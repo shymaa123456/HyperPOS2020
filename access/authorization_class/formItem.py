@@ -169,12 +169,11 @@ class CL_formItem(QtWidgets.QDialog):
         records = mycursor.fetchall()
 
         for row in records:
-
             self.CMB_formItemName.addItems([row[0]])
-
-
         connection.close()
         mycursor.close()
+
+
     def FN_GET_FORM_ITEM(self):
         self.FN_GET_FORMITEMID()
         self.id = self.LB_formItemID.text()

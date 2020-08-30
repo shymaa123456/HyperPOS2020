@@ -21,6 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="ee">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/formItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/formItem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createPrivilage.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createPrivilage.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +63,7 @@
       <recent name="$PROJECT_DIR$/presentation/master_data_ui" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.login">
     <configuration name="login" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -82,9 +85,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="privilage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HyperPOS2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/authorization_class" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/authorization_class/privilage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
+        <item itemvalue="Python.privilage" />
       </list>
     </recent_temporary>
   </component>
@@ -125,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598542233401</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ee">
+      <created>1598779231391</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1598779231391</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,6 +170,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ee" />
@@ -148,25 +181,45 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="497" y="144" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1598541788481" />
-    <state width="1271" height="172" key="GridCell.Tab.0.bottom" timestamp="1598542808863">
+    <state width="1271" height="2" key="GridCell.Tab.0.bottom" timestamp="1598803167445">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="172" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1598542808863" />
-    <state width="1271" height="172" key="GridCell.Tab.0.center" timestamp="1598542808863">
+    <state width="1271" height="2" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1598803167445" />
+    <state width="1271" height="2" key="GridCell.Tab.0.center" timestamp="1598803167444">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="172" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1598542808863" />
-    <state width="1271" height="172" key="GridCell.Tab.0.left" timestamp="1598542808862">
+    <state width="1271" height="2" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1598803167444" />
+    <state width="1271" height="2" key="GridCell.Tab.0.left" timestamp="1598803167444">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="172" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1598542808862" />
-    <state width="1271" height="172" key="GridCell.Tab.0.right" timestamp="1598542808863">
+    <state width="1271" height="2" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1598803167444" />
+    <state width="1271" height="2" key="GridCell.Tab.0.right" timestamp="1598803167445">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="172" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1598542808863" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1598542237349">
+    <state width="1271" height="2" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1598803167445" />
+    <state width="1271" height="215" key="GridCell.Tab.1.bottom" timestamp="1598802319657">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1598542237349" />
+    <state width="1271" height="215" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1598802319657" />
+    <state width="1271" height="215" key="GridCell.Tab.1.center" timestamp="1598802319657">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="215" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1598802319657" />
+    <state width="1271" height="215" key="GridCell.Tab.1.left" timestamp="1598802319657">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="215" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1598802319657" />
+    <state width="1271" height="215" key="GridCell.Tab.1.right" timestamp="1598802319657">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1598802319657" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1598779237900">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1598779237900" />
+    <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598789128767">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/72.27.1294.741@72.27.1294.741" timestamp="1598789128767" />
   </component>
 </project>

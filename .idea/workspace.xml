@@ -20,15 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="ee">
-      <change afterPath="$PROJECT_DIR$/access/configuration_class/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/coupon_class/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/customer_service_class/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/installment_class/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/loyalty_class/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/magazine_class/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/master_data_class/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/promotion_class/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/reports_class/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +49,44 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/access/voucher_class" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data_connection" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data_connection" />
+      <recent name="$PROJECT_DIR$/presentation/voucher_ui" />
+      <recent name="$PROJECT_DIR$/presentation/reports_ui" />
+      <recent name="$PROJECT_DIR$/presentation/promotion_ui" />
+      <recent name="$PROJECT_DIR$/presentation/master_data_ui" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="login" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HyperPOS2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/main_login_class" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/main_login_class/login.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.login" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -82,7 +111,21 @@
       <option name="project" value="LOCAL" />
       <updated>1598541997595</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ee">
+      <created>1598542180866</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1598542180866</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ee">
+      <created>1598542233401</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1598542233401</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -105,9 +148,25 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="497" y="144" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1598541788481" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1598542002065">
+    <state width="1271" height="172" key="GridCell.Tab.0.bottom" timestamp="1598542808863">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1598542002065" />
+    <state width="1271" height="172" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1598542808863" />
+    <state width="1271" height="172" key="GridCell.Tab.0.center" timestamp="1598542808863">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="172" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1598542808863" />
+    <state width="1271" height="172" key="GridCell.Tab.0.left" timestamp="1598542808862">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="172" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1598542808862" />
+    <state width="1271" height="172" key="GridCell.Tab.0.right" timestamp="1598542808863">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="172" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1598542808863" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1598542237349">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1598542237349" />
   </component>
 </project>

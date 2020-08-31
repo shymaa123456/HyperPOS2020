@@ -42,7 +42,7 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Assign_User_to_Roles.triggered.connect(self.FN_ASSIGN)
 
         self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
-        self.QAct_Modify_Privilage.triggered.connect(self.FN_MODIFY_PRIV)
+        #self.QAct_Modify_Privilage.triggered.connect(self.FN_MODIFY_PRIV)
         #self.QA_Create_Priv_Item.triggered.connect(self.FN_CREATE_PRIV_ITEM)
         #self.QA_Modify_Priv_Item.triggered.connect(self.FN_MODIFY_PRIV_ITEM)
 
@@ -108,10 +108,10 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two = CL_privilage()
         self.window_two.FN_LOAD_CREATE()
         self.window_two.show()
-    def FN_MODIFY_PRIV(self):
-        self.window_two = CL_privilage()
-        self.window_two.FN_LOAD_MODFIY()
-        self.window_two.show()
+    # def FN_MODIFY_PRIV(self):
+    #     self.window_two = CL_privilage()
+    #     self.window_two.FN_LOAD_MODFIY()
+    #     self.window_two.show()
 
     def FN_CREATE_PRIV_ITEM(self):
         self.window_two = CL_privilageItem()

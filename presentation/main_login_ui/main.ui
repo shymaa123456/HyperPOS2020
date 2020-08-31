@@ -94,7 +94,6 @@
        <string>Privilages</string>
       </property>
       <addaction name="QAct_Create_Privilage"/>
-      <addaction name="QAct_Modify_Privilage"/>
      </widget>
      <widget class="QMenu" name="QM_Role">
       <property name="title">
@@ -1377,8 +1376,6 @@
    </property>
   </action>
  </widget>
- <resources>
-  <include location="../../../../Downloads/12.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

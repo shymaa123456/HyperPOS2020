@@ -348,7 +348,7 @@ class CL_privilage(QtWidgets.QDialog):
         self.w1.setHorizontalHeaderLabels( header_labels )
         mycursor.close()
     def FN_CREATE_PRIVILAGE(self):
-        mycursor = self.conn.cursor()
+        mycursor = self.conn.cursor(buffered=True)
 
         self.role = self.LB_roleId.text()
         #delete current role -privilage
@@ -368,6 +368,9 @@ class CL_privilage(QtWidgets.QDialog):
 
 
         allRows = self.w1.rowCount()
+        #if allRows ==0:
+            #allRows=1
+
         for row in range( 0, allRows ):
         # # get max userid
             mycursor.execute("SELECT max(PRIV_ID) FROM SYS_PRIVILEGE")

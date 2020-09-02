@@ -11,6 +11,9 @@ import os
 import sys
 from pathlib import Path
 
+from data_connection.h1pos import db1
+
+
 class CL_form(QtWidgets.QDialog):
     dirname=''
     def __init__(self):
@@ -18,20 +21,17 @@ class CL_form(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
-
+        self.conn = db1.connect()
 
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createForm.ui'
         loadUi( filename, self )
-
         self.BTN_createForm.clicked.connect(self.FN_CREATE_FORM)
         self.CMB_formStatus.addItems(["0","1"])
 
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyForm.ui'
         loadUi( filename, self )
-
-
         self.FN_GET_FORMS()
         self.FN_GET_FORMID()
         self.FN_GET_FORM()
@@ -39,37 +39,28 @@ class CL_form(QtWidgets.QDialog):
         self.BTN_modifyForm.clicked.connect(self.FN_MODIFY_FORM)
         self.CMB_formStatus.addItems(["0", "1"])
     def FN_GET_FORMS(self):
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
-
+        mycursor = self.conn.cursor()
         mycursor.execute("SELECT FORM_DESC FROM SYS_FORM order by FORM_ID asc")
         records = mycursor.fetchall()
         for row in records:
             self.CMB_formName.addItems([row[0]])
-        connection.close()
         mycursor.close()
+
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s"
         x = (self.form,)
         mycursor.execute(sql_select_query, x)
 
         myresult = mycursor.fetchone()
         self.LB_formID.setText(myresult[0])
-
-        connection.close()
         mycursor.close()
+
     def FN_GET_FORM(self):
         self.FN_GET_FORMID()
         self.id = self.LB_formID.text()
-
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "select * from SYS_FORM where FORM_ID = %s"
         x = (self.id,)
         mycursor.execute(sql_select_query, x)
@@ -78,11 +69,9 @@ class CL_form(QtWidgets.QDialog):
         self.LE_desc.setText(record[1])
         self.LE_type.setText(record[2])
         self.LE_help.setText(record[4])
-
         self.CMB_formStatus.setCurrentText(record[3])
-
-        connection.close()
         mycursor.close()
+
 
         print(mycursor.rowcount, "record retrieved.")
 
@@ -94,10 +83,7 @@ class CL_form(QtWidgets.QDialog):
         self.help = self.LE_help.text()
 
         #connection = mysql.connector.connect(host='localhost',database='test',user='shelal',password='2ybQvkZbNijIyq2J',port='3306')
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
@@ -107,10 +93,10 @@ class CL_form(QtWidgets.QDialog):
 
         mycursor.execute(sql, val)
         # mycursor.execute(sql)
-        connection.commit()
 
-        connection.close()
+        db1.connectionCommit( self.conn )
         mycursor.close()
+        db1.connectionClose(self.conn)
 
         print(mycursor.rowcount, "record Modified.")
 
@@ -124,9 +110,8 @@ class CL_form(QtWidgets.QDialog):
 
         self.status = self.CMB_formStatus.currentText()
 
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+
+        mycursor = self.conn.cursor()
         # get max userid
         mycursor.execute("SELECT max(FORM_ID) FROM SYS_FORM")
         myresult = mycursor.fetchone()
@@ -136,18 +121,16 @@ class CL_form(QtWidgets.QDialog):
         else:
             self.id = int(myresult[0]) + 1
 
-
-
         sql = "INSERT INTO SYS_FORM (FORM_ID, FORM_DESC, FORM_TYPE,FORM_STATUS,FORM_HELP)  VALUES ( %s, %s, %s, %s,%s)"
 
         # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
         val = (self.id, self.desc, self.type, self.status, self.help)
         mycursor.execute(sql, val)
         # mycursor.execute(sql)
-        connection.commit()
-
-        connection.close()
+        db1.connectionCommit(self.conn)
         mycursor.close()
+        db1.connectionClose(self.conn)
+
 
         print(mycursor.rowcount, "record inserted.")
 

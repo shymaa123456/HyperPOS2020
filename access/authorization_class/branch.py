@@ -8,7 +8,7 @@ from PyQt5.QtGui import QPixmap
 from mysql.connector import Error
 from datetime import datetime
 import mysql.connector
-
+from data_connection.h1pos import db1
 class CL_branch(QtWidgets.QDialog):
     
 
@@ -39,9 +39,7 @@ class CL_branch(QtWidgets.QDialog):
          self.branchStatus = self.CMB_branch_status.currentText()
    
 #         connection = mysql.connector.connect(host='localhost',database='test',user='shelal',password='2ybQvkZbNijIyq2J',port='3306')
-         connection = mysql.connector.connect(host='localhost',database='PosDB'
-                                          ,user='root',password='password',port='3306')
-         mycursor = connection.cursor()
+         mycursor = db1.connect( self )
          #get max userid
          #mycursor.execute("SELECT max(USER_ID) FROM SYS_USER")
          #myresult = mycursor.fetchone()
@@ -66,9 +64,9 @@ class CL_branch(QtWidgets.QDialog):
          val = (self.branchId, self.branchCompany,self.name,self.password,self.fullName,self.hrId,creationDate,'','','',self.status,self.userType)
          mycursor.execute(sql, val)
          #mycursor.execute(sql)
-         connection.commit()
+
     
-         connection.close()
+         db1.connectionClose()
          mycursor.close()
          
             

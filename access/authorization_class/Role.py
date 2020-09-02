@@ -10,7 +10,7 @@ import mysql.connector
 import os
 import sys
 from pathlib import Path
-
+from data_connection.h1pos import db1
 class CL_role(QtWidgets.QDialog):
     dirname = ''
     def __init__(self):
@@ -18,6 +18,7 @@ class CL_role(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
+        self.conn = db1.connect()
     def FN_ASSIGN(self):
         filename = self.dirname + '/assignUserToRole.ui'
         loadUi( filename, self )
@@ -48,9 +49,7 @@ class CL_role(QtWidgets.QDialog):
         self.CMB_roleStatus.addItems(["0", "1"])
     def FN_GET_USERID(self):
         self.user = self.CMB_userName.currentText()
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query= "SELECT USER_ID FROM SYS_USER WHERE USER_NAME = %s"
         x = (self.user,)
         mycursor.execute(sql_select_query, x)
@@ -59,43 +58,35 @@ class CL_role(QtWidgets.QDialog):
 
     def FN_GET_ROLEID(self):
         self.role = self.CMB_roleName.currentText()
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "SELECT ROLE_ID FROM SYS_ROLE WHERE ROLE_NAME = %s"
         x = (self.role,)
         mycursor.execute(sql_select_query, x)
 
         myresult = mycursor.fetchone()
         self.LB_roleID.setText(myresult[0])
+        mycursor.close()
 
     def FN_GET_USERS(self):
 
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         mycursor.execute("SELECT USER_NAME FROM SYS_USER order by USER_ID asc")
         records = mycursor.fetchall()
         for row in records:
             self.CMB_userName.addItems([row[0]])
 
-        connection.commit()
-        connection.close()
+
         mycursor.close()
 
     def FN_GET_ROLES(self):
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
-
+        mycursor = self.conn.cursor()
         mycursor.execute("SELECT ROLE_NAME FROM SYS_ROLE order by ROLE_ID asc")
         records = mycursor.fetchall()
         for row in records:
             self.CMB_roleName.addItems([row[0]])
 
-        connection.commit()
-        connection.close()
+
         mycursor.close()
     def FN_ASSIGN_ROLE(self):
 
@@ -104,10 +95,7 @@ class CL_role(QtWidgets.QDialog):
         self.user = self.LB_userID.text()
         self.role = self.LB_roleID.text()
 
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
-        # get max userid
+        mycursor = self.conn.cursor()
         mycursor.execute("SELECT max(UR_USER_ROLE_ID) FROM SYS_USER_ROLE")
         myresult = mycursor.fetchone()
 
@@ -124,13 +112,11 @@ class CL_role(QtWidgets.QDialog):
 
         val = (self.id, self.user, self.role, '','', creationDate,'', '',  self.status)
         mycursor.execute(sql, val)
-        connection.commit()
 
-        connection.close()
         mycursor.close()
-
+        db1.connectionCommit( self.conn )
         print(mycursor.rowcount, "record inserted.")
-
+        db1.connectionClose(self.conn)
         self.close()
 
 
@@ -142,9 +128,7 @@ class CL_role(QtWidgets.QDialog):
         self.FN_GET_ROLEID()
         self.id = self.LB_roleID.text()
 
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "select * from SYS_ROLE where ROLE_ID = %s"
         x = (self.id,)
         mycursor.execute(sql_select_query, x)
@@ -155,7 +139,7 @@ class CL_role(QtWidgets.QDialog):
 
         self.CMB_roleStatus.setCurrentText(record[7])
 
-        connection.close()
+
         mycursor.close()
 
         print(mycursor.rowcount, "record retrieved.")
@@ -166,11 +150,7 @@ class CL_role(QtWidgets.QDialog):
         self.desc = self.LE_DESC.text()
         self.status = self.CMB_roleStatus.currentText()
 
-        #         connection = mysql.connector.connect(host='localhost',database='test',user='shelal',password='2ybQvkZbNijIyq2J',port='3306')
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
@@ -180,13 +160,11 @@ class CL_role(QtWidgets.QDialog):
         print(val)
         mycursor.execute(sql, val)
         # mycursor.execute(sql)
-        connection.commit()
 
-        connection.close()
         mycursor.close()
-
+        db1.connectionCommit( self.conn )
         print(mycursor.rowcount, "record Modified.")
-
+        db1.connectionClose(self)
         self.close()
 
     def FN_CREATE_ROLE(self):
@@ -195,9 +173,7 @@ class CL_role(QtWidgets.QDialog):
 
         self.status = self.CMB_roleStatus.currentText()
 
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         # get max userid
         mycursor.execute("SELECT max(role_ID) FROM SYS_ROLE")
         myresult = mycursor.fetchone()
@@ -209,18 +185,17 @@ class CL_role(QtWidgets.QDialog):
 
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        print(creationDate)
 
-        sql = "INSERT INTO SYS_ROLE (ROLE_ID, ROLE_NAME,ROLE_DESC,ROLE_CREATED_ON, ROLE_CREATED_BY,	ROLE_CHANGED_ON_CHANGED_BY,  ROLE_STATUS)         " \
-              "VALUES ( %s, %s, %s, %s,%s, %s,%s,%s)"
 
-        val = (self.id, self.name, self.desc,  creationDate,'', '','',  self.status)
-        mycursor.execute(sql, val)
-        connection.commit()
+        sql = "INSERT INTO SYS_ROLE (ROLE_ID, ROLE_NAME,ROLE_DESC,ROLE_CREATED_ON,   ROLE_STATUS)         " \
+              "VALUES ('"+ str(self.id )+"','"+ self.name+"','"+self.desc+"', '"+ creationDate +"','" + self.status+"')"
 
-        connection.close()
+        print(sql)
+        #val = ('"+self.id+"','"+ self.name"','"+self.desc "', '"+ creationDate +"',' ', ' ',' ','" + self.status+"')
+        mycursor.execute(sql)
+
         mycursor.close()
-
+        db1.connectionCommit( self.conn )
         print(mycursor.rowcount, "record inserted.")
-
+        db1.connectionClose(self.conn)
         self.close()

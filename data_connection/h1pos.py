@@ -8,8 +8,15 @@ class db1():
         pass
 
     @staticmethod
-    def connect(self) :
-        self.connection = mysql.connector.connect( host='localhost', database='PosDB'
+    def connect() :
+       connection = mysql.connector.connect( host='localhost', database='PosDB'
                                               , user='root', password='password', port='3306' )
-        self.mycursor = self.connection.cursor()
-        return self.mycursor
+       return connection
+
+    @staticmethod
+    def connectionClose(conn):
+        conn.close()
+
+    @staticmethod
+    def connectionCommit(conn):
+        conn.commit()

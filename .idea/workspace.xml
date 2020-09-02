@@ -19,13 +19,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="create privialge form">
-      <change afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="apply validation on creating a privilage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/Role.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/Role.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/branch.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/branch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/formItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/formItem.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilageItem.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/login.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_connection/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598803247205</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="apply validation on creating a privilage">
+      <created>1598880417067</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1598880417067</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,29 +196,30 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ee" />
     <MESSAGE value="create privialge form" />
-    <option name="LAST_COMMIT_MESSAGE" value="create privialge form" />
+    <MESSAGE value="apply validation on creating a privilage" />
+    <option name="LAST_COMMIT_MESSAGE" value="apply validation on creating a privilage" />
   </component>
   <component name="WindowStateProjectService">
     <state x="497" y="144" width="424" height="520" key="FileChooserDialogImpl" timestamp="1598541788481">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="497" y="144" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1598541788481" />
-    <state width="1271" height="164" key="GridCell.Tab.0.bottom" timestamp="1598880152880">
+    <state width="1271" height="270" key="GridCell.Tab.0.bottom" timestamp="1599045229547">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="164" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1598880152880" />
-    <state width="1271" height="164" key="GridCell.Tab.0.center" timestamp="1598880152879">
+    <state width="1271" height="270" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1599045229547" />
+    <state width="1271" height="270" key="GridCell.Tab.0.center" timestamp="1599045229546">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="164" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1598880152879" />
-    <state width="1271" height="164" key="GridCell.Tab.0.left" timestamp="1598880152879">
+    <state width="1271" height="270" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1599045229546" />
+    <state width="1271" height="270" key="GridCell.Tab.0.left" timestamp="1599045229546">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="164" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1598880152879" />
-    <state width="1271" height="164" key="GridCell.Tab.0.right" timestamp="1598880152879">
+    <state width="1271" height="270" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1599045229546" />
+    <state width="1271" height="270" key="GridCell.Tab.0.right" timestamp="1599045229547">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="164" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1598880152879" />
+    <state width="1271" height="270" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1599045229547" />
     <state width="1271" height="215" key="GridCell.Tab.1.bottom" timestamp="1598802319657">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -223,10 +236,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1271" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1598802319657" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1598803252059">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1598880422068">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1598803252059" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1598880422068" />
     <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598789128767">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

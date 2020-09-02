@@ -11,7 +11,7 @@ from access.authorization_class.user_module import CL_userModule
 import os
 import sys
 from pathlib import Path
-
+from data_connection.h1pos import db1
 class CL_user(QtWidgets.QDialog):
     dirname = ''
     def __init__(self):
@@ -19,7 +19,7 @@ class CL_user(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
-
+        self.conn = db1.connect()
 
 
     def FN_LOAD_MODIFY(self):
@@ -47,9 +47,7 @@ class CL_user(QtWidgets.QDialog):
         self.FN_GET_USERID()
         self.id = self.LB_userID.text()
 
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "select * from SYS_USER where user_id = %s"
         x = (self.id,)
         mycursor.execute(sql_select_query, x)
@@ -62,13 +60,13 @@ class CL_user(QtWidgets.QDialog):
         self.CMB_userType.setCurrentText(record[11])
         self.CMB_userStatus.setCurrentText(record[10])
 
-        connection.close()
+
         mycursor.close()
 
         print(mycursor.rowcount, "record retrieved.")
 
     def FN_MODIFY_USER(self):
-        self.id = self.LE_id.text()
+        self.id = self.LB_userID.text()
         self.name = self.LE_name.text()
         self.password = self.LE_password.text()
         self.branch = self.CMB_branch.currentText()
@@ -77,11 +75,7 @@ class CL_user(QtWidgets.QDialog):
         self.userType = self.CMB_userType.currentText()
         self.status = self.CMB_userStatus.currentText()
 
-        #         connection = mysql.connector.connect(host='localhost',database='test',user='shelal',password='2ybQvkZbNijIyq2J',port='3306')
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
@@ -89,35 +83,26 @@ class CL_user(QtWidgets.QDialog):
         val = (self.name  , self.password, self.branch, self.fullName,self.hrId, changeDate, CL_userModule.user_name , self.status, self.userType , self.id)
         print(val)
         mycursor.execute(sql, val)
-        # mycursor.execute(sql)
-        connection.commit()
 
-        connection.close()
         mycursor.close()
-
+        db1.connectionCommit( self.conn )
         print(mycursor.rowcount, "record Modified.")
-
+        db1.connectionClose( self.conn )
         self.close()
 
     def FN_GET_USERS(self):
 
-        connection = mysql.connector.connect( host='localhost', database='PosDB'
-                                              , user='root', password='password', port='3306' )
-        mycursor = connection.cursor()
-
+        mycursor = self.conn.cursor()
         mycursor.execute( "SELECT USER_NAME FROM SYS_USER order by USER_ID asc" )
         records = mycursor.fetchall()
         for row in records:
             self.CMB_userName.addItems( [row[0]] )
 
-        connection.commit()
-        connection.close()
+
         mycursor.close()
     def FN_GET_USERID(self):
         self.user = self.CMB_userName.currentText()
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query= "SELECT USER_ID FROM SYS_USER WHERE USER_NAME = %s"
         x = (self.user,)
         mycursor.execute(sql_select_query, x)
@@ -133,9 +118,7 @@ class CL_user(QtWidgets.QDialog):
         self.userType = self.CMB_userType.currentText()
         self.status = self.CMB_userStatus.currentText()
 
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         # get max userid
         mycursor.execute("SELECT max(USER_ID) FROM SYS_USER")
         myresult = mycursor.fetchone()
@@ -147,7 +130,7 @@ class CL_user(QtWidgets.QDialog):
 
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        print(creationDate)
+
 
         sql = "INSERT INTO SYS_USER (USER_ID, BRANCH_NO, USER_NAME, USER_PASSWORD, USER_FULLNAME, USER_HR_ID, USER_CREATED_ON, USER_CREATED_BY, USER_CHANGED_ON, USER_CHENGED_BY,USER_STATUS, USER_TYPE_ID)         VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"
 
@@ -157,11 +140,10 @@ class CL_user(QtWidgets.QDialog):
         self.userType)
         mycursor.execute(sql, val)
         # mycursor.execute(sql)
-        connection.commit()
 
-        connection.close()
         mycursor.close()
 
         print(mycursor.rowcount, "record inserted.")
-
+        db1.connectionCommit( self.conn )
+        db1.connectionClose(self.conn)
         self.close()

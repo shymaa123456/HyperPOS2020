@@ -22,10 +22,7 @@ from access.authorization_class.Role import CL_role
 from pathlib import Path
 import mysql.connector
 
-from access.authorization_class.form import CL_form
-from access.authorization_class.privilage import CL_privilage
-from access.authorization_class.user_module import CL_userModule
-
+from data_connection.h1pos import db1
 
 class CL_login(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
@@ -48,36 +45,30 @@ class CL_login(QtWidgets.QDialog):
 
     def FN_loadData(self, username, password):
      try:
-#        connection = mysql.connector.connect(host='localhost',database='test',user='shelal',password='2ybQvkZbNijIyq2J',port='3306')
-#    
-        connection = mysql.connector.connect(host='localhost',database='PosDB'
-                                          ,user='root',password='password',port='3306')
-#        sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
-    
-        sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
-                
-        
-        cursor = connection.cursor()
-        cursor.execute(sql_select_Query)
-        records = cursor.fetchall()
-        
-        if cursor.rowcount >0:
-            
-            #save the login in the table 
+         conn = db1.connect()
+         sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
+         cursor = conn.cursor()
+         cursor.execute(sql_select_Query)
+         records = cursor.fetchall()
+
+         if cursor.rowcount >0:
+            #save the login in the table
             CL_user.user_name=username
             self.switch_window.emit()
-           
-        else:
+
+         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Incorrect Username and Password")
             print("Please Enter Correct Username and Password")
 
      except Error as e:
         print("Error reading data from MySQL table", e)
      finally:
-        if (connection.is_connected()):
-            connection.close()
-            cursor.close()
-            print("MySQL connection is closed")
+         cursor.close()
+         db1.connectionClose(conn)
+         print( "MySQL connection is closed" )
+
+
+
 
     def __init__(self):
         super(CL_login, self).__init__()

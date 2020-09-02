@@ -23,7 +23,7 @@ class CL_privilage(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
-        #
+        self.conn = db1.connect( )
 
 
     def FN_LOAD_CREATE(self):
@@ -87,7 +87,7 @@ class CL_privilage(QtWidgets.QDialog):
                 self.w1.setItem( rowPosition, 5, QTableWidgetItem( str( self.formItemName ) ) )
     def FN_CHECK_TABLE_WIDGET_AVAILABILITY(self,var11, var2, var3, var4):
 
-        mycursor = db1.connect( self )
+        mycursor = self.conn.cursor()
         allRows = self.w1.rowCount()
 
         for row in range( 0, allRows ):
@@ -111,7 +111,7 @@ class CL_privilage(QtWidgets.QDialog):
 
             if var11 == self.w1.item( row, 1 ).text() and var2 ==self.w1.item( row, 3 ).text()and var3 == actionId and var4 == formItemId:
                return True
-
+        mycursor.close()
         # if chk:
         #     return True
 
@@ -119,7 +119,7 @@ class CL_privilage(QtWidgets.QDialog):
 
     def FN_CHECK_DB_AVAILABILITY(self,var11, var2, var3, var4):
         #print(var11, var2, var3, var4)
-        mycursor = db1.connect(self)
+        mycursor = self.conn.cursor()
         sqlStat= "Select  *      " \
                  "from SYS_PRIVILEGE p inner join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  " \
                  "and p.FORM_ID = pi.FORM_ID                 " \
@@ -134,10 +134,9 @@ class CL_privilage(QtWidgets.QDialog):
         else:
             return False
 
+
     def FN_GET_ACTIONS(self):
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         mycursor.execute("SELECT ACTION_DESC FROM SYS_PRINT_EXPORT_LOOKUP order by ACTION_ID asc")
         records = mycursor.fetchall()
@@ -145,12 +144,9 @@ class CL_privilage(QtWidgets.QDialog):
             self.CMB_actionName.addItems([row[0]])
 
 
-        connection.close()
         mycursor.close()
     def FN_GET_ROLES(self):
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         mycursor.execute("SELECT ROLE_NAME FROM SYS_ROLE order by ROLE_ID asc")
         records = mycursor.fetchall()
@@ -158,13 +154,11 @@ class CL_privilage(QtWidgets.QDialog):
             self.CMB_roleName.addItems([row[0]])
 
 
-        connection.close()
+
         mycursor.close()
 
     def FN_GET_FORMS(self):
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         mycursor.execute("SELECT FORM_DESC FROM SYS_FORM order by FORM_ID asc")
         records = mycursor.fetchall()
@@ -172,31 +166,30 @@ class CL_privilage(QtWidgets.QDialog):
             self.CMB_formName.addItems([row[0]])
 
 
-        connection.close()
+
         mycursor.close()
 
     def FN_GET_FORMItems(self):
-        self.CMB_formItemName.clear()
-        connection = mysql.connector.connect( host='localhost', database='PosDB'
 
-                                              , user='root', password='password', port='3306' )
+        mycursor = self.conn.cursor()
+        self.CMB_formItemName.clear()
+
         self.form = self.LB_formId.text()
-        mycursor = connection.cursor()
-        sql_select_query = "SELECT ITEM_DESC FROM SYS_FORM_ITEM where  FORM_ID = %s"
-        x = (self.form,)
-        mycursor.execute( sql_select_query, x )
+
+        sql_select_query = "SELECT ITEM_DESC FROM SYS_FORM_ITEM where  FORM_ID = '"+self.form+"'"
+
+        mycursor.execute( sql_select_query)
         records = mycursor.fetchall()
 
         for row in records:
             self.CMB_formItemName.addItems( [row[0]] )
-        connection.close()
+
         mycursor.close()
 
     def FN_GET_FORMITEMID(self):
+        mycursor = self.conn.cursor()
         self.item= self.CMB_formItemName.currentText()
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+
         sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s"
         x = (self.item,)
         mycursor.execute(sql_select_query, x)
@@ -205,41 +198,35 @@ class CL_privilage(QtWidgets.QDialog):
         if mycursor.rowcount > 0:
             self.LB_formItemID.setText(myresult[0])
 
-        connection.close()
+
         mycursor.close()
     def FN_GET_ROLEID(self):
         self.role = self.CMB_roleName.currentText()
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "SELECT ROLE_ID FROM SYS_ROLE WHERE ROLE_Name = %s"
         x = (self.role,)
         mycursor.execute(sql_select_query, x)
         myresult = mycursor.fetchone()
         if mycursor.rowcount > 0:
             self.LB_roleId.setText(myresult[0])
-        connection.close()
+
         mycursor.close()
         self.FN_DISPLAY_PRIVILAGE()
     def FN_GET_ROLENAME(self):
         self.role = self.LB_roleId.text()
-        connection = mysql.connector.connect( host='localhost', database='PosDB'
-                                              , user='root', password='password', port='3306' )
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "SELECT ROLE_DESC FROM SYS_ROLE WHERE ROLE_ID = %s"
         x = (self.role,)
         mycursor.execute( sql_select_query, x )
         myresult = mycursor.fetchone()
         if mycursor.rowcount > 0:
             self.CMB_roleName.setText( myresult[0] )
-        connection.close()
+
         mycursor.close()
 
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s"
         x = (self.form,)
         mycursor.execute(sql_select_query, x)
@@ -248,14 +235,12 @@ class CL_privilage(QtWidgets.QDialog):
         if mycursor.rowcount > 0:
             self.LB_formId.setText(myresult[0])
 
-        connection.close()
+
         mycursor.close()
         self.FN_GET_FORMItems()
     def FN_GET_ACTIONID(self):
         self.action = self.CMB_actionName.currentText()
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
         sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT_LOOKUP WHERE ACTION_DESC = %s"
         x = (self.action,)
         mycursor.execute(sql_select_query, x)
@@ -264,7 +249,7 @@ class CL_privilage(QtWidgets.QDialog):
         if mycursor.rowcount > 0:
             self.LB_actionId.setText(myresult[0])
 
-        connection.close()
+
         mycursor.close()
     # def FN_GET_PRIV(self):
     #
@@ -331,9 +316,7 @@ class CL_privilage(QtWidgets.QDialog):
     def FN_DISPLAY_PRIVILAGE(self):
         self.w1.clear()
         self.w1.setRowCount(0)
-        connection = mysql.connector.connect(host='localhost', database='PosDB'
-                                             , user='root', password='password', port='3306')
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         self.role = self.LB_roleId.text()
         self.form = self.LB_formId.text()
@@ -358,29 +341,31 @@ class CL_privilage(QtWidgets.QDialog):
 
                 self.w1.setItem(row_number, column_number, QTableWidgetItem(str(data)))
         # self.w1.setItem(0, 0, QTableWidgetItem("Name"))
-        connection.close()
+
 
         self.w1.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         header_labels = ['Role Name', 'Role Id', 'Form Name', 'Form Id', 'Action Name','Form Item']
         self.w1.setHorizontalHeaderLabels( header_labels )
-
+        mycursor.close()
     def FN_CREATE_PRIVILAGE(self):
-        connection = mysql.connector.connect( host='localhost', database='PosDB'
-                                              , user='root', password='password', port='3306' )
-        mycursor = connection.cursor()
+        mycursor = self.conn.cursor()
 
         self.role = self.LB_roleId.text()
         #delete current role -privilage
         sql_select_query = "SELECT PRIV_ID FROM SYS_PRIVILEGE WHERE ROLE_id = %s"
         x = (self.role,)
         mycursor.execute( sql_select_query, x )
-        records = mycursor.fetchall()
-        for row in records:
-            sql_select_query = "delete from SYS_PRIVILEG_ITEM where PRIV_ID = '"+row[0]+"'"
-            mycursor.execute( sql_select_query)
-            sql_select_query1 = "delete from SYS_PRIVILEGE  where PRIV_ID = '" + row[0] + "'"
-            mycursor.execute( sql_select_query1 )
-            # loop on table widget
+        if mycursor.rowcount > 0:
+            records = mycursor.fetchall()
+            for row in records:
+                sql_select_query = "delete from SYS_PRIVILEG_ITEM where PRIV_ID = '"+row[0]+"'"
+                mycursor.execute( sql_select_query)
+                db1.connectionCommit( self.conn )
+                sql_select_query1 = "delete from SYS_PRIVILEGE  where PRIV_ID = '" + row[0] + "'"
+                mycursor.execute( sql_select_query1 )
+                db1.connectionCommit( self.conn )
+                # loop on table widget
+
 
         allRows = self.w1.rowCount()
         for row in range( 0, allRows ):
@@ -419,18 +404,16 @@ class CL_privilage(QtWidgets.QDialog):
                   "VALUES ( %s, %s, %s, %s)"
             val = (self.id,roleId.text() , formId.text(),  actionId)
             mycursor.execute(sql, val)
-
+            db1.connectionCommit( self.conn )
             sql = "INSERT INTO SYS_PRIVILEG_ITEM (PRIV_ID, FORM_ID,ITEM_ID)         " \
                   "VALUES ( %s, %s, %s)"
             val = (self.id, formId.text(), formItemId)
             mycursor.execute( sql, val )
             print( mycursor.rowcount, "record inserted." )
 
-
-        connection.commit()
-        connection.close()
+        db1.connectionCommit( self.conn )
         mycursor.close()
 
-
+        db1.connectionClose(self.conn)
 
         self.close()

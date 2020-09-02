@@ -9,7 +9,7 @@ from mysql.connector import Error
 import mysql.connector
 
 from access.authorization_class.formItem import CL_formItem
-from access.authorization_class.privilageItem import CL_privilageItem
+
 from access.authorization_class.branch import CL_branch
 
 
@@ -113,14 +113,14 @@ class CL_main(QtWidgets.QMainWindow):
     #     self.window_two.FN_LOAD_MODFIY()
     #     self.window_two.show()
 
-    def FN_CREATE_PRIV_ITEM(self):
-        self.window_two = CL_privilageItem()
-        self.window_two.FN_LOAD_CREATE()
-        self.window_two.show()
-    def FN_MODIFY_PRIV_ITEM(self):
-        self.window_two = CL_privilage()
-        self.window_two.FN_LOAD_MODFIY()
-        self.window_two.show()
+    # def FN_CREATE_PRIV_ITEM(self):
+    #     self.window_two = CL_privilageItem()
+    #     self.window_two.FN_LOAD_CREATE()
+    #     self.window_two.show()
+    # def FN_MODIFY_PRIV_ITEM(self):
+    #     self.window_two = CL_privilage()
+    #     self.window_two.FN_LOAD_MODFIY()
+    #     self.window_two.show()
         
     def FN_create_form_item(self):
         self.window_two = CL_formItem()

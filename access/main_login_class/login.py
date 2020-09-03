@@ -6,23 +6,20 @@ Created on Mon Jun 29 19:52:06 2020
 @author: emad
 """
 #####
-import os
 import sys
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QApplication, QDialog
-from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets, uic
-from PyQt5.QtGui import QPixmap
-from mysql.connector import Error
-from PyQt5 import QtCore
-#import Controller
-from access.main_login_class.main import CL_main
-from access.authorization_class.user import  CL_user
-from access.authorization_class.Role import CL_role
 from pathlib import Path
-import mysql.connector
 
+from PyQt5 import QtCore
+from PyQt5 import QtWidgets
+from PyQt5.QtGui import QPixmap
+from PyQt5.uic import loadUi
+from mysql.connector import Error
+
+from access.authorization_class.user import CL_user
+# import Controller
+from access.main_login_class.main import CL_main
 from data_connection.h1pos import db1
+from access.authorization_class.user_module import CL_userModule
 
 class CL_login(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()

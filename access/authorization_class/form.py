@@ -1,15 +1,8 @@
-import sys
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QApplication, QDialog
-from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets, uic, QtCore
-from PyQt5.QtGui import QPixmap
-from mysql.connector import Error
 from datetime import datetime
-import mysql.connector
-import os
-import sys
 from pathlib import Path
+
+from PyQt5 import QtWidgets
+from PyQt5.uic import loadUi
 
 from data_connection.h1pos import db1
 

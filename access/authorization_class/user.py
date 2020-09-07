@@ -6,7 +6,7 @@ from PyQt5.uic import loadUi
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 
-
+from datetime import datetime
 class CL_user(QtWidgets.QDialog):
     dirname = ''
     def __init__(self):

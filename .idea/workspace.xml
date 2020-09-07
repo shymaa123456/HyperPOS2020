@@ -19,10 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="refactor code">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="organize code">
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599130803778</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="organize code">
+      <created>1599473694584</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1599473694584</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,29 +217,30 @@
     <MESSAGE value="apply validation on creating a privilage" />
     <MESSAGE value="apply the db conn" />
     <MESSAGE value="refactor code" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor code" />
+    <MESSAGE value="organize code" />
+    <option name="LAST_COMMIT_MESSAGE" value="organize code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="497" y="144" width="424" height="520" key="FileChooserDialogImpl" timestamp="1598541788481">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="497" y="144" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1598541788481" />
-    <state width="1271" height="215" key="GridCell.Tab.0.bottom" timestamp="1599379716097">
+    <state width="1271" height="128" key="GridCell.Tab.0.bottom" timestamp="1599473629412">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="215" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1599379716097" />
-    <state width="1271" height="215" key="GridCell.Tab.0.center" timestamp="1599379716096">
+    <state width="1271" height="128" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1599473629412" />
+    <state width="1271" height="128" key="GridCell.Tab.0.center" timestamp="1599473629412">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="215" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1599379716096" />
-    <state width="1271" height="215" key="GridCell.Tab.0.left" timestamp="1599379716096">
+    <state width="1271" height="128" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1599473629412" />
+    <state width="1271" height="128" key="GridCell.Tab.0.left" timestamp="1599473629411">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="215" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1599379716096" />
-    <state width="1271" height="215" key="GridCell.Tab.0.right" timestamp="1599379716096">
+    <state width="1271" height="128" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1599473629411" />
+    <state width="1271" height="128" key="GridCell.Tab.0.right" timestamp="1599473629412">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="215" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1599379716096" />
+    <state width="1271" height="128" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1599473629412" />
     <state width="1271" height="215" key="GridCell.Tab.1.bottom" timestamp="1599379716099">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -251,10 +257,14 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1271" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1599379716097" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1599130808240">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1599473705307">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1599130808240" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1599473705307" />
+    <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1599491214073">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/72.27.1294.741@72.27.1294.741" timestamp="1599491214073" />
     <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598789128767">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

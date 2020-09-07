@@ -31,6 +31,8 @@ class CL_form(QtWidgets.QDialog):
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORM )
         self.BTN_modifyForm.clicked.connect(self.FN_MODIFY_FORM)
         self.CMB_formStatus.addItems(["0", "1"])
+
+    @staticmethod
     def FN_GET_FORMS(self):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT FORM_DESC FROM SYS_FORM order by FORM_ID asc")
@@ -38,6 +40,7 @@ class CL_form(QtWidgets.QDialog):
         for row in records:
             self.CMB_formName.addItems([row[0]])
         mycursor.close()
+        return records
 
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()

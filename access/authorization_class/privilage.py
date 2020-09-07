@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.uic import loadUi
 
 from data_connection.h1pos import db1
-
+from access.authorization_class.form import CL_form
 
 class CL_privilage( QtWidgets.QDialog ):
     dirname = ''
@@ -23,7 +23,12 @@ class CL_privilage( QtWidgets.QDialog ):
 
         self.BTN_createPrivilage.clicked.connect( self.FN_CREATE_PRIVILAGE )
         self.FN_GET_ROLES()
-        self.FN_GET_FORMS()
+        #self.FN_GET_FORMS()
+        records = CL_form.FN_GET_FORMS(self)
+        self.CMB_formName.clear()
+        for row in records:
+            self.CMB_formName.addItems([row[0]])
+
         self.FN_GET_ACTIONS()
         self.FN_GET_ROLEID()
         self.FN_GET_FORMID()
@@ -146,15 +151,15 @@ class CL_privilage( QtWidgets.QDialog ):
 
         mycursor.close()
 
-    def FN_GET_FORMS(self):
-        mycursor = self.conn.cursor()
-
-        mycursor.execute( "SELECT FORM_DESC FROM SYS_FORM order by FORM_ID asc" )
-        records = mycursor.fetchall()
-        for row in records:
-            self.CMB_formName.addItems( [row[0]] )
-
-        mycursor.close()
+    # def FN_GET_FORMS(self):
+    #     mycursor = self.conn.cursor()
+    #
+    #     mycursor.execute( "SELECT FORM_DESC FROM SYS_FORM order by FORM_ID asc" )
+    #     records = mycursor.fetchall()
+    #     for row in records:
+    #         self.CMB_formName.addItems( [row[0]] )
+    #
+    #     mycursor.close()
 
     def FN_GET_FORMItems(self):
 

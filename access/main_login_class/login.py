@@ -42,17 +42,20 @@ class CL_login(QtWidgets.QDialog):
 
     def FN_loadData(self, username, password):
      try:
-         conn = db1.connect()
-         sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
-         cursor = conn.cursor()
-         cursor.execute(sql_select_Query)
-         records = cursor.fetchall()
+         self.conn = db1.connect()
+         #sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
+         sql_select_Query ="select * from SYS_USER where user_name = %s and user_password = %s"
 
-         if cursor.rowcount >0:
+         x = (username,password,)
+         mycursor = self.conn.cursor()
+         mycursor.execute(sql_select_Query,x )
+         record = mycursor.fetchone()
+
+
+         if mycursor.rowcount >0:
             #save the login in the table
             CL_userModule.user_name=username
-            #CL_userModule.init(username)
-            CL_userModule.myList.append(username)
+            #CL_userModule.myList.append(username)
             self.switch_window.emit()
 
          else:
@@ -62,8 +65,8 @@ class CL_login(QtWidgets.QDialog):
      except Error as e:
         print("Error reading data from MySQL table", e)
      finally:
-         cursor.close()
-         db1.connectionClose(conn)
+         mycursor.close()
+         db1.connectionClose(self.conn)
          print( "MySQL connection is closed" )
 
 

@@ -25,39 +25,51 @@ class CL_main( QtWidgets.QMainWindow ):
         filename = dirname + '/main.ui'
         loadUi( filename, self )
 
-        print (CL_userModule.myList[0])
+        print (CL_userModule.user_name)
         CL_userModule.loadPrivilages(self)
         for row_number, row_data in enumerate( CL_userModule.myList ):
-            print(row_data[0])
-            forms.append(row_data[0])
+
+            forms.append(row_data[1])
             #for column_number, data in enumerate( row_data ):
                 #self.w1.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
 
-        self.setWindowTitle( 'HyperPOS Main Page' )
-        x = forms.count( "2" )
-        print('x = ',x)
-        if  x == 1:
-
+        x = forms.count( "1" )
+        if  x > 0:
             self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
+        else:
+            self.QAct_Create_User.setEnabled( False )
 
-        self.QAct_Modify_User.triggered.connect( self.FN_MODIFY_USER )
-        self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
-        self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
-        self.QAct_Assign_User_to_Roles.triggered.connect( self.FN_ASSIGN )
+        x = forms.count( "2" )
+        if x > 0:
+            self.QAct_Modify_User.triggered.connect( self.FN_MODIFY_USER )
+        else:
+            self.QAct_Modify_User.setEnabled( False )
+
+        x = forms.count( "3" )
+        if x > 0:
+            self.QAct_Assign_User_to_Roles.triggered.connect( self.FN_ASSIGN )
+        else:
+            self.QAct_Assign_User_to_Roles.setEnabled( False )
+        x = forms.count( "4" )
+        if x > 0:
+            self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
+        else:
+            self.QAct_Create_Role.setEnabled( False )
+        x = forms.count( "5" )
+        if x > 0:
+            self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
+        else:
+            self.QAct_Modify_Role.setEnabled( False )
+
 
         self.QAct_Create_Privilage.triggered.connect( self.FN_CREATE_PRIV )
-        # self.QAct_Modify_Privilage.triggered.connect(self.FN_MODIFY_PRIV)
-        # self.QA_Create_Priv_Item.triggered.connect(self.FN_CREATE_PRIV_ITEM)
-        # self.QA_Modify_Priv_Item.triggered.connect(self.FN_MODIFY_PRIV_ITEM)
-
         self.QAct_Create_Form.triggered.connect( self.FN_create_form )
         self.QAct_Modify_Form.triggered.connect( self.FN_modify_form )
 
         self.QAct_Create_Form_Item.triggered.connect( self.FN_create_form_item )
         self.QAct_Modify_Form_Item.triggered.connect( self.FN_modify_form_item )
-        # self.QA_Display_Items.triggered.connect(self.FN_display_item)
-        # self.QA_Branch.triggered.connect( self.FN_create_branch )
-        # self.actiontest.triggered.connect(self.FN_test)
+
+        self.setWindowTitle( 'HyperPOS Main Page' )
 
     def FN_create_branch(self):
         self.window_two = CL_branch()

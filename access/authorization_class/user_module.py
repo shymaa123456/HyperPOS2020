@@ -16,14 +16,17 @@ class CL_userModule(object):
     def loadPrivilages(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        sql_select_query = "select f.FORM_ID  ,a.ACTION_DESC ,fi.ITEM_DESC " \
-                           "from SYS_PRIVILEGE p inner join SYS_FORM_ITEM fi on p.FORM_ID = fi.FORM_ID  " \
+        sql_select_query = "select r.ROLE_ID , f.FORM_ID  ,a.ACTION_DESC ,fi.ITEM_DESC " \
+                           "from SYS_PRIVILEGE p " \
+                           "left outer join SYS_FORM_ITEM fi on p.FORM_ID = fi.FORM_ID  " \
                            "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
                            "inner join SYS_PRINT_EXPORT_LOOKUP a on p.ACTION_ID = a.ACTION_ID " \
-                           "inner join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
+                           "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
                            "inner join SYS_USER_ROLE  ur on p.ROLE_ID = ur.ROLE_ID " \
+                           "inner join SYS_ROLE r on r.ROLE_ID = p.ROLE_ID " \
                            "inner join SYS_USER u ON u.USER_ID = ur.USER_ID" \
-                           " where  u.USER_NAME = %s and u.USER_STATUS= 0 and ur.UR_STATUS = 0 "
+                           " where  u.USER_NAME = %s and u.USER_STATUS= 0 and ur.UR_STATUS = 0 and f.form_status = 0 and r.ROLE_STATUS = 0"
+        print(sql_select_query)
         x = (CL_userModule.user_name,)
 
         # print(sql_select_query)

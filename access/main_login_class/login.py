@@ -50,7 +50,9 @@ class CL_login(QtWidgets.QDialog):
 
          if cursor.rowcount >0:
             #save the login in the table
-            CL_user.user_name=username
+            CL_userModule.user_name=username
+            #CL_userModule.init(username)
+            CL_userModule.myList.append(username)
             self.switch_window.emit()
 
          else:

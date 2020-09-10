@@ -9,21 +9,37 @@ from access.authorization_class.form import CL_form
 from access.authorization_class.formItem import CL_formItem
 from access.authorization_class.privilage import CL_privilage
 from access.authorization_class.user import CL_user
+from access.authorization_class.user_module import CL_userModule
+#from access.main_login_class.login import  CL_login
 
 
 class CL_main( QtWidgets.QMainWindow ):
     switch_window = QtCore.pyqtSignal()
 
     def __init__(self):
+        forms = []
         super( CL_main, self ).__init__()
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         dirname = mod_path.__str__() + '/presentation/main_login_ui'
         filename = dirname + '/main.ui'
         loadUi( filename, self )
-        self.setWindowTitle( 'HyperPOS Main Page' )
 
-        self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
+        print (CL_userModule.myList[0])
+        CL_userModule.loadPrivilages(self)
+        for row_number, row_data in enumerate( CL_userModule.myList ):
+            print(row_data[0])
+            forms.append(row_data[0])
+            #for column_number, data in enumerate( row_data ):
+                #self.w1.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
+
+        self.setWindowTitle( 'HyperPOS Main Page' )
+        x = forms.count( "2" )
+        print('x = ',x)
+        if  x == 1:
+
+            self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
+
         self.QAct_Modify_User.triggered.connect( self.FN_MODIFY_USER )
         self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
         self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )

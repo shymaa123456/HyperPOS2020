@@ -135,7 +135,7 @@ class CL_user(QtWidgets.QDialog):
         self.userType)
         mycursor.execute(sql, val)
         # mycursor.execute(sql)
-
+        print(CL_userModule.user_name)
         mycursor.close()
 
         print(mycursor.rowcount, "record inserted.")

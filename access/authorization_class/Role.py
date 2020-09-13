@@ -5,7 +5,8 @@ from PyQt5 import QtWidgets
 from PyQt5.uic import loadUi
 
 from data_connection.h1pos import db1
-import datetime
+from datetime import  datetime
+
 
 class CL_role( QtWidgets.QDialog ):
     dirname = ''
@@ -72,7 +73,7 @@ class CL_role( QtWidgets.QDialog ):
 
         mycursor = self.conn.cursor()
 
-        mycursor.execute( "SELECT USER_NAME FROM SYS_USER order by USER_ID asc" )
+        mycursor.execute( "SELECT USER_NAME FROM SYS_USER where USER_STATUS = 0 order by USER_ID asc" )
         records = mycursor.fetchall()
         for row in records:
             self.CMB_userName.addItems( [row[0]] )
@@ -122,7 +123,7 @@ class CL_role( QtWidgets.QDialog ):
         self.id = self.LB_roleID.text()
 
         mycursor = self.conn.cursor()
-        sql_select_query = "select * from SYS_ROLE where ROLE_ID = %s"
+        sql_select_query = "select * from SYS_ROLE where ROLE_ID = %s "
         x = (self.id,)
         mycursor.execute( sql_select_query, x )
         record = mycursor.fetchone()

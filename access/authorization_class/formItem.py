@@ -15,26 +15,6 @@ class CL_formItem( QtWidgets.QDialog ):
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
         self.conn = db1.connect()
-
-    # def FN_DISPLAY_FORM_ITEMS(self):
-    #     self.w1.clear()
-    #
-    #     mycursor = self.conn.cursor()
-    #     self.form = self.CMB_formId.currentText()
-    #
-    #     sql_select_query = "select ITEM_DESC , ITEM_STATUS from SYS_FORM_ITEM where FORM_ID = '"+self.form+"'"
-    #
-    #     mycursor.execute(sql_select_query)
-    #     records = mycursor.fetchall()
-    #     for row_number, row_data in enumerate(records):
-    #         self.w1.insertRow(row_number)
-    #
-    #         for column_number, data in enumerate(row_data):
-    #
-    #             self.w1.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-    #     # self.w1.setItem(0, 0, QTableWidgetItem("Name"))
-    #     db1.connectionClose(self.conn)
-
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createFormItem.ui'
         loadUi( filename, self )
@@ -62,7 +42,7 @@ class CL_formItem( QtWidgets.QDialog ):
         # self.item=  self.LB_formItemID.text()
 
         mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT FORM_DESC FROM SYS_FORM  order by FORM_ID asc" )
+        mycursor.execute( "SELECT FORM_DESC FROM SYS_FORM  where FORM_STATUS  = 0 order by FORM_ID asc" )
         records = mycursor.fetchall()
         for row in records:
             self.CMB_formName.addItems( [row[0]] )
@@ -73,7 +53,7 @@ class CL_formItem( QtWidgets.QDialog ):
         self.form = self.CMB_formName.currentText()
 
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s"
+        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s and FORM_STATUS  = 0"
         x = (self.form,)
         mycursor.execute( sql_select_query, x )
 
@@ -87,7 +67,7 @@ class CL_formItem( QtWidgets.QDialog ):
         self.item = self.CMB_formItemName.currentText()
 
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s"
+        sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s "
         x = (self.item,)
         mycursor.execute( sql_select_query, x )
 
@@ -129,7 +109,7 @@ class CL_formItem( QtWidgets.QDialog ):
     def FN_GET_FORMItems(self):
         mycursor = self.conn.cursor()
 
-        mycursor.execute( "SELECT ITEM_DESC FROM SYS_FORM_ITEM order by FORM_ID asc" )
+        mycursor.execute( "SELECT ITEM_DESC FROM SYS_FORM_ITEM  order by FORM_ID asc" )
         records = mycursor.fetchall()
 
         for row in records:
@@ -143,7 +123,7 @@ class CL_formItem( QtWidgets.QDialog ):
         self.FN_GET_FORMS()
         self.FN_GET_FORMID()
         mycursor = self.conn.cursor()
-        sql_select_query = "select * from SYS_FORM_ITEM where ITEM_ID = %s"
+        sql_select_query = "select * from SYS_FORM_ITEM where ITEM_ID = %s "
         x = (self.id,)
         mycursor.execute( sql_select_query, x )
         record = mycursor.fetchone()

@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
 from access.authorization_class.Role import CL_role
@@ -68,8 +69,11 @@ class CL_main( QtWidgets.QMainWindow ):
 
         self.QAct_Create_Form_Item.triggered.connect( self.FN_create_form_item )
         self.QAct_Modify_Form_Item.triggered.connect( self.FN_modify_form_item )
-
+        self.QAct_Exit.triggered.connect( self.FN_exit )
         self.setWindowTitle( 'HyperPOS Main Page' )
+
+    def FN_exit(self):
+        QApplication.quit()
 
     def FN_create_branch(self):
         self.window_two = CL_branch()

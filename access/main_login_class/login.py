@@ -44,7 +44,7 @@ class CL_login(QtWidgets.QDialog):
      try:
          self.conn = db1.connect()
          #sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
-         sql_select_Query ="select * from SYS_USER where user_name = %s and user_password = %s"
+         sql_select_Query ="select * from SYS_USER where user_name = %s and user_password = %s and USER_STATUS  = 0"
 
          x = (username,password,)
          mycursor = self.conn.cursor()
@@ -67,7 +67,7 @@ class CL_login(QtWidgets.QDialog):
      finally:
          mycursor.close()
          db1.connectionClose(self.conn)
-         print( "MySQL connection is closed" )
+         #print( "MySQL connection is closed" )
 
 
 
@@ -81,10 +81,10 @@ class CL_login(QtWidgets.QDialog):
 
         loadUi(filename , self )
         self.setWindowTitle('HyperPOS Login Page')
-        self.LE_userName.setText("mustafa")
-        self.LE_password.setText("123")
+        self.LE_userName.setText("admin")
+        self.LE_password.setText("admin")
         filename = dirname + '/hyperonelogo.png'
-        print(filename)
+        #print(filename)
         self.pixmap = QPixmap(filename)
         self.label_logo.setPixmap(self.pixmap)
         self.btn_login.clicked.connect(self.FN_login)

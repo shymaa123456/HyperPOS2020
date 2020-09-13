@@ -98,7 +98,7 @@ class CL_user(QtWidgets.QDialog):
     def FN_GET_USERID(self):
         self.user = self.CMB_userName.currentText()
         mycursor = self.conn.cursor()
-        sql_select_query= "SELECT USER_ID FROM SYS_USER WHERE USER_NAME = %s"
+        sql_select_query= "SELECT USER_ID FROM SYS_USER WHERE USER_NAME = %s "
         x = (self.user,)
         mycursor.execute(sql_select_query, x)
         myresult = mycursor.fetchone()

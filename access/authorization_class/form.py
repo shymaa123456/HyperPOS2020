@@ -25,7 +25,7 @@ class CL_form(QtWidgets.QDialog):
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyForm.ui'
         loadUi( filename, self )
-        self.FN_GET_FORMS()
+        CL_form.FN_GET_FORMS(self)
         self.FN_GET_FORMID()
         self.FN_GET_FORM()
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORM )
@@ -35,7 +35,7 @@ class CL_form(QtWidgets.QDialog):
     @staticmethod
     def FN_GET_FORMS(self):
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT FORM_DESC FROM SYS_FORM order by FORM_ID asc")
+        mycursor.execute("SELECT FORM_DESC FROM SYS_FORM  order by FORM_ID  asc")
         records = mycursor.fetchall()
         for row in records:
             self.CMB_formName.addItems([row[0]])
@@ -45,7 +45,7 @@ class CL_form(QtWidgets.QDialog):
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s"
+        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s  "
         x = (self.form,)
         mycursor.execute(sql_select_query, x)
 
@@ -57,7 +57,7 @@ class CL_form(QtWidgets.QDialog):
         self.FN_GET_FORMID()
         self.id = self.LB_formID.text()
         mycursor = self.conn.cursor()
-        sql_select_query = "select * from SYS_FORM where FORM_ID = %s"
+        sql_select_query = "select * from SYS_FORM where FORM_ID = %s "
         x = (self.id,)
         mycursor.execute(sql_select_query, x)
         record = mycursor.fetchone()

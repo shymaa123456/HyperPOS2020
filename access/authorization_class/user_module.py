@@ -26,7 +26,7 @@ class CL_userModule(object):
                            "inner join SYS_ROLE r on r.ROLE_ID = p.ROLE_ID " \
                            "inner join SYS_USER u ON u.USER_ID = ur.USER_ID" \
                            " where  u.USER_NAME = %s and u.USER_STATUS= 0 and ur.UR_STATUS = 0 and f.form_status = 0 and r.ROLE_STATUS = 0"
-        print(sql_select_query)
+        #print(sql_select_query)
         x = (CL_userModule.user_name,)
 
         # print(sql_select_query)
@@ -35,4 +35,4 @@ class CL_userModule(object):
         records = mycursor.fetchall()
         #print(records)
         CL_userModule.myList = records
-        print(CL_userModule.myList)
+        #print(CL_userModule.myList)

@@ -20,9 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="inialization class">
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/Role.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/Role.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/formItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/formItem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/authorization_class/user_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user_module.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/main_login_class/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/login.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599745488425</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="inialization class">
+      <created>1599750857017</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1599750857017</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -257,22 +270,22 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1599652032924" />
-    <state width="1271" height="128" key="GridCell.Tab.0.bottom" timestamp="1599750832410">
+    <state width="1271" height="112" key="GridCell.Tab.0.bottom" timestamp="1599984476179">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="128" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1599750832410" />
-    <state width="1271" height="128" key="GridCell.Tab.0.center" timestamp="1599750832409">
+    <state width="1271" height="112" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1599984476179" />
+    <state width="1271" height="112" key="GridCell.Tab.0.center" timestamp="1599984476179">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="128" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1599750832409" />
-    <state width="1271" height="128" key="GridCell.Tab.0.left" timestamp="1599750832408">
+    <state width="1271" height="112" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1599984476179" />
+    <state width="1271" height="112" key="GridCell.Tab.0.left" timestamp="1599984476178">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="128" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1599750832408" />
-    <state width="1271" height="128" key="GridCell.Tab.0.right" timestamp="1599750832409">
+    <state width="1271" height="112" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1599984476178" />
+    <state width="1271" height="112" key="GridCell.Tab.0.right" timestamp="1599984476179">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="128" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1599750832409" />
+    <state width="1271" height="112" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1599984476179" />
     <state width="1271" height="215" key="GridCell.Tab.1.bottom" timestamp="1599379716099">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -289,10 +302,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1271" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1599379716097" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1599745493146">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1599977202433">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1599745493146" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1599977202433" />
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1599491214073">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -305,5 +318,9 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="551" y="183" width="325" height="436" key="refactoring.ChangeSignatureDialog/72.27.1294.741@72.27.1294.741" timestamp="1598870908090" />
+    <state x="382" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1599982196472">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state x="382" y="89" width="672" height="678" key="search.everywhere.popup/72.27.1294.741@72.27.1294.741" timestamp="1599982196472" />
   </component>
 </project>

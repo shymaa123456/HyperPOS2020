@@ -293,7 +293,7 @@ class CL_privilage( QtWidgets.QDialog ):
 
         for row in range( 0, allRows ):
             # # get max userid
-            mycursor.execute( "SELECT max(PRIV_ID) FROM SYS_PRIVILEGE" )
+            mycursor.execute( "SELECT max(cast(PRIV_ID  AS UNSIGNED)) FROM SYS_PRIVILEGE" )
             myresult = mycursor.fetchone()
 
             if myresult[0] == None:

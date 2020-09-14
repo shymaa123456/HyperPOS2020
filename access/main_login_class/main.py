@@ -62,6 +62,9 @@ class CL_main( QtWidgets.QMainWindow ):
         else:
             self.QAct_Modify_Role.setEnabled( False )
 
+        self.QAct_Copy_User.triggered.connect(self.FN_COPY_USER)
+        self.QAct_Reset_User_Password.triggered.connect(self.FN_RESET_USER)
+        self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE)
 
         self.QAct_Create_Privilage.triggered.connect( self.FN_CREATE_PRIV )
         self.QAct_Create_Form.triggered.connect( self.FN_create_form )
@@ -85,19 +88,21 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two.FN_DISPLAY_ITEMS()
         self.window_two.show()
 
-    # def FN_test(self):
-    #     self.window_two = CL_test()
-    #
-    #     self.window_two.load()
-    #     self.window_two.show()
-    def FN_actionClicked(self):
-        print( 'Action: ' )
-        self.switch_window.emit()
-
     def FN_CREATE_USER(self):
         self.window_two = CL_user()
         self.window_two.FN_LOAD_CREATE()
         self.window_two.show()
+
+    def FN_COPY_USER(self):
+        self.window_two = CL_user()
+        self.window_two.FN_LOAD_COPY()
+        self.window_two.show()
+
+    def FN_RESET_USER(self):
+        self.window_two = CL_user()
+        self.window_two.FN_LOAD_RESET()
+        self.window_two.show()
+
 
     def FN_MODIFY_USER(self):
         self.window_two = CL_user()
@@ -112,6 +117,11 @@ class CL_main( QtWidgets.QMainWindow ):
     def FN_MODIFY_ROLE(self):
         self.window_two = CL_role()
         self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
+    def FN_COPY_ROLE(self):
+        self.window_two = CL_role()
+        self.window_two.FN_LOAD_COPY()
         self.window_two.show()
 
     def FN_ASSIGN(self):
@@ -157,3 +167,4 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two = CL_formItem()
         self.window_two.FN_LOAD_MODIFY()
         self.window_two.show()
+

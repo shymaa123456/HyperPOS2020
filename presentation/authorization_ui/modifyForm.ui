@@ -36,19 +36,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>120</y>
-     <width>99</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Form type</string>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="LE_type">
    <property name="geometry">
     <rect>
@@ -73,19 +60,6 @@
    </property>
    <property name="text">
     <string>Form help</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>80</y>
-     <width>99</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Description</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="LE_desc">
@@ -164,6 +138,32 @@
    </property>
    <property name="text">
     <string>form name</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>99</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Description &lt;span style=&quot; color:#ef2929;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>99</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Form type&lt;span style=&quot; color:#ef2929;&quot;&gt;  *&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

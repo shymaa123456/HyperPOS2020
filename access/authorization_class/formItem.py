@@ -77,34 +77,36 @@ class CL_formItem( QtWidgets.QDialog ):
         mycursor.close()
 
     def FN_CREATE_FORM_ITEM(self):
-        self.desc = self.LE_desc.text()
+        self.desc = self.LE_desc.text().strip()
         self.form = self.LB_formID.text()
 
         self.status = self.CMB_formItemStatus.currentText()
-
-        mycursor = self.conn.cursor()
-        # get max userid
-        mycursor.execute( "SELECT max(ITEM_ID) FROM SYS_FORM_ITEM" )
-        myresult = mycursor.fetchone()
-
-        if myresult[0] == None:
-            self.id = "1"
+        if self.desc == '':
+            QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
         else:
-            self.id = int( myresult[0] ) + 1
+            mycursor = self.conn.cursor()
+            # get max userid
+            mycursor.execute( "SELECT max(cast(ITEM_ID  AS UNSIGNED)) FROM SYS_FORM_ITEM" )
+            myresult = mycursor.fetchone()
 
-        sql = "INSERT INTO SYS_FORM_ITEM (ITEM_ID,FORM_ID,ITEM_DESC, ITEM_STATUS)  VALUES ( %s, %s, %s, %s)"
+            if myresult[0] == None:
+                self.id = "1"
+            else:
+                self.id = int( myresult[0] ) + 1
 
-        # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-        val = (self.id, self.form, self.desc, self.status)
-        mycursor.execute( sql, val )
-        # mycursor.execute(sql)
-        db1.connectionCommit( self.conn )
-        mycursor.close()
-        db1.connectionClose( self.conn )
+            sql = "INSERT INTO SYS_FORM_ITEM (ITEM_ID,FORM_ID,ITEM_DESC, ITEM_STATUS)  VALUES ( %s, %s, %s, %s)"
 
-        print( mycursor.rowcount, "record inserted." )
+            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+            val = (self.id, self.form, self.desc, self.status)
+            mycursor.execute( sql, val )
+            # mycursor.execute(sql)
+            db1.connectionCommit( self.conn )
+            mycursor.close()
+            db1.connectionClose( self.conn )
 
-        self.close()
+            print( mycursor.rowcount, "record inserted." )
+
+            self.close()
 
     def FN_GET_FORMItems(self):
         mycursor = self.conn.cursor()
@@ -140,20 +142,23 @@ class CL_formItem( QtWidgets.QDialog ):
     def FN_MODIFY_FORM(self):
         self.id = self.LB_formItemID.text()
         self.form = self.LB_formID.text()
-        self.desc = self.LE_desc.text()
+        self.desc = self.LE_desc.text().strip()
         self.status = self.CMB_formItemStatus.currentText()
+        if self.desc == '' :
+            QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
+        else:
 
-        mycursor = self.conn.cursor()
+            mycursor = self.conn.cursor()
 
-        sql = "UPDATE SYS_FORM_ITEM  set FORM_ID= %s ,ITEM_DESC= %s  , ITEM_STATUS = %s where ITEM_id= %s "
+            sql = "UPDATE SYS_FORM_ITEM  set FORM_ID= %s ,ITEM_DESC= %s  , ITEM_STATUS = %s where ITEM_id= %s "
 
-        val = (self.form, self.desc, self.status, self.id)
+            val = (self.form, self.desc, self.status, self.id)
 
-        mycursor.execute( sql, val )
-        mycursor.close()
-        db1.connectionCommit( self.conn )
-        db1.connectionClose( self.conn )
+            mycursor.execute( sql, val )
+            mycursor.close()
+            db1.connectionCommit( self.conn )
+            db1.connectionClose( self.conn )
 
-        print( mycursor.rowcount, "record Modified." )
+            print( mycursor.rowcount, "record Modified." )
 
-        self.close()
+            self.close()

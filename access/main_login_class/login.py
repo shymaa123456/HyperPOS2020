@@ -21,7 +21,7 @@ from access.main_login_class.main import CL_main
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
 
-class CL_login(QtWidgets.QDialog):
+class  CL_login(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
    
     def FN_login(self):
@@ -82,7 +82,7 @@ class CL_login(QtWidgets.QDialog):
         loadUi(filename , self )
         self.setWindowTitle('HyperPOS Login Page')
         self.LE_userName.setText("admin")
-        self.LE_password.setText("admin")
+        self.LE_password.setText("123")
         filename = dirname + '/hyperonelogo.png'
         #print(filename)
         self.pixmap = QPixmap(filename)

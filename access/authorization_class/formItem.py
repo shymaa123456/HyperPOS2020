@@ -23,7 +23,8 @@ class CL_formItem( QtWidgets.QDialog ):
         self.CMB_formItemStatus.addItems( ["0", "1"] )
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORMID )
         self.FN_GET_FORMS()
-        self.FN_GET_FORMID()
+        #self.FN_GET_FORMID()
+        #self.FN_GET_FORMItems()
 
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyFormItem.ui'
@@ -31,21 +32,25 @@ class CL_formItem( QtWidgets.QDialog ):
 
         self.BTN_modifyFormItem.clicked.connect( self.FN_MODIFY_FORM )
         self.CMB_formItemStatus.addItems( ["0", "1"] )
-
-        self.CMB_formItemName.currentIndexChanged.connect( self.FN_GET_FORM_ITEM )
-        self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORMID )
+        self.FN_GET_FORMS()
+        self.FN_GET_FORMID()
         self.FN_GET_FORMItems()
-        self.FN_GET_FORM_ITEM()
+
+        self.CMB_formItemName.currentIndexChanged.connect(self.FN_GET_FORM_ITEM)
+        self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORMItems )
+
 
     def FN_GET_FORMS(self):
         self.CMB_formName.clear()
         # self.item=  self.LB_formItemID.text()
 
         mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT FORM_DESC FROM SYS_FORM  where FORM_STATUS  = 0 order by FORM_ID asc" )
+        mycursor.execute( "SELECT FORM_DESC , FORM_ID FROM SYS_FORM   order by FORM_ID asc" )
         records = mycursor.fetchall()
+
         for row in records:
             self.CMB_formName.addItems( [row[0]] )
+            print("adding form",row[0])
 
         mycursor.close()
 
@@ -53,15 +58,18 @@ class CL_formItem( QtWidgets.QDialog ):
         self.form = self.CMB_formName.currentText()
 
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s and FORM_STATUS  = 0"
+        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s "
         x = (self.form,)
         mycursor.execute( sql_select_query, x )
 
         myresult = mycursor.fetchone()
         if mycursor.rowcount > 0:
             self.LB_formID.setText( myresult[0] )
+            print("form id id",myresult[0])
 
         mycursor.close()
+        #fill form item combo box
+
 
     def FN_GET_FORMITEMID(self):
         self.item = self.CMB_formItemName.currentText()
@@ -70,10 +78,10 @@ class CL_formItem( QtWidgets.QDialog ):
         sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s "
         x = (self.item,)
         mycursor.execute( sql_select_query, x )
-
         myresult = mycursor.fetchone()
-        self.LB_formItemID.setText( myresult[0] )
-
+        if mycursor.rowcount > 0:
+            self.LB_formItemID.setText( myresult[0] )
+        print("")
         mycursor.close()
 
     def FN_CREATE_FORM_ITEM(self):
@@ -109,31 +117,38 @@ class CL_formItem( QtWidgets.QDialog ):
             self.close()
 
     def FN_GET_FORMItems(self):
-        mycursor = self.conn.cursor()
+        self.CMB_formItemName.clear()
+        self.LE_desc.setText( '' )
+        mycursor = self.conn.cursor('')
+        self.FN_GET_FORMID()
+        formId=self.LB_formID.text()
+        sqlQuery = 'SELECT ITEM_DESC FROM SYS_FORM_ITEM where FORM_ID = %s '
+        val=(formId,)
+        mycursor.execute(sqlQuery,val)
 
-        mycursor.execute( "SELECT ITEM_DESC FROM SYS_FORM_ITEM  order by FORM_ID asc" )
         records = mycursor.fetchall()
-
         for row in records:
             self.CMB_formItemName.addItems( [row[0]] )
 
+
         mycursor.close()
 
+        self.FN_GET_FORMITEMID()
+        self.FN_GET_FORM_ITEM()
     def FN_GET_FORM_ITEM(self):
+        self.LE_desc.clear()
         self.FN_GET_FORMITEMID()
         self.id = self.LB_formItemID.text()
-        self.FN_GET_FORMS()
-        self.FN_GET_FORMID()
+        #self.FN_GET_FORMS()
+        #self.FN_GET_FORMID()
         mycursor = self.conn.cursor()
-        sql_select_query = "select * from SYS_FORM_ITEM where ITEM_ID = %s "
+        sql_select_query = "select ITEM_DESC ,ITEM_STATUS from SYS_FORM_ITEM where ITEM_ID = %s "
         x = (self.id,)
         mycursor.execute( sql_select_query, x )
-        record = mycursor.fetchone()
-
-        self.LE_desc.setText( record[2] )
-        self.CMB_formName.setCurrentText( record[1] )
-
-        self.CMB_formItemStatus.setCurrentText( record[3] )
+        record = mycursor.fetchall()
+        for row in record:
+            self.LE_desc.setText( row[0] )
+            self.CMB_formItemStatus.setCurrentText( row[1] )
 
         mycursor.close()
 

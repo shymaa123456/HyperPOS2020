@@ -42,8 +42,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>90</y>
+     <x>100</x>
+     <y>20</y>
      <width>86</width>
      <height>25</height>
     </rect>
@@ -52,8 +52,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>90</y>
+     <x>20</x>
+     <y>20</y>
      <width>67</width>
      <height>17</height>
     </rect>
@@ -81,8 +81,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>90</y>
+     <x>230</x>
+     <y>20</y>
      <width>141</width>
      <height>17</height>
     </rect>
@@ -110,8 +110,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>20</y>
+     <x>220</x>
+     <y>70</y>
      <width>141</width>
      <height>17</height>
     </rect>
@@ -126,8 +126,8 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>20</y>
+     <x>20</x>
+     <y>70</y>
      <width>71</width>
      <height>17</height>
     </rect>
@@ -139,8 +139,8 @@
   <widget class="QComboBox" name="CMB_formItemName">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>20</y>
+     <x>100</x>
+     <y>70</y>
      <width>86</width>
      <height>25</height>
     </rect>

@@ -20,7 +20,7 @@ class CL_userModule(object):
                            "from SYS_PRIVILEGE p " \
                            "left outer join SYS_FORM_ITEM fi on p.FORM_ID = fi.FORM_ID  " \
                            "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
-                           "inner join SYS_PRINT_EXPORT_LOOKUP a on p.ACTION_ID = a.ACTION_ID " \
+                           "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
                            "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
                            "inner join SYS_USER_ROLE  ur on p.ROLE_ID = ur.ROLE_ID " \
                            "inner join SYS_ROLE r on r.ROLE_ID = p.ROLE_ID " \

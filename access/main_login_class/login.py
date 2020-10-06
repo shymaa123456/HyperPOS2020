@@ -82,7 +82,7 @@ class  CL_login(QtWidgets.QDialog):
         loadUi(filename , self )
         self.setWindowTitle('HyperPOS Login Page')
         self.LE_userName.setText("admin")
-        self.LE_password.setText("123")
+        self.LE_password.setText("125")
         filename = dirname + '/hyperonelogo.png'
         #print(filename)
         self.pixmap = QPixmap(filename)

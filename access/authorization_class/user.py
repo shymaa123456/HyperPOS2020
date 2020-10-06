@@ -139,7 +139,9 @@ class CL_user(QtWidgets.QDialog):
         mycursor.execute(sql_select_query, x)
         record = mycursor.fetchone()
         self.LB_userID.setText( record[0] )
+
         self.LE_name.setText(record[2])
+        self.LE_password.setText(record[3])
         self.LE_fullName.setText(record[4])
         self.LE_hrId.setText(record[5])
         self.CMB_branch.setCurrentText(record[1])

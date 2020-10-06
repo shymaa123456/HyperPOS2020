@@ -90,7 +90,7 @@ class CL_privilage( QtWidgets.QDialog ):
 
         for row in range( 0, allRows ):
 
-            sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT_LOOKUP WHERE ACTION_DESC = %s"
+            sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT WHERE ACTION_DESC = %s"
             x = (self.w1.item( row, 4 ).text(),)
             mycursor.execute( sql_select_query, x )
 
@@ -133,7 +133,7 @@ class CL_privilage( QtWidgets.QDialog ):
     def FN_GET_ACTIONS(self):
         mycursor = self.conn.cursor()
 
-        mycursor.execute( "SELECT ACTION_DESC FROM SYS_PRINT_EXPORT_LOOKUP order by ACTION_ID asc" )
+        mycursor.execute( "SELECT ACTION_DESC FROM SYS_PRINT_EXPORT order by ACTION_ID asc" )
         records = mycursor.fetchall()
         for row in records:
             self.CMB_actionName.addItems( [row[0]] )
@@ -224,7 +224,7 @@ class CL_privilage( QtWidgets.QDialog ):
     def FN_GET_ACTIONID(self):
         self.action = self.CMB_actionName.currentText()
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT_LOOKUP WHERE ACTION_DESC = %s"
+        sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT WHERE ACTION_DESC = %s"
         x = (self.action,)
         mycursor.execute( sql_select_query, x )
 
@@ -247,7 +247,7 @@ class CL_privilage( QtWidgets.QDialog ):
                            "from SYS_PRIVILEGE p left outer join SYS_FORM_ITEM fi on p.FORM_ID = fi.FORM_ID  " \
                            "inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID " \
                            "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
-                           "inner join SYS_PRINT_EXPORT_LOOKUP a on p.ACTION_ID = a.ACTION_ID " \
+                           "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
                            "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
                            " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 0 and f.FORM_STATUS  = 0 "
         x = (self.role,)
@@ -306,7 +306,7 @@ class CL_privilage( QtWidgets.QDialog ):
             formId = self.w1.item( row, 3 )
             actionName = self.w1.item( row, 4 )
 
-            sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT_LOOKUP WHERE ACTION_DESC = %s"
+            sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT WHERE ACTION_DESC = %s"
             x = (actionName.text(),)
             mycursor.execute( sql_select_query, x )
 

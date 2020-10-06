@@ -154,7 +154,7 @@ class CL_user(QtWidgets.QDialog):
     def FN_MODIFY_USER(self):
         self.id = self.LB_userID.text()
         self.name = self.LE_name.text().strip()
-        self.password = self.LE_password.text().strip
+        self.password = self.LE_password.text().strip()
         self.branch = self.CMB_branch.currentText()
         self.fullName = self.LE_fullName.text().strip()
         self.hrId = self.LE_hrId.text().strip()

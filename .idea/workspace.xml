@@ -19,9 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="update the code to ADD THE validation">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="loyality ui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createForm.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createForm.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600167217874</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="loyality ui">
+      <created>1601562609060</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1601562609060</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -277,7 +284,8 @@
     <MESSAGE value="inialization class" />
     <MESSAGE value="update the code to take the status field in consideration" />
     <MESSAGE value="update the code to ADD THE validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="update the code to ADD THE validation" />
+    <MESSAGE value="loyality ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="loyality ui" />
   </component>
   <component name="WindowStateProjectService">
     <state x="172" y="127" width="1094" height="541" key="DiffContextDialog" timestamp="1599651840947">
@@ -288,22 +296,22 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1599652032924" />
-    <state width="983" height="116" key="GridCell.Tab.0.bottom" timestamp="1600256857121">
+    <state width="1028" height="116" key="GridCell.Tab.0.bottom" timestamp="1601975031867">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="983" height="116" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1600256857121" />
-    <state width="983" height="116" key="GridCell.Tab.0.center" timestamp="1600256857120">
+    <state width="1028" height="116" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1601975031867" />
+    <state width="1028" height="116" key="GridCell.Tab.0.center" timestamp="1601975031867">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="983" height="116" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1600256857120" />
-    <state width="983" height="116" key="GridCell.Tab.0.left" timestamp="1600256857120">
+    <state width="1028" height="116" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1601975031867" />
+    <state width="1028" height="116" key="GridCell.Tab.0.left" timestamp="1601975031866">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="983" height="116" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1600256857120" />
-    <state width="983" height="116" key="GridCell.Tab.0.right" timestamp="1600256857120">
+    <state width="1028" height="116" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1601975031866" />
+    <state width="1028" height="116" key="GridCell.Tab.0.right" timestamp="1601975031867">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="983" height="116" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1600256857120" />
+    <state width="1028" height="116" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1601975031867" />
     <state width="1271" height="215" key="GridCell.Tab.1.bottom" timestamp="1599379716099">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -320,10 +328,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1271" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1599379716097" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1600167227845">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1601562616012">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1600167227845" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1601562616012" />
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1599491214073">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

@@ -12,6 +12,7 @@ from access.authorization_class.privilage import CL_privilage
 from access.authorization_class.user import CL_user
 from access.authorization_class.user_module import CL_userModule
 #from access.main_login_class.login import  CL_login
+from access.loyalty_class.customer import CL_customer
 
 
 class CL_main( QtWidgets.QMainWindow ):
@@ -62,6 +63,12 @@ class CL_main( QtWidgets.QMainWindow ):
         else:
             self.QAct_Modify_Role.setEnabled( False )
 
+        x = forms.count( "7" )
+        if x > 0:
+            self.QAct_Cust_Add.triggered.connect( self.FN_CREATE_CUST )
+        else:
+            self.QAct_Cust_Add.setEnabled( False )
+
         self.QAct_Copy_User.triggered.connect(self.FN_COPY_USER)
         self.QAct_Reset_User_Password.triggered.connect(self.FN_RESET_USER)
         self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE)
@@ -75,6 +82,10 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Exit.triggered.connect( self.FN_exit )
         self.setWindowTitle( 'HyperPOS Main Page' )
 
+    def FN_CREATE_CUST(self):
+        self.window_two = CL_customer()
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
     def FN_exit(self):
         QApplication.quit()
 

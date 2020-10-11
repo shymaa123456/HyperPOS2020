@@ -228,7 +228,7 @@
    <zorder>CMB_status</zorder>
    <zorder>LE_notes</zorder>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="BTN_createCustomer">
    <property name="geometry">
     <rect>
      <x>28</x>

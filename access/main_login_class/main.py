@@ -69,6 +69,12 @@ class CL_main( QtWidgets.QMainWindow ):
         else:
             self.QAct_Cust_Add.setEnabled( False )
 
+        x = forms.count( "8" )
+        if x > 0:
+            self.QAct_Cust_Edit.triggered.connect( self.FN_MODIFY_CUST )
+        else:
+            self.QAct_Cust_Edit.setEnabled( False )
+
         self.QAct_Copy_User.triggered.connect(self.FN_COPY_USER)
         self.QAct_Reset_User_Password.triggered.connect(self.FN_RESET_USER)
         self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE)
@@ -86,6 +92,12 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two = CL_customer()
         self.window_two.FN_LOAD_CREATE()
         self.window_two.show()
+
+    def FN_MODIFY_CUST(self):
+        self.window_two = CL_customer()
+        self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
     def FN_exit(self):
         QApplication.quit()
 

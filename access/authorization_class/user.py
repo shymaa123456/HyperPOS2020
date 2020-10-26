@@ -227,7 +227,7 @@ class CL_user(QtWidgets.QDialog):
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
         if self.name == '' or self.password =='' or self.fullName == ''  or self.hrId == '' :
-            QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
+            QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
 
         else:
 

@@ -20,10 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="create customer">
-      <change afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,9 +113,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HyperPOS2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/loyalty_class" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/loyalty_class/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.privilage" />
       </list>
     </recent_temporary>
@@ -273,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602428481532</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="create customer">
+      <created>1602431208609</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1602431208609</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -324,22 +356,22 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1599652032924" />
-    <state width="896" height="187" key="GridCell.Tab.0.bottom" timestamp="1602430112824">
+    <state width="1271" height="219" key="GridCell.Tab.0.bottom" timestamp="1603633522483">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="896" height="187" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1602430112824" />
-    <state width="896" height="187" key="GridCell.Tab.0.center" timestamp="1602430112824">
+    <state width="1271" height="219" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1603633522483" />
+    <state width="1271" height="219" key="GridCell.Tab.0.center" timestamp="1603633522482">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="896" height="187" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1602430112824" />
-    <state width="896" height="187" key="GridCell.Tab.0.left" timestamp="1602430112823">
+    <state width="1271" height="219" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1603633522482" />
+    <state width="1271" height="219" key="GridCell.Tab.0.left" timestamp="1603633522482">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="896" height="187" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1602430112823" />
-    <state width="896" height="187" key="GridCell.Tab.0.right" timestamp="1602430112824">
+    <state width="1271" height="219" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1603633522482" />
+    <state width="1271" height="219" key="GridCell.Tab.0.right" timestamp="1603633522483">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="896" height="187" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1602430112824" />
+    <state width="1271" height="219" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1603633522483" />
     <state width="1271" height="215" key="GridCell.Tab.1.bottom" timestamp="1599379716099">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -356,10 +388,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1271" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1599379716097" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1602428487760">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1602431211608">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1602428487760" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1602431211608" />
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1599491214073">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

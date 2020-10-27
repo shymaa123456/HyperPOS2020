@@ -25,7 +25,7 @@ class CL_userModule(object):
                            "inner join SYS_USER_ROLE  ur on p.ROLE_ID = ur.ROLE_ID " \
                            "inner join SYS_ROLE r on r.ROLE_ID = p.ROLE_ID " \
                            "inner join SYS_USER u ON u.USER_ID = ur.USER_ID" \
-                           " where  u.USER_NAME = %s and u.USER_STATUS= 0 and ur.UR_STATUS = 0 and f.form_status = 0 and r.ROLE_STATUS = 0"
+                           " where  u.USER_NAME = %s and u.USER_STATUS= 1 and ur.UR_STATUS = 1 and f.form_status = 1 and r.ROLE_STATUS = 1"
         #print(sql_select_query)
         x = (CL_userModule.user_name,)
 

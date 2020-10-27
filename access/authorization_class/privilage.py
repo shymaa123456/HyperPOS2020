@@ -99,7 +99,7 @@ class CL_privilage( QtWidgets.QDialog ):
                 actionId = myresult[0]
 
             formItemName = self.w1.item( row, 5 )
-            sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s and ITEM_STATUS  = 0"
+            sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s and ITEM_STATUS  = 1"
             x = (formItemName.text(),)
             mycursor.execute( sql_select_query, x )
 
@@ -143,7 +143,7 @@ class CL_privilage( QtWidgets.QDialog ):
     def FN_GET_ROLES(self):
         mycursor = self.conn.cursor()
 
-        mycursor.execute( "SELECT ROLE_NAME FROM SYS_ROLE where ROLE_STATUS =0  order by ROLE_ID asc " )
+        mycursor.execute( "SELECT ROLE_NAME FROM SYS_ROLE where ROLE_STATUS =1  order by ROLE_ID asc " )
         records = mycursor.fetchall()
         for row in records:
             self.CMB_roleName.addItems( [row[0]] )
@@ -158,7 +158,7 @@ class CL_privilage( QtWidgets.QDialog ):
 
         self.form = self.LB_formId.text()
 
-        sql_select_query = "SELECT ITEM_DESC FROM SYS_FORM_ITEM where ITEM_STATUS  = 0 and FORM_ID = '" + self.form + "'"
+        sql_select_query = "SELECT ITEM_DESC FROM SYS_FORM_ITEM where ITEM_STATUS  = 1 and FORM_ID = '" + self.form + "'"
 
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
@@ -172,7 +172,7 @@ class CL_privilage( QtWidgets.QDialog ):
         mycursor = self.conn.cursor()
         self.item = self.CMB_formItemName.currentText()
 
-        sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s and ITEM_STATUS  = 0 "
+        sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s and ITEM_STATUS  = 1 "
         x = (self.item,)
         mycursor.execute( sql_select_query, x )
 
@@ -185,7 +185,7 @@ class CL_privilage( QtWidgets.QDialog ):
     def FN_GET_ROLEID(self):
         self.role = self.CMB_roleName.currentText()
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT ROLE_ID FROM SYS_ROLE WHERE ROLE_Name = %s and ROLE_STATUS  = 0 "
+        sql_select_query = "SELECT ROLE_ID FROM SYS_ROLE WHERE ROLE_Name = %s and ROLE_STATUS  = 1 "
         x = (self.role,)
         mycursor.execute( sql_select_query, x )
         myresult = mycursor.fetchone()
@@ -198,7 +198,7 @@ class CL_privilage( QtWidgets.QDialog ):
     def FN_GET_ROLENAME(self):
         self.role = self.LB_roleId.text()
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT ROLE_DESC FROM SYS_ROLE WHERE ROLE_ID = %s and ROLE_STATUS  = 0"
+        sql_select_query = "SELECT ROLE_DESC FROM SYS_ROLE WHERE ROLE_ID = %s and ROLE_STATUS  = 1"
         x = (self.role,)
         mycursor.execute( sql_select_query, x )
         myresult = mycursor.fetchone()
@@ -210,7 +210,7 @@ class CL_privilage( QtWidgets.QDialog ):
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s and FORM_STATUS  = 0"
+        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s and FORM_STATUS  = 1"
         x = (self.form,)
         mycursor.execute( sql_select_query, x )
 
@@ -249,7 +249,7 @@ class CL_privilage( QtWidgets.QDialog ):
                            "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
                            "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
                            "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
-                           " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 0 and f.FORM_STATUS  = 0 "
+                           " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1 "
         x = (self.role,)
 
         print(sql_select_query)

@@ -20,7 +20,7 @@ class CL_form(QtWidgets.QDialog):
         filename = self.dirname + '/createForm.ui'
         loadUi( filename, self )
         self.BTN_createForm.clicked.connect(self.FN_CREATE_FORM)
-        self.CMB_formStatus.addItems(["0","1"])
+        self.CMB_formStatus.addItems(["1","0"])
 
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyForm.ui'
@@ -30,7 +30,7 @@ class CL_form(QtWidgets.QDialog):
         self.FN_GET_FORM()
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORM )
         self.BTN_modifyForm.clicked.connect(self.FN_MODIFY_FORM)
-        self.CMB_formStatus.addItems(["0", "1"])
+        self.CMB_formStatus.addItems(["1", "0"])
 
     @staticmethod
     def FN_GET_FORMS(self):

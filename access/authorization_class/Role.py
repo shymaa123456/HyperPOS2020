@@ -4,6 +4,7 @@ from pathlib import Path
 from PyQt5 import QtWidgets
 from PyQt5.uic import loadUi
 
+from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 from datetime import  datetime
 
@@ -108,10 +109,10 @@ class CL_role( QtWidgets.QDialog ):
         loadUi( filename, self )
 
         self.BTN_assignRole.clicked.connect( self.FN_ASSIGN_ROLE )
-        self.CMB_userRoleStatus.addItems( ["0", "1"] )
+        self.CMB_userRoleStatus.addItems( ["1", "0"] )
         self.FN_GET_USERS()
         self.FN_GET_ROLES()
-        self.FN_GET_USERID()
+        #self.FN_GET_USERID()
         self.FN_GET_ROLEID()
         self.CMB_userName.currentIndexChanged.connect( self.FN_GET_USERID )
         self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLEID )
@@ -120,19 +121,20 @@ class CL_role( QtWidgets.QDialog ):
         filename = self.dirname + '/modifyRole.ui'
         loadUi( filename, self )
         # loadUi('../Presentation/modifyRole.ui', self)
+        self.CMB_roleStatus.addItems( ["1", "0"] )
         self.FN_GET_ROLES()
         self.FN_GET_ROLEID()
         self.FN_GET_ROLE()
         self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLE )
         self.BTN_modifyRole.clicked.connect( self.FN_MODIFY_ROLE )
-        self.CMB_roleStatus.addItems( ["0", "1"] )
+
 
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createRole.ui'
         loadUi( filename, self )
 
         self.BTN_createRole.clicked.connect( self.FN_CREATE_ROLE )
-        self.CMB_roleStatus.addItems( ["0", "1"] )
+        self.CMB_roleStatus.addItems( ["1", "0"] )
 
     def FN_GET_USERID(self):
         self.user = self.CMB_userName.currentText()
@@ -158,7 +160,7 @@ class CL_role( QtWidgets.QDialog ):
 
         mycursor = self.conn.cursor()
 
-        mycursor.execute( "SELECT USER_NAME FROM SYS_USER where USER_STATUS = 0 order by USER_ID asc" )
+        mycursor.execute( "SELECT USER_NAME FROM SYS_USER where USER_STATUS = 1 order by USER_ID asc" )
         records = mycursor.fetchall()
         for row in records:
             self.CMB_userName.addItems( [row[0]] )
@@ -237,7 +239,7 @@ class CL_role( QtWidgets.QDialog ):
 
             sql = "UPDATE SYS_ROLE   set ROLE_NAME= %s ,  ROLE_DESC= %s  ,  ROLE_CHANGED_ON = %s , ROLE_CHANGED_BY = %s, ROLE_STATUS = %s where ROLE_id= %s "
 
-            val = (self.name, self.desc, changeDate, '', self.status, self.id)
+            val = (self.name, self.desc, changeDate, CL_userModule.user_name, self.status, self.id)
             print( val )
             mycursor.execute( sql, val )
             # mycursor.execute(sql)

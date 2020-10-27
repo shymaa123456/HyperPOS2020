@@ -2,6 +2,7 @@ from pathlib import Path
 
 from PyQt5 import QtWidgets
 from PyQt5.uic import loadUi
+from qtpy import QtCore
 
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
@@ -20,6 +21,11 @@ class CL_user(QtWidgets.QDialog):
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyUser.ui'
         loadUi(filename , self)
+
+        self.FN_GET_BRANCHES()
+        self.FN_GET_USERTYPE()
+        self.CMB_userStatus.addItems( ["1", "0"] )
+
         records = self.FN_GET_USERS()
         for row in records:
             self.CMB_userName.addItems( [row[0]] )
@@ -28,9 +34,7 @@ class CL_user(QtWidgets.QDialog):
         self.FN_GET_USER()
         self.CMB_userName.currentIndexChanged.connect( self.FN_GET_USER )
         self.BTN_modifyUser.clicked.connect(self.FN_MODIFY_USER)
-        self.CMB_branch.addItems(["1", "2", "3"])
-        self.CMB_userType.addItems(["1", "2", "3"])
-        self.CMB_userStatus.addItems(["0", "1"])
+
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createUser.ui'
         loadUi( filename, self )
@@ -38,9 +42,45 @@ class CL_user(QtWidgets.QDialog):
         self.setWindowTitle('Users')
         self.BTN_createUser.clicked.connect(self.FN_CREATE_USER)
 
-        self.CMB_branch.addItems(["1","2","3"])
-        self.CMB_userType.addItems(["1","2","3"])
-        self.CMB_userStatus.addItems(["0","1"])
+        #self.CMB_branch.addItems(["1","2","3"])
+        self.FN_GET_BRANCHES()
+        self.FN_GET_USERTYPE()
+        self.CMB_userStatus.addItems(["1","0"])
+
+    def FN_GET_USERTYPE(self):
+
+        mycursor = self.conn.cursor()
+        self.CMB_userType.clear()
+
+
+
+        sql_select_query = "SELECT USER_TYPE_DESC  FROM SYS_USER_TYPE where USER_TYPE_STATUS   = 1 "
+
+        mycursor.execute( sql_select_query )
+        records = mycursor.fetchall()
+
+        for row in records:
+            self.CMB_userType.addItems( [row[0]] )
+
+        mycursor.close()
+
+
+    def FN_GET_BRANCHES(self):
+
+        mycursor = self.conn.cursor()
+        self.CMB_branch.clear()
+
+
+
+        sql_select_query = "SELECT BRANCH_DESC_A  FROM BRANCH where BRANCH_STATUS   = 1 "
+
+        mycursor.execute( sql_select_query )
+        records = mycursor.fetchall()
+
+        for row in records:
+            self.CMB_branch.addItems( [row[0]] )
+
+        mycursor.close()
     def FN_LOAD_COPY(self):
         filename = self.dirname + '/copyUser.ui'
         loadUi( filename, self )
@@ -94,7 +134,7 @@ class CL_user(QtWidgets.QDialog):
                 sql = "INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS)      " \
                       "VALUES ( %s, %s, %s, %s,%s, %s,%s,%s,%s)"
 
-                val = (id, newUser, row[0], row[1], '', creationDate, '', '', row[2])
+                val = (id, newUser, row[0], row[1], CL_userModule.user_name, creationDate, '', '', row[2])
                 print( str( sql ) )
                 # val = (id,newUser,  row[0], row[1], CL_userModule.user_name, creationDate, '', '', row[2],)
                 mycursor3.execute( sql, val )
@@ -103,34 +143,13 @@ class CL_user(QtWidgets.QDialog):
                 print( mycursor3.rowcount, "record inserted." )
                 id = id + 1
 
-                # sql_select_query = "select * from SYS_USER_ROLE where USER_ID ='"+newUser+"' and ROLE_ID = '"+row[0]+"'"
-                # print(sql_select_query)
-                #
-                # mycursor2.execute( sql_select_query)
-                # print("mycursor2.rowcount is "+ str(mycursor2.rowcount))
-                # if mycursor2.rowcount > 0:
-                #     print("h")
-                # else:
-                #     mycursor3 = self.conn.cursor()
-                #     #sql = " INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS) VALUES ( "+id+", "+newUser+", "+row[0]+", '"+row[1]+"','"+CL_userModule.user_name+"', '"+creationDate+"',' ',' ' ,'"+row[2]+"')"
-                #     sql = "INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS)      " \
-                #           "VALUES ( %s, %s, %s, %s,%s, %s,%s,%s,%s)"
-                #
-                #     val = (id, newUser,row[0], row[1], '', creationDate, '', '', row[2])
-                #     print(str(sql))
-                #     #val = (id,newUser,  row[0], row[1], CL_userModule.user_name, creationDate, '', '', row[2],)
-                #     mycursor3.execute( sql, val)
-                #
-                #
-                #     db1.connectionCommit( self.conn )
-                #     print( mycursor3.rowcount, "record inserted." )
-                #     id = id + 1
             mycursor2.close()
             mycursor1.close()
             mycursor.close()
             self.close()
 
     def FN_GET_USER(self):
+
         user = self.CMB_userName.currentText()
 
         mycursor = self.conn.cursor()
@@ -138,6 +157,7 @@ class CL_user(QtWidgets.QDialog):
         x = (user,)
         mycursor.execute(sql_select_query, x)
         record = mycursor.fetchone()
+        print(record)
         self.LB_userID.setText( record[0] )
 
         self.LE_name.setText(record[2])
@@ -145,7 +165,9 @@ class CL_user(QtWidgets.QDialog):
         self.LE_fullName.setText(record[4])
         self.LE_hrId.setText(record[5])
         self.CMB_branch.setCurrentText(record[1])
-        self.CMB_userType.setCurrentText(record[11])
+
+        self.CMB_userType.setCurrentText( record[11] )
+
         self.CMB_userStatus.setCurrentText(record[10])
 
 
@@ -162,6 +184,8 @@ class CL_user(QtWidgets.QDialog):
         self.hrId = self.LE_hrId.text().strip()
         self.userType = self.CMB_userType.currentText()
         self.status = self.CMB_userStatus.currentText()
+
+
         if self.name == '' or self.password =='' or self.fullName == ''  or self.hrId == '' :
             QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
         else:
@@ -169,9 +193,9 @@ class CL_user(QtWidgets.QDialog):
 
             changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-            sql = "UPDATE SYS_USER   set USER_NAME= %s ,  USER_PASSWORD= %s  ,  BRANCH_NO = %s, USER_FULLNAME = %s , USER_HR_ID = %s, USER_CHANGED_ON = %s , USER_CHENGED_BY = %s, USER_STATUS = %s, USER_TYPE_ID = %s where USER_id= %s "
+            sql = "UPDATE SYS_USER   set USER_NAME= %s ,  USER_PASSWORD= %s  ,  BRANCH_NO = %s, USER_FULLNAME = %s , USER_HR_ID = %s, USER_CHANGED_ON = %s , USER_CHANGED_BY = %s, USER_STATUS = %s, USERTYPE_ID = %s where USER_id= %s "
             val = (self.name  , self.password, self.branch, self.fullName,self.hrId, changeDate, CL_userModule.user_name , self.status, self.userType , self.id)
-            print(val)
+
             mycursor.execute(sql, val)
 
             mycursor.close()
@@ -187,14 +211,6 @@ class CL_user(QtWidgets.QDialog):
         records = mycursor.fetchall()
         mycursor.close()
         return  records
-    # def FN_GET_USERID(self):
-    #     self.user = self.CMB_userName.currentText()
-    #     mycursor = self.conn.cursor()
-    #     sql_select_query= "SELECT USER_ID FROM SYS_USER WHERE USER_NAME = %s "
-    #     x = (self.user,)
-    #     mycursor.execute(sql_select_query, x)
-    #     myresult = mycursor.fetchone()
-    #     self.LB_userID.setText(myresult [0])
 
     def FN_GET_USERID_N(self,user):
 
@@ -239,7 +255,7 @@ class CL_user(QtWidgets.QDialog):
             self.userType)
             mycursor.execute(sql, val)
             # mycursor.execute(sql)
-            print(CL_userModule.user_name)
+
             mycursor.close()
 
             print(mycursor.rowcount, "record inserted.")
@@ -253,7 +269,7 @@ class CL_user(QtWidgets.QDialog):
         changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
         if self.LE_password.text()  == self.LE_password2.text() :
 
-            sql = "UPDATE SYS_USER   set   USER_PASSWORD= %s  , USER_CHANGED_ON = %s , USER_CHENGED_BY = %s where USER_NAME= %s "
+            sql = "UPDATE SYS_USER   set   USER_PASSWORD= %s  , USER_CHANGED_ON = %s , USER_CHANGED_BY = %s where USER_NAME= %s "
             val = ( self.LE_password.text(), changeDate, CL_userModule.user_name,CL_userModule.user_name)
             #print( val )
             mycursor.execute( sql, val )

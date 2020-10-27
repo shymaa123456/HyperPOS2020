@@ -44,7 +44,7 @@ class  CL_login(QtWidgets.QDialog):
      try:
          self.conn = db1.connect()
          #sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
-         sql_select_Query ="select * from SYS_USER where user_name = %s and user_password = %s and USER_STATUS  = 0"
+         sql_select_Query ="select * from SYS_USER where user_name = %s and user_password = %s and USER_STATUS  = 1"
 
          x = (username,password,)
          mycursor = self.conn.cursor()
@@ -82,7 +82,7 @@ class  CL_login(QtWidgets.QDialog):
         loadUi(filename , self )
         self.setWindowTitle('HyperPOS Login Page')
         self.LE_userName.setText("admin")
-        self.LE_password.setText("125")
+        self.LE_password.setText("123")
         filename = dirname + '/hyperonelogo.png'
         #print(filename)
         self.pixmap = QPixmap(filename)

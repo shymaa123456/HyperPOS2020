@@ -20,7 +20,7 @@ class CL_formItem( QtWidgets.QDialog ):
         loadUi( filename, self )
 
         self.BTN_createFormItem.clicked.connect( self.FN_CREATE_FORM_ITEM )
-        self.CMB_formItemStatus.addItems( ["0", "1"] )
+        self.CMB_formItemStatus.addItems( ["1", "0"] )
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORMID )
         self.FN_GET_FORMS()
         #self.FN_GET_FORMID()
@@ -31,7 +31,7 @@ class CL_formItem( QtWidgets.QDialog ):
         loadUi( filename, self )
 
         self.BTN_modifyFormItem.clicked.connect( self.FN_MODIFY_FORM )
-        self.CMB_formItemStatus.addItems( ["0", "1"] )
+        self.CMB_formItemStatus.addItems( ["1", "0"] )
         self.FN_GET_FORMS()
         self.FN_GET_FORMID()
         self.FN_GET_FORMItems()

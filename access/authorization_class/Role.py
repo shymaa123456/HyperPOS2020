@@ -112,7 +112,7 @@ class CL_role( QtWidgets.QDialog ):
         self.CMB_userRoleStatus.addItems( ["1", "0"] )
         self.FN_GET_USERS()
         self.FN_GET_ROLES()
-        #self.FN_GET_USERID()
+        self.FN_GET_USERID()
         self.FN_GET_ROLEID()
         self.CMB_userName.currentIndexChanged.connect( self.FN_GET_USERID )
         self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLEID )
@@ -190,13 +190,13 @@ class CL_role( QtWidgets.QDialog ):
             self.id = "1"
         else:
             self.id = int( myresult[0] ) + 1
-
+        print('id is ',self.id)
         creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
 
         sql = "INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS)      " \
               "VALUES ( %s, %s, %s, %s,%s, %s,%s,%s,%s)"
 
-        val = (self.id, self.user, self.role, '1', '', creationDate, '', '', self.status)
+        val = (self.id, self.user, self.role, '1', CL_userModule.user_name, creationDate, '', '', self.status)
         mycursor.execute( sql, val )
 
         mycursor.close()

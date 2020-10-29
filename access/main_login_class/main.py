@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
@@ -27,7 +28,7 @@ class CL_main( QtWidgets.QMainWindow ):
         filename = dirname + '/main.ui'
         loadUi( filename, self )
 
-        print (CL_userModule.user_name)
+        #print (CL_userModule.user_name)
         CL_userModule.loadPrivilages(self)
         for row_number, row_data in enumerate( CL_userModule.myList ):
 
@@ -35,49 +36,29 @@ class CL_main( QtWidgets.QMainWindow ):
             #for column_number, data in enumerate( row_data ):
                 #self.w1.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
 
-        x = forms.count( "1" )
-        if  x > 0:
-            self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
-        else:
-            self.QAct_Create_User.setEnabled( False )
+        forms=list(dict.fromkeys(forms))
+        self.QAct_Create_Privilage.setEnabled( True )
+        # self.QAct_Create_Form_Item.setEnabled( True )
+        # self.QAct_Modify_Form.setEnabled( True )
+        # self.QAct_Modify_Form_Item.setEnabled( True )
+        # self.QAct_Create_Form.setEnabled( True )
+        for row in forms:
+            print(row)
+            but_name= 'QAct_'+row
+            self.findChild( QObject, but_name ).setEnabled( True )
 
-        x = forms.count( "2" )
-        if x > 0:
-            self.QAct_Modify_User.triggered.connect( self.FN_MODIFY_USER )
-        else:
-            self.QAct_Modify_User.setEnabled( False )
+        self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
+        self.QAct_Modify_User.triggered.connect( self.FN_MODIFY_USER )
+        self.QAct_Copy_User.triggered.connect( self.FN_COPY_USER )
+        self.QAct_Reset_User_Password.triggered.connect( self.FN_RESET_USER )
+        self.QAct_Assign_User_to_Roles.triggered.connect( self.FN_ASSIGN )
 
-        x = forms.count( "3" )
-        if x > 0:
-            self.QAct_Assign_User_to_Roles.triggered.connect( self.FN_ASSIGN )
-        else:
-            self.QAct_Assign_User_to_Roles.setEnabled( False )
-        x = forms.count( "4" )
-        if x > 0:
-            self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
-        else:
-            self.QAct_Create_Role.setEnabled( False )
-        x = forms.count( "5" )
-        if x > 0:
-            self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
-        else:
-            self.QAct_Modify_Role.setEnabled( False )
+        self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
+        self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
+        self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE )
 
-        x = forms.count( "7" )
-        if x > 0:
-            self.QAct_Cust_Add.triggered.connect( self.FN_CREATE_CUST )
-        else:
-            self.QAct_Cust_Add.setEnabled( False )
-
-        x = forms.count( "8" )
-        if x > 0:
-            self.QAct_Cust_Edit.triggered.connect( self.FN_MODIFY_CUST )
-        else:
-            self.QAct_Cust_Edit.setEnabled( False )
-
-        self.QAct_Copy_User.triggered.connect(self.FN_COPY_USER)
-        self.QAct_Reset_User_Password.triggered.connect(self.FN_RESET_USER)
-        self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE)
+        self.QAct_Cust_Add.triggered.connect( self.FN_CREATE_CUST )
+        self.QAct_Cust_Edit.triggered.connect( self.FN_MODIFY_CUST )
 
         self.QAct_Create_Privilage.triggered.connect( self.FN_CREATE_PRIV )
         self.QAct_Create_Form.triggered.connect( self.FN_create_form )
@@ -85,6 +66,7 @@ class CL_main( QtWidgets.QMainWindow ):
 
         self.QAct_Create_Form_Item.triggered.connect( self.FN_create_form_item )
         self.QAct_Modify_Form_Item.triggered.connect( self.FN_modify_form_item )
+
         self.QAct_Exit.triggered.connect( self.FN_exit )
         self.setWindowTitle( 'HyperPOS Main Page' )
 

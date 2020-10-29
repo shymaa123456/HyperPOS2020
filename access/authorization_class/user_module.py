@@ -16,7 +16,7 @@ class CL_userModule(object):
     def loadPrivilages(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        sql_select_query = "select r.ROLE_ID , f.FORM_ID  ,a.ACTION_ID ,fi.ITEM_ID " \
+        sql_select_query = "select r.ROLE_ID , f.FORM_DESC  ,a.ACTION_ID ,fi.ITEM_ID " \
                            "from SYS_PRIVILEGE p " \
                            "left outer join SYS_FORM_ITEM fi on p.FORM_ID = fi.FORM_ID  " \
                            "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \

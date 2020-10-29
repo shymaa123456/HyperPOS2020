@@ -96,6 +96,9 @@
       <addaction name="QAct_Create_Privilage"/>
      </widget>
      <widget class="QMenu" name="QM_Role">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="title">
        <string>Roles</string>
       </property>
@@ -972,71 +975,113 @@
    </property>
   </action>
   <action name="QAct_Create_User">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Create User</string>
    </property>
   </action>
   <action name="QAct_Modify_User">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modify User</string>
    </property>
   </action>
   <action name="QAct_Copy_User">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Copy User</string>
    </property>
   </action>
   <action name="QAct_Reset_User_Password">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Reset User Password</string>
    </property>
   </action>
   <action name="QAct_Create_Role">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Create Role</string>
    </property>
   </action>
   <action name="QAct_Modify_Role">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modify Role</string>
    </property>
   </action>
   <action name="QAct_Assign_User_to_Roles">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Assign User to Roles</string>
    </property>
   </action>
   <action name="QAct_Modify_Roles_Privilages">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modify Roles Privilages and Function Keys</string>
    </property>
   </action>
   <action name="QAct_Create_Form">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Create Form</string>
    </property>
   </action>
   <action name="QAct_Modify_Form">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modify Form</string>
    </property>
   </action>
   <action name="QAct_Create_Form_Item">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Create Form Item</string>
    </property>
   </action>
   <action name="QAct_Modify_Form_Item">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modify Form Item</string>
    </property>
   </action>
   <action name="QAct_Copy_Role">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Copy Role</string>
    </property>
   </action>
   <action name="QAct_Create_Privilage">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Create Privilage</string>
    </property>
@@ -1047,11 +1092,17 @@
    </property>
   </action>
   <action name="QAct_Create_Function_Keys">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Create Function Keys</string>
    </property>
   </action>
   <action name="QAct_Modify_Function_Keys">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modify Function Keys</string>
    </property>
@@ -1067,11 +1118,17 @@
    </property>
   </action>
   <action name="QAct_Create_User_Card">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Create User Card</string>
    </property>
   </action>
   <action name="QAct_Modify_User_Card">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modify User Card</string>
    </property>

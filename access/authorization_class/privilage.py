@@ -67,7 +67,7 @@ class CL_privilage( QtWidgets.QDialog ):
         if x == True:
             QtWidgets.QMessageBox.warning( self, "Error", "Privilage already exists" )
         else:
-            print( "in else" )
+
             if self.FN_CHECK_TABLE_WIDGET_AVAILABILITY( self.role, self.form, self.actionId, self.formItem ) == True:
                 QtWidgets.QMessageBox.warning( self, "Error", "You already entered this Priviliage in the grid" )
             else:
@@ -210,7 +210,7 @@ class CL_privilage( QtWidgets.QDialog ):
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()
         mycursor = self.conn.cursor()
-        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s and FORM_STATUS  = 1"
+        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s "
         x = (self.form,)
         mycursor.execute( sql_select_query, x )
 
@@ -248,11 +248,11 @@ class CL_privilage( QtWidgets.QDialog ):
                            "inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID " \
                            "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
                            "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
-                           "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
+                           "inner join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
                            " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1 "
         x = (self.role,)
 
-        print(sql_select_query)
+
         mycursor.execute( sql_select_query, x )
 
         records = mycursor.fetchall()

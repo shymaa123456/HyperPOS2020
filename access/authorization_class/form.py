@@ -35,7 +35,7 @@ class CL_form(QtWidgets.QDialog):
     @staticmethod
     def FN_GET_FORMS(self):
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT FORM_DESC FROM SYS_FORM  order by FORM_ID  asc")
+        mycursor.execute("SELECT FORM_DESC FROM SYS_FORM  where FORM_STATUS  = 1 order by FORM_ID  asc")
         records = mycursor.fetchall()
         for row in records:
             self.CMB_formName.addItems([row[0]])
@@ -61,7 +61,7 @@ class CL_form(QtWidgets.QDialog):
         x = (self.id,)
         mycursor.execute(sql_select_query, x)
         record = mycursor.fetchone()
-        print(record)
+        #print(record)
         self.LE_desc.setText(record[1])
         self.LE_type.setText(record[2])
         self.LE_help.setText(record[4])

@@ -1,7 +1,8 @@
 from PyQt5.uic import loadUi
 from pathlib import Path
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.Qt  import *
 from PyQt5.uic import loadUi
 
 from access.authorization_class.user_module import CL_userModule
@@ -71,7 +72,7 @@ class CL_role( QtWidgets.QDialog ):
                 sql = "INSERT INTO SYS_PRIVILEGE VALUES ( %s, %s, %s, %s)"
 
                 val = (id, newRole, row[0], row[1])
-                print( str( sql ) )
+                #print( str( sql ) )
                 # val = (id,newUser,  row[0], row[1], CL_userModule.user_name, creationDate, '', '', row[2],)
                 mycursor3.execute( sql, val )
 
@@ -111,11 +112,15 @@ class CL_role( QtWidgets.QDialog ):
         self.BTN_assignRole.clicked.connect( self.FN_ASSIGN_ROLE )
         self.CMB_userRoleStatus.addItems( ["1", "0"] )
         self.FN_GET_USERS()
-        self.FN_GET_ROLES()
         self.FN_GET_USERID()
-        self.FN_GET_ROLEID()
+        self.FN_GET_ROLES()
+
+        #self.FN_GET_ROLEID()
+        self.CMB_roleName.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection
+        )
         self.CMB_userName.currentIndexChanged.connect( self.FN_GET_USERID )
-        self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLEID )
+        #self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLEID )
 
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyRole.ui'
@@ -168,13 +173,42 @@ class CL_role( QtWidgets.QDialog ):
         mycursor.close()
 
     def FN_GET_ROLES(self):
+        selectedRoles = self.FN_SELECT_USER_ROLES()
         mycursor = self.conn.cursor()
         mycursor.execute( "SELECT ROLE_NAME FROM SYS_ROLE order by ROLE_ID asc" )
         records = mycursor.fetchall()
         for row in records:
-            self.CMB_roleName.addItems( [row[0]] )
+            i=0
+            self.CMB_roleName.addItems( row )
+            print("i=" , i)
+            for row1 in selectedRoles:
 
+                if row == row1:
+
+                    #print(i ,'   here')
+                    items = self.CMB_roleName.findItems( row[0], Qt.MatchContains );
+                    for item in items:
+                        print( "i in f =", i)
+                        print(item.text())
+                        self.CMB_roleName.item(i).setSelected(True)
+                i = i+1
         mycursor.close()
+
+
+
+
+    def FN_SELECT_USER_ROLES(self):
+        self.user = self.LB_userID.text()
+        mycursor = self.conn.cursor()
+
+
+        sql_select_query=  "SELECT ROLE_NAME FROM SYS_USER_ROLE INNER JOIN SYS_ROLE   on SYS_ROLE.ROLE_ID= SYS_USER_ROLE.ROLE_ID where SYS_USER_ROLE.USER_ID= %s "
+        print(sql_select_query)
+        x = (self.user,)
+        mycursor.execute( sql_select_query, x )
+        records = mycursor.fetchall()
+
+        return records
 
     def FN_ASSIGN_ROLE(self):
 
@@ -190,7 +224,7 @@ class CL_role( QtWidgets.QDialog ):
             self.id = "1"
         else:
             self.id = int( myresult[0] ) + 1
-        print('id is ',self.id)
+        #print('id is ',self.id)
         creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
 
         sql = "INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS)      " \
@@ -214,7 +248,7 @@ class CL_role( QtWidgets.QDialog ):
         x = (self.id,)
         mycursor.execute( sql_select_query, x )
         record = mycursor.fetchone()
-        print( record )
+        #print( record )
         self.LE_name.setText( record[1] )
         self.LE_DESC.setText( record[2] )
 
@@ -240,7 +274,7 @@ class CL_role( QtWidgets.QDialog ):
             sql = "UPDATE SYS_ROLE   set ROLE_NAME= %s ,  ROLE_DESC= %s  ,  ROLE_CHANGED_ON = %s , ROLE_CHANGED_BY = %s, ROLE_STATUS = %s where ROLE_id= %s "
 
             val = (self.name, self.desc, changeDate, CL_userModule.user_name, self.status, self.id)
-            print( val )
+            #print( val )
             mycursor.execute( sql, val )
             # mycursor.execute(sql)
 

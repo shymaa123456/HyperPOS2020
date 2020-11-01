@@ -31,19 +31,13 @@ class CL_main( QtWidgets.QMainWindow ):
         #print (CL_userModule.user_name)
         CL_userModule.loadPrivilages(self)
         for row_number, row_data in enumerate( CL_userModule.myList ):
-
             forms.append(row_data[1])
-            #for column_number, data in enumerate( row_data ):
-                #self.w1.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
 
         forms=list(dict.fromkeys(forms))
         self.QAct_Create_Privilage.setEnabled( True )
-        # self.QAct_Create_Form_Item.setEnabled( True )
-        # self.QAct_Modify_Form.setEnabled( True )
-        # self.QAct_Modify_Form_Item.setEnabled( True )
-        # self.QAct_Create_Form.setEnabled( True )
+
         for row in forms:
-            print(row)
+            #print(row)
             but_name= 'QAct_'+row
             self.findChild( QObject, but_name ).setEnabled( True )
 

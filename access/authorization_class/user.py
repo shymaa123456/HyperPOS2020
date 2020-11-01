@@ -141,6 +141,7 @@ class CL_user(QtWidgets.QDialog):
 
                 db1.connectionCommit( self.conn )
                 print( mycursor3.rowcount, "record inserted." )
+                QtWidgets.QMessageBox.information( self, "Success", "User is copied successfully" )
                 id = id + 1
 
             mycursor2.close()
@@ -157,7 +158,7 @@ class CL_user(QtWidgets.QDialog):
         x = (user,)
         mycursor.execute(sql_select_query, x)
         record = mycursor.fetchone()
-        print(record)
+        #print(record)
         self.LB_userID.setText( record[0] )
 
         self.LE_name.setText(record[2])
@@ -201,6 +202,7 @@ class CL_user(QtWidgets.QDialog):
             mycursor.close()
             db1.connectionCommit( self.conn )
             print(mycursor.rowcount, "record Modified.")
+            QtWidgets.QMessageBox.information( self, "Success", "User is modified successfully" )
             db1.connectionClose( self.conn )
             self.close()
 
@@ -259,6 +261,7 @@ class CL_user(QtWidgets.QDialog):
             mycursor.close()
 
             print(mycursor.rowcount, "record inserted.")
+            QtWidgets.QMessageBox.information( self, "Success", "User is created successfully" )
             db1.connectionCommit( self.conn )
             db1.connectionClose(self.conn)
             self.close()
@@ -276,6 +279,7 @@ class CL_user(QtWidgets.QDialog):
             mycursor.close()
             db1.connectionCommit( self.conn )
             print( mycursor.rowcount, "password changed" )
+            QtWidgets.QMessageBox.information( self, "Success", "Password is reset successfully" )
             db1.connectionClose( self.conn )
             self.close()
         else:

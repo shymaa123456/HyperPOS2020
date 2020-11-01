@@ -37,7 +37,7 @@ class  CL_login(QtWidgets.QDialog):
         else:
 
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter your Username and Password")
-            print("Please enter your Username and Password")
+            #print("Please enter your Username and Password")
 
 
     def FN_loadData(self, username, password):

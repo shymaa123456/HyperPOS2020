@@ -21,7 +21,7 @@ class CL_form(QtWidgets.QDialog):
         loadUi( filename, self )
         self.BTN_createForm.clicked.connect(self.FN_CREATE_FORM)
         self.CMB_formStatus.addItems(["1","0"])
-
+        self.CMB_formType.addItems( ["Frontend", "Backend"] )
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyForm.ui'
         loadUi( filename, self )
@@ -31,7 +31,7 @@ class CL_form(QtWidgets.QDialog):
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORM )
         self.BTN_modifyForm.clicked.connect(self.FN_MODIFY_FORM)
         self.CMB_formStatus.addItems(["1", "0"])
-
+        self.CMB_formType.addItems( ["Frontend", "Backend"] )
     @staticmethod
     def FN_GET_FORMS(self):
         mycursor = self.conn.cursor()
@@ -63,7 +63,7 @@ class CL_form(QtWidgets.QDialog):
         record = mycursor.fetchone()
         #print(record)
         self.LE_desc.setText(record[1])
-        self.LE_type.setText(record[2])
+        self.CMB_formType.setCurrentText(record[2])
         self.LE_help.setText(record[4])
         self.CMB_formStatus.setCurrentText(record[3])
         mycursor.close()
@@ -74,7 +74,7 @@ class CL_form(QtWidgets.QDialog):
     def FN_MODIFY_FORM(self):
         self.id = self.LB_formID.text()
         self.desc = self.LE_desc.text().strip()
-        self.type = self.LE_type.text().strip()
+        self.type = self.CMB_formType.currentText()
         self.status = self.CMB_formStatus.currentText()
         self.help = self.LE_help.text()
 
@@ -104,7 +104,7 @@ class CL_form(QtWidgets.QDialog):
     def FN_CREATE_FORM(self):
         self.desc = self.LE_desc.text().strip()
 
-        self.type = self.LE_type.text().strip()
+        self.type = self.CMB_formStatus.currentText()
         self.help= self.LE_help.text()
 
         self.status = self.CMB_formStatus.currentText()

@@ -6,17 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="adjust authorization">
-      <change afterPath="$PROJECT_DIR$/access/authorization_class/hello.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/authorization_ui/dumy.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/authorization_class/Role.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/Role.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/main_login_class/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/assignUserToRole.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/assignUserToRole.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createForm.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createForm.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/modifyForm.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/modifyForm.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/hello.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,7 +372,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603958696635</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="adjust authorization">
+      <created>1604242299569</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1604242299569</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -468,46 +467,46 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1271" height="166" key="GridCell.Tab.0.bottom" timestamp="1604242060100">
+    <state width="1271" height="166" key="GridCell.Tab.0.bottom" timestamp="1604400796567">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604242060100" />
-    <state width="1271" height="166" key="GridCell.Tab.0.center" timestamp="1604242060100">
+    <state width="1271" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604400796567" />
+    <state width="1271" height="166" key="GridCell.Tab.0.center" timestamp="1604400796567">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604242060100" />
-    <state width="1271" height="166" key="GridCell.Tab.0.left" timestamp="1604242060099">
+    <state width="1271" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604400796567" />
+    <state width="1271" height="166" key="GridCell.Tab.0.left" timestamp="1604400796566">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604242060099" />
-    <state width="1271" height="166" key="GridCell.Tab.0.right" timestamp="1604242060100">
+    <state width="1271" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604400796566" />
+    <state width="1271" height="166" key="GridCell.Tab.0.right" timestamp="1604400796567">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604242060100" />
-    <state width="1271" height="215" key="GridCell.Tab.1.bottom" timestamp="1604235908145">
+    <state width="1271" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604400796567" />
+    <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="215" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604235908145" />
-    <state width="1271" height="215" key="GridCell.Tab.1.center" timestamp="1604235908145">
+    <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
+    <state width="1271" height="17" key="GridCell.Tab.1.center" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="215" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604235908145" />
-    <state width="1271" height="215" key="GridCell.Tab.1.left" timestamp="1604235908145">
+    <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
+    <state width="1271" height="17" key="GridCell.Tab.1.left" timestamp="1604399627858">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="215" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604235908145" />
-    <state width="1271" height="215" key="GridCell.Tab.1.right" timestamp="1604235908145">
+    <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
+    <state width="1271" height="17" key="GridCell.Tab.1.right" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1271" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604235908145" />
+    <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog" timestamp="1603720741209">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1603958732859">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1604242303883">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1603958732859" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1604242303883" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

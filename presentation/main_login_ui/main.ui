@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>727</width>
-    <height>405</height>
+    <height>406</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -235,15 +235,18 @@
      <string>العملاء</string>
     </property>
     <widget class="QMenu" name="QM_Customer_Data">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
      </property>
      <property name="title">
       <string>بيانات العملاء</string>
      </property>
-     <addaction name="QAct_Cust_Add"/>
-     <addaction name="QAct_Cust_Edit"/>
-     <addaction name="QAct_Cust_Deactivate"/>
+     <addaction name="QAct_Create_Customer"/>
+     <addaction name="QAct_Modify_Customer"/>
+     <addaction name="QAct_Deactivate_Cust"/>
      <addaction name="separator"/>
      <addaction name="QAct_Cust_Upload_Data"/>
      <addaction name="separator"/>
@@ -258,8 +261,8 @@
      <property name="title">
       <string>مجموعات  العملاء</string>
      </property>
-     <addaction name="QAct_Cust_Grp_Add"/>
-     <addaction name="QAct_Cust_Grp_Edit"/>
+     <addaction name="QAct_Create_CustGp"/>
+     <addaction name="QAct_Modify_CustGp"/>
      <addaction name="QAct_Cust_Grp_Deactivate"/>
      <addaction name="separator"/>
     </widget>
@@ -509,27 +512,39 @@
     <string>انشاء عرض من اخر منتهى</string>
    </property>
   </action>
-  <action name="QAct_Cust_Add">
+  <action name="QAct_Create_Customer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>انشاء عميل</string>
    </property>
   </action>
-  <action name="QAct_Cust_Edit">
+  <action name="QAct_Modify_Customer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>تعديل بيانات عميل</string>
    </property>
   </action>
-  <action name="QAct_Cust_Deactivate">
+  <action name="QAct_Deactivate_Cust">
    <property name="text">
     <string>ايقاف عميل</string>
    </property>
   </action>
-  <action name="QAct_Cust_Grp_Add">
+  <action name="QAct_Create_CustGp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>انشاء مجموعة عملاء</string>
    </property>
   </action>
-  <action name="QAct_Cust_Grp_Edit">
+  <action name="QAct_Modify_CustGp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>تعديل مجموعة عملاء</string>
    </property>

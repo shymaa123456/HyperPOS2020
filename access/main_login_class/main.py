@@ -14,6 +14,7 @@ from access.authorization_class.user import CL_user
 from access.authorization_class.user_module import CL_userModule
 #from access.main_login_class.login import  CL_login
 from access.loyalty_class.customer import CL_customer
+from access.loyalty_class.customerGP import CL_customerGP
 
 
 class CL_main( QtWidgets.QMainWindow ):
@@ -34,11 +35,12 @@ class CL_main( QtWidgets.QMainWindow ):
             forms.append(row_data[1])
 
         forms=list(dict.fromkeys(forms))
-        self.QAct_Create_Privilage.setEnabled( True )
+
 
         for row in forms:
             #print(row)
             but_name= 'QAct_'+row
+
             self.findChild( QObject, but_name ).setEnabled( True )
 
         self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
@@ -51,8 +53,8 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
         self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE )
 
-        self.QAct_Cust_Add.triggered.connect( self.FN_CREATE_CUST )
-        self.QAct_Cust_Edit.triggered.connect( self.FN_MODIFY_CUST )
+        self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
+        self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
 
         self.QAct_Create_Privilage.triggered.connect( self.FN_CREATE_PRIV )
         self.QAct_Create_Form.triggered.connect( self.FN_create_form )
@@ -60,6 +62,9 @@ class CL_main( QtWidgets.QMainWindow ):
 
         self.QAct_Create_Form_Item.triggered.connect( self.FN_create_form_item )
         self.QAct_Modify_Form_Item.triggered.connect( self.FN_modify_form_item )
+
+        self.QAct_Create_CustGp.triggered.connect( self.FN_CREATE_CUSTGP )
+        self.QAct_Modify_CustGp.triggered.connect( self.FN_MODIFY_CUSTGP )
 
         self.QAct_Exit.triggered.connect( self.FN_exit )
         self.setWindowTitle( 'HyperPOS Main Page' )
@@ -73,6 +78,17 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two = CL_customer()
         self.window_two.FN_LOAD_MODIFY()
         self.window_two.show()
+
+    def FN_CREATE_CUSTGP(self):
+        self.window_two = CL_customerGP()
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
+
+    def FN_MODIFY_CUSTGP(self):
+        self.window_two = CL_customerGP()
+        self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
 
     def FN_exit(self):
         QApplication.quit()

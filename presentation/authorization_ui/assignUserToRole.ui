@@ -22,6 +22,12 @@
      <height>25</height>
     </rect>
    </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <property name="duplicatesEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLabel" name="User">
    <property name="geometry">
@@ -120,7 +126,7 @@
     <enum>QFrame::NoFrame</enum>
    </property>
    <property name="text">
-    <string>role id</string>
+    <string/>
    </property>
   </widget>
   <widget class="QListWidget" name="CMB_roleName">

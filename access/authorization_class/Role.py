@@ -148,8 +148,12 @@ class CL_role( QtWidgets.QDialog ):
         myresult = mycursor.fetchone()
         self.LB_userID.setText( myresult[0] )
 
-    def FN_GET_ROLEID(self):
-        self.role = self.CMB_roleName.currentText()
+    def FN_GET_ROLEID(self,roleNm):
+        if roleNm !='':
+            self.role = roleNm
+        else:
+
+            self.role = self.CMB_roleName.currentText()
         mycursor = self.conn.cursor()
         sql_select_query = "SELECT ROLE_ID FROM SYS_ROLE WHERE ROLE_NAME = %s"
         x = (self.role,)
@@ -157,7 +161,9 @@ class CL_role( QtWidgets.QDialog ):
 
         myresult = mycursor.fetchone()
         self.LB_roleID.setText( myresult[0] )
+
         mycursor.close()
+        return myresult[0]
 
     def FN_GET_USERS(self):
 
@@ -194,8 +200,8 @@ class CL_role( QtWidgets.QDialog ):
                     items = self.CMB_roleName.findItems( row[0], Qt.MatchContains )
                     for item in items:
 
-                        print(self.CMB_roleName.item(j).text())
-                        print("j in last loop ",j)
+                        #print(self.CMB_roleName.item(j).text())
+                        #print("j in last loop ",j)
 
                         self.CMB_roleName.item(j).setSelected( True )
                         #self.CMB_roleName.item( 0 ).setSelected( True )
@@ -231,9 +237,10 @@ class CL_role( QtWidgets.QDialog ):
         items = self.CMB_roleName.selectedItems()
         x = []
         for i in range( len( items ) ):
-            x.append( str( self.CMB_roleName.selectedItems()[i].text() ) )
+            roleId= self.FN_GET_ROLEID( str( self.CMB_roleName.selectedItems()[i].text() ))
 
-            print( x )
+
+
 
             mycursor = self.conn.cursor()
             mycursor.execute( "SELECT max(cast(UR_USER_ROLE_ID  AS UNSIGNED)) FROM SYS_USER_ROLE" )
@@ -249,7 +256,7 @@ class CL_role( QtWidgets.QDialog ):
             sql = "INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS)      " \
                   "VALUES ( %s, %s, %s, %s,%s, %s,%s,%s,%s)"
 
-            val = (self.id, self.user, self.role, '1', CL_userModule.user_name, creationDate, '', '', self.status)
+            val = (self.id, self.user, roleId, '1', CL_userModule.user_name, creationDate, '', '', self.status)
             mycursor.execute( sql, val )
 
             mycursor.close()

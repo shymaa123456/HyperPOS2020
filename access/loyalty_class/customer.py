@@ -55,12 +55,13 @@ class CL_customer(QtWidgets.QDialog):
         self.LE_city.setText( record[8] )
         self.LE_district.setText( record[9] )
         self.LE_building.setText( record[10] )
-        self.LE_email.setText( record[11] )
-        self.LE_company.setText( record[16] )
-        self.LE_workPhone.setText( record[17] )
-        self.LE_workAddress.setText( record[18] )
-        self.LE_notes.setText( record[19] )
-        self.CMB_status.setCurrentText( record[20] )
+        self.LE_floor.setText( record[11] )
+        self.LE_email.setText( record[12] )
+        self.LE_company.setText( record[17] )
+        self.LE_workPhone.setText( record[18] )
+        self.LE_workAddress.setText( record[19] )
+        self.LE_notes.setText( record[20] )
+        self.CMB_status.setCurrentText( record[21] )
 
         self.CMB_custGroup.setCurrentText( record[2] )
         self.CMB_loyalityType.setCurrentText( record[1] )
@@ -103,7 +104,7 @@ class CL_customer(QtWidgets.QDialog):
         self.city = self.LE_city.text().strip()
         self.district = self.LE_district.text().strip()
         self.building = self.LE_building.text().strip()
-        #self.LE_floor = self.LE_floor.text().strip()
+        self.LE_floor = self.LE_floor.text().strip()
         self.email = self.LE_email.text().strip()
         self.company = self.LE_company.text().strip()
         self.workPhone =  self.LE_workPhone.text().strip()
@@ -130,15 +131,15 @@ class CL_customer(QtWidgets.QDialog):
         else:
 
             sql = "INSERT INTO POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
-                  " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING, POSC_EMAIL, " \
+                  " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING,POSC_FLOOR, POSC_EMAIL, " \
                   "POSC_CREATED_BY, POSC_CREATED_ON ,POSC_CHANGED_BY ,  POSC_COMPANY, " \
                   "POSC_WORK_PHONE, POSC_WORK_ADDRESS, POSC_NOTES, POSC_STATUS) " \
                   "         VALUES ( %s, %s, %s,  %s,%s,%s, %s, %s, %s, %s, " \
-                  "%s,%s,  %s, %s,%s, %s, %s, %s, %s,%s)"
+                  "%s,%s,  %s, %s,%s, %s,%s, %s, %s, %s,%s)"
 
                        # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
             val = (self.id,self.loyalityType,self.custGroup,self.name,self.phone,self.mobile,
-                   self.job, self.address, self.city, self.district, self.building, self.email,
+                   self.job, self.address, self.city, self.district, self.building, self.LE_floor ,self.email,
                    CL_userModule.user_name, creationDate, ' ',self.company, self.workPhone, self.workAddress,
                    self.notes, self.status
             )
@@ -167,7 +168,7 @@ class CL_customer(QtWidgets.QDialog):
         self.city = self.LE_city.text().strip()
         self.district = self.LE_district.text().strip()
         self.building = self.LE_building.text().strip()
-        # self.LE_floor = self.LE_floor.text().strip()
+        self.LE_floor = self.LE_floor.text().strip()
         self.email = self.LE_email.text().strip()
         self.company = self.LE_company.text().strip()
         self.workPhone = self.LE_workPhone.text().strip()
@@ -187,13 +188,13 @@ class CL_customer(QtWidgets.QDialog):
         else:
 
             sql = "update  POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,   POSC_PHONE=%s," \
-                  " POSC_MOBILE=%s, POSC_JOB=%s, POSC_ADDRESS=%s, POSC_CITY=%s, POSC_DISTICT=%s, POSC_BUILDING=%s, POSC_EMAIL=%s, " \
+                  " POSC_MOBILE=%s, POSC_JOB=%s, POSC_ADDRESS=%s, POSC_CITY=%s, POSC_DISTICT=%s, POSC_BUILDING=%s,POSC_FLOOR=%s, POSC_EMAIL=%s, " \
                   "POSC_CHANGED_BY =%s, POSC_CHANGED_ON =%s, POSC_COMPANY=%s, " \
                   "POSC_WORK_PHONE=%s, POSC_WORK_ADDRESS=%s, POSC_NOTES=%s, POSC_STATUS=%s where POSC_CUST_ID = %s"
 
             # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
             val = ( self.loyalityType, self.custGroup,  self.phone, self.mobile,
-                   self.job, self.address, self.city, self.district, self.building, self.email,
+                   self.job, self.address, self.city, self.district, self.building, self.LE_floor ,self.email,
                    CL_userModule.user_name, changeDate,  self.company, self.workPhone, self.workAddress,
                    self.notes, self.status ,self.id  )
             mycursor.execute( sql, val )

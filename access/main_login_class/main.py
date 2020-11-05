@@ -15,7 +15,7 @@ from access.authorization_class.user_module import CL_userModule
 #from access.main_login_class.login import  CL_login
 from access.loyalty_class.customer import CL_customer
 from access.loyalty_class.customerGP import CL_customerGP
-
+from access.loyalty_class.customerType import CL_customerTP
 
 class CL_main( QtWidgets.QMainWindow ):
     switch_window = QtCore.pyqtSignal()
@@ -56,6 +56,9 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
         self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
 
+        self.QAct_Create_CustTp.triggered.connect( self.FN_CREATE_CUSTTP )
+        self.QAct_Modify_CustTp.triggered.connect( self.FN_MODIFY_CUSTTP )
+
         self.QAct_Create_Privilage.triggered.connect( self.FN_CREATE_PRIV )
         self.QAct_Create_Form.triggered.connect( self.FN_create_form )
         self.QAct_Modify_Form.triggered.connect( self.FN_modify_form )
@@ -86,6 +89,16 @@ class CL_main( QtWidgets.QMainWindow ):
 
     def FN_MODIFY_CUSTGP(self):
         self.window_two = CL_customerGP()
+        self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
+    def FN_CREATE_CUSTTP(self):
+        self.window_two = CL_customerTP()
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
+
+    def FN_MODIFY_CUSTTP(self):
+        self.window_two = CL_customerTP()
         self.window_two.FN_LOAD_MODIFY()
         self.window_two.show()
 

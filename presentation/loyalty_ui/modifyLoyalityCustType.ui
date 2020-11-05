@@ -23,7 +23,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="LB_custGpID">
+  <widget class="QLabel" name="LB_custTpID">
    <property name="enabled">
     <bool>false</bool>
    </property>

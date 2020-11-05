@@ -64,7 +64,7 @@ class CL_customerTP(QtWidgets.QDialog):
 
         else:
             self.CMB_custType.setCurrentText( 'Active' )
-
+        self.LE_points.setText(record[1])
         mycursor.close()
 
     def FN_LOAD_CREATE(self):

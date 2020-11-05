@@ -270,8 +270,8 @@
      <property name="title">
       <string>مستويات العملاء</string>
      </property>
-     <addaction name="QAct_Cust_Lvl_Add"/>
-     <addaction name="QAct_Cust_Lvl_Edit"/>
+     <addaction name="QAct_Create_CustTp"/>
+     <addaction name="QAct_Modify_CustTp"/>
      <addaction name="QAct_Cust_Lvl_Promote"/>
      <addaction name="QAct_Cust_Promote_Manual"/>
     </widget>
@@ -1228,12 +1228,18 @@
     <string>تعديل مستوى عملاء</string>
    </property>
   </action>
-  <action name="QAct_Cust_Lvl_Add">
+  <action name="QAct_Create_CustTp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>انشاء مستوى عملاء</string>
    </property>
   </action>
-  <action name="QAct_Cust_Lvl_Edit">
+  <action name="QAct_Modify_CustTp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>تعديل مستوى عملاء</string>
    </property>

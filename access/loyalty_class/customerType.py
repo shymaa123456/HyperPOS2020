@@ -21,14 +21,14 @@ class CL_customerTP(QtWidgets.QDialog):
 
 
     def FN_LOAD_MODIFY(self):
-        filename = self.dirname + '/modifyCustomerGp.ui'
+        filename = self.dirname + '/modifyLoyalityCustType.ui'
         loadUi( filename, self )
         self.CMB_custType.addItems( ["Active", "Inactive"] )
         self.FN_GET_CUSTTPS()
         self.FN_GET_CustTPID()
         self.FN_GET_CUSTTP()
         self.CMB_custTypeDesc.currentIndexChanged.connect( self.FN_GET_CUSTTP )
-        self.BTN_modifyCustTp.clicked.connect( self.FN_MODIFY_CUSTGP )
+        self.BTN_modifyCustTp.clicked.connect( self.FN_MODIFY_CUSTTP )
 
     def FN_GET_CUSTTPS(self):
         mycursor = self.conn.cursor()
@@ -68,7 +68,7 @@ class CL_customerTP(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_LOAD_CREATE(self):
-        filename = self.dirname + '/createCustomerGp.ui'
+        filename = self.dirname + '/createLoyalityCustType.ui'
         loadUi( filename, self )
         self.BTN_createCustTp.clicked.connect( self.FN_CREATE_CUSTTP )
         self.CMB_custType.addItems( ["Active", "Inactive"] )

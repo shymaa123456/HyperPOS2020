@@ -7,8 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="Create customer 7type&#10;modify customer type">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Validation/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Validation/Validation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/authorization_class/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/hello.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerType.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerType.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +52,28 @@
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.login">
+  <component name="RunManager" selected="Python.Validation">
+    <configuration name="Validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HyperPOS2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Validation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Validation/Validation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="hello" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -116,22 +137,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for hello.Test" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="HyperPOS2020" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/authorization_class" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;hello.Test&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="pytest for testt.Test" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -166,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Validation" />
         <item itemvalue="Python.login" />
         <item itemvalue="Python.hello" />
         <item itemvalue="Python tests.pytest for testt.Test" />
         <item itemvalue="Python.test (1)" />
-        <item itemvalue="Python tests.pytest for hello.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -407,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604583604773</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Create customer 7type&#10;modify customer type">
+      <created>1604584634687</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1604584634687</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -498,22 +510,22 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1235" height="166" key="GridCell.Tab.0.bottom" timestamp="1604584367358">
+    <state width="1230" height="166" key="GridCell.Tab.0.bottom" timestamp="1604828570144">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1235" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604584367358" />
-    <state width="1235" height="166" key="GridCell.Tab.0.center" timestamp="1604584367358">
+    <state width="1230" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604828570144" />
+    <state width="1230" height="166" key="GridCell.Tab.0.center" timestamp="1604828570143">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1235" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604584367358" />
-    <state width="1235" height="166" key="GridCell.Tab.0.left" timestamp="1604584367357">
+    <state width="1230" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604828570143" />
+    <state width="1230" height="166" key="GridCell.Tab.0.left" timestamp="1604828570143">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1235" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604584367357" />
-    <state width="1235" height="166" key="GridCell.Tab.0.right" timestamp="1604584367358">
+    <state width="1230" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604828570143" />
+    <state width="1230" height="166" key="GridCell.Tab.0.right" timestamp="1604828570144">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1235" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604584367358" />
+    <state width="1230" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604828570144" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -534,10 +546,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1604583608808">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1604584871133">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1604583608808" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1604584871133" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

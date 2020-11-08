@@ -258,24 +258,25 @@ class CL_user(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
 
         else:
-            CL_validation.FN_validation_password(self,self.password)
+            if CL_validation.FN_validation_password(self,self.password) ==False:
 
-            sql = "INSERT INTO SYS_USER (USER_ID, BRANCH_NO, USER_NAME, USER_PASSWORD, USER_FULLNAME, USER_HR_ID, USER_CREATED_ON, USER_CREATED_BY, USER_CHANGED_ON, USER_CHANGED_BY,USER_STATUS, USERTYPE_ID)         VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"
 
-            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = (
-            self.id, self.branch, self.name, self.password, self.fullName, self.hrId, creationDate, CL_userModule.user_name , '', '', self.status,
-            self.userType)
-            mycursor.execute(sql, val)
-            # mycursor.execute(sql)
+                sql = "INSERT INTO SYS_USER (USER_ID, BRANCH_NO, USER_NAME, USER_PASSWORD, USER_FULLNAME, USER_HR_ID, USER_CREATED_ON, USER_CREATED_BY, USER_CHANGED_ON, USER_CHANGED_BY,USER_STATUS, USERTYPE_ID)         VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"
 
-            mycursor.close()
+                # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+                val = (
+                self.id, self.branch, self.name, self.password, self.fullName, self.hrId, creationDate, CL_userModule.user_name , '', '', self.status,
+                self.userType)
+                mycursor.execute(sql, val)
+                # mycursor.execute(sql)
 
-            print(mycursor.rowcount, "record inserted.")
-            QtWidgets.QMessageBox.information( self, "Success", "User is created successfully" )
-            db1.connectionCommit( self.conn )
-            db1.connectionClose(self.conn)
-            self.close()
+                mycursor.close()
+
+                print(mycursor.rowcount, "record inserted.")
+                QtWidgets.QMessageBox.information( self, "Success", "User is created successfully" )
+                db1.connectionCommit( self.conn )
+                db1.connectionClose(self.conn)
+                self.close()
 
     def FN_RESET_USER(self):
         mycursor = self.conn.cursor()

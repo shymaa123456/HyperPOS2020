@@ -15,22 +15,26 @@ class  CL_validation():
 
     @staticmethod
     def FN_validation_password(self,password):
+            mes = 0
 
             if len(password) < 8:
-              return   QtWidgets.QMessageBox.warning( "Error", "Make sure your password is at lest 8 letters" )
+                mes=1
+                QtWidgets.QMessageBox.warning( self,"Error", "Make sure your password is at lest 8 letters" )
 
             elif re.search('[0-9]', password) is None:
-                QtWidgets.QMessageBox.warning(  "Error", "Make sure your password has a number in it" )
-
+                QtWidgets.QMessageBox.warning(  self,"Error", "Make sure your password has a number in it" )
+                mes = 1
 
             elif re.search('[A-Z]', password) is None:
-                QtWidgets.QMessageBox.warning( "Error", "Make sure your password has a capital letter in it" )
-
+                QtWidgets.QMessageBox.warning(self, "Error", "Make sure your password has a capital letter in it" )
+                mes = 1
 
             else:
                 print("Your password seems fine")
-
-
+            if mes==1:
+                return True
+            else:
+                return False
     @staticmethod
     def FN_validation_mobile( mobile):
         number = re.compile(r'[^0-9]').sub('', mobile)

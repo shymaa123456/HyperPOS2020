@@ -20,7 +20,7 @@ class CL_formItem( QtWidgets.QDialog ):
         loadUi( filename, self )
 
         self.BTN_createFormItem.clicked.connect( self.FN_CREATE_FORM_ITEM )
-        self.CMB_formItemStatus.addItems( ["1", "0"] )
+        self.CMB_formItemStatus.addItems( ["Active", "Inactive"] )
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORMID )
         self.FN_GET_FORMS()
         #self.FN_GET_FORMID()
@@ -31,7 +31,7 @@ class CL_formItem( QtWidgets.QDialog ):
         loadUi( filename, self )
 
         self.BTN_modifyFormItem.clicked.connect( self.FN_MODIFY_FORM )
-        self.CMB_formItemStatus.addItems( ["1", "0"] )
+        self.CMB_formItemStatus.addItems( ["Active", "Inactive"] )
         self.FN_GET_FORMS()
         self.FN_GET_FORMID()
         self.FN_GET_FORMItems()
@@ -89,6 +89,11 @@ class CL_formItem( QtWidgets.QDialog ):
         self.form = self.LB_formID.text()
 
         self.status = self.CMB_formItemStatus.currentText()
+        if self.status == 'Active':
+            self.status = '1'
+        else:
+            self.status = '0'
+
         if self.desc == '':
             QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
         else:
@@ -115,6 +120,7 @@ class CL_formItem( QtWidgets.QDialog ):
             print( mycursor.rowcount, "record inserted." )
 
             self.close()
+            QtWidgets.QMessageBox.information( self, "Success", "Form Item is created successfully" )
 
     def FN_GET_FORMItems(self):
         self.CMB_formItemName.clear()
@@ -148,8 +154,11 @@ class CL_formItem( QtWidgets.QDialog ):
         record = mycursor.fetchall()
         for row in record:
             self.LE_desc.setText( row[0] )
-            self.CMB_formItemStatus.setCurrentText( row[1] )
 
+            if row[1] == '1':
+                self.CMB_formItemStatus.setCurrentText( 'Active' )
+            else:
+                self.CMB_formItemStatus.setCurrentText( 'Inactive' )
         mycursor.close()
 
         print( mycursor.rowcount, "record retrieved." )
@@ -159,6 +168,10 @@ class CL_formItem( QtWidgets.QDialog ):
         self.form = self.LB_formID.text()
         self.desc = self.LE_desc.text().strip()
         self.status = self.CMB_formItemStatus.currentText()
+        if self.status == 'Active':
+            self.status = '1'
+        else:
+            self.status = '0'
         if self.desc == '' :
             QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
         else:
@@ -177,3 +190,5 @@ class CL_formItem( QtWidgets.QDialog ):
             print( mycursor.rowcount, "record Modified." )
 
             self.close()
+            QtWidgets.QMessageBox.information( self, "Success", "Form Item is modified successfully" )
+

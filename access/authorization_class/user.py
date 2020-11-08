@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets
 from PyQt5.uic import loadUi
 from qtpy import QtCore
 
+from Validation.Validation import CL_validation
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 
@@ -24,7 +25,7 @@ class CL_user(QtWidgets.QDialog):
 
         self.FN_GET_BRANCHES()
         self.FN_GET_USERTYPE()
-        self.CMB_userStatus.addItems( ["1", "0"] )
+        self.CMB_userStatus.addItems( ["Active", "Inactive"] )
 
         records = self.FN_GET_USERS()
         for row in records:
@@ -45,7 +46,7 @@ class CL_user(QtWidgets.QDialog):
         #self.CMB_branch.addItems(["1","2","3"])
         self.FN_GET_BRANCHES()
         self.FN_GET_USERTYPE()
-        self.CMB_userStatus.addItems(["1","0"])
+        self.CMB_userStatus.addItems(["Active", "Inactive"])
 
     def FN_GET_USERTYPE(self):
 
@@ -141,8 +142,8 @@ class CL_user(QtWidgets.QDialog):
 
                 db1.connectionCommit( self.conn )
                 print( mycursor3.rowcount, "record inserted." )
-                QtWidgets.QMessageBox.information( self, "Success", "User is copied successfully" )
                 id = id + 1
+            QtWidgets.QMessageBox.information( self, "Success", "User is copied successfully" )
 
             mycursor2.close()
             mycursor1.close()
@@ -169,7 +170,10 @@ class CL_user(QtWidgets.QDialog):
 
         self.CMB_userType.setCurrentText( record[11] )
 
-        self.CMB_userStatus.setCurrentText(record[10])
+        if record[10] == '1':
+            self.CMB_userStatus.setCurrentText('Active')
+        else:
+            self.CMB_userStatus.setCurrentText( 'Inactive' )
 
 
         mycursor.close()
@@ -185,7 +189,10 @@ class CL_user(QtWidgets.QDialog):
         self.hrId = self.LE_hrId.text().strip()
         self.userType = self.CMB_userType.currentText()
         self.status = self.CMB_userStatus.currentText()
-
+        if self.status  == 'Active':
+            self.status = 1
+        else:
+            self.status = 0
 
         if self.name == '' or self.password =='' or self.fullName == ''  or self.hrId == '' :
             QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
@@ -231,7 +238,10 @@ class CL_user(QtWidgets.QDialog):
         self.hrId = self.LE_hrId.text().strip()
         self.userType = self.CMB_userType.currentText()
         self.status = self.CMB_userStatus.currentText()
-
+        if self.status == 'Active':
+            self.status = 1
+        else:
+            self.status = 0
         mycursor = self.conn.cursor()
         # get max userid
         mycursor.execute("SELECT max(cast(USER_ID  AS UNSIGNED)) FROM SYS_USER")
@@ -244,10 +254,11 @@ class CL_user(QtWidgets.QDialog):
 
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        if self.name == '' or self.password =='' or self.fullName == ''  or self.hrId == '' :
+        if CL_validation.FN_isEmpty(self.name)  or CL_validation.FN_isEmpty(self.password ) or CL_validation.FN_isEmpty(self.fullName )  or CL_validation.FN_isEmpty(self.hrId ):
             QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
 
         else:
+            CL_validation.FN_validation_password(self,self.password)
 
             sql = "INSERT INTO SYS_USER (USER_ID, BRANCH_NO, USER_NAME, USER_PASSWORD, USER_FULLNAME, USER_HR_ID, USER_CREATED_ON, USER_CREATED_BY, USER_CHANGED_ON, USER_CHANGED_BY,USER_STATUS, USERTYPE_ID)         VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"
 

@@ -20,7 +20,7 @@ class CL_form(QtWidgets.QDialog):
         filename = self.dirname + '/createForm.ui'
         loadUi( filename, self )
         self.BTN_createForm.clicked.connect(self.FN_CREATE_FORM)
-        self.CMB_formStatus.addItems(["1","0"])
+        self.CMB_formStatus.addItems(["Active", "Inactive"])
         self.CMB_formType.addItems( ["Frontend", "Backend"] )
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyForm.ui'
@@ -30,7 +30,7 @@ class CL_form(QtWidgets.QDialog):
         self.FN_GET_FORM()
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORM )
         self.BTN_modifyForm.clicked.connect(self.FN_MODIFY_FORM)
-        self.CMB_formStatus.addItems(["1", "0"])
+        self.CMB_formStatus.addItems(["Active", "Inactive"])
         self.CMB_formType.addItems( ["Frontend", "Backend"] )
     @staticmethod
     def FN_GET_FORMS(self):
@@ -43,6 +43,7 @@ class CL_form(QtWidgets.QDialog):
         return records
 
     def FN_GET_FORMID(self):
+
         self.form = self.CMB_formName.currentText()
         mycursor = self.conn.cursor()
         sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s  "
@@ -54,10 +55,11 @@ class CL_form(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_FORM(self):
+
         self.FN_GET_FORMID()
         self.id = self.LB_formID.text()
         mycursor = self.conn.cursor()
-        sql_select_query = "select * from SYS_FORM where FORM_ID = %s "
+        sql_select_query = "select * from SYS_FORM where FORM_ID = %s"
         x = (self.id,)
         mycursor.execute(sql_select_query, x)
         record = mycursor.fetchone()
@@ -65,7 +67,11 @@ class CL_form(QtWidgets.QDialog):
         self.LE_desc.setText(record[1])
         self.CMB_formType.setCurrentText(record[2])
         self.LE_help.setText(record[4])
-        self.CMB_formStatus.setCurrentText(record[3])
+        if record[3]== '1':
+
+            self.CMB_formStatus.setCurrentText('Active')
+        else:
+            self.CMB_formStatus.setCurrentText( 'Inactive' )
         mycursor.close()
 
 
@@ -76,6 +82,10 @@ class CL_form(QtWidgets.QDialog):
         self.desc = self.LE_desc.text().strip()
         self.type = self.CMB_formType.currentText()
         self.status = self.CMB_formStatus.currentText()
+        if self.status == 'Active':
+            self.status = '1'
+        else:
+            self.status = '0'
         self.help = self.LE_help.text()
 
         if self.desc == '' or self.type == '':
@@ -100,6 +110,7 @@ class CL_form(QtWidgets.QDialog):
             print(mycursor.rowcount, "record Modified.")
 
             self.close()
+            QtWidgets.QMessageBox.information( self, "Success", "Form is modified successfully" )
 
     def FN_CREATE_FORM(self):
         self.desc = self.LE_desc.text().strip()
@@ -108,6 +119,10 @@ class CL_form(QtWidgets.QDialog):
         self.help= self.LE_help.text()
 
         self.status = self.CMB_formStatus.currentText()
+        if self.status == 'Active':
+            self.status = '1'
+        else:
+            self.status = '0'
         if self.desc == '' or self.type ==''  :
             QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
 
@@ -136,3 +151,4 @@ class CL_form(QtWidgets.QDialog):
             print(mycursor.rowcount, "record inserted.")
 
             self.close()
+            QtWidgets.QMessageBox.information( self, "Success", "Form is created successfully" )

@@ -50,6 +50,7 @@ class CL_privilage( QtWidgets.QDialog ):
         # print(rows)
         for row in rows:
             self.w1.removeRow( row )
+        #QtWidgets.QMessageBox.information( self, "Success", "Privilage is deleted successfully" )
 
     def FN_ADD_PRIVILAGE(self):
         self.role = self.LB_roleId.text()
@@ -342,3 +343,5 @@ class CL_privilage( QtWidgets.QDialog ):
         db1.connectionClose( self.conn )
 
         self.close()
+        QtWidgets.QMessageBox.information( self, "Success", "Privilage is created successfully" )
+

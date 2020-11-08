@@ -102,15 +102,12 @@ class CL_role( QtWidgets.QDialog ):
         myresult = mycursor.fetchone()
         return myresult[0]
 
-
-
-
     def FN_ASSIGN(self):
         filename = self.dirname + '/assignUserToRole.ui'
         loadUi( filename, self )
 
         self.BTN_assignRole.clicked.connect( self.FN_ASSIGN_ROLE )
-        self.CMB_userRoleStatus.addItems( ["1", "0"] )
+        self.CMB_userRoleStatus.addItems( ["Active", "Inactive"] )
         self.FN_GET_USERS()
         self.FN_GET_USERID()
         self.FN_GET_ROLES()
@@ -124,8 +121,9 @@ class CL_role( QtWidgets.QDialog ):
         filename = self.dirname + '/modifyRole.ui'
         loadUi( filename, self )
         # loadUi('../Presentation/modifyRole.ui', self)
-        self.CMB_roleStatus.addItems( ["1", "0"] )
-        self.FN_GET_ROLES()
+        self.CMB_roleStatus.addItems( ["Active", "Inactive"] )
+        self.FN_GET_ROLES1()
+
         self.FN_GET_ROLEID()
         self.FN_GET_ROLE()
         self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLE )
@@ -137,7 +135,7 @@ class CL_role( QtWidgets.QDialog ):
         loadUi( filename, self )
 
         self.BTN_createRole.clicked.connect( self.FN_CREATE_ROLE )
-        self.CMB_roleStatus.addItems( ["1", "0"] )
+        self.CMB_roleStatus.addItems( ["Active", "Inactive"])
 
     def FN_GET_USERID(self):
         self.user = self.CMB_userName.currentText()
@@ -148,12 +146,26 @@ class CL_role( QtWidgets.QDialog ):
         myresult = mycursor.fetchone()
         self.LB_userID.setText( myresult[0] )
 
-    def FN_GET_ROLEID(self,roleNm):
-        if roleNm !='':
+    def FN_GET_ROLEID1(self,roleNm):
+        if roleNm is not None:
             self.role = roleNm
         else:
 
             self.role = self.CMB_roleName.currentText()
+        mycursor = self.conn.cursor()
+        sql_select_query = "SELECT ROLE_ID FROM SYS_ROLE WHERE ROLE_NAME = %s"
+        x = (self.role,)
+        mycursor.execute( sql_select_query, x )
+
+        myresult = mycursor.fetchone()
+        self.LB_roleID.setText( myresult[0] )
+
+        mycursor.close()
+        return myresult[0]
+
+    def FN_GET_ROLEID(self):
+
+        self.role = self.CMB_roleName.currentText()
         mycursor = self.conn.cursor()
         sql_select_query = "SELECT ROLE_ID FROM SYS_ROLE WHERE ROLE_NAME = %s"
         x = (self.role,)
@@ -177,7 +189,8 @@ class CL_role( QtWidgets.QDialog ):
         mycursor.close()
 
     def FN_GET_ROLES(self):
-        selectedRoles = self.FN_SELECT_USER_ROLES()
+        if self.LB_userID is not None :
+            selectedRoles = self.FN_SELECT_USER_ROLES()
         mycursor = self.conn.cursor()
         mycursor.execute( "SELECT ROLE_NAME FROM SYS_ROLE order by ROLE_ID asc" )
         records = mycursor.fetchall()
@@ -186,29 +199,25 @@ class CL_role( QtWidgets.QDialog ):
         # print(records)
         # print(selectedRoles)
         for row in records:
-
-            # print("A- ", row[0])
-            # print("j=",j)
             self.CMB_roleName.addItems( row )
-
             for row1 in selectedRoles:
-
                 if row[0] == row1[0]:
-                    # print("B- ",row1)
-                    # print("j = ",j)
-                    #print(i ,'   here')
                     items = self.CMB_roleName.findItems( row[0], Qt.MatchContains )
                     for item in items:
-
-                        #print(self.CMB_roleName.item(j).text())
-                        #print("j in last loop ",j)
-
                         self.CMB_roleName.item(j).setSelected( True )
-                        #self.CMB_roleName.item( 0 ).setSelected( True )
+
             j=j+1
         mycursor.close()
 
+    def FN_GET_ROLES1(self):
 
+        mycursor = self.conn.cursor()
+        mycursor.execute( "SELECT ROLE_NAME FROM SYS_ROLE order by ROLE_ID asc" )
+        records = mycursor.fetchall()
+        for row in records:
+            self.CMB_roleName.addItems( row )
+
+        mycursor.close()
 
 
     def FN_SELECT_USER_ROLES(self):
@@ -228,6 +237,11 @@ class CL_role( QtWidgets.QDialog ):
         self.status = self.CMB_userRoleStatus.currentText()
         self.user = self.LB_userID.text()
         self.role = self.LB_roleID.text()
+        self.status = self.CMB_userRoleStatus.currentText()
+        if self.status == 'Active':
+            self.status = 1
+        else:
+            self.status = 0
         #delete allcurrent roles
         mycursor = self.conn.cursor( buffered=True )
         sql_select_query = "delete from SYS_USER_ROLE where SYS_USER_ROLE.USER_ID=  '" + self.user + "'"
@@ -237,7 +251,7 @@ class CL_role( QtWidgets.QDialog ):
         items = self.CMB_roleName.selectedItems()
         x = []
         for i in range( len( items ) ):
-            roleId= self.FN_GET_ROLEID( str( self.CMB_roleName.selectedItems()[i].text() ))
+            roleId= self.FN_GET_ROLEID1( str( self.CMB_roleName.selectedItems()[i].text() ))
 
 
 
@@ -265,32 +279,40 @@ class CL_role( QtWidgets.QDialog ):
         db1.connectionClose( self.conn )
 
         self.close()
+        QtWidgets.QMessageBox.information( self, "Success", "Role is assigned successfully" )
 
     def FN_GET_ROLE(self):
         self.FN_GET_ROLEID()
-        self.id = self.LB_roleID.text()
+        self.name = self.CMB_roleName.currentText()
 
         mycursor = self.conn.cursor()
-        sql_select_query = "select * from SYS_ROLE where ROLE_ID = %s "
-        x = (self.id,)
+        sql_select_query = "select * from SYS_ROLE where ROLE_NAME = %s "
+        x = (self.name,)
         mycursor.execute( sql_select_query, x )
         record = mycursor.fetchone()
         #print( record )
         self.LE_name.setText( record[1] )
         self.LE_DESC.setText( record[2] )
+        if record[7] == '1':
+            self.CMB_roleStatus.setCurrentText( 'Active' )
+        else:
+            self.CMB_roleStatus.setCurrentText( 'Inactive' )
 
-        self.CMB_roleStatus.setCurrentText( record[7] )
 
         mycursor.close()
 
         print( mycursor.rowcount, "record retrieved." )
 
     def FN_MODIFY_ROLE(self):
-        self.id = self.LB_roleID.text()
+        #self.id = self.LB_roleID.text()
+        self.old_name = self.CMB_roleName.currentText()
         self.name = self.LE_name.text().strip()
         self.desc = self.LE_DESC.text().strip()
         self.status = self.CMB_roleStatus.currentText()
-
+        if self.status == 'Active':
+            self.status = '1'
+        else:
+            self.status = '0'
         if self.name == '' or self.desc == '':
             QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
         else:
@@ -298,9 +320,9 @@ class CL_role( QtWidgets.QDialog ):
 
             changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
 
-            sql = "UPDATE SYS_ROLE   set ROLE_NAME= %s ,  ROLE_DESC= %s  ,  ROLE_CHANGED_ON = %s , ROLE_CHANGED_BY = %s, ROLE_STATUS = %s where ROLE_id= %s "
+            sql = "UPDATE SYS_ROLE   set ROLE_NAME= %s ,  ROLE_DESC= %s  ,  ROLE_CHANGED_ON = %s , ROLE_CHANGED_BY = %s, ROLE_STATUS = %s where ROLE_NAME= %s "
 
-            val = (self.name, self.desc, changeDate, CL_userModule.user_name, self.status, self.id)
+            val = (self.name, self.desc, changeDate, CL_userModule.user_name, self.status, self.old_name)
             #print( val )
             mycursor.execute( sql, val )
             # mycursor.execute(sql)
@@ -310,12 +332,18 @@ class CL_role( QtWidgets.QDialog ):
             print( mycursor.rowcount, "record Modified." )
             db1.connectionClose( self )
             self.close()
+            QtWidgets.QMessageBox.information( self, "Success", "Role is modified successfully" )
 
     def FN_CREATE_ROLE(self):
         self.name = self.LE_name.text().strip()
         self.desc = self.LE_DESC.text().strip()
 
         self.status = self.CMB_roleStatus.currentText()
+        if self.status == 'Active':
+            self.status = '1'
+        else:
+            self.status = '0'
+
         if self.name == '' or self.desc =='' :
             QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
         else:
@@ -345,3 +373,5 @@ class CL_role( QtWidgets.QDialog ):
             print( mycursor.rowcount, "record inserted." )
             db1.connectionClose( self.conn )
             self.close()
+            QtWidgets.QMessageBox.information( self, "Success", "Role is created successfully" )
+

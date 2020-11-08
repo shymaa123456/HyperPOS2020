@@ -5,10 +5,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="Create customer 7type&#10;modify customer type">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="validation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Validation/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Validation/Validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/hello.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/Role.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/Role.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/formItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/formItem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/hello.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +57,7 @@
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Validation">
+  <component name="RunManager" selected="Python.login">
     <configuration name="Validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,8 +176,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Validation" />
         <item itemvalue="Python.login" />
+        <item itemvalue="Python.Validation" />
         <item itemvalue="Python.hello" />
         <item itemvalue="Python tests.pytest for testt.Test" />
         <item itemvalue="Python.test (1)" />
@@ -419,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604584634687</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="validation">
+      <created>1604829800547</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1604829800547</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -495,7 +507,8 @@
     <MESSAGE value="add the functionality to select more than one element in combobox" />
     <MESSAGE value="Create customer group &#10;modify customer gp" />
     <MESSAGE value="Create customer 7type&#10;modify customer type" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create customer 7type&#10;modify customer type" />
+    <MESSAGE value="validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="validation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604236813970">
@@ -510,22 +523,22 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1230" height="166" key="GridCell.Tab.0.bottom" timestamp="1604828570144">
+    <state width="866" height="166" key="GridCell.Tab.0.bottom" timestamp="1604844234713">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1230" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604828570144" />
-    <state width="1230" height="166" key="GridCell.Tab.0.center" timestamp="1604828570143">
+    <state width="866" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604844234713" />
+    <state width="866" height="166" key="GridCell.Tab.0.center" timestamp="1604844234712">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1230" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604828570143" />
-    <state width="1230" height="166" key="GridCell.Tab.0.left" timestamp="1604828570143">
+    <state width="866" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604844234712" />
+    <state width="866" height="166" key="GridCell.Tab.0.left" timestamp="1604844234711">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1230" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604828570143" />
-    <state width="1230" height="166" key="GridCell.Tab.0.right" timestamp="1604828570144">
+    <state width="866" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604844234711" />
+    <state width="866" height="166" key="GridCell.Tab.0.right" timestamp="1604844234713">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1230" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604828570144" />
+    <state width="866" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604844234713" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

@@ -41,7 +41,7 @@ class CL_form(QtWidgets.QDialog):
             self.CMB_formName.addItems([row[0]])
         mycursor.close()
         return records
-
+#
     def FN_GET_FORMID(self):
 
         self.form = self.CMB_formName.currentText()

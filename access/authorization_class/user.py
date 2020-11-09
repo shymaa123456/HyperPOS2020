@@ -194,24 +194,29 @@ class CL_user(QtWidgets.QDialog):
         else:
             self.status = 0
 
-        if self.name == '' or self.password =='' or self.fullName == ''  or self.hrId == '' :
-            QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
+        if CL_validation.FN_isEmpty( self.name ) or CL_validation.FN_isEmpty(
+                self.password ) or CL_validation.FN_isEmpty( self.fullName ) or CL_validation.FN_isEmpty(
+                self.hrId ):
+            QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
+
         else:
-            mycursor = self.conn.cursor()
+            if CL_validation.FN_validation_password( self, self.password ) == False:
 
-            changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                mycursor = self.conn.cursor()
 
-            sql = "UPDATE SYS_USER   set USER_NAME= %s ,  USER_PASSWORD= %s  ,  BRANCH_NO = %s, USER_FULLNAME = %s , USER_HR_ID = %s, USER_CHANGED_ON = %s , USER_CHANGED_BY = %s, USER_STATUS = %s, USERTYPE_ID = %s where USER_id= %s "
-            val = (self.name  , self.password, self.branch, self.fullName,self.hrId, changeDate, CL_userModule.user_name , self.status, self.userType , self.id)
+                changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-            mycursor.execute(sql, val)
+                sql = "UPDATE SYS_USER   set USER_NAME= %s ,  USER_PASSWORD= %s  ,  BRANCH_NO = %s, USER_FULLNAME = %s , USER_HR_ID = %s, USER_CHANGED_ON = %s , USER_CHANGED_BY = %s, USER_STATUS = %s, USERTYPE_ID = %s where USER_id= %s "
+                val = (self.name  , self.password, self.branch, self.fullName,self.hrId, changeDate, CL_userModule.user_name , self.status, self.userType , self.id)
 
-            mycursor.close()
-            db1.connectionCommit( self.conn )
-            print(mycursor.rowcount, "record Modified.")
-            QtWidgets.QMessageBox.information( self, "Success", "User is modified successfully" )
-            db1.connectionClose( self.conn )
-            self.close()
+                mycursor.execute(sql, val)
+
+                mycursor.close()
+                db1.connectionCommit( self.conn )
+                print(mycursor.rowcount, "record Modified.")
+                QtWidgets.QMessageBox.information( self, "Success", "User is modified successfully" )
+                db1.connectionClose( self.conn )
+                self.close()
 
     def FN_GET_USERS(self):
 

@@ -47,7 +47,7 @@ class  CL_validation():
                 return QtWidgets.QMessageBox.warning( "Error", "Invalid mobile no,no must start with '01'" )
 
     @staticmethod
-    def FN_validation_type(self,data):
+    def FN_validation_type(data):
         print(type(data))
 
     @staticmethod
@@ -65,5 +65,8 @@ class  CL_validation():
             print("PASS!")
         else:
             QtWidgets.QMessageBox.warning(  "Error", "Invalid date format" )
+if __name__ == '__main__':
+    x=5
+    CL_validation.FN_validation_type(x)
 
 

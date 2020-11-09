@@ -145,7 +145,7 @@ class CL_role( QtWidgets.QDialog ):
         mycursor.execute( sql_select_query, x )
         myresult = mycursor.fetchone()
         self.LB_userID.setText( myresult[0] )
-
+#
     def FN_GET_ROLEID1(self,roleNm):
         if roleNm is not None:
             self.role = roleNm

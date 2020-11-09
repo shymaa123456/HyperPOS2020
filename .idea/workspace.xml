@@ -52,7 +52,7 @@
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.login">
+  <component name="RunManager" selected="Python.Validation">
     <configuration name="Validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,8 +171,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.login" />
         <item itemvalue="Python.Validation" />
+        <item itemvalue="Python.login" />
         <item itemvalue="Python.hello" />
         <item itemvalue="Python tests.pytest for testt.Test" />
         <item itemvalue="Python.test (1)" />
@@ -433,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604844452670</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="validation">
+      <created>1604846748250</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1604846748250</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -525,22 +532,22 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="865" height="166" key="GridCell.Tab.0.bottom" timestamp="1604846526909">
+    <state width="856" height="166" key="GridCell.Tab.0.bottom" timestamp="1604913123335">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="865" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604846526909" />
-    <state width="865" height="166" key="GridCell.Tab.0.center" timestamp="1604846526909">
+    <state width="856" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604913123335" />
+    <state width="856" height="166" key="GridCell.Tab.0.center" timestamp="1604913123335">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="865" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604846526909" />
-    <state width="865" height="166" key="GridCell.Tab.0.left" timestamp="1604846526909">
+    <state width="856" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604913123335" />
+    <state width="856" height="166" key="GridCell.Tab.0.left" timestamp="1604913123334">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="865" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604846526909" />
-    <state width="865" height="166" key="GridCell.Tab.0.right" timestamp="1604846526909">
+    <state width="856" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604913123334" />
+    <state width="856" height="166" key="GridCell.Tab.0.right" timestamp="1604913123335">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="865" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604846526909" />
+    <state width="856" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604913123335" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -561,10 +568,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1604846731626">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1604846757391">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1604846731626" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1604846757391" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

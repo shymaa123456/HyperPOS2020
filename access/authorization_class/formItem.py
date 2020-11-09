@@ -154,7 +154,7 @@ class CL_formItem( QtWidgets.QDialog ):
         record = mycursor.fetchall()
         for row in record:
             self.LE_desc.setText( row[0] )
-
+#
             if row[1] == '1':
                 self.CMB_formItemStatus.setCurrentText( 'Active' )
             else:

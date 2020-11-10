@@ -27,8 +27,17 @@ class CL_customer(QtWidgets.QDialog):
         self.FN_GET_CUST()
         self.CMB_custName.currentIndexChanged.connect( self.FN_GET_CUST )
         self.BTN_modifyCustomer.clicked.connect( self.FN_MODIFY_CUST )
-        #
-        # self.CMB_custGroup.addItems( ["1", "2", "3"] )
+
+    def FN_LOAD_UPLOAD(self):
+
+        filename = self.dirname + '/uploadCustomers.ui'
+        loadUi( filename, self )
+        # self.FN_GET_CUSTOMERS()
+        # self.FN_GET_CustID()
+        # self.FN_GET_CUST()
+        # self.CMB_custName.currentIndexChanged.connect( self.FN_GET_CUST )
+        # self.BTN_modifyCustomer.clicked.connect( self.FN_MODIFY_CUST )
+
     def FN_GET_CUSTOMERS(self):
 
         mycursor = self.conn.cursor()

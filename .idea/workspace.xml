@@ -6,17 +6,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="validation">
-      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_activate.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_change_date.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_copy.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_create.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_display.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_edit.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_upload.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/access/reports_class/reporting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/reports_ui/Promotion_display.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,22 +50,22 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
+    <property name="last_opened_file_path" value="E:/hossam/POSLogin" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hossam\PycharmProjects\HyperPOS2020\presentation\reports_ui" />
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
       <recent name="$PROJECT_DIR$/data_connection" />
       <recent name="$PROJECT_DIR$/presentation/voucher_ui" />
       <recent name="$PROJECT_DIR$/presentation/reports_ui" />
-      <recent name="$PROJECT_DIR$/presentation/promotion_ui" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.login">
+  <component name="RunManager" selected="Python.reporting">
     <configuration name="Validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -131,7 +129,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="reporting" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -139,11 +137,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/authorization_class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/reports_class" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/authorization_class/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/reports_class/reporting.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -168,7 +166,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in testt.py" type="tests" factoryName="py.test" nameIsGenerated="true">
+    <configuration name="pytest in C:/Users/Hossam/PycharmProjects/HyperPOS2020/access/authorization_class/testt.py" type="tests" factoryName="py.test" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -186,11 +184,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.reporting" />
         <item itemvalue="Python.login" />
         <item itemvalue="Python.Validation" />
         <item itemvalue="Python.hello" />
         <item itemvalue="Python tests.pytest for testt.Test" />
-        <item itemvalue="Python.test (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -550,50 +548,59 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="172" y="127" width="1094" height="541" key="DiffContextDialog/72.27.1294.741@72.27.1294.741" timestamp="1603721119801" />
-    <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl" timestamp="1603720751348">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1605097149467">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605097149467" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="855" height="166" key="GridCell.Tab.0.bottom" timestamp="1604914781953">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom" timestamp="1605109996280">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605109996280" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="855" height="166" key="GridCell.Tab.0.center" timestamp="1604914781953">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="180" key="GridCell.Tab.0.center" timestamp="1605109996280">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605109996280" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="855" height="166" key="GridCell.Tab.0.left" timestamp="1604914781952">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="180" key="GridCell.Tab.0.left" timestamp="1605109996280">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605109996280" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="855" height="166" key="GridCell.Tab.0.right" timestamp="1604914781953">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="180" key="GridCell.Tab.0.right" timestamp="1605109996280">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605109996280" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="223" key="GridCell.Tab.1.bottom" timestamp="1605096110573">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605096110573" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1271" height="17" key="GridCell.Tab.1.center" timestamp="1604399627859">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="223" key="GridCell.Tab.1.center" timestamp="1605096110572">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1605096110572" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1271" height="17" key="GridCell.Tab.1.left" timestamp="1604399627858">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="223" key="GridCell.Tab.1.left" timestamp="1605096110572">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1605096110572" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1271" height="17" key="GridCell.Tab.1.right" timestamp="1604399627859">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="223" key="GridCell.Tab.1.right" timestamp="1605096110572">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1605096110572" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog" timestamp="1603720741209">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1605003663141">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1605008325547">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605003663141" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605008325547" />
     <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605005475118">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

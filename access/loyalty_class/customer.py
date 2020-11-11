@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QFileDialog
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QRegExpValidator ,QIntValidator
 from PyQt5.QtCore import QRegExp
@@ -36,7 +37,17 @@ class CL_customer(QtWidgets.QDialog):
         # self.FN_GET_CustID()
         # self.FN_GET_CUST()
         # self.CMB_custName.currentIndexChanged.connect( self.FN_GET_CUST )
-        # self.BTN_modifyCustomer.clicked.connect( self.FN_MODIFY_CUST )
+        self.BTN_browse.clicked.connect( self.openFileNameDialog )
+
+
+    def openFileNameDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getOpenFileName( self, "QFileDialog.getOpenFileName()", "",
+                                                   " Files (*.csv)", options=options )
+        if fileName:
+            self.LE_fileName.setText(fileName)
+            print( fileName )
 
     def FN_GET_CUSTOMERS(self):
 

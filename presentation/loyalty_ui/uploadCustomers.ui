@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>173</height>
+    <width>486</width>
+    <height>169</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="BTN_load">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>340</x>
      <y>120</y>
      <width>121</width>
      <height>25</height>
@@ -26,10 +26,10 @@
     <string>تحميل ملف عملاء</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="BTN_load_2">
+  <widget class="QPushButton" name="BTN_browse">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>340</x>
      <y>60</y>
      <width>121</width>
      <height>25</height>
@@ -39,17 +39,17 @@
     <string>اختر ملف عملاء</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLineEdit" name="LE_fileName">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>6</x>
+     <x>10</x>
      <y>60</y>
-     <width>221</width>
-     <height>20</height>
+     <width>311</width>
+     <height>25</height>
     </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
    </property>
   </widget>
  </widget>

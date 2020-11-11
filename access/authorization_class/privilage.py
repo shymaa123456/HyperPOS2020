@@ -249,7 +249,7 @@ class CL_privilage( QtWidgets.QDialog ):
                            "inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID " \
                            "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
                            "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
-                           "inner join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
+                           "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
                            " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1 "
         x = (self.role,)
 

@@ -263,7 +263,7 @@
      </property>
      <addaction name="QAct_Create_CustGp"/>
      <addaction name="QAct_Modify_CustGp"/>
-     <addaction name="QAct_Cust_Grp_Deactivate"/>
+     <addaction name="QAct_Deactivate_CustGp"/>
      <addaction name="separator"/>
     </widget>
     <widget class="QMenu" name="QM_Customer_Level">
@@ -529,6 +529,9 @@
    </property>
   </action>
   <action name="QAct_Deactivate_Cust">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>ايقاف عميل</string>
    </property>
@@ -549,7 +552,10 @@
     <string>تعديل مجموعة عملاء</string>
    </property>
   </action>
-  <action name="QAct_Cust_Grp_Deactivate">
+  <action name="QAct_Deactivate_CustGp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>ايقاف مجموعة عملاء</string>
    </property>

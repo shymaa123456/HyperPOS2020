@@ -33,6 +33,6 @@ class CL_userModule(object):
         mycursor.execute( sql_select_query, x )
 
         records = mycursor.fetchall()
-        #print(records)
+        print(records)
         CL_userModule.myList = records
         #print(CL_userModule.myList)

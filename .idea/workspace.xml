@@ -5,10 +5,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="validation">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="upload customer">
+      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_activate.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_change_date.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_copy.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_create.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_display.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_edit.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_upload.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Validation/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Validation/Validation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user_module.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,15 +52,15 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/access/loyalty_class" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
       <recent name="$PROJECT_DIR$/data_connection" />
       <recent name="$PROJECT_DIR$/presentation/voucher_ui" />
       <recent name="$PROJECT_DIR$/presentation/reports_ui" />
       <recent name="$PROJECT_DIR$/presentation/promotion_ui" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
   <component name="RunManager" selected="Python.login">
@@ -447,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604913387769</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="upload customer">
+      <created>1605084797143</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1605084797143</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -524,7 +542,8 @@
     <MESSAGE value="Create customer group &#10;modify customer gp" />
     <MESSAGE value="Create customer 7type&#10;modify customer type" />
     <MESSAGE value="validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="validation" />
+    <MESSAGE value="upload customer" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload customer" />
   </component>
   <component name="WindowStateProjectService">
     <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604236813970">
@@ -539,22 +558,22 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="855" height="166" key="GridCell.Tab.0.bottom" timestamp="1604914781953">
+    <state width="891" height="242" key="GridCell.Tab.0.bottom" timestamp="1605185212132">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="855" height="166" key="GridCell.Tab.0.center" timestamp="1604914781953">
+    <state width="891" height="242" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1605185212132" />
+    <state width="891" height="242" key="GridCell.Tab.0.center" timestamp="1605185212132">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="855" height="166" key="GridCell.Tab.0.left" timestamp="1604914781952">
+    <state width="891" height="242" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1605185212132" />
+    <state width="891" height="242" key="GridCell.Tab.0.left" timestamp="1605185212131">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="855" height="166" key="GridCell.Tab.0.right" timestamp="1604914781953">
+    <state width="891" height="242" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1605185212131" />
+    <state width="891" height="242" key="GridCell.Tab.0.right" timestamp="1605185212132">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
+    <state width="891" height="242" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1605185212132" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -575,10 +594,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1604913403225">
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605084802048">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1604913403225" />
+    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605084802048" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -595,10 +614,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/72.27.1294.741@72.27.1294.741" timestamp="1598789128767" />
-    <state x="500" y="312" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601991488853">
+    <state x="500" y="312" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605084816708">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="500" y="312" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1294.741@72.27.1294.741" timestamp="1601991488853" />
+    <state x="500" y="312" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1294.741@72.27.1294.741" timestamp="1605084816708" />
     <state x="551" y="183" width="325" height="436" key="refactoring.ChangeSignatureDialog" timestamp="1598870908090">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

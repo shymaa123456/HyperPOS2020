@@ -29,18 +29,17 @@ class CL_main( QtWidgets.QMainWindow ):
         filename = dirname + '/main.ui'
         loadUi( filename, self )
 
-        #print (CL_userModule.user_name)
+        print (CL_userModule.user_name)
         CL_userModule.loadPrivilages(self)
         for row_number, row_data in enumerate( CL_userModule.myList ):
             forms.append(row_data[1])
 
         forms=list(dict.fromkeys(forms))
 
-
+        print(forms)
         for row in forms:
             #print(row)
             but_name= 'QAct_'+row
-
             self.findChild( QObject, but_name ).setEnabled( True )
 
         self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
@@ -48,7 +47,7 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Copy_User.triggered.connect( self.FN_COPY_USER )
         self.QAct_Reset_User_Password.triggered.connect( self.FN_RESET_USER )
         self.QAct_Assign_User_to_Roles.triggered.connect( self.FN_ASSIGN )
-
+        print("hi")
         self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
         self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
         self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE )

@@ -8,7 +8,11 @@
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="upload customer">
       <change beforePath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_٥‏_١١‏_٢٠٢٠_٣_٢١_م_[Default_Changelist]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +43,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -169,6 +174,14 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.Validation" />
+      <item itemvalue="Python.hello" />
+      <item itemvalue="Python.login" />
+      <item itemvalue="Python.test (1)" />
+      <item itemvalue="Python tests.pytest for testt.Test" />
+      <item itemvalue="Python tests.pytest in testt.py" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
@@ -547,21 +560,25 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="855" height="166" key="GridCell.Tab.0.bottom" timestamp="1604914781953">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="137" key="GridCell.Tab.0.bottom" timestamp="1605628419752">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="137" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605628419752" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="855" height="166" key="GridCell.Tab.0.center" timestamp="1604914781953">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="137" key="GridCell.Tab.0.center" timestamp="1605628419752">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="137" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605628419752" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="855" height="166" key="GridCell.Tab.0.left" timestamp="1604914781952">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="137" key="GridCell.Tab.0.left" timestamp="1605628419752">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="137" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605628419752" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="855" height="166" key="GridCell.Tab.0.right" timestamp="1604914781953">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state width="1345" height="137" key="GridCell.Tab.0.right" timestamp="1605628419752">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="137" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605628419752" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
@@ -583,6 +600,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1605538727743">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605538727743" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605185588804">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

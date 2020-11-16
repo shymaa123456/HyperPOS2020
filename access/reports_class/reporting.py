@@ -5,24 +5,29 @@ Created on Mon Jun 29 19:52:06 2020
 
 @author: emad
 """
+
 #####
+import os
 import sys
+
+import tempfile
 from pathlib import Path
+
+from PIL.ImageQt import ImageQt
+from PyQt5 import QtCore, QtWidgets, QtPrintSupport, Qt
 
 from PyQt5 import QtCore, QtGui
 from PyQt5 import QtWidgets
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtGui import QPainter
+from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog
 from PyQt5.uic import loadUi
-from mysql.connector import Error
+from pdf2image import convert_from_path
 
-from access.authorization_class.user import CL_user
-# import Controller
 from access.main_login_class.main import CL_main
 from data_connection.h1pos import db1
-from access.authorization_class.user_module import CL_userModule
-
-
+import sys
+from PyQt5.QtPrintSupport import QPrintDialog, QPrinter, QPrintPreviewDialog
+from PyQt5.Qt import QFileInfo
 class CL_report(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
 
@@ -48,7 +53,7 @@ class CL_report(QtWidgets.QDialog):
         self.Qtable_promotion.setRowCount(0)
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("select * from promotion_detail")
+        mycursor.execute("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_ID`= '"+self.Qline_promotion.text()+"'")
         records = mycursor.fetchall()
         print(records)
         for row_number, row_data in enumerate( records ):
@@ -160,6 +165,36 @@ class CL_report(QtWidgets.QDialog):
         else:
             self.Qcombo_magazine.setEnabled(False)
 
+    def printpreviewDialog(self):
+        from access.reports_class.ReportPDF import body, Text
+        from Validation.Validation import CL_validation
+        title = Text()
+        title.setName("Invoice")
+        title.setFooter(
+            " س ت 36108 ملف  ضريبي 212/306/5 مأموريه  ضرائب الشركات المساهمة رقم التسجيل بضرائب المبيعات 153/846/310 ")
+        title.setFont('Scheherazade-Regular.ttf')
+        title.setFontsize(10)
+        title.setcodeText("15235692356562")
+        title.setwaterText("hyperone company")
+        title.settelText("1266533")
+        title.setbrachText("Entrance 1,EL Sheikh Zayed City")
+        body()
+        QtWidgets.QMessageBox.information(self, "Success", "Report is printed successfully")
+        ######################################################
+        # dialog = QtPrintSupport.QPrintPreviewDialog()
+        # dialog.paintRequested.connect(self.handlePaintRequest)
+        # dialog.exec_()
+
+    # def handlePaintRequest(self, printer):
+    #     document = QtGui.QTextDocument()
+    #     cursor = QtGui.QTextCursor(document)
+    #     table = cursor.insertTable(self.Qtable_promotion.rowCount(), self.Qtable_promotion.columnCount())
+    #     for row in range(table.rows()):
+    #         for col in range(table.columns()):
+    #             cursor.insertText(self.Qtable_promotion.item(row, col).text())
+    #             cursor.movePosition(QtGui.QTextCursor.NextCell)
+    #
+    #     document.print_(printer)
 
     def __init__(self):
         super(CL_report, self).__init__()
@@ -192,7 +227,7 @@ class CL_report(QtWidgets.QDialog):
         self.QcheckBox_magazine.toggled.connect(self.FN_Check_Magazine)
         self.groupBox_2.setEnabled(False)
         self.Qcombo_promotion.setEnabled(False)
-
+        self.Qbtn_print.clicked.connect(self.printpreviewDialog)
 
 class CL_controller():
     def __init__(self):

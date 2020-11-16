@@ -264,7 +264,7 @@ class CL_user(QtWidgets.QDialog):
 
         else:
             if CL_validation.FN_validation_password(self,self.password) == False :
-               if  CL_validation.FN_validation_str( self, self.hrId, "HR ID" ) == False:
+               #if  CL_validation.FN_validation_int( self, self.hrId, "HR ID" ) == True:
 
                     sql = "INSERT INTO SYS_USER (USER_ID, BRANCH_NO, USER_NAME, USER_PASSWORD, USER_FULLNAME, USER_HR_ID, USER_CREATED_ON, USER_CREATED_BY, USER_CHANGED_ON, USER_CHANGED_BY,USER_STATUS, USERTYPE_ID)         VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"
 

@@ -1,60 +1,55 @@
 import sys
-from PyQt5.QtCore import *
-from PyQt5.QtGui import  *
-from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QGridLayout, QLabel, QRadioButton
+from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog
+from PyQt5.QtGui import QIcon
 
 
-class EricsValidator(QValidator):
+class App( QWidget ):
 
-    def validate(self, text, position):
-        print( 'validate (%s %s)' % (repr(text), repr(position)))
-        return (QValidator.Intermediate, text, position)
+    def __init__(self):
+        super().__init__()
+        self.title = 'PyQt5 file dialogs - pythonspot.com'
+        self.left = 10
+        self.top = 10
+        self.width = 640
+        self.height = 480
+        self.initUI()
 
-class Form(QDialog):
+    def initUI(self):
+        self.setWindowTitle( self.title )
+        self.setGeometry( self.left, self.top, self.width, self.height )
 
-    def __init__(self, parent=None):
+        self.openFileNameDialog()
+        self.openFileNamesDialog()
+        self.saveFileDialog()
 
-        super(Form, self).__init__(parent)
+        self.show()
 
-        self.lineedit = QLineEdit()
+    def openFileNameDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getOpenFileName( self, "QFileDialog.getOpenFileName()", "",
+                                                   "All Files (*);;Python Files (*.py)", options=options )
+        if fileName:
+            print( fileName )
 
-        self.validators = []
-        layout = QGridLayout()
-        layout.addWidget(self.lineedit, 0, 0, 1, 2)
-        for i, (name, validator) in enumerate([
-            ("Q&IntValidator"   , QIntValidator(self)   ),
-            ("Q&DoubleValidator", QDoubleValidator(self)),
-            ("&Eric's Validator", EricsValidator(self)  ),
-        ]):
-            label  = QLabel(name)
-            button = QRadioButton()
-            label.setBuddy(button)
-            self.validators.append((validator, label, button))
-            layout.addWidget(label , i + 1, 0)
-            layout.addWidget(button, i + 1, 1)
-            label.setBuddy(button)
+    def openFileNamesDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        files, _ = QFileDialog.getOpenFileNames( self, "QFileDialog.getOpenFileNames()", "",
+                                                 "All Files (*);;Python Files (*.py)", options=options )
+        if files:
+            print( files )
 
-           # self.connect(button, SIGNAL("clicked()"), self.update)
-            button.clicked.connect(self.update)
-        self.validators[-1][2].setChecked(True)
-
-        self.setLayout(layout)
-
-        self.setWindowTitle("Validation Tester")
-
-        self.update()
-
-    def update(self):
-
-        for validator, label, button in self.validators:
-            if button.isChecked():
-                print ('setting validator to', label.text())
-                self.lineedit.setValidator(validator)
-                break
+    def saveFileDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getSaveFileName( self, "QFileDialog.getSaveFileName()", "",
+                                                   "All Files (*);;Text Files (*.txt)", options=options )
+        if fileName:
+            print( fileName )
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    form = Form()
-    form.show()
-    app.exec_()
+    app = QApplication( sys.argv )
+    ex = App()
+    sys.exit( app.exec_() )

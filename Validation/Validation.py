@@ -48,17 +48,24 @@ class  CL_validation():
 
     @staticmethod
     def FN_validation_str(self,data,field_name):
-        message = "Make sure your that " +field_name + "is string"
-        QtWidgets.QMessageBox.warning( self, "Error", message)
-        print (type(data) is str  )
+        if type( data ) is str:
+            print( type( data ) is str)
+        else:
+            message = "Make sure your that " +field_name + "is string"
+            QtWidgets.QMessageBox.warning( self, "Error", message)
+
         return(type(data) is str  )
 
     def FN_validation_int(self,data,field_name):
-        message = "Make sure your that "+ field_name+ " is number"
-        QtWidgets.QMessageBox.warning( self, "Error", message )
+        print(data)
         print( type( data ) is int )
-        return(type(data) is int             )
-
+        data = int(data)
+        if type( data ) is int:
+            print( type( data ) is int )
+        else:
+            message = "Make sure your that " + field_name + "is int"
+            QtWidgets.QMessageBox.warning( self, "Error", message )
+        return (type( data ) is int)
     @staticmethod
     def FN_isEmpty(data):
         if len(data)==0 or data is None:

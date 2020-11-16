@@ -10,7 +10,7 @@ class db1():
     @staticmethod
     def connect() :
        connection = mysql.connector.connect( host='localhost', database='Hyper1_Retail'
-                                              , user='root', password='password', port='3306' )
+                                              , user='root', port='3306' )
        return connection
 
     @staticmethod

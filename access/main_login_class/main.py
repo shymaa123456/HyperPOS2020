@@ -29,18 +29,17 @@ class CL_main( QtWidgets.QMainWindow ):
         filename = dirname + '/main.ui'
         loadUi( filename, self )
 
-        #print (CL_userModule.user_name)
+        print (CL_userModule.user_name)
         CL_userModule.loadPrivilages(self)
         for row_number, row_data in enumerate( CL_userModule.myList ):
             forms.append(row_data[1])
 
         forms=list(dict.fromkeys(forms))
 
-
+        print(forms)
         for row in forms:
             #print(row)
             but_name= 'QAct_'+row
-
             self.findChild( QObject, but_name ).setEnabled( True )
 
         self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
@@ -48,7 +47,7 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Copy_User.triggered.connect( self.FN_COPY_USER )
         self.QAct_Reset_User_Password.triggered.connect( self.FN_RESET_USER )
         self.QAct_Assign_User_to_Roles.triggered.connect( self.FN_ASSIGN )
-
+        print("hi")
         self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
         self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
         self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE )
@@ -56,8 +55,14 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
         self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
 
+        self.QAct_Create_CustGp.triggered.connect( self.FN_CREATE_CUSTGP )
+        self.QAct_Modify_CustGp.triggered.connect( self.FN_MODIFY_CUSTGP )
+        self.QAct_Deactivate_CustGp.triggered.connect( self.FN_MODIFY_CUSTGP )
+
         self.QAct_Create_CustTp.triggered.connect( self.FN_CREATE_CUSTTP )
         self.QAct_Modify_CustTp.triggered.connect( self.FN_MODIFY_CUSTTP )
+
+        self.QAct_Cust_Upload_Data.triggered.connect(self.FN_UPLOAD_CUST)
 
         self.QAct_Create_Privilage.triggered.connect( self.FN_CREATE_PRIV )
         self.QAct_Create_Form.triggered.connect( self.FN_create_form )
@@ -66,8 +71,6 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Create_Form_Item.triggered.connect( self.FN_create_form_item )
         self.QAct_Modify_Form_Item.triggered.connect( self.FN_modify_form_item )
 
-        self.QAct_Create_CustGp.triggered.connect( self.FN_CREATE_CUSTGP )
-        self.QAct_Modify_CustGp.triggered.connect( self.FN_MODIFY_CUSTGP )
 
         self.QAct_Exit.triggered.connect( self.FN_exit )
         self.setWindowTitle( 'HyperPOS Main Page' )
@@ -77,9 +80,16 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two.FN_LOAD_CREATE()
         self.window_two.show()
 
+
+
     def FN_MODIFY_CUST(self):
         self.window_two = CL_customer()
         self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
+    def FN_UPLOAD_CUST(self):
+        self.window_two = CL_customer()
+        self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
 
     def FN_CREATE_CUSTGP(self):

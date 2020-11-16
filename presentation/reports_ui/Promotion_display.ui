@@ -739,41 +739,51 @@ background-color: rgb(198, 207, 199);</string>
        <string notr="true"/>
       </property>
       <property name="columnCount">
-       <number>33</number>
+       <number>18</number>
       </property>
       <column>
        <property name="text">
-        <string>PROM_ID</string>
+        <string>رقم العرض</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>PROM_LINE_NO</string>
+        <string>نوع العرض</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>POS_ITEM_NO</string>
+        <string>انشاء العرض خلال</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>POS_GTIN</string>
+        <string>PROM_CREATED_ON</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>BMC_ID</string>
+        <string>رقم الخط</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>SPONSER_ID</string>
+        <string>رقم الماكينه</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>PROM_PRICE_BEFORE_DISC</string>
+        <string>GTIN</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>القسم</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>السعر قبل الخصم</string>
        </property>
       </column>
       <column>
@@ -793,117 +803,32 @@ background-color: rgb(198, 207, 199);</string>
       </column>
       <column>
        <property name="text">
-        <string>PROM_ITEM_DISCOUNT</string>
+        <string>عدد الاصناف</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>PROM_GROUP_NO</string>
+        <string>قيمه الخصم</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>PROM_GROUP_DISC</string>
+        <string>سعر الصنف</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>PROM_GROUP_ITEM_ID</string>
+        <string>بدايه العرض</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>PROM_GROUP_ITEM_DISC_SHARE</string>
+        <string>نهايه العرض</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>PROM_ITEM_QTY</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_ITEM_DISC_VAL</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_ITEM_PRICE</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_MAX_DISC_QTY</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_MAX_DISC_VAL</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_START_DATE</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_END_DATE</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_CREATED_ON</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_CHANGED_BY</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_ACTIVATED_BY</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_STOPPED_BY</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_STATUS</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_RESERVED1</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_RESERVED2</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_RESERVED3</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_RESERVED4</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_RESERVED5</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>PROM_RESERVED6</string>
+        <string>حاله العرض</string>
        </property>
       </column>
      </widget>

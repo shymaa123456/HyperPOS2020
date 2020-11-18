@@ -9,8 +9,8 @@ class db1():
 
     @staticmethod
     def connect() :
-       connection = mysql.connector.connect( host='10.2.1.190', database='Hyper1_Retail'
-                                              , user='shelal',password='123P@ssword', port='3306' ,auth_plugin='mysql_native_password' )
+       connection = mysql.connector.connect( host='localhost', database='Hyper1_Retail'
+                                              , user='root', port='3306' )
        return connection
 
     @staticmethod

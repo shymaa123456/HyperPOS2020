@@ -6,9 +6,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="hossam 16/11/2020">
+      <change afterPath="$PROJECT_DIR$/access/reports_class/myreport.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/reports_class/ReportPDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/ReportPDF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/reports_class/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/reports_class/my_file.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/my_file.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/reports_class/reporting.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/reporting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/reports_ui/Promotion_display.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/reports_ui/Promotion_display.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,11 +50,15 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/presentation/reports_ui" />
+    <property name="last_opened_file_path" value="E:/hossam/POSLogin" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hossam\PycharmProjects\HyperPOS2020\access\reports_class" />
+      <recent name="$PROJECT_DIR$/access/loyalty_class" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Hossam\PycharmProjects\HyperPOS2020\presentation\reports_ui" />
       <recent name="C:\Users\Hossam\PycharmProjects\HyperPOS2020\access\reports_class" />
@@ -56,13 +66,9 @@
       <recent name="$PROJECT_DIR$/data_connection" />
       <recent name="$PROJECT_DIR$/presentation/voucher_ui" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Hossam\PycharmProjects\HyperPOS2020\access\reports_class" />
-      <recent name="$PROJECT_DIR$/access/loyalty_class" />
-    </key>
   </component>
   <component name="RunManager" selected="Python.reporting">
-    <configuration name="Validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="customer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -70,11 +76,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Validation" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/loyalty_class" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Validation/Validation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/loyalty_class/customer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -83,7 +89,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="hello" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="h1pos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -91,11 +97,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/authorization_class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_connection" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/authorization_class/hello.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_connection/h1pos.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -184,20 +190,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.hello" />
       <item itemvalue="Python.login" />
-      <item itemvalue="Python.Validation" />
-      <item itemvalue="Python tests.pytest in testt.py" />
-      <item itemvalue="Python.reporting" />
       <item itemvalue="Python.model" />
+      <item itemvalue="Python.reporting" />
+      <item itemvalue="Python.h1pos" />
+      <item itemvalue="Python.customer" />
+      <item itemvalue="Python tests.pytest in testt.py" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.reporting" />
         <item itemvalue="Python.model" />
+        <item itemvalue="Python.customer" />
+        <item itemvalue="Python.h1pos" />
         <item itemvalue="Python.login" />
-        <item itemvalue="Python.Validation" />
-        <item itemvalue="Python.hello" />
       </list>
     </recent_temporary>
   </component>
@@ -483,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605534208345</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="hossam 16/11/2020">
+      <created>1605538588582</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1605538588582</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -570,10 +583,10 @@
     </state>
     <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1605524782803" />
     <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1604236813970" />
-    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605533203238">
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605703022331">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1605533203238" />
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1605703022331" />
     <state x="429" y="218" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1605537257273">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -583,29 +596,30 @@
     </state>
     <state x="106" y="98" width="1155" height="532" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1605537461551" />
     <state x="172" y="127" width="1094" height="541" key="DiffContextDialog/72.27.1294.741@72.27.1294.741" timestamp="1603721119801" />
-    <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl" timestamp="1603720751348">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1605700394989">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605700394989" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1345" height="180" key="GridCell.Tab.0.bottom" timestamp="1605538417034">
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom" timestamp="1605707139425">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605538417034" />
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605707139425" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="180" key="GridCell.Tab.0.center" timestamp="1605538417034">
+    <state width="1345" height="180" key="GridCell.Tab.0.center" timestamp="1605707139425">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605538417034" />
+    <state width="1345" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1605707139425" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="180" key="GridCell.Tab.0.left" timestamp="1605538417034">
+    <state width="1345" height="180" key="GridCell.Tab.0.left" timestamp="1605707139425">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605538417034" />
+    <state width="1345" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1605707139425" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1345" height="180" key="GridCell.Tab.0.right" timestamp="1605538417034">
+    <state width="1345" height="180" key="GridCell.Tab.0.right" timestamp="1605707139425">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605538417034" />
+    <state width="1345" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1605707139425" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
@@ -627,14 +641,14 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="184" y="8" key="SettingsEditor" timestamp="1605525445840">
+    <state x="184" y="8" key="SettingsEditor" timestamp="1605605193974">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605525445840" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605534211868">
+    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1605605193974" />
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605538596582">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605534211868" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605538596582" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
@@ -644,9 +658,10 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/72.27.1294.741@72.27.1294.741" timestamp="1603707589579" />
-    <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1599491214073">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state x="106" y="98" width="1155" height="532" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605605765373">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="106" y="98" width="1155" height="532" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1605605765373" />
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/72.27.1294.741@72.27.1294.741" timestamp="1599491214073" />
     <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598789128767">
       <screen x="72" y="27" width="1294" height="741" />

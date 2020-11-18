@@ -19,6 +19,13 @@ class CL_customer(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
 
+    def FN_LOAD_DEACTIVATE(self):
+        filename = self.dirname + '/deactivateCustomer.ui'
+        loadUi(filename, self)
+        self.FN_GET_CUSTOMERS()
+        self.FN_GET_CustID()
+        self.FN_GET_CUSTSTATUS()
+        self.BTN_deactivateCustomer.clicked.connect(self.FN_DEACTIVATE_CUST)
     def FN_LOAD_MODIFY(self):
 
         filename = self.dirname + '/modifyCustomer.ui'
@@ -161,6 +168,23 @@ class CL_customer(QtWidgets.QDialog):
         self.CMB_loyalityType.setCurrentText( record[1] )
         mycursor.close()
 
+    def FN_GET_CUSTSTATUS(self):
+        self.FN_GET_CustID()
+
+        self.id = self.LB_custID.text()
+        mycursor = self.conn.cursor()
+        sql_select_query = "select POSC_STATUS from POS_CUSTOMER where POSC_CUST_ID = %s "
+        x = (self.id,)
+        mycursor.execute( sql_select_query, x )
+        record = mycursor.fetchone()
+        #print( record )
+
+        if record[0] == '1':
+            self.CMB_status.setCurrentText('Active')
+        else:
+            self.CMB_status.setCurrentText( 'Inactive' )
+
+        mycursor.close()
 
 
     def FN_GET_CustID(self):
@@ -276,10 +300,51 @@ class CL_customer(QtWidgets.QDialog):
             print( mycursor.rowcount, "record inserted." )
             db1.connectionCommit( self.conn )
             db1.connectionClose( self.conn )
+            QtWidgets.QMessageBox.information(self, "Success", "Customer is created successfully")
+
             self.close()
 
         print("in create cust" ,self.name)
-        # insert into db
+
+    def FN_DEACTIVATE_CUST(self):
+        mycursor = self.conn.cursor()
+        self.id = self.LB_custID.text().strip()
+        self.status = self.CMB_status.currentText()
+        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+        # get customer gp id
+        mycursor.execute("SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '" + self.custGroup + "'")
+        myresult = mycursor.fetchone()
+        self.custGroup = myresult[0]
+
+        # get customer type
+        mycursor.execute(
+            "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + self.loyalityType + "'")
+        myresult = mycursor.fetchone()
+        self.loyalityType = myresult[0]
+
+        self.status = self.CMB_status.currentText()
+        if self.status == 'Active':
+            self.status = 1
+        else:
+            self.status = 0
+
+
+
+        sql = "update   POSC_STATUS=%s where POSC_CUST_ID = %s"
+
+        # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+        val = ( self.status, self.id)
+        mycursor.execute(sql, val)
+        # mycursor.execute(sql)
+
+        mycursor.close()
+
+        print(mycursor.rowcount, "customer deactivate.")
+        db1.connectionCommit(self.conn)
+        db1.connectionClose(self.conn)
+        QtWidgets.QMessageBox.information(self, "Success", "Customer status changed successfully")
+
+        self.close()
 
     def FN_MODIFY_CUST(self):
 
@@ -343,6 +408,8 @@ class CL_customer(QtWidgets.QDialog):
             mycursor.close()
 
             print( mycursor.rowcount, "record updated." )
+            QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
+
             db1.connectionCommit( self.conn )
             db1.connectionClose( self.conn )
             self.close()

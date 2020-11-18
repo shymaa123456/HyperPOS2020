@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from mysql.connector import Error
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.uic import loadUi
@@ -280,9 +280,15 @@ class CL_privilage( QtWidgets.QDialog ):
         if mycursor.rowcount > 0:
             records = mycursor.fetchall()
             for row in records:
-                sql_select_query = "delete from SYS_PRIVILEG_ITEM where PRIV_ID = '" + row[0] + "'"
-                mycursor.execute( sql_select_query )
-                db1.connectionCommit( self.conn )
+                sql_select_query = "SELECT ITEM_ID FROM SYS_PRIVILEG_ITEM WHERE PRIV_ID = '" + row[0] + "'"
+                mycursor.execute(sql_select_query)
+                myresult = mycursor.fetchone()
+                if mycursor.rowcount > 0:
+                    sql_select_query = "delete from SYS_PRIVILEG_ITEM where PRIV_ID = '" + row[0] + "'"
+                    mycursor.execute( sql_select_query )
+                    db1.connectionCommit( self.conn )
+
+
                 sql_select_query1 = "delete from SYS_PRIVILEGE  where PRIV_ID = '" + row[0] + "'"
                 mycursor.execute( sql_select_query1 )
                 db1.connectionCommit( self.conn )

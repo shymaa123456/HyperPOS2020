@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(198, 207, 199);</string>
+  </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -156,6 +159,13 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QLineEdit" name="LE_name">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -168,46 +178,150 @@
      <widget class="QComboBox" name="CMB_loyalityType"/>
     </item>
     <item>
-     <widget class="QLineEdit" name="lE_phone"/>
+     <widget class="QLineEdit" name="lE_phone">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lE_mobile"/>
+     <widget class="QLineEdit" name="lE_mobile">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_job"/>
+     <widget class="QLineEdit" name="LE_job">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_address"/>
+     <widget class="QLineEdit" name="LE_address">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_city"/>
+     <widget class="QLineEdit" name="LE_city">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_district"/>
+     <widget class="QLineEdit" name="LE_district">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_building"/>
+     <widget class="QLineEdit" name="LE_building">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_floor"/>
+     <widget class="QLineEdit" name="LE_floor">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_email"/>
+     <widget class="QLineEdit" name="LE_email">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_company"/>
+     <widget class="QLineEdit" name="LE_company">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_workPhone"/>
+     <widget class="QLineEdit" name="LE_workPhone">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_workAddress"/>
+     <widget class="QLineEdit" name="LE_workAddress">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QComboBox" name="CMB_status"/>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_notes"/>
+     <widget class="QLineEdit" name="LE_notes">
+      <property name="styleSheet">
+       <string notr="true"> border: 2px solid gray;
+   
+    padding: 0 8px;
+    
+    selection-background-color: darkgray;</string>
+      </property>
+     </widget>
     </item>
    </layout>
    <zorder>CMB_loyalityType</zorder>
@@ -233,9 +347,19 @@
     <rect>
      <x>28</x>
      <y>520</y>
-     <width>131</width>
-     <height>25</height>
+     <width>191</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: beige;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 6px;</string>
    </property>
    <property name="text">
     <string>إنشاء عميل عضويه</string>

@@ -18,7 +18,7 @@ class CL_customerGP(QtWidgets.QDialog):
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
-
+###
 
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyCustomerGp.ui'

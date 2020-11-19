@@ -54,6 +54,7 @@ class CL_main( QtWidgets.QMainWindow ):
 
         self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
         self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
+        self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
 
         self.QAct_Create_CustGp.triggered.connect( self.FN_CREATE_CUSTGP )
         self.QAct_Modify_CustGp.triggered.connect( self.FN_MODIFY_CUSTGP )
@@ -85,6 +86,10 @@ class CL_main( QtWidgets.QMainWindow ):
     def FN_MODIFY_CUST(self):
         self.window_two = CL_customer()
         self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+    def FN_DEACTIVATE_CUST(self):
+        self.window_two = CL_customer()
+        self.window_two.FN_LOAD_DEACTIVATE()
         self.window_two.show()
 
     def FN_UPLOAD_CUST(self):

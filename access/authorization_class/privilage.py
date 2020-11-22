@@ -244,19 +244,34 @@ class CL_privilage( QtWidgets.QDialog ):
         self.role = self.LB_roleId.text()
         self.form = self.LB_formId.text()
 
-        sql_select_query = "select r.ROLE_Name , r.ROLE_ID , f.FORM_DESC,f.FORM_ID  ,a.ACTION_DESC ,fi.ITEM_DESC " \
-                           "from SYS_PRIVILEGE p left outer join SYS_FORM_ITEM fi on p.FORM_ID = fi.FORM_ID  " \
+        sql_select_query = "select r.ROLE_Name , r.ROLE_ID , f.FORM_DESC,f.FORM_ID  ,a.ACTION_DESC ,pi.ITEM_ID " \
+                           "from SYS_PRIVILEGE p   " \
                            "inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID " \
                            "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
                            "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
-                           "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
+                           " left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
                            " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1 "
+        print(sql_select_query)
         x = (self.role,)
 
 
         mycursor.execute( sql_select_query, x )
-
+        if mycursor.rowcount ==0 :
+            sql_select_query = "select r.ROLE_Name , r.ROLE_ID , f.FORM_DESC,f.FORM_ID  ,a.ACTION_DESC ,pi.ITEM_ID " \
+                               "from SYS_PRIVILEGE p   " \
+                               "inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID " \
+                               "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
+                               "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
+                               "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
+                               " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1 "
+            print('in if')
+            print(sql_select_query)
+            x = (self.role,)
+            mycursor.execute(sql_select_query, x)
         records = mycursor.fetchall()
+
+        records = list(dict.fromkeys(records))
+        print(records)
         for row_number, row_data in enumerate( records ):
             self.w1.insertRow( row_number )
 

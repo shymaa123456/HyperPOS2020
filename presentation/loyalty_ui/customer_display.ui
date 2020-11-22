@@ -45,7 +45,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>10</y>
      <width>1001</width>
      <height>221</height>
@@ -61,12 +61,15 @@
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
    <property name="styleSheet">
-    <string notr="true">
-background-color: rgb(198, 207, 199);</string>
+    <string notr="true">background-color: rgb(198, 207, 199);
+</string>
    </property>
    <property name="title">
-    <string>بحث ب </string>
+    <string/>
    </property>
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
@@ -116,16 +119,16 @@ background-color: rgb(198, 207, 199);</string>
       <property name="title">
        <string/>
       </property>
-      <widget class="QComboBox" name="Qcombo_promotion">
+      <widget class="QComboBox" name="CMB_loyalityType">
        <property name="enabled">
         <bool>true</bool>
        </property>
        <property name="geometry">
         <rect>
-         <x>-10</x>
+         <x>-20</x>
          <y>10</y>
-         <width>281</width>
-         <height>20</height>
+         <width>291</width>
+         <height>21</height>
         </rect>
        </property>
        <property name="layoutDirection">
@@ -179,13 +182,16 @@ background-color: rgb(198, 207, 199);</string>
       <property name="title">
        <string>حاله العميل</string>
       </property>
-      <widget class="QCheckBox" name="QcheckBox_magazine_2">
+      <widget class="QRadioButton" name="radioButton_3">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>15</y>
-         <width>70</width>
-         <height>21</height>
+         <x>260</x>
+         <y>18</y>
+         <width>51</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="layoutDirection">
@@ -195,13 +201,16 @@ background-color: rgb(198, 207, 199);</string>
         <string>فعال</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="QcheckBox_magazine_3">
+      <widget class="QRadioButton" name="radioButton_4">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>15</y>
-         <width>70</width>
-         <height>21</height>
+         <x>168</x>
+         <y>16</y>
+         <width>51</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="layoutDirection">
@@ -211,13 +220,16 @@ background-color: rgb(198, 207, 199);</string>
         <string>موقوف</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="QcheckBox_magazine_5">
+      <widget class="QRadioButton" name="radioButton_5">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>10</y>
-         <width>41</width>
-         <height>30</height>
+         <x>70</x>
+         <y>14</y>
+         <width>51</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="layoutDirection">
@@ -270,7 +282,7 @@ background-color: rgb(198, 207, 199);</string>
        </property>
        <property name="styleSheet">
         <string notr="true"> border: 2px solid gray;
-    border-radius: 10px;
+   
     padding: 0 8px;
     
     selection-background-color: darkgray;</string>
@@ -421,10 +433,19 @@ background-color: rgb(198, 207, 199);</string>
         <property name="text">
          <string>بحث</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="Qbtn_print">
+       <widget class="QPushButton" name="Qbtn_create">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -447,7 +468,7 @@ background-color: rgb(198, 207, 199);</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="Qbtn_search_2">
+       <widget class="QPushButton" name="Qbtn_upload">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -569,7 +590,7 @@ background-color: rgb(198, 207, 199);</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="Qbtn_exit">
+       <widget class="QPushButton" name="Qbtn_modify">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>

@@ -64,9 +64,9 @@ class  CL_login(QtWidgets.QDialog):
 
      except Error as e:
         print("Error reading data from MySQL table", e)
-     finally:
-         mycursor.close()
-         db1.connectionClose(self.conn)
+     # finally:
+     #     mycursor.close()
+     #     db1.connectionClose(self.conn)
          #print( "MySQL connection is closed" )
 
 

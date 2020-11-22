@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from PyQt5 import QtWidgets,QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QRegExpValidator ,QIntValidator
@@ -11,7 +11,6 @@ from data_connection.h1pos import db1
 import xlrd
 from datetime import datetime
 class CL_customer(QtWidgets.QDialog):
-    switch_window = QtCore.pyqtSignal()
     dirname = ''
     def __init__(self):
         super(CL_customer, self).__init__()
@@ -20,24 +19,13 @@ class CL_customer(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
 
-    # def FN_LOAD_DEACTIVATE(self):
-    #     filename = self.dirname + '/deactivateCustomer.ui'
-    #     loadUi(filename, self)
-    #     self.FN_GET_CUSTOMERS()
-    #     self.FN_GET_CustID()
-    #     self.FN_GET_CUSTSTATUS()
-    #     self.BTN_deactivateCustomer.clicked.connect(self.FN_DEACTIVATE_CUST)
-
-    def FN_LOAD_DISPLAY(self):
-        filename = self.dirname + '/customer_display.ui'
+    def FN_LOAD_DEACTIVATE(self):
+        filename = self.dirname + '/deactivateCustomer.ui'
         loadUi(filename, self)
-        self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
-        self.Qbtn_create.clicked.connect(self.FN_CR_CUST)
-        self.Qbtn_modify.clicked.connect(self.FN_MD_CUST)
-        self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
-
-    def FN_SEARCH_CUST(self):
-        self.FN_GET_CUSTTP()
+        self.FN_GET_CUSTOMERS()
+        self.FN_GET_CustID()
+        self.FN_GET_CUSTSTATUS()
+        self.BTN_deactivateCustomer.clicked.connect(self.FN_DEACTIVATE_CUST)
     def FN_LOAD_MODIFY(self):
 
         filename = self.dirname + '/modifyCustomer.ui'
@@ -210,21 +198,6 @@ class CL_customer(QtWidgets.QDialog):
         self.LB_custID.setText( myresult[0] )
         mycursor.close()
 
-
-    def FN_CR_CUST(self,funct):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_CREATE()
-        self.window_two.show()
-
-    def FN_MD_CUST(self, funct):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_MODIFY()
-        self.window_two.show()
-
-    def FN_UP_CUST(self, funct):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_UPLOAD()
-        self.window_two.show()
 
 
     def FN_LOAD_CREATE(self):

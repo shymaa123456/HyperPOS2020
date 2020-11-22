@@ -31,10 +31,24 @@ class CL_customer(QtWidgets.QDialog):
     def FN_LOAD_DISPLAY(self):
         filename = self.dirname + '/customer_display.ui'
         loadUi(filename, self)
+        mycursor = self.conn.cursor()
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
-        self.Qbtn_create.clicked.connect(self.FN_CR_CUST)
-        self.Qbtn_modify.clicked.connect(self.FN_MD_CUST)
-        self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
+        #check authorization
+        for row_number, row_data in enumerate( CL_userModule.myList ):
+           if  row_data[1] =='Display_Customer':
+               if row_data[4] =='None':
+                print('hh')
+               else:
+                   sql_select_query = "select  i.ITEM_DESC from SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
+                   x = (row_data[4],)
+                   mycursor.execute(sql_select_query, x)
+                   result = mycursor.fetchone()
+                   if result[0] == 'create' :
+                        self.Qbtn_create.clicked.connect(self.FN_CR_CUST)
+                   elif result[0] == 'modify':
+                         self.Qbtn_modify.clicked.connect(self.FN_MD_CUST)
+                   elif result[0] == 'upload':
+                         self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
 
     def FN_SEARCH_CUST(self):
         self.FN_GET_CUSTTP()

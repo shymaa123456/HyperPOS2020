@@ -240,43 +240,37 @@ class CL_privilage( QtWidgets.QDialog ):
         self.w1.clear()
         self.w1.setRowCount( 0 )
         mycursor = self.conn.cursor()
-#
+##
         self.role = self.LB_roleId.text()
         self.form = self.LB_formId.text()
 
-        sql_select_query = "select r.ROLE_Name , r.ROLE_ID , f.FORM_DESC,f.FORM_ID  ,a.ACTION_DESC ,pi.ITEM_ID " \
-                           "from SYS_PRIVILEGE p   " \
-                           "inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID " \
-                           "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
-                           "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
-                           " left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
-                           " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1 "
-        print(sql_select_query)
+        sql_select_query = "select r.ROLE_Name , r.ROLE_ID , f.FORM_DESC,f.FORM_ID  ,a.ACTION_DESC ,pi.ITEM_ID from SYS_PRIVILEGE p   inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID  left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID    where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1"
+        #print(sql_select_query)
         x = (self.role,)
 
 
         mycursor.execute( sql_select_query, x )
-        if mycursor.rowcount ==0 :
-            sql_select_query = "select r.ROLE_Name , r.ROLE_ID , f.FORM_DESC,f.FORM_ID  ,a.ACTION_DESC ,pi.ITEM_ID " \
-                               "from SYS_PRIVILEGE p   " \
-                               "inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID " \
-                               "inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID " \
-                               "inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID " \
-                               "left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID and pi.ITEM_ID = fi.ITEM_ID  " \
-                               " where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1 "
-            print('in if')
-            print(sql_select_query)
-            x = (self.role,)
-            mycursor.execute(sql_select_query, x)
+
         records = mycursor.fetchall()
 
         records = list(dict.fromkeys(records))
-        print(records)
+        #print(records)
         for row_number, row_data in enumerate( records ):
             self.w1.insertRow( row_number )
 
             for column_number, data in enumerate( row_data ):
                 self.w1.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
+            val= self.w1.item(row_number,5).text()
+            if val == 'None':
+                print ('hh')
+            else:
+                sql_select_query = "select  i.ITEM_DESC from SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
+                #print(sql_select_query)
+                #print(val)
+                x = (val,)
+                mycursor.execute(sql_select_query, x)
+                result = mycursor.fetchone()
+                self.w1.setItem(row_number, 5, QTableWidgetItem(str(result[0])))
         # self.w1.setItem(0, 0, QTableWidgetItem("Name"))
 
         self.w1.setEditTriggers( QtWidgets.QTableWidget.NoEditTriggers )

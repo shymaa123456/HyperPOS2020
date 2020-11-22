@@ -1,5 +1,6 @@
+import mysql
 
-from WeasypayPDFFile import FooterCanvas,Foo
+from access.reports_class.WeasypayPDFFile import FooterCanvas,Foo
 
 from reportlab.pdfgen import canvas
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, PageBreak)
@@ -14,6 +15,10 @@ import pandas as pd
 import numpy as np
 import textwrap
 import sys
+from mysql.connector import Error
+
+import mysql.connector
+
 from reportlab.lib import colors
 from sqlalchemy import create_engine
 import pymysql
@@ -35,7 +40,13 @@ code=""
 watermark=""
 branch=""
 tel=""
+cursortest=0
 class Text():
+    def setCursor(self,cursor):
+        global cursortest
+        cursortest=cursor
+    def getcursor(self):
+        return cursortest
     def setName(self,title):
         global name
         name = title
@@ -95,10 +106,15 @@ class body():
         d = Drawing(100, 5)
         d.add(Line(16, 6, 500, 6))
 
-        sqlEngine = create_engine('mysql+pymysql://habdelnaby:123P@ssword@10.2.1.190', pool_recycle=3600)
-        dbConnection = sqlEngine.connect()
-        frame = pd.read_sql("select * from Hyper1_Retail.PROMOTIONAL_VOUCHER", dbConnection)
-        df = pd.DataFrame(frame, columns=['PROMV_VOUCHER_ID', 'PROMV_VOUCHER_DESC', 'PROMV_VOUCHER_VAL', 'PROMV_SERIAL_ID', 'PROMV_CREATED_BY','PrROMV_CHANGED_ON'])
+        # sqlEngine = create_engine('mysql+pymysql://root:@127.0.0.1', pool_recycle=3600)
+        # dbConnection = sqlEngine.connect()
+        connection = mysql.connector.connect(host='localhost', database='Hyper1_Retail'
+                                             , user='root', port='3306')
+        frame = pd.read_sql("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_ID`= 30", connection)
+        df = pd.DataFrame(frame, columns=['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
+
+        # df = pd.DataFrame(cursortest.fetchall())
+        # df.columns = cursortest.keys()
 
         df = df.reset_index()
         df = df.rename(columns={"index": ""})
@@ -106,26 +122,26 @@ class body():
         z = df.size
         print(z)
         row, col = df.shape
-        df['PROMV_SERIAL_ID'] = df['PROMV_SERIAL_ID'].str.wrap(60)
+        df['PROM_ID'] = df['PROM_ID'].str.wrap(60)
         total = 0
         numCount = 0
         for x in range(row):
-            val = df['PROMV_SERIAL_ID'].values[x]
+            val = df['PROM_ID'].values[x]
             arabic_text = arabic_reshaper.reshape(val)
             arabic_text = get_display(arabic_text)
-            df.at[x, 'PROMV_SERIAL_ID'] = arabic_text
+            df.at[x, 'PROM_ID'] = arabic_text
             numCount += 1
         num = 0
         for x in range(row):
-            val = df['PROMV_SERIAL_ID'].values[x]
+            val = df['PROM_ID'].values[x]
             total += int(val)
             num = x
 
-        df.sort_values(by=['PROMV_SERIAL_ID'], inplace=True)
+        df.sort_values(by=['PROM_ID'], inplace=True)
 
-        df.at[num + 2, 'PROMV_SERIAL_ID'] = str(total)
-        df.at[num + 2, 'PROMV_SERIAL_ID'] = str(numCount)
-        df.at[num + 2, 'PROMV_SERIAL_ID'] = str(numCount)
+        df.at[num + 2, 'PROM_ID'] = str(total)
+        df.at[num + 2, 'PROM_ID'] = str(numCount)
+        df.at[num + 2, 'PROM_ID'] = str(numCount)
 
         data = [df.columns.to_list()] + df.values.tolist()
 

@@ -240,7 +240,7 @@ class CL_privilage( QtWidgets.QDialog ):
         self.w1.clear()
         self.w1.setRowCount( 0 )
         mycursor = self.conn.cursor()
-#
+##
         self.role = self.LB_roleId.text()
         self.form = self.LB_formId.text()
 

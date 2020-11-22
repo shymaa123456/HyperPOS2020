@@ -30,54 +30,50 @@ from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog
 from PyQt5.uic import loadUi
 from pdf2image import convert_from_path
 
-from access.main_login_class.main import CL_main
 from data_connection.h1pos import db1
 import sys
 from PyQt5.QtPrintSupport import QPrintDialog, QPrinter, QPrintPreviewDialog
 from PyQt5.Qt import QFileInfo
 class CL_report(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
-    cond=0
-    def FN_login(self):
+    cond=4
 
-        if len(self.LE_userName.text()) > 0 and len(self.LE_password.text()) > 0:
-            print("Login!")
-            self.username = self.LE_userName.text()
-            self.password = self.LE_password.text()
-            self.LE_userName.clear()
-            self.LE_password.clear()
-            self.FN_loadData(self.username, self.password)
-
-        else:
-
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter your Username and Password")
-            # print("Please enter your Username and Password")
 
     def FN_close(self):
         self.close()
 
     def FN_loadData(self, PROM_ID):
+        print(self.cond)
+        print(self.Qdate_to.dateTime().toString('yyyy-MM-dd')+" "+self.Qtime_from.dateTime().toString('hh:mm:ss'))
+
         self.Qtable_promotion.setRowCount(0)
         self.conn = db1.connect()
-        print(self.cond)
+
+
         mycursor = self.conn.cursor()
         query=""
         if self.cond==1:
-            query=  ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_ID`= '"+self.Qline_promotion.text()+"'")
+            query=  ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_ID`= '"+self.Qline_promotion.text()+"'JOIN `prom_branch` ON `prom_branch`.`BRANCH_NO`=(SELECT `branch`.`BRANCH_NO` FROM `branch` WHERE `branch`.`BRANCH_DESC_A`='"+self.Qcombo_branch.currentText()+"')")
         elif self.cond==3:
-            query=  ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_DETAIL`.`POS_GTIN`= '"+self.Qline_promotion_2.text()+"'")
+            query=  ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_DETAIL`.`POS_GTIN`= '"+self.Qline_promotion_2.text()+"' and `PROMOTION_DETAIL`.`PROM_START_DATE`='"+self.Qdate_from.dateTime().toString('yyyy-MM-dd')+" "+self.Qtime_from.dateTime().toString('hh:mm:ss')+"' and `PROMOTION_DETAIL`.`PROM_END_DATE`='"+self.Qdate_to.dateTime().toString('yyyy-MM-dd')+" "+self.Qtime_to.dateTime().toString('hh:mm:ss')+"' JOIN `prom_branch` ON `prom_branch`.`BRANCH_NO`=(SELECT `branch`.`BRANCH_NO` FROM `branch` WHERE `branch`.`BRANCH_DESC_A`='"+self.Qcombo_branch.currentText()+"')")
         elif self.cond==2:
-            query=  ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_TYPE_ID`= '"+self.Qcombo_promotion.currentText()+"'")
+            query=  ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_TYPE_ID`= '"+self.Qcombo_promotion.currentText()+"'and `PROMOTION_DETAIL`.`PROM_START_DATE`='"+self.Qdate_from.dateTime().toString('yyyy-MM-dd')+" "+self.Qtime_from.dateTime().toString('hh:mm:ss')+"' and `PROMOTION_DETAIL`.`PROM_END_DATE`='"+self.Qdate_to.dateTime().toString('yyyy-MM-dd')+" "+self.Qtime_to.dateTime().toString('hh:mm:ss')+"' JOIN `prom_branch` ON `prom_branch`.`BRANCH_NO`=(SELECT `branch`.`BRANCH_NO` FROM `branch` WHERE `branch`.`BRANCH_DESC_A`='"+self.Qcombo_branch.currentText()+"')")
+        elif self.cond==4:
+            query=  ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_STATUS`= 3 JOIN `prom_branch` ON `prom_branch`.`BRANCH_NO`=(SELECT `branch`.`BRANCH_NO` FROM `branch` WHERE `branch`.`BRANCH_DESC_A`='"+self.Qcombo_branch.currentText()+"')")
+        elif self.cond==5:
+            query=  ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_STATUS`= 3 JOIN `prom_branch` ON `prom_branch`.`BRANCH_NO`=(SELECT `branch`.`BRANCH_NO` FROM `branch` WHERE `branch`.`BRANCH_DESC_A`='"+self.Qcombo_branch.currentText()+"')")
 
         mycursor.execute(query)
         records = mycursor.fetchall()
         print(records)
         for row_number, row_data in enumerate( records ):
 
-            self.Qtable_promotion.insertRow( row_number )
-            for column_number, data in enumerate( row_data ):
-                 self.Qtable_promotion.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
+          self.Qtable_promotion.insertRow( row_number )
+          for column_number, data in enumerate( row_data ):
+               self.Qtable_promotion.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
         mycursor.close()
+
+
     def FN_GET_Company(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -145,25 +141,24 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_Checked_Selected(self):
+       self.radioBtnPromNum_2.setChecked(False)
        self.radioBtnPromNum.setChecked(False)
        self.Qline_promotion.setEnabled(False)
-       self.radioBtnPromNum_2.setChecked(False)
        self.Qline_promotion.clear()
        self.groupBox_2.setEnabled(True)
        self.Qcombo_promotion.setEnabled(True)
        self.Qline_promotion_2.setEnabled(False)
        self.Qline_promotion_2.clear()
-       self.QcheckBox_department.setEnabled(True)
        self.cond=2
 
     def FN_Checked_Selected2(self):
+       self.radioBtnPromNum_2.setChecked(False)
        self.radioButton_2.setChecked(False)
        self.Qcombo_promotion.setEnabled(False)
        self.Qline_promotion.setEnabled(True)
        self.groupBox_2.setEnabled(False)
        self.Qline_promotion_2.setEnabled(False)
        self.Qline_promotion_2.clear()
-       self.QcheckBox_department.setEnabled(True)
        self.cond=1
 
     def FN_Checked_Selected3(self):
@@ -172,7 +167,8 @@ class CL_report(QtWidgets.QDialog):
        self.Qline_promotion.clear()
        self.Qline_promotion_2.setEnabled(True)
        self.groupBox_2.setEnabled(False)
-       self.QcheckBox_department.setEnabled(False)
+       self.groupBox_2.setEnabled(True)
+       self.Qcombo_promotion.setEnabled(False)
        self.cond=3
 
 
@@ -208,7 +204,8 @@ class CL_report(QtWidgets.QDialog):
         writer = pd.ExcelWriter('myreport.xlsx', engine='xlsxwriter')
         df.to_excel(writer, sheet_name='Sheet1', startrow=2)
         writer.save()
-
+        import os
+        os.system('myreport.xlsx')
         ####################################
     def saveFile(self):
         df = pd.DataFrame()
@@ -298,7 +295,6 @@ class CL_report(QtWidgets.QDialog):
         self.groupBox_2.setEnabled(False)
         self.Qcombo_promotion.setEnabled(False)
         self.Qline_promotion_2.setEnabled(False)
-        self.QcheckBox_department.setEnabled(False)
         self.Qbtn_print.clicked.connect(self.printpreviewDialog)
 
 class CL_controller():
@@ -307,12 +303,11 @@ class CL_controller():
 
     def FN_show_login(self):
         self.report = CL_report()
-        self.report.switch_window.connect(self.FN_show_main)
         self.report.show()
 
 
     def FN_show_main(self):
-        self.window = CL_main()
+        self.window = CL_report()
 
         self.report.close()
 

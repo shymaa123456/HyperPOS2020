@@ -5,6 +5,8 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.reports_class.reporting import CL_report
+
 from access.authorization_class.Role import CL_role
 from access.authorization_class.branch import CL_branch
 from access.authorization_class.form import CL_form
@@ -16,6 +18,7 @@ from access.authorization_class.user_module import CL_userModule
 from access.loyalty_class.customer import CL_customer
 from access.loyalty_class.customerGP import CL_customerGP
 from access.loyalty_class.customerType import CL_customerTP
+
 
 class CL_main( QtWidgets.QMainWindow ):
     switch_window = QtCore.pyqtSignal()
@@ -73,6 +76,8 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Create_Form_Item.triggered.connect( self.FN_create_form_item )
         self.QAct_Modify_Form_Item.triggered.connect( self.FN_modify_form_item )
 
+
+        self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_promotion)
 
         self.QAct_Exit.triggered.connect( self.FN_exit )
         self.setWindowTitle( 'HyperPOS Main Page' )
@@ -213,5 +218,10 @@ class CL_main( QtWidgets.QMainWindow ):
     def FN_modify_form_item(self):
         self.window_two = CL_formItem()
         self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
+
+    def FN_search_promotion(self):
+        self.window_two = CL_report()
         self.window_two.show()
 

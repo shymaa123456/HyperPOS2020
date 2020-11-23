@@ -12,7 +12,7 @@ import os
 import sys
 import pandas as pd
 import numpy as np
-from appdirs import unicode
+#from appdirs import unicode
 from pandas.tests.io.excel.test_xlwt import xlwt
 
 from access.reports_class.ReportPDF import body, Text
@@ -28,7 +28,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog
 from PyQt5.uic import loadUi
-from pdf2image import convert_from_path
+#from pdf2image import convert_from_path
 
 from data_connection.h1pos import db1
 import sys

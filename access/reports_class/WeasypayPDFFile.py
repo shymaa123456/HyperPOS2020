@@ -13,13 +13,13 @@ import textwrap
 import sys
 from reportlab.lib import colors
 from sqlalchemy import create_engine
-import pymysql
+#import pymysql
 from reportlab.graphics import renderPDF
 from reportlab.graphics.barcode.eanbc import Ean13BarcodeWidget
 from reportlab.graphics.shapes import Drawing,Line
 from reportlab.platypus import Flowable
 import arabic_reshaper
-from fpdf import FPDF
+#from fpdf import FPDF
 from datetime import datetime
 from bidi.algorithm import get_display
 foot="text".encode('utf-8')

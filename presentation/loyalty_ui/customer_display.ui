@@ -45,7 +45,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>10</y>
      <width>1001</width>
      <height>221</height>
@@ -74,9 +74,9 @@
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>460</x>
       <y>0</y>
-      <width>491</width>
+      <width>521</width>
       <height>211</height>
      </rect>
     </property>
@@ -107,9 +107,9 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>0</x>
         <y>20</y>
-        <width>421</width>
+        <width>411</width>
         <height>131</height>
        </rect>
       </property>
@@ -233,99 +233,119 @@
        </property>
       </widget>
      </widget>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_6">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>150</y>
-       <width>331</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
-     </property>
-     <property name="title">
-      <string>حاله العميل</string>
-     </property>
-     <widget class="QRadioButton" name="Rbtn_stsActive">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>20</y>
-        <width>68</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::RightToLeft</enum>
-      </property>
-      <property name="text">
-       <string>فعال</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="Rbtn_stsInactive">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>-60</x>
-        <y>20</y>
-        <width>289</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::RightToLeft</enum>
-      </property>
-      <property name="text">
-       <string>موقوف</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="Rbtn_stsExpired">
+     <widget class="QGroupBox" name="groupBox_6">
       <property name="enabled">
        <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
-        <width>141</width>
-        <height>17</height>
+        <y>150</y>
+        <width>401</width>
+        <height>51</height>
        </rect>
       </property>
       <property name="layoutDirection">
        <enum>Qt::RightToLeft</enum>
       </property>
-      <property name="text">
-       <string>منتهي</string>
+      <property name="title">
+       <string>حاله العميل</string>
       </property>
+      <widget class="QRadioButton" name="Rbtn_stsActive">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>20</y>
+         <width>68</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>فعال</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="Rbtn_stsInactive">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>-110</x>
+         <y>20</y>
+         <width>289</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>موقوف</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="Rbtn_stsAll">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>20</y>
+         <width>92</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>الكل</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QRadioButton" name="Rbtn_stsAll">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
+     <widget class="QCheckBox" name="chk_search_status">
       <property name="geometry">
        <rect>
-        <x>-10</x>
-        <y>20</y>
-        <width>92</width>
+        <x>429</x>
+        <y>170</y>
+        <width>31</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chk_status_2">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>60</y>
+        <width>70</width>
         <height>17</height>
        </rect>
       </property>
-      <property name="layoutDirection">
-       <enum>Qt::RightToLeft</enum>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chk_search_other">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>30</y>
+        <width>31</width>
+        <height>20</height>
+       </rect>
       </property>
       <property name="text">
-       <string>الكل</string>
+       <string/>
       </property>
      </widget>
     </widget>
@@ -333,8 +353,8 @@
    <widget class="QGroupBox" name="groupBox_8">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
+      <x>50</x>
+      <y>10</y>
       <width>411</width>
       <height>191</height>
      </rect>

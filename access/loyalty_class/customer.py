@@ -9,6 +9,7 @@ from PyQt5.QtCore import QRegExp
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 import xlrd
+import xlsxwriter
 from datetime import datetime
 class CL_customer(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
@@ -53,6 +54,7 @@ class CL_customer(QtWidgets.QDialog):
         loadUi(filename, self)
         mycursor = self.conn.cursor()
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
+        self.Qbtn_export.clicked.connect(self.FN_SAVE_CUST)
         self.Rbtn_custNo.clicked.connect(self.onClicked)
         self.Rbtn_custTp.clicked.connect(self.onClicked)
 
@@ -75,48 +77,73 @@ class CL_customer(QtWidgets.QDialog):
                    elif result[0] == 'upload':
                          self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
 
+    def FN_SAVE_CUST(self):
+
+        filename = QFileDialog.getSaveFileName(self, 'Save File', " "'.xlsx','(*.xlsx)')
+        from xlwt import Workbook
+        if filename:
+            wb = Workbook()
+
+            # add_sheet is used to create sheet.
+            sheet = wb.add_sheet('Sheet 1')
+
+            for currentColumn in range(self.Qtable_customer.columnCount()):
+                for currentRow in range(self.Qtable_customer.rowCount()):
+                    teext = str(self.Qtable_customer.item(currentRow, currentColumn).text())
+                    sheet.write(currentRow, currentColumn, teext)
+            wb.save(filename)
+            #wb.close()
     def FN_SEARCH_CUST(self):
         print('in search')
-        self.Qtable_customer.clearcontents()
+        #self.Qtable_customer.clearcontents()
+        for i in reversed(range(self.Qtable_customer.rowCount())):
+            self.Qtable_customer.removeRow(i)
+
+
         mycursor = self.conn.cursor()
         whereClause =""
-        if self.Rbtn_custNo.isChecked ():
-            id= self.LE_custNo.text()
+        if self.chk_search_other.isChecked():
+            if self.Rbtn_custNo.isChecked ():
+                id= self.LE_custNo.text()
+                whereClause=" POSC_CUST_ID = '"+id+"'"
 
-            whereClause=" POSC_CUST_ID = '"+id+"'"
-        elif self.Rbtn_custTp .isChecked ():
-            type= self.CMB_loyalityType.currentText()
-            whereClause = " POSC_CUST_ID ='" + self.FN_GET_CUSTTP_ID(type) + "'"
+            elif self.Rbtn_custTp .isChecked ():
+                type= self.CMB_loyalityType.currentText()
+                whereClause = " LOYCT_TYPE_ID ='" + self.FN_GET_CUSTTP_ID(type) + "'"
 
-        elif self.Rbtn_custPhone.isChecked():
+            elif self.Rbtn_custPhone.isChecked():
+                phone = self.LE_custPhone.text()
+                whereClause = " POSC_PHONE = '"+phone+"'"
 
-            phone = self.LE_custPhone.text()
-            whereClause = " POSC_PHONE = '"+phone+"'"
+        if self.chk_search_status.isChecked():
+            if self.Rbtn_stsActive.isChecked():
+                if whereClause != '':
+                    whereClause = whereClause + ' and '
+                whereClause = whereClause + 'POSC_STATUS = 1'
+            elif  self.Rbtn_stsInactive.isChecked():
+                if whereClause != '':
+                    whereClause = whereClause + ' and '
+                whereClause = whereClause + 'POSC_STATUS = 0'
+            elif  self.Rbtn_stsAll.isChecked():
+                if whereClause != '':
+                    whereClause = whereClause + ' and '
+                whereClause = whereClause + 'POSC_STATUS in ( 0,1)'
+        if self.chk_search_status.isChecked()==False and  self.chk_search_other.isChecked()==False:
+            QtWidgets.QMessageBox.warning(self, "Error", "أختر أي من محدادات البحث")
+        else:
+            print(whereClause)
+            sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from POS_CUSTOMER where "+ whereClause
+            print(sql_select_query)
+            mycursor.execute(sql_select_query)
+            records = mycursor.fetchall()
+            for row_number, row_data in enumerate( records ):
+                self.Qtable_customer.insertRow( row_number )
 
+                for column_number, data in enumerate( row_data ):
+                    self.Qtable_customer.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
+            self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
-
-        if self.Rbtn_stsActive.isChecked():
-            if whereClause != '':
-                whereClause = whereClause + ' and '
-            whereClause = whereClause + 'POSC_STATUS = 1'
-        elif  self.Rbtn_stsInactive.isChecked():
-            if whereClause != '':
-                whereClause = whereClause + ' and '
-            whereClause = whereClause + 'POSC_STATUS = 0'
-
-        print(whereClause)
-        sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from POS_CUSTOMER where "+ whereClause
-        print(sql_select_query)
-        mycursor.execute(sql_select_query)
-        records = mycursor.fetchall()
-        for row_number, row_data in enumerate( records ):
-            self.Qtable_customer.insertRow( row_number )
-
-            for column_number, data in enumerate( row_data ):
-                self.Qtable_customer.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
-        self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-
-        mycursor.close()
+            mycursor.close()
 
     def FN_LOAD_MODIFY(self):
 
@@ -214,6 +241,7 @@ class CL_customer(QtWidgets.QDialog):
             self.msgBox.show()
             self.close()
         #Extracting number of rows
+
 
 
 

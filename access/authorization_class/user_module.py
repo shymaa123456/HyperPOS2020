@@ -34,4 +34,4 @@ class CL_userModule(object):
         records = mycursor.fetchall()
         #print(records)
         CL_userModule.myList = records
-        print(CL_userModule.myList)
+        #print(CL_userModule.myList)

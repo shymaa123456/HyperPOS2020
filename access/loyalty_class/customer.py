@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from PyQt5 import QtWidgets,QtCore
-from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QRegExpValidator ,QIntValidator
 from PyQt5.QtCore import QRegExp
@@ -27,12 +27,37 @@ class CL_customer(QtWidgets.QDialog):
     #     self.FN_GET_CustID()
     #     self.FN_GET_CUSTSTATUS()
     #     self.BTN_deactivateCustomer.clicked.connect(self.FN_DEACTIVATE_CUST)
+    def onClicked(self):
+        #radioButton = self.sender()
+        #print(radioButton.name)
+        if self.Rbtn_custTp.isChecked ():
+            self.CMB_loyalityType.setEnabled(True)
+            self.LE_custNo.setEnabled(False)
+
+            self.LE_custPhone.setEnabled(False)
+        elif self.Rbtn_custNo.isChecked ():
+            self.CMB_loyalityType.setEnabled(False)
+            self.LE_custNo.setEnabled(True)
+
+            self.LE_custPhone.setEnabled(False)
+
+        elif self.Rbtn_custPhone.isChecked ():
+            self.CMB_loyalityType.setEnabled(False)
+            self.LE_custNo.setEnabled(False)
+
+            self.LE_custPhone.setEnabled(True)
+
 
     def FN_LOAD_DISPLAY(self):
         filename = self.dirname + '/customer_display.ui'
         loadUi(filename, self)
         mycursor = self.conn.cursor()
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
+        self.Rbtn_custNo.clicked.connect(self.onClicked)
+        self.Rbtn_custTp.clicked.connect(self.onClicked)
+
+        self.Rbtn_custPhone.clicked.connect(self.onClicked)
+        self.FN_GET_CUSTTP()
         #check authorization
         for row_number, row_data in enumerate( CL_userModule.myList ):
            if  row_data[1] =='Display_Customer':
@@ -51,7 +76,48 @@ class CL_customer(QtWidgets.QDialog):
                          self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
 
     def FN_SEARCH_CUST(self):
-        self.FN_GET_CUSTTP()
+        print('in search')
+        self.Qtable_customer.clearcontents()
+        mycursor = self.conn.cursor()
+        whereClause =""
+        if self.Rbtn_custNo.isChecked ():
+            id= self.LE_custNo.text()
+
+            whereClause=" POSC_CUST_ID = '"+id+"'"
+        elif self.Rbtn_custTp .isChecked ():
+            type= self.CMB_loyalityType.currentText()
+            whereClause = " POSC_CUST_ID ='" + self.FN_GET_CUSTTP_ID(type) + "'"
+
+        elif self.Rbtn_custPhone.isChecked():
+
+            phone = self.LE_custPhone.text()
+            whereClause = " POSC_PHONE = '"+phone+"'"
+
+
+
+        if self.Rbtn_stsActive.isChecked():
+            if whereClause != '':
+                whereClause = whereClause + ' and '
+            whereClause = whereClause + 'POSC_STATUS = 1'
+        elif  self.Rbtn_stsInactive.isChecked():
+            if whereClause != '':
+                whereClause = whereClause + ' and '
+            whereClause = whereClause + 'POSC_STATUS = 0'
+
+        print(whereClause)
+        sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from POS_CUSTOMER where "+ whereClause
+        print(sql_select_query)
+        mycursor.execute(sql_select_query)
+        records = mycursor.fetchall()
+        for row_number, row_data in enumerate( records ):
+            self.Qtable_customer.insertRow( row_number )
+
+            for column_number, data in enumerate( row_data ):
+                self.Qtable_customer.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
+        self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
+        mycursor.close()
+
     def FN_LOAD_MODIFY(self):
 
         filename = self.dirname + '/modifyCustomer.ui'
@@ -266,6 +332,12 @@ class CL_customer(QtWidgets.QDialog):
         for row in records:
             self.CMB_loyalityType.addItems( [row[0]] )
 
+    def FN_GET_CUSTTP_ID(self,desc):
+        mycursor = self.conn.cursor()
+        mycursor.execute( "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+desc+"'" )
+        records = mycursor.fetchone()
+        mycursor.close()
+        return records[0]
     def FN_CREATE_CUST(self):
         #get customer data
 

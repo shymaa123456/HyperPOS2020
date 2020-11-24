@@ -34,52 +34,52 @@ class CL_main( QtWidgets.QMainWindow ):
 
         #print (CL_userModule.user_name)
         CL_userModule.loadPrivilages(self)
-        for row_number, row_data in enumerate( CL_userModule.myList ):
+        for row_number, row_data in enumerate(CL_userModule.myList):
             forms.append(row_data[1])
 
-        forms=list(dict.fromkeys(forms))
+        forms = list(dict.fromkeys(forms))
 
         print(forms)
         for row in forms:
             #print(row)
-            but_name= 'QAct_'+row
-            self.findChild( QObject, but_name ).setEnabled( True )
+            but_name = 'QAct_'+row
+            self.findChild(QObject, but_name).setEnabled(True)
 
-        self.QAct_Create_User.triggered.connect( self.FN_CREATE_USER )
-        self.QAct_Modify_User.triggered.connect( self.FN_MODIFY_USER )
-        self.QAct_Copy_User.triggered.connect( self.FN_COPY_USER )
-        self.QAct_Reset_User_Password.triggered.connect( self.FN_RESET_USER )
-        self.QAct_Assign_User_to_Roles.triggered.connect( self.FN_ASSIGN )
+        self.QAct_Create_User.triggered.connect(self.FN_CREATE_USER)
+        self.QAct_Modify_User.triggered.connect(self.FN_MODIFY_USER)
+        self.QAct_Copy_User.triggered.connect(self.FN_COPY_USER)
+        self.QAct_Reset_User_Password.triggered.connect(self.FN_RESET_USER)
+        self.QAct_Assign_User_to_Roles.triggered.connect(self.FN_ASSIGN)
         #print("hi")
-        self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
-        self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
-        self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE )
+        self.QAct_Create_Role.triggered.connect(self.FN_CREATE_ROLE)
+        self.QAct_Modify_Role.triggered.connect(self.FN_MODIFY_ROLE)
+        self.QAct_Copy_Role.triggered.connect(self.FN_COPY_ROLE)
 
         # self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
         # self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
         # self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
         self.QAct_Display_Customer.triggered.connect(self.FN_DISPLAY_CUST)
 
-        self.QAct_Create_CustGp.triggered.connect( self.FN_CREATE_CUSTGP )
-        self.QAct_Modify_CustGp.triggered.connect( self.FN_MODIFY_CUSTGP )
-        self.QAct_Deactivate_CustGp.triggered.connect( self.FN_MODIFY_CUSTGP )
+        self.QAct_Create_CustGp.triggered.connect(self.FN_CREATE_CUSTGP)
+        self.QAct_Modify_CustGp.triggered.connect(self.FN_MODIFY_CUSTGP)
+        self.QAct_Deactivate_CustGp.triggered.connect(self.FN_MODIFY_CUSTGP)
 
-        self.QAct_Create_CustTp.triggered.connect( self.FN_CREATE_CUSTTP )
-        self.QAct_Modify_CustTp.triggered.connect( self.FN_MODIFY_CUSTTP )
+        self.QAct_Create_CustTp.triggered.connect(self.FN_CREATE_CUSTTP)
+        self.QAct_Modify_CustTp.triggered.connect(self.FN_MODIFY_CUSTTP)
 
         #self.QAct_Cust_Upload_Data.triggered.connect(self.FN_UPLOAD_CUST)
 
-        self.QAct_Create_Privilage.triggered.connect( self.FN_CREATE_PRIV )
-        self.QAct_Create_Form.triggered.connect( self.FN_create_form )
-        self.QAct_Modify_Form.triggered.connect( self.FN_modify_form )
+        self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
+        self.QAct_Create_Form.triggered.connect( self.FN_create_form)
+        self.QAct_Modify_Form.triggered.connect(self.FN_modify_form)
 
-        self.QAct_Create_Form_Item.triggered.connect( self.FN_create_form_item )
-        self.QAct_Modify_Form_Item.triggered.connect( self.FN_modify_form_item )
+        self.QAct_Create_Form_Item.triggered.connect(self.FN_create_form_item)
+        self.QAct_Modify_Form_Item.triggered.connect(self.FN_modify_form_item)
 
 
         self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_promotion)
 
-        self.QAct_Exit.triggered.connect( self.FN_exit )
+        self.QAct_Exit.triggered.connect(self.FN_exit)
         self.setWindowTitle( 'HyperPOS Main Page' )
 
     def FN_CREATE_CUST(self):

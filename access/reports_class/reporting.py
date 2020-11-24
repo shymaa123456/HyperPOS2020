@@ -198,7 +198,7 @@ class CL_report(QtWidgets.QDialog):
 
     def FN_Check_Active(self):
         self.cond = 8
-        self.status=3
+        self.status=1
 
     def FN_Check_Stopped(self):
         self.cond = 9
@@ -320,7 +320,6 @@ class CL_report(QtWidgets.QDialog):
         self.Qcombo_promotion.setEnabled(False)
         self.Qline_promotion_2.setEnabled(False)
         self.Qbtn_print.clicked.connect(self.printpreviewDialog)
-
 class CL_controller():
     def __init__(self):
         pass

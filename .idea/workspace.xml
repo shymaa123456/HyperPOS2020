@@ -6,6 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="hossam 22/11/2020">
+      <change beforePath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_3.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
     </list>
@@ -28,6 +32,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1ggf8247w7dPnIMIzlx5ilHQUux" />
   <component name="ProjectLevelVcsManager">
@@ -523,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606219960048</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="hossam 22/11/2020">
+      <created>1606221694827</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1606221694827</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -602,6 +614,7 @@
     <MESSAGE value="validation" />
     <MESSAGE value="upload customer" />
     <MESSAGE value="hossam 16/11/2020" />
+    <MESSAGE value="hossam 24/11/2020" />
     <MESSAGE value="hossam 22/11/2020" />
     <option name="LAST_COMMIT_MESSAGE" value="hossam 22/11/2020" />
   </component>
@@ -628,25 +641,25 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1345" height="180" key="GridCell.Tab.0.bottom" timestamp="1606219815361">
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom" timestamp="1606221747143">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1606219815361" />
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1606221747143" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="180" key="GridCell.Tab.0.center" timestamp="1606219815361">
+    <state width="1345" height="180" key="GridCell.Tab.0.center" timestamp="1606221747143">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1606219815361" />
+    <state width="1345" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1606221747143" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="180" key="GridCell.Tab.0.left" timestamp="1606219815361">
+    <state width="1345" height="180" key="GridCell.Tab.0.left" timestamp="1606221747143">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1606219815361" />
+    <state width="1345" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1606221747143" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1345" height="180" key="GridCell.Tab.0.right" timestamp="1606219815361">
+    <state width="1345" height="180" key="GridCell.Tab.0.right" timestamp="1606221747143">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1606219815361" />
+    <state width="1345" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1606221747143" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
       <screen x="72" y="27" width="1294" height="741" />
@@ -664,22 +677,26 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1606219916475">
+    <state x="129" y="54" key="MergeDialog" timestamp="1606221723941">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606219916475" />
+    <state x="129" y="54" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606221723941" />
+    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1606221719129">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606221719129" />
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog" timestamp="1603720741209">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="184" y="8" key="SettingsEditor" timestamp="1606047378760">
+    <state x="184" y="8" key="SettingsEditor" timestamp="1606221739300">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606047378760" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1606219966238">
+    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606221739300" />
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1606221698030">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1606219966238" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1606221698030" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />

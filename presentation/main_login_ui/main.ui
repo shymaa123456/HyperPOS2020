@@ -244,9 +244,7 @@
      <property name="title">
       <string>بيانات العملاء</string>
      </property>
-     <addaction name="QAct_Create_Customer"/>
-     <addaction name="QAct_Modify_Customer"/>
-     <addaction name="QAct_Deactivate_Customer"/>
+     <addaction name="QAct_Display_Customer"/>
      <addaction name="separator"/>
      <addaction name="QAct_Cust_Upload_Data"/>
      <addaction name="separator"/>
@@ -1463,6 +1461,14 @@
   <action name="QAct_Exit">
    <property name="text">
     <string>خروج</string>
+   </property>
+  </action>
+  <action name="QAct_Display_Customer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>العملاء</string>
    </property>
   </action>
  </widget>

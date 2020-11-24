@@ -1,15 +1,16 @@
 from pathlib import Path
-from PyQt5 import QtWidgets,QtCore
-from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
+
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from PyQt5.uic import loadUi
+from PyQt5.QtGui import QRegExpValidator ,QIntValidator
+from PyQt5.QtCore import QRegExp
+
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 import xlrd
 from datetime import datetime
-import xlwt.Workbook
-
 class CL_customer(QtWidgets.QDialog):
-    switch_window = QtCore.pyqtSignal()
     dirname = ''
     def __init__(self):
         super(CL_customer, self).__init__()
@@ -18,140 +19,13 @@ class CL_customer(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
 
-    def onClickedCheckBox(self):
-        if self.chk_search_other.isChecked():
-            #self.Rbtn_custNo.setEnabled(True)
-            self.Rbtn_custNo.setChecked(True)
-            self.LE_custNo.setEnabled(True)
-        else:
-            self.Rbtn_custNo.setChecked(False)
-            self.LE_custNo.setEnabled(False)
-
-        if self.chk_search_status.isChecked():
-            #self.Rbtn_stsAll.setEnabled(True)
-            self.Rbtn_stsAll.setChecked(True)
-        else :
-            self.Rbtn_stsAll.setChecked(False)
-    def onClicked(self):
-        #radioButton = self.sender()
-        #print(radioButton.name)
-        if self.Rbtn_custTp.isChecked ():
-            self.CMB_loyalityType.setEnabled(True)
-            self.LE_custNo.setEnabled(False)
-
-            self.LE_custPhone.setEnabled(False)
-        elif self.Rbtn_custNo.isChecked ():
-            self.CMB_loyalityType.setEnabled(False)
-            self.LE_custNo.setEnabled(True)
-
-            self.LE_custPhone.setEnabled(False)
-
-        elif self.Rbtn_custPhone.isChecked ():
-            self.CMB_loyalityType.setEnabled(False)
-            self.LE_custNo.setEnabled(False)
-
-            self.LE_custPhone.setEnabled(True)
-
-
-    def FN_LOAD_DISPLAY(self):
-        filename = self.dirname + '/customer_display.ui'
+    def FN_LOAD_DEACTIVATE(self):
+        filename = self.dirname + '/deactivateCustomer.ui'
         loadUi(filename, self)
-        mycursor = self.conn.cursor()
-        self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
-        self.Qbtn_export.clicked.connect(self.FN_SAVE_CUST)
-        self.Rbtn_custNo.clicked.connect(self.onClicked)
-        self.Rbtn_custTp.clicked.connect(self.onClicked)
-
-        self.Rbtn_custPhone.clicked.connect(self.onClicked)
-        self.chk_search_other.clicked.connect(self.onClickedCheckBox)
-        self.chk_search_status.clicked.connect(self.onClickedCheckBox)
-        self.FN_GET_CUSTTP()
-        #check authorization
-        for row_number, row_data in enumerate( CL_userModule.myList ):
-           if  row_data[1] =='Display_Customer':
-               if row_data[4] =='None':
-                print('hh')
-               else:
-                   sql_select_query = "select  i.ITEM_DESC from SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
-                   x = (row_data[4],)
-                   mycursor.execute(sql_select_query, x)
-                   result = mycursor.fetchone()
-                   if result[0] == 'create' :
-                        self.Qbtn_create.clicked.connect(self.FN_CR_CUST)
-                   elif result[0] == 'modify':
-                         self.Qbtn_modify.clicked.connect(self.FN_MD_CUST)
-                   elif result[0] == 'upload':
-                         self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
-
-    def FN_SAVE_CUST(self):
-
-        filename = QFileDialog.getSaveFileName(self, "Save File", '', "(*.xls)")
-        print(filename)
-
-        wb = xlwt.Workbook()
-
-        # add_sheet is used to create sheet.
-        sheet = wb.add_sheet('Sheet 1')
-
-        for currentColumn in range(self.Qtable_customer.columnCount()):
-            for currentRow in range(self.Qtable_customer.rowCount()):
-                teext = str(self.Qtable_customer.item(currentRow, currentColumn).text())
-                sheet.write(currentRow, currentColumn, teext)
-        #wb.save('test11.xls')
-        wb.save( str(filename[0]))
-        wb.close()
-    def FN_SEARCH_CUST(self):
-        print('in search')
-        #self.Qtable_customer.clearcontents()
-        for i in reversed(range(self.Qtable_customer.rowCount())):
-            self.Qtable_customer.removeRow(i)
-
-
-        mycursor = self.conn.cursor()
-        whereClause =""
-        if self.chk_search_other.isChecked():
-            if self.Rbtn_custNo.isChecked ():
-                id= self.LE_custNo.text()
-                whereClause=" POSC_CUST_ID = '"+id+"'"
-
-            elif self.Rbtn_custTp .isChecked ():
-                type= self.CMB_loyalityType.currentText()
-                whereClause = " LOYCT_TYPE_ID ='" + self.FN_GET_CUSTTP_ID(type) + "'"
-
-            elif self.Rbtn_custPhone.isChecked():
-                phone = self.LE_custPhone.text()
-                whereClause = " POSC_PHONE = '"+phone+"'"
-
-        if self.chk_search_status.isChecked():
-            if self.Rbtn_stsActive.isChecked():
-                if whereClause != '':
-                    whereClause = whereClause + ' and '
-                whereClause = whereClause + 'POSC_STATUS = 1'
-            elif  self.Rbtn_stsInactive.isChecked():
-                if whereClause != '':
-                    whereClause = whereClause + ' and '
-                whereClause = whereClause + 'POSC_STATUS = 0'
-            elif  self.Rbtn_stsAll.isChecked():
-                if whereClause != '':
-                    whereClause = whereClause + ' and '
-                whereClause = whereClause + 'POSC_STATUS in ( 0,1)'
-        if self.chk_search_status.isChecked()==False and  self.chk_search_other.isChecked()==False:
-            QtWidgets.QMessageBox.warning(self, "Error", "أختر أي من محدادات البحث")
-        else:
-            print(whereClause)
-            sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from POS_CUSTOMER where "+ whereClause
-            print(sql_select_query)
-            mycursor.execute(sql_select_query)
-            records = mycursor.fetchall()
-            for row_number, row_data in enumerate( records ):
-                self.Qtable_customer.insertRow( row_number )
-
-                for column_number, data in enumerate( row_data ):
-                    self.Qtable_customer.setItem( row_number, column_number, QTableWidgetItem( str( data ) ) )
-            self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-
-            mycursor.close()
-
+        self.FN_GET_CUSTOMERS()
+        self.FN_GET_CustID()
+        self.FN_GET_CUSTSTATUS()
+        self.BTN_deactivateCustomer.clicked.connect(self.FN_DEACTIVATE_CUST)
     def FN_LOAD_MODIFY(self):
 
         filename = self.dirname + '/modifyCustomer.ui'
@@ -251,7 +125,6 @@ class CL_customer(QtWidgets.QDialog):
 
 
 
-
     def FN_GET_CUSTOMERS(self):
 
         mycursor = self.conn.cursor()
@@ -326,21 +199,6 @@ class CL_customer(QtWidgets.QDialog):
         mycursor.close()
 
 
-    def FN_CR_CUST(self,funct):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_CREATE()
-        self.window_two.show()
-
-    def FN_MD_CUST(self, funct):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_MODIFY()
-        self.window_two.show()
-
-    def FN_UP_CUST(self, funct):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_UPLOAD()
-        self.window_two.show()
-
 
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createCustomer.ui'
@@ -367,12 +225,6 @@ class CL_customer(QtWidgets.QDialog):
         for row in records:
             self.CMB_loyalityType.addItems( [row[0]] )
 
-    def FN_GET_CUSTTP_ID(self,desc):
-        mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+desc+"'" )
-        records = mycursor.fetchone()
-        mycursor.close()
-        return records[0]
     def FN_CREATE_CUST(self):
         #get customer data
 

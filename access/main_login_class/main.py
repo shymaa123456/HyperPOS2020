@@ -5,6 +5,8 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.reports_class.reporting import CL_report
+
 from access.authorization_class.Role import CL_role
 from access.authorization_class.branch import CL_branch
 from access.authorization_class.form import CL_form
@@ -16,6 +18,7 @@ from access.authorization_class.user_module import CL_userModule
 from access.loyalty_class.customer import CL_customer
 from access.loyalty_class.customerGP import CL_customerGP
 from access.loyalty_class.customerType import CL_customerTP
+
 
 class CL_main( QtWidgets.QMainWindow ):
     switch_window = QtCore.pyqtSignal()
@@ -29,7 +32,7 @@ class CL_main( QtWidgets.QMainWindow ):
         filename = dirname + '/main.ui'
         loadUi( filename, self )
 
-        print (CL_userModule.user_name)
+        #print (CL_userModule.user_name)
         CL_userModule.loadPrivilages(self)
         for row_number, row_data in enumerate( CL_userModule.myList ):
             forms.append(row_data[1])
@@ -47,14 +50,15 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Copy_User.triggered.connect( self.FN_COPY_USER )
         self.QAct_Reset_User_Password.triggered.connect( self.FN_RESET_USER )
         self.QAct_Assign_User_to_Roles.triggered.connect( self.FN_ASSIGN )
-        print("hi")
+        #print("hi")
         self.QAct_Create_Role.triggered.connect( self.FN_CREATE_ROLE )
         self.QAct_Modify_Role.triggered.connect( self.FN_MODIFY_ROLE )
         self.QAct_Copy_Role.triggered.connect( self.FN_COPY_ROLE )
 
-        self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
-        self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
-        self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
+        # self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
+        # self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
+        # self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
+        self.QAct_Display_Customer.triggered.connect(self.FN_DISPLAY_CUST)
 
         self.QAct_Create_CustGp.triggered.connect( self.FN_CREATE_CUSTGP )
         self.QAct_Modify_CustGp.triggered.connect( self.FN_MODIFY_CUSTGP )
@@ -63,7 +67,7 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Create_CustTp.triggered.connect( self.FN_CREATE_CUSTTP )
         self.QAct_Modify_CustTp.triggered.connect( self.FN_MODIFY_CUSTTP )
 
-        self.QAct_Cust_Upload_Data.triggered.connect(self.FN_UPLOAD_CUST)
+        #self.QAct_Cust_Upload_Data.triggered.connect(self.FN_UPLOAD_CUST)
 
         self.QAct_Create_Privilage.triggered.connect( self.FN_CREATE_PRIV )
         self.QAct_Create_Form.triggered.connect( self.FN_create_form )
@@ -73,6 +77,8 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Modify_Form_Item.triggered.connect( self.FN_modify_form_item )
 
 
+        self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_promotion)
+
         self.QAct_Exit.triggered.connect( self.FN_exit )
         self.setWindowTitle( 'HyperPOS Main Page' )
 
@@ -81,7 +87,10 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two.FN_LOAD_CREATE()
         self.window_two.show()
 
-
+    def FN_DISPLAY_CUST(self):
+        self.window_two = CL_customer()
+        self.window_two.FN_LOAD_DISPLAY()
+        self.window_two.show()
 
     def FN_MODIFY_CUST(self):
         self.window_two = CL_customer()
@@ -209,5 +218,10 @@ class CL_main( QtWidgets.QMainWindow ):
     def FN_modify_form_item(self):
         self.window_two = CL_formItem()
         self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
+
+    def FN_search_promotion(self):
+        self.window_two = CL_report()
         self.window_two.show()
 

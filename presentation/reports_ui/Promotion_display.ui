@@ -654,6 +654,9 @@ background-color: rgb(198, 207, 199);</string>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QPushButton" name="Qbtn_search">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -661,14 +664,28 @@ background-color: rgb(198, 207, 199);</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true"> background-color: green;
+         <string notr="true"> QPushButton{
+background-color: green;
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
     border-color: beige;
     font: bold 14px;
     min-width: 10em;
-    padding: 6px;</string>
+    padding: 6px;}
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
         </property>
         <property name="text">
          <string>بحث</string>
@@ -684,14 +701,27 @@ background-color: rgb(198, 207, 199);</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true"> background-color: green;
+         <string notr="true"> QPushButton{background-color: green;
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
     border-color: beige;
     font: bold 14px;
     min-width: 10em;
-    padding: 6px;</string>
+    padding: 6px;}
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
         </property>
         <property name="text">
          <string>طباعة</string>
@@ -715,14 +745,27 @@ background-color: rgb(198, 207, 199);</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true"> background-color: green;
+         <string notr="true"> QPushButton{background-color: green;
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
     border-color: beige;
     font: bold 14px;
     min-width: 10em;
-    padding: 6px;</string>
+    padding: 6px;}
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
         </property>
         <property name="text">
          <string>تصدير</string>
@@ -746,14 +789,27 @@ background-color: rgb(198, 207, 199);</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true"> background-color: red;
+         <string notr="true"> QPushButton{background-color: red;
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
     border-color: beige;
     font: bold 14px;
     min-width: 10em;
-    padding: 6px;</string>
+    padding: 6px;}
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
         </property>
         <property name="text">
          <string>خروج</string>

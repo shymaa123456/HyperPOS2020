@@ -7,35 +7,18 @@ Created on Mon Jun 29 19:52:06 2020
 """
 
 #####
-import csv
-import os
-import sys
+
 import pandas as pd
-import numpy as np
-#from appdirs import unicode
-from pandas.tests.io.excel.test_xlwt import xlwt
-from mysql.connector import Error
-
-import mysql.connector
 from access.reports_class.ReportPDF import body, Text
-from Validation.Validation import CL_validation
-import tempfile
 from pathlib import Path
-
-from PIL.ImageQt import ImageQt
-from PyQt5 import QtCore, QtWidgets, QtPrintSupport, Qt
 
 from PyQt5 import QtCore, QtGui
 from PyQt5 import QtWidgets
-from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog
 from PyQt5.uic import loadUi
-#from pdf2image import convert_from_path
 
 from data_connection.h1pos import db1
 import sys
-from PyQt5.QtPrintSupport import QPrintDialog, QPrinter, QPrintPreviewDialog
-from PyQt5.Qt import QFileInfo
 class CL_report(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     cond=0
@@ -231,8 +214,7 @@ class CL_report(QtWidgets.QDialog):
 
     def handleSave(self):
 
-        connection = mysql.connector.connect(host='localhost', database='Hyper1_Retail'
-                                             , user='root', port='3306')
+
         frame = pd.read_sql(str(self.query),self.conn)
         df = pd.DataFrame(frame,columns=['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
 
@@ -300,6 +282,7 @@ class CL_report(QtWidgets.QDialog):
 
     def __init__(self):
         super(CL_report, self).__init__()
+
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
         dirname = mod_path.__str__() + '/presentation/reports_ui'

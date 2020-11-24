@@ -2,7 +2,6 @@ import mysql
 
 from access.reports_class.WeasypayPDFFile import FooterCanvas,Foo
 
-from reportlab.pdfgen import canvas
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, PageBreak)
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle,Spacer
@@ -12,23 +11,16 @@ from reportlab.lib.pagesizes import LETTER,A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import pandas as pd
-import numpy as np
-import textwrap
-import sys
+
 from mysql.connector import Error
 
 import mysql.connector
 
 from reportlab.lib import colors
-from sqlalchemy import create_engine
-#import pymysql
-from reportlab.graphics import renderPDF
-from reportlab.graphics.barcode.eanbc import Ean13BarcodeWidget
+
 from reportlab.graphics.shapes import Drawing,Line
-from reportlab.platypus import Flowable
 import arabic_reshaper
-#from fpdf import FPDF
-from datetime import datetime
+
 from bidi.algorithm import get_display
 from Validation.Validation import CL_validation
 

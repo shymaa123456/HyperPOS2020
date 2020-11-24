@@ -1,16 +1,13 @@
 from pathlib import Path
-
 from PyQt5 import QtWidgets,QtCore
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
 from PyQt5.uic import loadUi
-from PyQt5.QtGui import QRegExpValidator ,QIntValidator
-from PyQt5.QtCore import QRegExp
-
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 import xlrd
-import xlsxwriter
 from datetime import datetime
+import xlwt.Workbook
+
 class CL_customer(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
@@ -21,13 +18,20 @@ class CL_customer(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
 
-    # def FN_LOAD_DEACTIVATE(self):
-    #     filename = self.dirname + '/deactivateCustomer.ui'
-    #     loadUi(filename, self)
-    #     self.FN_GET_CUSTOMERS()
-    #     self.FN_GET_CustID()
-    #     self.FN_GET_CUSTSTATUS()
-    #     self.BTN_deactivateCustomer.clicked.connect(self.FN_DEACTIVATE_CUST)
+    def onClickedCheckBox(self):
+        if self.chk_search_other.isChecked():
+            #self.Rbtn_custNo.setEnabled(True)
+            self.Rbtn_custNo.setChecked(True)
+            self.LE_custNo.setEnabled(True)
+        else:
+            self.Rbtn_custNo.setChecked(False)
+            self.LE_custNo.setEnabled(False)
+
+        if self.chk_search_status.isChecked():
+            #self.Rbtn_stsAll.setEnabled(True)
+            self.Rbtn_stsAll.setChecked(True)
+        else :
+            self.Rbtn_stsAll.setChecked(False)
     def onClicked(self):
         #radioButton = self.sender()
         #print(radioButton.name)
@@ -59,6 +63,8 @@ class CL_customer(QtWidgets.QDialog):
         self.Rbtn_custTp.clicked.connect(self.onClicked)
 
         self.Rbtn_custPhone.clicked.connect(self.onClicked)
+        self.chk_search_other.clicked.connect(self.onClickedCheckBox)
+        self.chk_search_status.clicked.connect(self.onClickedCheckBox)
         self.FN_GET_CUSTTP()
         #check authorization
         for row_number, row_data in enumerate( CL_userModule.myList ):
@@ -79,20 +85,21 @@ class CL_customer(QtWidgets.QDialog):
 
     def FN_SAVE_CUST(self):
 
-        filename = QFileDialog.getSaveFileName(self, 'Save File', " "'.xlsx','(*.xlsx)')
-        from xlwt import Workbook
-        if filename:
-            wb = Workbook()
+        filename = QFileDialog.getSaveFileName(self, "Save File", '', "(*.xls)")
+        print(filename)
 
-            # add_sheet is used to create sheet.
-            sheet = wb.add_sheet('Sheet 1')
+        wb = xlwt.Workbook()
 
-            for currentColumn in range(self.Qtable_customer.columnCount()):
-                for currentRow in range(self.Qtable_customer.rowCount()):
-                    teext = str(self.Qtable_customer.item(currentRow, currentColumn).text())
-                    sheet.write(currentRow, currentColumn, teext)
-            wb.save(filename)
-            #wb.close()
+        # add_sheet is used to create sheet.
+        sheet = wb.add_sheet('Sheet 1')
+
+        for currentColumn in range(self.Qtable_customer.columnCount()):
+            for currentRow in range(self.Qtable_customer.rowCount()):
+                teext = str(self.Qtable_customer.item(currentRow, currentColumn).text())
+                sheet.write(currentRow, currentColumn, teext)
+        #wb.save('test11.xls')
+        wb.save( str(filename[0]))
+        wb.close()
     def FN_SEARCH_CUST(self):
         print('in search')
         #self.Qtable_customer.clearcontents()

@@ -5,7 +5,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="hh" />
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="hossam 22/11/2020">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,10 +21,12 @@
       </list>
     </option>
   </component>
-  <component name="Git.Pull.Settings">
-    <option name="BRANCH" value="master" />
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ggf8247w7dPnIMIzlx5ilHQUux" />
@@ -37,18 +42,20 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
-    <property name="settings.editor.selected.configurable" value="vcs.Mercurial" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/presentation/reports_ui" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hossam\PycharmProjects\HyperPOS2020\presentation\reports_ui" />
+      <recent name="C:\Users\Hossam\PycharmProjects\HyperPOS2020\access\reports_class" />
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
       <recent name="$PROJECT_DIR$/data_connection" />
       <recent name="$PROJECT_DIR$/presentation/voucher_ui" />
-      <recent name="$PROJECT_DIR$/presentation/reports_ui" />
-      <recent name="$PROJECT_DIR$/presentation/promotion_ui" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hossam\PycharmProjects\HyperPOS2020\access\reports_class" />
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
@@ -102,9 +109,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Hossam\anaconda3\envs\HyperPOS2020\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/main_login_class" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/main_login_class/login.py" />
@@ -116,7 +123,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -124,11 +131,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/promotion_class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/reports_class" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/promotion_class/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/reports_class/model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -137,20 +144,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for testt.Test" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="reporting" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/authorization_class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/reports_class" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;testt.Test&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/reports_class/reporting.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="pytest in testt.py" type="tests" factoryName="py.test" nameIsGenerated="true">
@@ -173,24 +185,21 @@
       <item itemvalue="Python.Validation" />
       <item itemvalue="Python.hello" />
       <item itemvalue="Python.login" />
-      <item itemvalue="Python.test" />
-      <item itemvalue="Python tests.pytest for testt.Test" />
+      <item itemvalue="Python.model" />
+      <item itemvalue="Python.reporting" />
       <item itemvalue="Python tests.pytest in testt.py" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
-        <item itemvalue="Python.test" />
+        <item itemvalue="Python.reporting" />
+        <item itemvalue="Python.model" />
         <item itemvalue="Python.Validation" />
         <item itemvalue="Python.hello" />
-        <item itemvalue="Python tests.pytest for testt.Test" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="" />
@@ -465,43 +474,56 @@
       <option name="project" value="LOCAL" />
       <updated>1605185580815</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٣٩" summary="Merge remote-tracking branch 'origin/master'">
-      <created>1605776313986</created>
-      <option name="number" value="LOCAL؜٠٠٠٣٩" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٣٩" />
-      <updated>1605776313986</updated>
+    <task id="LOCAL-00039" summary="hossam 16/11/2020">
+      <created>1605534208344</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1605534208345</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٤٠" summary="Merge remote-tracking branch 'origin/master'">
-      <created>1605776353763</created>
-      <option name="number" value="LOCAL؜٠٠٠٤٠" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٤٠" />
-      <updated>1605776353763</updated>
+    <task id="LOCAL-00040" summary="hossam 16/11/2020">
+      <created>1606056066278</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1606056066278</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٤١" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml&#10;#&#9;.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_.xml&#10;#&#9;.idea/workspace.xml">
-      <created>1606217504257</created>
-      <option name="number" value="LOCAL؜٠٠٠٤١" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٤١" />
-      <updated>1606217504257</updated>
+    <task id="LOCAL-00041" summary="hossam 22/11/2020">
+      <created>1606063085266</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1606063085266</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٤٢" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml&#10;#&#9;.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_.xml&#10;#&#9;.idea/workspace.xml">
-      <created>1606217510869</created>
-      <option name="number" value="LOCAL؜٠٠٠٤٢" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٤٢" />
-      <updated>1606217510869</updated>
+    <task id="LOCAL-00042" summary="hossam 22/11/2020">
+      <created>1606149277648</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1606149277648</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٤٣" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml&#10;#&#9;.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_.xml&#10;#&#9;.idea/workspace.xml">
-      <created>1606218467567</created>
-      <option name="number" value="LOCAL؜٠٠٠٤٣" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٤٣" />
-      <updated>1606218467567</updated>
+    <task id="LOCAL-00043" summary="hossam 22/11/2020">
+      <created>1606208167237</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1606208167237</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٤٤" summary="hh">
-      <created>1606220623860</created>
-      <option name="number" value="LOCAL؜٠٠٠٤٤" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٤٤" />
-      <updated>1606220623860</updated>
+    <task id="LOCAL-00044" summary="hossam 22/11/2020">
+      <created>1606219863887</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1606219863887</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="hossam 22/11/2020">
+      <created>1606219960048</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1606219960048</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -579,88 +601,85 @@
     <MESSAGE value="Create customer 7type&#10;modify customer type" />
     <MESSAGE value="validation" />
     <MESSAGE value="upload customer" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml&#10;#&#9;.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_.xml&#10;#&#9;.idea/workspace.xml" />
-    <MESSAGE value="hh" />
-    <option name="LAST_COMMIT_MESSAGE" value="hh" />
+    <MESSAGE value="hossam 16/11/2020" />
+    <MESSAGE value="hossam 22/11/2020" />
+    <option name="LAST_COMMIT_MESSAGE" value="hossam 22/11/2020" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604236813970">
-      <screen x="72" y="27" width="1294" height="741" />
-    </state>
-    <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1604236813970" />
-    <state x="106" y="98" width="1155" height="532" key="DiffContextDialog" timestamp="1605776613769">
+    <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605524782803">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="106" y="98" width="1155" height="532" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1605776613769" />
+    <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1605524782803" />
+    <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1604236813970" />
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605533203238">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1605533203238" />
+    <state x="429" y="218" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1605537257273">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="429" y="218" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1605537257273" />
+    <state x="106" y="98" width="1155" height="532" key="DiffContextDialog" timestamp="1605537461551">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="106" y="98" width="1155" height="532" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1605537461551" />
     <state x="172" y="127" width="1094" height="541" key="DiffContextDialog/72.27.1294.741@72.27.1294.741" timestamp="1603721119801" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl" timestamp="1603720751348">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1345" height="136" key="GridCell.Tab.0.bottom" timestamp="1606220730599">
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom" timestamp="1606219815361">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="136" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1606220730599" />
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1606219815361" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="136" key="GridCell.Tab.0.center" timestamp="1606220730599">
+    <state width="1345" height="180" key="GridCell.Tab.0.center" timestamp="1606219815361">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="136" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1606220730599" />
+    <state width="1345" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1606219815361" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="136" key="GridCell.Tab.0.left" timestamp="1606220730599">
+    <state width="1345" height="180" key="GridCell.Tab.0.left" timestamp="1606219815361">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="136" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1606220730599" />
+    <state width="1345" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1606219815361" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1345" height="136" key="GridCell.Tab.0.right" timestamp="1606220730599">
+    <state width="1345" height="180" key="GridCell.Tab.0.right" timestamp="1606219815361">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="136" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1606220730599" />
+    <state width="1345" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1606219815361" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="223" key="GridCell.Tab.1.bottom" timestamp="1605984580762">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1271" height="17" key="GridCell.Tab.1.bottom" timestamp="1604399627859">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605984580762" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1345" height="223" key="GridCell.Tab.1.center" timestamp="1605984580762">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1271" height="17" key="GridCell.Tab.1.center" timestamp="1604399627859">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1605984580762" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1345" height="223" key="GridCell.Tab.1.left" timestamp="1605984580762">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1271" height="17" key="GridCell.Tab.1.left" timestamp="1604399627858">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1605984580762" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1345" height="223" key="GridCell.Tab.1.right" timestamp="1605984580762">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1271" height="17" key="GridCell.Tab.1.right" timestamp="1604399627859">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1605984580762" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state x="129" y="55" key="MergeDialog" timestamp="1606217493443">
+    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1606219916475">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="55" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606217493443" />
-    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1606217489545">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606217489545" />
+    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606219916475" />
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog" timestamp="1603720741209">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1606220688172">
+    <state x="184" y="8" key="SettingsEditor" timestamp="1606047378760">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606220688172" />
-    <state x="470" y="80" key="VCS.ChangeListViewerDialog" timestamp="1605776338415">
+    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606047378760" />
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1606219966238">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="470" y="80" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1605776338415" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605185588804">
-      <screen x="72" y="27" width="1294" height="741" />
-    </state>
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1606219966238" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
@@ -678,23 +697,18 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/72.27.1294.741@72.27.1294.741" timestamp="1598789128767" />
-    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606220456538">
+    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606219941286">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1606220456538" />
+    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1606219941286" />
     <state x="500" y="312" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1294.741@72.27.1294.741" timestamp="1601991488853" />
-    <state x="458" y="265" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1606220724921">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="458" y="265" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1366.728@0.0.1366.728" timestamp="1606220724921" />
     <state x="551" y="183" width="325" height="436" key="refactoring.ChangeSignatureDialog" timestamp="1598870908090">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="551" y="183" width="325" height="436" key="refactoring.ChangeSignatureDialog/72.27.1294.741@72.27.1294.741" timestamp="1598870908090" />
-    <state x="327" y="61" width="710" height="667" key="search.everywhere.popup" timestamp="1605884281076">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="382" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1604406788152">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state x="327" y="61" width="710" height="667" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1605884281076" />
     <state x="382" y="89" width="672" height="678" key="search.everywhere.popup/72.27.1294.741@72.27.1294.741" timestamp="1604406788152" />
   </component>
 </project>

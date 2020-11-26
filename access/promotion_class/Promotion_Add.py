@@ -28,7 +28,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.FN_GET_promotion_sponser()
         self.FN_GET_promotion_type()
 
-        # self.BTN_createUser.clicked.connect(self.FN_CREATE_USER)
+
 
     def FN_GET_Company(self):
         self.conn = db1.connect()
@@ -39,7 +39,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_company.addItems( row )
         mycursor.close()
-
     def FN_GET_Branch(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -49,7 +48,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_branch.addItems( row )
         mycursor.close()
-
     def FN_GET_CustomerGroup(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -59,7 +57,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_cust_group.addItems( row )
         mycursor.close()
-
     def FN_GET_MAGAZINE(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -69,7 +66,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_magazine.addItems( row )
         mycursor.close()
-
     def FN_GET_department(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -79,7 +75,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_sponsor_2.addItems( row )
         mycursor.close()
-
     def FN_GET_promotion_sponser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -89,7 +84,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_sponsor.addItems( row )
         mycursor.close()
-
     def FN_GET_promotion_type(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()

@@ -3,6 +3,8 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.uic import loadUi
 from data_connection.h1pos import db1
 
+from access.main_login_class.main import *
+
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
@@ -68,9 +70,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         filename = self.dirname + '/Promotion_create.ui'
         loadUi(filename, self)
 
-
-
-
         self.FN_GET_Company()
         self.FN_GET_Branch()
         self.FN_GET_CustomerGroup()
@@ -110,6 +109,9 @@ class CL_create_promotion(QtWidgets.QDialog):
         mycursor.close()
 
         #  self.Qcombo_cust_group = CheckableComboBox(self)
+
+
+
 
     def FN_GET_MAGAZINE(self):
         self.conn = db1.connect()

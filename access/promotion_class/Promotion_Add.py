@@ -193,6 +193,13 @@ class CL_create_promotion(QtWidgets.QDialog):
 
         loadUi(filename, self)
 
+        """ checked combobox sample """
+        self.Qcombo_cust_group2 = CheckableComboBox(self)
+        self.Qcombo_cust_group2.setGeometry(400, 79, 179, 18)
+        self.Qcombo_cust_group2.setLayoutDirection(Qt.RightToLeft)
+        # self.Qcombo_cust_group2.lineEdit().setAlignment(Qt.AlignRight)
+
+
         self.FN_GET_Company()
         self.FN_GET_Branch()
         self.FN_GET_CustomerGroup()
@@ -228,10 +235,12 @@ class CL_create_promotion(QtWidgets.QDialog):
         records = mycursor.fetchall()
         print(records)
 
-        # self.Qcombo_cust_group  = CheckableComboBox(self)
+
+
 
         for row in records:
             self.Qcombo_cust_group.addItems(row)
+            self.Qcombo_cust_group2.addItems(row)
         mycursor.close()
 
 

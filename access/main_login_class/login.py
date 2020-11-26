@@ -104,7 +104,7 @@ class CL_controller():
         self.window = CL_main()
 
         self.login.close()
-        self.window.show()
+        self.window.showMaximized()
 def main():
     app = QtWidgets.QApplication(sys.argv)
     controller = CL_controller()

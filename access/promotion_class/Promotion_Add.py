@@ -21,7 +21,12 @@ class CL_create_promotion(QtWidgets.QDialog):
         loadUi(filename, self)
 
         self.FN_GET_Company()
-
+        self.FN_GET_Branch()
+        self.FN_GET_CustomerGroup()
+        self.FN_GET_MAGAZINE()
+        self.FN_GET_department()
+        self.FN_GET_promotion_sponser()
+        self.FN_GET_promotion_type()
 
         # self.BTN_createUser.clicked.connect(self.FN_CREATE_USER)
 
@@ -35,5 +40,63 @@ class CL_create_promotion(QtWidgets.QDialog):
             self.Qcombo_company.addItems( row )
         mycursor.close()
 
+    def FN_GET_Branch(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute( "SELECT BRANCH_DESC_A FROM BRANCH" )
+        records = mycursor.fetchall()
+        print(records)
+        for row in records:
+            self.Qcombo_branch.addItems( row )
+        mycursor.close()
 
+    def FN_GET_CustomerGroup(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute( "SELECT CG_DESC FROM CUSTOMER_GROUP" )
+        records = mycursor.fetchall()
+        print(records)
+        for row in records:
+            self.Qcombo_cust_group.addItems( row )
+        mycursor.close()
+
+    def FN_GET_MAGAZINE(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute( "SELECT MAGAZINE_DESC FROM MAGAZINE" )
+        records = mycursor.fetchall()
+        print(records)
+        for row in records:
+            self.Qcombo_magazine.addItems( row )
+        mycursor.close()
+
+    def FN_GET_department(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute( "SELECT DEPARTMENT_DESC FROM DEPARTMENT" )
+        records = mycursor.fetchall()
+        print(records)
+        for row in records:
+            self.Qcombo_sponsor_2.addItems( row )
+        mycursor.close()
+
+    def FN_GET_promotion_sponser(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute( "SELECT SPONSER_NAME FROM SPONSER" )
+        records = mycursor.fetchall()
+        print(records)
+        for row in records:
+            self.Qcombo_sponsor.addItems( row )
+        mycursor.close()
+
+    def FN_GET_promotion_type(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute( "SELECT PROMT_NAME_AR FROM PROMOTION_TYPE order by PROMOTION_TYPE_ID*1 " )
+        records = mycursor.fetchall()
+        print(records)
+        for row in records:
+            self.Qcombo_promotion.addItems( row )
+        mycursor.close()
 

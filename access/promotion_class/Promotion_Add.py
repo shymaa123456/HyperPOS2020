@@ -1,13 +1,11 @@
 from pathlib import Path
-
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.uic import loadUi
-
 from data_connection.h1pos import db1
 
-
 class CL_create_promotion(QtWidgets.QDialog):
-
+    switch_window = QtCore.pyqtSignal()
+    dirname = ''
     def __init__(self):
         super(CL_create_promotion, self).__init__()
 

@@ -19,6 +19,10 @@ from access.loyalty_class.customer import CL_customer
 from access.loyalty_class.customerGP import CL_customerGP
 from access.loyalty_class.customerType import CL_customerTP
 
+# Promotion
+from access.promotion_class.Promotion_Add import CL_create_promotion
+
+
 
 class CL_main( QtWidgets.QMainWindow ):
     switch_window = QtCore.pyqtSignal()
@@ -76,11 +80,14 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Create_Form_Item.triggered.connect(self.FN_create_form_item)
         self.QAct_Modify_Form_Item.triggered.connect(self.FN_modify_form_item)
 
-
-        self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_promotion)
+        """ Promotion """
+        self.QAct_Prom_Add.triggered.connect(self.FN_search_promotion)
 
         self.QAct_Exit.triggered.connect(self.FN_exit)
-        self.setWindowTitle( 'HyperPOS Main Page' )
+        self.setWindowTitle('HyperPOS Main Page')
+
+
+
 
     def FN_CREATE_CUST(self):
         self.window_two = CL_customer()
@@ -220,8 +227,9 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two.FN_LOAD_MODIFY()
         self.window_two.show()
 
-
+    """ Promotion """
     def FN_search_promotion(self):
-        self.window_two = CL_report()
+        self.window_two = CL_create_promotion()
+        self.window_two.FN_LOAD_CREATE_PROM()
         self.window_two.show()
 

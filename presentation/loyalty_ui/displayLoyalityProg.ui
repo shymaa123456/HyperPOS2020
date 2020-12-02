@@ -173,19 +173,6 @@ background-color: rgb(198, 207, 199);</string>
       <string>اسم البرنامج</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>50</y>
-       <width>112</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>وصف البرنامج</string>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
@@ -193,16 +180,6 @@ background-color: rgb(198, 207, 199);</string>
        <y>10</y>
        <width>201</width>
        <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QTextEdit" name="textEdit">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>201</width>
-       <height>61</height>
       </rect>
      </property>
     </widget>
@@ -348,7 +325,7 @@ background-color: rgb(198, 207, 199);</string>
        <x>10</x>
        <y>10</y>
        <width>91</width>
-       <height>83</height>
+       <height>112</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -362,7 +339,7 @@ background-color: rgb(198, 207, 199);</string>
       <item>
        <widget class="QPushButton" name="Qbtn_save">
         <property name="text">
-         <string>حفظ </string>
+         <string>تعديل</string>
         </property>
        </widget>
       </item>
@@ -586,17 +563,32 @@ background-color: rgb(198, 207, 199);</string>
      <widget class="QTableWidget" name="Qtable_promotion">
       <column>
        <property name="text">
-        <string>الباركود /BMC</string>
+        <string>New Column</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>الوصف</string>
+        <string>اسم البرنامج</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>وصف البرنامج</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>تاريخ البدايه</string>
        </property>
       </column>
       <column>
        <property name="text">
         <string>الحاله</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>الشركه </string>
        </property>
       </column>
      </widget>

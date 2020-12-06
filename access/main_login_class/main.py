@@ -5,6 +5,7 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.loyalty_class.loyalityProg import CL_loyProg
 from access.reports_class.reporting import CL_report
 
 from access.authorization_class.Role import CL_role
@@ -63,6 +64,7 @@ class CL_main( QtWidgets.QMainWindow ):
         # self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
         # self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
         self.QAct_Display_Customer.triggered.connect(self.FN_DISPLAY_CUST)
+        self.QAct_Display_Loyality.triggered.connect(self.FN_CREATE_LOYPROG)
 
         self.QAct_Create_CustGp.triggered.connect(self.FN_CREATE_CUSTGP)
         self.QAct_Modify_CustGp.triggered.connect(self.FN_MODIFY_CUSTGP)
@@ -86,7 +88,10 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Exit.triggered.connect(self.FN_exit)
         self.setWindowTitle('HyperPOS Main Page')
 
-
+    def FN_CREATE_LOYPROG(self):
+        self.window_two = CL_loyProg()
+        self.window_two.FN_LOAD_DISPLAY()
+        self.window_two.show()
 
 
     def FN_CREATE_CUST(self):

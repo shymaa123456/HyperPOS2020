@@ -330,16 +330,9 @@ background-color: rgb(198, 207, 199);</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QPushButton" name="Qbtn_exit_2">
-        <property name="text">
-         <string>تحميل البيانات</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="Qbtn_save">
         <property name="text">
-         <string>تعديل</string>
+         <string>بحث</string>
         </property>
        </widget>
       </item>
@@ -398,65 +391,6 @@ background-color: rgb(198, 207, 199);</string>
      </property>
      <property name="text">
       <string>موقوف</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_5">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>129</y>
-      <width>311</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>211</x>
-       <y>10</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>القيمه المستحقه</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_12">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>40</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>عدد النقاط</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>10</y>
-       <width>171</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>40</y>
-       <width>171</width>
-       <height>20</height>
-      </rect>
      </property>
     </widget>
    </widget>
@@ -552,20 +486,15 @@ background-color: rgb(198, 207, 199);</string>
   <widget class="QWidget" name="gridLayoutWidget_4">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>240</y>
+     <x>0</x>
+     <y>250</y>
      <width>991</width>
-     <height>301</height>
+     <height>150</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_7">
     <item row="1" column="0">
      <widget class="QTableWidget" name="Qtable_promotion">
-      <column>
-       <property name="text">
-        <string>New Column</string>
-       </property>
-      </column>
       <column>
        <property name="text">
         <string>اسم البرنامج</string>
@@ -591,9 +520,59 @@ background-color: rgb(198, 207, 199);</string>
         <string>الشركه </string>
        </property>
       </column>
+      <column>
+       <property name="text">
+        <string>الفرع</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>مجموعه العملاء</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>New Column</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>القيمه المستحقه</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>عدد النقاط</string>
+       </property>
+      </column>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QTableWidget" name="Qtable_promotion_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>400</y>
+     <width>989</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>الباركود /BMC</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الوصف</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الحاله</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>

@@ -70,9 +70,6 @@ class CL_user(QtWidgets.QDialog):
 
         mycursor = self.conn.cursor()
         self.CMB_branch.clear()
-
-
-
         sql_select_query = "SELECT BRANCH_DESC_A  FROM BRANCH where BRANCH_STATUS   = 1 "
 
         mycursor.execute( sql_select_query )

@@ -29,6 +29,7 @@ class CL_userModule(object):
         x = (CL_userModule.user_name,)
 
         print(sql_select_query)
+
         mycursor.execute( sql_select_query, x )
 
         records = mycursor.fetchall()

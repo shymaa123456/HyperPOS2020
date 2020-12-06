@@ -294,6 +294,12 @@
      <addaction name="QAct_Cust_Gift_make"/>
      <addaction name="QAct_Cust_Redeem_Voucher_Print"/>
     </widget>
+    <widget class="QMenu" name="menu">
+     <property name="title">
+      <string>برامج العضويه</string>
+     </property>
+     <addaction name="QAct_Display_Loyality"/>
+    </widget>
     <addaction name="QM_Customer_Group"/>
     <addaction name="QM_Customer_Level"/>
     <addaction name="separator"/>
@@ -302,6 +308,7 @@
     <addaction name="QM_Customer_Points"/>
     <addaction name="QM_Customer_Redeem"/>
     <addaction name="action_2"/>
+    <addaction name="menu"/>
    </widget>
    <widget class="QMenu" name="QM_Report">
     <property name="layoutDirection">
@@ -1265,7 +1272,7 @@
   </action>
   <action name="QAct_Cust_Points_By_Section">
    <property name="text">
-    <string>تسجيل عدد وقيمة النقاط على مستوى الاقسام</string>
+    <string>إنشاء برنامج عضويه</string>
    </property>
   </action>
   <action name="QAct_Cust_Points_By_Item">
@@ -1469,6 +1476,11 @@
    </property>
    <property name="text">
     <string>العملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Display_Loyality">
+   <property name="text">
+    <string>إنشاء برنامج عضويه</string>
    </property>
   </action>
  </widget>

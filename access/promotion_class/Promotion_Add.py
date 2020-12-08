@@ -199,6 +199,19 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.Qcombo_cust_group2.setLayoutDirection(Qt.RightToLeft)
         # self.Qcombo_cust_group2.lineEdit().setAlignment(Qt.AlignRight)
 
+        """ checked combobox sample >>> Branch"""
+        self.Qcombo_branch2 = CheckableComboBox(self)
+        self.Qcombo_branch2.setGeometry(400, 55, 179, 18)
+        self.Qcombo_branch2.setLayoutDirection(Qt.LeftToRight)
+        self.Qcombo_branch2.setStyleSheet("background-color: rgb(198, 207, 199)")
+
+        """ checked combobox sample >>> sponsor"""
+        self.Qcombo_sponsor2 = CheckableComboBox(self)
+        self.Qcombo_sponsor2.setGeometry(400, 103, 179, 18)
+        self.Qcombo_sponsor2.setLayoutDirection(Qt.LeftToRight)
+        self.Qcombo_sponsor2.setStyleSheet("background-color: rgb(198, 207, 199)")
+
+
 
         self.FN_GET_Company()
         self.FN_GET_Branch()
@@ -219,6 +232,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_company.addItems( row )
         mycursor.close()
+
     def FN_GET_Branch(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -226,27 +240,19 @@ class CL_create_promotion(QtWidgets.QDialog):
         records = mycursor.fetchall()
         print(records)
         for row in records:
-            self.Qcombo_branch.addItems( row )
+            self.Qcombo_branch2.addItems( row )
         mycursor.close()
+
     def FN_GET_CustomerGroup(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute( "SELECT CG_DESC FROM CUSTOMER_GROUP" )
         records = mycursor.fetchall()
         print(records)
-
-
-
-
         for row in records:
-            self.Qcombo_cust_group.addItems(row)
+            #self.Qcombo_cust_group.addItems(row)
             self.Qcombo_cust_group2.addItems(row)
         mycursor.close()
-
-
-
-
-
 
 
     def FN_GET_MAGAZINE(self):
@@ -258,6 +264,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_magazine.addItems( row )
         mycursor.close()
+
     def FN_GET_department(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -267,6 +274,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_sponsor_2.addItems( row )
         mycursor.close()
+
     def FN_GET_promotion_sponser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -274,8 +282,9 @@ class CL_create_promotion(QtWidgets.QDialog):
         records = mycursor.fetchall()
         print(records)
         for row in records:
-            self.Qcombo_sponsor.addItems( row )
+            self.Qcombo_sponsor2.addItems( row )
         mycursor.close()
+
     def FN_GET_promotion_type(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()

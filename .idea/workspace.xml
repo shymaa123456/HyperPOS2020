@@ -6,9 +6,74 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="create loyality prog design">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Validation/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Validation/Validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/Role.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/Role.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/branch.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/branch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/formItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/formItem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user_module.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerType.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerType.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer_old.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer_old.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/promotion_class/Promotion_Add.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/promotion_class/Promotion_Add.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/reports_class/ReportPDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/ReportPDF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/reports_class/WeasypayPDFFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/WeasypayPDFFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/reports_class/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/reports_class/reporting.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/reporting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/Branch.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/Branch.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/assignUserToRole.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/assignUserToRole.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/copyRole.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/copyRole.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/copyUser.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/copyUser.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createForm.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createForm.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createFormItem.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createFormItem.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createPrivilage.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createPrivilage.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createPrivilageItem.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createPrivilageItem.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createRole.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createRole.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/createUser.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/createUser.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/displayFormItems.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/displayFormItems.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/dumy.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/dumy.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/modifyForm.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/modifyForm.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/modifyFormItem.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/modifyFormItem.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/modifyPrivilage.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/modifyPrivilage.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/modifyRole.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/modifyRole.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/modifyUser.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/modifyUser.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/authorization_ui/resetUserPassword.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/authorization_ui/resetUserPassword.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomerGp.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomerGp.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createLoyalityCustType.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createLoyalityCustType.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createLoyalityProg.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createLoyalityProg.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyLoyalityProg.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyLoyalityProg.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/customer_display.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/customer_display.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/deactivateCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/deactivateCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/displayLoyalityProg.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/displayLoyalityProg.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomerGp.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomerGp.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyLoyalityCustType.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyLoyalityCustType.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyLoyalityProg.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyLoyalityProg.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/uploadCustomers.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadCustomers.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/uploadLoyalityProg.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadLoyalityProg.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/login.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/login.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main_Form.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main_Form.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main_old.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main_old.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_activate.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_activate.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_change_date.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_change_date.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_copy.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_copy.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_create.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_create.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_display.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_display.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_edit.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_edit.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_upload.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_upload.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/reports_ui/Promotion_display.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/reports_ui/Promotion_display.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +117,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -564,7 +630,13 @@
       <option name="project" value="LOCAL" />
       <updated>1607267284771</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL؜٠٠٠٤٩" summary="create loyality prog design">
+      <created>1607438979532</created>
+      <option name="number" value="LOCAL؜٠٠٠٤٩" />
+      <option name="presentableId" value="LOCAL؜٠٠٠٤٩" />
+      <updated>1607438979532</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -656,6 +728,10 @@
     </state>
     <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1607427587250" />
     <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1604236813970" />
+    <state x="430" y="219" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1607439198719">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="430" y="219" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1607439198719" />
     <state x="506" y="228" width="354" height="320" key="DBNavigator.ConnectionAuthenticationDialog" timestamp="1605442784187">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -677,25 +753,25 @@
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605453075670" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1345" height="119" key="GridCell.Tab.0.bottom" timestamp="1607438715803">
+    <state width="1345" height="200" key="GridCell.Tab.0.bottom" timestamp="1607443101377">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="119" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1607438715803" />
+    <state width="1345" height="200" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1607443101377" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="119" key="GridCell.Tab.0.center" timestamp="1607438715803">
+    <state width="1345" height="200" key="GridCell.Tab.0.center" timestamp="1607443101377">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="119" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1607438715803" />
+    <state width="1345" height="200" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1607443101377" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="119" key="GridCell.Tab.0.left" timestamp="1607438715803">
+    <state width="1345" height="200" key="GridCell.Tab.0.left" timestamp="1607443101377">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="119" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1607438715803" />
+    <state width="1345" height="200" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1607443101377" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1345" height="119" key="GridCell.Tab.0.right" timestamp="1607438715803">
+    <state width="1345" height="200" key="GridCell.Tab.0.right" timestamp="1607443101377">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="119" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1607438715803" />
+    <state width="1345" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1607443101377" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
     <state width="1323" height="271" key="GridCell.Tab.1.bottom" timestamp="1607413038812">
       <screen x="0" y="0" width="1366" height="728" />
@@ -754,10 +830,6 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/72.27.1294.741@72.27.1294.741" timestamp="1599491214073" />
-    <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598789128767">
-      <screen x="72" y="27" width="1294" height="741" />
-    </state>
-    <state x="329" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/72.27.1294.741@72.27.1294.741" timestamp="1598789128767" />
     <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607260509677">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

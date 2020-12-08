@@ -15,7 +15,7 @@ from access.authorization_class.formItem import CL_formItem
 from access.authorization_class.privilage import CL_privilage
 from access.authorization_class.user import CL_user
 from access.authorization_class.user_module import CL_userModule
-#from access.main_login_class.login import  CL_login
+# from access.main_login_class.login import  CL_login
 from access.loyalty_class.customer import CL_customer
 from access.loyalty_class.customerGP import CL_customerGP
 from access.loyalty_class.customerType import CL_customerTP
@@ -24,30 +24,29 @@ from access.loyalty_class.customerType import CL_customerTP
 from access.promotion_class.Promotion_Add import CL_create_promotion
 
 
-
-class CL_main( QtWidgets.QMainWindow ):
+class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
 
     def __init__(self):
         forms = []
-        super( CL_main, self ).__init__()
+        super(CL_main, self).__init__()
         cwd = Path.cwd()
-        mod_path = Path( __file__ ).parent.parent.parent
+        mod_path = Path(__file__).parent.parent.parent
         dirname = mod_path.__str__() + '/presentation/main_login_ui'
         filename = dirname + '/main.ui'
-        loadUi( filename, self )
+        loadUi(filename, self)
 
-        #print (CL_userModule.user_name)
+        # print (CL_userModule.user_name)
         CL_userModule.loadPrivilages(self)
         for row_number, row_data in enumerate(CL_userModule.myList):
             forms.append(row_data[1])
 
         forms = list(dict.fromkeys(forms))
 
-        #print(forms)
+        # print(forms)
         for row in forms:
-            #print(row)
-            but_name = 'QAct_'+row
+            # print(row)
+            but_name = 'QAct_' + row
             self.findChild(QObject, but_name).setEnabled(True)
 
         self.QAct_Create_User.triggered.connect(self.FN_CREATE_USER)
@@ -55,7 +54,7 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Copy_User.triggered.connect(self.FN_COPY_USER)
         self.QAct_Reset_User_Password.triggered.connect(self.FN_RESET_USER)
         self.QAct_Assign_User_to_Roles.triggered.connect(self.FN_ASSIGN)
-        #print("hi")
+        # print("hi")
         self.QAct_Create_Role.triggered.connect(self.FN_CREATE_ROLE)
         self.QAct_Modify_Role.triggered.connect(self.FN_MODIFY_ROLE)
         self.QAct_Copy_Role.triggered.connect(self.FN_COPY_ROLE)
@@ -73,10 +72,10 @@ class CL_main( QtWidgets.QMainWindow ):
         self.QAct_Create_CustTp.triggered.connect(self.FN_CREATE_CUSTTP)
         self.QAct_Modify_CustTp.triggered.connect(self.FN_MODIFY_CUSTTP)
 
-        #self.QAct_Cust_Upload_Data.triggered.connect(self.FN_UPLOAD_CUST)
+        # self.QAct_Cust_Upload_Data.triggered.connect(self.FN_UPLOAD_CUST)
 
         self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
-        self.QAct_Create_Form.triggered.connect( self.FN_create_form)
+        self.QAct_Create_Form.triggered.connect(self.FN_create_form)
         self.QAct_Modify_Form.triggered.connect(self.FN_modify_form)
 
         self.QAct_Create_Form_Item.triggered.connect(self.FN_create_form_item)
@@ -93,7 +92,6 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two.FN_LOAD_DISPLAY()
         self.window_two.show()
 
-
     def FN_CREATE_CUST(self):
         self.window_two = CL_customer()
         self.window_two.FN_LOAD_CREATE()
@@ -108,6 +106,7 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two = CL_customer()
         self.window_two.FN_LOAD_MODIFY()
         self.window_two.show()
+
     def FN_DEACTIVATE_CUST(self):
         self.window_two = CL_customer()
         self.window_two.FN_LOAD_DEACTIVATE()
@@ -138,7 +137,6 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two.FN_LOAD_MODIFY()
         self.window_two.show()
 
-
     def FN_exit(self):
         QApplication.quit()
 
@@ -166,7 +164,6 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two = CL_user()
         self.window_two.FN_LOAD_RESET()
         self.window_two.show()
-
 
     def FN_MODIFY_USER(self):
         self.window_two = CL_user()
@@ -233,8 +230,8 @@ class CL_main( QtWidgets.QMainWindow ):
         self.window_two.show()
 
     """ Promotion """
+
     def FN_search_promotion(self):
         self.window_two = CL_create_promotion()
         self.window_two.FN_LOAD_CREATE_PROM()
         self.window_two.show()
-

@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtGui,QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
 try:
@@ -9,11 +9,14 @@ except AttributeError:
 
 try:
     _encoding = QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QApplication.translate(context, text, disambig)
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -62,12 +65,12 @@ class Ui_MainWindow(object):
 
     def test(self):
         s = str(self.comboBox1.currentText())
-        res=['aa','bb','cc','dd']
+        res = ['aa', 'bb', 'cc', 'dd']
 
         if (s == "- - select - -"):
             self.comboBox_2.setEnabled(0)
             self.comboBox_2.setCurrentIndex(0)
-        elif(len(s)== 0):
+        elif (len(s) == 0):
             self.comboBox_2.setEnabled(1)
             self.comboBox_2.clear()
             self.comboBox_2.addItem("- - select - -")
@@ -81,10 +84,12 @@ class Ui_MainWindow(object):
             self.comboBox_2.currentIndexChanged.connect(self.test1)
 
     def test1(self):
-        print ("Hello")
+        print("Hello")
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

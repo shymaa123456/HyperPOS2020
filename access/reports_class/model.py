@@ -1,9 +1,9 @@
+from access.reports_class.ReportPDF import body, Text
 
-
-from access.reports_class.ReportPDF import body,Text
-title=Text()
+title = Text()
 title.setName("Invoice")
-title.setFooter(" س ت 36108 ملف  ضريبي 212/306/5 مأموريه  ضرائب الشركات المساهمة رقم التسجيل بضرائب المبيعات 153/846/310 ")
+title.setFooter(
+    " س ت 36108 ملف  ضريبي 212/306/5 مأموريه  ضرائب الشركات المساهمة رقم التسجيل بضرائب المبيعات 153/846/310 ")
 title.setFont('Scheherazade-Regular.ttf')
 title.setFontsize(10)
 title.setcodeText("15235692356562")
@@ -28,6 +28,5 @@ wb.sheets[0]['A3'].value = df
 
 # Save under a new file name
 wb.save('myreport.xlsx')
-
 
 body()

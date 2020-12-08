@@ -1,5 +1,5 @@
 from pathlib import Path
-from PyQt5 import QtWidgets,QtCore
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
 from PyQt5.uic import loadUi
 from access.authorization_class.user_module import CL_userModule
@@ -8,13 +8,15 @@ import xlrd
 from datetime import datetime
 import xlwt.Workbook
 
+
 class CL_loyProg(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
+
     def __init__(self):
         super(CL_loyProg, self).__init__()
         cwd = Path.cwd()
-        mod_path = Path( __file__ ).parent.parent.parent
+        mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
 
@@ -34,20 +36,19 @@ class CL_loyProg(QtWidgets.QDialog):
     #     else :
     #         self.Rbtn_stsAll.setChecked(False)
     def onClicked(self):
-        #radioButton = self.sender()
-        #print(radioButton.name)
-        if self.Qradio_barcode.isChecked ():
+        # radioButton = self.sender()
+        # print(radioButton.name)
+        if self.Qradio_barcode.isChecked():
             self.Qline_barcode.setEnabled(True)
             self.Qcombo_departement.setEnabled(False)
             self.Qcombo_section.setEnabled(False)
             self.Qcombo_level4.setEnabled(False)
 
-        elif self.Qradio_bmc.isChecked ():
+        elif self.Qradio_bmc.isChecked():
             self.Qline_barcode.setEnabled(False)
             self.Qcombo_departement.setEnabled(True)
             self.Qcombo_section.setEnabled(True)
             self.Qcombo_level4.setEnabled(True)
-
 
     def FN_LOAD_DISPLAY(self):
         filename = self.dirname + '/createModifyLoyalityProg.ui'
@@ -67,25 +68,22 @@ class CL_loyProg(QtWidgets.QDialog):
         self.FN_GET_DEPARTMENTS()
         self.FN_GET_SECTIONS()
         self.FN_GET_LEVEL4()
-    #     #check authorization
-        for row_number, row_data in enumerate( CL_userModule.myList ):
-           if  row_data[1] =='Display_Loyality':
-               if row_data[4] =='None':
-                print('hh')
-               else:
-                   sql_select_query = "select  i.ITEM_DESC from SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
-                   x = (row_data[4],)
-                   mycursor.execute(sql_select_query, x)
-                   result = mycursor.fetchone()
-                   if result[0] == 'create' :
+        #     #check authorization
+        for row_number, row_data in enumerate(CL_userModule.myList):
+            if row_data[1] == 'Display_Loyality':
+                if row_data[4] == 'None':
+                    print('hh')
+                else:
+                    sql_select_query = "select  i.ITEM_DESC from SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
+                    x = (row_data[4],)
+                    mycursor.execute(sql_select_query, x)
+                    result = mycursor.fetchone()
+                    if result[0] == 'create':
                         self.Qbtn_create.clicked.connect(self.FN_CREATE_CUST)
-                   elif result[0] == 'modify':
-                         self.Qbtn_modify.clicked.connect(self.FN_LOAD_MODIFY)
-                   elif result[0] == 'upload':
-                         self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
-
-
-
+                    elif result[0] == 'modify':
+                        self.Qbtn_modify.clicked.connect(self.FN_LOAD_MODIFY)
+                    elif result[0] == 'upload':
+                        self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
 
     # def FN_SAVE_CUST(self):
     #
@@ -160,58 +158,59 @@ class CL_loyProg(QtWidgets.QDialog):
     def FN_LOAD_UPLOAD(self):
 
         filename = self.dirname + '/uploadLoyalityProg.ui'
-        loadUi( filename, self )
-        self.BTN_browse.clicked.connect( self.openFileNameDialog )
+        loadUi(filename, self)
+        self.BTN_browse.clicked.connect(self.openFileNameDialog)
+
     #
     #
     def openFileNameDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getOpenFileName( self, "QFileDialog.getOpenFileName()", "",
-                                                   " Files (*.xlsx)", options=options )
+        fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
+                                                  " Files (*.xlsx)", options=options)
         if fileName:
             self.LE_fileName.setText(fileName)
-            wb = xlrd.open_workbook( fileName )
-            sheet = wb.sheet_by_index( 0 )
+            wb = xlrd.open_workbook(fileName)
+            sheet = wb.sheet_by_index(0)
             mycursor = self.conn.cursor()
-            errorMsg =''
-            createdCust =0
-            nonCreatedCust=0
+            errorMsg = ''
+            createdCust = 0
+            nonCreatedCust = 0
 
-            for i in range( sheet.nrows ):
+            for i in range(sheet.nrows):
 
-                self.name = sheet.cell_value( i, 0 )
-                self.custGroup = int(sheet.cell_value( i, 1 ))
-                self.loyalityType = int(sheet.cell_value( i, 2 ))
-                self.phone = int(sheet.cell_value( i, 3))
-                self.mobile = int(sheet.cell_value( i, 4))
-                self.job = sheet.cell_value( i, 5)
-                self.address = sheet.cell_value( i, 6)
-                self.city = sheet.cell_value( i, 7 )
-                self.district = sheet.cell_value( i, 8 )
-                self.building = sheet.cell_value( i, 9 )
-                self.LE_floor = int(sheet.cell_value( i, 10 ))
-                self.email = sheet.cell_value( i, 11 )
-                self.company = sheet.cell_value( i, 12 )
-                self.workPhone = int(sheet.cell_value( i, 13 ))
-                self.workAddress = sheet.cell_value( i, 14 )
-                self.status = int (sheet.cell_value( i, 15 ) )
-                self.notes = sheet.cell_value( i, 16 )
+                self.name = sheet.cell_value(i, 0)
+                self.custGroup = int(sheet.cell_value(i, 1))
+                self.loyalityType = int(sheet.cell_value(i, 2))
+                self.phone = int(sheet.cell_value(i, 3))
+                self.mobile = int(sheet.cell_value(i, 4))
+                self.job = sheet.cell_value(i, 5)
+                self.address = sheet.cell_value(i, 6)
+                self.city = sheet.cell_value(i, 7)
+                self.district = sheet.cell_value(i, 8)
+                self.building = sheet.cell_value(i, 9)
+                self.LE_floor = int(sheet.cell_value(i, 10))
+                self.email = sheet.cell_value(i, 11)
+                self.company = sheet.cell_value(i, 12)
+                self.workPhone = int(sheet.cell_value(i, 13))
+                self.workAddress = sheet.cell_value(i, 14)
+                self.status = int(sheet.cell_value(i, 15))
+                self.notes = sheet.cell_value(i, 16)
                 if self.name == '' or self.mobile == '' or self.job == '' or self.address == '' or self.city == '' or self.district == '' or self.building == '' \
                         or self.email == '':
-                    nonCreatedCust=nonCreatedCust+1
+                    nonCreatedCust = nonCreatedCust + 1
 
                 else:
-                # get max userid
-                    mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM POS_CUSTOMER" )
+                    # get max userid
+                    mycursor.execute("SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM POS_CUSTOMER")
                     myresult = mycursor.fetchone()
 
                     if myresult[0] == None:
                         self.id = "1"
                     else:
-                        self.id = int( myresult[0] ) + 1
+                        self.id = int(myresult[0]) + 1
 
-                    creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+                    creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                     sql = "INSERT INTO POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
                           " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING,POSC_FLOOR, POSC_EMAIL, " \
                           "POSC_CREATED_BY, POSC_CREATED_ON ,POSC_CHANGED_BY ,  POSC_COMPANY, " \
@@ -225,21 +224,23 @@ class CL_loyProg(QtWidgets.QDialog):
                            CL_userModule.user_name, creationDate, ' ', self.company, self.workPhone, self.workAddress,
                            self.notes, self.status
                            )
-                    #print(val)
-                    mycursor.execute( sql, val )
-                    createdCust=createdCust+1
-                    db1.connectionCommit( self.conn )
+                    # print(val)
+                    mycursor.execute(sql, val)
+                    createdCust = createdCust + 1
+                    db1.connectionCommit(self.conn)
             mycursor.close()
-            db1.connectionClose( self.conn )
-            #QtWidgets.QMessageBox.warning( self, "Information", "No of created user ",counter)
+            db1.connectionClose(self.conn)
+            # QtWidgets.QMessageBox.warning( self, "Information", "No of created user ",counter)
             self.msgBox = QMessageBox()
 
             # Set the various texts
-            self.msgBox.setWindowTitle( "Information" )
-            self.msgBox.setStandardButtons( QMessageBox.Ok)
-            self.msgBox.setText("No of created Cust '"+str(createdCust) +"'  No of non created Cust '"+str(nonCreatedCust)+"'")
+            self.msgBox.setWindowTitle("Information")
+            self.msgBox.setStandardButtons(QMessageBox.Ok)
+            self.msgBox.setText(
+                "No of created Cust '" + str(createdCust) + "'  No of non created Cust '" + str(nonCreatedCust) + "'")
             self.msgBox.show()
             self.close()
+
     #     #Extracting number of rows
     #
     #
@@ -318,92 +319,92 @@ class CL_loyProg(QtWidgets.QDialog):
     #     self.LB_custID.setText( myresult[0] )
     #     mycursor.close()
 
-
     def FN_UP_CUST(self, funct):
         self.window_two = CL_loyProg()
         self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
+
     # endregion
     def FN_GET_BRANCHES(self):
         mycursor = self.conn.cursor()
         self.CMB_branch.clear()
         sql_select_query = "SELECT BRANCH_DESC_A  FROM BRANCH where BRANCH_STATUS   = 1 "
-        mycursor.execute( sql_select_query )
+        mycursor.execute(sql_select_query)
         records = mycursor.fetchall()
         for row in records:
-            self.CMB_branch.addItems( [row[0]] )
+            self.CMB_branch.addItems([row[0]])
         mycursor.close()
 
     def FN_GET_COMPANIES(self):
         mycursor = self.conn.cursor()
         self.CMB_branch.clear()
         sql_select_query = "SELECT BRANCH_DESC_A  FROM BRANCH where BRANCH_STATUS   = 1 "
-        mycursor.execute( sql_select_query )
+        mycursor.execute(sql_select_query)
         records = mycursor.fetchall()
         for row in records:
-            self.CMB_branch.addItems( [row[0]] )
+            self.CMB_branch.addItems([row[0]])
         mycursor.close()
 
     def FN_GET_DEPARTMENTS(self):
         mycursor = self.conn.cursor()
         self.CMB_branch.clear()
         sql_select_query = "SELECT BRANCH_DESC_A  FROM BRANCH where BRANCH_STATUS   = 1 "
-        mycursor.execute( sql_select_query )
+        mycursor.execute(sql_select_query)
         records = mycursor.fetchall()
         for row in records:
-            self.CMB_branch.addItems( [row[0]] )
+            self.CMB_branch.addItems([row[0]])
         mycursor.close()
 
     def FN_GET_SECTIONS(self):
         mycursor = self.conn.cursor()
         self.CMB_branch.clear()
         sql_select_query = "SELECT BRANCH_DESC_A  FROM BRANCH where BRANCH_STATUS   = 1 "
-        mycursor.execute( sql_select_query )
+        mycursor.execute(sql_select_query)
         records = mycursor.fetchall()
         for row in records:
-            self.CMB_branch.addItems( [row[0]] )
+            self.CMB_branch.addItems([row[0]])
         mycursor.close()
 
     def FN_GET_LEVEL4(self):
         mycursor = self.conn.cursor()
         self.CMB_branch.clear()
         sql_select_query = "SELECT BRANCH_DESC_A  FROM BRANCH where BRANCH_STATUS   = 1 "
-        mycursor.execute( sql_select_query )
+        mycursor.execute(sql_select_query)
         records = mycursor.fetchall()
         for row in records:
-            self.CMB_branch.addItems( [row[0]] )
+            self.CMB_branch.addItems([row[0]])
         mycursor.close()
-
 
     def FN_GET_CUSTGP(self):
         mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT CG_DESC FROM CUSTOMER_GROUP order by CG_GROUP_ID asc" )
+        mycursor.execute("SELECT CG_DESC FROM CUSTOMER_GROUP order by CG_GROUP_ID asc")
         records = mycursor.fetchall()
         mycursor.close()
         for row in records:
-            self.CMB_custGroup.addItems( [row[0]] )
+            self.CMB_custGroup.addItems([row[0]])
 
     def FN_GET_CUSTTP(self):
         mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT LOYCT_DESC FROM LOYALITY_CUSTOMER_TYPE order by LOYCT_TYPE_ID asc" )
+        mycursor.execute("SELECT LOYCT_DESC FROM LOYALITY_CUSTOMER_TYPE order by LOYCT_TYPE_ID asc")
         records = mycursor.fetchall()
         mycursor.close()
         for row in records:
-            self.CMB_loyalityType.addItems( [row[0]] )
+            self.CMB_loyalityType.addItems([row[0]])
 
-    def FN_GET_CUSTTP_ID(self,desc):
+    def FN_GET_CUSTTP_ID(self, desc):
         mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+desc+"'" )
+        mycursor.execute("SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + desc + "'")
         records = mycursor.fetchone()
         mycursor.close()
         return records[0]
+
     def FN_CREATE_CUST(self):
-        #get customer data
+        # get customer data
 
         self.name = self.LE_name.text().strip()
         self.custGroup = self.CMB_custGroup.currentText()
-        self.loyalityType =self.CMB_loyalityType.currentText()
-        self.phone = self.lE_phone .text().strip()
+        self.loyalityType = self.CMB_loyalityType.currentText()
+        self.phone = self.lE_phone.text().strip()
         self.mobile = self.lE_mobile.text().strip()
         self.job = self.LE_job.text().strip()
         self.address = self.LE_address.text().strip()
@@ -413,30 +414,31 @@ class CL_loyProg(QtWidgets.QDialog):
         self.LE_floor = self.LE_floor.text().strip()
         self.email = self.LE_email.text().strip()
         self.company = self.LE_company.text().strip()
-        self.workPhone =  self.LE_workPhone.text().strip()
+        self.workPhone = self.LE_workPhone.text().strip()
         self.workAddress = self.LE_workAddress.text().strip()
         self.status = self.CMB_status.currentText()
         self.notes = self.LE_notes.text().strip()
 
         mycursor = self.conn.cursor()
         # get max id
-        mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM POS_CUSTOMER" )
+        mycursor.execute("SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM POS_CUSTOMER")
         myresult = mycursor.fetchone()
 
         if myresult[0] == None:
             self.id = "1"
         else:
-            self.id = int( myresult[0] ) + 1
+            self.id = int(myresult[0]) + 1
 
-        creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+        creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        #get customer gp id
-        mycursor.execute( "SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '"+self.custGroup+"'" )
+        # get customer gp id
+        mycursor.execute("SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '" + self.custGroup + "'")
         myresult = mycursor.fetchone()
         self.custGroup = myresult[0]
 
-        #get customer type
-        mycursor.execute( "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+self.loyalityType +"'" )
+        # get customer type
+        mycursor.execute(
+            "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + self.loyalityType + "'")
         myresult = mycursor.fetchone()
         self.loyalityType = myresult[0]
 
@@ -445,9 +447,9 @@ class CL_loyProg(QtWidgets.QDialog):
             self.status = 1
         else:
             self.status = 0
-        if self.name == '' or self.lE_mobile == '' or self.LE_job  == '' or self.LE_address== '' or self.LE_city == '' or self.LE_district== '' or self.LE_building  == '' \
-                or self.LE_floor == '' or self.LE_email=='' :
-            QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
+        if self.name == '' or self.lE_mobile == '' or self.LE_job == '' or self.LE_address == '' or self.LE_city == '' or self.LE_district == '' or self.LE_building == '' \
+                or self.LE_floor == '' or self.LE_email == '':
+            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
 
         else:
 
@@ -458,25 +460,25 @@ class CL_loyProg(QtWidgets.QDialog):
                   "         VALUES ( %s, %s, %s,  %s,%s,%s, %s, %s, %s, %s, " \
                   "%s,%s,  %s, %s,%s, %s,%s, %s, %s, %s,%s)"
 
-                       # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = (self.id,self.loyalityType,self.custGroup,self.name,self.phone,self.mobile,
-                   self.job, self.address, self.city, self.district, self.building, self.LE_floor ,self.email,
-                   CL_userModule.user_name, creationDate, ' ',self.company, self.workPhone, self.workAddress,
+            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+            val = (self.id, self.loyalityType, self.custGroup, self.name, self.phone, self.mobile,
+                   self.job, self.address, self.city, self.district, self.building, self.LE_floor, self.email,
+                   CL_userModule.user_name, creationDate, ' ', self.company, self.workPhone, self.workAddress,
                    self.notes, self.status
-            )
-            mycursor.execute( sql, val )
+                   )
+            mycursor.execute(sql, val)
             # mycursor.execute(sql)
 
             mycursor.close()
 
-            print( mycursor.rowcount, "record inserted." )
-            db1.connectionCommit( self.conn )
-            db1.connectionClose( self.conn )
+            print(mycursor.rowcount, "record inserted.")
+            db1.connectionCommit(self.conn)
+            db1.connectionClose(self.conn)
             QtWidgets.QMessageBox.information(self, "Success", "Customer is created successfully")
 
             self.close()
 
-        print("in create cust" ,self.name)
+        print("in create cust", self.name)
 
     def FN_DEACTIVATE_CUST(self):
         mycursor = self.conn.cursor()
@@ -500,12 +502,10 @@ class CL_loyProg(QtWidgets.QDialog):
         else:
             self.status = 0
 
-
-
         sql = "update   POSC_STATUS=%s where POSC_CUST_ID = %s"
 
         # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-        val = ( self.status, self.id)
+        val = (self.status, self.id)
         mycursor.execute(sql, val)
         # mycursor.execute(sql)
 
@@ -540,15 +540,15 @@ class CL_loyProg(QtWidgets.QDialog):
 
         mycursor = self.conn.cursor()
 
-        changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
         # get customer gp id
-        mycursor.execute( "SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '" + self.custGroup + "'" )
+        mycursor.execute("SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '" + self.custGroup + "'")
         myresult = mycursor.fetchone()
         self.custGroup = myresult[0]
 
         # get customer type
         mycursor.execute(
-            "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + self.loyalityType + "'" )
+            "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + self.loyalityType + "'")
         myresult = mycursor.fetchone()
         self.loyalityType = myresult[0]
 
@@ -558,9 +558,9 @@ class CL_loyProg(QtWidgets.QDialog):
         else:
             self.status = 0
 
-        if  self.lE_mobile == '' or self.LE_job == '' or self.LE_address == '' or self.LE_city == '' or self.LE_district == '' or self.LE_building == '' \
+        if self.lE_mobile == '' or self.LE_job == '' or self.LE_address == '' or self.LE_city == '' or self.LE_district == '' or self.LE_building == '' \
                 or self.LE_floor == '' or self.LE_email == '':
-            QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
+            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
 
         else:
 
@@ -570,20 +570,20 @@ class CL_loyProg(QtWidgets.QDialog):
                   "POSC_WORK_PHONE=%s, POSC_WORK_ADDRESS=%s, POSC_NOTES=%s, POSC_STATUS=%s where POSC_CUST_ID = %s"
 
             # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = ( self.loyalityType, self.custGroup,  self.phone, self.mobile,
-                   self.job, self.address, self.city, self.district, self.building, self.LE_floor ,self.email,
-                   CL_userModule.user_name, changeDate,  self.company, self.workPhone, self.workAddress,
-                   self.notes, self.status ,self.id  )
-            mycursor.execute( sql, val )
+            val = (self.loyalityType, self.custGroup, self.phone, self.mobile,
+                   self.job, self.address, self.city, self.district, self.building, self.LE_floor, self.email,
+                   CL_userModule.user_name, changeDate, self.company, self.workPhone, self.workAddress,
+                   self.notes, self.status, self.id)
+            mycursor.execute(sql, val)
             # mycursor.execute(sql)
 
             mycursor.close()
 
-            print( mycursor.rowcount, "record updated." )
+            print(mycursor.rowcount, "record updated.")
             QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
 
-            db1.connectionCommit( self.conn )
-            db1.connectionClose( self.conn )
+            db1.connectionCommit(self.conn)
+            db1.connectionClose(self.conn)
             self.close()
 
-        print( "in modify cust", self.CMB_custName )
+        print("in modify cust", self.CMB_custName)

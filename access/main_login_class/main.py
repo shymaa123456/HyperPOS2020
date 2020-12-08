@@ -44,7 +44,7 @@ class CL_main( QtWidgets.QMainWindow ):
 
         forms = list(dict.fromkeys(forms))
 
-        print(forms)
+        #print(forms)
         for row in forms:
             #print(row)
             but_name = 'QAct_'+row

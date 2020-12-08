@@ -28,7 +28,7 @@ class CL_userModule(object):
         #print(sql_select_query)
         x = (CL_userModule.user_name,)
 
-        print(sql_select_query)
+        #print(sql_select_query)
 
         mycursor.execute( sql_select_query, x )
 

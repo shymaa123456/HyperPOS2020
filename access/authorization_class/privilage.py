@@ -1,6 +1,6 @@
 from pathlib import Path
 from mysql.connector import Error
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets,QtCore
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.uic import loadUi
 
@@ -39,10 +39,12 @@ class CL_privilage( QtWidgets.QDialog ):
         self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLEID )
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORMID )
         self.CMB_actionName.currentIndexChanged.connect( self.FN_GET_ACTIONID )
-        self.CMB_formItemName.currentIndexChanged.connect( self.FN_GET_FORMITEMID )
+        self.CMB_formItemName.blockSignals(True)
+        self.CMB_formItemName.currentTextChanged.connect( self.FN_GET_FORMITEMID )
+        self.CMB_formItemName.blockSignals(False)
         self.BTN_add.clicked.connect( self.FN_ADD_PRIVILAGE )
         self.BTN_delete.clicked.connect( self.FN_DELETE_PRIVILAGE )
-
+        #QtCore.QMetaObject.connectSlotsByName(self)
     def FN_DELETE_PRIVILAGE(self):
         rows = []
         for idx in self.w1.selectionModel().selectedRows():
@@ -154,22 +156,26 @@ class CL_privilage( QtWidgets.QDialog ):
 
     def FN_GET_FORMItems(self):
 
-        mycursor = self.conn.cursor()
-        self.CMB_formItemName.clear()
-
         self.form = self.LB_formId.text()
-
+        self.CMB_formItemName.blockSignals(True)
+        self.CMB_formItemName.clear()
+        # print("after clear")
+        # print(self.CMB_formItemName.count())
+        mycursor = self.conn.cursor()
         sql_select_query = "SELECT ITEM_DESC FROM SYS_FORM_ITEM where ITEM_STATUS  = 1 and FORM_ID = '" + self.form + "'"
 
         mycursor.execute( sql_select_query )
+
         records = mycursor.fetchall()
-
-        for row in records:
-            self.CMB_formItemName.addItems( [row[0]] )
-
+        print(records )
+        #self.CMB_formItemName.addItem("test")
+        for row1 in records:
+            self.CMB_formItemName.addItems( [row1[0]] )
         mycursor.close()
 
+        self.CMB_formItemName.blockSignals(False)
     def FN_GET_FORMITEMID(self):
+        #self.CMB_formItemName.blockSignals(True)
         mycursor = self.conn.cursor()
         self.item = self.CMB_formItemName.currentText()
 
@@ -183,6 +189,7 @@ class CL_privilage( QtWidgets.QDialog ):
 
         mycursor.close()
 
+        self.CMB_formItemName.blockSignals(False)
     def FN_GET_ROLEID(self):
         self.role = self.CMB_roleName.currentText()
         mycursor = self.conn.cursor()
@@ -209,7 +216,9 @@ class CL_privilage( QtWidgets.QDialog ):
         mycursor.close()
 
     def FN_GET_FORMID(self):
+
         self.form = self.CMB_formName.currentText()
+
         mycursor = self.conn.cursor()
         sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s "
         x = (self.form,)
@@ -220,6 +229,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.LB_formId.setText( myresult[0] )
 
         mycursor.close()
+
         self.FN_GET_FORMItems()
 
     def FN_GET_ACTIONID(self):
@@ -245,7 +255,7 @@ class CL_privilage( QtWidgets.QDialog ):
         self.form = self.LB_formId.text()
 
         sql_select_query = "select r.ROLE_Name , r.ROLE_ID , f.FORM_DESC,f.FORM_ID  ,a.ACTION_DESC ,pi.ITEM_ID from SYS_PRIVILEGE p   inner join SYS_ROLE r on p.ROLE_ID = r.ROLE_ID inner join SYS_FORM f on  p.FORM_ID= f.FORM_ID inner join SYS_PRINT_EXPORT a on p.ACTION_ID = a.ACTION_ID  left outer join SYS_PRIVILEG_ITEM pi on p.PRIV_ID= pi.PRIV_ID  and p.FORM_ID=pi.FORM_ID    where  p.ROLE_ID = %s and r.ROLE_STATUS  = 1 and f.FORM_STATUS  = 1"
-        print(sql_select_query)
+        #print(sql_select_query)
         x = (self.role,)
 
 
@@ -254,7 +264,7 @@ class CL_privilage( QtWidgets.QDialog ):
         records = mycursor.fetchall()
 
         records = list(dict.fromkeys(records))
-        print(records)
+        #print(records)
         for row_number, row_data in enumerate( records ):
             self.w1.insertRow( row_number )
 

@@ -360,9 +360,9 @@ class CL_role( QtWidgets.QDialog ):
             creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
 
 
-            sql = "INSERT INTO SYS_ROLE (ROLE_ID, ROLE_NAME,ROLE_DESC,ROLE_CREATED_ON,   ROLE_STATUS)         " \
+            sql = "INSERT INTO SYS_ROLE (ROLE_ID, ROLE_NAME,ROLE_DESC,ROLE_CREATED_BY,ROLE_CREATED_ON,   ROLE_STATUS)         " \
                   "VALUES ('" + str(
-                self.id ) + "','" + self.name + "','" + self.desc + "', '" + creationDate + "','" + self.status + "')"
+                self.id ) + "','" + self.name + "','" + self.desc + "',  '" +CL_userModule.user_name+"',  '"  + creationDate + "','" + self.status + "')"
 
             print( sql )
             # val = ('"+self.id+"','"+ self.name"','"+self.desc "', '"+ creationDate +"',' ', ' ',' ','" + self.status+"')

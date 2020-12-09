@@ -77,10 +77,13 @@ class CL_customer(QtWidgets.QDialog):
                    mycursor.execute(sql_select_query, x)
                    result = mycursor.fetchone()
                    if result[0] == 'create' :
+                        self.Qbtn_create.setEnabled(True)
                         self.Qbtn_create.clicked.connect(self.FN_CR_CUST)
                    elif result[0] == 'modify':
+                         self.Qbtn_modify.setEnabled(True)
                          self.Qbtn_modify.clicked.connect(self.FN_MD_CUST)
                    elif result[0] == 'upload':
+                         self.Qbtn_upload.setEnabled(True)
                          self.Qbtn_upload.clicked.connect(self.FN_UP_CUST)
 
     def FN_SAVE_CUST(self):

@@ -1,7 +1,7 @@
 from pathlib import Path
 from mysql.connector import Error
 from PyQt5 import QtWidgets,QtCore
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QTableWidgetItem, QComboBox
 from PyQt5.uic import loadUi
 
 from data_connection.h1pos import db1
@@ -16,6 +16,7 @@ class CL_privilage( QtWidgets.QDialog ):
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
         self.conn = db1.connect()
+
 
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createPrivilage.ui'
@@ -39,9 +40,9 @@ class CL_privilage( QtWidgets.QDialog ):
         self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLEID )
         self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORMID )
         self.CMB_actionName.currentIndexChanged.connect( self.FN_GET_ACTIONID )
-        self.CMB_formItemName.blockSignals(True)
-        self.CMB_formItemName.currentTextChanged.connect( self.FN_GET_FORMITEMID )
-        self.CMB_formItemName.blockSignals(False)
+        #self.CMB_formItemName.blockSignals(True)
+        self.CMB_formItemName.currentIndexChanged.connect( self.FN_GET_FORMITEMID )
+        #self.CMB_formItemName.blockSignals(False)
         self.BTN_add.clicked.connect( self.FN_ADD_PRIVILAGE )
         self.BTN_delete.clicked.connect( self.FN_DELETE_PRIVILAGE )
         #QtCore.QMetaObject.connectSlotsByName(self)
@@ -178,9 +179,10 @@ class CL_privilage( QtWidgets.QDialog ):
         #self.CMB_formItemName.blockSignals(True)
         mycursor = self.conn.cursor()
         self.item = self.CMB_formItemName.currentText()
+        formId = self.LB_formId.text()
 
-        sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s and ITEM_STATUS  = 1 "
-        x = (self.item,)
+        sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM  WHERE ITEM_DESC = %s and FORM_ID = %s and ITEM_STATUS  = 1 "
+        x = (self.item,formId)
         mycursor.execute( sql_select_query, x )
 
         myresult = mycursor.fetchone()
@@ -231,6 +233,7 @@ class CL_privilage( QtWidgets.QDialog ):
         mycursor.close()
 
         self.FN_GET_FORMItems()
+        self.FN_GET_FORMITEMID()
 
     def FN_GET_ACTIONID(self):
         self.action = self.CMB_actionName.currentText()
@@ -347,8 +350,8 @@ class CL_privilage( QtWidgets.QDialog ):
             db1.connectionCommit( self.conn )
 
             formItemName = self.w1.item( row, 5 )
-            sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s"
-            x = (formItemName.text(),)
+            sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s and form_ID =%s"
+            x = (formItemName.text(),formId.text())
             mycursor.execute( sql_select_query, x )
 
             myresult = mycursor.fetchone()

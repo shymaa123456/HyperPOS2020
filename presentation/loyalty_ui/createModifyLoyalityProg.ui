@@ -91,16 +91,16 @@ background-color: rgb(198, 207, 199);</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QComboBox" name="Qcombo_company"/>
+       <widget class="QComboBox" name="CMB_company"/>
       </item>
       <item>
-       <widget class="QComboBox" name="Qcombo_branch"/>
+       <widget class="QComboBox" name="CMB_branch"/>
       </item>
       <item>
-       <widget class="QComboBox" name="Qcombo_cust_group"/>
+       <widget class="QComboBox" name="CMB_custGroup"/>
       </item>
       <item>
-       <widget class="QComboBox" name="Qcombo_sponsor"/>
+       <widget class="QComboBox" name="CMB_loyalityType"/>
       </item>
      </layout>
     </widget>
@@ -354,6 +354,9 @@ background-color: rgb(198, 207, 199);</string>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QPushButton" name="Qbtn_upload">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>تحميل البيانات</string>
         </property>
@@ -361,6 +364,9 @@ background-color: rgb(198, 207, 199);</string>
       </item>
       <item>
        <widget class="QPushButton" name="Qbtn_create">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>إنشاء البرنامج</string>
         </property>
@@ -368,6 +374,9 @@ background-color: rgb(198, 207, 199);</string>
       </item>
       <item>
        <widget class="QPushButton" name="Qbtn_modify">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>تعديل البرنامج</string>
         </property>
@@ -469,7 +478,7 @@ background-color: rgb(198, 207, 199);</string>
       <string>النقاط المستحقه</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="Qline_name_2">
+    <widget class="QLineEdit" name="Qline_purchAmount">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -478,8 +487,11 @@ background-color: rgb(198, 207, 199);</string>
        <height>20</height>
       </rect>
      </property>
+     <property name="text">
+      <string>1000</string>
+     </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
+    <widget class="QLineEdit" name="Qline_points">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -487,6 +499,9 @@ background-color: rgb(198, 207, 199);</string>
        <width>171</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="text">
+      <string>17</string>
      </property>
     </widget>
    </widget>
@@ -518,7 +533,7 @@ background-color: rgb(198, 207, 199);</string>
       <string>الإداره</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="Qcombo_departement">
+    <widget class="QComboBox" name="CMB_department">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -564,7 +579,7 @@ background-color: rgb(198, 207, 199);</string>
       <string>القسم</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="Qcombo_section">
+    <widget class="QComboBox" name="CMB_section">
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -587,7 +602,7 @@ background-color: rgb(198, 207, 199);</string>
       <string>التصنيف الرابع</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="Qcombo_level4">
+    <widget class="QComboBox" name="CMB_level4">
      <property name="geometry">
       <rect>
        <x>40</x>

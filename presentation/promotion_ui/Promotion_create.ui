@@ -86,7 +86,7 @@ background-color: rgb(198, 207, 199);</string>
        <x>10</x>
        <y>10</y>
        <width>181</width>
-       <height>91</height>
+       <height>92</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -94,7 +94,7 @@ background-color: rgb(198, 207, 199);</string>
        <widget class="QComboBox" name="Qcombo_company"/>
       </item>
       <item>
-       <widget class="QComboBox" name="Qcombo_branch"/>
+       <widget class="QComboBox" name="CMB_branch"/>
       </item>
       <item>
        <widget class="QComboBox" name="Qcombo_cust_group"/>

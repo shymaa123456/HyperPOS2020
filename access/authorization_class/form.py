@@ -8,30 +8,33 @@ from data_connection.h1pos import db1
 
 
 class CL_form(QtWidgets.QDialog):
-    dirname=''
+    dirname = ''
+
     def __init__(self):
         super(CL_form, self).__init__()
         cwd = Path.cwd()
-        mod_path = Path( __file__ ).parent.parent.parent
+        mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
         self.conn = db1.connect()
 
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createForm.ui'
-        loadUi( filename, self )
+        loadUi(filename, self)
         self.BTN_createForm.clicked.connect(self.FN_CREATE_FORM)
         self.CMB_formStatus.addItems(["Active", "Inactive"])
-        self.CMB_formType.addItems( ["Frontend", "Backend"] )
+        self.CMB_formType.addItems(["Frontend", "Backend"])
+
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyForm.ui'
-        loadUi( filename, self )
+        loadUi(filename, self)
         CL_form.FN_GET_FORMS(self)
         self.FN_GET_FORMID()
         self.FN_GET_FORM()
-        self.CMB_formName.currentIndexChanged.connect( self.FN_GET_FORM )
+        self.CMB_formName.currentIndexChanged.connect(self.FN_GET_FORM)
         self.BTN_modifyForm.clicked.connect(self.FN_MODIFY_FORM)
         self.CMB_formStatus.addItems(["Active", "Inactive"])
-        self.CMB_formType.addItems( ["Frontend", "Backend"] )
+        self.CMB_formType.addItems(["Frontend", "Backend"])
+
     @staticmethod
     def FN_GET_FORMS(self):
         mycursor = self.conn.cursor()
@@ -41,7 +44,8 @@ class CL_form(QtWidgets.QDialog):
             self.CMB_formName.addItems([row[0]])
         mycursor.close()
         return records
-#
+
+    #
     def FN_GET_FORMID(self):
 
         self.form = self.CMB_formName.currentText()
@@ -63,17 +67,16 @@ class CL_form(QtWidgets.QDialog):
         x = (self.id,)
         mycursor.execute(sql_select_query, x)
         record = mycursor.fetchone()
-        #print(record)
+        # print(record)
         self.LE_desc.setText(record[1])
         self.CMB_formType.setCurrentText(record[2])
         self.LE_help.setText(record[4])
-        if record[3]== '1':
+        if record[3] == '1':
 
             self.CMB_formStatus.setCurrentText('Active')
         else:
-            self.CMB_formStatus.setCurrentText( 'Inactive' )
+            self.CMB_formStatus.setCurrentText('Inactive')
         mycursor.close()
-
 
         print(mycursor.rowcount, "record retrieved.")
 
@@ -89,8 +92,8 @@ class CL_form(QtWidgets.QDialog):
         self.help = self.LE_help.text()
 
         if self.desc == '' or self.type == '':
-            QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
-        #connection = mysql.connector.connect(host='localhost',database='test',user='shelal',password='2ybQvkZbNijIyq2J',port='3306')
+            QtWidgets.QMessageBox.warning(self, "Error", "Please all required field")
+        # connection = mysql.connector.connect(host='localhost',database='test',user='shelal',password='2ybQvkZbNijIyq2J',port='3306')
         else:
             mycursor = self.conn.cursor()
 
@@ -98,33 +101,33 @@ class CL_form(QtWidgets.QDialog):
 
             sql = "UPDATE SYS_FORM  set FORM_DESC= %s ,FORM_TYPE= %s  , FORM_STATUS = %s, FORM_HELP = %s where FORM_id= %s "
 
-            val = (self.desc  , self.type, self.status, self.help, self.id)
+            val = (self.desc, self.type, self.status, self.help, self.id)
 
             mycursor.execute(sql, val)
             # mycursor.execute(sql)
 
-            db1.connectionCommit( self.conn )
+            db1.connectionCommit(self.conn)
             mycursor.close()
             db1.connectionClose(self.conn)
 
             print(mycursor.rowcount, "record Modified.")
 
             self.close()
-            QtWidgets.QMessageBox.information( self, "Success", "Form is modified successfully" )
+            QtWidgets.QMessageBox.information(self, "Success", "Form is modified successfully")
 
     def FN_CREATE_FORM(self):
         self.desc = self.LE_desc.text().strip()
 
         self.type = self.CMB_formStatus.currentText()
-        self.help= self.LE_help.text()
+        self.help = self.LE_help.text()
 
         self.status = self.CMB_formStatus.currentText()
         if self.status == 'Active':
             self.status = '1'
         else:
             self.status = '0'
-        if self.desc == '' or self.type ==''  :
-            QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
+        if self.desc == '' or self.type == '':
+            QtWidgets.QMessageBox.warning(self, "Error", "Please all required field")
 
         else:
             mycursor = self.conn.cursor()
@@ -147,8 +150,7 @@ class CL_form(QtWidgets.QDialog):
             mycursor.close()
             db1.connectionClose(self.conn)
 
-
             print(mycursor.rowcount, "record inserted.")
 
             self.close()
-            QtWidgets.QMessageBox.information( self, "Success", "Form is created successfully" )
+            QtWidgets.QMessageBox.information(self, "Success", "Form is created successfully")

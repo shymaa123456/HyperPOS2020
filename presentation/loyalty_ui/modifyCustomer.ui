@@ -1,419 +1,434 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>1001</width>
-    <height>706</height>
-   </rect>
-  </property>
-  <property name="acceptDrops">
-   <bool>false</bool>
-  </property>
-  <property name="windowTitle">
-   <string>Dialog</string>
-  </property>
-  <property name="autoFillBackground">
-   <bool>false</bool>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: rgb(198, 207, 199);</string>
-  </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>821</x>
-     <y>140</y>
-     <width>81</width>
-     <height>511</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLabel" name="label_17">
-      <property name="text">
-       <string>نوع العميل </string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_14">
-      <property name="text">
-       <string>نوع العضويه</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>رقم الهاتف</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>رقم الموبايل</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>الوظيفه</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>العنوان</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>المدينه</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_8">
-      <property name="text">
-       <string>المنطقه</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>رقم العماره</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_9">
-      <property name="text">
-       <string>الطابق</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_10">
-      <property name="text">
-       <string>اﻹيميل</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_11">
-      <property name="text">
-       <string>الشركه</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_13">
-      <property name="text">
-       <string>تليفون العمل</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_12">
-      <property name="text">
-       <string>عنوان العمل</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_15">
-      <property name="text">
-       <string>حاله العميل</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_16">
-      <property name="text">
-       <string>ملاحظات</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>140</y>
-     <width>561</width>
-     <height>523</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
-     <widget class="QComboBox" name="CMB_custGroup">
-      <property name="duplicatesEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QComboBox" name="CMB_loyalityType">
-      <property name="duplicatesEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="lE_phone">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="lE_mobile">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_job">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_address">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_city">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_district">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_building">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_floor">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_email">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_company">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_workPhone">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_workAddress">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QComboBox" name="CMB_status">
-      <property name="autoFillBackground">
-       <bool>true</bool>
-      </property>
-      <property name="duplicatesEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LE_notes">
-      <property name="styleSheet">
-       <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-   <zorder>CMB_loyalityType</zorder>
-   <zorder>lE_phone</zorder>
-   <zorder>LE_job</zorder>
-   <zorder>lE_mobile</zorder>
-   <zorder>LE_address</zorder>
-   <zorder>LE_city</zorder>
-   <zorder>LE_district</zorder>
-   <zorder>LE_building</zorder>
-   <zorder>LE_floor</zorder>
-   <zorder>LE_email</zorder>
-   <zorder>LE_company</zorder>
-   <zorder>LE_workPhone</zorder>
-   <zorder>LE_workAddress</zorder>
-   <zorder>CMB_custGroup</zorder>
-   <zorder>CMB_status</zorder>
-   <zorder>LE_notes</zorder>
-  </widget>
-  <widget class="QPushButton" name="BTN_modifyCustomer">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>660</y>
-     <width>186</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: beige;
-    font: bold 14px;
-    min-width: 10em;
-    padding: 6px;</string>
-   </property>
-   <property name="text">
-    <string>تعديل عميل عضويه</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>800</x>
-     <y>50</y>
-     <width>109</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>اسم العميل</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="CMB_custName">
-   <property name="geometry">
-    <rect>
-     <x>248</x>
-     <y>50</y>
-     <width>551</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"> border: 2px solid gray;
-   
-    padding: 0 8px;
-    
-    selection-background-color: darkgray;</string>
-   </property>
-   <property name="duplicatesEnabled">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="LB_custID">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>50</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>cust id </string>
-   </property>
-  </widget>
- </widget>
- <resources/>
- <connections/>
+    <class>Dialog</class>
+    <widget class="QDialog" name="Dialog">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>1001</width>
+                <height>706</height>
+            </rect>
+        </property>
+        <property name="acceptDrops">
+            <bool>false</bool>
+        </property>
+        <property name="windowTitle">
+            <string>Dialog</string>
+        </property>
+        <property name="autoFillBackground">
+            <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+            <string notr="true">background-color: rgb(198, 207, 199);</string>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget">
+            <property name="geometry">
+                <rect>
+                    <x>821</x>
+                    <y>140</y>
+                    <width>81</width>
+                    <height>511</height>
+                </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                    <widget class="QLabel" name="label_17">
+                        <property name="text">
+                            <string>نوع العميل</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_14">
+                        <property name="text">
+                            <string>نوع العضويه</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_2">
+                        <property name="text">
+                            <string>رقم الهاتف</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label">
+                        <property name="text">
+                            <string>رقم الموبايل</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_4">
+                        <property name="text">
+                            <string>الوظيفه</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_6">
+                        <property name="text">
+                            <string>العنوان</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_5">
+                        <property name="text">
+                            <string>المدينه</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_8">
+                        <property name="text">
+                            <string>المنطقه</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_7">
+                        <property name="text">
+                            <string>رقم العماره</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_9">
+                        <property name="text">
+                            <string>الطابق</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_10">
+                        <property name="text">
+                            <string>اﻹيميل</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_11">
+                        <property name="text">
+                            <string>الشركه</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_13">
+                        <property name="text">
+                            <string>تليفون العمل</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_12">
+                        <property name="text">
+                            <string>عنوان العمل</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_15">
+                        <property name="text">
+                            <string>حاله العميل</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="label_16">
+                        <property name="text">
+                            <string>ملاحظات</string>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QWidget" name="verticalLayoutWidget_2">
+            <property name="geometry">
+                <rect>
+                    <x>250</x>
+                    <y>140</y>
+                    <width>561</width>
+                    <height>523</height>
+                </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+                <item>
+                    <widget class="QComboBox" name="CMB_custGroup">
+                        <property name="duplicatesEnabled">
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QComboBox" name="CMB_loyalityType">
+                        <property name="duplicatesEnabled">
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="lE_phone">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="lE_mobile">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_job">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_address">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_city">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_district">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_building">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_floor">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_email">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_company">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_workPhone">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_workAddress">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QComboBox" name="CMB_status">
+                        <property name="autoFillBackground">
+                            <bool>true</bool>
+                        </property>
+                        <property name="duplicatesEnabled">
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="LE_notes">
+                        <property name="styleSheet">
+                            <string notr="true">border: 2px solid gray;
+
+                                padding: 0 8px;
+
+                                selection-background-color: darkgray;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+            <zorder>CMB_loyalityType</zorder>
+            <zorder>lE_phone</zorder>
+            <zorder>LE_job</zorder>
+            <zorder>lE_mobile</zorder>
+            <zorder>LE_address</zorder>
+            <zorder>LE_city</zorder>
+            <zorder>LE_district</zorder>
+            <zorder>LE_building</zorder>
+            <zorder>LE_floor</zorder>
+            <zorder>LE_email</zorder>
+            <zorder>LE_company</zorder>
+            <zorder>LE_workPhone</zorder>
+            <zorder>LE_workAddress</zorder>
+            <zorder>CMB_custGroup</zorder>
+            <zorder>CMB_status</zorder>
+            <zorder>LE_notes</zorder>
+        </widget>
+        <widget class="QPushButton" name="BTN_modifyCustomer">
+            <property name="geometry">
+                <rect>
+                    <x>30</x>
+                    <y>660</y>
+                    <width>186</width>
+                    <height>31</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">
+                    border-style: outset;
+                    border-width: 2px;
+                    border-radius: 10px;
+                    border-color: beige;
+                    font: bold 14px;
+                    min-width: 10em;
+                    padding: 6px;
+                </string>
+            </property>
+            <property name="text">
+                <string>تعديل عميل عضويه</string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="label_3">
+            <property name="geometry">
+                <rect>
+                    <x>800</x>
+                    <y>50</y>
+                    <width>109</width>
+                    <height>25</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>اسم العميل</string>
+            </property>
+        </widget>
+        <widget class="QComboBox" name="CMB_custName">
+            <property name="geometry">
+                <rect>
+                    <x>248</x>
+                    <y>50</y>
+                    <width>551</width>
+                    <height>25</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">border: 2px solid gray;
+
+                    padding: 0 8px;
+
+                    selection-background-color: darkgray;
+                </string>
+            </property>
+            <property name="duplicatesEnabled">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="QLabel" name="LB_custID">
+            <property name="enabled">
+                <bool>false</bool>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>130</x>
+                    <y>50</y>
+                    <width>91</width>
+                    <height>31</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>cust id</string>
+            </property>
+        </widget>
+    </widget>
+    <resources/>
+    <connections/>
 </ui>

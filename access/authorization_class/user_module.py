@@ -7,9 +7,11 @@ Created on Sun Aug 23 00:35:15 2020
 """
 from data_connection.h1pos import db1
 
+
 class CL_userModule(object):
-    user_name=''
-    myList=[]
+    user_name = ''
+    myList = []
+
     def init(self):
         self.conn = db1.connect()
 
@@ -25,14 +27,14 @@ class CL_userModule(object):
                            "inner join SYS_ROLE r on r.ROLE_ID = p.ROLE_ID " \
                            "inner join SYS_USER u ON u.USER_ID = ur.USER_ID" \
                            " where  u.USER_NAME = %s and u.USER_STATUS= 1 and ur.UR_STATUS = 1 and f.form_status = 1 and r.ROLE_STATUS = 1"
-        #print(sql_select_query)
+        # print(sql_select_query)
         x = (CL_userModule.user_name,)
 
-        #print(sql_select_query)
+        # print(sql_select_query)
 
-        mycursor.execute( sql_select_query, x )
+        mycursor.execute(sql_select_query, x)
 
         records = mycursor.fetchall()
-        #print(records)
+        # print(records)
         CL_userModule.myList = records
-        #print(CL_userModule.myList)
+        # print(CL_userModule.myList)

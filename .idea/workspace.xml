@@ -24,12 +24,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="create loyality prog design">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/customer_display.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/customer_display.ui" afterDir="false" />
-    </list>
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="create loyality prog design" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -247,14 +242,7 @@
       <workItem from="1605685288704" duration="7984000" />
       <workItem from="1605771792115" duration="14111000" />
       <workItem from="1606042569935" duration="22948000" />
-      <workItem from="1607589758769" duration="32149000" />
-    </task>
-    <task id="LOCAL-00001" summary="ee">
-      <created>1598541924931</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1598541924931</updated>
+      <workItem from="1607589758769" duration="33054000" />
     </task>
     <task id="LOCAL-00002" summary="ee">
       <created>1598541997595</created>
@@ -592,7 +580,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607613188225</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="create loyality prog design">
+      <created>1607952326464</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1607952326465</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

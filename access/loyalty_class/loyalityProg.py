@@ -284,7 +284,7 @@ class CL_loyProg(QtWidgets.QDialog):
         self.Qcombo_group3.setCurrentIndex(1)
         self.Qcombo_group4.setCurrentIndex(1)
         self.Qcombo_group5.setCurrentIndex(1)
-        mycursor = self.conn.cursor()
+
         cust_gps=self.Qcombo_group2.currentData()
         cust_tps = self.Qcombo_group5.currentData()
         branchs = self.Qcombo_group4.currentData()
@@ -305,13 +305,9 @@ class CL_loyProg(QtWidgets.QDialog):
               self.status = 0
 
         #mycursor = self.conn.cursor(buffered=True)
+        self.mycursor = self.conn.cursor()
         # get max id
-        mycursor.execute( "SELECT max(cast(LOY_PROGRAM_ID AS UNSIGNED)) FROM LOYALITY_PROGRAM" )
-        myresult = mycursor.fetchone()
-        if myresult[0] == None:
-            self.id = "1"
-        else:
-            self.id = int( myresult[0] ) + 1
+
 
         creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
 
@@ -319,35 +315,35 @@ class CL_loyProg(QtWidgets.QDialog):
         branch_list=[]
         for branch in branchs:
             sql="SELECT BRANCH_NO FROM BRANCH where BRANCH_DESC_A = '" + branch + "'"
-            mycursor.execute(sql)
-            myresult = mycursor.fetchone()
+            self.mycursor.execute(sql)
+            myresult =  self.mycursor.fetchone()
             branch_list.append(myresult[0])
 
         # get COMPANY
         company_list = []
         for comp in companies:
             sql = "SELECT COMPANY_ID FROM COMPANY where COMPANY_DESC = '" + comp + "'"
-            mycursor.execute(sql)
-            myresult = mycursor.fetchone()
+            self.mycursor.execute(sql)
+            myresult =  self.mycursor.fetchone()
             company_list.append(myresult[0])
       # get customer gp id
         cust_gp_list=[]
         for cust_gp in cust_gps:
-            mycursor.execute("SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '" + cust_gp+ "'")
-            myresult = mycursor.fetchone()
+            self.mycursor.execute("SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '" + cust_gp+ "'")
+            myresult = self.mycursor.fetchone()
             cust_gp_list.append(myresult[0])
 
      # get customer type
         cust_tp_list = []
         for cust_tp in cust_tps:
-            mycursor.execute(
+            self.mycursor.execute(
                 "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + cust_tp + "'")
-            myresult = mycursor.fetchone()
+            myresult = self.mycursor.fetchone()
             cust_tp_list.append(myresult[0])
 
         # get department
-        mycursor.execute("SELECT DEPARTMENT_ID FROM DEPARTMENT where DEPARTMENT_DESC = '" + self.department + "'")
-        myresult = mycursor.fetchone()
+        self.mycursor.execute("SELECT DEPARTMENT_ID FROM DEPARTMENT where DEPARTMENT_DESC = '" + self.department + "'")
+        myresult = self.mycursor.fetchone()
         self.department = myresult[0]
 
         # get sECTION
@@ -359,8 +355,7 @@ class CL_loyProg(QtWidgets.QDialog):
         # mycursor.execute("SELECT BMC_LEVEL4_ID FROM BMC_LEVEL4 where BMC_LEVEL4_DESC = '" + self.level4 + "'")
         # myresult = mycursor.fetchone()
         # self.level4 = myresult[0]
-        mycursor.close()
-        mycursor1 = self.conn.cursor()
+
 
 
         if   len(self.Qcombo_group2.currentData())==0 or len( self.Qcombo_group3.currentData())==0 or len( self.Qcombo_group4.currentData())==0 or len( self.Qcombo_group5.currentData())==0 or self.name == '' or self.desc == '' or self.purchAmount  == '' or self.points== '' or self.date_from == '' or self.date_to== '' \
@@ -369,8 +364,12 @@ class CL_loyProg(QtWidgets.QDialog):
 
 
         else:
+             # import mysql.connector
+             # connection = mysql.connector.connect(host='10.2.1.190', database='Hyper1_Retail', password='Hyper1@POS'
+             #                                     , user='pos', port='3306')
+             # mycursor1 = connection.cursor()
 
-                #loop on companies
+             #loop on companies
                 # loop on branchs
                 # loop on custGps
                 #loop on custTps
@@ -383,6 +382,14 @@ class CL_loyProg(QtWidgets.QDialog):
                                 if ret==False:
                                     try:
                                         print("pt1")
+                                        self.mycursor.execute(
+                                            "SELECT max(cast(LOY_PROGRAM_ID AS UNSIGNED)) FROM LOYALITY_PROGRAM")
+                                        myresult = self.mycursor.fetchone()
+                                        if myresult[0] == None:
+                                            self.id = "1"
+                                        else:
+                                            self.id = int(myresult[0]) + 1
+
                                         #mycursor = self.conn.cursor()
                                         sql = "INSERT INTO LOYALITY_PROGRAM (LOY_PROGRAM_ID,COPMAPNY_ID," \
                                               "BRANCH_NO,CG_GROUP_ID,BMC_ID,POS_GTIN,LOY_NAME,LOY_DESC,LOY_CREATED_ON,LOY_CREATED_BY," \
@@ -395,34 +402,34 @@ class CL_loyProg(QtWidgets.QDialog):
                                         print(sql)
                                         print(val)
 
-                                        mycursor1.execute(sql,val)
+                                        self.mycursor.execute(sql,val)
                                         #mycursor1.close()
-                                        db1.connectionCommit(self.conn)
+                                        db1.connectionCommit()
 
                                     except (Error, Warning) as e:
                                         print(e)
                                 else:
                                     QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists " )
         # mycursor.execute(sql)
-
-
-             db1.connectionClose(self.conn)
-
-             print( mycursor.rowcount, "record inserted." )
-
-             db1.connectionClose( self.conn )
-             QtWidgets.QMessageBox.information(self, "Success", "program is created successfully")
+        if self.mycursor.rowcount>0:
+            print( self.mycursor.rowcount, "record inserted." )
+            #mycursor1.close()
+            #connection.close()
+         #db1.connectionClose( self.conn )
+            QtWidgets.QMessageBox.information(self, "Success", "program is created successfully")
 
         #self.close()
 
     def FN_CHECK_EXIST(self,comp,branch,ctgp,cttp):
-        mycursor = self.conn.cursor()
+
         sql ="SELECT *  FROM LOYALITY_PROGRAM where COPMAPNY_ID ='"+comp+"' and BRANCH_NO = '"+branch+"' and CG_GROUP_ID='"+ctgp+"' and LOYCT_TYPE_ID ='"+cttp+"' "
 
-        mycursor.execute(sql)
-        if mycursor.rowcount>0:
+        self.mycursor.execute(sql)
+        if self.mycursor.rowcount>0:
+            #mycursor.close()
             return True
         else:
+            #mycursor.close()
             return False
 
 

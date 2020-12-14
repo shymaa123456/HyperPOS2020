@@ -22,23 +22,51 @@ class CL_customer(QtWidgets.QDialog):
         if self.chk_search_other.isChecked():
             #self.Rbtn_custNo.setEnabled(True)
             self.Rbtn_custNo.setChecked(True)
+
+            self.Rbtn_custNo.setEnabled(True)
+            self.Rbtn_custTp.setEnabled(True)
+            self.Rbtn_custPhone.setEnabled(True)
             self.LE_custNo.setEnabled(True)
+            self.LE_custPhone.setEnabled(True)
+            self.CMB_loyalityType.setEnabled(True)
         else:
             self.Rbtn_custNo.setChecked(False)
+            self.Rbtn_custTp.setChecked(False)
+            self.Rbtn_custPhone.setChecked(False)
+
+            self.Rbtn_custNo.setEnabled(False)
+            self.Rbtn_custTp.setEnabled(False)
+            self.Rbtn_custPhone.setEnabled(False)
             self.LE_custNo.setEnabled(False)
+            self.LE_custPhone.setEnabled(False)
+            self.CMB_loyalityType.setEnabled(False)
+
 
         if self.chk_search_status.isChecked():
-            #self.Rbtn_stsAll.setEnabled(True)
+
+            #self.LE_custNo.setEnabled(False)
             self.Rbtn_stsAll.setChecked(True)
-        else :
+            self.Rbtn_stsActive.setEnabled(True)
+            self.Rbtn_stsInactive.setEnabled(True)
+            self.Rbtn_stsAll.setEnabled(True)
+        else:
             self.Rbtn_stsAll.setChecked(False)
+            self.Rbtn_stsActive.setEnabled(False)
+            self.Rbtn_stsInactive.setEnabled(False)
+            self.Rbtn_stsAll.setEnabled(False)
+
+        # if self.chk_search_status.isChecked():
+        #     #self.Rbtn_stsAll.setEnabled(True)
+        #
+        # else :
+        #     self.Rbtn_stsAll.setChecked(False)
     def onClicked(self):
         #radioButton = self.sender()
         #print(radioButton.name)
         if self.Rbtn_custTp.isChecked ():
+            self.FN_GET_CUSTTP()
             self.CMB_loyalityType.setEnabled(True)
             self.LE_custNo.setEnabled(False)
-
             self.LE_custPhone.setEnabled(False)
         elif self.Rbtn_custNo.isChecked ():
             self.CMB_loyalityType.setEnabled(False)
@@ -63,9 +91,11 @@ class CL_customer(QtWidgets.QDialog):
         self.Rbtn_custTp.clicked.connect(self.onClicked)
 
         self.Rbtn_custPhone.clicked.connect(self.onClicked)
-        self.chk_search_other.clicked.connect(self.onClickedCheckBox)
-        self.chk_search_status.clicked.connect(self.onClickedCheckBox)
-        self.FN_GET_CUSTTP()
+        self.chk_search_other.stateChanged.connect(self.onClickedCheckBox)
+        self.chk_search_status.stateChanged.connect(self.onClickedCheckBox)
+
+        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+        #self.FN_GET_CUSTTP()
         #check authorization
         for row_number, row_data in enumerate( CL_userModule.myList ):
            if  row_data[1] =='Display_Customer':

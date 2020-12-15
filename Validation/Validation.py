@@ -9,11 +9,9 @@ class CL_validation():
     @staticmethod
     def FN_valedation_mail(email):
         if re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            QtWidgets.QMessageBox.warning("Error", "address is valid")
-
-            print("")
+            return False;
         else:
-            print("not valid")
+            return True;
 
     @staticmethod
     def FN_validation_password(self, password):
@@ -42,12 +40,12 @@ class CL_validation():
     def FN_validation_mobile(mobile):
         number = re.compile(r'[^0-9]').sub('', mobile)
         if len(number) != 11:
-            return QtWidgets.QMessageBox.warning("Error", "Invalid mobile n0,len must be = 11")
+            return 1
         else:
             if (mobile.startswith('01')):
                 print(mobile.startswith('01'))
             else:
-                return QtWidgets.QMessageBox.warning("Error", "Invalid mobile no,no must start with '01'")
+                return 2
 
     @staticmethod
     def FN_validation_str(self, data, field_name):
@@ -59,15 +57,8 @@ class CL_validation():
 
         return (type(data) is str)
 
-    def FN_validation_int(self, data, field_name):
-        print(data)
-        print(type(data) is int)
+    def FN_validation_int(self, data):
         data = int(data)
-        if type(data) is int:
-            print(type(data) is int)
-        else:
-            message = "Make sure your that " + field_name + "is int"
-            QtWidgets.QMessageBox.warning(self, "Error", message)
         return (type(data) is int)
 
     @staticmethod

@@ -2,6 +2,8 @@ from pathlib import Path
 from PyQt5 import QtWidgets,QtCore
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
 from PyQt5.uic import loadUi
+
+from Validation.Validation import CL_validation
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 import xlrd
@@ -185,18 +187,19 @@ class CL_customer(QtWidgets.QDialog):
 
             mycursor.close()
 
-    def FN_LOAD_MODIFY(self):
-
+    def FN_LOAD_MODIFY(self,id):
+        print("id is ", id)
         filename = self.dirname + '/modifyCustomer.ui'
         loadUi( filename, self )
-        self.FN_GET_CUSTOMERS()
-        self.FN_GET_CustID()
-        self.FN_GET_CUST()
+        #self.FN_GET_CUSTOMERS()
+        #self.FN_GET_CustID()
+        self.FN_GET_CUST(id)
         self.FN_GET_CUSTGP()
         self.FN_GET_CUSTTP()
-        self.CMB_custName.currentIndexChanged.connect( self.FN_GET_CUST )
+        #self.CMB_custName.currentIndexChanged.connect( self.FN_GET_CUST )
         self.BTN_modifyCustomer.clicked.connect( self.FN_MODIFY_CUST )
         self.CMB_status.addItems( ["Active", "Inactive"] )
+
     def FN_LOAD_UPLOAD(self):
 
         filename = self.dirname + '/uploadCustomers.ui'
@@ -294,16 +297,17 @@ class CL_customer(QtWidgets.QDialog):
             self.CMB_custName.addItems( [row[0]] )
         mycursor.close()
         #print(records)
-    def FN_GET_CUST(self):
-        self.FN_GET_CustID()
-
-        self.id = self.LB_custID.text()
+    def FN_GET_CUST(self,id):
+        #self.FN_GET_CustID()
+        #self.id = self.LB_custID.text()
+        self.LB_custID.setText(id)
         mycursor = self.conn.cursor()
         sql_select_query = "select * from POS_CUSTOMER where POSC_CUST_ID = %s "
-        x = (self.id,)
+        x = (id,)
         mycursor.execute( sql_select_query, x )
         record = mycursor.fetchone()
         #print( record )
+        self.lE_custName.setText(record[3])
         self.lE_phone.setText( record[4] )
         self.lE_mobile.setText( record[5] )
         self.LE_job.setText( record[6] )
@@ -322,41 +326,39 @@ class CL_customer(QtWidgets.QDialog):
         else:
             self.CMB_status.setCurrentText( 'Inactive' )
 
-        #self.CMB_status.setCurrentText( record[21] )
-
         self.CMB_custGroup.setCurrentText( record[2] )
         self.CMB_loyalityType.setCurrentText( record[1] )
         mycursor.close()
 
-    def FN_GET_CUSTSTATUS(self):
-        self.FN_GET_CustID()
+    # def FN_GET_CUSTSTATUS(self):
+    #     self.FN_GET_CustID()
+    #
+    #     self.id = self.LB_custID.text()
+    #     mycursor = self.conn.cursor()
+    #     sql_select_query = "select POSC_STATUS from POS_CUSTOMER where POSC_CUST_ID = %s "
+    #     x = (self.id,)
+    #     mycursor.execute( sql_select_query, x )
+    #     record = mycursor.fetchone()
+    #     #print( record )
+    #
+    #     if record[0] == '1':
+    #         self.CMB_status.setCurrentText('Active')
+    #     else:
+    #         self.CMB_status.setCurrentText( 'Inactive' )
+    #
+    #     mycursor.close()
 
-        self.id = self.LB_custID.text()
-        mycursor = self.conn.cursor()
-        sql_select_query = "select POSC_STATUS from POS_CUSTOMER where POSC_CUST_ID = %s "
-        x = (self.id,)
-        mycursor.execute( sql_select_query, x )
-        record = mycursor.fetchone()
-        #print( record )
 
-        if record[0] == '1':
-            self.CMB_status.setCurrentText('Active')
-        else:
-            self.CMB_status.setCurrentText( 'Inactive' )
-
-        mycursor.close()
-
-
-    def FN_GET_CustID(self):
-        self.cust = self.CMB_custName.currentText()
-        mycursor = self.conn.cursor()
-        sql_select_query = "SELECT POSC_CUST_ID  FROM POS_CUSTOMER  WHERE POSC_NAME = %s  "
-        x = (self.cust,)
-        mycursor.execute( sql_select_query, x )
-
-        myresult = mycursor.fetchone()
-        self.LB_custID.setText( myresult[0] )
-        mycursor.close()
+    # def FN_GET_CustID(self):
+    #     self.cust = self.CMB_custName.currentText()
+    #     mycursor = self.conn.cursor()
+    #     sql_select_query = "SELECT POSC_CUST_ID  FROM POS_CUSTOMER  WHERE POSC_NAME = %s  "
+    #     x = (self.cust,)
+    #     mycursor.execute( sql_select_query, x )
+    #
+    #     myresult = mycursor.fetchone()
+    #     self.LB_custID.setText( myresult[0] )
+    #     mycursor.close()
 
 
     def FN_CR_CUST(self,funct):
@@ -365,8 +367,13 @@ class CL_customer(QtWidgets.QDialog):
         self.window_two.show()
 
     def FN_MD_CUST(self, funct):
+
         self.window_two = CL_customer()
-        self.window_two.FN_LOAD_MODIFY()
+        #get first selected row
+        rowNo=self.Qtable_customer.selectedItems()[0].row()
+        id =self.Qtable_customer.item(rowNo, 0).text()
+        #print("id is ",id)
+        self.window_two.FN_LOAD_MODIFY(id)
         self.window_two.show()
 
     def FN_UP_CUST(self, funct):
@@ -454,11 +461,37 @@ class CL_customer(QtWidgets.QDialog):
             self.status = 1
         else:
             self.status = 0
+
+        error =0
         if self.name == '' or self.lE_mobile == '' or self.LE_job  == '' or self.LE_address== '' or self.LE_city == '' or self.LE_district== '' or self.LE_building  == '' \
                 or self.LE_floor == '' or self.LE_email=='' :
             QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
+            error=1
 
-        else:
+        ret= CL_validation.FN_validation_mobile(self.lE_mobile)
+        if ret == 1 :
+             QtWidgets.QMessageBox.warning("Error", "Invalid mobile n0,len must be = 11")
+             error = 1
+        elif ret == 2 :
+             QtWidgets.QMessageBox.warning("Error", "Invalid mobile no,no must start with '01'")
+             error = 1
+
+        ret = CL_validation.FN_validation_int(self.lE_phone)
+        if ret == 'False':
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
+            error = 1
+
+        ret = CL_validation.FN_validation_int(self.LE_workPhone)
+        if ret == 'False':
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
+            error = 1
+
+        ret = CL_validation.FN_valedation_mail(self.email)
+        if ret == 'True':
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
+            error = 1
+
+        if error !=1:
 
             sql = "INSERT INTO POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
                   " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING,POSC_FLOOR, POSC_EMAIL, " \
@@ -508,9 +541,6 @@ class CL_customer(QtWidgets.QDialog):
             self.status = 1
         else:
             self.status = 0
-
-
-
         sql = "update   POSC_STATUS=%s where POSC_CUST_ID = %s"
 
         # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
@@ -589,7 +619,7 @@ class CL_customer(QtWidgets.QDialog):
             mycursor.close()
 
             print( mycursor.rowcount, "record updated." )
-            QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
+            #QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
 
             db1.connectionCommit( self.conn )
             db1.connectionClose( self.conn )

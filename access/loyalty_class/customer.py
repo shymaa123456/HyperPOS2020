@@ -193,10 +193,13 @@ class CL_customer(QtWidgets.QDialog):
         loadUi( filename, self )
         #self.FN_GET_CUSTOMERS()
         #self.FN_GET_CustID()
+        self.FN_GET_CITIES()
+        self.FN_GET_DISTRICTS ()
         self.FN_GET_CUST(id)
         self.FN_GET_CUSTGP()
         self.FN_GET_CUSTTP()
-        #self.CMB_custName.currentIndexChanged.connect( self.FN_GET_CUST )
+
+        self.CMB_city.currentIndexChanged.connect( self.FN_GET_DISTRICT )
         self.BTN_modifyCustomer.clicked.connect( self.FN_MODIFY_CUST )
         self.CMB_status.addItems( ["Active", "Inactive"] )
 
@@ -340,8 +343,8 @@ class CL_customer(QtWidgets.QDialog):
         self.lE_mobile.setText( record[5] )
         self.LE_job.setText( record[6] )
         self.LE_address.setText( record[7] )
-        self.LE_city.setText( record[8] )
-        self.LE_district.setText( record[9] )
+        self.CMB_city.setText( record[8] )
+        self.CMB_district.setText( record[9] )
         self.LE_building.setText( record[10] )
         self.LE_floor.setText( record[11] )
         self.LE_email.setText( record[12] )
@@ -421,9 +424,40 @@ class CL_customer(QtWidgets.QDialog):
         loadUi( filename, self )
         self.FN_GET_CUSTGP()
         self.FN_GET_CUSTTP()
+        self.FN_GET_CITIES()
+        #self.FN_GET_DISTRICTS()
+        self.FN_GET_DISTRICT()
+        self.CMB_city.currentIndexChanged.connect( self.FN_GET_DISTRICT )
         self.CMB_status.addItems( ["Active", "Inactive"] )
         self.BTN_createCustomer.clicked.connect(self.FN_CREATE_CUST)
 
+    def FN_GET_CITIES(self):
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT city_name FROM city order by city_id asc")
+        records = mycursor.fetchall()
+        mycursor.close()
+        for row in records:
+            self.CMB_city.addItems([row[0]])
+    def FN_GET_DISTRICT(self):
+        self.CMB_district.clear()
+        if self.CMB_city.currentText() !=None:
+            mycursor = self.conn.cursor()
+            mycursor.execute("SELECT district_name FROM district d inner join city c on d.city_id = c.city_id where city_name = '"+self.CMB_city.currentText()+"' order by district_id asc")
+            records = mycursor.fetchall()
+            mycursor.close()
+            for row in records:
+                self.CMB_district.addItems([row[0]])
+
+    def FN_GET_DISTRICTS(self):
+        self.CMB_district.clear()
+        if self.CMB_city.currentText() != None:
+            mycursor = self.conn.cursor()
+            mycursor.execute(
+                "SELECT district_name FROM district d  order by district_id asc")
+            records = mycursor.fetchall()
+            mycursor.close()
+            for row in records:
+                self.CMB_district.addItems([row[0]])
 
     def FN_GET_CUSTGP(self):
         mycursor = self.conn.cursor()
@@ -457,8 +491,8 @@ class CL_customer(QtWidgets.QDialog):
         self.mobile = self.lE_mobile.text().strip()
         self.job = self.LE_job.text().strip()
         self.address = self.LE_address.text().strip()
-        self.city = self.LE_city.text().strip()
-        self.district = self.LE_district.text().strip()
+        self.city = self.CMB_city.currentText()
+        self.district = self.CMB_district.currentText()
         self.building = self.LE_building.text().strip()
         self.LE_floor = self.LE_floor.text().strip()
         self.email = self.LE_email.text().strip()
@@ -497,7 +531,7 @@ class CL_customer(QtWidgets.QDialog):
             self.status = 0
 
         error =0
-        if self.name == '' or self.lE_mobile == '' or self.LE_job  == '' or self.LE_address== '' or self.LE_city == '' or self.LE_district== '' or self.LE_building  == '' \
+        if self.name == '' or self.lE_mobile == '' or self.LE_job  == '' or self.LE_address== '' or self.LE_building  == '' \
                 or self.LE_floor == '' or self.LE_email=='' :
             QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
             error=1

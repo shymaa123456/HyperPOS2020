@@ -27,7 +27,6 @@
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="update create and modify customer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,13 +246,9 @@
       <workItem from="1605771792115" duration="14111000" />
       <workItem from="1606042569935" duration="22948000" />
       <workItem from="1607589758769" duration="50744000" />
-    </task>
-    <task id="LOCAL-00004" summary="ee">
-      <created>1598542233401</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1598542233401</updated>
+      <workItem from="1608104467483" duration="1923000" />
+      <workItem from="1608106423543" duration="765000" />
+      <workItem from="1608109403377" duration="1632000" />
     </task>
     <task id="LOCAL-00005" summary="ee">
       <created>1598779231391</created>
@@ -591,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608020410193</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="update create and modify customer">
+      <created>1608104501173</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1608104501174</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -705,45 +707,45 @@
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605453075670" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1323" height="234" key="GridCell.Tab.0.bottom" timestamp="1608040169027">
+    <state width="1323" height="234" key="GridCell.Tab.0.bottom" timestamp="1608110312452">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="234" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608040169027" />
+    <state width="1323" height="234" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608110312452" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1323" height="234" key="GridCell.Tab.0.center" timestamp="1608040169026">
+    <state width="1323" height="234" key="GridCell.Tab.0.center" timestamp="1608110312452">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="234" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608040169026" />
+    <state width="1323" height="234" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608110312452" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1323" height="234" key="GridCell.Tab.0.left" timestamp="1608040169026">
+    <state width="1323" height="234" key="GridCell.Tab.0.left" timestamp="1608110312452">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="234" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608040169026" />
+    <state width="1323" height="234" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608110312452" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1323" height="234" key="GridCell.Tab.0.right" timestamp="1608040169027">
+    <state width="1323" height="234" key="GridCell.Tab.0.right" timestamp="1608110312452">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="234" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608040169027" />
+    <state width="1323" height="234" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608110312452" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1323" height="234" key="GridCell.Tab.1.bottom" timestamp="1608040169027">
+    <state width="1323" height="234" key="GridCell.Tab.1.bottom" timestamp="1608110380430">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="234" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608040169027" />
+    <state width="1323" height="234" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608110380430" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1323" height="234" key="GridCell.Tab.1.center" timestamp="1608040169027">
+    <state width="1323" height="234" key="GridCell.Tab.1.center" timestamp="1608110380430">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="234" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1608040169027" />
+    <state width="1323" height="234" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1608110380430" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1323" height="234" key="GridCell.Tab.1.left" timestamp="1608040169027">
+    <state width="1323" height="234" key="GridCell.Tab.1.left" timestamp="1608110380430">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="234" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1608040169027" />
+    <state width="1323" height="234" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1608110380430" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1323" height="234" key="GridCell.Tab.1.right" timestamp="1608040169027">
+    <state width="1323" height="234" key="GridCell.Tab.1.right" timestamp="1608110380430">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="234" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1608040169027" />
+    <state width="1323" height="234" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1608110380430" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
       <screen x="0" y="0" width="1366" height="728" />
@@ -753,9 +755,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056539367" />
-    <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog" timestamp="1603720741209">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state x="407" y="53" width="511" height="640" key="RollbackChangesDialog" timestamp="1608104489811">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="407" y="53" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1608104489811" />
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1607414747271">
       <screen x="0" y="0" width="1366" height="728" />
@@ -765,10 +768,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608020560775">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608104503437">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608020560775" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608104503437" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
@@ -806,8 +809,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>215</line>
+          <line>218</line>
           <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>504</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -830,7 +838,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/HyperPOS2020$login.coverage" NAME="login Coverage Results" MODIFIED="1608040169012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/access/main_login_class" />
+    <SUITE FILE_PATH="coverage/HyperPOS2020$login.coverage" NAME="login Coverage Results" MODIFIED="1608110312216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/access/main_login_class" />
     <SUITE FILE_PATH="coverage/HyperPOS2020$Promotion_Add.coverage" NAME="Promotion_Add Coverage Results" MODIFIED="1607432216161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/access/promotion_class" />
     <SUITE FILE_PATH="coverage/HyperPOS2020$test.coverage" NAME="test Coverage Results" MODIFIED="1607418734415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/access/loyalty_class" />
     <SUITE FILE_PATH="coverage/HyperPOS2020$model.coverage" NAME="model Coverage Results" MODIFIED="1607432312160" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/access/reports_class" />

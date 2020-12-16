@@ -136,7 +136,7 @@ class CL_customer(QtWidgets.QDialog):
         wb.save( str(filename[0]))
         wb.close()
     def FN_SEARCH_CUST(self):
-        print('in search')
+        #print('in search')
         #self.Qtable_customer.clearcontents()
         for i in reversed(range(self.Qtable_customer.rowCount())):
             self.Qtable_customer.removeRow(i)
@@ -173,9 +173,9 @@ class CL_customer(QtWidgets.QDialog):
         if self.chk_search_status.isChecked()==False and  self.chk_search_other.isChecked()==False:
             QtWidgets.QMessageBox.warning(self, "Error", "أختر أي من محدادات البحث")
         else:
-            print(whereClause)
+            #print(whereClause)
             sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from POS_CUSTOMER where "+ whereClause
-            print(sql_select_query)
+            #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
             for row_number, row_data in enumerate( records ):
@@ -220,31 +220,59 @@ class CL_customer(QtWidgets.QDialog):
             errorMsg =''
             createdCust =0
             nonCreatedCust=0
-
+            print (sheet.nrows)
             for i in range( sheet.nrows ):
-
-                self.name = sheet.cell_value( i, 0 )
-                self.custGroup = int(sheet.cell_value( i, 1 ))
-                self.loyalityType = int(sheet.cell_value( i, 2 ))
-                self.phone = int(sheet.cell_value( i, 3))
-                self.mobile = int(sheet.cell_value( i, 4))
-                self.job = sheet.cell_value( i, 5)
-                self.address = sheet.cell_value( i, 6)
-                self.city = sheet.cell_value( i, 7 )
-                self.district = sheet.cell_value( i, 8 )
-                self.building = sheet.cell_value( i, 9 )
-                self.LE_floor = int(sheet.cell_value( i, 10 ))
-                self.email = sheet.cell_value( i, 11 )
-                self.company = sheet.cell_value( i, 12 )
-                self.workPhone = int(sheet.cell_value( i, 13 ))
-                self.workAddress = sheet.cell_value( i, 14 )
-                self.status = int (sheet.cell_value( i, 15 ) )
-                self.notes = sheet.cell_value( i, 16 )
+                error = 0
+                try:
+                    self.name = sheet.cell_value( i, 0 )
+                    self.custGroup = int(sheet.cell_value( i, 1 ))
+                    self.loyalityType = int(sheet.cell_value( i, 2 ))
+                    self.phone = int(sheet.cell_value( i, 3))
+                    self.mobile = int(sheet.cell_value( i, 4))
+                    self.job = sheet.cell_value( i, 5)
+                    self.address = sheet.cell_value( i, 6)
+                    self.city = sheet.cell_value( i, 7 )
+                    self.district = sheet.cell_value( i, 8 )
+                    self.building = sheet.cell_value( i, 9 )
+                    self.LE_floor = int(sheet.cell_value( i, 10 ))
+                    self.email = sheet.cell_value( i, 11 )
+                    self.company = sheet.cell_value( i, 12 )
+                    self.workPhone = int(sheet.cell_value( i, 13 ))
+                    self.workAddress = sheet.cell_value( i, 14 )
+                    self.status = int (sheet.cell_value( i, 15 ) )
+                    self.notes = sheet.cell_value( i, 16 )
+                except Exception as err:
+                    print(err)
+                    #QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
                 if self.name == '' or self.mobile == '' or self.job == '' or self.address == '' or self.city == '' or self.district == '' or self.building == '' \
                         or self.email == '':
                     nonCreatedCust=nonCreatedCust+1
+                    error = 1
 
-                else:
+                    ret = CL_validation.FN_validation_mobile(self.lE_mobile)
+                    if ret == 1:
+                        QtWidgets.QMessageBox.warning("Error", "Invalid mobile n0,len must be = 11")
+                        error = 1
+                    elif ret == 2:
+                        QtWidgets.QMessageBox.warning("Error", "Invalid mobile no,no must start with '01'")
+                        error = 1
+
+                    ret = CL_validation.FN_validation_int(self.lE_phone)
+                    if ret == 'False':
+                        QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
+                        error = 1
+
+                    ret = CL_validation.FN_validation_int(self.LE_workPhone)
+                    if ret == 'False':
+                        QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
+                        error = 1
+
+                    ret = CL_validation.FN_valedation_mail(self.email)
+                    if ret == 'True':
+                        QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
+                        error = 1
+
+                if error != 1:
                 # get max userid
                     mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM POS_CUSTOMER" )
                     myresult = mycursor.fetchone()
@@ -370,11 +398,17 @@ class CL_customer(QtWidgets.QDialog):
 
         self.window_two = CL_customer()
         #get first selected row
-        rowNo=self.Qtable_customer.selectedItems()[0].row()
-        id =self.Qtable_customer.item(rowNo, 0).text()
-        #print("id is ",id)
-        self.window_two.FN_LOAD_MODIFY(id)
-        self.window_two.show()
+        try:
+            rowNo=self.Qtable_customer.selectedItems()[0].row()
+            if rowNo >0 :
+                id =self.Qtable_customer.item(rowNo, 0).text()
+                self.window_two.FN_LOAD_MODIFY(id)
+                self.window_two.show()
+            #else:
+
+        except Exception as err:
+            #(err)
+            QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
 
     def FN_UP_CUST(self, funct):
         self.window_two = CL_customer()
@@ -596,12 +630,37 @@ class CL_customer(QtWidgets.QDialog):
             self.status = 1
         else:
             self.status = 0
-
+        error = 0
         if  self.lE_mobile == '' or self.LE_job == '' or self.LE_address == '' or self.LE_city == '' or self.LE_district == '' or self.LE_building == '' \
                 or self.LE_floor == '' or self.LE_email == '':
             QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
+            error = 1
 
-        else:
+            ret = CL_validation.FN_validation_mobile(self.lE_mobile)
+            if ret == 1:
+                QtWidgets.QMessageBox.warning("Error", "Invalid mobile n0,len must be = 11")
+                error = 1
+            elif ret == 2:
+                QtWidgets.QMessageBox.warning("Error", "Invalid mobile no,no must start with '01'")
+                error = 1
+
+            ret = CL_validation.FN_validation_int(self.lE_phone)
+            if ret == 'False':
+                QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
+                error = 1
+
+            ret = CL_validation.FN_validation_int(self.LE_workPhone)
+            if ret == 'False':
+                QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
+                error = 1
+
+            ret = CL_validation.FN_valedation_mail(self.email)
+            if ret == 'True':
+                QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
+                error = 1
+
+        if error != 1:
+
 
             sql = "update  POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,   POSC_PHONE=%s," \
                   " POSC_MOBILE=%s, POSC_JOB=%s, POSC_ADDRESS=%s, POSC_CITY=%s, POSC_DISTICT=%s, POSC_BUILDING=%s,POSC_FLOOR=%s, POSC_EMAIL=%s, " \
@@ -619,10 +678,10 @@ class CL_customer(QtWidgets.QDialog):
             mycursor.close()
 
             print( mycursor.rowcount, "record updated." )
-            #QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
+            QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
 
             db1.connectionCommit( self.conn )
             db1.connectionClose( self.conn )
             self.close()
 
-        print( "in modify cust", self.CMB_custName )
+

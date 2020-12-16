@@ -381,8 +381,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>800</x>
-     <y>50</y>
+     <x>780</x>
+     <y>100</y>
      <width>109</width>
      <height>25</height>
     </rect>
@@ -397,8 +397,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>50</y>
+     <x>150</x>
+     <y>90</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -408,10 +408,13 @@
    </property>
   </widget>
   <widget class="QLineEdit" name="lE_custName">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>60</y>
+     <y>100</y>
      <width>559</width>
      <height>20</height>
     </rect>

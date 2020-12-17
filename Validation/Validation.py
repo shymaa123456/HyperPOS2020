@@ -38,26 +38,31 @@ class CL_validation():
 
     @staticmethod
     def FN_validation_mobile(mobile):
-        number = re.compile(r'[^0-9]').sub('', mobile)
-        if len(number) != 11:
-            return 1
-        else:
-            if (mobile.startswith('01')):
-                print(mobile.startswith('01'))
+        try:
+            number = re.compile(r'[^0-9]').sub('', mobile)
+            if len(number) != 11:
+                return 3
             else:
-                return 2
+                if (mobile.startswith('01')):
+                    print(mobile.startswith('01'))
+                    return True
+                else:
+                    return 2
+        except Exception as err:
+            print(err)
 
     @staticmethod
     def FN_validation_str(self, data, field_name):
         if type(data) is str:
             print(type(data) is str)
+            return True
         else:
             message = "Make sure your that " + field_name + "is string"
             QtWidgets.QMessageBox.warning(self, "Error", message)
 
         return (type(data) is str)
 
-    def FN_validation_int(self, data):
+    def FN_validation_int(data):
         data = int(data)
         return (type(data) is int)
 
@@ -74,5 +79,6 @@ class CL_validation():
         entry_date = datetime.datetime.strptime(date, "%d-%m-%Y")
         if start <= entry_date <= end:
             print("PASS!")
+            return True
         else:
             QtWidgets.QMessageBox.warning("Error", "Invalid date format")

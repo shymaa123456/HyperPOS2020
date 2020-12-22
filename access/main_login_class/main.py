@@ -235,3 +235,4 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two = CL_create_promotion()
         self.window_two.FN_LOAD_CREATE_PROM()
         self.window_two.show()
+

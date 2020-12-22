@@ -9,11 +9,9 @@ class CL_validation():
     @staticmethod
     def FN_valedation_mail(email):
         if re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            QtWidgets.QMessageBox.warning("Error", "address is valid")
-
-            print("")
+            return False;
         else:
-            print("not valid")
+            return True;
 
     @staticmethod
     def FN_validation_password(self, password):
@@ -40,34 +38,32 @@ class CL_validation():
 
     @staticmethod
     def FN_validation_mobile(mobile):
-        number = re.compile(r'[^0-9]').sub('', mobile)
-        if len(number) != 11:
-            return QtWidgets.QMessageBox.warning("Error", "Invalid mobile n0,len must be = 11")
-        else:
-            if (mobile.startswith('01')):
-                print(mobile.startswith('01'))
+        try:
+            number = re.compile(r'[^0-9]').sub('', mobile)
+            if len(number) != 11:
+                return 3
             else:
-                return QtWidgets.QMessageBox.warning("Error", "Invalid mobile no,no must start with '01'")
+                if (mobile.startswith('01')):
+                    print(mobile.startswith('01'))
+                    return True
+                else:
+                    return 2
+        except Exception as err:
+            print(err)
 
     @staticmethod
     def FN_validation_str(self, data, field_name):
         if type(data) is str:
             print(type(data) is str)
+            return True
         else:
             message = "Make sure your that " + field_name + "is string"
             QtWidgets.QMessageBox.warning(self, "Error", message)
 
         return (type(data) is str)
 
-    def FN_validation_int(self, data, field_name):
-        print(data)
-        print(type(data) is int)
+    def FN_validation_int(data):
         data = int(data)
-        if type(data) is int:
-            print(type(data) is int)
-        else:
-            message = "Make sure your that " + field_name + "is int"
-            QtWidgets.QMessageBox.warning(self, "Error", message)
         return (type(data) is int)
 
     @staticmethod
@@ -83,5 +79,6 @@ class CL_validation():
         entry_date = datetime.datetime.strptime(date, "%d-%m-%Y")
         if start <= entry_date <= end:
             print("PASS!")
+            return True
         else:
             QtWidgets.QMessageBox.warning("Error", "Invalid date format")

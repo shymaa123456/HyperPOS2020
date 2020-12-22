@@ -446,7 +446,7 @@ class CL_customer(QtWidgets.QDialog):
 
     def FN_GET_CITIES(self):
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT city_name FROM city order by city_id asc")
+        mycursor.execute("SELECT CITY_NAME FROM City  where CITY_STATUS = 1 order by CITY_ID asc")
         records = mycursor.fetchall()
 
         for row in records:
@@ -456,7 +456,7 @@ class CL_customer(QtWidgets.QDialog):
         self.CMB_district.clear()
         if self.CMB_city.currentText() !=None:
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT district_name FROM district d inner join city c on d.city_id = c.city_id where city_name = '"+self.CMB_city.currentText()+"' order by district_id asc")
+            mycursor.execute("SELECT DISTRICT_NAME FROM DISTRICT d inner join City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+self.CMB_city.currentText()+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
             records = mycursor.fetchall()
 
             for row in records:
@@ -468,7 +468,7 @@ class CL_customer(QtWidgets.QDialog):
         if self.CMB_city.currentText() != None:
             mycursor = self.conn.cursor()
             mycursor.execute(
-                "SELECT district_name FROM district d  order by district_id asc")
+                "SELECT DISTRICT_NAME FROM DISTRICT d where DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
             records = mycursor.fetchall()
 
             for row in records:

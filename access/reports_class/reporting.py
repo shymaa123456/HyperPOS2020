@@ -344,7 +344,7 @@ class CL_report(QtWidgets.QDialog):
         title = Text()
         title.setName("Invoice")
         title.setFooter(
-            " س ت 36108 ملف  ضريبي 212/306/5 مأموريه  ضرائب الشركات المساهمة رقم التسجيل بضرائب المبيعات 153/846/310 ")
+            " Ø³ Øª 36108 Ù…Ù„Ù  Ø¶Ø±ÙŠØ¨ÙŠ 212/306/5 Ù…Ø£Ù…ÙˆØ±ÙŠÙ‡  Ø¶Ø±Ø§Ø¦Ø¨ Ø§Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù…Ø³Ø§Ù‡Ù…Ø© Ø±Ù‚Ù… Ø§Ù„ØªØ³Ø¬ÙŠÙ„ Ø¨Ø¶Ø±Ø§Ø¦Ø¨ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª 153/846/310 ")
         title.setFont('Scheherazade-Regular.ttf')
         title.setFontsize(10)
         title.setcodeText("15235")
@@ -511,4 +511,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 

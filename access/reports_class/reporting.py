@@ -181,7 +181,7 @@ class CL_report(QtWidgets.QDialog):
         self.Qcombo_classification.clear()
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BMC_LEVEL4 , BMC_ID FROM pos_bmc where SECTION_ID ="+id+"")
+        mycursor.execute("SELECT BMC_LEVEL4_DESC , BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID ="+id+"")
         records = mycursor.fetchall()
         print(records)
         for row , val in records:

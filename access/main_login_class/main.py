@@ -83,6 +83,8 @@ class CL_main(QtWidgets.QMainWindow):
 
         """ Promotion """
         self.QAct_Prom_Add.triggered.connect(self.FN_search_promotion)
+        self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)
+
 
         self.QAct_Exit.triggered.connect(self.FN_exit)
         self.setWindowTitle('HyperPOS Main Page')
@@ -234,4 +236,10 @@ class CL_main(QtWidgets.QMainWindow):
     def FN_search_promotion(self):
         self.window_two = CL_create_promotion()
         self.window_two.FN_LOAD_CREATE_PROM()
+        self.window_two.show()
+
+
+
+    def FN_search_reporting(self):
+        self.window_two = CL_report()
         self.window_two.show()

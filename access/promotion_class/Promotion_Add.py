@@ -10,6 +10,8 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
+from PyQt5.QtWidgets import QMessageBox
+
 import sys
 
 """ 
@@ -188,24 +190,34 @@ class CL_create_promotion(QtWidgets.QDialog):
 
         loadUi(filename, self)
 
-        """ checked combobox sample """
-        self.Qcombo_cust_group2 = CheckableComboBox(self)
-        self.Qcombo_cust_group2.setGeometry(400, 79, 179, 18)
-        self.Qcombo_cust_group2.setLayoutDirection(Qt.LeftToRight)  # RightToLeft)
-        # self.Qcombo_cust_group2.lineEdit().setAlignment(Qt.AlignRight)
-        self.Qcombo_cust_group2.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         """ checked combobox sample >>> Branch"""
         self.Qcombo_branch2 = CheckableComboBox(self)
-        self.Qcombo_branch2.setGeometry(400, 55, 179, 18)
-        self.Qcombo_branch2.setLayoutDirection(Qt.LeftToRight)
+        self.Qcombo_branch2.setGeometry(621, 44, 179, 18)
+        self.Qcombo_branch2.setLayoutDirection(Qt.RightToLeft)
         self.Qcombo_branch2.setStyleSheet("background-color: rgb(198, 207, 199)")
+        # self.Qcombo_branch.hide()
+
+        """ checked combobox sample """
+        self.Qcombo_cust_group2 = CheckableComboBox(self)
+        self.Qcombo_cust_group2.setGeometry(621, 68, 179, 18)
+        self.Qcombo_cust_group2.setLayoutDirection(Qt.RightToLeft)  # RightToLeft)
+        # self.Qcombo_cust_group2.lineEdit().setAlignment(Qt.AlignRight)
+        self.Qcombo_cust_group2.setStyleSheet("background-color: rgb(198, 207, 199)")
+        # self.Qcombo_cust_group.hide()
 
         """ checked combobox sample >>> sponsor"""
         self.Qcombo_sponsor2 = CheckableComboBox(self)
-        self.Qcombo_sponsor2.setGeometry(400, 103, 179, 18)
-        self.Qcombo_sponsor2.setLayoutDirection(Qt.LeftToRight)
+        self.Qcombo_sponsor2.setGeometry(621, 92, 179, 18)
+        self.Qcombo_sponsor2.setLayoutDirection(Qt.RightToLeft)
         self.Qcombo_sponsor2.setStyleSheet("background-color: rgb(198, 207, 199)")
+        # self.Qcombo_sponsor.hide()
+
+        self.Qcombo_sponsor2.activated.connect(self.handleActivated)
+        # self.Qcombo_sponsor2.currentIndexChanged().connect(self.handleActivated)
+
+
+
 
         self.FN_GET_Company()
         self.FN_GET_Branch()
@@ -269,12 +281,80 @@ class CL_create_promotion(QtWidgets.QDialog):
     def FN_GET_promotion_sponser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT SPONSER_NAME FROM SPONSER")
+        mycursor.execute("SELECT SPONSER_NAME , SPONSER_ID FROM SPONSER WHERE SPONSER_STATUS = '1' ")
         records = mycursor.fetchall()
         print(records)
-        for row in records:
-            self.Qcombo_sponsor2.addItems(row)
+        for row, VAL in records:
+            # self.Qcombo_sponsor2.addItems(row)
+            self.Qcombo_sponsor2.addItem(row , VAL)
+            self.Qline_promotion.text = VAL
         mycursor.close()
+
+        ##################################################
+        # ##  test data
+        # # self.Qtable_promotion.
+        #
+        # # data = 'Recordset back from postgis'
+        # nb_row = len(records)
+        # nb_col = 3
+        # self.Qtable_promotion.setRowCount(nb_row)
+        # self.Qtable_promotion.setColumnCount(nb_col)
+        #
+        # combo_box_options = ["Option", "Option 2: val", "Option 3: val"]
+        # combo = QComboBox()
+        # for t in combo_box_options:
+        #     combo.addItem(t)
+        #
+        # for row in range(nb_row):
+        #     for col in range(nb_col-1):
+        #         item = QTableWidgetItem(str(records[row][col]))
+        #         self.Qtable_promotion.setItem(row, col, item)
+        #
+        #     # self.Qtable_promotion.setCellWidget(row, 2, combo)
+        #     # combo.setCurrentIndex(1)
+        # # self.Qtable_promotion.setHorizontalHeaderLabels([u'Column1', u'Column2'])
+        #
+        # self.Qtable_promotion.setHorizontalHeaderLabels([u'SPONSER_NAME', u'SPONSER_ID', u'combo'])
+        # self.Qtable_promotion.cellClicked.connect(self.cell_was_clicked)
+        #
+        # self.Qtable_promotion.resizeColumnsToContents()
+        #
+        # ##################################################
+        #
+        # # self.table = QtGui.QTableWidget()
+        # # self.table.setColumnCount(3)
+        # # self.setCentralWidget(self.table)
+        # # data1 = ['row1', 'row2', 'row3', 'row4']
+        # # data2 = ['1', '2.0', '3.00000001', '3.9999999']
+        # # combo_box_options = ["Option 1", "Option 2", "Option 3"]
+        #
+        # # self.table.setRowCount(4)
+        #
+        # # for index in range(nb_row):
+        # #     # item1 = QtGui.QTableWidgetItem(data1[index])
+        # #     # self.table.setItem(index, 0, item1)
+        # #     # item2 = QtGui.QTableWidgetItem(data2[index])
+        # #     # self.table.setItem(index, 1, item2)
+        # #     combo = QtGui.QComboBox()
+        # #     for t in combo_box_options:
+        # #         combo.addItem(t)
+        # #     self.Qtable_promotion.setCellWidget(index, 2, combo)
+        #
+        #     ##################################################
+
+    def handleActivated(self, index):
+        print(self.Qcombo_sponsor2.itemText(index))
+        print(self.Qcombo_sponsor2.itemData(index))
+        QMessageBox.about(self, self.Qcombo_sponsor2.itemText(index), self.Qcombo_sponsor2.itemData(index))
+
+    def cell_was_clicked(self,  row, column):
+        # index = self.Qtable_promotion.currentIndex()
+        # NewIndex = self.Qtable_promotion.model().index(index.row(), 0)
+        # print(NewIndex)
+        # print(index)
+        print("Row %d and Column %d was clicked" % (row, column))
+        item = self.Qtable_promotion.item(row, column)
+        print(item.text())
 
     def FN_GET_promotion_type(self):
         self.conn = db1.connect()

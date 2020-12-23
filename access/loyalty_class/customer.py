@@ -571,7 +571,7 @@ class CL_customer(QtWidgets.QDialog):
                 error = 1
 
             ret = CL_validation.FN_valedation_mail(self.email)
-            if ret != 'False':
+            if ret == 'True':
                 QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
                 error = 1
 

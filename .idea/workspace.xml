@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BranchesTreeState">
-    <expand />
-    <select />
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="PROMOTION 22-12-2020">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="finish Ehab comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/reports_class/reporting.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/reports_class/reporting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,14 +69,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/00 MINE/2020 MASTER 2020/To Fawzy/ODDO/odoo-13.0/odoo-13.0" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/access/loyalty_class" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\access\loyalty_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\presentation\loyalty_ui" />
@@ -65,9 +80,12 @@
       <recent name="$PROJECT_DIR$/data_connection" />
       <recent name="$PROJECT_DIR$/presentation/voucher_ui" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/access/loyalty_class" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.login">
-    <configuration name="TEST2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -75,11 +93,34 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/promotion_class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Validation" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/promotion_class/TEST2.py" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Validation/Validation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="hello" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HyperPOS2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/authorization_class" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/authorization_class/hello.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -95,7 +136,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Administrator\anaconda3\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\Shaymaa\anaconda3\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/main_login_class" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -110,7 +151,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test (١)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -118,11 +159,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/promotion_class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/loyalty_class" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/promotion_class/test.py" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/loyalty_class/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -131,46 +173,21 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for testt.Test" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/promotion_class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/authorization_class" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/promotion_class/test3.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="HyperPOS2020" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/promotion_class" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/promotion_class/test4.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;testt.Test&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="pytest in testt.py" type="tests" factoryName="py.test" nameIsGenerated="true">
@@ -191,20 +208,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.TEST2" />
+      <item itemvalue="Python.Validation" />
+      <item itemvalue="Python.hello" />
       <item itemvalue="Python.login" />
-      <item itemvalue="Python.test (١)" />
-      <item itemvalue="Python.test3" />
-      <item itemvalue="Python.test4" />
+      <item itemvalue="Python.test" />
       <item itemvalue="Python tests.pytest in testt.py" />
+      <item itemvalue="Python tests.pytest for testt.Test" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
-        <item itemvalue="Python.test4" />
-        <item itemvalue="Python.test3" />
-        <item itemvalue="Python.TEST2" />
-        <item itemvalue="Python.test (١)" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.Validation" />
+        <item itemvalue="Python.hello" />
+        <item itemvalue="Python tests.pytest for testt.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -228,20 +245,10 @@
       <workItem from="1605685288704" duration="7984000" />
       <workItem from="1605771792115" duration="14111000" />
       <workItem from="1606042569935" duration="22948000" />
-    </task>
-    <task id="LOCAL-00004" summary="ee">
-      <created>1598542233401</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1598542233401</updated>
-    </task>
-    <task id="LOCAL-00005" summary="ee">
-      <created>1598779231391</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1598779231391</updated>
+      <workItem from="1607589758769" duration="50744000" />
+      <workItem from="1608104467483" duration="1923000" />
+      <workItem from="1608106423543" duration="765000" />
+      <workItem from="1608109403377" duration="1632000" />
     </task>
     <task id="LOCAL-00006" summary="create privialge form">
       <created>1598803247205</created>
@@ -544,31 +551,49 @@
       <option name="project" value="LOCAL" />
       <updated>1607267284771</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٤٩" summary="create loyality prog design">
-      <created>1607438979532</created>
-      <option name="number" value="LOCAL؜٠٠٠٤٩" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٤٩" />
-      <updated>1607438979532</updated>
+    <task id="LOCAL-00049" summary="create loyality prog design">
+      <created>1607613188225</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1607613188225</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٥٠" summary="PROMOTION 8-12-2020">
-      <created>1607443273733</created>
-      <option name="number" value="LOCAL؜٠٠٠٥٠" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٥٠" />
-      <updated>1607443273733</updated>
+    <task id="LOCAL-00050" summary="create loyality prog design">
+      <created>1607952326464</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1607952326465</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٥١" summary="PROMOTION 22-12-2020">
-      <created>1608643979466</created>
-      <option name="number" value="LOCAL؜٠٠٠٥١" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٥١" />
-      <updated>1608643979467</updated>
+    <task id="LOCAL-00051" summary="create loyality prog design">
+      <created>1607953340739</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1607953340739</updated>
     </task>
-    <task id="LOCAL؜٠٠٠٥٢" summary="PROMOTION 22-12-2020">
-      <created>1608649826798</created>
-      <option name="number" value="LOCAL؜٠٠٠٥٢" />
-      <option name="presentableId" value="LOCAL؜٠٠٠٥٢" />
-      <updated>1608649826798</updated>
+    <task id="LOCAL-00052" summary="update create and modify customer">
+      <created>1608020410193</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1608020410193</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="update create and modify customer">
+      <created>1608104501173</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1608104501174</updated>
+    </task>
+    <task id="LOCAL-00054" summary="finish Ehab comments">
+      <created>1608204418288</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1608204418288</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,28 +676,16 @@
     <MESSAGE value="upload the code" />
     <MESSAGE value="search customer" />
     <MESSAGE value="create loyality prog design" />
-    <MESSAGE value="PROMOTION 8-12-2020" />
-    <MESSAGE value="PROMOTION 22-12-2020" />
-    <option name="LAST_COMMIT_MESSAGE" value="PROMOTION 22-12-2020" />
+    <MESSAGE value="update create and modify customer" />
+    <MESSAGE value="finish Ehab comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish Ehab comments" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="188" key="#Notifications" timestamp="1608650022153">
+    <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605430091539">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="421" y="188" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1608650022153" />
-    <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608644086693">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1608644086693" />
+    <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1605430091539" />
     <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1604236813970" />
-    <state x="438" y="67" key="#xdebugger.evaluate" timestamp="1608040074418">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="438" y="67" key="#xdebugger.evaluate/0.0.1366.728@0.0.1366.728" timestamp="1608040074418" />
-    <state x="430" y="219" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1607439198719">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="430" y="219" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1607439198719" />
     <state x="506" y="228" width="354" height="320" key="DBNavigator.ConnectionAuthenticationDialog" timestamp="1605442784187">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -689,88 +702,93 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="172" y="127" width="1094" height="541" key="DiffContextDialog/72.27.1294.741@72.27.1294.741" timestamp="1603721119801" />
-    <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1608054011197">
+    <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1605453075670">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1608054011197" />
+    <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605453075670" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1345" height="142" key="GridCell.Tab.0.bottom" timestamp="1608649865392">
+    <state width="1308" height="163" key="GridCell.Tab.0.bottom" timestamp="1608622532286">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="142" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608649865392" />
+    <state width="1308" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608622532286" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="142" key="GridCell.Tab.0.center" timestamp="1608649865392">
+    <state width="1308" height="163" key="GridCell.Tab.0.center" timestamp="1608622532286">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="142" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608649865392" />
+    <state width="1308" height="163" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608622532286" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="142" key="GridCell.Tab.0.left" timestamp="1608649865392">
+    <state width="1308" height="163" key="GridCell.Tab.0.left" timestamp="1608622532286">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="142" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608649865392" />
+    <state width="1308" height="163" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608622532286" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1345" height="142" key="GridCell.Tab.0.right" timestamp="1608649865392">
+    <state width="1308" height="163" key="GridCell.Tab.0.right" timestamp="1608622532286">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="142" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608649865392" />
+    <state width="1308" height="163" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608622532286" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="223" key="GridCell.Tab.1.bottom" timestamp="1608055514155">
+    <state width="1308" height="208" key="GridCell.Tab.1.bottom" timestamp="1608620975236">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608055514155" />
+    <state width="1308" height="208" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608620975236" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1345" height="223" key="GridCell.Tab.1.center" timestamp="1608055514155">
+    <state width="1308" height="208" key="GridCell.Tab.1.center" timestamp="1608620975236">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1608055514155" />
+    <state width="1308" height="208" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1608620975236" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1345" height="223" key="GridCell.Tab.1.left" timestamp="1608055514155">
+    <state width="1308" height="208" key="GridCell.Tab.1.left" timestamp="1608620975236">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1608055514155" />
+    <state width="1308" height="208" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1608620975236" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1345" height="223" key="GridCell.Tab.1.right" timestamp="1608055514155">
+    <state width="1308" height="208" key="GridCell.Tab.1.right" timestamp="1608620975236">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1608055514155" />
+    <state width="1308" height="208" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1608620975236" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="129" y="55" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606042463662" />
-    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1608649856544">
+    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1606056539367">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1608649856544" />
-    <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog" timestamp="1603720741209">
-      <screen x="72" y="27" width="1294" height="741" />
+    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056539367" />
+    <state x="407" y="53" width="511" height="640" key="RollbackChangesDialog" timestamp="1608104489811">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="407" y="53" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1608104489811" />
     <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1607427566919">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1608112241771">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607427566919" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1608112241771" />
     <state x="470" y="79" key="VCS.ChangeListViewerDialog" timestamp="1606056527179">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1607443291330">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608204422297">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1607443291330" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608204422297" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603710032984" />
+    <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1607601800288">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="691" height="372" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1607601800288" />
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1603707589579">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/72.27.1294.741@72.27.1294.741" timestamp="1603707589579" />
-    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608650005233">
+    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607945386697">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1608650005233" />
+    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1607945386697" />
     <state x="500" y="312" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1294.741@72.27.1294.741" timestamp="1601991488853" />
     <state x="382" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1604406788152">
       <screen x="72" y="27" width="1294" height="741" />
@@ -778,15 +796,51 @@
     <state x="382" y="89" width="672" height="678" key="search.everywhere.popup/72.27.1294.741@72.27.1294.741" timestamp="1604406788152" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
+          <line>383</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>672</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>572</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>649</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>250</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>230</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="self.verticalLayout" />
-        <watch expression="self.Qbtn_create.PdmPhysicalDpiX" />
-        <watch expression="self.CMB" language="Python" />
-        <watch expression="CMB_formItemName.text()" language="Python" />
-        <watch expression="self.CMB_formItemName.count()" language="Python" />
-        <watch expression="row1[0]" language="Python" />
-        <watch expression="self.CMB_formItemName.count()" language="Python" />
+        <watch expression="ret" language="Python" />
+        <watch expression="sheet.nrows " language="Python" />
       </configuration>
     </watches-manager>
   </component>

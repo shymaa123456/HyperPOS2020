@@ -79,6 +79,7 @@ class CL_loyProg(QtWidgets.QDialog):
         self.FN_GET_DEPARTMENTS()
         self.FN_GET_SECTIONS()
         self.FN_GET_LEVEL4()
+        self.CMB_department.activated.connect( self.FN_GET_SECTIONS )
     # #     #check authorization
         #print(CL_userModule.myList)
         for row_number, row_data in enumerate( CL_userModule.myList ):
@@ -233,7 +234,11 @@ class CL_loyProg(QtWidgets.QDialog):
     def FN_GET_SECTIONS(self):
         mycursor = self.conn.cursor()
         self.CMB_section.clear()
-        sql_select_query = "SELECT SECTION_DESC  FROM SECTION where SECTION_STATUS   = 1 "
+        dept = self.CMB_department.currentText()
+
+        sql_select_query = "SELECT SECTION_DESC  FROM SECTION s inner join DEPARTMENT d ON " \
+                           "d.`DEPARTMENT_ID` = s.`DEPARTMENT_ID`" \
+                           "where SECTION_STATUS   = 1 and `DEPARTMENT_DESC`= '"+dept+"'"
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
         for row in records:
@@ -243,6 +248,7 @@ class CL_loyProg(QtWidgets.QDialog):
     def FN_GET_LEVEL4(self):
         mycursor = self.conn.cursor()
         self.CMB_level4.clear()
+        sec = self.CMB_section.currentText()
         sql_select_query = "SELECT BMC_LEVEL4_DESC  FROM BMC_LEVEL4 where BMC_LEVEL4_STATUS   = 1 "
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
@@ -280,11 +286,12 @@ class CL_loyProg(QtWidgets.QDialog):
         mycursor.close()
         return records[0]
     def FN_CREATE_LOYPROG(self):
-        self.Qcombo_group2.setCurrentIndex(1)
-        self.Qcombo_group3.setCurrentIndex(1)
-        self.Qcombo_group4.setCurrentIndex(1)
-        self.Qcombo_group5.setCurrentIndex(1)
-
+        #testing
+        # self.Qcombo_group2.setCurrentIndex(1)
+        # self.Qcombo_group3.setCurrentIndex(1)
+        # self.Qcombo_group4.setCurrentIndex(1)
+        # self.Qcombo_group5.setCurrentIndex(1)
+        # testing
         cust_gps=self.Qcombo_group2.currentData()
         cust_tps = self.Qcombo_group5.currentData()
         branchs = self.Qcombo_group4.currentData()

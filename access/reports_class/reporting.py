@@ -66,11 +66,12 @@ class CL_report(QtWidgets.QDialog):
             if len(self.Qcombo_cust_group.currentData())>0:
                 for i in self.Qcombo_cust_group.currentData():
                     self.customer_group_list.append("'" + i + "'")
-                self.prom_CG = "JOIN `promotion_group` ON `PROMOTION_GROUP`.`CG_GROUP_ID` IN (" +','.join(self.customer_group_list) + ")"
+                self.prom_CG = "JOIN `PROMOTION_GROUP` ON `PROMOTION_GROUP`.`CG_GROUP_ID` IN (" +','.join(self.customer_group_list) + ")"
         if self.QcheckBox_sponsor_prom.isChecked():
             if len(self.Qcombo_sponsor.currentData()) > 0:
                 for i in self.Qcombo_sponsor.currentData():
                     self.sponsor_list.append("'" + i + "'")
+
                 self.sponsor_prom="JOIN `PROMOTION_SPONSER` ON `PROMOTION_SPONSER`.`SPONSER_ID`IN(" +','.join(self.sponsor_list) + ")"
         if self.QcheckBox_magazine.isChecked():
             if len(self.Qcombo_magazine.currentData()) > 0:
@@ -181,7 +182,7 @@ class CL_report(QtWidgets.QDialog):
         self.Qcombo_classification.clear()
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BMC_LEVEL4 , BMC_ID FROM pos_bmc where SECTION_ID ="+id+"")
+        mycursor.execute("SELECT BMC_LEVEL4_DESC , BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID ="+id+"")
         records = mycursor.fetchall()
         print(records)
         for row , val in records:

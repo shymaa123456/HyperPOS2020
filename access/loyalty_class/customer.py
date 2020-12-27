@@ -484,6 +484,7 @@ class CL_customer(QtWidgets.QDialog):
             self.CMB_custGroup.addItems( [row[0]] )
 
     def FN_GET_CUSTTP(self):
+        self.CMB_loyalityType.clear()
         mycursor = self.conn.cursor()
         mycursor.execute( "SELECT LOYCT_DESC FROM LOYALITY_CUSTOMER_TYPE order by LOYCT_TYPE_ID asc" )
         records = mycursor.fetchall()

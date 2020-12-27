@@ -24,9 +24,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="finish Ehab comments">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="update city ,district tables">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,6 +154,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="reporting" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HyperPOS2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/reports_class" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/reports_class/reporting.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,23 +195,6 @@
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for testt.Test" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="HyperPOS2020" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/authorization_class" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;testt.Test&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="pytest in testt.py" type="tests" factoryName="py.test" nameIsGenerated="true">
@@ -212,16 +219,16 @@
       <item itemvalue="Python.hello" />
       <item itemvalue="Python.login" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.reporting" />
       <item itemvalue="Python tests.pytest in testt.py" />
-      <item itemvalue="Python tests.pytest for testt.Test" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
+        <item itemvalue="Python.reporting" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.Validation" />
         <item itemvalue="Python.hello" />
-        <item itemvalue="Python tests.pytest for testt.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -707,45 +714,45 @@
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605453075670" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1308" height="163" key="GridCell.Tab.0.bottom" timestamp="1608622532286">
+    <state width="1308" height="99" key="GridCell.Tab.0.bottom" timestamp="1609060022759">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608622532286" />
+    <state width="1308" height="99" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609060022759" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1308" height="163" key="GridCell.Tab.0.center" timestamp="1608622532286">
+    <state width="1308" height="99" key="GridCell.Tab.0.center" timestamp="1609060022757">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="163" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608622532286" />
+    <state width="1308" height="99" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609060022757" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1308" height="163" key="GridCell.Tab.0.left" timestamp="1608622532286">
+    <state width="1308" height="99" key="GridCell.Tab.0.left" timestamp="1609060022757">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="163" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608622532286" />
+    <state width="1308" height="99" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609060022757" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1308" height="163" key="GridCell.Tab.0.right" timestamp="1608622532286">
+    <state width="1308" height="99" key="GridCell.Tab.0.right" timestamp="1609060022758">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="163" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608622532286" />
+    <state width="1308" height="99" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609060022758" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1308" height="208" key="GridCell.Tab.1.bottom" timestamp="1608620975236">
+    <state width="1308" height="244" key="GridCell.Tab.1.bottom" timestamp="1608805578932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="208" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608620975236" />
+    <state width="1308" height="244" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608805578932" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1308" height="208" key="GridCell.Tab.1.center" timestamp="1608620975236">
+    <state width="1308" height="244" key="GridCell.Tab.1.center" timestamp="1608805578932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="208" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1608620975236" />
+    <state width="1308" height="244" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1608805578932" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1308" height="208" key="GridCell.Tab.1.left" timestamp="1608620975236">
+    <state width="1308" height="244" key="GridCell.Tab.1.left" timestamp="1608805578932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="208" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1608620975236" />
+    <state width="1308" height="244" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1608805578932" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1308" height="208" key="GridCell.Tab.1.right" timestamp="1608620975236">
+    <state width="1308" height="244" key="GridCell.Tab.1.right" timestamp="1608805578932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="208" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1608620975236" />
+    <state width="1308" height="244" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1608805578932" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
       <screen x="0" y="0" width="1366" height="728" />
@@ -768,10 +775,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608204422297">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608791021337">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608204422297" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608791021337" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
@@ -785,11 +792,15 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/72.27.1294.741@72.27.1294.741" timestamp="1603707589579" />
-    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607945386697">
+    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608791006895">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1607945386697" />
+    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1608791006895" />
     <state x="500" y="312" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1294.741@72.27.1294.741" timestamp="1601991488853" />
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1608733341649">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1608733341649" />
     <state x="382" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1604406788152">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
@@ -799,23 +810,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>383</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>672</line>
+          <line>673</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>572</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>649</line>
+          <line>650</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -828,6 +829,11 @@
           <line>230</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/authorization_class/privilage.py</url>
+          <line>181</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -839,8 +845,11 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="ret" language="Python" />
-        <watch expression="sheet.nrows " language="Python" />
+        <watch expression="myresult[0] " language="Python" />
+        <watch expression="self.mycursor" language="Python" />
+        <watch expression="self.conn" language="Python" />
+        <watch expression="__py_debug_temp_var_745666278" />
+        <watch expression="cursor.rowcount()" language="Python" />
       </configuration>
     </watches-manager>
   </component>

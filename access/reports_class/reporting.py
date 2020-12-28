@@ -48,9 +48,15 @@ class CL_report(QtWidgets.QDialog):
     list_num = []
 
     def FN_close(self):
+        #Todo: method for close window
+
         self.close()
 
+
+
     def FN_loadData(self, PROM_ID):
+        #Todo: method for searching about promotions in data base
+
         self.customer_group_list.clear()
         self.sponsor_list.clear()
         self.magazine_list.clear()
@@ -60,9 +66,15 @@ class CL_report(QtWidgets.QDialog):
         if len(self.Qcombo_company.currentData()) > 0:
             for i in self.Qcombo_company.currentData():
                 self.company_list.append("'" + i + "'")
+        else:
+            self.company_list.append("'" "'")
+
         if len(self.Qcombo_branchEdition.currentData()) > 0:
             for i in self.Qcombo_branchEdition.currentData():
                 self.branch_list.append("'" + i + "'")
+        else:
+            self.branch_list.append("'" "'")
+
 
         if self.QcheckBox_customer_group.isChecked():
             if len(self.Qcombo_cust_group.currentData()) > 0:
@@ -96,18 +108,22 @@ class CL_report(QtWidgets.QDialog):
                     "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_ID`= '" + self.Qline_promotion.text() + "'")
         elif self.cond == 2:
 
-            self.query = ("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` "
-                          "JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`"
-                          "JOIN `PROMOTION_GROUP` ON   `PROMOTION_GROUP`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
-                          "JOIN `PROMOTION_SPONSER` ON   `PROMOTION_SPONSER`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
-                          "JOIN `PROM_BRANCH` ON `PROM_BRANCH`.`PROM_ID` = `PROMOTION_HEADER`.`PROM_ID`"
-                          "where"
-                          "`PROM_BRANCH`.`COMPANY_ID` IN (" + ','.join(self.company_list) + ")"
-                          "and `PROM_BRANCH`.`BRANCH_NO`IN ("+ ','.join(self.branch_list) +")"
-                          "and `PROMOTION_HEADER`.`PROM_TYPE_ID`= '" + self.Qcombo_promotion.currentData() + "'"
-                          +self.magazine_prom+" "+self.prom_CG+" "+self.sponsor_prom+" "+self.bmc+"and `PROMOTION_DETAIL`.`PROM_START_DATE` <= '" + self.Qdate_from.dateTime().toString(
-                            'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`>='" + self.Qdate_to.dateTime().toString(
-                            'yyyy-MM-dd') + " " + "23:59:00" + "'"+self.prom_status)
+            self.query = (
+                        "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` "
+                        "JOIN `PROM_BRANCH` ON `PROM_BRANCH`.`PROM_ID` = `PROMOTION_HEADER`.`PROM_ID`"
+                        "JOIN `PROMOTION_GROUP` ON   `PROMOTION_GROUP`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
+                        "JOIN `PROMOTION_SPONSER` ON   `PROMOTION_SPONSER`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
+                        "JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`"
+
+                        "where"
+                        "`PROM_BRANCH`.`COMPANY_ID` IN (" + ','.join(self.company_list) + ")"
+                        "and `PROM_BRANCH`.`BRANCH_NO`IN (" + ','.join(self.branch_list) + ")"
+                        "and `PROMOTION_HEADER`.`PROM_TYPE_ID`= '" + self.Qcombo_promotion.currentData() + "'"
+                        + self.magazine_prom + " " + self.prom_CG + " " + self.sponsor_prom + " " + self.bmc +
+                        "and `PROMOTION_DETAIL`.`PROM_START_DATE` <= '" + self.Qdate_from.dateTime().toString(
+                        'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`>='"
+                        + self.Qdate_to.dateTime().toString(
+                        'yyyy-MM-dd') + " " + "23:59:00" + "'" + self.prom_status)
 
 
         elif self.cond == 3:
@@ -139,6 +155,8 @@ class CL_report(QtWidgets.QDialog):
         self.disable()
 
     def FN_GET_Company(self):
+        #Todo: method for fills the company combobox
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
@@ -149,6 +167,8 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_Branch(self):
+        #Todo: method for fills the Branch combobox
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
@@ -158,6 +178,9 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_CustomerGroup(self):
+
+        #Todo: method for fills the Customer Group combobox
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT CG_DESC,CG_GROUP_ID FROM CUSTOMER_GROUP")
@@ -167,6 +190,8 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_MAGAZINE(self):
+        #Todo: method for fills the MAGAZINE combobox
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT MAGAZINE_DESC , MAGAZINE_ID FROM MAGAZINE")
@@ -176,15 +201,20 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_department(self):
+        #Todo: method for fills the department combobox
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT DEPARTMENT_DESC ,DEPARTMENT_ID FROM DEPARTMENT")
         records = mycursor.fetchall()
         for row, val in records:
+
             self.Qcombo_department.addItem(row, val)
         mycursor.close()
 
     def FN_GET_promotion_sponser(self):
+        #Todo: method for fills the promotion_sponser combobox
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT SPONSER_NAME ,SPONSER_ID FROM SPONSER")
@@ -194,6 +224,8 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_section(self, id):
+        #Todo: method for fills the section combobox through departmet id
+
         self.Qcombo_section.clear()
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -205,6 +237,8 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_classification(self, id):
+        #Todo: method for fills the Subsection combobox through SECTION id
+
         self.Qcombo_classification.clear()
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -216,6 +250,8 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_promotion_type(self):
+        #Todo: method for fills the section combobox through SECTION id
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT PROMT_NAME_AR , PROMOTION_TYPE_ID FROM PROMOTION_TYPE order by PROMOTION_TYPE_ID*1 ")
@@ -225,6 +261,8 @@ class CL_report(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_Checked_Selected(self):
+        #Todo: method for change kind of Search parameters to search by promotion type
+
         self.radioBtnPromNum_2.setChecked(False)
         self.radioBtnPromNum.setChecked(False)
         self.radioButton_2.setChecked(True)
@@ -239,6 +277,8 @@ class CL_report(QtWidgets.QDialog):
         self.disable()
 
     def FN_Checked_Selected2(self):
+        #Todo: method for change kind of Search parameters to search by promotion number
+
         self.radioBtnPromNum_2.setChecked(False)
         self.radioButton_2.setChecked(False)
         self.radioBtnPromNum.setChecked(True)
@@ -253,6 +293,9 @@ class CL_report(QtWidgets.QDialog):
         self.disable()
 
     def FN_Checked_Selected3(self):
+
+        #Todo: method for change kind of Search parameters to search by gtin
+
         self.radioBtnPromNum.setChecked(False)
         self.radioButton_2.setChecked(False)
         self.radioBtnPromNum_2.setChecked(True)
@@ -266,6 +309,8 @@ class CL_report(QtWidgets.QDialog):
         self.disable()
 
     def FN_Check_Group(self):
+        #Todo: method for enable or disable customer group combobox
+
         if self.QcheckBox_customer_group.isChecked():
             self.Qcombo_cust_group.setEnabled(True)
             self.Qtable_promotion.setRowCount(0)
@@ -276,6 +321,8 @@ class CL_report(QtWidgets.QDialog):
             self.prom_CG = ""
 
     def FN_Check_Sponsor(self):
+        #Todo: method for enable or disable Sponsor combobox
+
         if self.QcheckBox_sponsor_prom.isChecked():
             self.Qcombo_sponsor.setEnabled(True)
             self.Qtable_promotion.setRowCount(0)
@@ -285,16 +332,24 @@ class CL_report(QtWidgets.QDialog):
             self.sponsor_prom = ""
 
     def FN_Check_department(self):
+        #Todo: method for enable or disable department combobox
+
         if self.QcheckBox_department.isChecked():
             self.Qcombo_department.setEnabled(True)
+            self.Qcombo_section.setEnabled(True)
+            self.Qcombo_classification.setEnabled(True)
             self.Qtable_promotion.setRowCount(0)
             self.disable()
 
         else:
             self.Qcombo_department.setEnabled(False)
+            self.Qcombo_section.setEnabled(False)
+            self.Qcombo_classification.setEnabled(False)
             self.bmc=""
 
     def FN_Check_Magazine(self):
+        #Todo: method for enable or disable Magazine combobox
+
         if self.QcheckBox_magazine.isChecked():
             self.Qcombo_magazine.setEnabled(True)
             self.Qtable_promotion.setRowCount(0)
@@ -306,29 +361,38 @@ class CL_report(QtWidgets.QDialog):
             self.magazine_prom = ""
 
     def FN_Check_Active(self):
+        #Todo: method for change status to active
+
         self.status = 1
         self.Qtable_promotion.setRowCount(0)
         self.disable()
         self.prom_status = "and `PROMOTION_DETAIL`.`PROM_STATUS`='1'"
 
     def FN_Check_Stopped(self):
+        #Todo: method for change status to Stopped
+
         self.status = 0
         self.Qtable_promotion.setRowCount(0)
         self.disable()
         self.prom_status = "and `PROMOTION_DETAIL`.`PROM_STATUS`='0'"
 
     def FN_Check_Expired(self):
+        #Todo: method for change status to Expired
+
         self.status = 2
         self.Qtable_promotion.setRowCount(0)
         self.disable()
         self.prom_status = "and `PROMOTION_DETAIL`.`PROM_STATUS`='2'"
 
     def FN_Check_All(self):
+        #Todo: method for change status to All
+
         self.Qtable_promotion.setRowCount(0)
         self.disable()
         self.prom_status = ""
 
     def handleSave(self):
+        #Todo: method for export reports excel file
 
         frame = pd.read_sql(str(self.query), self.conn)
         df = pd.DataFrame(frame,
@@ -343,23 +407,13 @@ class CL_report(QtWidgets.QDialog):
         os.system('myreport.xlsx')
         ####################################
 
-    def saveFile(self):
-        df = pd.DataFrame()
-        savePath = QtGui.QFileDialog.getSaveFileName(None, "Blood Hound", "Testing.csv", "CSV files (*.csv)")
-        rows = self.Qtable_promotion.rowCount()
-        columns = self.Qtable_promotion.columnCount()
-
-        for i in range(rows):
-            for j in range(columns):
-                df.loc[i, j] = str(self.Qtable_promotion.item(i, j).text())
-        df.to_csv((savePath), header=None, index=0)
-
     def printpreviewDialog(self):
+        #Todo: method for export reports pdf file
 
         title = Text()
         title.setName("Invoice")
         title.setFooter(
-            " Ø³ Øª 36108 Ù…Ù„Ù  Ø¶Ø±ÙŠØ¨ÙŠ 212/306/5 Ù…Ø£Ù…ÙˆØ±ÙŠÙ‡  Ø¶Ø±Ø§Ø¦Ø¨ Ø§Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù…Ø³Ø§Ù‡Ù…Ø© Ø±Ù‚Ù… Ø§Ù„ØªØ³Ø¬ÙŠÙ„ Ø¨Ø¶Ø±Ø§Ø¦Ø¨ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª 153/846/310 ")
+            " س ت 36108 ملف  ضريبي 212/306/5 مأموريه  ضرائب الشركات المساهمة رقم التسجيل بضرائب المبيعات 153/846/310 ")
         title.setFont('Scheherazade-Regular.ttf')
         title.setFontsize(10)
         title.setcodeText("15235")
@@ -371,33 +425,13 @@ class CL_report(QtWidgets.QDialog):
 
         body()
         QtWidgets.QMessageBox.information(self, "Success", "Report is printed successfully")
-        ######################################################
-        # options = QFileDialog.Options()
-        # options |= QFileDialog.DontUseNativeDialog
-        # fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
-        #                                           " Files (*.pdf)", options=options)
         import os
         os.system('my_file.pdf')
-        # print(f.read())
-        # dialog = QtPrintSupport.QP
-        # rintPreviewDialog()
-        # dialog.paintRequested.connect(self.handlePaintRequest)
-        # dialog.exec_()
 
-    def handlePaintRequest(self, printer):
-        title = Text()
-
-        document = QtGui.QTextDocument()
-        cursor = QtGui.QTextCursor(document)
-        table = cursor.insertTable(self.Qtable_promotion.rowCount(), self.Qtable_promotion.columnCount())
-        for row in range(table.rows()):
-            for col in range(table.columns()):
-                cursor.insertText(self.Qtable_promotion.item(row, col).text())
-                cursor.movePosition(QtGui.QTextCursor.NextCell)
-
-        document.print_(printer)
 
     def disable(self):
+        #Todo: method for disable or enable table based on count of row
+
         if self.Qtable_promotion.rowCount() == 0:
             self.Qbtn_exprot.setEnabled(False)
             self.Qbtn_print.setEnabled(False)
@@ -406,6 +440,8 @@ class CL_report(QtWidgets.QDialog):
             self.Qbtn_print.setEnabled(True)
 
     def updatestatecombo(self):
+        #Todo: method for do action when select item from department to fill another combobox like Qcombo_section
+
         indx = self.Qcombo_department.currentData()
         self.FN_GET_section(indx)
         indx = self.Qcombo_section.currentData()
@@ -413,10 +449,15 @@ class CL_report(QtWidgets.QDialog):
         self.FN_GET_classification(indx)
 
     def updateBMCcombo(self):
+        #Todo: method for do action when select item from Qcombo_section to fill another combobox like Qcombo_classification
+
         indx = self.Qcombo_section.currentData()
         self.FN_GET_classification(indx)
 
     def __init__(self):
+        #Todo: method for initialization components
+
+
         super(CL_report, self).__init__()
 
         cwd = Path.cwd()
@@ -486,7 +527,7 @@ class CL_report(QtWidgets.QDialog):
 
         self.Qcombo_department.activated[str].connect(self.updatestatecombo)
         self.Qcombo_section.activated[str].connect(self.updateBMCcombo)
-
+        self.updatestatecombo()
         self.disable()
 
 

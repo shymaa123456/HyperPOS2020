@@ -77,8 +77,8 @@ class CL_loyProg(QtWidgets.QDialog):
         self.FN_GET_CUSTTP()
     #
         self.FN_GET_DEPARTMENTS()
-        self.FN_GET_SECTIONS()
-        self.FN_GET_BMCLEVEL4()
+        #self.FN_GET_SECTIONS()
+        #self.FN_GET_BMCLEVEL4()
         self.CMB_department.activated.connect( self.FN_GET_SECTIONS )
         self.CMB_section.activated.connect(self.FN_GET_BMCLEVEL4)
     # #     #check authorization
@@ -237,7 +237,7 @@ class CL_loyProg(QtWidgets.QDialog):
         for row in records:
             self.CMB_department.addItems( [row[0]] )
         mycursor.close()
-
+        self.FN_GET_SECTIONS()
     def FN_GET_SECTIONS(self):
         mycursor = self.conn.cursor()
         self.CMB_section.clear()
@@ -251,6 +251,7 @@ class CL_loyProg(QtWidgets.QDialog):
         for row in records:
             self.CMB_section.addItems( [row[0]] )
         mycursor.close()
+        self.FN_GET_BMCLEVEL4()
 
     def FN_GET_BMCLEVEL4(self):
         mycursor = self.conn.cursor()
@@ -544,7 +545,7 @@ class CL_loyProg(QtWidgets.QDialog):
             self.Qtable_loyality.insertRow(row_number)
 
             for column_number, data in enumerate(row_data):
-                print(column_number,'  ',str(data))
+
                 if column_number ==4 :
                     data =self.FN_GET_STATUS_DESC(str(data))
                 elif column_number ==5 :

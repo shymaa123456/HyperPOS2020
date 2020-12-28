@@ -45,7 +45,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>0</y>
      <width>1021</width>
      <height>271</height>
@@ -336,7 +336,7 @@ background-color: rgb(198, 207, 199);</string>
       <x>10</x>
       <y>110</y>
       <width>111</width>
-      <height>121</height>
+      <height>151</height>
      </rect>
     </property>
     <property name="title">
@@ -348,17 +348,17 @@ background-color: rgb(198, 207, 199);</string>
        <x>10</x>
        <y>10</y>
        <width>91</width>
-       <height>112</height>
+       <height>141</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QPushButton" name="Qbtn_upload">
+       <widget class="QPushButton" name="Qbtn_search">
         <property name="enabled">
          <bool>false</bool>
         </property>
         <property name="text">
-         <string>تحميل البيانات</string>
+         <string>بحث</string>
         </property>
        </widget>
       </item>
@@ -379,6 +379,16 @@ background-color: rgb(198, 207, 199);</string>
         </property>
         <property name="text">
          <string>تعديل البرنامج</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Qbtn_upload">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>تحميل البيانات</string>
         </property>
        </widget>
       </item>
@@ -508,9 +518,9 @@ background-color: rgb(198, 207, 199);</string>
    <widget class="QGroupBox" name="groupBox_7">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>136</x>
       <y>130</y>
-      <width>481</width>
+      <width>541</width>
       <height>121</height>
      </rect>
     </property>
@@ -523,7 +533,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLabel" name="label_13">
      <property name="geometry">
       <rect>
-       <x>409</x>
+       <x>462</x>
        <y>20</y>
        <width>41</width>
        <height>20</height>
@@ -536,7 +546,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QComboBox" name="CMB_department">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>383</x>
        <y>20</y>
        <width>81</width>
        <height>20</height>
@@ -546,7 +556,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLabel" name="label_14">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>473</x>
        <y>70</y>
        <width>41</width>
        <height>20</height>
@@ -559,7 +569,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLineEdit" name="Qline_barcode">
      <property name="geometry">
       <rect>
-       <x>231</x>
+       <x>284</x>
        <y>74</y>
        <width>181</width>
        <height>20</height>
@@ -569,7 +579,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLabel" name="label_15">
      <property name="geometry">
       <rect>
-       <x>282</x>
+       <x>335</x>
        <y>20</y>
        <width>41</width>
        <height>20</height>
@@ -582,7 +592,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QComboBox" name="CMB_section">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>253</x>
        <y>20</y>
        <width>81</width>
        <height>20</height>
@@ -592,7 +602,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLabel" name="label_16">
      <property name="geometry">
       <rect>
-       <x>122</x>
+       <x>175</x>
        <y>20</y>
        <width>71</width>
        <height>20</height>
@@ -605,7 +615,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QComboBox" name="CMB_level4">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>93</x>
        <y>20</y>
        <width>81</width>
        <height>20</height>
@@ -615,7 +625,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QRadioButton" name="Qradio_bmc">
      <property name="geometry">
       <rect>
-       <x>453</x>
+       <x>506</x>
        <y>23</y>
        <width>20</width>
        <height>20</height>
@@ -631,7 +641,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QRadioButton" name="Qradio_barcode">
      <property name="geometry">
       <rect>
-       <x>454</x>
+       <x>507</x>
        <y>71</y>
        <width>20</width>
        <height>20</height>
@@ -657,7 +667,7 @@ background-color: rgb(198, 207, 199);</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_7">
     <item row="0" column="0">
-     <widget class="QTableWidget" name="Qtable_promotion">
+     <widget class="QTableWidget" name="Qtable_loyality">
       <column>
        <property name="text">
         <string>اسم البرنامج</string>
@@ -705,7 +715,7 @@ background-color: rgb(198, 207, 199);</string>
       </column>
       <column>
        <property name="text">
-        <string>الأداره</string>
+        <string>الباركود</string>
        </property>
       </column>
       <column>

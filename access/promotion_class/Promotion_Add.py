@@ -187,7 +187,6 @@ class CL_create_promotion(QtWidgets.QDialog):
 
     def FN_LOAD_CREATE_PROM(self):
         filename = self.dirname + '/Promotion_create.ui'
-
         loadUi(filename, self)
 
 
@@ -217,15 +216,30 @@ class CL_create_promotion(QtWidgets.QDialog):
         # self.Qcombo_sponsor2.currentIndexChanged().connect(self.handleActivated)
 
 
-
-
         self.FN_GET_Company()
         self.FN_GET_Branch()
         self.FN_GET_CustomerGroup()
         self.FN_GET_MAGAZINE()
-        # self.FN_GET_department()
         self.FN_GET_promotion_sponser()
         self.FN_GET_promotion_type()
+
+        self.FN_GET_department()
+        self.updatestatecombo()
+
+        # department
+        self.Qcombo_department.activated[str].connect(self.updatestatecombo)
+        self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)
+
+    # SEARCH BUTTON
+    def FN_SEARCH_BARCODES(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT COMPANY_DESC FROM COMPANY")
+        records = mycursor.fetchall()
+        print(records)
+        for row in records:
+            self.Qcombo_company.addItems(row)
+        mycursor.close()
 
     def FN_GET_Company(self):
         self.conn = db1.connect()
@@ -266,16 +280,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         print(records)
         for row in records:
             self.Qcombo_magazine.addItems(row)
-        mycursor.close()
-
-    def FN_GET_department(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT DEPARTMENT_DESC FROM DEPARTMENT")
-        records = mycursor.fetchall()
-        print(records)
-        # for row in records:
-        #     self.Qcombo_sponsor_2.addItems(row)
         mycursor.close()
 
     def FN_GET_promotion_sponser(self):
@@ -365,3 +369,53 @@ class CL_create_promotion(QtWidgets.QDialog):
         for row in records:
             self.Qcombo_promotion.addItems(row)
         mycursor.close()
+
+    # department
+    def FN_GET_department(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT DEPARTMENT_DESC ,DEPARTMENT_ID FROM DEPARTMENT")
+        records = mycursor.fetchall()
+        print(records)
+        for row, val in records:
+            self.Qcombo_department.addItem(row, val)
+        mycursor.close()
+
+    # section
+    def FN_GET_section(self, id):
+        self.Qcombo_section.clear()
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT SECTION_DESC ,SECTION_ID FROM SECTION where DEPARTMENT_ID = '" + id + "'")
+        records = mycursor.fetchall()
+        print(records)
+        for row, val in records:
+            self.Qcombo_section.addItem(row, val)
+        mycursor.close()
+
+    # section update
+    def updatestatecombo(self):
+        indx = self.Qcombo_department.currentData()
+        self.FN_GET_section(indx)
+        indx = self.Qcombo_section.currentData()
+        self.Qcombo_classification.clear()
+        self.FN_GET_classification(indx)
+        self.Qcombo_section.activated[str].connect(self.updateBMCcombo)
+
+
+    # BMC
+    def FN_GET_classification(self, id):
+        self.Qcombo_classification.clear()
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT BMC_LEVEL4_DESC , BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID =" + id + "")
+        records = mycursor.fetchall()
+        print(records)
+        for row, val in records:
+            self.Qcombo_classification.addItem(row, val)
+        mycursor.close()
+
+    # BMC update
+    def updateBMCcombo(self):
+        indx = self.Qcombo_section.currentData()
+        self.FN_GET_classification(indx)

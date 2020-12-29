@@ -106,6 +106,8 @@ class CL_report(QtWidgets.QDialog):
         if self.cond == 1:
             self.query = (
                     "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_ID`= '" + self.Qline_promotion.text() + "'")
+            self.runQuery(mycursor)
+
         elif self.cond == 2:
 
             self.query = (
@@ -124,6 +126,7 @@ class CL_report(QtWidgets.QDialog):
                         'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`>='"
                         + self.Qdate_to.dateTime().toString(
                         'yyyy-MM-dd') + " " + "23:59:00" + "'" + self.prom_status)
+            self.runQuery(mycursor)
 
 
         elif self.cond == 3:
@@ -140,20 +143,23 @@ class CL_report(QtWidgets.QDialog):
                     "and `PROMOTION_DETAIL`.`POS_GTIN`= '" + self.Qline_promotion_2.text() + "'" + self.prom_status + " "  + "and `PROMOTION_DETAIL`.`PROM_START_DATE`>='" + self.Qdate_from.dateTime().toString(
                     'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`<='" + self.Qdate_to.dateTime().toString(
                     'yyyy-MM-dd') + " " + "23:59:00"+"'" )
+            self.runQuery(mycursor)
+        elif self.cond==0:
+            QtWidgets.QMessageBox.warning(self, "Error", "برجاء تحديد محددات البحث")
+            mycursor.close()
 
+
+        self.disable()
+
+    def runQuery(self,mycursor):
         print(self.query)
-
         mycursor.execute(self.query)
         records = mycursor.fetchall()
-        print(records)
         for row_number, row_data in enumerate(records):
-
             self.Qtable_promotion.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.Qtable_promotion.setItem(row_number, column_number, QTableWidgetItem(str(data)))
         mycursor.close()
-        self.disable()
-
     def FN_GET_Company(self):
         #Todo: method for fills the company combobox
 

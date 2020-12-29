@@ -233,6 +233,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         except:
             print("An exception occurred")
 
+
     # SEARCH BUTTON
     def FN_SEARCH_BARCODES(self):
         self.conn = db1.connect()

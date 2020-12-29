@@ -1,20 +1,9 @@
-import re
-def FN_validation_mobile(mobile):
-    number = re.compile(r'[^0-9]').sub('', mobile)
-    if len(number) != 11:
-        return 1
+import datetime
+def validate(date_text):
+    try:
+        datetime.datetime.strptime(date_text, '%d-%m-%Y')
+    except ValueError:
+        raise ValueError("Incorrect data format, should be DD-MM-YYYY")
 
-    else:
-        if (mobile.startswith('01')):
-            print(mobile.startswith('01'))
-            return True
-        else:
-            return 2
-
-def FN_valedation_mail(email):
-        if re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            return False;
-        else:
-            return True;
-
-print (FN_valedation_mail ('shyml@gmail.com.eg'))
+validate('2003-12-23')
+#validate('2003-12-32')

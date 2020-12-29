@@ -38,10 +38,10 @@ class CL_privilage( QtWidgets.QDialog ):
         self.FN_GET_FORMITEMID()
         self.FN_DISPLAY_PRIVILAGE()
         self.CMB_roleName.activated.connect( self.FN_GET_ROLEID )
-        self.CMB_formName.activated.connect( self.FN_GET_FORMID )
+        self.CMB_formName.activated[str].connect( self.FN_GET_FORMID )
         self.CMB_actionName.activated.connect( self.FN_GET_ACTIONID )
         #self.CMB_formItemName.blockSignals(True)
-        self.CMB_formItemName.activated.connect( self.FN_GET_FORMITEMID )
+
         #self.CMB_formItemName.blockSignals(False)
         self.BTN_add.clicked.connect( self.FN_ADD_PRIVILAGE )
         self.BTN_delete.clicked.connect( self.FN_DELETE_PRIVILAGE )
@@ -88,32 +88,34 @@ class CL_privilage( QtWidgets.QDialog ):
                 self.w1.setItem( rowPosition, 5, QTableWidgetItem( str( self.formItemName ) ) )
 
     def FN_CHECK_TABLE_WIDGET_AVAILABILITY(self, var11, var2, var3, var4):
+        try:
+            mycursor = self.conn.cursor()
+            allRows = self.w1.rowCount()
 
-        mycursor = self.conn.cursor()
-        allRows = self.w1.rowCount()
+            for row in range( 0, allRows ):
 
-        for row in range( 0, allRows ):
+                sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT WHERE ACTION_DESC = %s"
+                x = (self.w1.item( row, 4 ).text(),)
+                mycursor.execute( sql_select_query, x )
 
-            sql_select_query = "SELECT ACTION_ID FROM SYS_PRINT_EXPORT WHERE ACTION_DESC = %s"
-            x = (self.w1.item( row, 4 ).text(),)
-            mycursor.execute( sql_select_query, x )
+                myresult = mycursor.fetchone()
+                if mycursor.rowcount > 0:
+                    actionId = myresult[0]
 
-            myresult = mycursor.fetchone()
-            if mycursor.rowcount > 0:
-                actionId = myresult[0]
+                formItemName = self.w1.item( row, 5 )
+                sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s and ITEM_STATUS  = 1"
+                x = (formItemName.text(),)
+                mycursor.execute( sql_select_query, x )
 
-            formItemName = self.w1.item( row, 5 )
-            sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s and ITEM_STATUS  = 1"
-            x = (formItemName.text(),)
-            mycursor.execute( sql_select_query, x )
+                myresult = mycursor.fetchone()
+                if mycursor.rowcount > 0:
+                    formItemId = myresult[0]
 
-            myresult = mycursor.fetchone()
-            if mycursor.rowcount > 0:
-                formItemId = myresult[0]
-
-            if var11 == self.w1.item( row, 1 ).text() and var2 == self.w1.item( row,  3 ).text() and var3 == actionId and var4 == formItemId:
-                return True
-        mycursor.close()
+                if var11 == self.w1.item( row, 1 ).text() and var2 == self.w1.item( row,  3 ).text() and var3 == actionId and var4 == formItemId:
+                    return True
+            mycursor.close()
+        except Exception as err:
+            print(err)
         # if chk:
         #     return True
 
@@ -158,7 +160,7 @@ class CL_privilage( QtWidgets.QDialog ):
     def FN_GET_FORMItems(self):
 
         self.form = self.LB_formId.text()
-        self.CMB_formItemName.blockSignals(True)
+        #self.CMB_formItemName.blockSignals(True)
         self.CMB_formItemName.clear()
         # print("after clear")
         # print(self.CMB_formItemName.count())
@@ -174,7 +176,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.CMB_formItemName.addItems( [row1[0]] )
         mycursor.close()
 
-        self.CMB_formItemName.blockSignals(False)
+        #self.CMB_formItemName.blockSignals(False)
     def FN_GET_FORMITEMID(self):
         #self.CMB_formItemName.blockSignals(True)
         mycursor = self.conn.cursor()
@@ -191,7 +193,7 @@ class CL_privilage( QtWidgets.QDialog ):
 
         mycursor.close()
 
-        self.CMB_formItemName.blockSignals(False)
+        #self.CMB_formItemName.blockSignals(False)
     def FN_GET_ROLEID(self):
         self.role = self.CMB_roleName.currentText()
         mycursor = self.conn.cursor()
@@ -231,7 +233,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.LB_formId.setText( myresult[0] )
 
         mycursor.close()
-
+        self.CMB_formItemName.activated[str].connect(self.FN_GET_FORMITEMID)
         self.FN_GET_FORMItems()
         self.FN_GET_FORMITEMID()
 

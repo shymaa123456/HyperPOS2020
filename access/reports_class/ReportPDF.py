@@ -1,81 +1,65 @@
-import mysql
 
-from access.reports_class.WeasypayPDFFile import FooterCanvas, Foo
+from access.reports_class.WeasypayPDFFile import FooterCanvas,Foo
 
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, PageBreak)
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle, Spacer
-from reportlab.platypus import Table, LongTable
-from reportlab.lib.units import inch, cm, mm
-from reportlab.lib.pagesizes import LETTER, A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle,Spacer
+from reportlab.platypus import Table,LongTable
+from reportlab.lib.units import inch,cm,mm
+from reportlab.lib.pagesizes import LETTER,A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import pandas as pd
-
-from mysql.connector import Error
-
-import mysql.connector
+from data_connection.h1pos import db1
 
 from reportlab.lib import colors
 
-from reportlab.graphics.shapes import Drawing, Line
+from reportlab.graphics.shapes import Drawing,Line
 import arabic_reshaper
 
 from bidi.algorithm import get_display
 from Validation.Validation import CL_validation
 
-name = "done"
-foot = "text"
-fontname = ''
-fontsize = 0
-code = ""
-watermark = ""
-branch = ""
-tel = ""
-query = ""
-cursortest = 0
-
-
+name="done"
+foot="text"
+fontname=''
+fontsize=0
+code=""
+watermark=""
+branch=""
+tel=""
+query=""
+cursortest=0
 class Text():
-    def setCursor(self, cursor):
+    def setCursor(self,cursor):
         global cursortest
-        cursortest = cursor
-
+        cursortest=cursor
     def getcursor(self):
         return cursortest
-
-    def setName(self, title):
+    def setName(self,title):
         global name
         name = title
-
     def getName(self):
         return name
-
     def setFooter(self, footer):
         global foot
         foot = footer
-
     def getFooter(self):
         return foot
-
     def setFont(self, font):
         global fontname
         fontname = font
 
     def getFont(self):
         return fontname
-
     def setFontsize(self, font):
         global fontsize
         fontsize = font
-
     def getFontsize(self):
         return fontsize
-
     def setcodeText(self, codeText):
         global code
         code = codeText
-
     def getcodeText(self):
         return code
 
@@ -89,52 +73,36 @@ class Text():
     def setbrachText(self, waterText):
         global branch
         branch = waterText
-
     def getbrachText(self):
         return branch
 
     def settelText(self, waterText):
         global tel
         tel = waterText
-
     def gettelText(self):
         return tel
-
     def setQuery(self, waterText):
         global query
         query = waterText
-
     def getQuery(self):
         return query
-
-
 class body():
     def __init__(self):
-        title = Text()
-        val = CL_validation()
+        title=Text()
+        val= CL_validation()
         pdfmetrics.registerFont(TTFont('Scheherazade', 'Scheherazade-Regular.ttf'))
         data = [['Nubmber reset:', '248361 5/1/2018', '                                      ', '', 'Client Data'],
-                ['phone number:', title.gettelText(), '                           ', title.getcodeText(),
-                 'Customer Code'],
+                ['phone number:', title.gettelText(), '                           ', title.getcodeText(), 'Customer Code'],
                 ['mobile number', title.gettelText(), '                             ', 'TEST', 'Customer Name'],
                 ['', '', '                                ', 'Giza', 'City']]
         f = Table(data, repeatRows=1, repeatCols=1, hAlign='CENTER')
 
         d = Drawing(100, 5)
         d.add(Line(16, 6, 500, 6))
-
-        # sqlEngine = create_engine('mysql+pymysql://root:@127.0.0.1', pool_recycle=3600)
-        # dbConnection = sqlEngine.connect()
-        connection = mysql.connector.connect(host='localhost', database='Hyper1_Retail'
-                                             , user='root', port='3306')
-        # frame = pd.read_sql("SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID` AND `PROMOTION_DETAIL`.`PROM_STATUS`='3' JOIN `PROM_BRANCH` ON `PROM_BRANCH`.`BRANCH_NO`=(SELECT `BRANCH`.`BRANCH_NO` FROM `BRANCH` WHERE `BRANCH`.`BRANCH_DESC_A`='zayed')", connection)
+        connection = db1.connect()
         frame = pd.read_sql(str(title.getQuery()), connection)
-        df = pd.DataFrame(frame,
-                          columns=['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON',
-                                   'PROM_LINE_NO'])
+        df = pd.DataFrame(frame, columns=['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
 
-        # df = pd.DataFrame(cursortest.fetchall())
-        # df.columns = cursortest.keys()
 
         df = df.reset_index()
         df = df.rename(columns={"index": ""})
@@ -179,8 +147,9 @@ class body():
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             ('FONT', (0, 0), (-1, 0), 'Times-Bold'),
             ('FONTSIZE', (0, 0), (-1, 0), 6),
-            ('FONT', (0, -1), (-1, -1), 'Times-Bold'),
-            ('FONTSIZE', (0, -1), (-1, -1), 10)
+            ('FONT', (0,-1), (-1,-1), 'Times-Bold'),
+            ('FONTSIZE', (0,-1), (-1,-1), 10)
+
 
         ]))
         genStr = "Total LienceNumber: " + str(total)
@@ -194,9 +163,8 @@ class body():
         elements.append(Paragraph(genStr))
 
         elements.append(PageBreak())
-        # elements.append(Paragraph("", styles["Normal"]))
-        # Build
-        foo = Foo()  # init Foo class and call its function
+
+        foo = Foo()
         foo.foo_func(title.getName())
         foo.setFooter(title.getFooter())
         foo.setFont(title.getFont())

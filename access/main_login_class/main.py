@@ -24,8 +24,10 @@ from access.loyalty_class.customerType import CL_customerTP
 from access.promotion_class.Promotion_Add import CL_create_promotion
 
 
+
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
+
 
     def __init__(self):
         forms = []

@@ -189,7 +189,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         filename = self.dirname + '/Promotion_create.ui'
         loadUi(filename, self)
 
-
         """ checked combobox sample >>> Branch"""
         self.Qcombo_branch2 = CheckableComboBox(self)
         self.Qcombo_branch2.setGeometry(621, 44, 179, 18)
@@ -212,23 +211,27 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.Qcombo_sponsor2.setStyleSheet("background-color: rgb(198, 207, 199)")
         # self.Qcombo_sponsor.hide()
 
-        self.Qcombo_sponsor2.activated.connect(self.handleActivated)
-        # self.Qcombo_sponsor2.currentIndexChanged().connect(self.handleActivated)
+        try:
+             self.Qcombo_sponsor2.activated.connect(self.handleActivated)
+             # self.Qcombo_sponsor2.currentIndexChanged().connect(self.handleActivated)
 
+             self.FN_GET_Company()
+             self.FN_GET_Branch()
+             self.FN_GET_CustomerGroup()
 
-        self.FN_GET_Company()
-        self.FN_GET_Branch()
-        self.FN_GET_CustomerGroup()
-        self.FN_GET_MAGAZINE()
-        self.FN_GET_promotion_sponser()
-        self.FN_GET_promotion_type()
+             self.FN_GET_sponser()
+             self.FN_GET_promotion_type()
 
-        self.FN_GET_department()
-        self.updatestatecombo()
+             self.FN_GET_department()
+             self.updatestatecombo()
 
-        # department
-        self.Qcombo_department.activated[str].connect(self.updatestatecombo)
-        self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)
+             self.FN_GET_MAGAZINE()
+
+              # department
+             self.Qcombo_department.activated[str].connect(self.updatestatecombo)
+             self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)
+        except:
+            print("An exception occurred")
 
     # SEARCH BUTTON
     def FN_SEARCH_BARCODES(self):
@@ -282,7 +285,7 @@ class CL_create_promotion(QtWidgets.QDialog):
             self.Qcombo_magazine.addItems(row)
         mycursor.close()
 
-    def FN_GET_promotion_sponser(self):
+    def FN_GET_sponser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT SPONSER_NAME , SPONSER_ID FROM SPONSER WHERE SPONSER_STATUS = '1' ")

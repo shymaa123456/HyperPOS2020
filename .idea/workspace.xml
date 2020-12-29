@@ -5,10 +5,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="PROMOTION 22-12-2020">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="PROMOTION UPDATE1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/promotion_class/Promotion_Add.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/promotion_class/Promotion_Add.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_create.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/promotion_ui/Promotion_create.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,8 +194,8 @@
       <item itemvalue="Python.hello" />
       <item itemvalue="Python.login" />
       <item itemvalue="Python.test" />
-      <item itemvalue="Python tests.pytest for testt.Test" />
       <item itemvalue="Python tests.pytest in testt.py" />
+      <item itemvalue="Python tests.pytest for testt.Test" />
     </list>
     <recent_temporary>
       <list>
@@ -231,13 +231,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00006" summary="create privialge form">
-      <created>1598803247205</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1598803247205</updated>
     </task>
     <task id="LOCAL-00007" summary="apply validation on creating a privilage">
       <created>1598880417067</created>
@@ -575,7 +568,13 @@
       <option name="project" value="LOCAL" />
       <updated>1608204418288</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL؜٠٠٠٥٥" summary="PROMOTION UPDATE1">
+      <created>1609240474278</created>
+      <option name="number" value="LOCAL؜٠٠٠٥٥" />
+      <option name="presentableId" value="LOCAL؜٠٠٠٥٥" />
+      <updated>1609240474279</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +634,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="create privialge form" />
     <MESSAGE value="apply validation on creating a privilage" />
     <MESSAGE value="apply the db conn" />
     <MESSAGE value="refactor code" />
@@ -660,7 +658,8 @@
     <MESSAGE value="create loyality prog design" />
     <MESSAGE value="update create and modify customer" />
     <MESSAGE value="finish Ehab comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish Ehab comments" />
+    <MESSAGE value="PROMOTION UPDATE1" />
+    <option name="LAST_COMMIT_MESSAGE" value="PROMOTION UPDATE1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608801675148">
@@ -684,30 +683,30 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="172" y="127" width="1094" height="541" key="DiffContextDialog/72.27.1294.741@72.27.1294.741" timestamp="1603721119801" />
-    <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1605453075670">
+    <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1609240442642">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605453075670" />
+    <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609240442642" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1345" height="142" key="GridCell.Tab.0.bottom" timestamp="1609168847116">
+    <state width="1345" height="142" key="GridCell.Tab.0.bottom" timestamp="1609244129415">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="142" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609168847116" />
+    <state width="1345" height="142" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609244129415" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="142" key="GridCell.Tab.0.center" timestamp="1609168847116">
+    <state width="1345" height="142" key="GridCell.Tab.0.center" timestamp="1609244129415">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="142" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609168847116" />
+    <state width="1345" height="142" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609244129415" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1345" height="142" key="GridCell.Tab.0.left" timestamp="1609168847115">
+    <state width="1345" height="142" key="GridCell.Tab.0.left" timestamp="1609244129415">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="142" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609168847115" />
+    <state width="1345" height="142" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609244129415" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1345" height="142" key="GridCell.Tab.0.right" timestamp="1609168847116">
+    <state width="1345" height="142" key="GridCell.Tab.0.right" timestamp="1609244129415">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="142" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609168847116" />
+    <state width="1345" height="142" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609244129415" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
     <state width="1308" height="208" key="GridCell.Tab.1.bottom" timestamp="1608620975236">
       <screen x="0" y="0" width="1366" height="728" />
@@ -750,10 +749,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608204422297">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1609240483302">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608204422297" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1609240483302" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />

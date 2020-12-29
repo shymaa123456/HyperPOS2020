@@ -26,8 +26,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="create and search in loy prog">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Validation/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Validation/Validation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/uploadCustomers.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadCustomers.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/uploadLoyalityProg.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadLoyalityProg.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,15 +220,15 @@
       <item itemvalue="Python.Validation" />
       <item itemvalue="Python.hello" />
       <item itemvalue="Python.login" />
-      <item itemvalue="Python.reporting" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.reporting" />
       <item itemvalue="Python tests.pytest in testt.py" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
-        <item itemvalue="Python.reporting" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.reporting" />
         <item itemvalue="Python.Validation" />
         <item itemvalue="Python.hello" />
       </list>
@@ -254,13 +258,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00008" summary="apply the db conn">
-      <created>1599049189138</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1599049189138</updated>
     </task>
     <task id="LOCAL-00009" summary="apply the db conn">
       <created>1599050401944</created>
@@ -598,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609148970225</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="create and search in loy prog">
+      <created>1609164774036</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1609164774037</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -712,45 +716,45 @@
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1308" height="99" key="GridCell.Tab.0.bottom" timestamp="1609162587438">
+    <state width="1318" height="171" key="GridCell.Tab.0.bottom" timestamp="1609240028988">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="99" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609162587438" />
+    <state width="1318" height="171" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609240028988" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1308" height="99" key="GridCell.Tab.0.center" timestamp="1609162587438">
+    <state width="1318" height="171" key="GridCell.Tab.0.center" timestamp="1609240028988">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="99" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609162587438" />
+    <state width="1318" height="171" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609240028988" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1308" height="99" key="GridCell.Tab.0.left" timestamp="1609162587438">
+    <state width="1318" height="171" key="GridCell.Tab.0.left" timestamp="1609240028988">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="99" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609162587438" />
+    <state width="1318" height="171" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609240028988" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1308" height="99" key="GridCell.Tab.0.right" timestamp="1609162587438">
+    <state width="1318" height="171" key="GridCell.Tab.0.right" timestamp="1609240028988">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="99" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609162587438" />
+    <state width="1318" height="171" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609240028988" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1308" height="199" key="GridCell.Tab.1.bottom" timestamp="1609157705680">
+    <state width="1318" height="171" key="GridCell.Tab.1.bottom" timestamp="1609240028989">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="199" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609157705680" />
+    <state width="1318" height="171" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609240028989" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1308" height="199" key="GridCell.Tab.1.center" timestamp="1609157705680">
+    <state width="1318" height="171" key="GridCell.Tab.1.center" timestamp="1609240028988">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="199" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1609157705680" />
+    <state width="1318" height="171" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1609240028988" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1308" height="199" key="GridCell.Tab.1.left" timestamp="1609157705680">
+    <state width="1318" height="171" key="GridCell.Tab.1.left" timestamp="1609240028988">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="199" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1609157705680" />
+    <state width="1318" height="171" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1609240028988" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1308" height="199" key="GridCell.Tab.1.right" timestamp="1609157705680">
+    <state width="1318" height="171" key="GridCell.Tab.1.right" timestamp="1609240028989">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="199" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1609157705680" />
+    <state width="1318" height="171" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1609240028989" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
       <screen x="0" y="0" width="1366" height="728" />
@@ -773,10 +777,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1609148973759">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1609164836954">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1609148973759" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1609164836954" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
@@ -812,6 +816,21 @@
           <line>181</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>104</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
+          <line>593</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
+          <line>570</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -829,6 +848,8 @@
         <watch expression="__py_debug_temp_var_745666278" />
         <watch expression="cursor.rowcount()" language="Python" />
         <watch expression="CL_userModule.myList " language="Python" />
+        <watch expression="self.fileName" language="Python" />
+        <watch expression="self.fileName" language="Python" />
       </configuration>
     </watches-manager>
   </component>

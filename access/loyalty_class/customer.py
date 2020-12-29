@@ -75,7 +75,9 @@ class CL_customer(QtWidgets.QDialog):
 
         filename = self.dirname + '/uploadCustomers.ui'
         loadUi(filename, self)
-        self.BTN_browse.clicked.connect(self.openFileNameDialog)
+        self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
+        self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
+        self.fileName = ''
 # get customer type desc
     def FN_GET_CUSTTP_DESC(self, id):
         mycursor = self.conn.cursor()
@@ -91,14 +93,18 @@ class CL_customer(QtWidgets.QDialog):
 
 
 
-    def openFileNameDialog(self):
+    def FN_OPEN_FILE(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getOpenFileName( self, "QFileDialog.getOpenFileName()", "",
+        self.fileName, _ = QFileDialog.getOpenFileName( self, "QFileDialog.getOpenFileName()", "",
                                                    " Files (*.xlsx)", options=options )
-        if fileName:
-            self.LE_fileName.setText(fileName)
-            wb = xlrd.open_workbook( fileName )
+        self.LE_fileName.setText(self.fileName)
+        #print(self.fileName)
+    def FN_SAVE_UPLOAD(self):
+
+        if self.fileName !='':
+            self.LE_fileName.setText(self.fileName)
+            wb = xlrd.open_workbook( self.fileName )
             sheet = wb.sheet_by_index( 0 )
             mycursor = self.conn.cursor()
             errorMsg =''
@@ -186,7 +192,7 @@ class CL_customer(QtWidgets.QDialog):
 
                         # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
                         val = (self.id, self.loyalityType, self.custGroup, self.name, self.phone, self.mobile,
-                               self.job, self.address, self.city, self.district, self.building, self.LE_floor, self.email,
+                               self.job, self.address, self.city, self.district, self.building, self.floor, self.email,
                                CL_userModule.user_name, creationDate, ' ', self.company, self.workPhone, self.workAddress,
                                self.notes, self.status
                                )
@@ -211,7 +217,8 @@ class CL_customer(QtWidgets.QDialog):
             self.msgBox.show()
             self.close()
         #Extracting number of rows
-
+        else:
+            QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
 
     def FN_GET_CUST(self,id):
         #self.FN_GET_CustID()

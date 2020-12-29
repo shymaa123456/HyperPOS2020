@@ -61,7 +61,7 @@ class CL_validation():
             QtWidgets.QMessageBox.warning(self, "Error", message)
 
         return (type(data) is str)
-
+    @staticmethod
     def FN_validation_int(data):
         data = int(data)
         return (type(data) is int)
@@ -82,3 +82,10 @@ class CL_validation():
             return True
         else:
             QtWidgets.QMessageBox.warning("Error", "Invalid date format")
+
+    def FN_validate_date1(date_text):
+        try:
+            datetime.datetime.strptime(date_text, '%d-%m-%Y')
+            return  True
+        except ValueError:
+            raise ValueError("Incorrect data format, should be DD-MM-YYYY")

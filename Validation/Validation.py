@@ -85,7 +85,7 @@ class CL_validation():
 
     def FN_validate_date1(date_text):
         try:
-            datetime.datetime.strptime(date_text, '%d-%m-%Y')
+            datetime.datetime.strptime(date_text, '%d.%m.%Y')
             return  True
         except ValueError:
-            raise ValueError("Incorrect data format, should be DD-MM-YYYY")
+            raise ValueError("Incorrect data format, should be DD.MM.YYYY")

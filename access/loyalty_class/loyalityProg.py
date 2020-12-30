@@ -222,12 +222,14 @@ class CL_loyProg(QtWidgets.QDialog):
     # endregion
     def FN_CHECK_EXIST(self,comp,branch,ctgp,cttp,level4,barcode):
         cursor = self.conn.cursor()
+        comp = str(comp)
+        level4= str(level4)
         if barcode =='' :
-            sql ="SELECT *  FROM LOYALITY_PROGRAM where LOY_STATUS = 1 and  COPMAPNY_ID ='"+comp+"' and BRANCH_NO = '"+branch+"' and CG_GROUP_ID='"+ctgp+"' and LOYCT_TYPE_ID ='"+cttp+"' and BMC_ID = '"+level4+"' "
+            sql ="SELECT *  FROM LOYALITY_PROGRAM where LOY_STATUS = 1 and  COPMAPNY_ID ='"+str(comp)+"' and BRANCH_NO = '"+branch+"' and CG_GROUP_ID='"+str(ctgp)+"' and LOYCT_TYPE_ID ='"+str(cttp)+"' and BMC_ID = '"+str(level4)+"' "
             print(sql)
             cursor.execute(sql)
         else :
-            sql = "SELECT *  FROM LOYALITY_PROGRAM where  LOY_STATUS = 1 and COPMAPNY_ID ='" + comp + "' and BRANCH_NO = '" + branch + "' and CG_GROUP_ID='" + ctgp + "' and LOYCT_TYPE_ID ='" + cttp + "' and POS_GTIN = '" + barcode + "'"
+            sql = "SELECT *  FROM LOYALITY_PROGRAM where  LOY_STATUS = 1 and COPMAPNY_ID ='" + str(comp) + "' and BRANCH_NO = '" + branch + "' and CG_GROUP_ID='" + str(ctgp) + "' and LOYCT_TYPE_ID ='" + str(cttp) + "' and POS_GTIN = '" + str(barcode) + "'"
             print(sql)
             cursor.execute(sql)
         myresult = cursor.fetchone()
@@ -536,6 +538,7 @@ class CL_loyProg(QtWidgets.QDialog):
                                                   " Files (*.xlsx)", options=options)
         self.LE_fileName.setText(self.fileName)
     def FN_SAVE_UPLOAD(self):
+        self.fileName ="C:/Users/Shaymaa/Desktop/Book2.xlsx"
         if self.fileName !='':
             self.LE_fileName.setText(self.fileName)
             wb = xlrd.open_workbook(self.fileName)
@@ -552,12 +555,12 @@ class CL_loyProg(QtWidgets.QDialog):
                 validFrom = sheet.cell_value(i, 2)
                 validTo = sheet.cell_value(i, 3)
                 status = int(sheet.cell_value(i, 4))
-                company = sheet.cell_value(i, 5)
+                company = int(sheet.cell_value(i, 5))
                 branch = sheet.cell_value(i, 6)
                 custGroup = int(sheet.cell_value(i, 7))
                 loyalityType = int(sheet.cell_value(i, 8))
                 barcode = sheet.cell_value(i, 9)
-                bmc = sheet.cell_value(i, 10)
+                bmc = int(sheet.cell_value(i, 10))
                 purchAmount = int(sheet.cell_value(i, 11))
                 points = int(sheet.cell_value(i, 12))
                 if name == '' or desc == '' or validFrom == '' or validTo == '' or status == '' or company == '' or branch == '' \
@@ -565,45 +568,48 @@ class CL_loyProg(QtWidgets.QDialog):
                     nonCreatedProg = nonCreatedProg + 1
                     QtWidgets.QMessageBox.warning(self, "Error", "Some fields arenot filled")
                     break
-                elif CL_validation.FN_validate_date1(validFrom) == True and CL_validation.FN_validation_int(status)   :
-                    try:
-                        # get max userid
-                        mycursor = self.conn.cursor()
-                        mycursor.execute("SELECT max(cast(LOY_PROGRAM_ID AS UNSIGNED)) FROM LOYALITY_PROGRAM")
-                        myresult = mycursor.fetchone()
-
-                        if myresult[0] == None:
-                            self.id = "1"
-                        else:
-                            self.id = int(myresult[0]) + 1
-
-                        creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                        sql = "INSERT INTO LOYALITY_PROGRAM (LOY_PROGRAM_ID,COPMAPNY_ID," \
-                              "BRANCH_NO,CG_GROUP_ID,BMC_ID,POS_GTIN,LOY_NAME,LOY_DESC,LOY_CREATED_ON,LOY_CREATED_BY," \
-                              "LOY_VALID_FROM,LOY_VALID_TO,LOY_VALUE,LOY_POINTS,LOYCT_TYPE_ID,LOY_STATUS)" \
-                              "values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                        # "values ('"+self.id+"','" +com+"', '"+br+"',' "+ctgp+"','','"+self.barcode+"','" +self.name+"' ,'" +self.desc+"','" + creationDate+"',CL_userModule.user_name+"',' \
-                        # '" +self.date_to+"'+ self.purchAmount+"',self.points+"','" +cttp+"','" +self.status +"")"
-
-                        val = (self.id, company, branch, custGroup, bmc, barcode, name, desc,
-                               creationDate, CL_userModule.user_name, validFrom, validTo,
-                               purchAmount, points, loyalityType, status)
-                        print(sql)
-                        print(val)
-
-                        mycursor.execute(sql, val)
-                        # print(val)
-                        mycursor.execute(sql, val)
-                        createdProg = createdProg + 1
-                        db1.connectionCommit(self.conn)
-                        mycursor.close()
-                    except Exception as err :
-                        print(err)
-
+                #                 #     try:
+                #elif CL_validation.FN_validate_date1(validFrom) == True and CL_validation.FN_validation_int(status):
                 else:
-                    nonCreatedProg = nonCreatedProg + 1
-                    QtWidgets.QMessageBox.warning(self, "Error", "Validation Error")
-                    break
+                    ret= self.FN_CHECK_EXIST(company, branch, custGroup, loyalityType, bmc,barcode)
+                    if ret == False:
+                       try:     # get max userid
+                            mycursor1 = self.conn.cursor()
+                            mycursor1.execute("SELECT max(cast(LOY_PROGRAM_ID AS UNSIGNED)) FROM LOYALITY_PROGRAM")
+                            myresult = mycursor1.fetchone()
+
+                            if myresult[0] == None:
+                                self.id = "1"
+                            else:
+                                self.id = int(myresult[0]) + 1
+
+                            creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                            sql = "INSERT INTO LOYALITY_PROGRAM (LOY_PROGRAM_ID,COPMAPNY_ID," \
+                                  "BRANCH_NO,CG_GROUP_ID,BMC_ID,POS_GTIN,LOY_NAME,LOY_DESC,LOY_CREATED_ON,LOY_CREATED_BY," \
+                                  "LOY_VALID_FROM,LOY_VALID_TO,LOY_VALUE,LOY_POINTS,LOYCT_TYPE_ID,LOY_STATUS)" \
+                                  "values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                            # "values ('"+self.id+"','" +com+"', '"+br+"',' "+ctgp+"','','"+self.barcode+"','" +self.name+"' ,'" +self.desc+"','" + creationDate+"',CL_userModule.user_name+"',' \
+                            # '" +self.date_to+"'+ self.purchAmount+"',self.points+"','" +cttp+"','" +self.status +"")"
+
+                            val = (self.id, company, branch, custGroup, bmc, barcode, name, desc,
+                                   creationDate, CL_userModule.user_name, validFrom, validTo,
+                                   purchAmount, points, loyalityType, status)
+                            print(sql)
+                            print(val)
+
+                            mycursor1.execute(sql, val)
+                            # print(val)
+
+                            createdProg = createdProg + 1
+                            db1.connectionCommit(self.conn)
+                            mycursor1.close()
+                       except Exception as err :
+                             print(err)
+                #
+                    else:
+                        nonCreatedProg = nonCreatedProg + 1
+                        QtWidgets.QMessageBox.warning(self, "Error", "Validation Error")
+                        break
 
 
             db1.connectionClose(self.conn)

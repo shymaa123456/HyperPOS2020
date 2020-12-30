@@ -218,8 +218,98 @@ class CL_loyProg(QtWidgets.QDialog):
         mycursor.close()
         return records[0]
 
+    def FN_CHECK_VALID_BMC(self,id):
+        try:
+            mycursor11 = self.conn.cursor()
+            sql="SELECT * FROM BMC_LEVEL4 where BMC_LEVEL4 = '" + str(id) + "'"
+            print(sql)
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount>0:
+                mycursor11.close()
+                return True
+            else :
+                mycursor11.close()
+                return False
+        except (Error, Warning) as e:
+            print(e)
 
-    # endregion
+
+
+    def FN_CHECK_VALID_BARCCODE(self,id):
+        try:
+            mycursor11 = self.conn.cursor()
+            sql = "SELECT * FROM POS_ITEM where POS_GTIN = '" + str(id) + "'"
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+        except (Error, Warning) as e:
+            print(e)
+
+    def FN_CHECK_VALID_CUSTGP(self,id):
+        try:
+            mycursor11 = self.conn.cursor()
+            sql = "SELECT * FROM CUSTOMER_GROUP where CG_GROUP_ID  ='" + str(id) + "'"
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+        except (Error, Warning) as e:
+            print(e)
+    def FN_CHECK_VALID_CUSTTP(self,id):
+        try:
+            mycursor11 = self.conn.cursor()
+            sql = "SELECT * FROM LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID ='" + str(id) + "'"
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+        except (Error, Warning) as e:
+            print(e)
+    def FN_CHECK_VALID_COMPANY(self,id):
+        try:
+            mycursor11 = self.conn.cursor()
+            sql = "SELECT * FROM COMPANY where COMPANY_ID = '" + str(id) + "'"
+            print(sql)
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+        except (Error, Warning) as e:
+            print(e)
+    def FN_CHECK_VALID_BRANCH(self,id):
+        try:
+            mycursor11 = self.conn.cursor()
+            sql = "SELECT * FROM BRANCH where BRANCH_NO = '" + str(id) + "'"
+            print(sql)
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+        except (Error, Warning) as e:
+            print(e)
+    # # endregion
     def FN_CHECK_EXIST(self,comp,branch,ctgp,cttp,level4,barcode):
         cursor = self.conn.cursor()
         comp = str(comp)
@@ -560,7 +650,7 @@ class CL_loyProg(QtWidgets.QDialog):
                 custGroup = int(sheet.cell_value(i, 7))
                 loyalityType = int(sheet.cell_value(i, 8))
                 barcode = sheet.cell_value(i, 9)
-                bmc = int(sheet.cell_value(i, 10))
+                bmc = sheet.cell_value(i, 10)
                 purchAmount = int(sheet.cell_value(i, 11))
                 points = int(sheet.cell_value(i, 12))
                 if name == '' or desc == '' or validFrom == '' or validTo == '' or status == '' or company == '' or branch == '' \
@@ -572,8 +662,21 @@ class CL_loyProg(QtWidgets.QDialog):
                 #elif CL_validation.FN_validate_date1(validFrom) == True and CL_validation.FN_validation_int(status):
                 else:
                     ret= self.FN_CHECK_EXIST(company, branch, custGroup, loyalityType, bmc,barcode)
-                    if ret == False:
-                       try:     # get max userid
+                    if barcode == '':
+                        ret2 = True
+                        bmc = int(bmc)
+                        ret1 = self.FN_CHECK_VALID_BMC(bmc)
+                    else:
+                        ret1=True
+                        ret2 = self.FN_CHECK_VALID_BARCCODE(barcode)
+
+                    ret3 = self.FN_CHECK_VALID_CUSTGP(custGroup)
+                    ret4 = self.FN_CHECK_VALID_CUSTTP(loyalityType)
+                    ret5 = self.FN_CHECK_VALID_BRANCH(branch)
+                    ret6 = self.FN_CHECK_VALID_COMPANY(company)
+                    try:
+                        if ret == False and ret1 == True and ret2 == True and ret3 == True and ret4 == True and ret5 == True and ret6 == True :
+                          # get max userid
                             mycursor1 = self.conn.cursor()
                             mycursor1.execute("SELECT max(cast(LOY_PROGRAM_ID AS UNSIGNED)) FROM LOYALITY_PROGRAM")
                             myresult = mycursor1.fetchone()
@@ -594,23 +697,45 @@ class CL_loyProg(QtWidgets.QDialog):
                             val = (self.id, company, branch, custGroup, bmc, barcode, name, desc,
                                    creationDate, CL_userModule.user_name, validFrom, validTo,
                                    purchAmount, points, loyalityType, status)
-                            print(sql)
-                            print(val)
-
                             mycursor1.execute(sql, val)
-                            # print(val)
-
                             createdProg = createdProg + 1
                             db1.connectionCommit(self.conn)
                             mycursor1.close()
-                       except Exception as err :
-                             print(err)
                 #
-                    else:
-                        nonCreatedProg = nonCreatedProg + 1
-                        QtWidgets.QMessageBox.warning(self, "Error", "Validation Error")
-                        break
+                        else:
+                            nonCreatedProg = nonCreatedProg + 1
+                            self.msgBox1 = QMessageBox()
+                            self.msgBox1.setWindowTitle("Information")
+                            self.msgBox1.setStandardButtons(QMessageBox.Ok)
 
+
+                            if ret ==True:
+                                j=i+1
+                                self.msgBox1.setText("Line " + str(j) + " already exists")
+                            elif ret1==False:
+                                j = i + 1
+                                self.msgBox1.setText("Line " + str(j) + " has invalid BMC")
+                            elif ret2 == False:
+                                j = i + 1
+                                self.msgBox1.setText("Line " + str(j) + " has invalid Barcode")
+                            elif ret3 == False:
+                                j = i + 1
+                                self.msgBox1.setText("Line " + str(j) + " has invalid Customer Gp")
+                            elif ret4 == False:
+                                j = i + 1
+                                self.msgBox1.setText("Line " + str(j) + " has invalid Customer Type")
+                            elif ret5 == False:
+                                j = i + 1
+                                self.msgBox1.setText("Line " + str(j) + " has invalid Branch")
+                            elif ret6 == False:
+                                j = i + 1
+                                self.msgBox1.setText("Line " + str(j) + " has invalid Company")
+
+                            self.msgBox1.show()
+                            self.close()
+                            break
+                    except Exception as err:
+                        print(err)
 
             db1.connectionClose(self.conn)
             # QtWidgets.QMessageBox.warning( self, "Information", "No of created user ",counter)

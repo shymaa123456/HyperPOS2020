@@ -68,6 +68,11 @@ class CL_login(QtWidgets.QDialog):
         #     db1.connectionClose(self.conn)
         # print( "MySQL connection is closed" )
 
+    def FN_reset(self):
+        self.window_two = CL_user()
+        self.window_two.FN_LOAD_RESET()
+        self.window_two.show()
+
     def __init__(self):
         super(CL_login, self).__init__()
         cwd = Path.cwd()
@@ -84,6 +89,7 @@ class CL_login(QtWidgets.QDialog):
         self.pixmap = QPixmap(filename)
         self.label_logo.setPixmap(self.pixmap)
         self.btn_login.clicked.connect(self.FN_login)
+        self.btn_reset.clicked.connect(self.FN_reset)
 
 
 class CL_controller():

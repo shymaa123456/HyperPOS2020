@@ -1,5 +1,4 @@
 from pathlib import Path
-from mysql.connector import Error
 from PyQt5 import QtWidgets,QtCore
 from PyQt5.QtWidgets import QTableWidgetItem, QComboBox
 from PyQt5.uic import loadUi

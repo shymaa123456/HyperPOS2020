@@ -166,7 +166,7 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_RESET_USER(self):
         self.window_two = CL_user()
-        self.window_two.FN_LOAD_RESET()
+        self.window_two.FN_LOAD_RESET_MAIN()
         self.window_two.show()
 
     def FN_MODIFY_USER(self):

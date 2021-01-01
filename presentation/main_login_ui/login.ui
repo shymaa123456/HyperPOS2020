@@ -1,120 +1,234 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>Dialog</class>
-    <widget class="QDialog" name="Dialog">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>400</width>
-                <height>300</height>
-            </rect>
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>250</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>2000</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Dialog</string>
+  </property>
+  <property name="toolTipDuration">
+   <number>-1</number>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="verticalWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>0</y>
+     <width>300</width>
+     <height>250</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>300</width>
+     <height>250</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <layout class="QVBoxLayout">
+    <property name="spacing">
+     <number>5</number>
+    </property>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMinAndMaxSize</enum>
+    </property>
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>15</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="label_logo">
+      <property name="maximumSize">
+       <size>
+        <width>300</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>hyperonelogo.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item alignment="Qt::AlignHCenter">
+     <widget class="QLineEdit" name="LE_userName">
+      <property name="placeholderText">
+       <string>Username</string>
+      </property>
+     </widget>
+    </item>
+    <item alignment="Qt::AlignHCenter">
+     <widget class="QLineEdit" name="LE_password">
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string>Password</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_login">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>118</width>
+          <height>0</height>
+         </size>
         </property>
         <property name="maximumSize">
-            <size>
-                <width>2000</width>
-                <height>16777215</height>
-            </size>
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
         </property>
-        <property name="windowTitle">
-            <string>Dialog</string>
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
         </property>
         <property name="styleSheet">
-            <string notr="true">background-color: rgb(33, 198, 188);</string>
+         <string notr="true">QPushButton{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        font: bold 14px;
+                                        min-width:6em;
+ padding: 6px;
+                                       }
+                                        QPushButton:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                        QPushButton:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
         </property>
-        <widget class="QWidget" name="verticalWidget" native="true">
-            <property name="geometry">
-                <rect>
-                    <x>100</x>
-                    <y>30</y>
-                    <width>200</width>
-                    <height>200</height>
-                </rect>
-            </property>
-            <property name="maximumSize">
-                <size>
-                    <width>200</width>
-                    <height>200</height>
-                </size>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <layout class="QVBoxLayout">
-                <property name="spacing">
-                    <number>5</number>
-                </property>
-                <property name="sizeConstraint">
-                    <enum>QLayout::SetMinAndMaxSize</enum>
-                </property>
-                <property name="leftMargin">
-                    <number>1</number>
-                </property>
-                <property name="topMargin">
-                    <number>15</number>
-                </property>
-                <item alignment="Qt::AlignHCenter">
-                    <widget class="QLabel" name="label_logo">
-                        <property name="maximumSize">
-                            <size>
-                                <width>120</width>
-                                <height>150</height>
-                            </size>
-                        </property>
-                        <property name="text">
-                            <string/>
-                        </property>
-                        <property name="pixmap">
-                            <pixmap>hyperonelogo.png</pixmap>
-                        </property>
-                        <property name="scaledContents">
-                            <bool>true</bool>
-                        </property>
-                    </widget>
-                </item>
-                <item alignment="Qt::AlignHCenter">
-                    <widget class="QLineEdit" name="LE_userName">
-                        <property name="placeholderText">
-                            <string>Username</string>
-                        </property>
-                    </widget>
-                </item>
-                <item alignment="Qt::AlignHCenter">
-                    <widget class="QLineEdit" name="LE_password">
-                        <property name="echoMode">
-                            <enum>QLineEdit::Password</enum>
-                        </property>
-                        <property name="placeholderText">
-                            <string>Password</string>
-                        </property>
-                    </widget>
-                </item>
-                <item alignment="Qt::AlignHCenter">
-                    <widget class="QPushButton" name="btn_login">
-                        <property name="maximumSize">
-                            <size>
-                                <width>100</width>
-                                <height>16777215</height>
-                            </size>
-                        </property>
-                        <property name="font">
-                            <font>
-                                <weight>75</weight>
-                                <italic>true</italic>
-                                <bold>true</bold>
-                            </font>
-                        </property>
-                        <property name="autoFillBackground">
-                            <bool>false</bool>
-                        </property>
-                        <property name="text">
-                            <string>Login</string>
-                        </property>
-                    </widget>
-                </item>
-            </layout>
-        </widget>
-    </widget>
-    <resources/>
-    <connections/>
+        <property name="text">
+         <string>Login</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_reset">
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        font: bold 14px;
+                                        min-width: 6em;
+                                         padding: 6px;
+                                        }
+                                        QPushButton:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                        QPushButton:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+        </property>
+        <property name="text">
+         <string>Reset Pass</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
 </ui>

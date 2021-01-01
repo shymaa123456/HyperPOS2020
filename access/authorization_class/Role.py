@@ -6,6 +6,7 @@ from PyQt5.Qt import *
 from PyQt5.uic import loadUi
 
 from access.authorization_class.user_module import CL_userModule
+from access.promotion_class.Promotion_Add import CheckableComboBox
 from data_connection.h1pos import db1
 from datetime import datetime
 
@@ -103,9 +104,12 @@ class CL_role(QtWidgets.QDialog):
         return myresult[0]
 
     def FN_ASSIGN(self):
+        # self.CMB_roleName = CheckableComboBox(self)
+        # self.CMB_roleName.setGeometry(242, 20, 179, 18)
+        # self.CMB_roleName.setLayoutDirection(QtCore.Qt.LeftToRight)
+        # self.CMB_roleName.setStyleSheet("background-color: rgb(198, 207, 199)")
         filename = self.dirname + '/assignUserToRole.ui'
         loadUi(filename, self)
-
         self.BTN_assignRole.clicked.connect(self.FN_ASSIGN_ROLE)
         self.CMB_userRoleStatus.addItems(["Active", "Inactive"])
         self.FN_GET_USERS()

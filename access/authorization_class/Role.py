@@ -205,7 +205,6 @@ class CL_role(QtWidgets.QDialog):
         # print(selectedRoles)
         for row in records:
             self.CMB_roleName.addItems(row)
-
             for row1 in selectedRoles:
                 if row[0] == row1[0]:
                     items = self.CMB_roleName.findText(row[0])

@@ -24,7 +24,7 @@ class CL_formItem(QtWidgets.QDialog):
         self.CMB_formItemStatus.addItems(["Active", "Inactive"])
         self.CMB_formName.currentIndexChanged.connect(self.FN_GET_FORMID)
         self.FN_GET_FORMS()
-        # self.FN_GET_FORMID()
+        #self.FN_GET_FORMID()
         # self.FN_GET_FORMItems()
 
     def FN_LOAD_MODIFY(self):

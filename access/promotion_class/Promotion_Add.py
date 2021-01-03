@@ -172,6 +172,10 @@ class CheckableComboBox(QComboBox):
                 res.append(self.model().item(i).data())
         return res
 
+    def setChecked(self,index):
+        item = self.model().item(index)
+        item.setCheckState(Qt.Checked)
+
 
 class CL_create_promotion(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()

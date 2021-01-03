@@ -104,10 +104,10 @@ class CL_role(QtWidgets.QDialog):
         return myresult[0]
 
     def FN_ASSIGN(self):
-        # self.CMB_roleName = CheckableComboBox(self)
-        # self.CMB_roleName.setGeometry(242, 20, 179, 18)
-        # self.CMB_roleName.setLayoutDirection(QtCore.Qt.LeftToRight)
-        # self.CMB_roleName.setStyleSheet("background-color: rgb(198, 207, 199)")
+        self.CMB_roleName = CheckableComboBox(self)
+        self.CMB_roleName.setGeometry(100, 85, 179, 18)
+        self.CMB_roleName.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.CMB_roleName.setStyleSheet("background-color: rgb(198, 207, 199)")
         filename = self.dirname + '/assignUserToRole.ui'
         loadUi(filename, self)
         self.BTN_assignRole.clicked.connect(self.FN_ASSIGN_ROLE)
@@ -115,9 +115,8 @@ class CL_role(QtWidgets.QDialog):
         self.FN_GET_USERS()
         self.FN_GET_USERID()
         self.FN_GET_ROLES()
-
         # self.FN_GET_ROLEID()
-        self.CMB_roleName.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        #self.CMB_roleName.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.CMB_userName.currentIndexChanged.connect(self.FN_GET_USERID)
         # self.CMB_roleName.currentIndexChanged.connect( self.FN_GET_ROLEID )
 
@@ -148,6 +147,7 @@ class CL_role(QtWidgets.QDialog):
         mycursor.execute(sql_select_query, x)
         myresult = mycursor.fetchone()
         self.LB_userID.setText(myresult[0])
+        self.FN_GET_ROLES()
 
     #
     def FN_GET_ROLEID1(self, roleNm):
@@ -193,23 +193,24 @@ class CL_role(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_ROLES(self):
+        self.CMB_roleName.clear()
         if self.LB_userID is not None:
             selectedRoles = self.FN_SELECT_USER_ROLES()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT ROLE_NAME FROM SYS_ROLE order by ROLE_ID asc")
         records = mycursor.fetchall()
-        self.CMB_roleName.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        #self.CMB_roleName.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         j = 0
         # print(records)
         # print(selectedRoles)
         for row in records:
             self.CMB_roleName.addItems(row)
+
             for row1 in selectedRoles:
                 if row[0] == row1[0]:
-                    items = self.CMB_roleName.findItems(row[0], Qt.MatchContains)
-                    for item in items:
-                        self.CMB_roleName.item(j).setSelected(True)
-
+                    items = self.CMB_roleName.findText(row[0])
+                    for item in range(items+1):
+                        self.CMB_roleName.setChecked(j)
             j = j + 1
         mycursor.close()
 
@@ -250,15 +251,13 @@ class CL_role(QtWidgets.QDialog):
         mycursor.execute(sql_select_query)
         db1.connectionCommit(self.conn)
         # get selected roles
-        items = self.CMB_roleName.selectedItems()
+        items = self.CMB_roleName.currentData()
         x = []
         for i in range(len(items)):
-            roleId = self.FN_GET_ROLEID1(str(self.CMB_roleName.selectedItems()[i].text()))
-
+            roleId = self.FN_GET_ROLEID1(str(items[i]))
             mycursor = self.conn.cursor()
             mycursor.execute("SELECT max(cast(UR_USER_ROLE_ID  AS UNSIGNED)) FROM SYS_USER_ROLE")
             myresult = mycursor.fetchone()
-
             if myresult[0] == None:
                 self.id = "1"
             else:
@@ -268,15 +267,12 @@ class CL_role(QtWidgets.QDialog):
 
             sql = "INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS)      " \
                   "VALUES ( %s, %s, %s, %s,%s, %s,%s,%s,%s)"
-
             val = (self.id, self.user, roleId, '1', CL_userModule.user_name, creationDate, '', '', self.status)
             mycursor.execute(sql, val)
-
             mycursor.close()
             db1.connectionCommit(self.conn)
             print(mycursor.rowcount, "record inserted.")
         db1.connectionClose(self.conn)
-
         self.close()
         QtWidgets.QMessageBox.information(self, "Success", "Role is assigned successfully")
 

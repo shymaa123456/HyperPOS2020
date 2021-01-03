@@ -129,16 +129,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QListWidget" name="CMB_roleName">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>60</y>
-     <width>131</width>
-     <height>91</height>
-    </rect>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>

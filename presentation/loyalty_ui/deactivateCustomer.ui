@@ -1,94 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>Dialog</class>
-    <widget class="QDialog" name="Dialog">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>928</width>
-                <height>223</height>
-            </rect>
-        </property>
-        <property name="windowTitle">
-            <string>Dialog</string>
-        </property>
-        <widget class="QPushButton" name="BTN_deactivateCustomer">
-            <property name="geometry">
-                <rect>
-                    <x>120</x>
-                    <y>170</y>
-                    <width>131</width>
-                    <height>25</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>تعديل حاله العميل</string>
-            </property>
-        </widget>
-        <widget class="QLabel" name="label_3">
-            <property name="geometry">
-                <rect>
-                    <x>800</x>
-                    <y>50</y>
-                    <width>109</width>
-                    <height>25</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>اسم العميل</string>
-            </property>
-        </widget>
-        <widget class="QComboBox" name="CMB_custName">
-            <property name="geometry">
-                <rect>
-                    <x>248</x>
-                    <y>50</y>
-                    <width>551</width>
-                    <height>25</height>
-                </rect>
-            </property>
-        </widget>
-        <widget class="QLabel" name="LB_custID">
-            <property name="enabled">
-                <bool>false</bool>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>130</x>
-                    <y>50</y>
-                    <width>91</width>
-                    <height>31</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>cust id</string>
-            </property>
-        </widget>
-        <widget class="QLabel" name="label_15">
-            <property name="geometry">
-                <rect>
-                    <x>830</x>
-                    <y>100</y>
-                    <width>79</width>
-                    <height>26</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>حاله العميل</string>
-            </property>
-        </widget>
-        <widget class="QComboBox" name="CMB_status">
-            <property name="geometry">
-                <rect>
-                    <x>240</x>
-                    <y>100</y>
-                    <width>559</width>
-                    <height>20</height>
-                </rect>
-            </property>
-        </widget>
-    </widget>
-    <resources/>
-    <connections/>
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>928</width>
+    <height>223</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="BTN_deactivateCustomer">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>170</y>
+     <width>131</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width:6em;
+                                       }
+                                        QPushButton:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                        QPushButton:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    
+                                    </string>
+   </property>
+   <property name="text">
+    <string>تعديل حاله العميل</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>50</y>
+     <width>109</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>اسم العميل</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="CMB_custName">
+   <property name="geometry">
+    <rect>
+     <x>248</x>
+     <y>50</y>
+     <width>551</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LB_custID">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>50</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>cust id</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_15">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>100</y>
+     <width>79</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>حاله العميل</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="CMB_status">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>100</y>
+     <width>559</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
 </ui>

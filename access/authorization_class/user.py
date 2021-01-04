@@ -289,31 +289,36 @@ class CL_user(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
 
         changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-        if self.LE_password.text() == self.LE_password2.text():
+        if CL_validation.FN_isEmpty(self.LE_password.text()) :
+            QtWidgets.QMessageBox.warning(self, "Error", "Enter Password Please")
+        elif CL_validation.FN_isEmpty(self.LE_password2.text()):
+            QtWidgets.QMessageBox.warning(self, "Error", " RePassword Please")
+        elif CL_validation.FN_validation_password(self,self.LE_password.text())==False:
+            if self.LE_password.text() == self.LE_password2.text():
 
-            sql_select_Query = "select * from SYS_USER where USER_NAME = %s and USER_PASSWORD = %s and USER_STATUS  = 1"
-            x = (self.LE_username.text(), self.old_password.text())
-            mycursor = self.conn.cursor()
-            mycursor.execute(sql_select_Query, x)
-            record = mycursor.fetchone()
-            if mycursor.rowcount > 0:
+                sql_select_Query = "select * from SYS_USER where USER_NAME = %s and USER_PASSWORD = %s and USER_STATUS  = 1"
+                x = (self.LE_username.text(), self.old_password.text())
+                mycursor = self.conn.cursor()
+                mycursor.execute(sql_select_Query, x)
+                record = mycursor.fetchone()
+                if mycursor.rowcount > 0:
 
-               sql = "UPDATE SYS_USER set USER_PASSWORD= %s  , USER_CHANGED_ON = %s , USER_CHANGED_BY = %s where USER_NAME= %s and USER_PASSWORD= %s "
-               val = (self.LE_password.text(), changeDate, self.LE_username.text(), self.LE_username.text(),
-                   self.old_password.text())
-               print(sql)
-               mycursor.execute(sql, val)
-               mycursor.close()
-               db1.connectionCommit(self.conn)
-               print(mycursor.rowcount, "password changed")
-               QtWidgets.QMessageBox.information(self, "Success", "Password is reset successfully")
-               db1.connectionClose(self.conn)
-               self.close()
+                    sql = "UPDATE SYS_USER set USER_PASSWORD= %s  , USER_CHANGED_ON = %s , USER_CHANGED_BY = %s where USER_NAME= %s and USER_PASSWORD= %s "
+                    val = (self.LE_password.text(), changeDate, self.LE_username.text(), self.LE_username.text(),
+                           self.old_password.text())
+                    print(sql)
+                    mycursor.execute(sql, val)
+                    mycursor.close()
+                    db1.connectionCommit(self.conn)
+                    print(mycursor.rowcount, "password changed")
+                    QtWidgets.QMessageBox.information(self, "Success", "Password is reset successfully")
+                    db1.connectionClose(self.conn)
+                    self.close()
+                else:
+                    QtWidgets.QMessageBox.warning(self, "Error", "Incorrect Username and Password")
+                    print("Please Enter Correct Username and Password")
             else:
-                QtWidgets.QMessageBox.warning(self, "Error", "Incorrect Username and Password")
-                print("Please Enter Correct Username and Password")
-        else:
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter 2 different Passwords")
+                QtWidgets.QMessageBox.warning(self, "Error", "Please enter 2 different Passwords")
 
     def FN_LOAD_RESET(self):
         filename = self.dirname + '/resetUserPassword.ui'
@@ -323,35 +328,53 @@ class CL_user(QtWidgets.QDialog):
 
     def FN_RESET_USER_MAIN(self):
         mycursor = self.conn.cursor()
+        if CL_validation.FN_isEmpty(self.LE_password.text()):
+            QtWidgets.QMessageBox.warning(self, "Error", "Enter Password Please")
+        elif CL_validation.FN_isEmpty(self.LE_password2.text()):
+            QtWidgets.QMessageBox.warning(self, "Error", " RePassword Please")
+        elif CL_validation.FN_validation_password(self,self.LE_password.text())==False:
+            changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+            if self.LE_password.text() == self.LE_password2.text():
 
-        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-        if self.LE_password.text() == self.LE_password2.text():
+                sql_select_Query = "select * from SYS_USER where USER_NAME = '" + self.LE_username.currentText() + "' and USER_STATUS = 1"
+                mycursor = self.conn.cursor()
+                mycursor.execute(sql_select_Query)
+                print(sql_select_Query)
+                record = mycursor.fetchone()
+                print(record)
+                if mycursor.rowcount > 0:
 
-            sql_select_Query = "select * from SYS_USER where USER_NAME = '"+self.LE_username.text()+"' and USER_STATUS = 1"
-            mycursor = self.conn.cursor()
-            mycursor.execute(sql_select_Query)
-            print(sql_select_Query)
-            record = mycursor.fetchone()
-            print(record)
-            if mycursor.rowcount > 0:
-
-                sql = "UPDATE SYS_USER set USER_PASSWORD= %s  , USER_CHANGED_ON = %s , USER_CHANGED_BY = %s where USER_NAME= %s"
-                val = (self.LE_password.text(), changeDate, self.LE_username.text(), self.LE_username.text())
-                print(sql)
-                mycursor.execute(sql, val)
-                mycursor.close()
-                db1.connectionCommit(self.conn)
-                print(mycursor.rowcount, "password changed")
-                QtWidgets.QMessageBox.information(self, "Success", "Password is reset successfully")
-                db1.connectionClose(self.conn)
-                self.close()
+                    sql = "UPDATE SYS_USER set USER_PASSWORD= %s  , USER_CHANGED_ON = %s , USER_CHANGED_BY = %s where USER_NAME= %s"
+                    val = (self.LE_password.text(), changeDate, self.LE_username.currentText(), self.LE_username.currentText())
+                    print(sql)
+                    mycursor.execute(sql, val)
+                    mycursor.close()
+                    db1.connectionCommit(self.conn)
+                    print(mycursor.rowcount, "password changed")
+                    QtWidgets.QMessageBox.information(self, "Success", "Password is reset successfully")
+                    db1.connectionClose(self.conn)
+                    self.close()
+                else:
+                    QtWidgets.QMessageBox.warning(self, "Error", "Incorrect Username ")
+                    print("Please Enter Correct Username and Password")
             else:
-                QtWidgets.QMessageBox.warning(self, "Error", "Incorrect Username ")
-                print("Please Enter Correct Username and Password")
-        else:
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter 2 different Passwords")
+                QtWidgets.QMessageBox.warning(self, "Error", "Please enter 2 different Passwords")
+
 
     def FN_LOAD_RESET_MAIN(self):
         filename = self.dirname + '/resetUserPasswordMain.ui'
         loadUi(filename, self)
+        self.FN_GET_User()
         self.BTN_resetPass.clicked.connect(self.FN_RESET_USER_MAIN)
+
+
+    def FN_GET_User(self):
+        #Todo: method for fills the department combobox
+
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT USER_NAME FROM SYS_USER")
+        records = mycursor.fetchall()
+        for row in records:
+            self.LE_username.addItems(row)
+        mycursor.close()

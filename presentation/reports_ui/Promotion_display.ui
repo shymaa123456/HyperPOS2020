@@ -340,12 +340,28 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid gray;
-                            border-radius: 10px;
-                            padding: 0 8px;
-                            background: white;
-                            selection-background-color: white;
-                        </string>
+      <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
      </property>
     </widget>
     <widget class="QGroupBox" name="QgroupBox_prom">
@@ -596,11 +612,28 @@
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border: 2px solid gray;
-                                    border-radius: 10px;
-                                    padding: 0 8px;
-                                    background: white;
-                                    selection-background-color: darkgray;
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    
                                 </string>
        </property>
       </widget>
@@ -682,8 +715,7 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: green;
+         <string notr="true">QPushButton{background-color: green;
                                         border-style: outset;
                                         border-width: 2px;
                                         border-radius: 10px;

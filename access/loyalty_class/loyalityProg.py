@@ -373,8 +373,9 @@ class CL_loyProg(QtWidgets.QDialog):
 
         for i in reversed(range(self.Qtable_loyality.rowCount())):
             self.Qtable_loyality.removeRow(i)
+
         BMC_LEVEL4 = self.CMB_level4.currentText()
-        self.mycursor = self.conn.cursor()
+        #self.mycursor = self.conn.cursor()
         cust_gps = self.Qcombo_group2.currentData()
         cust_tps = self.Qcombo_group5.currentData()
         branchs = self.Qcombo_group4.currentData()
@@ -397,8 +398,8 @@ class CL_loyProg(QtWidgets.QDialog):
             whereClause = whereClause + " and POS_GTIN ='" + barcode + "'"
         elif self.Qradio_bmc.isChecked():
             # get bmc_level4
-            self.mycursor.execute("SELECT BMC_LEVEL4 FROM BMC_LEVEL4 where BMC_LEVEL4_DESC = '" + BMC_LEVEL4 + "'")
-            myresult = self.mycursor.fetchone()
+            mycursor.execute("SELECT BMC_LEVEL4 FROM BMC_LEVEL4 where BMC_LEVEL4_DESC = '" + BMC_LEVEL4 + "'")
+            myresult = mycursor.fetchone()
             BMC_LEVEL4 = myresult[0]
             whereClause = whereClause + " and BMC_ID ='" + BMC_LEVEL4 + "'"
 
@@ -407,7 +408,7 @@ class CL_loyProg(QtWidgets.QDialog):
         for comp in companies:
             sql = "SELECT COMPANY_ID FROM COMPANY where COMPANY_DESC = '" + comp + "'"
             self.mycursor.execute(sql)
-            myresult = self.mycursor.fetchone()
+            myresult = mycursor.fetchone()
             company_list.append(myresult[0])
 
         if len(company_list) > 0:
@@ -421,7 +422,7 @@ class CL_loyProg(QtWidgets.QDialog):
         for branch in branchs:
             sql = "SELECT BRANCH_NO FROM BRANCH where BRANCH_DESC_A = '" + branch + "'"
             self.mycursor.execute(sql)
-            myresult = self.mycursor.fetchone()
+            myresult = mycursor.fetchone()
             branch_list.append(myresult[0])
 
         if len(branch_list) > 0:
@@ -436,7 +437,7 @@ class CL_loyProg(QtWidgets.QDialog):
         cust_gp_list = []
         for cust_gp in cust_gps:
             self.mycursor.execute("SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '" + cust_gp + "'")
-            myresult = self.mycursor.fetchone()
+            myresult = mycursor.fetchone()
             cust_gp_list.append(myresult[0])
 
         if len(cust_gp_list) > 0:
@@ -451,7 +452,7 @@ class CL_loyProg(QtWidgets.QDialog):
         for cust_tp in cust_tps:
             self.mycursor.execute(
                 "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + cust_tp + "'")
-            myresult = self.mycursor.fetchone()
+            myresult = mycursor.fetchone()
             cust_tp_list.append(myresult[0])
         if len(cust_tp_list) > 0:
             if len(cust_tp_list) > 0:
@@ -464,7 +465,7 @@ class CL_loyProg(QtWidgets.QDialog):
         # else:
         # print(whereClause)
         sql_select_query = "select  LOY_NAME ,LOY_DESC,LOY_VALID_FROM,LOY_VALID_TO, LOY_STATUS,COPMAPNY_ID,BRANCH_NO,CG_GROUP_ID,LOYCT_TYPE_ID,POS_GTIN,BMC_ID,LOY_VALUE,LOY_POINTS from LOYALITY_PROGRAM    where " + whereClause
-        # print(sql_select_query)
+        print(sql_select_query)
         mycursor.execute(sql_select_query)
         records = mycursor.fetchall()
         for row_number, row_data in enumerate(records):

@@ -24,9 +24,21 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="upload screen in loy prog">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="solve bug in search">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/user_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user_module.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createLoyalityProg.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyLoyalityProg.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyLoyalityProg.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/customer_display.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/customer_display.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/deactivateCustomer.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/displayLoyalityProg.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyLoyalityCustType.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyLoyalityCustType.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/uploadCustomers.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadCustomers.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,13 +265,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00012" summary="solve bug">
-      <created>1599491223892</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1599491223892</updated>
     </task>
     <task id="LOCAL-00013" summary="inialization class">
       <created>1599745488425</created>
@@ -597,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609342003501</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="solve bug in search">
+      <created>1609935967532</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1609935967533</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -657,7 +669,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="apply the db conn" />
     <MESSAGE value="refactor code" />
     <MESSAGE value="organize code" />
     <MESSAGE value="solve bug" />
@@ -682,7 +693,8 @@
     <MESSAGE value="finish Ehab comments" />
     <MESSAGE value="create and search in loy prog" />
     <MESSAGE value="upload screen in loy prog" />
-    <option name="LAST_COMMIT_MESSAGE" value="upload screen in loy prog" />
+    <MESSAGE value="solve bug in search" />
+    <option name="LAST_COMMIT_MESSAGE" value="solve bug in search" />
   </component>
   <component name="WindowStateProjectService">
     <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605430091539">
@@ -711,45 +723,45 @@
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1318" height="171" key="GridCell.Tab.0.bottom" timestamp="1609935678436">
+    <state width="1318" height="97" key="GridCell.Tab.0.bottom" timestamp="1610260048868">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1318" height="171" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609935678436" />
+    <state width="1318" height="97" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610260048868" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1318" height="171" key="GridCell.Tab.0.center" timestamp="1609935678436">
+    <state width="1318" height="97" key="GridCell.Tab.0.center" timestamp="1610260048867">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1318" height="171" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609935678436" />
+    <state width="1318" height="97" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1610260048867" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1318" height="171" key="GridCell.Tab.0.left" timestamp="1609935678436">
+    <state width="1318" height="97" key="GridCell.Tab.0.left" timestamp="1610260048867">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1318" height="171" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609935678436" />
+    <state width="1318" height="97" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1610260048867" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1318" height="171" key="GridCell.Tab.0.right" timestamp="1609935678436">
+    <state width="1318" height="97" key="GridCell.Tab.0.right" timestamp="1610260048868">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1318" height="171" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609935678436" />
+    <state width="1318" height="97" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610260048868" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1318" height="171" key="GridCell.Tab.1.bottom" timestamp="1609935678200">
+    <state width="1318" height="171" key="GridCell.Tab.1.bottom" timestamp="1610190542456">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1318" height="171" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609935678200" />
+    <state width="1318" height="171" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610190542456" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1318" height="171" key="GridCell.Tab.1.center" timestamp="1609935678199">
+    <state width="1318" height="171" key="GridCell.Tab.1.center" timestamp="1610190542455">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1318" height="171" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1609935678199" />
+    <state width="1318" height="171" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1610190542455" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1318" height="171" key="GridCell.Tab.1.left" timestamp="1609935678199">
+    <state width="1318" height="171" key="GridCell.Tab.1.left" timestamp="1610190542455">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1318" height="171" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1609935678199" />
+    <state width="1318" height="171" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1610190542455" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1318" height="171" key="GridCell.Tab.1.right" timestamp="1609935678199">
+    <state width="1318" height="171" key="GridCell.Tab.1.right" timestamp="1610190542456">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1318" height="171" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1609935678199" />
+    <state width="1318" height="171" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1610190542456" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
       <screen x="0" y="0" width="1366" height="728" />
@@ -772,10 +784,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1609342005558">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1609936067299">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1609342005558" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1609936067299" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
       <screen x="72" y="27" width="1294" height="741" />
@@ -823,12 +835,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>706</line>
+          <line>709</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>664</line>
+          <line>667</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -843,7 +855,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>376</line>
+          <line>378</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
       </breakpoints>

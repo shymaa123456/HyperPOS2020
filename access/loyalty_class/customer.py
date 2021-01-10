@@ -42,7 +42,7 @@ class CL_customer(QtWidgets.QDialog):
                if row_data[4] =='None':
                 print('hh')
                else:
-                   sql_select_query = "select  i.ITEM_DESC from SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
+                   sql_select_query = "select  i.ITEM_DESC from Hyper1_Retail.SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
                    x = (row_data[4],)
                    mycursor.execute(sql_select_query, x)
                    result = mycursor.fetchone()
@@ -81,7 +81,7 @@ class CL_customer(QtWidgets.QDialog):
 # get customer type desc
     def FN_GET_CUSTTP_DESC(self, id):
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT LOYCT_DESC FROM LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
+        mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
 
@@ -110,7 +110,7 @@ class CL_customer(QtWidgets.QDialog):
             errorMsg =''
             createdCust =0
             nonCreatedCust=0
-            print (sheet.nrows)
+            #print (sheet.nrows)
             error_message = ''
             for i in range( sheet.nrows ):
                 error = 0
@@ -174,7 +174,7 @@ class CL_customer(QtWidgets.QDialog):
 
                     if error != 1:
                     # get max userid
-                        mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM POS_CUSTOMER" )
+                        mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM Hyper1_Retail.POS_CUSTOMER" )
                         myresult = mycursor.fetchone()
 
                         if myresult[0] == None:
@@ -183,7 +183,7 @@ class CL_customer(QtWidgets.QDialog):
                             self.id = int( myresult[0] ) + 1
 
                         creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-                        sql = "INSERT INTO POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
+                        sql = "INSERT INTO Hyper1_Retail.POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
                               " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING,POSC_FLOOR, POSC_EMAIL, " \
                               "POSC_CREATED_BY, POSC_CREATED_ON ,POSC_CHANGED_BY ,  POSC_COMPANY, " \
                               "POSC_WORK_PHONE, POSC_WORK_ADDRESS, POSC_NOTES, POSC_STATUS) " \
@@ -225,7 +225,7 @@ class CL_customer(QtWidgets.QDialog):
         #self.id = self.LB_custID.text()
         self.LB_custID.setText(id)
         mycursor = self.conn.cursor()
-        sql_select_query = "select * from POS_CUSTOMER where POSC_CUST_ID = %s "
+        sql_select_query = "select * from Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = %s "
         x = (id,)
         mycursor.execute( sql_select_query, x )
         record = mycursor.fetchone()
@@ -297,7 +297,7 @@ class CL_customer(QtWidgets.QDialog):
 
     def FN_GET_CITIES(self):
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT CITY_NAME FROM City  where CITY_STATUS = 1 order by CITY_ID asc")
+        mycursor.execute("SELECT CITY_NAME FROM Hyper1_Retail.City  where CITY_STATUS = 1 order by CITY_ID asc")
         records = mycursor.fetchall()
 
         for row in records:
@@ -307,7 +307,7 @@ class CL_customer(QtWidgets.QDialog):
         self.CMB_district.clear()
         if self.CMB_city.currentText() !=None:
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT DISTRICT_NAME FROM DISTRICT d inner join City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+self.CMB_city.currentText()+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
+            mycursor.execute("SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d inner join Hyper1_Retail.City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+self.CMB_city.currentText()+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
             records = mycursor.fetchall()
 
             for row in records:
@@ -319,7 +319,7 @@ class CL_customer(QtWidgets.QDialog):
         if self.CMB_city.currentText() != None:
             mycursor = self.conn.cursor()
             mycursor.execute(
-                "SELECT DISTRICT_NAME FROM DISTRICT d where DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
+                "SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d where DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
             records = mycursor.fetchall()
 
             for row in records:
@@ -328,7 +328,7 @@ class CL_customer(QtWidgets.QDialog):
 #fill the combo box of customer group
     def FN_GET_CUSTGP(self):
         mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT CG_DESC FROM CUSTOMER_GROUP order by CG_GROUP_ID asc" )
+        mycursor.execute( "SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP order by CG_GROUP_ID asc" )
         records = mycursor.fetchall()
         mycursor.close()
         for row in records:
@@ -338,7 +338,7 @@ class CL_customer(QtWidgets.QDialog):
     def FN_GET_CUSTTP(self):
         self.CMB_loyalityType.clear()
         mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT LOYCT_DESC FROM LOYALITY_CUSTOMER_TYPE order by LOYCT_TYPE_ID asc" )
+        mycursor.execute( "SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE order by LOYCT_TYPE_ID asc" )
         records = mycursor.fetchall()
         mycursor.close()
         for row in records:
@@ -347,7 +347,7 @@ class CL_customer(QtWidgets.QDialog):
     # return customer tye id
     def FN_GET_CUSTTP_ID(self,desc):
         mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+desc+"'" )
+        mycursor.execute( "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+desc+"'" )
         records = mycursor.fetchone()
         mycursor.close()
         return records[0]
@@ -373,6 +373,8 @@ class CL_customer(QtWidgets.QDialog):
             self.Rbtn_custPhone.setEnabled(False)
             self.LE_custNo.setEnabled(False)
             self.LE_custPhone.setEnabled(False)
+            self.LE_custNo.setText('')
+            self.LE_custPhone.setText('')
             self.CMB_loyalityType.setEnabled(False)
 
         if self.chk_search_status.isChecked():
@@ -394,16 +396,18 @@ class CL_customer(QtWidgets.QDialog):
             self.FN_GET_CUSTTP()
             self.CMB_loyalityType.setEnabled(True)
             self.LE_custNo.setEnabled(False)
+            self.LE_custNo.setText('')
             self.LE_custPhone.setEnabled(False)
         elif self.Rbtn_custNo.isChecked():
             self.CMB_loyalityType.setEnabled(False)
             self.LE_custNo.setEnabled(True)
 
             self.LE_custPhone.setEnabled(False)
-
+            self.LE_custPhone.setText('')
         elif self.Rbtn_custPhone.isChecked():
             self.CMB_loyalityType.setEnabled(False)
             self.LE_custNo.setEnabled(False)
+            self.LE_custNo.setText('')
 
             self.LE_custPhone.setEnabled(True)
 
@@ -430,7 +434,7 @@ class CL_customer(QtWidgets.QDialog):
 
             mycursor = self.conn.cursor()
             # get max id
-            mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM POS_CUSTOMER" )
+            mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM Hyper1_Retail.POS_CUSTOMER" )
             myresult = mycursor.fetchone()
 
             if myresult[0] == None:
@@ -441,12 +445,12 @@ class CL_customer(QtWidgets.QDialog):
             creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
 
             #get customer gp id
-            mycursor.execute( "SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '"+self.custGroup+"'" )
+            mycursor.execute( "SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '"+self.custGroup+"'" )
             myresult = mycursor.fetchone()
             self.custGroup = myresult[0]
 
             #get customer type
-            mycursor.execute( "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+self.loyalityType +"'" )
+            mycursor.execute( "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+self.loyalityType +"'" )
             myresult = mycursor.fetchone()
             self.loyalityType = myresult[0]
 
@@ -487,7 +491,7 @@ class CL_customer(QtWidgets.QDialog):
 
             if error !=1:
 
-                sql = "INSERT INTO POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
+                sql = "INSERT INTO Hyper1_Retail.POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
                       " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING,POSC_FLOOR, POSC_EMAIL, " \
                       "POSC_CREATED_BY, POSC_CREATED_ON ,POSC_CHANGED_BY ,  POSC_COMPANY, " \
                       "POSC_WORK_PHONE, POSC_WORK_ADDRESS, POSC_NOTES, POSC_STATUS) " \
@@ -541,13 +545,13 @@ class CL_customer(QtWidgets.QDialog):
 
             changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
             # get customer gp id
-            mycursor.execute( "SELECT CG_GROUP_ID FROM CUSTOMER_GROUP where CG_DESC = '" + self.custGroup + "'" )
+            mycursor.execute( "SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '" + self.custGroup + "'" )
             myresult = mycursor.fetchone()
             self.custGroup = myresult[0]
 
             # get customer type
             mycursor.execute(
-                "SELECT LOYCT_TYPE_ID FROM LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + self.loyalityType + "'" )
+                "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + self.loyalityType + "'" )
             myresult = mycursor.fetchone()
             self.loyalityType = myresult[0]
 
@@ -588,7 +592,7 @@ class CL_customer(QtWidgets.QDialog):
             if error != 1:
 
 
-                sql = "update  POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,   POSC_PHONE=%s," \
+                sql = "update  Hyper1_Retail.POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,   POSC_PHONE=%s," \
                       " POSC_MOBILE=%s, POSC_JOB=%s, POSC_ADDRESS=%s, POSC_CITY=%s, POSC_DISTICT=%s, POSC_BUILDING=%s,POSC_FLOOR=%s, POSC_EMAIL=%s, " \
                       "POSC_CHANGED_BY =%s, POSC_CHANGED_ON =%s, POSC_COMPANY=%s, " \
                       "POSC_WORK_PHONE=%s, POSC_WORK_ADDRESS=%s, POSC_NOTES=%s, POSC_STATUS=%s where POSC_CUST_ID = %s"
@@ -623,15 +627,32 @@ class CL_customer(QtWidgets.QDialog):
 
             # add_sheet is used to create sheet.
             sheet = wb.add_sheet('Sheet 1')
-            # Headers = ['Line Name', 'SOL_E', 'SOL_N', 'EOL_E', 'EOL_N']
-            # sheet.writerow(Headers)
+            sheet.write(0, 0, 'رقم العميل')
+            sheet.write(0, 1, 'اسم العميل')
+            sheet.write(0, 2, 'نوع العضويه')
+            sheet.write(0, 3, 'رقم الهاتف')
+            sheet.write(0, 4, 'الموبايل')
+            sheet.write(0, 5, 'الوظيفه')
+            sheet.write(0, 6, 'العنوان')
+            sheet.write(0, 7, 'المدينه')
+            sheet.write(0, 8, 'المجاوره')
+            sheet.write(0, 9, 'المبنى')
+
+            sheet.write(0, 10, 'الطابق')
+            sheet.write(0, 11, 'الإيميل')
+            sheet.write(0, 12, 'حاله العميل')
+
+            rowNo= self.Qtable_customer.rowCount()+1
+
             for currentColumn in range(self.Qtable_customer.columnCount()):
                 for currentRow in range(self.Qtable_customer.rowCount()):
                     teext = str(self.Qtable_customer.item(currentRow, currentColumn).text())
-                    sheet.write(currentRow, currentColumn, teext)
-            # wb.save('test11.xls')
+                    sheet.write(currentRow+1, currentColumn, teext)
+            # # wb.save('test11.xls')
             wb.save(str(filename[0]))
             # wb.close()
+            import webbrowser
+            webbrowser.open(filename[0])
         except Exception as err:
             print(err)
 
@@ -674,8 +695,8 @@ class CL_customer(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "أختر أي من محدادات البحث")
         else:
             # print(whereClause)
-            sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from POS_CUSTOMER where " + whereClause
-            # print(sql_select_query)
+            sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where " + whereClause
+            print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):

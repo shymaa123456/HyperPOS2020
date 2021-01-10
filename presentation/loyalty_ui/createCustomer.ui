@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>977</width>
-    <height>615</height>
+    <width>1004</width>
+    <height>559</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>إنشاء عميل</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(198, 207, 199);</string>
@@ -29,7 +29,7 @@
     <item>
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>اسم العميل</string>
+       <string>اسم العميل *</string>
       </property>
      </widget>
     </item>
@@ -50,14 +50,14 @@
     <item>
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>رقم الهاتف</string>
+       <string>رقم الهاتف  *</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>رقم الموبايل</string>
+       <string>رقم الموبايل *</string>
       </property>
      </widget>
     </item>
@@ -106,7 +106,7 @@
     <item>
      <widget class="QLabel" name="label_10">
       <property name="text">
-       <string>اﻹيميل</string>
+       <string>اﻹيميل *</string>
       </property>
      </widget>
     </item>

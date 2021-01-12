@@ -403,7 +403,7 @@ background-color: rgb(198, 207, 199);</string>
       <item>
        <widget class="QPushButton" name="Qbtn_search">
         <property name="enabled">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton{
@@ -541,7 +541,7 @@ background-color: rgb(198, 207, 199);</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="Qbtn_exit">
+       <widget class="QPushButton" name="QAct_Exit">
         <property name="styleSheet">
          <string notr="true">QPushButton{
                                         background-color: white;

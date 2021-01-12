@@ -116,7 +116,8 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         for i in range(int(self.serialCount)):
             value = randint(0, 1000000)
             sql2 = "INSERT INTO COUPON_SERIAL (COPS_SERIAL_ID,COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-            val2 = (i+value,self.LE_desc_6.text(),value,CL_userModule.user_name,creationDate,0,self.CMB_CouponStatus.currentIndex())
+            val2 = (i+value,self.LE_desc_6.text(),bin(value),CL_userModule.user_name,creationDate,0,self.CMB_CouponStatus.currentIndex())
+            print(sql2,val2)
             mycursor.execute(sql2, val2)
         for j in range(len(self.Qcombo_company.currentData())):
             for i in range(len(self.Qcombo_branch.currentData())):

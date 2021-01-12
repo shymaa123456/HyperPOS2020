@@ -1,4 +1,5 @@
 import re
+from base64 import encode
 
 from access.reports_class.ReportPDF import body, Text
 
@@ -20,17 +21,29 @@ from access.reports_class.ReportPDF import body, Text
 #
 # window_two = CL_report()
 # window_two.show()
-from data_connection.h1pos import db1
+# from data_connection.h1pos import db1
+#
+# conn = db1.connect()
+#
+# mycursor = conn.cursor()
+# sql = "INSERT INTO COUPON_SERIAL (COPS_SERIAL_ID,COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES  (201061, '125000', 'gAAAAABf_bLHK9Emytwb-2p8C5drsG4cFdy_w49AQePXQ2vt1_wO08sTBRDcC9s5Wdeh3IQsdMhsEXt_ldaT1KWOeXd7LwbQrQ==', 'admin', '2021-01-12', 0, 0)"
+#
+#
+# mycursor.execute(sql)
+# db1.connectionCommit(conn)
+# mycursor.close()
 
-conn = db1.connect()
-
-mycursor = conn.cursor()
-sql = "update COUPON set COP_STATUS='"+str(0)+"' where COP_ID='"+str(1256)+"'"
 
 
-mycursor.execute(sql)
-db1.connectionCommit(conn)
-mycursor.close()
+# from cryptography.fernet import Fernet
+# key = Fernet.generate_key() #this is your "password"
+# cipher_suite = Fernet(key)
+# my_str = str(123)
+# my_str_as_bytes = str.encode(my_str)
+# encoded_text = cipher_suite.encrypt(my_str_as_bytes)
+# # plain_text = cipher_suite.decrypt(encoded_text)
+#
+# print(encoded_text)
 
 
 #INSERT INTO COUPON (COP_ID, COP_DESC, COP_DISCOUNT_VAL, COP_DISCOUNT_PERCENT, COP_SERIAL_COUNT, COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_CHANGED_BY, COP_CHANGED_ON, COP_VALID_FROM, COP_VALID_TO, COP_STATUS) VALUES ( %s, %s, %s,%s, %s, %s,%s, %s, %s,%s, %s, %s, %s, %s)  ('2', 'd', 'd', 'd', 'd', '1', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd')
@@ -40,4 +53,18 @@ mycursor.close()
 
 
 
+
+
+
+
+
+
 #INSERT INTO COUPON (COP_ID, COP_DESC, , COP_SERIAL_COUNT,COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_VALID_FROM, COP_VALID_TO, COP_STATUS) VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s , %s)  ('123456', 'edition', '1', '1', '1', '0', 'admin', '2021-01-10', '2021-01-10', '2021-01-10', 0)
+
+
+a = 79
+
+# Base 2(binary)
+bin_a = bin(a)
+print(bin_a)
+print(int(bin_a, 2))

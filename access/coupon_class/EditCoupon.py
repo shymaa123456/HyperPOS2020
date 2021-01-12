@@ -31,6 +31,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
         self.CMB_CouponStatus.addItems(["Active", "Inactive"])
         self.FN_getData()
         self.CMB_CouponDes.activated[str].connect(self.FN_getDatabyID)
+        self.FN_getDatabyID()
         self.radioButton_Value.clicked.connect(self.FN_EnableDiscVal)
         self.radioButton_Percentage.clicked.connect(self.FN_EnablePercentage)
         self.checkBox_Multi.toggled.connect(self.FN_endableMultiUser)

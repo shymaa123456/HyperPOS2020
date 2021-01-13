@@ -5,6 +5,9 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.coupon_class.CreateCoupon import CL_CreateCoupon
+from access.coupon_class.EditCoupon import CL_EditCoupon
+from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.loyalty_class.loyalityProg import CL_loyProg
 from access.reports_class.reporting import CL_report
 
@@ -86,6 +89,14 @@ class CL_main(QtWidgets.QMainWindow):
         """ Promotion """
         self.QAct_Prom_Add.triggered.connect(self.FN_search_promotion)
         self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)
+
+
+        #Todo: method for Open Create Coupon Window
+        self.QAct_Coupon_Add.triggered.connect(self.FN_CreateCoupon)
+        self.QAct_Coupon_Deactivate.triggered.connect(self.FN_ModifyCoupon)
+        self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
+        self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
+
 
 
         self.QAct_Exit.triggered.connect(self.FN_exit)
@@ -244,4 +255,20 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_search_reporting(self):
         self.window_two = CL_report()
+        self.window_two.show()
+
+
+    def FN_CreateCoupon(self):
+        self.window_two = CL_CreateCoupon()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_ModifyCoupon(self):
+        self.window_two = CL_modifyCoupon()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_EditCoupon(self):
+        self.window_two = CL_EditCoupon()
+        self.window_two.FN_LOADUI()
         self.window_two.show()

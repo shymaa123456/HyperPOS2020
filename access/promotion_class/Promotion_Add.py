@@ -172,7 +172,7 @@ class CheckableComboBox(QComboBox):
                 res.append(self.model().item(i).data())
         return res
 
-    def setChecked(self,index):
+    def setChecked(self, index):
         item = self.model().item(index)
         item.setCheckState(Qt.Checked)
 
@@ -180,6 +180,7 @@ class CheckableComboBox(QComboBox):
 class CL_create_promotion(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
+    query = ""
 
     def __init__(self):
         super(CL_create_promotion, self).__init__()
@@ -216,38 +217,85 @@ class CL_create_promotion(QtWidgets.QDialog):
         # self.Qcombo_sponsor.hide()
 
         try:
-             self.Qcombo_sponsor2.activated.connect(self.handleActivated)
-             # self.Qcombo_sponsor2.currentIndexChanged().connect(self.handleActivated)
+            self.Qcombo_sponsor2.activated.connect(self.handleActivated)
+            # self.Qcombo_sponsor2.currentIndexChanged().connect(self.handleActivated)
+            self.FN_GET_Company()
+            self.FN_GET_Branch()
+            self.FN_GET_CustomerGroup()
+            self.FN_GET_sponser()
+            self.FN_GET_promotion_type()
+            self.FN_GET_department()
+            self.updatestatecombo()
+            self.FN_GET_MAGAZINE()
 
-             self.FN_GET_Company()
-             self.FN_GET_Branch()
-             self.FN_GET_CustomerGroup()
+            # department
+            self.Qcombo_department.activated[str].connect(self.updatestatecombo)
 
-             self.FN_GET_sponser()
-             self.FN_GET_promotion_type()
+            self.tableWidget.setRowCount(0)
+            self.Qtable_promotion.setRowCount(0)
 
-             self.FN_GET_department()
-             self.updatestatecombo()
+            #  SEARCH BUTTON
+            self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)
 
-             self.FN_GET_MAGAZINE()
-
-              # department
-             self.Qcombo_department.activated[str].connect(self.updatestatecombo)
-             self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)
         except:
             print("An exception occurred")
 
-
-    # SEARCH BUTTON
+    # SEARCH BUTTON # FILL SERCH DATA TABLE  >> tableWidget
     def FN_SEARCH_BARCODES(self):
+
+        # model = QStandardItemModel()
+        # model.setHorizontalHeaderLabels(['DEPARTMENT_ID', 'DEPARTMENT_DESC', 'DEPARTMENT_STATUS'])
+        #
+        # self.Qtable_promotion.setModel(model)
+        # header = self.Qtable_promotion.horizontalHeader()
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.setColumnCount(4)
+        self.tableWidget.setHorizontalHeaderLabels(['DEPARTMENT_ID', 'DEPARTMENT_DESC', 'DEPARTMENT_STATUS', 'test'])
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT COMPANY_DESC FROM COMPANY")
+        mycursor.execute("SELECT  DEPARTMENT_ID, DEPARTMENT_DESC , DEPARTMENT_STATUS , '1' FROM DEPARTMENT")
+        # print(self.query)
         records = mycursor.fetchall()
         print(records)
-        for row in records:
-            self.Qcombo_company.addItems(row)
+        headers = []
+        for row_number, row_data in enumerate(records):
+            # self.tableWidget.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+            headers.append(row_data)
+            self.tableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+                if column_number != 2:
+                    self.tableWidget.item(row_number, column_number).setFlags(QtCore.Qt.ItemFlags
+                                                                              (~QtCore.Qt.ItemIsEditable))
+                else:
+                    self.tableWidget.item(row_number, column_number).setFlags(QtCore.Qt.ItemFlags
+                                                                              (~QtCore.Qt.ItemIsSelectable |
+                                                                               ~QtCore.Qt.ItemIsEditable |
+                                                                               ~QtCore.Qt.ItemIsEnabled))
+
+
+            self.tableWidget.resizeColumnsToContents() #item(0, 1).EditTriggers
+            self.tableWidget.setSortingEnabled(True)
+            # self.tableWidget.item(0, 1).setFlags(QtCore.Qt.ItemFlags)
+            # self.tableWidget.item(2, 1).setFlags(Qt.NoItemFlags)
+            # self.tableWidget.item(1, 1).setFlags(Qt.NoItemFlags)
+            # self.tableWidget.selectRow(1)
+            # self.tableWidget.wordWrap()
+            self.tableWidget.setCornerButtonEnabled(False)
+            # self.tableWidget.column(2).setEditTriggers(QtWidgets.QTableWidget.EditTriggers)
+            # flags = self.tableWidget.QTableWidgetItem.ItemFlags
+            # flags |= Qt::ItemIsSelectable | Qt::ItemIsEditable; // set the flag ItemIsEnabled
+            # self.tableWidget.item(0, 1).setFlags(QtCore.Qt.ItemIsSelectable |
+            #                                      QtCore.Qt.ItemIsEditable |
+            #                                      QtCore.Qt.ItemIsEnabled)
+        # self.tableWidget.item(0, 1).setFlags(Qt.ItemIsEditable)
         mycursor.close()
+
+    # item = QTableWidgetItem()
+    # item.setFlags(item.flags() ^ Qt.ItemIsEditable)
+    # tableName.setItem(row, column, item)
 
     def FN_GET_Company(self):
         self.conn = db1.connect()
@@ -298,7 +346,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         print(records)
         for row, VAL in records:
             # self.Qcombo_sponsor2.addItems(row)
-            self.Qcombo_sponsor2.addItem(row , VAL)
+            self.Qcombo_sponsor2.addItem(row, VAL)
             self.Qline_promotion.text = VAL
         mycursor.close()
 
@@ -359,7 +407,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         print(self.Qcombo_sponsor2.itemData(index))
         QMessageBox.about(self, self.Qcombo_sponsor2.itemText(index), self.Qcombo_sponsor2.itemData(index))
 
-    def cell_was_clicked(self,  row, column):
+    def cell_was_clicked(self, row, column):
         # index = self.Qtable_promotion.currentIndex()
         # NewIndex = self.Qtable_promotion.model().index(index.row(), 0)
         # print(NewIndex)
@@ -382,9 +430,16 @@ class CL_create_promotion(QtWidgets.QDialog):
     def FN_GET_department(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT DEPARTMENT_DESC ,DEPARTMENT_ID FROM DEPARTMENT")
-        records = mycursor.fetchall()
+        try:
+            mycursor.execute("SELECT DEPARTMENT_DESC ,DEPARTMENT_ID FROM DEPARTMENT")
+            records = mycursor.fetchall()
+        # finally:
+        #     return records
+        except:
+            return ''
+
         print(records)
+
         for row, val in records:
             self.Qcombo_department.addItem(row, val)
         mycursor.close()
@@ -410,14 +465,19 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.FN_GET_classification(indx)
         self.Qcombo_section.activated[str].connect(self.updateBMCcombo)
 
-
     # BMC
     def FN_GET_classification(self, id):
         self.Qcombo_classification.clear()
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BMC_LEVEL4_DESC , BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID =" + id + "")
-        records = mycursor.fetchall()
+        try:
+            mycursor.execute("SELECT BMC_LEVEL4_DESC , BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID =" + id + "")
+            records = mycursor.fetchall()
+
+
+        except:
+            return   ''
+
         print(records)
         for row, val in records:
             self.Qcombo_classification.addItem(row, val)

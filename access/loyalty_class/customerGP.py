@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets ,QtCore
+from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QRegExpValidator, QIntValidator
 from PyQt5.QtCore import QRegExp
@@ -23,58 +24,43 @@ class CL_customerGP(QtWidgets.QDialog):
 
     ###
 
-    def FN_LOAD_MODIFY(self):
-        filename = self.dirname + '/modifyCustomerGp.ui'
+    def FN_LOAD_DISPlAY(self):
+        filename = self.dirname + '/createModifyCustGp.ui'
         loadUi(filename, self)
-        self.CMB_custGroup.addItems(["Active", "Inactive"])
+
         self.FN_GET_CUSTGPS()
-        self.FN_GET_CustGPID()
-        self.FN_GET_CUSTGP()
-        self.CMB_custGroupDesc.currentIndexChanged.connect(self.FN_GET_CUSTGP)
-        self.BTN_modifyCustGp.clicked.connect(self.FN_MODIFY_CUSTGP)
+        # self.FN_GET_CustGPID()
+        # self.FN_GET_CUSTGP()
+        try:
+            self.CMB_custGroup.addItems(["Active", "Inactive"])
+            self.BTN_createCustGp.clicked.connect(self.FN_CREATE_CUSTGP)
+            self.BTN_modifyCustGp.clicked.connect(self.FN_MODIFY_CUSTGP)
+            #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        except Exception as err:
+            print(err)
+
+    def FN_GET_STATUS_DESC(self,id):
+        if id == '1':
+            return "Active"
+        else:
+            return "Inactive"
 
     def FN_GET_CUSTGPS(self):
+        for i in reversed(range(self.Qtable_custGP.rowCount())):
+            self.Qtable_custGP.removeRow(i)
+
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT CG_DESC  FROM CUSTOMER_GROUP  order by CG_GROUP_ID   asc")
+        mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  order by CG_GROUP_ID   asc")
         records = mycursor.fetchall()
-        for row in records:
-            self.CMB_custGroupDesc.addItems([row[0]])
+        for row_number, row_data in enumerate(records):
+            self.Qtable_custGP.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                if column_number == 2:
+                    data = self.FN_GET_STATUS_DESC(str(data))
+                self.Qtable_custGP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
         mycursor.close()
 
-    def FN_GET_CustGPID(self):
-        self.cust = self.CMB_custGroupDesc.currentText()
-        mycursor = self.conn.cursor()
-        sql_select_query = "SELECT CG_GROUP_ID  FROM CUSTOMER_GROUP   WHERE CG_DESC  = %s  "
-        x = (self.cust,)
-        mycursor.execute(sql_select_query, x)
 
-        myresult = mycursor.fetchone()
-        self.LB_custGpID.setText(myresult[0])
-        mycursor.close()
-
-    def FN_GET_CUSTGP(self):
-        self.FN_GET_CustGPID()
-
-        self.id = self.LB_custGpID.text()
-        mycursor = self.conn.cursor()
-        sql_select_query = "select CG_Status  from CUSTOMER_GROUP where CG_GROUP_ID = %s "
-        x = (self.id,)
-        mycursor.execute(sql_select_query, x)
-        record = mycursor.fetchone()
-        print(record)
-        if record[0] == '0':
-            self.CMB_custGroup.setCurrentText('Inactive')
-
-        else:
-            self.CMB_custGroup.setCurrentText('Active')
-
-        mycursor.close()
-
-    def FN_LOAD_CREATE(self):
-        filename = self.dirname + '/createCustomerGp.ui'
-        loadUi(filename, self)
-        self.BTN_createCustGp.clicked.connect(self.FN_CREATE_CUSTGP)
-        self.CMB_custGroup.addItems(["Active", "Inactive"])
 
     def FN_CREATE_CUSTGP(self):
         print('kkk')
@@ -87,7 +73,7 @@ class CL_customerGP(QtWidgets.QDialog):
 
         mycursor = self.conn.cursor()
         # get max userid
-        mycursor.execute("SELECT max(cast(CG_GROUP_ID  AS UNSIGNED)) FROM CUSTOMER_GROUP")
+        mycursor.execute("SELECT max(cast(CG_GROUP_ID  AS UNSIGNED)) FROM Hyper1_Retail.CUSTOMER_GROUP")
         myresult = mycursor.fetchone()
 
         if myresult[0] == None:
@@ -102,7 +88,7 @@ class CL_customerGP(QtWidgets.QDialog):
 
         else:
 
-            sql = "INSERT INTO CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
+            sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
                   "         VALUES ( %s, %s, %s,  %s,%s)"
 
             # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
@@ -115,35 +101,50 @@ class CL_customerGP(QtWidgets.QDialog):
 
             print(mycursor.rowcount, "Cust Gp inserted.")
             db1.connectionCommit(self.conn)
-            db1.connectionClose(self.conn)
-            self.close()
+            self.FN_GET_CUSTGPS()
+            #db1.connectionClose(self.conn)
+            #self.close()
 
         print("in create cust", self.name)
+
         # insert into db
 
     def FN_MODIFY_CUSTGP(self):
+        try:
+
+            rowNo = self.Qtable_custGP.selectedItems()[0].row()
+            #rowNo.setEditTriggers(QtWidgets.QTableWidget.AllEditTriggers)
+            print(rowNo)
+
+            #if rowNo > 0:
+            id = self.Qtable_custGP.item(rowNo, 0).text()
+            desc = self.Qtable_custGP.item(rowNo, 1).text()
+            status = self.Qtable_custGP.item(rowNo, 2).text()
+
+        except Exception as err:
+            QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+            print(err)
         print('kkk')
-        self.id = self.LB_custGpID.text().strip()
-        self.custGroup = self.CMB_custGroup.currentText()
-        if self.custGroup == 'Active':
+        # self.id = self.LB_custGpID.text().strip()
+        # self.custGroup = self.CMB_custGroup.currentText()
+        if status == 'Active':
             status = 1
         else:
             status = 0
-
+        #
         mycursor = self.conn.cursor()
 
         changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        sql = "update  CUSTOMER_GROUP  set CG_Status= %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
+        sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
 
-        # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-        val = (status, changeDate,
-               CL_userModule.user_name, self.id)
+
+        val = (status,desc, changeDate,CL_userModule.user_name,id)
         mycursor.execute(sql, val)
         # mycursor.execute(sql)
 
         mycursor.close()
-
+        #
         print(mycursor.rowcount, "record updated.")
         db1.connectionCommit(self.conn)
         db1.connectionClose(self.conn)

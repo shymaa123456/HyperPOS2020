@@ -563,7 +563,7 @@ class CL_customer(QtWidgets.QDialog):
             error = 0
             if  self.mobile == '' or self.job == '' or self.address == '' or self.building == '' \
                     or self.floor == '' or self.email == '':
-                QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
+                QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields"   )
                 error = 1
 
             ret = CL_validation.FN_validation_mobile(self.mobile)

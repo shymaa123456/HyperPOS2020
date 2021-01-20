@@ -48,7 +48,7 @@ class CL_main(QtWidgets.QMainWindow):
 
         forms = list(dict.fromkeys(forms))
 
-        # print(forms)
+        print(forms)
         for row in forms:
             # print(row)
             but_name = 'QAct_' + row
@@ -70,9 +70,9 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Display_Customer.triggered.connect(self.FN_DISPLAY_CUST)
         self.QAct_Display_Loyality.triggered.connect(self.FN_CREATE_LOYPROG)
 
-        self.QAct_Create_CustGp.triggered.connect(self.FN_CREATE_CUSTGP)
-        self.QAct_Modify_CustGp.triggered.connect(self.FN_MODIFY_CUSTGP)
-        self.QAct_Deactivate_CustGp.triggered.connect(self.FN_MODIFY_CUSTGP)
+        self.QAct_Display_CustGp.triggered.connect(self.FN_DISPLAY_CUSTGP)
+        self.QAct_Display_CustTp.triggered.connect(self.FN_DISPLAY_CUSTTP)
+        #self.QAct_Deactivate_CustGp.triggered.connect(self.FN_MODIFY_CUSTGP)
 
         self.QAct_Create_CustTp.triggered.connect(self.FN_CREATE_CUSTTP)
         self.QAct_Modify_CustTp.triggered.connect(self.FN_MODIFY_CUSTTP)
@@ -132,25 +132,17 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
 
-    def FN_CREATE_CUSTGP(self):
+    def FN_DISPLAY_CUSTGP(self):
         self.window_two = CL_customerGP()
-        self.window_two.FN_LOAD_CREATE()
+        self.window_two.FN_LOAD_DISPlAY()
         self.window_two.show()
 
-    def FN_MODIFY_CUSTGP(self):
-        self.window_two = CL_customerGP()
-        self.window_two.FN_LOAD_MODIFY()
-        self.window_two.show()
-
-    def FN_CREATE_CUSTTP(self):
+    def FN_DISPLAY_CUSTTP(self):
         self.window_two = CL_customerTP()
-        self.window_two.FN_LOAD_CREATE()
+        self.window_two.FN_LOAD_DISPLAY()
         self.window_two.show()
 
-    def FN_MODIFY_CUSTTP(self):
-        self.window_two = CL_customerTP()
-        self.window_two.FN_LOAD_MODIFY()
-        self.window_two.show()
+
 
     def FN_exit(self):
         QApplication.quit()

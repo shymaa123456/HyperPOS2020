@@ -621,10 +621,10 @@ class CL_loyProg(QtWidgets.QDialog):
         #refresh datagrid
         self.FN_REFRESH_DATA_GRID(ids)
         # self.close()
-    def    FN_REFRESH_DATA_GRID(self,ids,obj):
+    def    FN_REFRESH_DATA_GRID(self,ids):
         try:
             for i in reversed(range(self.Qtable_loyality.rowCount())):
-               obj.Qtable_loyality.removeRow(i)
+               self.Qtable_loyality.removeRow(i)
             time.sleep(5)
             mycursor = self.conn2.cursor()
             i = 0
@@ -635,7 +635,7 @@ class CL_loyProg(QtWidgets.QDialog):
                 val = (id,)
                 mycursor.execute(sql_select_query,val)
                 record = mycursor.fetchone()
-                obj.Qtable_loyality.insertRow(i)
+                self.Qtable_loyality.insertRow(i)
                 for column_number, data in enumerate(record):
 
                     if column_number == 4:
@@ -651,11 +651,11 @@ class CL_loyProg(QtWidgets.QDialog):
                     elif column_number == 10:
                         data = self.FN_GET_BMC_DESC(str(data))
 
-                    obj.Qtable_loyality.setItem(i, column_number, QTableWidgetItem(str(data)))
+                    self.Qtable_loyality.setItem(i, column_number, QTableWidgetItem(str(data)))
                 i=i+1
         except (Error, Warning) as e:
             print(e)
-        obj.Qtable_loyality.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        self.Qtable_loyality.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
 
     def FN_UPLOAD_LOYPROG(self):

@@ -6,44 +6,44 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>407</width>
-    <height>175</height>
+    <width>368</width>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>إنشاء محموعه عملاء</string>
   </property>
   <widget class="QLabel" name="desc">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>40</y>
-     <width>67</width>
-     <height>17</height>
+     <x>266</x>
+     <y>20</y>
+     <width>81</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Desc</string>
+    <string>الأسم</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>100</y>
+     <x>280</x>
+     <y>70</y>
      <width>67</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>Status</string>
+    <string>الحاله</string>
    </property>
   </widget>
   <widget class="QComboBox" name="CMB_custGroup">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>100</y>
+     <x>170</x>
+     <y>70</y>
      <width>86</width>
      <height>25</height>
     </rect>
@@ -52,10 +52,10 @@
   <widget class="QPushButton" name="BTN_createCustGp">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>130</y>
-     <width>121</width>
-     <height>25</height>
+     <x>9</x>
+     <y>20</y>
+     <width>82</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -83,15 +83,15 @@
                                     </string>
    </property>
    <property name="text">
-    <string>Create CustGp</string>
+    <string>إنشاء</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="LE_desc">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>40</y>
-     <width>271</width>
+     <x>130</x>
+     <y>20</y>
+     <width>161</width>
      <height>25</height>
     </rect>
    </property>
@@ -118,6 +118,71 @@
                                         );
                                         }
                                     </string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="Qtable_custGP">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>341</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <column>
+    <property name="text">
+     <string>رقم المجموعه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>اسم  المجموعه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الحاله</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="BTN_modifyCustGp">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>82</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QPushButton:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                        QPushButton:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+   </property>
+   <property name="text">
+    <string>تعديل</string>
    </property>
   </widget>
  </widget>

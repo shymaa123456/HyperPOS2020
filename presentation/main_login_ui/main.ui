@@ -258,9 +258,7 @@
      <property name="title">
       <string>مجموعات العملاء</string>
      </property>
-     <addaction name="QAct_Create_CustGp"/>
-     <addaction name="QAct_Modify_CustGp"/>
-     <addaction name="QAct_Deactivate_CustGp"/>
+     <addaction name="QAct_Display_CustGp"/>
      <addaction name="separator"/>
     </widget>
     <widget class="QMenu" name="QM_Customer_Level">
@@ -540,12 +538,12 @@
     <string>ايقاف عميل</string>
    </property>
   </action>
-  <action name="QAct_Create_CustGp">
+  <action name="QAct_Display_CustGp">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>انشاء مجموعة عملاء</string>
+    <string>مجموعة عملاء</string>
    </property>
   </action>
   <action name="QAct_Modify_CustGp">

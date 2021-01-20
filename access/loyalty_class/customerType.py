@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QRegExpValidator, QIntValidator
 from PyQt5.QtCore import QRegExp
@@ -21,15 +22,132 @@ class CL_customerTP(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
 
-    def FN_LOAD_MODIFY(self):
-        filename = self.dirname + '/modifyLoyalityCustType.ui'
+    def FN_LOAD_DISPlAY(self):
+        filename = self.dirname + '/createModifyCustTp.ui'
         loadUi(filename, self)
-        self.CMB_custType.addItems(["Active", "Inactive"])
+
         self.FN_GET_CUSTTPS()
-        self.FN_GET_CustTPID()
-        self.FN_GET_CUSTTP()
-        self.CMB_custTypeDesc.currentIndexChanged.connect(self.FN_GET_CUSTTP)
-        self.BTN_modifyCustTp.clicked.connect(self.FN_MODIFY_CUSTTP)
+        # self.FN_GET_CustGPID()
+        # self.FN_GET_CUSTGP()
+        try:
+            self.CMB_custType.addItems(["Active", "Inactive"])
+            self.BTN_createCustTp.clicked.connect(self.FN_CREATE_CUSTTP)
+            self.BTN_modifyCustTp.clicked.connect(self.FN_MODIFY_CUSTTP)
+            #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        except Exception as err:
+            print(err)
+
+    def FN_GET_STATUS_DESC(self, id):
+        if id == '1':
+            return "Active"
+        else:
+            return "Inactive"
+
+    def FN_GET_CUSTTPS(self):
+        for i in reversed(range(self.Qtable_custTP.rowCount())):
+            self.Qtable_custTP.removeRow(i)
+
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT  * FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by CG_GROUP_ID   asc")
+        records = mycursor.fetchall()
+        for row_number, row_data in enumerate(records):
+            self.Qtable_custTP.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                if column_number == 5:
+                    data = self.FN_GET_STATUS_DESC(str(data))
+                self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+        mycursor.close()
+
+
+    def FN_CREATE_CUSTGP(self):
+
+        self.name = self.LE_desc.text().strip()
+        self.custType = self.CMB_custGroup.currentText()
+        if self.custGroup == 'Active':
+            self.status = 1
+        else:
+            self.status = 0
+
+        mycursor = self.conn.cursor()
+        # get max userid
+        mycursor.execute("SELECT max(cast(CG_GROUP_ID  AS UNSIGNED)) FROM Hyper1_Retail.CUSTOMER_GROUP")
+        myresult = mycursor.fetchone()
+
+        if myresult[0] == None:
+            self.id = "1"
+        else:
+            self.id = int(myresult[0]) + 1
+
+        creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+
+        if self.name == '':
+            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+
+        else:
+
+            sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
+                  "         VALUES ( %s, %s, %s,  %s,%s)"
+
+            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+            val = (self.id, self.name, creationDate, CL_userModule.user_name, self.status
+                   )
+            mycursor.execute(sql, val)
+            # mycursor.execute(sql)
+
+            mycursor.close()
+
+            print(mycursor.rowcount, "Cust Gp inserted.")
+            db1.connectionCommit(self.conn)
+            self.FN_GET_CUSTGPS()
+            #db1.connectionClose(self.conn)
+            #self.close()
+
+        print("in create cust", self.name)
+
+        # insert into db
+
+    def FN_MODIFY_CUSTGP(self):
+        try:
+
+            rowNo = self.Qtable_custGP.selectedItems()[0].row()
+            #rowNo.setEditTriggers(QtWidgets.QTableWidget.AllEditTriggers)
+            print(rowNo)
+
+            #if rowNo > 0:
+            id = self.Qtable_custGP.item(rowNo, 0).text()
+            desc = self.Qtable_custGP.item(rowNo, 1).text()
+            status = self.Qtable_custGP.item(rowNo, 2).text()
+
+        except Exception as err:
+            QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+            print(err)
+        print('kkk')
+        # self.id = self.LB_custGpID.text().strip()
+        # self.custGroup = self.CMB_custGroup.currentText()
+        if status == 'Active':
+            status = 1
+        else:
+            status = 0
+        #
+        mycursor = self.conn.cursor()
+
+        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+
+        sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
+
+
+        val = (status,desc, changeDate,CL_userModule.user_name,id)
+        mycursor.execute(sql, val)
+        # mycursor.execute(sql)
+
+        mycursor.close()
+        #
+        print(mycursor.rowcount, "record updated.")
+        db1.connectionCommit(self.conn)
+        db1.connectionClose(self.conn)
+        self.close()
+
+
 
     def FN_GET_CUSTTPS(self):
         mycursor = self.conn.cursor()
@@ -39,16 +157,7 @@ class CL_customerTP(QtWidgets.QDialog):
             self.CMB_custTypeDesc.addItems([row[0]])
         mycursor.close()
 
-    def FN_GET_CustTPID(self):
-        self.cust = self.CMB_custTypeDesc.currentText()
-        mycursor = self.conn.cursor()
-        sql_select_query = "SELECT LOYCT_TYPE_ID   FROM LOYALITY_CUSTOMER_TYPE   WHERE LOYCT_DESC  = %s  "
-        x = (self.cust,)
-        mycursor.execute(sql_select_query, x)
 
-        myresult = mycursor.fetchone()
-        self.LB_custTpID.setText(myresult[0])
-        mycursor.close()
 
     def FN_GET_CUSTTP(self):
         self.FN_GET_CustTPID()

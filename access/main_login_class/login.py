@@ -110,11 +110,14 @@ class CL_controller():
 
 
 def main():
-    app = QtWidgets.QApplication(sys.argv)
-    controller = CL_controller()
-    controller.FN_show_login()
-    sys.exit(app.exec_())
+    try:
+        app = QtWidgets.QApplication(sys.argv)
+        controller = CL_controller()
+        controller.FN_show_login()
+        sys.exit(app.exec_())
+    except Exception as err:
 
+        print(err)
 
 if __name__ == '__main__':
     main()

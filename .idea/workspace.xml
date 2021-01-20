@@ -25,24 +25,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="fawzy comments">
-      <change afterPath="$PROJECT_DIR$/access/loyalty_class/customerGP-old.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/main_login_class/load3D.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/main_login_class/t1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustGp.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerType.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerType.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/login.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/main_login_class/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomerGp.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createLoyalityCustType.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyLoyalityProg - Copy.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomerGp.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyLoyalityCustType.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -730,45 +717,45 @@
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1316" height="172" key="GridCell.Tab.0.bottom" timestamp="1611067247717">
+    <state width="1316" height="121" key="GridCell.Tab.0.bottom" timestamp="1611136610704">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="172" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611067247717" />
+    <state width="1316" height="121" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611136610704" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="172" key="GridCell.Tab.0.center" timestamp="1611067247716">
+    <state width="1316" height="121" key="GridCell.Tab.0.center" timestamp="1611136610704">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="172" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611067247716" />
+    <state width="1316" height="121" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611136610704" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="172" key="GridCell.Tab.0.left" timestamp="1611067247716">
+    <state width="1316" height="121" key="GridCell.Tab.0.left" timestamp="1611136610704">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="172" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611067247716" />
+    <state width="1316" height="121" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611136610704" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1316" height="172" key="GridCell.Tab.0.right" timestamp="1611067247716">
+    <state width="1316" height="121" key="GridCell.Tab.0.right" timestamp="1611136610704">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="172" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611067247716" />
+    <state width="1316" height="121" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611136610704" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="172" key="GridCell.Tab.1.bottom" timestamp="1611067247594">
+    <state width="1316" height="172" key="GridCell.Tab.1.bottom" timestamp="1611136004766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="172" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611067247594" />
+    <state width="1316" height="172" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611136004766" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1316" height="172" key="GridCell.Tab.1.center" timestamp="1611067247594">
+    <state width="1316" height="172" key="GridCell.Tab.1.center" timestamp="1611136004766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="172" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1611067247594" />
+    <state width="1316" height="172" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1611136004766" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1316" height="172" key="GridCell.Tab.1.left" timestamp="1611067247594">
+    <state width="1316" height="172" key="GridCell.Tab.1.left" timestamp="1611136004766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="172" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1611067247594" />
+    <state width="1316" height="172" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1611136004766" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1316" height="172" key="GridCell.Tab.1.right" timestamp="1611067247594">
+    <state width="1316" height="172" key="GridCell.Tab.1.right" timestamp="1611136004766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="172" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1611067247594" />
+    <state width="1316" height="172" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1611136004766" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
       <screen x="0" y="0" width="1366" height="728" />
@@ -812,7 +799,6 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1611053447726" />
-    <state x="500" y="312" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1294.741@72.27.1294.741" timestamp="1601991488853" />
     <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1609339922109">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -870,10 +856,5 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="PythonConfigurationType">
-        <watch expression="self.Qtable_loyality" language="Python" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

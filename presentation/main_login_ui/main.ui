@@ -265,8 +265,7 @@
      <property name="title">
       <string>مستويات العملاء</string>
      </property>
-     <addaction name="QAct_Create_CustTp"/>
-     <addaction name="QAct_Modify_CustTp"/>
+     <addaction name="QAct_Display_CustTp"/>
      <addaction name="QAct_Cust_Lvl_Promote"/>
      <addaction name="QAct_Cust_Promote_Manual"/>
     </widget>
@@ -1236,7 +1235,7 @@
     <string>تعديل مستوى عملاء</string>
    </property>
   </action>
-  <action name="QAct_Create_CustTp">
+  <action name="QAct_Display_CustTp">
    <property name="enabled">
     <bool>false</bool>
    </property>

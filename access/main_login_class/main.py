@@ -74,8 +74,8 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Display_CustTp.triggered.connect(self.FN_DISPLAY_CUSTTP)
         #self.QAct_Deactivate_CustGp.triggered.connect(self.FN_MODIFY_CUSTGP)
 
-        self.QAct_Create_CustTp.triggered.connect(self.FN_CREATE_CUSTTP)
-        self.QAct_Modify_CustTp.triggered.connect(self.FN_MODIFY_CUSTTP)
+        #self.QAct_Create_CustTp.triggered.connect(self.FN_CREATE_CUSTTP)
+        #self.QAct_Modify_CustTp.triggered.connect(self.FN_MODIFY_CUSTTP)
 
         # self.QAct_Cust_Upload_Data.triggered.connect(self.FN_UPLOAD_CUST)
 
@@ -139,8 +139,11 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_DISPLAY_CUSTTP(self):
         self.window_two = CL_customerTP()
-        self.window_two.FN_LOAD_DISPLAY()
-        self.window_two.show()
+        try:
+            self.window_two.FN_LOAD_DISPlAY()
+            self.window_two.show()
+        except Exception as err:
+            print(err)
 
 
 

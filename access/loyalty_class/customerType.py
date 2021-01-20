@@ -48,29 +48,32 @@ class CL_customerTP(QtWidgets.QDialog):
             self.Qtable_custTP.removeRow(i)
 
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT  * FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by CG_GROUP_ID   asc")
+        mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
         records = mycursor.fetchall()
         for row_number, row_data in enumerate(records):
             self.Qtable_custTP.insertRow(row_number)
             for column_number, data in enumerate(row_data):
-                if column_number == 5:
+                if column_number ==4:
                     data = self.FN_GET_STATUS_DESC(str(data))
                 self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
         mycursor.close()
 
 
-    def FN_CREATE_CUSTGP(self):
+    def FN_CREATE_CUSTTP(self):
 
-        self.name = self.LE_desc.text().strip()
-        self.custType = self.CMB_custGroup.currentText()
-        if self.custGroup == 'Active':
-            self.status = 1
+        name = self.LE_desc.text().strip()
+        points = self.LE_points.text().strip()
+
+        custType = self.CMB_custType.currentText()
+        nextLevel = self.CMB_nextLevel.currentText()
+        if custType == 'Active':
+            status = 1
         else:
-            self.status = 0
+           status = 0
 
         mycursor = self.conn.cursor()
         # get max userid
-        mycursor.execute("SELECT max(cast(CG_GROUP_ID  AS UNSIGNED)) FROM Hyper1_Retail.CUSTOMER_GROUP")
+        mycursor.execute("SELECT max(cast(LOYCT_TYPE_ID   AS UNSIGNED))   FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE ")
         myresult = mycursor.fetchone()
 
         if myresult[0] == None:
@@ -78,45 +81,46 @@ class CL_customerTP(QtWidgets.QDialog):
         else:
             self.id = int(myresult[0]) + 1
 
-        creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+        #creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        if self.name == '':
+        if name == '':
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
 
         else:
 
-            sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
+            sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
                   "         VALUES ( %s, %s, %s,  %s,%s)"
 
             # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = (self.id, self.name, creationDate, CL_userModule.user_name, self.status
+            val = (self.id, name,points,nextLevel ,  status
                    )
             mycursor.execute(sql, val)
             # mycursor.execute(sql)
 
             mycursor.close()
 
-            print(mycursor.rowcount, "Cust Gp inserted.")
+            print(mycursor.rowcount, "Cust Tp inserted.")
             db1.connectionCommit(self.conn)
-            self.FN_GET_CUSTGPS()
+            self.FN_GET_CUSTTPS()
             #db1.connectionClose(self.conn)
             #self.close()
 
-        print("in create cust", self.name)
 
         # insert into db
 
-    def FN_MODIFY_CUSTGP(self):
+    def FN_MODIFY_CUSTTP(self):
         try:
 
-            rowNo = self.Qtable_custGP.selectedItems()[0].row()
+            rowNo = self.Qtable_custTP.selectedItems()[0].row()
             #rowNo.setEditTriggers(QtWidgets.QTableWidget.AllEditTriggers)
             print(rowNo)
 
             #if rowNo > 0:
-            id = self.Qtable_custGP.item(rowNo, 0).text()
-            desc = self.Qtable_custGP.item(rowNo, 1).text()
-            status = self.Qtable_custGP.item(rowNo, 2).text()
+            id = self.Qtable_custTP.item(rowNo, 0).text()
+            desc = self.Qtable_custTP.item(rowNo, 1).text()
+            status = self.Qtable_custTP.item(rowNo, 2).text()
+            points = self.Qtable_custTP.item(rowNo, 3).text()
+            nextLevel = self.Qtable_custTP.item(rowNo, 4).text()
 
         except Exception as err:
             QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
@@ -133,10 +137,9 @@ class CL_customerTP(QtWidgets.QDialog):
 
         changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
+        sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT`= %s where LOYCT_TYPE_ID = %s"
 
-
-        val = (status,desc, changeDate,CL_userModule.user_name,id)
+        val = (status,desc,points,nextLevel ,id)
         mycursor.execute(sql, val)
         # mycursor.execute(sql)
 
@@ -144,115 +147,10 @@ class CL_customerTP(QtWidgets.QDialog):
         #
         print(mycursor.rowcount, "record updated.")
         db1.connectionCommit(self.conn)
-        db1.connectionClose(self.conn)
-        self.close()
+        #db1.connectionClose(self.conn)
+        #self.close()
 
 
 
-    def FN_GET_CUSTTPS(self):
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT LOYCT_DESC   FROM LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
-        records = mycursor.fetchall()
-        for row in records:
-            self.CMB_custTypeDesc.addItems([row[0]])
-        mycursor.close()
 
 
-
-    def FN_GET_CUSTTP(self):
-        self.FN_GET_CustTPID()
-
-        self.id = self.LB_custTpID.text()
-        mycursor = self.conn.cursor()
-        sql_select_query = "select LOYCT_STATUS , 	LOYCT_POINTS_TO_PROMOTE   from LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = %s "
-        x = (self.id,)
-        mycursor.execute(sql_select_query, x)
-        record = mycursor.fetchone()
-        print(record)
-        if record[0] == '0':
-            self.CMB_custType.setCurrentText('Inactive')
-
-        else:
-            self.CMB_custType.setCurrentText('Active')
-        self.LE_points.setText(record[1])
-        mycursor.close()
-
-    def FN_LOAD_CREATE(self):
-        filename = self.dirname + '/createLoyalityCustType.ui'
-        loadUi(filename, self)
-        self.BTN_createCustTp.clicked.connect(self.FN_CREATE_CUSTTP)
-        self.CMB_custType.addItems(["Active", "Inactive"])
-
-    def FN_CREATE_CUSTTP(self):
-
-        self.name = self.LE_desc.text().strip()
-        self.points = self.LE_points.text().strip()
-        self.custType = self.CMB_custType.currentText()
-        if self.custType == 'Active':
-            self.status = 1
-        else:
-            self.status = 0
-
-        mycursor = self.conn.cursor()
-        # get max userid
-        mycursor.execute("SELECT max(cast(LOYCT_TYPE_ID   AS UNSIGNED))   FROM LOYALITY_CUSTOMER_TYPE ")
-        myresult = mycursor.fetchone()
-
-        if myresult[0] == None:
-            self.id = "1"
-        else:
-            self.id = int(myresult[0]) + 1
-
-        creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-
-        if self.name == '':
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
-
-        else:
-
-            sql = "INSERT INTO LOYALITY_CUSTOMER_TYPE " \
-                  "         VALUES ( %s, %s, %s,  %s)"
-
-            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = (self.id, self.name, self.points, self.status
-                   )
-            mycursor.execute(sql, val)
-            # mycursor.execute(sql)
-
-            mycursor.close()
-
-            print(mycursor.rowcount, "Cust Type inserted.")
-            db1.connectionCommit(self.conn)
-            db1.connectionClose(self.conn)
-            self.close()
-
-        print("in create cust", self.name)
-        # insert into db
-
-    def FN_MODIFY_CUSTTP(self):
-
-        self.id = self.LB_custTpID.text().strip()
-        self.custType = self.CMB_custType.currentText()
-        self.points = self.LE_points.text().strip()
-        if self.custType == 'Active':
-            status = 1
-        else:
-            status = 0
-
-        mycursor = self.conn.cursor()
-
-        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-
-        sql = "update  LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_POINTS_TO_PROMOTE=%s where LOYCT_TYPE_ID = %s"
-
-        # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-        val = (status, self.points, self.id)
-        mycursor.execute(sql, val)
-        # mycursor.execute(sql)
-
-        mycursor.close()
-
-        print(mycursor.rowcount, "record updated.")
-        db1.connectionCommit(self.conn)
-        db1.connectionClose(self.conn)
-        self.close()

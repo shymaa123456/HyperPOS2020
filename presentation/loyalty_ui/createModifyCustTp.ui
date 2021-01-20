@@ -229,7 +229,7 @@
                                     </string>
    </property>
    <property name="text">
-    <string>النقاط</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="desc_2">

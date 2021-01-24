@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets,QtCore
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QRegExpValidator, QIntValidator
@@ -28,7 +28,9 @@ class CL_customerTP(QtWidgets.QDialog):
 
         self.FN_GET_CUSTTPS()
         # self.FN_GET_CustGPID()
-        # self.FN_GET_CUSTGP()
+        records=self.FN_GET_NEXTlEVEL()
+        for row in records:
+            self.CMB_nextLevel.addItems([row[0]])
         try:
             self.CMB_custType.addItems(["Active", "Inactive"])
             self.BTN_createCustTp.clicked.connect(self.FN_CREATE_CUSTTP)
@@ -36,6 +38,31 @@ class CL_customerTP(QtWidgets.QDialog):
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         except Exception as err:
             print(err)
+
+    def FN_GET_NEXTlEVEL(self):
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
+        records = mycursor.fetchall()
+        mycursor.close()
+        return records
+
+    def FN_GET_NEXTlEVEL_ID(self,desc):
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  where LOYCT_DESC= '"+desc+"'")
+        records = mycursor.fetchone()
+
+        mycursor.close()
+        return records[0]
+
+    def FN_GET_NEXTlEVEL_DESC(self,id):
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT  LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  where LOYCT_TYPE_ID= '"+id+"'")
+        records = mycursor.fetchone()
+
+        mycursor.close()
+        return records[0]
+    #def FN_VALIDATE_NEXTlEVEL(self,):
+
 
     def FN_GET_STATUS_DESC(self, id):
         if id == '1':
@@ -53,9 +80,23 @@ class CL_customerTP(QtWidgets.QDialog):
         for row_number, row_data in enumerate(records):
             self.Qtable_custTP.insertRow(row_number)
             for column_number, data in enumerate(row_data):
-                if column_number ==4:
-                    data = self.FN_GET_STATUS_DESC(str(data))
-                self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+                if column_number == 3 :
+                    data= self.FN_GET_NEXTlEVEL_DESC(str(data))
+                    # comboBox = QtWidgets.QComboBox()
+                    # records = self.FN_GET_NEXTlEVEL()
+                    # for row in records:
+                    #    comboBox.addItems([row[0]])
+                    # comboBox.setCurrentText(data)
+                    # self.Qtable_custTP.setCellWidget(row_number, column_number, comboBox)
+                else:
+                    if column_number == 4:
+                        data = self.FN_GET_STATUS_DESC(str(data))
+                    item = QTableWidgetItem(str(data))
+                    if column_number == 0:
+                        item.setFlags(QtCore.Qt.NoItemFlags)
+
+                    self.Qtable_custTP.setItem(row_number, column_number, item)
         mycursor.close()
 
 
@@ -87,7 +128,7 @@ class CL_customerTP(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
 
         else:
-
+            nextLevel = self.FN_GET_NEXTlEVEL_ID(nextLevel)
             sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
                   "         VALUES ( %s, %s, %s,  %s,%s)"
 
@@ -100,6 +141,7 @@ class CL_customerTP(QtWidgets.QDialog):
             mycursor.close()
 
             print(mycursor.rowcount, "Cust Tp inserted.")
+            QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
             db1.connectionCommit(self.conn)
             self.FN_GET_CUSTTPS()
             #db1.connectionClose(self.conn)
@@ -114,39 +156,36 @@ class CL_customerTP(QtWidgets.QDialog):
             rowNo = self.Qtable_custTP.selectedItems()[0].row()
             #rowNo.setEditTriggers(QtWidgets.QTableWidget.AllEditTriggers)
             print(rowNo)
+            if rowNo == None:
+                QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+            else:
 
-            #if rowNo > 0:
-            id = self.Qtable_custTP.item(rowNo, 0).text()
-            desc = self.Qtable_custTP.item(rowNo, 1).text()
-            status = self.Qtable_custTP.item(rowNo, 2).text()
-            points = self.Qtable_custTP.item(rowNo, 3).text()
-            nextLevel = self.Qtable_custTP.item(rowNo, 4).text()
+                #if rowNo > 0:
+                id = self.Qtable_custTP.item(rowNo, 0).text()
+                desc = self.Qtable_custTP.item(rowNo, 1).text()
+                points = self.Qtable_custTP.item(rowNo, 2).text()
+                nextLevel = self.Qtable_custTP.item(rowNo, 3).text()
+                # nextLevel = CMB_nextLevel.currentText()
+
+                status = self.Qtable_custTP.item(rowNo, 4).text()
+                nextLevel = self.FN_GET_NEXTlEVEL_ID(nextLevel)
+                if status == 'Active':
+                    status = 1
+                else:
+                    status = 0
+                #
+                mycursor = self.conn.cursor()
+                sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT= %s where LOYCT_TYPE_ID = %s"
+                val = (status,desc,points,nextLevel ,id)
+                mycursor.execute(sql, val)
+                mycursor.close()                #
+                print(mycursor.rowcount, "record updated.")
+                QtWidgets.QMessageBox.information(self, "Success", "Cust Tp updated")
+                db1.connectionCommit(self.conn)
 
         except Exception as err:
-            QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+
             print(err)
-        print('kkk')
-        # self.id = self.LB_custGpID.text().strip()
-        # self.custGroup = self.CMB_custGroup.currentText()
-        if status == 'Active':
-            status = 1
-        else:
-            status = 0
-        #
-        mycursor = self.conn.cursor()
-
-        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-
-        sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT`= %s where LOYCT_TYPE_ID = %s"
-
-        val = (status,desc,points,nextLevel ,id)
-        mycursor.execute(sql, val)
-        # mycursor.execute(sql)
-
-        mycursor.close()
-        #
-        print(mycursor.rowcount, "record updated.")
-        db1.connectionCommit(self.conn)
         #db1.connectionClose(self.conn)
         #self.close()
 

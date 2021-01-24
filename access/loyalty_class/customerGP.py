@@ -57,7 +57,10 @@ class CL_customerGP(QtWidgets.QDialog):
             for column_number, data in enumerate(row_data):
                 if column_number == 2:
                     data = self.FN_GET_STATUS_DESC(str(data))
-                self.Qtable_custGP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+                item = QTableWidgetItem(str(data))
+                if column_number == 0:
+                    item.setFlags(QtCore.Qt.NoItemFlags)
+                self.Qtable_custGP.setItem(row_number, column_number, item)
         mycursor.close()
 
 
@@ -100,6 +103,7 @@ class CL_customerGP(QtWidgets.QDialog):
             mycursor.close()
 
             print(mycursor.rowcount, "Cust Gp inserted.")
+            QtWidgets.QMessageBox.information(self, "Success", "Cust Gp inserted.")
             db1.connectionCommit(self.conn)
             self.FN_GET_CUSTGPS()
             #db1.connectionClose(self.conn)
@@ -146,6 +150,7 @@ class CL_customerGP(QtWidgets.QDialog):
         mycursor.close()
         #
         print(mycursor.rowcount, "record updated.")
+        QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
         db1.connectionCommit(self.conn)
-        db1.connectionClose(self.conn)
-        self.close()
+        # db1.connectionClose(self.conn)
+        #  self.close()

@@ -144,17 +144,17 @@
    </column>
    <column>
     <property name="text">
-     <string>الحاله</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
      <string>النقاط</string>
     </property>
    </column>
    <column>
     <property name="text">
      <string>الفئه التاليه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الحاله</string>
     </property>
    </column>
   </widget>

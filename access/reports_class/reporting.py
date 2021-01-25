@@ -7,6 +7,7 @@ Created on Mon Jun 29 19:52:06 2020
 """
 
 #####
+import os
 
 import pandas as pd
 from PyQt5.QtGui import QStandardItemModel
@@ -15,14 +16,14 @@ from access.promotion_class.Promotion_Add import CheckableComboBox
 from access.reports_class.ReportPDF import body, Text
 from pathlib import Path
 
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, uic
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog
-from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from data_connection.h1pos import db1
 import sys
+
 
 
 class CL_report(QtWidgets.QDialog):
@@ -466,12 +467,12 @@ class CL_report(QtWidgets.QDialog):
 
         super(CL_report, self).__init__()
 
-        cwd = Path.cwd()
-        mod_path = Path(__file__).parent.parent.parent
-        dirname = mod_path.__str__() + '/presentation/reports_ui'
-        filename = dirname + '/Promotion_display.ui'
-        loadUi(filename, self)
-        self.setWindowTitle('HyperPOS Reporting')
+        # cwd = Path.cwd()
+        # mod_path = Path(__file__).parent.parent.parent
+        # dirname = mod_path.__str__() + '/presentation/reports_ui'
+        # filename = dirname + '/Promotion_display.ui'
+        # loadUi(filename, self)
+        # self.setWindowTitle('HyperPOS Reporting')
 
         self.Qcombo_company = CheckableComboBox(self)
         self.Qcombo_company.setGeometry(242, 20, 179, 18)

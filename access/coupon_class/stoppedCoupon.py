@@ -21,7 +21,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
     def FN_LOADUI(self):
         filename = self.dirname + '/stoppedCoupon.ui'
         loadUi(filename, self)
-        self.CMB_CouponStatus.addItems(["Active", "Inactive"])
+        self.CMB_CouponStatus.addItems(["Inactive","Active"])
         self.FN_getData()
         self.CMB_CouponDes.activated[str].connect(self.FN_getStatus)
         self.FN_getStatus()

@@ -155,7 +155,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
 
             db1.connectionCommit(self.conn)
             mycursor.close()
-            QtWidgets.QMessageBox.warning(self, "Done", "Done")
+            QtWidgets.QMessageBox.warning(self, "Done", "رقم الكوبون هو"+str(id))
         except:
             print(sys.exc_info())
 

@@ -682,6 +682,9 @@
    </property>
   </action>
   <action name="QAct_Coupon_Edit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>تعديل كوبون الخصم</string>
    </property>

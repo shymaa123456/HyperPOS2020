@@ -89,6 +89,7 @@ class CL_customerTP(QtWidgets.QDialog):
                     #    comboBox.addItems([row[0]])
                     # comboBox.setCurrentText(data)
                     # self.Qtable_custTP.setCellWidget(row_number, column_number, comboBox)
+                    item = QTableWidgetItem(str(data))
                 else:
                     if column_number == 4:
                         data = self.FN_GET_STATUS_DESC(str(data))
@@ -96,9 +97,34 @@ class CL_customerTP(QtWidgets.QDialog):
                     if column_number == 0:
                         item.setFlags(QtCore.Qt.NoItemFlags)
 
-                    self.Qtable_custTP.setItem(row_number, column_number, item)
+                self.Qtable_custTP.setItem(row_number, column_number, item)
         mycursor.close()
 
+    def FN_CHECK_STATUS(self, status):
+        if status == 'Active' or status == 'Inactive' :
+            return True
+        else :
+            return False
+
+    def FN_CHECK_DUP_NAME(self, name):
+        mycursor1 = self.conn.cursor()
+        # get max userid
+        mycursor1.execute("SELECT LOYCT_DESC  FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + name + "'")
+        len = mycursor1.rowcount
+        if len > 0:
+            return True
+        else:
+            return False
+
+    def FN_CHECK_DUP_NEXTLEVEL(self, name):
+        mycursor2 = self.conn.cursor()
+        # get max userid
+        mycursor2.execute("SELECT LOYCT_DESC  FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + name + "'")
+        len = mycursor2.rowcount
+        if len > 0:
+            return True
+        else:
+            return False
 
     def FN_CREATE_CUSTTP(self):
 
@@ -126,62 +152,63 @@ class CL_customerTP(QtWidgets.QDialog):
 
         if name == '':
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
-
         else:
-            nextLevel = self.FN_GET_NEXTlEVEL_ID(nextLevel)
-            sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
-                  "         VALUES ( %s, %s, %s,  %s,%s)"
+            if self.FN_CHECK_DUP_NAME(name) != False:
+                QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+            else :
+                nextLevel = self.FN_GET_NEXTlEVEL_ID(nextLevel)
+                sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
+                      "         VALUES ( %s, %s, %s,  %s,%s)"
 
-            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = (self.id, name,points,nextLevel ,  status
-                   )
-            mycursor.execute(sql, val)
-            # mycursor.execute(sql)
+                # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+                val = (self.id, name,points,nextLevel ,  status
+                       )
+                mycursor.execute(sql, val)
+                mycursor.close()
 
-            mycursor.close()
-
-            print(mycursor.rowcount, "Cust Tp inserted.")
-            QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
-            db1.connectionCommit(self.conn)
-            self.FN_GET_CUSTTPS()
-            #db1.connectionClose(self.conn)
-            #self.close()
-
-
-        # insert into db
+                print(mycursor.rowcount, "Cust Tp inserted.")
+                QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
+                db1.connectionCommit(self.conn)
+                self.FN_GET_CUSTTPS()
 
     def FN_MODIFY_CUSTTP(self):
         try:
+            if len(self.Qtable_custGP.selectedIndexes()) > 0:
 
-            rowNo = self.Qtable_custTP.selectedItems()[0].row()
-            #rowNo.setEditTriggers(QtWidgets.QTableWidget.AllEditTriggers)
-            print(rowNo)
-            if rowNo == None:
-                QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
-            else:
-
-                #if rowNo > 0:
+                rowNo = self.Qtable_custTP.selectedItems()[0].row()
                 id = self.Qtable_custTP.item(rowNo, 0).text()
                 desc = self.Qtable_custTP.item(rowNo, 1).text()
                 points = self.Qtable_custTP.item(rowNo, 2).text()
                 nextLevel = self.Qtable_custTP.item(rowNo, 3).text()
                 # nextLevel = CMB_nextLevel.currentText()
-
                 status = self.Qtable_custTP.item(rowNo, 4).text()
                 nextLevel = self.FN_GET_NEXTlEVEL_ID(nextLevel)
-                if status == 'Active':
-                    status = 1
-                else:
-                    status = 0
-                #
-                mycursor = self.conn.cursor()
-                sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT= %s where LOYCT_TYPE_ID = %s"
-                val = (status,desc,points,nextLevel ,id)
-                mycursor.execute(sql, val)
-                mycursor.close()                #
-                print(mycursor.rowcount, "record updated.")
-                QtWidgets.QMessageBox.information(self, "Success", "Cust Tp updated")
-                db1.connectionCommit(self.conn)
+
+                ret = self.FN_CHECK_STATUS(status)
+                ret1=  self.FN_CHECK_DUP_NEXTLEVEL(nextLevel)
+                if ret != False and ret1 != False:
+                #if FN_CHECK_DUP_NEXTLEVEL
+                    if status == 'Active':
+                        status = 1
+                    else:
+                        status = 0
+                    #
+                    mycursor = self.conn.cursor()
+                    sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT= %s where LOYCT_TYPE_ID = %s"
+                    val = (status,desc,points,nextLevel ,id)
+                    mycursor.execute(sql, val)
+                    mycursor.close()                #
+                    print(mycursor.rowcount, "record updated.")
+                    QtWidgets.QMessageBox.information(self, "Success", "Cust Tp updated")
+                    db1.connectionCommit(self.conn)
+                elif ret !=True:
+                    QtWidgets.QMessageBox.warning(self, "Error", "Status should be 'Active' or 'Inactive' ")
+
+                elif ret1 != True:
+                    QtWidgets.QMessageBox.warning(self, "Error", "NextLevel is invalid' ")
+            else:
+                QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+
 
         except Exception as err:
 

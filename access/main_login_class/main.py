@@ -25,7 +25,7 @@ from access.loyalty_class.customerType import CL_customerTP
 
 # Promotion
 from access.promotion_class.Promotion_Add import CL_create_promotion
-
+from PyQt5.QtWidgets import QMessageBox
 
 
 class CL_main(QtWidgets.QMainWindow):
@@ -267,3 +267,14 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two = CL_EditCoupon()
         self.window_two.FN_LOADUI()
         self.window_two.show()
+
+    # close application event
+    def closeEvent(self, event):
+        # print("event")
+        reply = QMessageBox.question(self, 'Message',
+                                     "Are you sure to quit Application?", QMessageBox.Yes, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            QApplication.quit()
+        else:
+            event.ignore()

@@ -114,6 +114,7 @@ class CL_customerGP(QtWidgets.QDialog):
             try:
                 if self.FN_CHECK_DUP_NAME(self.name) != False:
                     QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                    mycursor.close()
                 else:
                     sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
                           "         VALUES ( %s, %s, %s,  %s,%s)"
@@ -141,7 +142,6 @@ class CL_customerGP(QtWidgets.QDialog):
     def FN_MODIFY_CUSTGP(self):
         print("here")
         if len(self.Qtable_custGP.selectedIndexes()) >0 :
-
             rowNo = self.Qtable_custGP.selectedItems()[0].row()
             id = self.Qtable_custGP.item(rowNo, 0).text()
             desc = self.Qtable_custGP.item(rowNo, 1).text()
@@ -153,7 +153,7 @@ class CL_customerGP(QtWidgets.QDialog):
                 else:
                     status = 0
                 #
-                mycursor = self.conn.cursor()
+                mycursor = self.conn1.cursor()
                 changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                 sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
                 val = (status,desc, changeDate,CL_userModule.user_name,id)
@@ -162,10 +162,11 @@ class CL_customerGP(QtWidgets.QDialog):
                 #
                 print(mycursor.rowcount, "record updated.")
                 QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
-                db1.connectionCommit(self.conn)
+                db1.connectionCommit(self.conn1)
                 # db1.connectionClose(self.conn)
                 #  self.close()
             else:
+
                 QtWidgets.QMessageBox.warning(self, "Error", "Status should be 'Active' or 'Inactive' ")
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")

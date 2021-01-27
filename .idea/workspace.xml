@@ -24,8 +24,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="customer type">
-      <change beforePath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" afterDir="false" />
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="comments on custGp and custTps">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerType.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerType.py" afterDir="false" />
@@ -253,13 +252,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00017" summary="update the code to ADD THE validation">
-      <created>1600167217874</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1600167217874</updated>
     </task>
     <task id="LOCAL-00018" summary="loyality ui">
       <created>1601562609060</created>
@@ -597,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611387085514</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="comments on custGp and custTps">
+      <created>1611671582699</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1611671582699</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -657,7 +656,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="solve bug" />
     <MESSAGE value="inialization class" />
     <MESSAGE value="update the code to take the status field in consideration" />
     <MESSAGE value="update the code to ADD THE validation" />
@@ -682,7 +680,8 @@
     <MESSAGE value="solve bug in search" />
     <MESSAGE value="fawzy comments" />
     <MESSAGE value="customer type" />
-    <option name="LAST_COMMIT_MESSAGE" value="customer type" />
+    <MESSAGE value="comments on custGp and custTps" />
+    <option name="LAST_COMMIT_MESSAGE" value="comments on custGp and custTps" />
   </component>
   <component name="WindowStateProjectService">
     <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605430091539">
@@ -715,45 +714,45 @@
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
     <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1316" height="145" key="GridCell.Tab.0.bottom" timestamp="1611671326772">
+    <state width="1345" height="217" key="GridCell.Tab.0.bottom" timestamp="1611759871671">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="145" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611671326772" />
+    <state width="1345" height="217" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611759871671" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="145" key="GridCell.Tab.0.center" timestamp="1611671326772">
+    <state width="1345" height="217" key="GridCell.Tab.0.center" timestamp="1611759871671">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="145" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611671326772" />
+    <state width="1345" height="217" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611759871671" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="145" key="GridCell.Tab.0.left" timestamp="1611671326772">
+    <state width="1345" height="217" key="GridCell.Tab.0.left" timestamp="1611759871671">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="145" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611671326772" />
+    <state width="1345" height="217" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611759871671" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1316" height="145" key="GridCell.Tab.0.right" timestamp="1611671326772">
+    <state width="1345" height="217" key="GridCell.Tab.0.right" timestamp="1611759871671">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="145" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611671326772" />
+    <state width="1345" height="217" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611759871671" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="145" key="GridCell.Tab.1.bottom" timestamp="1611671326667">
+    <state width="1345" height="217" key="GridCell.Tab.1.bottom" timestamp="1611759871553">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="145" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611671326667" />
+    <state width="1345" height="217" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611759871553" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1316" height="145" key="GridCell.Tab.1.center" timestamp="1611671326667">
+    <state width="1345" height="217" key="GridCell.Tab.1.center" timestamp="1611759871553">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="145" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1611671326667" />
+    <state width="1345" height="217" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1611759871553" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1316" height="145" key="GridCell.Tab.1.left" timestamp="1611671326667">
+    <state width="1345" height="217" key="GridCell.Tab.1.left" timestamp="1611759871553">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="145" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1611671326667" />
+    <state width="1345" height="217" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1611759871553" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1316" height="145" key="GridCell.Tab.1.right" timestamp="1611671326667">
+    <state width="1345" height="217" key="GridCell.Tab.1.right" timestamp="1611759871553">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="145" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1611671326667" />
+    <state width="1345" height="217" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1611759871553" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
       <screen x="0" y="0" width="1366" height="728" />
@@ -836,11 +835,6 @@
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
-          <line>178</line>
-          <option name="timeStamp" value="139" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customerGP.py</url>
           <line>114</line>
           <option name="timeStamp" value="141" />
@@ -852,8 +846,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
-          <line>130</line>
-          <option name="timeStamp" value="147" />
+          <line>146</line>
+          <option name="timeStamp" value="150" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
+          <line>192</line>
+          <option name="timeStamp" value="155" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -871,6 +870,9 @@
         <watch expression="self.Qtable_custTP.item(0, 0)" language="Python" />
         <watch expression="mycursor1.rowcount() " language="Python" />
         <watch expression="self.FN_CHECK_STATUS(status)" language="Python" />
+        <watch expression="self.Qtable_custTP.selectedIndexes()" language="Python" />
+        <watch expression="len(self.Qtable_custTP.selectedIndexes())" />
+        <watch expression="records" language="Python" />
       </configuration>
     </watches-manager>
   </component>

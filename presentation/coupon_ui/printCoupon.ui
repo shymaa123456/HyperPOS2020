@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>طباعه الكوبون</string>
   </property>
   <widget class="QPushButton" name="BTN_modifyCoupon">
    <property name="geometry">

@@ -42,6 +42,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
         d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
         self.Qdate_from.setMinimumDate(d)
         self.Qdate_to.setMinimumDate(d)
+        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+
 
 
 
@@ -54,13 +56,18 @@ class CL_EditCoupon(QtWidgets.QDialog):
             self.CMB_CouponDes.addItem(row,val)
         mycursor.close()
 
+
     def FN_getDatabyID(self):
         try:
             self.FN_Clear()
             indx = self.CMB_CouponDes.currentData()
+            self.labe_id.setText(str(indx))
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT * FROM COUPON where COP_ID = '" + indx + "'")
+            sql_select_Query = "SELECT * FROM COUPON where COP_ID = %s "
+            x = (indx,)
+            mycursor = self.conn.cursor()
+            mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
             self.LE_desc_1.setText(record[1])
             if (record[2]!=None and len(record[2]) > 0):

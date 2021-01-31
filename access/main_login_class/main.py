@@ -7,6 +7,7 @@ from PyQt5.uic import loadUi
 
 from access.coupon_class.CreateCoupon import CL_CreateCoupon
 from access.coupon_class.EditCoupon import CL_EditCoupon
+from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.loyalty_class.loyalityProg import CL_loyProg
 from access.reports_class.reporting import CL_report
@@ -96,6 +97,7 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Coupon_Deactivate.triggered.connect(self.FN_ModifyCoupon)
         self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
         self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
+        self.QAct_Coupon_Print.triggered.connect(self.FN_PrintCoupon)
 
 
 
@@ -258,6 +260,7 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two.FN_LOADUI()
         self.window_two.show()
 
+
     def FN_ModifyCoupon(self):
         self.window_two = CL_modifyCoupon()
         self.window_two.FN_LOADUI()
@@ -265,6 +268,11 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_EditCoupon(self):
         self.window_two = CL_EditCoupon()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_PrintCoupon(self):
+        self.window_two = CL_printCoupon()
         self.window_two.FN_LOADUI()
         self.window_two.show()
 

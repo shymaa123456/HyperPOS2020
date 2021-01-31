@@ -11,6 +11,7 @@ import os
 
 import pandas as pd
 from PyQt5.QtGui import QStandardItemModel
+from PyQt5.uic import loadUi
 
 from access.promotion_class.Promotion_Add import CheckableComboBox
 from access.reports_class.ReportPDF import body, Text
@@ -215,7 +216,6 @@ class CL_report(QtWidgets.QDialog):
         mycursor.execute("SELECT DEPARTMENT_DESC ,DEPARTMENT_ID FROM DEPARTMENT")
         records = mycursor.fetchall()
         for row, val in records:
-
             self.Qcombo_department.addItem(row, val)
         mycursor.close()
 
@@ -466,76 +466,79 @@ class CL_report(QtWidgets.QDialog):
 
 
         super(CL_report, self).__init__()
+        try:
+            cwd = Path.cwd()
+            mod_path = Path(__file__).parent.parent.parent
+            dirname = mod_path.__str__() + '/presentation/reports_ui'
+            filename = dirname + '/Promotion_display.ui'
+            loadUi(filename, self)
+            self.setWindowTitle('HyperPOS Reporting')
 
-        # cwd = Path.cwd()
-        # mod_path = Path(__file__).parent.parent.parent
-        # dirname = mod_path.__str__() + '/presentation/reports_ui'
-        # filename = dirname + '/Promotion_display.ui'
-        # loadUi(filename, self)
-        # self.setWindowTitle('HyperPOS Reporting')
+            self.Qcombo_company = CheckableComboBox(self)
+            self.Qcombo_company.setGeometry(242, 20, 179, 18)
+            self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
+            self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        self.Qcombo_company = CheckableComboBox(self)
-        self.Qcombo_company.setGeometry(242, 20, 179, 18)
-        self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
+            self.Qcombo_branchEdition = CheckableComboBox(self)
+            self.Qcombo_branchEdition.setGeometry(242, 45, 179, 18)
+            self.Qcombo_branchEdition.setLayoutDirection(QtCore.Qt.LeftToRight)
+            self.Qcombo_branchEdition.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        self.Qcombo_branchEdition = CheckableComboBox(self)
-        self.Qcombo_branchEdition.setGeometry(242, 45, 179, 18)
-        self.Qcombo_branchEdition.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.Qcombo_branchEdition.setStyleSheet("background-color: rgb(198, 207, 199)")
+            self.Qcombo_cust_group = CheckableComboBox(self)
+            self.Qcombo_cust_group.setGeometry(242, 75, 179, 18)
+            self.Qcombo_cust_group.setLayoutDirection(QtCore.Qt.LeftToRight)
+            self.Qcombo_cust_group.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        self.Qcombo_cust_group = CheckableComboBox(self)
-        self.Qcombo_cust_group.setGeometry(242, 75, 179, 18)
-        self.Qcombo_cust_group.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.Qcombo_cust_group.setStyleSheet("background-color: rgb(198, 207, 199)")
+            self.Qcombo_sponsor = CheckableComboBox(self)
+            self.Qcombo_sponsor.setGeometry(242, 98, 179, 18)
+            self.Qcombo_sponsor.setLayoutDirection(QtCore.Qt.LeftToRight)
+            self.Qcombo_sponsor.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        self.Qcombo_sponsor = CheckableComboBox(self)
-        self.Qcombo_sponsor.setGeometry(242, 98, 179, 18)
-        self.Qcombo_sponsor.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.Qcombo_sponsor.setStyleSheet("background-color: rgb(198, 207, 199)")
+            self.Qcombo_magazine = CheckableComboBox(self)
+            self.Qcombo_magazine.setGeometry(242, 145, 179, 18)
+            self.Qcombo_magazine.setLayoutDirection(QtCore.Qt.LeftToRight)
+            self.Qcombo_magazine.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        self.Qcombo_magazine = CheckableComboBox(self)
-        self.Qcombo_magazine.setGeometry(242, 145, 179, 18)
-        self.Qcombo_magazine.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.Qcombo_magazine.setStyleSheet("background-color: rgb(198, 207, 199)")
+            self.Qbtn_exit.clicked.connect(self.FN_close)
+            self.Qbtn_search.clicked.connect(self.FN_loadData)
+            self.FN_GET_Company()
+            self.FN_GET_Branch()
+            self.FN_GET_CustomerGroup()
+            self.FN_GET_MAGAZINE()
+            self.FN_GET_department()
+            self.FN_GET_promotion_sponser()
+            self.FN_GET_promotion_type()
+            self.Qtable_promotion.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+            self.radioBtnPromNum.clicked.connect(self.FN_Checked_Selected2)
+            self.radioButton_2.clicked.connect(self.FN_Checked_Selected)
+            self.radioBtnPromNum_2.clicked.connect(self.FN_Checked_Selected3)
+            self.radioBtnPromExpired.clicked.connect(self.FN_Check_Expired)
+            self.radioBtnPromStop.clicked.connect(self.FN_Check_Stopped)
+            self.radioBtnPromActive.clicked.connect(self.FN_Check_Active)
+            self.radioBtnPromAll.clicked.connect(self.FN_Check_All)
 
-        self.Qbtn_exit.clicked.connect(self.FN_close)
-        self.Qbtn_search.clicked.connect(self.FN_loadData)
-        self.FN_GET_Company()
-        self.FN_GET_Branch()
-        self.FN_GET_CustomerGroup()
-        self.FN_GET_MAGAZINE()
-        self.FN_GET_department()
-        self.FN_GET_promotion_sponser()
-        self.FN_GET_promotion_type()
-        self.Qtable_promotion.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-        self.radioBtnPromNum.clicked.connect(self.FN_Checked_Selected2)
-        self.radioButton_2.clicked.connect(self.FN_Checked_Selected)
-        self.radioBtnPromNum_2.clicked.connect(self.FN_Checked_Selected3)
-        self.radioBtnPromExpired.clicked.connect(self.FN_Check_Expired)
-        self.radioBtnPromStop.clicked.connect(self.FN_Check_Stopped)
-        self.radioBtnPromActive.clicked.connect(self.FN_Check_Active)
-        self.radioBtnPromAll.clicked.connect(self.FN_Check_All)
+            self.Qline_promotion.setEnabled(False)
+            self.Qcombo_cust_group.setEnabled(False)
+            self.Qcombo_sponsor.setEnabled(False)
+            self.Qcombo_department.setEnabled(False)
+            self.Qcombo_magazine.setEnabled(False)
+            self.QcheckBox_customer_group.toggled.connect(self.FN_Check_Group)
+            self.QcheckBox_sponsor_prom.toggled.connect(self.FN_Check_Sponsor)
+            self.QcheckBox_department.toggled.connect(self.FN_Check_department)
+            self.QcheckBox_magazine.toggled.connect(self.FN_Check_Magazine)
+            self.Qbtn_exprot.clicked.connect(self.handleSave)
+            self.groupBox_2.setEnabled(False)
+            self.Qcombo_promotion.setEnabled(False)
+            self.Qline_promotion_2.setEnabled(False)
+            self.Qbtn_print.clicked.connect(self.printpreviewDialog)
 
-        self.Qline_promotion.setEnabled(False)
-        self.Qcombo_cust_group.setEnabled(False)
-        self.Qcombo_sponsor.setEnabled(False)
-        self.Qcombo_department.setEnabled(False)
-        self.Qcombo_magazine.setEnabled(False)
-        self.QcheckBox_customer_group.toggled.connect(self.FN_Check_Group)
-        self.QcheckBox_sponsor_prom.toggled.connect(self.FN_Check_Sponsor)
-        self.QcheckBox_department.toggled.connect(self.FN_Check_department)
-        self.QcheckBox_magazine.toggled.connect(self.FN_Check_Magazine)
-        self.Qbtn_exprot.clicked.connect(self.handleSave)
-        self.groupBox_2.setEnabled(False)
-        self.Qcombo_promotion.setEnabled(False)
-        self.Qline_promotion_2.setEnabled(False)
-        self.Qbtn_print.clicked.connect(self.printpreviewDialog)
+            self.Qcombo_department.activated[str].connect(self.updatestatecombo)
+            self.Qcombo_section.activated[str].connect(self.updateBMCcombo)
+            self.updatestatecombo()
+            self.disable()
 
-        self.Qcombo_department.activated[str].connect(self.updatestatecombo)
-        self.Qcombo_section.activated[str].connect(self.updateBMCcombo)
-        self.updatestatecombo()
-        self.disable()
+        except:
+            print(sys.exc_info())
 
 
 class CL_controller():

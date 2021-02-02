@@ -7,6 +7,9 @@ from access.authorization_class.user_module import CL_userModule
 
 from datetime import datetime
 
+import barcode
+from barcode.writer import ImageWriter
+
 
 class CL_printCoupon(QtWidgets.QDialog):
 

@@ -97,11 +97,11 @@ class CL_EditCoupon(QtWidgets.QDialog):
             d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setDate(d)
 
-            self.LE_desc_4.setText(str(record[4]))
+            self.LE_desc_4.setValue(float(record[4]))
             print(record[5])
             if (int(record[5]) == 0):
                 self.checkBox_Multi.setChecked(True)
-                self.LE_desc_5.setText(str(record[6]))
+                self.LE_desc_5.setValue(float(record[6]))
                 self.LE_desc_5.setEnabled(True)
                 self.LE_desc_4.setEnabled(False)
             else:

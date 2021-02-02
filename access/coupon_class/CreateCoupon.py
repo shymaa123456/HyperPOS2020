@@ -110,12 +110,12 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 if self.checkBox_Multi.isChecked():
                         self.serialCount = "1"
                         self.MultiCount = self.LE_desc_5.text()
-                        self.MultiUse = "0"
+                        self.MultiUse = "1"
                 else:
                         self.serialCount = self.LE_desc_4.text()
                         self.MultiCount = "0"
-                        self.MultiUse = "1"
-            creationDate = str(datetime.today().strftime('%Y-%m-%d'))
+                        self.MultiUse = "0"
+            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
             if self.radioButton_Percentage.isChecked():
                 if len(self.LE_desc_3.text()) == 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
@@ -144,11 +144,11 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 id = 0
                 sql = "INSERT INTO COUPON (COP_DESC, " + self.valueType + ", COP_SERIAL_COUNT,COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_VALID_FROM, COP_VALID_TO, COP_STATUS)" \
                                                                           " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s) "
-                print(self.Qdate_from.dateTime().toString('yyyy-MM-dd'))
+                print(self.Qdate_from.dateTime().toString('dd-MM-yyyy'))
                 val = (self.LE_desc.text(), self.valueData, self.serialCount, self.MultiUse,
                        self.MultiCount, CL_userModule.user_name, creationDate,
-                       self.Qdate_from.dateTime().toString('yyyy-MM-dd'),
-                       self.Qdate_to.dateTime().toString('yyyy-MM-dd'),
+                       self.Qdate_from.dateTime().toString('dd-MM-yyyy'),
+                       self.Qdate_to.dateTime().toString('dd-MM-yyyy'),
                        '0')
                 mycursor.execute(sql, val)
                 db1.connectionCommit(self.conn)

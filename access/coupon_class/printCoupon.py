@@ -3,12 +3,7 @@ from pathlib import Path
 from PyQt5 import QtWidgets
 from PyQt5.uic import loadUi
 from data_connection.h1pos import db1
-from access.authorization_class.user_module import CL_userModule
 
-from datetime import datetime
-
-import barcode
-from barcode.writer import ImageWriter
 
 
 class CL_printCoupon(QtWidgets.QDialog):

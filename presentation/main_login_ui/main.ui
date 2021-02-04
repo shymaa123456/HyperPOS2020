@@ -120,8 +120,15 @@
      <addaction name="QM_Form"/>
      <addaction name="QM_Function_Key"/>
     </widget>
+    <widget class="QMenu" name="QM_Configurations">
+     <property name="title">
+      <string>Configurations</string>
+     </property>
+     <addaction name="QAct_Parameter"/>
+    </widget>
     <addaction name="QM_Master_Data"/>
     <addaction name="QM_Authorization"/>
+    <addaction name="QM_Configurations"/>
    </widget>
    <widget class="QMenu" name="QM_Promotion">
     <property name="layoutDirection">
@@ -1480,6 +1487,11 @@
   <action name="QAct_Display_Loyality">
    <property name="text">
     <string>إنشاء برنامج عضويه</string>
+   </property>
+  </action>
+  <action name="QAct_Parameter">
+   <property name="text">
+    <string>Parameter</string>
    </property>
   </action>
  </widget>

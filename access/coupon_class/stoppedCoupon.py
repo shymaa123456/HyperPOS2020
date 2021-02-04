@@ -56,16 +56,14 @@ class CL_modifyCoupon(QtWidgets.QDialog):
             if (record[2]!=None and len(record[2]) > 0):
                 self.radioButton_Value.setChecked(True)
                 self.LE_desc_2.setValue(float(record[2]))
-                self.LE_desc_2.setEnabled(True)
-                self.LE_desc_3.setEnabled(False)
+
                 self.LE_desc_3.clear()
                 self.valueType = "COP_DISCOUNT_VAL"
                 self.valueData = self.LE_desc_2.text()
             else:
                 self.radioButton_Percentage.setChecked(True)
                 self.LE_desc_3.setValue(float(record[3]))
-                self.LE_desc_3.setEnabled(True)
-                self.LE_desc_2.setEnabled(False)
+
                 self.LE_desc_2.clear()
                 self.valueType = "COP_DISCOUNT_PERCENT"
                 self.valueData = self.LE_desc_3.text()
@@ -80,17 +78,14 @@ class CL_modifyCoupon(QtWidgets.QDialog):
             d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setDate(d)
 
-            self.LE_desc_4.setText(str(record[4]))
+            self.LE_desc_4.setValue(float(record[4]))
             print(record[5])
             if (int(record[5]) == 0):
                 self.checkBox_Multi.setChecked(True)
-                self.LE_desc_5.setText(str(record[6]))
-                self.LE_desc_5.setEnabled(True)
-                self.LE_desc_4.setEnabled(False)
+                self.LE_desc_5.setValue(float(record[6]))
             else:
                 self.checkBox_Multi.setChecked(False)
-                self.LE_desc_5.setEnabled(False)
-                self.LE_desc_4.setEnabled(True)
+
 
             self.CMB_CouponStatus.setCurrentIndex(int(record[13]))
             mycursor.close()

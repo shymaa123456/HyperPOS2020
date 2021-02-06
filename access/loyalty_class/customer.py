@@ -430,7 +430,7 @@ class CL_customer(QtWidgets.QDialog):
             self.workPhone =  self.LE_workPhone.text().strip()
             self.workAddress = self.LE_workAddress.text().strip()
             self.status = self.CMB_status.currentText()
-            self.notes = self.LE_notes.text().strip()
+            self.notes = self.LE_notes.toPlainText().strip()
 
             mycursor = self.conn.cursor()
             # get max id
@@ -539,8 +539,7 @@ class CL_customer(QtWidgets.QDialog):
             self.workPhone = self.LE_workPhone.text().strip()
             self.workAddress = self.LE_workAddress.text().strip()
             self.status = self.CMB_status.currentText()
-            self.notes = self.LE_notes.text().strip()
-
+            self.notes = self.LE_notes.toPlainText().strip()
             mycursor = self.conn.cursor()
 
             changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )

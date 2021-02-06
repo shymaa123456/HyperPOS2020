@@ -72,14 +72,14 @@ class CL_customerTP(QtWidgets.QDialog):
     def FN_GET_CUSTTPS(self):
         for i in reversed(range(self.Qtable_custTP.rowCount())):
             self.Qtable_custTP.removeRow(i)
-        mycursor = self.conn.cursor()
+        mycursor = self.conn1.cursor(buffered=True)
         mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
         records = mycursor.fetchall()
         for row_number, row_data in enumerate(records):
             self.Qtable_custTP.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 if column_number == 3 and row_number >0 :
-                    data= self.FN_GET_NEXTlEVEL_DESC(str(data))
+                    #data= self.FN_GET_NEXTlEVEL_DESC(str(data))
                     # comboBox = QtWidgets.QComboBox()
                     # records = self.FN_GET_NEXTlEVEL()
                     # for row in records:
@@ -157,12 +157,12 @@ class CL_customerTP(QtWidgets.QDialog):
             else:
                 if ret != True :
 
-                    nextLevel = self.FN_GET_NEXTlEVEL_ID(nextLevel)
+                    nextLevel1 = self.FN_GET_NEXTlEVEL_ID(nextLevel)
                     sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
                           "         VALUES ( %s, %s, %s,  %s,%s)"
 
                     # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-                    val = (self.id, name,points,nextLevel ,  status
+                    val = (self.id, name,points,nextLevel1 ,  status
                            )
                     mycursor.execute(sql, val)
                     mycursor.close()
@@ -171,6 +171,21 @@ class CL_customerTP(QtWidgets.QDialog):
                     QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
                     db1.connectionCommit(self.conn1)
                     self.FN_GET_CUSTTPS()
+                    # rowNo= self.Qtable_custTP.rowCount()
+                    # self.Qtable_custTP.insertRow(rowNo)
+                    # item = QTableWidgetItem(str(self.id))
+                    # self.Qtable_custTP.setItem(rowNo, 0, item)
+                    # item = QTableWidgetItem(str(name))
+                    # self.Qtable_custTP.setItem(rowNo, 1, item)
+                    # item = QTableWidgetItem(str(points))
+                    # self.Qtable_custTP.setItem(rowNo, 2, item)
+                    #
+                    #
+                    # item = QTableWidgetItem(nextLevel)
+                    # self.Qtable_custTP.setItem(rowNo, 3, item)
+                    #
+                    # item = QTableWidgetItem(custType)
+                    # self.Qtable_custTP.setItem(rowNo, 4, item)
                 else:
                     QtWidgets.QMessageBox.warning(self, "Error", "Name duplicated' ")
                     #mycursor.close()

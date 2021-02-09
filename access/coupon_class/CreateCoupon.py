@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate
 from PyQt5.uic import loadUi
 
+from access.coupon_class.PathData import CL_PathData
 from access.promotion_class.Promotion_Add import CheckableComboBox
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
@@ -102,6 +103,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_Create(self):
+
         try:
             mycursor = self.conn.cursor()
             if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text())==0 or len(self.LE_desc_3.text()) == 0 and len(self.LE_desc_2.text()) == 0:
@@ -176,7 +178,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                         value=value+1
                     sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s)"
                     val2 = (id, bin(value), CL_userModule.user_name, creationDate, 0,
-                            '0')
+                            '1')
                     print(sql2, val2)
                     mycursor.execute(sql2, val2)
                 for j in range(len(self.Qcombo_company.currentData())):
@@ -185,7 +187,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                         val3 = (
                             self.Qcombo_company.currentData()[j], self.Qcombo_branch.currentData()[i],
                             id,
-                            '0')
+                            '1')
                         mycursor.execute(sql3, val3)
 
                 db1.connectionCommit(self.conn)

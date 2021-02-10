@@ -6,7 +6,6 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate
 from PyQt5.uic import loadUi
 
-from access.coupon_class.PathData import CL_PathData
 from access.promotion_class.Promotion_Add import CheckableComboBox
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule

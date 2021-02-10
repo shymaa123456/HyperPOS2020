@@ -63,8 +63,10 @@ class CL_validation():
         return (type(data) is str)
     @staticmethod
     def FN_validation_int(data):
-        data = int(data)
-        return (type(data) is int)
+        if any(c.isalpha() for c in data)==False:
+            return True
+        else:
+            return False
 
     @staticmethod
     def FN_isEmpty(data):
@@ -89,3 +91,7 @@ class CL_validation():
             return  True
         except ValueError:
             raise ValueError("Incorrect data format, should be DD.MM.YYYY")
+
+if __name__ == '__main__':
+    data=CL_validation()
+    print(data.FN_validation_int("f012"))

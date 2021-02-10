@@ -24,6 +24,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
     usage=0
     branch_list = []
     new_branch_list = []
+    multiusage=0
 
     def __init__(self):
         super(CL_EditCoupon, self).__init__()
@@ -36,12 +37,12 @@ class CL_EditCoupon(QtWidgets.QDialog):
         filename = self.dirname + '/editCoupon.ui'
         loadUi(filename, self)
         self.Qcombo_company = CheckableComboBox(self)
-        self.Qcombo_company.setGeometry(10, 15, 271, 25)
+        self.Qcombo_company.setGeometry(10, 100, 271, 25)
         self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.Qcombo_branch = CheckableComboBox(self)
-        self.Qcombo_branch.setGeometry(10, 55, 271, 25)
+        self.Qcombo_branch.setGeometry(10, 140, 271, 25)
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_Company()
@@ -96,6 +97,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
     def FN_getDatabyID(self):
          try:
+            self.branch_list = []
+            self.new_branch_list = []
             self.FN_Clear()
             indx = self.CMB_CouponDes.currentData()
             self.labe_id.setText(str(indx))
@@ -127,14 +130,18 @@ class CL_EditCoupon(QtWidgets.QDialog):
             xto = dateto.split("-")
             d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
             self.Qdate_to.setDate(d)
+
             datefrom = record[11]
             xfrom = datefrom.split("-")
             d = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
             self.Qdate_from.setDate(d)
 
+
+
             self.LE_desc_4.setValue(float(record[4]))
             self.serial_num=int(record[4])
 
+            self.multiusage=int(record[5])
             if (int(record[5]) == 1):
                 self.checkBox_Multi.setChecked(True)
                 self.LE_desc_5.setValue(float(record[6]))
@@ -214,93 +221,137 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
     def FN_editAction(self):
         try:
-
-
-            mycursor = self.conn.cursor()
-            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
-            if self.checkBox_Multi.isChecked():
-                self.serialCount = "0"
-                self.MultiCount = self.LE_desc_5.text()
-                self.MultiUse = "1"
+            if len(self.Qcombo_company.currentData()) == 0 or len(self.Qcombo_branch.currentData()) == 0 or len(
+                    self.LE_desc_1.text()) == 0 or len(self.LE_desc_3.text()) == 0 and len(self.LE_desc_2.text()) == 0:
+                QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
-                self.serialCount = self.LE_desc_4.text()
-                self.MultiCount = "0"
-                self.MultiUse = "0"
-            print(self.serial_num)
-            print(int(self.LE_desc_4.text()))
-            if int(self.LE_desc_4.text()) < self.serial_num and self.movement == 1:
-                QtWidgets.QMessageBox.warning(self, "Error", "برجاء ادخل عدد اكبر من السابق")
-            else:
-                sql = "update COUPON set COP_DESC='" + self.LE_desc_1.text() + "'," + self.valueType + "=" + self.valueData + ",COP_SERIAL_COUNT=" + self.serialCount + ",COP_MULTI_USE=" + self.MultiUse + ",COP_MULTI_USE_COUNT=" + self.MultiCount + ",COP_CHANGED_BY='" + CL_userModule.user_name + "',COP_CHANGED_ON='" + creationDate + "',COP_VALID_FROM='" + self.Qdate_from.dateTime().toString(
-                    'dd-MM-yyyy') + "',COP_VALID_TO='" + self.Qdate_to.dateTime().toString(
-                    'dd-MM-yyyy') + "',COP_STATUS='" + str(
-                    self.CMB_CouponStatus.currentIndex()) + "' where COP_ID='" + str(
-                    self.CMB_CouponDes.currentData()) + "'"
-                mycursor.execute(sql)
-                # sql2 = "update COUPON_SERIAL set COPS_STATUS='" + str(
-                #     self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(
-                #     self.CMB_CouponDes.currentData()) + "'"
-                # mycursor.execute(sql2)
-                # sql3 = "update COUPON_BRANCH set STATUS='" + str(
-                #     self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(
-                #     self.CMB_CouponDes.currentData()) + "'"
-                # mycursor.execute(sql3)
-                if len(self.Qcombo_branch.currentData()) > 0:
-                    for i in self.Qcombo_branch.currentData():
-                        self.new_branch_list.append(i)
-                if len(self.branch_list) > len(self.new_branch_list):
-                    for row in self.branch_list:
-                        print(row)
-                        if row in self.new_branch_list:
-                            print("found")
-                        else:
-                            print("not found")
-                            mycursor = self.conn.cursor()
-                            sql5 = "update COUPON_BRANCH set STATUS= 0 where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "' and BRANCH_NO = '"+row+"'"
-                            mycursor.execute(sql5)
-                            print(sql5)
+                if self.Qdate_to.dateTime()<self.Qdate_from.dateTime():
+                    QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+
                 else:
-                    for row in self.new_branch_list:
-                        print(row)
-                        if row in self.branch_list:
-                            print("found")
-                        else:
-                            print("not found")
-                            mycursor = self.conn.cursor()
-                            sql6 = "INSERT INTO COUPON_BRANCH (COMPANY_ID,BRANCH_NO,COUPON_ID,STATUS) VALUES (%s,%s,%s,%s)"
-                            val6 = (str(self.Qcombo_company.currentData()), row,str(self.CMB_CouponDes.currentData()),'1')
-                            mycursor.execute(sql6, val6)
-
-                if int(self.LE_desc_4.text()) < self.serial_num:
-                    indx = self.CMB_CouponDes.currentData()
-                    sql_select_Query = "SELECT COPS_SERIAL_ID FROM COUPON_SERIAL where COUPON_ID = %s"
-                    x = (indx,)
                     mycursor = self.conn.cursor()
-                    mycursor.execute(sql_select_Query, x)
-                    record = mycursor.fetchall()
-                    num=0
-                    for row in range(self.serial_num-int(self.LE_desc_4.text())):
-                        mycursor = self.conn.cursor()
-                        sql5 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "' and COPS_SERIAL_ID = '" + str(record[num][0]) + "'"
-                        mycursor.execute(sql5)
-                        print(sql5)
-                        num+=1
-                else:
-                    for row in range(int(self.LE_desc_4.text())-self.serial_num ):
-                        value = randint(0, 1000000000000)
-                        creationDate = str(datetime.today().strftime('%d-%m-%Y'))
-                        mycursor = self.conn.cursor()
-                        sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s)"
-                        val7 = (str(self.CMB_CouponDes.currentData()), bin(value),CL_userModule.user_name, creationDate,0, '1')
-                        mycursor.execute(sql7, val7)
+                    creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                    if self.checkBox_Multi.isChecked():
+                        self.serialCount = "1"
+                        self.MultiCount = self.LE_desc_5.text()
+                        self.MultiUse = "1"
+                        print("multi use="+str(self.multiusage))
+                        if self.multiusage==0:
+                            sql2 = "update COUPON_SERIAL set COPS_STATUS='0' where COUPON_ID='" + str(
+                                self.CMB_CouponDes.currentData()) + "'"
+                            mycursor.execute(sql2)
+                            value = randint(0, 1000000000000)
+                            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                            mycursor = self.conn.cursor()
+                            sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s)"
+                            val7 = (
+                                str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,
+                                creationDate, 0,
+                                '1')
+                            mycursor.execute(sql7, val7)
+                            self.multiusage=1
 
 
 
+                    else:
+                        self.serialCount = self.LE_desc_4.text()
+                        self.MultiCount = "0"
+                        self.MultiUse = "0"
+                    print(self.serial_num)
+                    print(int(self.LE_desc_4.text()))
+                    if int(self.LE_desc_4.text()) < self.serial_num and self.movement == 1:
+                        QtWidgets.QMessageBox.warning(self, "Error", "برجاء ادخل عدد اكبر من السابق")
+                    else:
+                        sql = "update COUPON set COP_DESC='" + self.LE_desc_1.text() + "'," + self.valueType + "=" + self.valueData + ",COP_SERIAL_COUNT=" + self.serialCount + ",COP_MULTI_USE=" + self.MultiUse + ",COP_MULTI_USE_COUNT=" + self.MultiCount + ",COP_CHANGED_BY='" + CL_userModule.user_name + "',COP_CHANGED_ON='" + creationDate + "',COP_VALID_FROM='" + self.Qdate_from.dateTime().toString(
+                            'dd-MM-yyyy') + "',COP_VALID_TO='" + self.Qdate_to.dateTime().toString(
+                            'dd-MM-yyyy') + "',COP_STATUS='" + str(
+                            self.CMB_CouponStatus.currentIndex()) + "' where COP_ID='" + str(
+                            self.CMB_CouponDes.currentData()) + "'"
+                        mycursor.execute(sql)
+                        # sql2 = "update COUPON_SERIAL set COPS_STATUS='" + str(
+                        #     self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(
+                        #     self.CMB_CouponDes.currentData()) + "'"
+                        # mycursor.execute(sql2)
+                        # sql3 = "update COUPON_BRANCH set STATUS='" + str(
+                        #     self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(
+                        #     self.CMB_CouponDes.currentData()) + "'"
+                        # mycursor.execute(sql3)
+                        if len(self.Qcombo_branch.currentData()) > 0:
+                            for i in self.Qcombo_branch.currentData():
+                                self.new_branch_list.append(i)
+                        if len(self.branch_list) > len(self.new_branch_list):
+                            for row in self.branch_list:
+                                print(row)
+                                if row in self.new_branch_list:
+                                    print("found")
+                                else:
+                                    print("not found")
+                                    mycursor = self.conn.cursor()
+                                    sql5 = "update COUPON_BRANCH set STATUS= 0 where COUPON_ID='" + str(
+                                        self.CMB_CouponDes.currentData()) + "' and BRANCH_NO = '" + row + "'"
+                                    mycursor.execute(sql5)
+                                    print(sql5)
+                        else:
+                            for row in self.new_branch_list:
+                                print(row)
+                                if row in self.branch_list:
+                                    print("found")
+                                else:
 
-                db1.connectionCommit(self.conn)
-                mycursor.close()
+                                    mycursor = self.conn.cursor()
+                                    mycursor.execute(
+                                        "SELECT * FROM COUPON_BRANCH where BRANCH_NO='" + row + "' and COUPON_ID='" + str(
+                                            self.CMB_CouponDes.currentData()) + "'")
+                                    record = mycursor.fetchall()
+                                    if mycursor.rowcount > 0:
+                                        mycursor = self.conn.cursor()
+                                        sql8 = "update COUPON_BRANCH set STATUS= 1 where COUPON_ID='" + str(
+                                            self.CMB_CouponDes.currentData()) + "' and BRANCH_NO = '" + row + "'"
+                                        mycursor.execute(sql8)
+                                        print(sql8)
+                                    else:
+                                        mycursor = self.conn.cursor()
+                                        sql6 = "INSERT INTO COUPON_BRANCH (COMPANY_ID,BRANCH_NO,COUPON_ID,STATUS) VALUES (%s,%s,%s,%s)"
+                                        val6 = (
+                                            str(self.Qcombo_company.currentData()[0]), row,
+                                            str(self.CMB_CouponDes.currentData()),
+                                            '1')
+                                        mycursor.execute(sql6, val6)
 
-                QtWidgets.QMessageBox.warning(self, "Done","Done")
+                        if int(self.LE_desc_4.text()) < self.serial_num:
+                            indx = self.CMB_CouponDes.currentData()
+                            sql_select_Query = "SELECT COPS_SERIAL_ID FROM COUPON_SERIAL where COUPON_ID = %s and COPS_STATUS = 1"
+                            x = (indx,)
+                            mycursor = self.conn.cursor()
+                            mycursor.execute(sql_select_Query, x)
+                            record = mycursor.fetchall()
+                            num = 0
+                            for row in range(self.serial_num - int(self.LE_desc_4.text())):
+                                mycursor = self.conn.cursor()
+                                sql9 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(
+                                    self.CMB_CouponDes.currentData()) + "' and COPS_SERIAL_ID = '" + str(
+                                    record[num][0]) + "'"
+                                mycursor.execute(sql9)
+                                print(sql9)
+                                num += 1
+                            self.serial_num=int(self.LE_desc_4.text())
+                        else:
+                            for row in range(int(self.LE_desc_4.text()) - self.serial_num):
+                                value = randint(0, 1000000000000)
+                                creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                                mycursor = self.conn.cursor()
+                                sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s)"
+                                val7 = (
+                                    str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,
+                                    creationDate, 0,
+                                    '1')
+                                mycursor.execute(sql7, val7)
+                            self.serial_num = int(self.LE_desc_4.text())
+
+                        db1.connectionCommit(self.conn)
+                        mycursor.close()
+
+                        QtWidgets.QMessageBox.warning(self, "Done", "Done")
 
         except:
             print(sys.exc_info())

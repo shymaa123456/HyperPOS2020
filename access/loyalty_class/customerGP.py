@@ -37,9 +37,47 @@ class CL_customerGP(QtWidgets.QDialog):
             self.BTN_createCustGp.clicked.connect(self.FN_CREATE_CUSTGP)
             self.BTN_modifyCustGp.clicked.connect(self.FN_MODIFY_CUSTGP)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+            self.BTN_searchCustGp.clicked.connect(self.FN_SEARCH_CUSTGP)
+
         except Exception as err:
             print(err)
 
+    def FN_SEARCH_CUSTGP(self):
+        try:
+            for i in reversed(range(self.Qtable_custGP.rowCount())):
+                self.Qtable_custGP.removeRow(i)
+
+            mycursor = self.conn.cursor()
+
+            name = self.LE_desc.text().strip()
+            self.custGroup = self.CMB_custGroup.currentText()
+            if self.custGroup == 'Active':
+
+                whereClause = "where CG_Status =1  "
+            else:
+                whereClause = "where CG_Status = 0 "
+
+            if name != '' :
+                whereClause = whereClause + "and CG_DESC = '" + str(name) + "'"
+
+            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause
+            print(sql_select_query)
+            mycursor.execute(sql_select_query)
+            records = mycursor.fetchall()
+            for row_number, row_data in enumerate(records):
+                self.Qtable_custGP.insertRow(row_number)
+
+                for column_number, data in enumerate(row_data):
+                    if column_number == 2:
+                        data = self.FN_GET_STATUS_DESC(str(data))
+
+                    self.Qtable_custGP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+            #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        #
+            mycursor.close()
+        #self.Qtable_custGP.setItem(0, 0, QTableWidgetItem(str('11111')))
+        except Exception as err:
+             print(err)
     def FN_GET_STATUS_DESC(self,id):
         if id == '1':
             return "Active"

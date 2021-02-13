@@ -30,18 +30,82 @@ class CL_customerTP(QtWidgets.QDialog):
 
         self.FN_GET_CUSTTPS()
         records=self.FN_GET_NEXTlEVEL()
+        #id = self.FN_GET_NEXTlEVEL_ID
+        #self.LB_nextLvlId.setText ()
         for row in records:
             self.CMB_nextLevel.addItems([row[0]])
         try:
             self.CMB_custType.addItems(["Active", "Inactive"])
             self.BTN_createCustTp.clicked.connect(self.FN_CREATE_CUSTTP)
             self.BTN_modifyCustTp.clicked.connect(self.FN_MODIFY_CUSTTP)
+            self.BTN_searchCustTp.clicked.connect(self.FN_SEARCH_CUSTTP)
+            self.BTN_unlockCustTp.clicked.connect(self.FN_UNLOCK_CUSTTP)
+            self.CMB_nextLevel.activated.connect (self.FN_GET_ID)
+            self.CMB_custType.activated.connect (self.FN_GET_ID_STS)
+            self.FN_GET_ID()
+            self.FN_GET_ID_STS()
         except Exception as err:
             print(err)
 
+    def FN_UNLOCK_CUSTTP(self):
+     try:
+        if len(self.Qtable_custTP.selectedIndexes()) > 0:
+            rowNo = self.Qtable_custTP.selectedItems()[0].row()
+            self.Qtable_custTP.item(rowNo, 0).setFlags(QtCore.Qt.ItemIsEditable)
+            print(rowNo)
+     except Exception as err:
+         print(err)
+    def FN_GET_ID_STS(self):
+
+        sts = self.CMB_custType.currentText()
+        if sts == 'Active':
+            id= 1
+        else:
+            id = 0
+        self.LB_status.setText (str(id))
+    def FN_GET_ID(self):
+
+        desc = self.CMB_nextLevel.currentText()
+        id = self.FN_GET_NEXTlEVEL_ID(desc)
+        self.LB_nextLvlId.setText (id)
+    def FN_SEARCH_CUSTTP(self):
+        try:
+            for i in reversed(range(self.Qtable_custTP.rowCount())):
+                self.Qtable_custTP.removeRow(i)
+
+            mycursor = self.conn.cursor()
+            name = self.LE_desc.text().strip()
+            self.custType = self.CMB_custType.currentText()
+            if self.custType == 'Active':
+                whereClause = "where LOYCT_STATUS =1  "
+            else:
+                whereClause = "where LOYCT_STATUS = 0 "
+
+            if name != '':
+                whereClause = whereClause + "and LOYCT_DESC = '" + str(name) + "'"
+            whereClause = whereClause  + " and LOYCT_TYPE_ID != 'H1'"
+
+            sql_select_query = "select  LOYCT_TYPE_ID,LOYCT_DESC , LOYCT_POINTS_TO_PROMOTE,LOYCT_TYPE_NEXT,LOYCT_STATUS from  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE " + whereClause
+            print(sql_select_query)
+            mycursor.execute(sql_select_query)
+            records = mycursor.fetchall()
+            for row_number, row_data in enumerate(records):
+                self.Qtable_custTP.insertRow(row_number)
+                for column_number, data in enumerate(row_data):
+                    if column_number == 2:
+                        data = self.FN_GET_STATUS_DESC(str(data))
+                    item = QTableWidgetItem(str(data))
+                    #item.setFlags(QtCore.Qt.NoItemFlags)
+                    self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(item ))
+            # self.Qtable_custTP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+            #
+            mycursor.close()
+        # self.Qtable_custTP.setItem(0, 0, QTableWidgetItem(str('11111')))
+        except Exception as err:
+            print(err)
     def FN_GET_NEXTlEVEL(self):
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
+        mycursor.execute("SELECT LOYCT_DESC ,LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
         records = mycursor.fetchall()
         #mycursor.close()
         return records
@@ -73,26 +137,13 @@ class CL_customerTP(QtWidgets.QDialog):
         for i in reversed(range(self.Qtable_custTP.rowCount())):
             self.Qtable_custTP.removeRow(i)
         mycursor = self.conn1.cursor(buffered=True)
-        mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
+        mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID   asc")
         records = mycursor.fetchall()
         for row_number, row_data in enumerate(records):
             self.Qtable_custTP.insertRow(row_number)
             for column_number, data in enumerate(row_data):
-                if column_number == 3 and row_number >0 :
-                    #data= self.FN_GET_NEXTlEVEL_DESC(str(data))
-                    # comboBox = QtWidgets.QComboBox()
-                    # records = self.FN_GET_NEXTlEVEL()
-                    # for row in records:
-                    #    comboBox.addItems([row[0]])
-                    # comboBox.setCurrentText(data)
-                    # self.Qtable_custTP.setCellWidget(row_number, column_number, comboBox)
-                    item = QTableWidgetItem(str(data))
-                else:
-                    if column_number == 4:
-                        data = self.FN_GET_STATUS_DESC(str(data))
-                    item = QTableWidgetItem(str(data))
-                    if column_number == 0:
-                        item.setFlags(QtCore.Qt.NoItemFlags)
+                item = QTableWidgetItem(str(data))
+                #item.setFlags(QtCore.Qt.ItemIsUserCheckable)
                 self.Qtable_custTP.setItem(row_number, column_number, item)
         mycursor.close()
 

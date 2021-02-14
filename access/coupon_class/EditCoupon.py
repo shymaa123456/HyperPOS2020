@@ -25,6 +25,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
     branch_list = []
     new_branch_list = []
     multiusage=0
+    serial_type=0
 
     def __init__(self):
         super(CL_EditCoupon, self).__init__()
@@ -76,13 +77,23 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
     def FN_GET_Branch(self):
         # Todo: method for fills the Branch combobox
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
-        records = mycursor.fetchall()
-        for row, val in records:
-            self.Qcombo_branch.addItem(row, val)
-        mycursor.close()
+        i = 0
+        try:
+            # Todo: method for fills the Branch combobox
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
+            records = mycursor.fetchall()
+            for row, val in records:
+
+                if val in self.FN_AuthBranchUser()[i]:
+                    self.Qcombo_branch.addItem(row, val)
+                i += 1
+            mycursor.close()
+        except:
+            print(sys.exc_info())
+
+
 
 
     def FN_getData(self):
@@ -235,6 +246,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                         self.serialCount = "1"
                         self.MultiCount = self.LE_desc_5.text()
                         self.MultiUse = "1"
+                        self.serial_type=1
                         print("multi use="+str(self.multiusage))
                         if self.multiusage==0:
                             sql2 = "update COUPON_SERIAL set COPS_STATUS='0' where COUPON_ID='" + str(
@@ -243,9 +255,9 @@ class CL_EditCoupon(QtWidgets.QDialog):
                             value = randint(0, 1000000000000)
                             creationDate = str(datetime.today().strftime('%d-%m-%Y'))
                             mycursor = self.conn.cursor()
-                            sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s)"
+                            sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val7 = (
-                                str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,
+                                str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,self.serial_type,
                                 creationDate, 0,
                                 '1')
                             mycursor.execute(sql7, val7)
@@ -253,10 +265,12 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
 
 
+
                     else:
                         self.serialCount = self.LE_desc_4.text()
                         self.MultiCount = "0"
                         self.MultiUse = "0"
+                        self.serial_type=0
                     print(self.serial_num)
                     print(int(self.LE_desc_4.text()))
                     if int(self.LE_desc_4.text()) < self.serial_num and self.movement == 1:
@@ -276,9 +290,11 @@ class CL_EditCoupon(QtWidgets.QDialog):
                         #     self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(
                         #     self.CMB_CouponDes.currentData()) + "'"
                         # mycursor.execute(sql3)
+                        
                         if len(self.Qcombo_branch.currentData()) > 0:
                             for i in self.Qcombo_branch.currentData():
                                 self.new_branch_list.append(i)
+
                         if len(self.branch_list) > len(self.new_branch_list):
                             for row in self.branch_list:
                                 print(row)
@@ -320,7 +336,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
                         if int(self.LE_desc_4.text()) < self.serial_num:
                             indx = self.CMB_CouponDes.currentData()
-                            sql_select_Query = "SELECT COPS_SERIAL_ID FROM COUPON_SERIAL where COUPON_ID = %s and COPS_STATUS = 1"
+                            sql_select_Query = "SELECT COPS_SERIAL_ID FROM COUPON_SERIAL where COUPON_ID = %s and COPS_STATUS = 1 and COPS_SERIAL_type = 0"
                             x = (indx,)
                             mycursor = self.conn.cursor()
                             mycursor.execute(sql_select_Query, x)
@@ -340,9 +356,9 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 value = randint(0, 1000000000000)
                                 creationDate = str(datetime.today().strftime('%d-%m-%Y'))
                                 mycursor = self.conn.cursor()
-                                sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s)"
+                                sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                                 val7 = (
-                                    str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,
+                                    str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,self.serial_type,
                                     creationDate, 0,
                                     '1')
                                 mycursor.execute(sql7, val7)
@@ -352,10 +368,13 @@ class CL_EditCoupon(QtWidgets.QDialog):
                         mycursor.close()
 
                         QtWidgets.QMessageBox.warning(self, "Done", "Done")
+                        for i in self.FN_GetMathchBranch():
+                            self.branch_list.append(i)
+
+
 
         except:
             print(sys.exc_info())
-
 
 
     def FN_EnableDiscVal(self):
@@ -425,7 +444,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
             for row1 in self.FN_SELECT_branch():
                 if row[0] == row1[0]:
                     items = self.Qcombo_branch.findText(row[0])
-                    for item in range(items + 2):
+                    for item in range(items +2):
                         if int(row1[1])==1:
                             self.Qcombo_branch.setChecked(i)
             i = i + 1
@@ -434,7 +453,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
     def FN_unCheckedALL(self):
         mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT BRANCH_NO FROM BRANCH"
+        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"'"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
         i=0
@@ -442,4 +461,22 @@ class CL_EditCoupon(QtWidgets.QDialog):
             self.Qcombo_branch.unChecked(i)
             i+=1
 
+
+
+    def FN_GetMathchBranch(self):
+        indx = self.CMB_CouponDes.currentData()
+        mycursor = self.conn.cursor()
+        sql = "SELECT BRANCH_NO FROM COUPON_BRANCH where COUPON_ID = %s and STATUS = 1"
+        c = (indx,)
+        mycursor.execute(sql, c)
+        records = mycursor.fetchall()
+        mycursor.close()
+        return records
+
+    def FN_AuthBranchUser(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"'")
+        records = mycursor.fetchall()
+        return records
 

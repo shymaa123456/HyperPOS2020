@@ -20,6 +20,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
     serialCount=""
     MultiCount=""
     MultiUse=""
+    serialType=0
     def __init__(self):
         super(CL_CreateCoupon, self).__init__()
         cwd = Path.cwd()
@@ -92,14 +93,22 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_Branch(self):
-        # Todo: method for fills the Branch combobox
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
-        records = mycursor.fetchall()
-        for row, val in records:
-            self.Qcombo_branch.addItem(row, val)
-        mycursor.close()
+        i=0
+        try:
+            # Todo: method for fills the Branch combobox
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
+            records = mycursor.fetchall()
+            for row, val in records:
+
+                if val in self.FN_AuthBranchUser()[i]:
+                    self.Qcombo_branch.addItem(row, val)
+                i+=1
+            mycursor.close()
+        except:
+            print(sys.exc_info())
+
 
     def FN_Create(self):
 
@@ -112,10 +121,12 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                         self.serialCount = "1"
                         self.MultiCount = self.LE_desc_5.text()
                         self.MultiUse = "1"
+                        self.serialType=1
                 else:
                         self.serialCount = self.LE_desc_4.text()
                         self.MultiCount = "0"
                         self.MultiUse = "0"
+                        self.serialType=0
             creationDate = str(datetime.today().strftime('%d-%m-%Y'))
             if self.radioButton_Percentage.isChecked():
                 if len(self.LE_desc_3.text()) == 0:
@@ -175,8 +186,8 @@ class CL_CreateCoupon(QtWidgets.QDialog):
 
                     if mycursor.rowcount > 0:
                         value=value+1
-                    sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s)"
-                    val2 = (id, bin(value), CL_userModule.user_name, creationDate, 0,
+                    sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                    val2 = (id, bin(value), CL_userModule.user_name,self.serialType ,creationDate, 0,
                             '1')
                     print(sql2, val2)
                     mycursor.execute(sql2, val2)
@@ -192,9 +203,18 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 db1.connectionCommit(self.conn)
                 mycursor.close()
                 QtWidgets.QMessageBox.warning(self, "Done", "رقم الكوبون هو " + str(id))
+                self.label_num.setText(str(id))
 
 
         except:
             print(sys.exc_info())
+
+    def FN_AuthBranchUser(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"'")
+        records = mycursor.fetchall()
+        return records
+
 
 

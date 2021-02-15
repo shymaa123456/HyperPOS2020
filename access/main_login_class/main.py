@@ -28,6 +28,9 @@ from access.loyalty_class.customerType import CL_customerTP
 from access.promotion_class.Promotion_Add import CL_create_promotion
 from PyQt5.QtWidgets import QMessageBox
 
+from access.voucher_class.CreateVoucher import CL_CreateVoucher
+from access.voucher_class.EditVoucher import CL_EditVoucher
+
 
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
@@ -98,6 +101,13 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
         self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
         self.QAct_Coupon_Print.triggered.connect(self.FN_PrintCoupon)
+
+        #Todo: method for Open Create Voucher Window
+        self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
+        self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
+
+
+
 
 
 
@@ -273,6 +283,17 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_PrintCoupon(self):
         self.window_two = CL_printCoupon()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+
+    def FN_CreateVoucher(self):
+        self.window_two=CL_CreateVoucher()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_EditVoucher(self):
+        self.window_two=CL_EditVoucher()
         self.window_two.FN_LOADUI()
         self.window_two.show()
 

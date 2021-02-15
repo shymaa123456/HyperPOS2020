@@ -112,7 +112,6 @@ class CL_modifyCoupon(QtWidgets.QDialog):
 
 
     def FN_UpdateStatus(self):
-        self.showDialog()
         mycursor = self.conn.cursor()
         print(self.CMB_CouponStatus.currentIndex())
         print(self.CMB_CouponDes.currentData())
@@ -135,12 +134,12 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         self.LE_desc_4.clear()
         self.LE_desc_5.clear()
 
-    def showDialog(self):
-        # print("event")
-        buttonReply = QMessageBox.question(self, 'PyQt5 message', "هناك فروع غير فعاله سيتم تفعيلها؟",
-                                           QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        if buttonReply == QMessageBox.Yes:
-            print('Yes clicked.')
-        else:
-            print('No clicked.')
+    # def showDialog(self):
+    #     # print("event")
+    #     buttonReply = QMessageBox.question(self, 'PyQt5 message', "هناك فروع غير فعاله سيتم تفعيلها؟",
+    #                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+    #     if buttonReply == QMessageBox.Yes:
+    #         print('Yes clicked.')
+    #     else:
+    #         print('No clicked.')
 

@@ -158,7 +158,7 @@
     </property>
    </column>
   </widget>
-  <widget class="QPushButton" name="BTN_unlockCustTp">
+  <widget class="QPushButton" name="BTN_getCustTp">
    <property name="geometry">
     <rect>
      <x>50</x>

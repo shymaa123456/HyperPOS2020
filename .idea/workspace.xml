@@ -24,11 +24,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="comments of 3-2-2021">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="comments of 10-2-2021">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerType.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerType.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustGp.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustGp.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -254,13 +253,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00021" summary="create customer">
-      <created>1602428481532</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1602428481532</updated>
     </task>
     <task id="LOCAL-00022" summary="create customer">
       <created>1602431208609</created>
@@ -598,7 +590,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612951486594</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="comments of 10-2-2021">
+      <created>1613224942123</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1613224942124</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -658,7 +657,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update the code to ADD THE validation" />
     <MESSAGE value="loyality ui" />
     <MESSAGE value="update the db" />
     <MESSAGE value="create customer" />
@@ -683,7 +681,8 @@
     <MESSAGE value="comments on custGp and custTps" />
     <MESSAGE value="comments on create cust" />
     <MESSAGE value="comments of 3-2-2021" />
-    <option name="LAST_COMMIT_MESSAGE" value="comments of 3-2-2021" />
+    <MESSAGE value="comments of 10-2-2021" />
+    <option name="LAST_COMMIT_MESSAGE" value="comments of 10-2-2021" />
   </component>
   <component name="WindowStateProjectService">
     <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605430091539">
@@ -711,45 +710,45 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
-    <state width="1294" height="190" key="GridCell.Tab.0.bottom" timestamp="1613224666612">
+    <state width="1294" height="116" key="GridCell.Tab.0.bottom" timestamp="1613408041099">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1294" height="190" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613224666612" />
+    <state width="1294" height="116" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613408041099" />
     <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1294" height="190" key="GridCell.Tab.0.center" timestamp="1613224666612">
+    <state width="1294" height="116" key="GridCell.Tab.0.center" timestamp="1613408041099">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1294" height="190" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613224666612" />
+    <state width="1294" height="116" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613408041099" />
     <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1294" height="190" key="GridCell.Tab.0.left" timestamp="1613224666612">
+    <state width="1294" height="116" key="GridCell.Tab.0.left" timestamp="1613408041098">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1294" height="190" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613224666612" />
+    <state width="1294" height="116" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613408041098" />
     <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1294" height="190" key="GridCell.Tab.0.right" timestamp="1613224666612">
+    <state width="1294" height="116" key="GridCell.Tab.0.right" timestamp="1613408041099">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1294" height="190" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613224666612" />
+    <state width="1294" height="116" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613408041099" />
     <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1294" height="190" key="GridCell.Tab.1.bottom" timestamp="1613224666613">
+    <state width="1294" height="190" key="GridCell.Tab.1.bottom" timestamp="1613315335038">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1294" height="190" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613224666613" />
+    <state width="1294" height="190" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613315335038" />
     <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1294" height="190" key="GridCell.Tab.1.center" timestamp="1613224666613">
+    <state width="1294" height="190" key="GridCell.Tab.1.center" timestamp="1613315335038">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1294" height="190" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1613224666613" />
+    <state width="1294" height="190" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1613315335038" />
     <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1294" height="190" key="GridCell.Tab.1.left" timestamp="1613224666613">
+    <state width="1294" height="190" key="GridCell.Tab.1.left" timestamp="1613315335038">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1294" height="190" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1613224666613" />
+    <state width="1294" height="190" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1613315335038" />
     <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1294" height="190" key="GridCell.Tab.1.right" timestamp="1613224666613">
+    <state width="1294" height="190" key="GridCell.Tab.1.right" timestamp="1613315335038">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1294" height="190" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1613224666613" />
+    <state width="1294" height="190" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1613315335038" />
     <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
     <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
       <screen x="0" y="0" width="1366" height="728" />
@@ -771,10 +770,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1612952493869">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1613285189302">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1612952493869" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1613285189302" />
     <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
     <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
       <screen x="0" y="0" width="1366" height="728" />
@@ -784,10 +783,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1612946548477" />
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1611996930538">
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1613307460388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1611996930538" />
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1613307460388" />
     <state x="327" y="61" width="710" height="667" key="search.everywhere.popup" timestamp="1613224647921">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -798,54 +797,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/authorization_class/privilage.py</url>
-          <line>180</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>139</line>
-          <option name="timeStamp" value="80" />
+          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
+          <line>625</line>
+          <option name="timeStamp" value="191" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>797</line>
-          <option name="timeStamp" value="110" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="112" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>112</line>
-          <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customerGP.py</url>
-          <line>187</line>
-          <option name="timeStamp" value="145" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Validation/Validation.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>303</line>
-          <option name="timeStamp" value="173" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>297</line>
-          <option name="timeStamp" value="174" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
-          <line>51</line>
-          <option name="timeStamp" value="181" />
+          <line>596</line>
+          <option name="timeStamp" value="192" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -861,6 +820,10 @@
         <watch expression="mycursor" language="Python" />
         <watch expression="self.conn" language="Python" />
         <watch expression="self.conn.cursor()" language="Python" />
+        <watch expression="self.Qtable_custTP.selectedIndexes()" language="Python" />
+        <watch expression="self.section" language="Python" />
+        <watch expression="records" language="Python" />
+        <watch expression="BMC_LEVEL4_list" language="Python" />
       </configuration>
     </watches-manager>
   </component>

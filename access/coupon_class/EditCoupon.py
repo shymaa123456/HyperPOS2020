@@ -352,16 +352,25 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 num += 1
                             self.serial_num=int(self.LE_desc_4.text())
                         else:
-                            for row in range(int(self.LE_desc_4.text()) - self.serial_num):
+                            for row in range(self.serial_num):
+                                mycursor = self.conn.cursor()
+                                sql9 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(
+                                    self.CMB_CouponDes.currentData()) + "'"
+                                mycursor.execute(sql9)
+                            for row in range(int(self.LE_desc_4.text())):
                                 value = randint(0, 1000000000000)
                                 creationDate = str(datetime.today().strftime('%d-%m-%Y'))
                                 mycursor = self.conn.cursor()
                                 sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                                 val7 = (
-                                    str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,self.serial_type,
+                                    str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,
+                                    self.serial_type,
                                     creationDate, 0,
                                     '1')
                                 mycursor.execute(sql7, val7)
+
+
+
                             self.serial_num = int(self.LE_desc_4.text())
 
                         db1.connectionCommit(self.conn)
@@ -371,8 +380,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                         for i in self.FN_GetMathchBranch():
                             self.branch_list.append(i)
 
-
-
+            self.FN_getDatabyID()
         except:
             print(sys.exc_info())
 

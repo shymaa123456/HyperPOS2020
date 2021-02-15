@@ -8,10 +8,10 @@ class CL_validation():
 
     @staticmethod
     def FN_valedation_mail(email):
-        if re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            return False;
-        else:
+        if re.match(r"[^@]+@[^@]+\.[^@]", email):
             return True;
+        else:
+            return False;
 
     @staticmethod
     def FN_validation_password(self, password):
@@ -94,4 +94,4 @@ class CL_validation():
 
 if __name__ == '__main__':
     data=CL_validation()
-    print(data.FN_validation_int("f012"))
+    print(data.FN_valedation_mail("hossam.goog@gmail."))

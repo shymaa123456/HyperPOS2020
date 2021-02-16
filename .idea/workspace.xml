@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -25,11 +28,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="fawzy comments">
+      <change afterPath="$PROJECT_DIR$/access/installment_class/Bank.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/access/installment_class/installment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/installment_ui/Installment_create.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/installment_ui/create_installment_type.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/installment_ui/createbank.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/installment_ui/modifybank.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerType.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerType.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,18 +81,19 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/presentation/installment_ui" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\MustafaElsayed\Projects\HyperPOS2020\presentation\installment_ui" />
+      <recent name="E:\MustafaElsayed\Projects\HyperPOS2020\access\installment_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects_community\HyperPOS2020\access\loyalty_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\access\loyalty_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\presentation\loyalty_ui" />
-      <recent name="$PROJECT_DIR$/access/loyalty_class" />
-      <recent name="$PROJECT_DIR$/data_connection" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
@@ -95,7 +107,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Shaymaa\anaconda3\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\mustafa\anaconda3\envs\HyperPOS2020_V3.7\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/main_login_class" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -684,129 +696,6 @@
     <MESSAGE value="solve bug in search" />
     <MESSAGE value="fawzy comments" />
     <option name="LAST_COMMIT_MESSAGE" value="fawzy comments" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605430091539">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="111" y="13" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1605430091539" />
-    <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1604236813970" />
-    <state x="48" y="116" key="#xdebugger.XInspectDialog" timestamp="1610380377039">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="48" y="116" key="#xdebugger.XInspectDialog/0.0.1366.728@0.0.1366.728" timestamp="1610380377039" />
-    <state x="506" y="228" width="354" height="320" key="DBNavigator.ConnectionAuthenticationDialog" timestamp="1605442784187">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="506" y="228" width="354" height="320" key="DBNavigator.ConnectionAuthenticationDialog/0.0.1366.728@0.0.1366.728" timestamp="1605442784187" />
-    <state x="213" y="19" key="DBNavigator.ProjectSettingsDialog" timestamp="1605442764873">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="213" y="19" key="DBNavigator.ProjectSettingsDialog/0.0.1366.728@0.0.1366.728" timestamp="1605442764873" />
-    <state width="792" height="448" key="DebuggerActiveHint" timestamp="1606055766186">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="792" height="448" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1606055766186" />
-    <state x="172" y="127" width="1094" height="541" key="DiffContextDialog" timestamp="1603721119801">
-      <screen x="72" y="27" width="1294" height="741" />
-    </state>
-    <state x="172" y="127" width="1094" height="541" key="DiffContextDialog/72.27.1294.741@72.27.1294.741" timestamp="1603721119801" />
-    <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1609070986320">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
-    <state x="492" y="142" width="424" height="520" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1603720751348" />
-    <state width="1316" height="2" key="GridCell.Tab.0.bottom" timestamp="1611386937241">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1316" height="2" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611386937241" />
-    <state width="855" height="166" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="2" key="GridCell.Tab.0.center" timestamp="1611386937240">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1316" height="2" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611386937240" />
-    <state width="855" height="166" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="2" key="GridCell.Tab.0.left" timestamp="1611386937240">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1316" height="2" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611386937240" />
-    <state width="855" height="166" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1604914781952" />
-    <state width="1316" height="2" key="GridCell.Tab.0.right" timestamp="1611386937241">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1316" height="2" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611386937241" />
-    <state width="855" height="166" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1604914781953" />
-    <state width="1316" height="2" key="GridCell.Tab.1.bottom" timestamp="1611386937242">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1316" height="2" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611386937242" />
-    <state width="1271" height="17" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1316" height="2" key="GridCell.Tab.1.center" timestamp="1611386937241">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1316" height="2" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1611386937241" />
-    <state width="1271" height="17" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state width="1316" height="2" key="GridCell.Tab.1.left" timestamp="1611386937241">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1316" height="2" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1611386937241" />
-    <state width="1271" height="17" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1604399627858" />
-    <state width="1316" height="2" key="GridCell.Tab.1.right" timestamp="1611386937241">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1316" height="2" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1611386937241" />
-    <state width="1271" height="17" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1604399627859" />
-    <state x="129" y="55" key="MergeDialog" timestamp="1606042463662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="129" y="55" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606042463662" />
-    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1606056539367">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056539367" />
-    <state x="407" y="53" width="511" height="640" key="RollbackChangesDialog" timestamp="1608104489811">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="407" y="53" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1608104489811" />
-    <state x="458" y="81" width="511" height="640" key="RollbackChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603720741209" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1608112241771">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1608112241771" />
-    <state x="470" y="79" key="VCS.ChangeListViewerDialog" timestamp="1606056527179">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1611136650242">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1611136650242" />
-    <state x="314" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1294.741@72.27.1294.741" timestamp="1605185588804" />
-    <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog" timestamp="1603710032984">
-      <screen x="72" y="27" width="1294" height="741" />
-    </state>
-    <state x="474" y="114" width="480" height="573" key="VcsDiffUtil.ChangesDialog/72.27.1294.741@72.27.1294.741" timestamp="1603710032984" />
-    <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="691" height="372" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1609935341048" />
-    <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1603707589579">
-      <screen x="72" y="27" width="1294" height="741" />
-    </state>
-    <state x="172" y="127" width="1094" height="541" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/72.27.1294.741@72.27.1294.741" timestamp="1603707589579" />
-    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611053447726">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1611053447726" />
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1611386272404">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1611386272404" />
-    <state x="327" y="61" width="710" height="667" key="search.everywhere.popup" timestamp="1611049696837">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="327" y="61" width="710" height="667" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611049696837" />
-    <state x="382" y="89" width="672" height="678" key="search.everywhere.popup/72.27.1294.741@72.27.1294.741" timestamp="1604406788152" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

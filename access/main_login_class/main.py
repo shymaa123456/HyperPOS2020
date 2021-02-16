@@ -26,7 +26,9 @@ from access.loyalty_class.customerType import CL_customerTP
 # Promotion
 from access.promotion_class.Promotion_Add import CL_create_promotion
 
-
+#Installment
+from access.installment_class.Bank import CL_CreateBank
+from access.installment_class.installment import CL_installment
 
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
@@ -97,7 +99,10 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
         self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
 
-
+        # for installment
+        self.QAct_Create_Bank.triggered.connect(self.FN_CREATE_Bank)
+        self.QAct_Modify_Bank.triggered.connect(self.FN_Modify_Bank)
+        self.QAct_Install_Add.triggered.connect(self.FN_CREATE_installment)
 
         self.QAct_Exit.triggered.connect(self.FN_exit)
         self.setWindowTitle('HyperPOS Main Page')
@@ -144,8 +149,6 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_two.show()
         except Exception as err:
             print(err)
-
-
 
     def FN_exit(self):
         QApplication.quit()
@@ -266,4 +269,21 @@ class CL_main(QtWidgets.QMainWindow):
     def FN_EditCoupon(self):
         self.window_two = CL_EditCoupon()
         self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+
+    #Installment
+    def FN_CREATE_Bank(self):
+        self.window_two = CL_CreateBank()
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
+
+    def FN_Modify_Bank(self):
+        self.window_two = CL_CreateBank()
+        self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
+    def FN_CREATE_installment(self):
+        self.window_two = CL_installment()
+        self.window_two.FN_LOAD_CREATE()
         self.window_two.show()

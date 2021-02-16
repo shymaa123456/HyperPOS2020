@@ -6,7 +6,7 @@ from data_connection.h1pos import db1
 from access.main_login_class.main import *
 
 from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, uic
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
@@ -193,6 +193,12 @@ class CL_create_promotion(QtWidgets.QDialog):
     def FN_LOAD_CREATE_PROM(self):
         filename = self.dirname + '/Promotion_create.ui'
         loadUi(filename, self)
+        # self.ui = uic.loadUi( filename )
+        # self.ui.closeEvent = self.closeEvent
+        # self.ui.show()
+        # quit = QAction("Quit", self)
+        # quit.triggered.connect(self.closeEvent)
+
 
         """ checked combobox sample >>> Branch"""
         self.Qcombo_branch2 = CheckableComboBox(self)
@@ -228,20 +234,151 @@ class CL_create_promotion(QtWidgets.QDialog):
             self.updatestatecombo()
             self.FN_GET_MAGAZINE()
 
+            # Qcombo_promotion = self.Qcombo_promotion.itemData(self.Qcombo_promotion.currentIndex())   # promotion type id
+            # self.Qcombo_promotion.activated.connect(self.Qcombo_promotion_index)
+            # print(Qcombo_promotion)
             # department
             self.Qcombo_department.activated[str].connect(self.updatestatecombo)
 
             self.tableWidget.setRowCount(0)
             self.Qtable_promotion.setRowCount(0)
 
+            self.tableWidget.setSelectionMode(QAbstractItemView.MultiSelection)
+
             #  SEARCH BUTTON
-            self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)
+            self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)  # search barcodes
+            self.QcheckBox_all.stateChanged.connect(self.changeTitle)  # select all
+            self.Qbtn_add.clicked.connect(self.add_items)  # add_items  to Qtable_promotion datatable
+
 
         except:
             print("An exception occurred")
 
+    # def Qcombo_promotion_index(self, index):
+    #     print(self.Qcombo_promotion.itemText(index))
+    #     print(self.Qcombo_promotion.itemData(index))
+    #     Qcombo_promotion = self.Qcombo_promotion.itemData(self.Qcombo_promotion.currentIndex())
+    #     print(Qcombo_promotion)
+    #####################################
+    # def closeEvent(self, event):
+    #     """Generate 'question' dialog on clicking 'X' button in title bar.
+    #
+    #     Reimplement the closeEvent() event handler to include a 'Question'
+    #     dialog with options on how to proceed - Save, Close, Cancel buttons
+    #     """
+    #     reply = QMessageBox.question(
+    #         self, "Message",
+    #         "Are you sure you want to quit? Any unsaved work will be lost.",
+    #         QMessageBox.Save | QMessageBox.Close | QMessageBox.Cancel,
+    #         QMessageBox.Save)
+    #     # QMessageBox.Save | QMessageBox.Close | QMessageBox.Cancel,
+    #     # QMessageBox.Save)
+    #
+    #     if reply == QMessageBox.Close:
+    #         QCoreApplication.exit(0)
+    #     else:
+    #         pass
+    #
+    # def keyPressEvent(self, event):
+    #     """Close application from escape key.
+    #
+    #     results in QMessageBox dialog from closeEvent, good but how/why?
+    #     """
+    #     if event.key() == Qt.Key_Escape:
+    #         self.close()
+    #####################################
+    def closeEvent(self, event):
+        print("event")
+        reply = QMessageBox.question(self, 'Message',
+                                           "Are you sure to quit promotion?", QMessageBox.Yes, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
+
+    def add_items(self):     # add_items to Qtable_promotion datatable
+        self.Qtable_promotion.setRowCount(0)
+        self.Qtable_promotion.setColumnCount(6)
+        self.Qtable_promotion.setHorizontalHeaderLabels(['القسم الفرعى', 'الباركود', 'رقم الصنف', 'وحدة القياس', 'الوصف' , 'نسبة الضريبة'])
+
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute(
+            " SELECT BMD_ID ,POS_GTIN ,  POS_ITEM_NO ,  POS_UOM, POS_GTIN_DESC_A , POS_VATRATE  from Hyper1_Retail.POS_ITEM   ")
+        # mycursor.execute("SELECT * from Hyper1_Retail.POS_ITEM   ")
+
+        # print(self.query)
+        records = mycursor.fetchall()
+        # print(records)
+        headers = []
+        for row_number, row_data in enumerate(records):
+            # self.Qtable_promotion.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+            headers.append(row_data)
+            self.Qtable_promotion.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.Qtable_promotion.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+                if column_number != 5:  # or column_number == 1 or column_number == 3:
+                    self.Qtable_promotion.item(row_number, column_number).setFlags(QtCore.Qt.ItemFlags
+                                                                              (~QtCore.Qt.ItemIsEditable))
+                # else:
+                #     self.Qtable_promotion.item(row_number, column_number).setFlags(QtCore.Qt.ItemFlags
+                #                                                               (QtCore.Qt.ItemIsSelectable |
+                #                                                                QtCore.Qt.ItemIsEditable |
+                #                                                                QtCore.Qt.ItemIsEnabled))
+
+            self.Qtable_promotion.resizeColumnsToContents()  # item(0, 1).EditTriggers
+            self.Qtable_promotion.setSortingEnabled(True)
+            # self.tableWidget.wordWrap()
+            self.Qtable_promotion.setCornerButtonEnabled(False)
+            mycursor.close()
+
+    def changeTitle(self):    # select table rows
+        if self.QcheckBox_all.isChecked():
+            self.tableWidget.selectAll()
+            self.tableWidget.setFocus()
+        else:
+            self.tableWidget.clearSelection()
+
+        #     rowsCount = self.tableWidget.rowCount()
+        #     # print(rowsCount)
+        #     for rows in range(rowsCount):
+        #         self.tableWidget.selectRow(rows)
+
     # SEARCH BUTTON # FILL SERCH DATA TABLE  >> tableWidget
     def FN_SEARCH_BARCODES(self):
+
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.setColumnCount(5)
+        # self.tableWidget.setHorizontalHeaderLabels(['DEPARTMENT_ID', 'DEPARTMENT_DESC', 'DEPARTMENT_STATUS', 'test'])
+        #
+        self.tableWidget.setHorizontalHeaderLabels(['الباركود', 'رقم الصنف',  'القسم الفرعى', 'وحدة القياس', 'الوصف'] )
+
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute(
+            " SELECT POS_GTIN ,  POS_ITEM_NO , BMD_ID , POS_UOM, POS_GTIN_DESC_A  from Hyper1_Retail.POS_ITEM   ")
+        # mycursor.execute("SELECT * from Hyper1_Retail.POS_ITEM   ")
+
+        # print(self.query)
+        records = mycursor.fetchall()
+        # print(records)
+        headers = []
+        for row_number, row_data in enumerate(records):
+            self.tableWidget.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+            headers.append(row_data)
+            self.tableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+            self.tableWidget.resizeColumnsToContents()  # item(0, 1).EditTriggers
+            self.tableWidget.setSortingEnabled(True)
+            # self.tableWidget.wordWrap()
+            self.tableWidget.setCornerButtonEnabled(False)
+            mycursor.close()
+
+    def FN_SEARCH_BARCODES_test(self):
 
         # model = QStandardItemModel()
         # model.setHorizontalHeaderLabels(['DEPARTMENT_ID', 'DEPARTMENT_DESC', 'DEPARTMENT_STATUS'])
@@ -249,13 +386,18 @@ class CL_create_promotion(QtWidgets.QDialog):
         # self.Qtable_promotion.setModel(model)
         # header = self.Qtable_promotion.horizontalHeader()
         self.tableWidget.setRowCount(0)
-        self.tableWidget.setColumnCount(4)
-        self.tableWidget.setHorizontalHeaderLabels(['DEPARTMENT_ID', 'DEPARTMENT_DESC', 'DEPARTMENT_STATUS', 'test'])
+        self.tableWidget.setColumnCount(5)
+        # self.tableWidget.setHorizontalHeaderLabels(['DEPARTMENT_ID', 'DEPARTMENT_DESC', 'DEPARTMENT_STATUS', 'test'])
+        #
+        self.tableWidget.setHorizontalHeaderLabels(['GTIN', 'ITEM_NO', 'GTIN_DESC', 'VATRATE', 'UOM'])
 
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT  DEPARTMENT_ID, DEPARTMENT_DESC , DEPARTMENT_STATUS , '1' FROM DEPARTMENT")
-        # print(self.query)
+        # mycursor.execute("SELECT  DEPARTMENT_ID, DEPARTMENT_DESC , DEPARTMENT_STATUS , '1' FROM DEPARTMENT")
+        #
+        mycursor.execute(" SELECT POS_GTIN ,  POS_ITEM_NO , POS_GTIN_DESC_A , POS_VATRATE , POS_UOM from Hyper1_Retail.POS_ITEM   ")
+        # mycursor.execute("SELECT * from Hyper1_Retail.POS_ITEM   ")
+        print(self.query)
         records = mycursor.fetchall()
         print(records)
         headers = []
@@ -266,15 +408,15 @@ class CL_create_promotion(QtWidgets.QDialog):
             for column_number, data in enumerate(row_data):
                 self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
 
-                if column_number != 2:
+                if column_number == 0 or column_number == 1  or column_number == 2 :
                     self.tableWidget.item(row_number, column_number).setFlags(QtCore.Qt.ItemFlags
-                                                                              (~QtCore.Qt.ItemIsEditable))
+                                                                              (QtCore.Qt.ItemIsEditable))
                 else:
+
                     self.tableWidget.item(row_number, column_number).setFlags(QtCore.Qt.ItemFlags
                                                                               (~QtCore.Qt.ItemIsSelectable |
                                                                                ~QtCore.Qt.ItemIsEditable |
                                                                                ~QtCore.Qt.ItemIsEnabled))
-
 
             self.tableWidget.resizeColumnsToContents() #item(0, 1).EditTriggers
             self.tableWidget.setSortingEnabled(True)
@@ -292,10 +434,10 @@ class CL_create_promotion(QtWidgets.QDialog):
             #                                      QtCore.Qt.ItemIsEnabled)
         # self.tableWidget.item(0, 1).setFlags(Qt.ItemIsEditable)
         mycursor.close()
+        # item = QTableWidgetItem()
+        # item.setFlags(item.flags() ^ Qt.ItemIsEditable)
+        # tableName.setItem(row, column, item)
 
-    # item = QTableWidgetItem()
-    # item.setFlags(item.flags() ^ Qt.ItemIsEditable)
-    # tableName.setItem(row, column, item)
 
     def FN_GET_Company(self):
         self.conn = db1.connect()
@@ -419,11 +561,11 @@ class CL_create_promotion(QtWidgets.QDialog):
     def FN_GET_promotion_type(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT PROMT_NAME_AR FROM PROMOTION_TYPE order by PROMOTION_TYPE_ID*1 ")
+        mycursor.execute("SELECT PROMT_NAME_AR , PROMOTION_TYPE_ID FROM PROMOTION_TYPE order by PROMOTION_TYPE_ID*1 ")
         records = mycursor.fetchall()
         print(records)
-        for row in records:
-            self.Qcombo_promotion.addItems(row)
+        for row, VAL in records:
+            self.Qcombo_promotion.addItem(row, VAL)
         mycursor.close()
 
     # department

@@ -77,8 +77,43 @@ class CL_customer(QtWidgets.QDialog):
         loadUi(filename, self)
         self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
         self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
+        self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP)
         self.fileName = ''
+
+    def FN_DISPLAY_TEMP(self):
+         try:
+             filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
+             print(filename)
+
+             wb = xlwt.Workbook()
+
+             # add_sheet is used to create sheet.
+             sheet = wb.add_sheet('Sheet 1')
+             sheet.write(0, 0, 'رقم العميل')
+             sheet.write(0, 1, 'اسم العميل')
+             sheet.write(0, 2, 'نوع العضويه')
+             sheet.write(0, 3, 'رقم الهاتف')
+             sheet.write(0, 4, 'الموبايل')
+             sheet.write(0, 5, 'الوظيفه')
+             sheet.write(0, 6, 'العنوان')
+             sheet.write(0, 7, 'المدينه')
+             sheet.write(0, 8, 'المجاوره')
+             sheet.write(0, 9, 'المبنى')
+
+             sheet.write(0, 10, 'الطابق')
+             sheet.write(0, 11, 'الإيميل')
+             sheet.write(0, 12, 'حاله العميل')
+
+
+             # # wb.save('test11.xls')
+             wb.save(str(filename[0]))
+             # wb.close()
+             import webbrowser
+             webbrowser.open(filename[0])
+         except Exception as err:
+             print(err)
 # get customer type desc
+
     def FN_GET_CUSTTP_DESC(self, id):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
@@ -154,19 +189,19 @@ class CL_customer(QtWidgets.QDialog):
                         error = 1
 
                     ret = CL_validation.FN_validation_int(self.phone)
-                    if ret == 'False':
+                    if ret == False:
                         error_message = error_message + " , has Invalid phone number"
 
                         error = 1
 
                     ret = CL_validation.FN_validation_int(self. workPhone)
-                    if ret == 'False':
+                    if ret == False:
                         error_message = error_message + " ,has Invalid work Phone"
 
                         error = 1
 
                     ret = CL_validation.FN_valedation_mail(self.email)
-                    if ret == 'True':
+                    if ret == True:
                         error_message = error_message + " ,has Invalid email"
 
                         error = 1
@@ -230,7 +265,7 @@ class CL_customer(QtWidgets.QDialog):
         mycursor.execute( sql_select_query, x )
         record = mycursor.fetchone()
         #print( record )
-        self.lE_custName.setText(record[3])
+        self.LE_name.setText(record[3])
         self.lE_phone.setText( record[4] )
         self.lE_mobile.setText( record[5] )
         self.LE_job.setText( record[6] )
@@ -269,8 +304,9 @@ class CL_customer(QtWidgets.QDialog):
                 self.window_two.FN_LOAD_MODIFY(id)
                 self.window_two.show()
         except Exception as err:
-            QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
             print(err)
+            #QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+
             #else:
 
 
@@ -410,7 +446,61 @@ class CL_customer(QtWidgets.QDialog):
             self.LE_custNo.setText('')
 
             self.LE_custPhone.setEnabled(True)
+    def FN_VALIDATE_FIELDS(self):
 
+        self.name = self.LE_name.text().strip()
+
+        self.phone = self.lE_phone.text().strip()
+        self.mobile = self.lE_mobile.text().strip()
+
+
+        self.building = self.LE_building.text().strip()
+        self.floor = self.LE_floor.text().strip()
+        self.email = self.LE_email.text().strip()
+        self.company = self.LE_company.text().strip()
+        self.workPhone = self.LE_workPhone.text().strip()
+        self.workAddress = self.LE_workAddress.text().strip()
+
+
+        if self.name == '' or self.mobile == '' or self.job == '' or self.address == '' or self.building == '' \
+                or self.floor == '' or self.email == '':
+            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+            error = 1
+            return error
+        ret = CL_validation.FN_validation_int(self.phone)
+        if ret == False:
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
+            error = 1
+
+        ret = CL_validation.FN_validation_mobile(self.mobile)
+        if ret == 3:
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile n0,len must be = 11")
+            error = 1
+        elif ret == 2:
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile no,no must start with '01'")
+            error = 1
+
+
+
+        ret = CL_validation.FN_validation_int(self.workPhone)
+        if ret == False:
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
+            error = 1
+        ret = CL_validation.FN_validation_int(self.building)
+        if ret == False:
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid building number")
+            error = 1
+
+        ret = CL_validation.FN_validation_int(self.floor)
+        if ret == False:
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid floor Phone")
+            error = 1
+
+        ret = CL_validation.FN_valedation_mail(self.email)
+        if ret == True:
+            QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
+            error = 1
+        return error
     def FN_CREATE_CUST(self):
         #get customer data
         try:
@@ -430,7 +520,7 @@ class CL_customer(QtWidgets.QDialog):
             self.workPhone =  self.LE_workPhone.text().strip()
             self.workAddress = self.LE_workAddress.text().strip()
             self.status = self.CMB_status.currentText()
-            self.notes = self.LE_notes.text().strip()
+            self.notes = self.LE_notes.toPlainText().strip()
 
             mycursor = self.conn.cursor()
             # get max id
@@ -461,33 +551,7 @@ class CL_customer(QtWidgets.QDialog):
                 self.status = 0
 
             error =0
-            if self.name == '' or self.mobile == '' or self.job  == '' or self.address== '' or self.building  == '' \
-                    or self.floor == '' or self.email=='' :
-                QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
-                error=1
-
-            ret= CL_validation.FN_validation_mobile(self.mobile)
-            if ret == 3 :
-                 QtWidgets.QMessageBox.warning(self,"Error", "Invalid mobile n0,len must be = 11")
-                 error = 1
-            elif ret == 2 :
-                 QtWidgets.QMessageBox.warning(self,"Error", "Invalid mobile no,no must start with '01'")
-                 error = 1
-
-            ret = CL_validation.FN_validation_int(self.phone)
-            if ret == 'False':
-                QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
-                error = 1
-
-            ret = CL_validation.FN_validation_int(self.workPhone)
-            if ret == 'False':
-                QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
-                error = 1
-
-            ret = CL_validation.FN_valedation_mail(self.email)
-            if ret == 'True':
-                QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
-                error = 1
+            error = self.FN_VALIDATE_FIELDS()
 
             if error !=1:
 
@@ -524,6 +588,7 @@ class CL_customer(QtWidgets.QDialog):
     def FN_MODIFY_CUST(self):
         try:
             self.id = self.LB_custID.text().strip()
+            self.name = self.LE_name.text().strip()
             self.custGroup = self.CMB_custGroup.currentText()
             self.loyalityType = self.CMB_loyalityType.currentText()
             self.phone = self.lE_phone.text().strip()
@@ -539,8 +604,7 @@ class CL_customer(QtWidgets.QDialog):
             self.workPhone = self.LE_workPhone.text().strip()
             self.workAddress = self.LE_workAddress.text().strip()
             self.status = self.CMB_status.currentText()
-            self.notes = self.LE_notes.text().strip()
-
+            self.notes = self.LE_notes.toPlainText().strip()
             mycursor = self.conn.cursor()
 
             changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
@@ -561,44 +625,18 @@ class CL_customer(QtWidgets.QDialog):
             else:
                 self.status = 0
             error = 0
-            if  self.mobile == '' or self.job == '' or self.address == '' or self.building == '' \
-                    or self.floor == '' or self.email == '':
-                QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields"   )
-                error = 1
-
-            ret = CL_validation.FN_validation_mobile(self.mobile)
-            if ret == 3:
-                QtWidgets.QMessageBox.warning(self,"Error", "Invalid mobile no,len must be = 11")
-                error = 1
-            elif ret == 2:
-                QtWidgets.QMessageBox.warning(self,"Error", "Invalid mobile no,no must start with '01'")
-                error = 1
-
-            ret = CL_validation.FN_validation_int(self.phone)
-            if ret == 'False':
-                QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
-                error = 1
-
-            ret = CL_validation.FN_validation_int(self. workPhone)
-            if ret == 'False':
-                QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
-                error = 1
-
-            ret = CL_validation.FN_valedation_mail(self.email)
-            if ret == 'True':
-                QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
-                error = 1
+            error = self.FN_VALIDATE_FIELDS()
 
             if error != 1:
 
 
-                sql = "update  Hyper1_Retail.POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,   POSC_PHONE=%s," \
+                sql = "update  Hyper1_Retail.POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,  POSC_NAME = %s  POSC_PHONE=%s," \
                       " POSC_MOBILE=%s, POSC_JOB=%s, POSC_ADDRESS=%s, POSC_CITY=%s, POSC_DISTICT=%s, POSC_BUILDING=%s,POSC_FLOOR=%s, POSC_EMAIL=%s, " \
                       "POSC_CHANGED_BY =%s, POSC_CHANGED_ON =%s, POSC_COMPANY=%s, " \
                       "POSC_WORK_PHONE=%s, POSC_WORK_ADDRESS=%s, POSC_NOTES=%s, POSC_STATUS=%s where POSC_CUST_ID = %s"
 
                 # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-                val = ( self.loyalityType, self.custGroup,  self.phone, self.mobile,
+                val = ( self.loyalityType, self.custGroup, self.name, self.phone, self.mobile,
                        self.job, self.address, self.city, self.district, self.building, self.floor ,self.email,
                        CL_userModule.user_name, changeDate,  self.company, self.workPhone, self.workAddress,
                        self.notes, self.status ,self.id  )

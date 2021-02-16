@@ -758,6 +758,12 @@
     <layout class="QGridLayout" name="gridLayout_7">
      <item row="0" column="0">
       <widget class="QTableWidget" name="Qtable_promotion">
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustToContents</enum>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
        <property name="rowCount">
         <number>0</number>
        </property>

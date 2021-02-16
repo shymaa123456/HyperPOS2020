@@ -13,7 +13,7 @@ from access.authorization_class.user_module import CL_userModule
 from datetime import datetime
 
 
-class CL_EditCoupon(QtWidgets.QDialog):
+class CL_EditVoucher(QtWidgets.QDialog):
     valueType=""
     valueData=""
     serialCount = ""
@@ -28,14 +28,14 @@ class CL_EditCoupon(QtWidgets.QDialog):
     serial_type=0
 
     def __init__(self):
-        super(CL_EditCoupon, self).__init__()
+        super(CL_EditVoucher, self).__init__()
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
-        self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
+        self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
         self.conn = db1.connect()
 
     def FN_LOADUI(self):
-        filename = self.dirname + '/editCoupon.ui'
+        filename = self.dirname + '/editVoucher.ui'
         loadUi(filename, self)
         self.Qcombo_company = CheckableComboBox(self)
         self.Qcombo_company.setGeometry(10, 100, 271, 25)
@@ -226,8 +226,6 @@ class CL_EditCoupon(QtWidgets.QDialog):
         if self.checkBox_Multi.isChecked():
             self.LE_desc_5.setEnabled(True)
             self.LE_desc_4.setEnabled(False)
-            self.LE_desc_4.setValue(1.0)
-
         else:
             self.LE_desc_5.setEnabled(False)
             self.LE_desc_4.setEnabled(True)

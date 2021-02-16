@@ -118,8 +118,15 @@
      <addaction name="QM_Form"/>
      <addaction name="QM_Function_Key"/>
     </widget>
+    <widget class="QMenu" name="menuConfiguration">
+     <property name="title">
+      <string>Configuration</string>
+     </property>
+     <addaction name="actionParameter"/>
+    </widget>
     <addaction name="QM_Master_Data"/>
     <addaction name="QM_Authorization"/>
+    <addaction name="menuConfiguration"/>
    </widget>
    <widget class="QMenu" name="QM_Promotion">
     <property name="layoutDirection">
@@ -1377,6 +1384,11 @@
   <action name="action_2">
    <property name="text">
     <string>خدمة العملاء</string>
+   </property>
+  </action>
+  <action name="actionParameter">
+   <property name="text">
+    <string>Parameter</string>
    </property>
   </action>
  </widget>

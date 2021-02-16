@@ -13,7 +13,7 @@ from access.authorization_class.user_module import CL_userModule
 from datetime import datetime
 
 
-class CL_CreateCoupon(QtWidgets.QDialog):
+class CL_CreateVoucher(QtWidgets.QDialog):
     dirname = ''
     valueType=""
     valueData=""
@@ -22,15 +22,15 @@ class CL_CreateCoupon(QtWidgets.QDialog):
     MultiUse=""
     serialType=0
     def __init__(self):
-        super(CL_CreateCoupon, self).__init__()
+        super(CL_CreateVoucher, self).__init__()
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
-        self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
+        self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
         self.conn = db1.connect()
 
 
     def FN_LOADUI(self):
-        filename = self.dirname + '/createCoupon.ui'
+        filename = self.dirname + '/createVoucher.ui'
         loadUi(filename, self)
 
         self.Qcombo_company = CheckableComboBox(self)

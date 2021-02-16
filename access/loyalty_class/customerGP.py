@@ -21,6 +21,7 @@ class CL_customerGP(QtWidgets.QDialog):
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
+        self.conn1 = db1.connect()
 
     ###
 
@@ -36,9 +37,47 @@ class CL_customerGP(QtWidgets.QDialog):
             self.BTN_createCustGp.clicked.connect(self.FN_CREATE_CUSTGP)
             self.BTN_modifyCustGp.clicked.connect(self.FN_MODIFY_CUSTGP)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+            self.BTN_searchCustGp.clicked.connect(self.FN_SEARCH_CUSTGP)
+
         except Exception as err:
             print(err)
 
+    def FN_SEARCH_CUSTGP(self):
+        try:
+            for i in reversed(range(self.Qtable_custGP.rowCount())):
+                self.Qtable_custGP.removeRow(i)
+
+            mycursor = self.conn.cursor()
+
+            name = self.LE_desc.text().strip()
+            self.custGroup = self.CMB_custGroup.currentText()
+            if self.custGroup == 'Active':
+
+                whereClause = "where CG_Status =1  "
+            else:
+                whereClause = "where CG_Status = 0 "
+
+            if name != '' :
+                whereClause = whereClause + "and CG_DESC = '" + str(name) + "'"
+
+            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause
+            print(sql_select_query)
+            mycursor.execute(sql_select_query)
+            records = mycursor.fetchall()
+            for row_number, row_data in enumerate(records):
+                self.Qtable_custGP.insertRow(row_number)
+
+                for column_number, data in enumerate(row_data):
+                    if column_number == 2:
+                        data = self.FN_GET_STATUS_DESC(str(data))
+
+                    self.Qtable_custGP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+            #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        #
+            mycursor.close()
+        #self.Qtable_custGP.setItem(0, 0, QTableWidgetItem(str('11111')))
+        except Exception as err:
+             print(err)
     def FN_GET_STATUS_DESC(self,id):
         if id == '1':
             return "Active"
@@ -64,6 +103,26 @@ class CL_customerGP(QtWidgets.QDialog):
         mycursor.close()
 
 
+    def FN_CHECK_DUP_NAME(self,name):
+        mycursor1 = self.conn1.cursor()
+        # get max userid
+        mycursor1.execute("SELECT CG_DESC  FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '"+name+"'")
+        #myresult = mycursor1.fetchone()
+        #print("testing")
+        len = mycursor1.rowcount
+        print(len)
+        if len > 0:
+            #mycursor1.close()
+            return True
+        else:
+            #mycursor1.close()
+            return False
+
+    def FN_CHECK_STATUS(self, status):
+        if status == 'Active' or status == 'Inactive' :
+            return True
+        else :
+            return False
 
     def FN_CREATE_CUSTGP(self):
         print('kkk')
@@ -86,71 +145,66 @@ class CL_customerGP(QtWidgets.QDialog):
 
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        if self.name == '':
+        if self.name == '' :
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
 
         else:
+            try:
+                if self.FN_CHECK_DUP_NAME(self.name) != False:
+                    QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                    mycursor.close()
+                else:
+                    sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
+                          "         VALUES ( %s, %s, %s,  %s,%s)"
 
-            sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
-                  "         VALUES ( %s, %s, %s,  %s,%s)"
+                    # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+                    val = (self.id, self.name, creationDate, CL_userModule.user_name, self.status
+                           )
+                    mycursor.execute(sql, val)
+                    # mycursor.execute(sql)
 
-            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = (self.id, self.name, creationDate, CL_userModule.user_name, self.status
-                   )
-            mycursor.execute(sql, val)
-            # mycursor.execute(sql)
+                    mycursor.close()
 
-            mycursor.close()
-
-            print(mycursor.rowcount, "Cust Gp inserted.")
-            QtWidgets.QMessageBox.information(self, "Success", "Cust Gp inserted.")
-            db1.connectionCommit(self.conn)
-            self.FN_GET_CUSTGPS()
-            #db1.connectionClose(self.conn)
-            #self.close()
-
+                    print(mycursor.rowcount, "Cust Gp inserted.")
+                    QtWidgets.QMessageBox.information(self, "Success", "Cust Gp inserted.")
+                    db1.connectionCommit(self.conn)
+                    self.FN_GET_CUSTGPS()
+                    #db1.connectionClose(self.conn)
+                    #self.close()
+            except Exception as err:
+                print(err)
         print("in create cust", self.name)
 
         # insert into db
 
     def FN_MODIFY_CUSTGP(self):
-        try:
-
+        print("here")
+        if len(self.Qtable_custGP.selectedIndexes()) >0 :
             rowNo = self.Qtable_custGP.selectedItems()[0].row()
-            #rowNo.setEditTriggers(QtWidgets.QTableWidget.AllEditTriggers)
-            print(rowNo)
-
-            #if rowNo > 0:
             id = self.Qtable_custGP.item(rowNo, 0).text()
             desc = self.Qtable_custGP.item(rowNo, 1).text()
             status = self.Qtable_custGP.item(rowNo, 2).text()
+            ret = self.FN_CHECK_STATUS(status)
+            if ret != False:
+                if status == 'Active':
+                    status = 1
+                else:
+                    status = 0
+                #
+                mycursor = self.conn1.cursor()
+                changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
+                val = (status,desc, changeDate,CL_userModule.user_name,id)
+                mycursor.execute(sql, val)
+                mycursor.close()
+                #
+                print(mycursor.rowcount, "record updated.")
+                QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
+                db1.connectionCommit(self.conn1)
+                # db1.connectionClose(self.conn)
+                #  self.close()
+            else:
 
-        except Exception as err:
-            QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
-            print(err)
-        print('kkk')
-        # self.id = self.LB_custGpID.text().strip()
-        # self.custGroup = self.CMB_custGroup.currentText()
-        if status == 'Active':
-            status = 1
+                QtWidgets.QMessageBox.warning(self, "Error", "Status should be 'Active' or 'Inactive' ")
         else:
-            status = 0
-        #
-        mycursor = self.conn.cursor()
-
-        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-
-        sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
-
-
-        val = (status,desc, changeDate,CL_userModule.user_name,id)
-        mycursor.execute(sql, val)
-        # mycursor.execute(sql)
-
-        mycursor.close()
-        #
-        print(mycursor.rowcount, "record updated.")
-        QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
-        db1.connectionCommit(self.conn)
-        # db1.connectionClose(self.conn)
-        #  self.close()
+            QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")

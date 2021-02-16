@@ -1,11 +1,13 @@
+import sys
 from pathlib import Path
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QMessageBox
 from PyQt5.uic import loadUi
 from data_connection.h1pos import db1
-from access.authorization_class.user_module import CL_userModule
+from PyQt5.QtCore import QDate
 
-from datetime import datetime
+
 
 
 class CL_modifyCoupon(QtWidgets.QDialog):
@@ -19,15 +21,23 @@ class CL_modifyCoupon(QtWidgets.QDialog):
 
 
     def FN_LOADUI(self):
-        filename = self.dirname + '/stoppedCoupon.ui'
-        loadUi(filename, self)
-        self.CMB_CouponStatus.addItems(["Active", "Inactive"])
-        self.FN_getData()
-        self.CMB_CouponDes.activated[str].connect(self.FN_getStatus)
-        self.FN_getStatus()
-        self.BTN_modifyCoupon.clicked.connect(self.FN_UpdateStatus)
+        try:
+            filename = self.dirname + '/stoppedCoupon.ui'
+            loadUi(filename, self)
+            self.CMB_CouponStatus.addItems(["Inactive", "Active"])
+            self.CMB_CouponDes.activated[str].connect(self.FN_getStatus)
+            self.FN_getData()
+            self.FN_getDatabyID()
+            self.FN_getStatus()
+            self.BTN_modifyCoupon.clicked.connect(self.FN_UpdateStatus)
+            self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+        except:
+            print(sys.exc_info())
+
+
 
     def FN_getData(self):
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COP_DESC,COP_ID FROM COUPON")
@@ -36,16 +46,69 @@ class CL_modifyCoupon(QtWidgets.QDialog):
             self.CMB_CouponDes.addItem(row,val)
         mycursor.close()
 
+    def FN_getDatabyID(self):
+        try:
+            indx = self.CMB_CouponDes.currentData()
+            self.labe_id.setText(str(indx))
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            sql_select_Query = "SELECT * FROM COUPON where COP_ID = %s "
+            x = (indx,)
+            mycursor = self.conn.cursor()
+            mycursor.execute(sql_select_Query, x)
+            record = mycursor.fetchone()
+            if (record[2]!=None and len(record[2]) > 0):
+                self.radioButton_Value.setChecked(True)
+                self.LE_desc_2.setValue(float(record[2]))
+
+                self.LE_desc_3.clear()
+                self.valueType = "COP_DISCOUNT_VAL"
+                self.valueData = self.LE_desc_2.text()
+            else:
+                self.radioButton_Percentage.setChecked(True)
+                self.LE_desc_3.setValue(float(record[3]))
+
+                self.LE_desc_2.clear()
+                self.valueType = "COP_DISCOUNT_PERCENT"
+                self.valueData = self.LE_desc_3.text()
+
+            dateto = record[12]
+            xto = dateto.split("-")
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+            self.Qdate_to.setDate(d)
+
+            datefrom = record[11]
+            xfrom = datefrom.split("-")
+            d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
+            self.Qdate_from.setDate(d)
+
+            self.LE_desc_4.setValue(float(record[4]))
+            print(record[5])
+            if (int(record[5]) == 0):
+                self.checkBox_Multi.setChecked(True)
+                self.LE_desc_5.setValue(float(record[6]))
+            else:
+                self.checkBox_Multi.setChecked(False)
+
+            self.CMB_CouponStatus.setCurrentIndex(int(record[13]))
+            mycursor.close()
+        except:
+            print(sys.exc_info())
+
     def FN_getStatus(self):
         indx = self.CMB_CouponDes.currentData()
         self.conn = db1.connect()
+        sql_select_Query = "SELECT COP_STATUS FROM COUPON where COP_ID = %s "
+        x = (indx,)
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT COP_STATUS FROM COUPON where COP_ID = '" + indx + "'")
+        mycursor.execute(sql_select_Query, x)
         records = mycursor.fetchone()
         for row in records:
             int(row)
             self.CMB_CouponStatus.setCurrentIndex(int(row))
         mycursor.close()
+        self.FN_getDatabyID()
+
 
 
     def FN_UpdateStatus(self):
@@ -54,15 +117,29 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         print(self.CMB_CouponDes.currentData())
         sql = "update COUPON set COP_STATUS='"+str(self.CMB_CouponStatus.currentIndex())+"' where COP_ID='"+str(self.CMB_CouponDes.currentData())+"'"
         mycursor.execute(sql)
-        sql2 = "update COUPON_SERIAL set COPS_STATUS='" + str(self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
-        mycursor.execute(sql2)
-        sql3 = "update COUPON_BRANCH set STATUS='" + str(
-            self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
-        mycursor.execute(sql3)
+        # sql2 = "update COUPON_SERIAL set COPS_STATUS='" + str(self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
+        # mycursor.execute(sql2)
+        # sql3 = "update COUPON_BRANCH set STATUS='" + str(
+        #     self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
+        # mycursor.execute(sql3)
         db1.connectionCommit(self.conn)
         mycursor.close()
         QtWidgets.QMessageBox.warning(self, "Done", "Done")
         self.close()
 
 
+    def FN_Clear(self):
+        self.LE_desc_2.clear()
+        self.LE_desc_3.clear()
+        self.LE_desc_4.clear()
+        self.LE_desc_5.clear()
+
+    # def showDialog(self):
+    #     # print("event")
+    #     buttonReply = QMessageBox.question(self, 'PyQt5 message', "هناك فروع غير فعاله سيتم تفعيلها؟",
+    #                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+    #     if buttonReply == QMessageBox.Yes:
+    #         print('Yes clicked.')
+    #     else:
+    #         print('No clicked.')
 

@@ -7,6 +7,7 @@ from PyQt5.uic import loadUi
 
 from access.coupon_class.CreateCoupon import CL_CreateCoupon
 from access.coupon_class.EditCoupon import CL_EditCoupon
+from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.loyalty_class.loyalityProg import CL_loyProg
 from access.reports_class.reporting import CL_report
@@ -25,10 +26,15 @@ from access.loyalty_class.customerType import CL_customerTP
 
 # Promotion
 from access.promotion_class.Promotion_Add import CL_create_promotion
+from PyQt5.QtWidgets import QMessageBox
 
 #Installment
 from access.installment_class.Bank import CL_CreateBank
 from access.installment_class.installment import CL_installment
+
+from access.voucher_class.CreateVoucher import CL_CreateVoucher
+from access.voucher_class.EditVoucher import CL_EditVoucher
+
 
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
@@ -98,6 +104,14 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Coupon_Deactivate.triggered.connect(self.FN_ModifyCoupon)
         self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
         self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
+        self.QAct_Coupon_Print.triggered.connect(self.FN_PrintCoupon)
+
+        #Todo: method for Open Create Voucher Window
+        self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
+        self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
+
+
+
 
         # for installment
         self.QAct_Create_Bank.triggered.connect(self.FN_CREATE_Bank)
@@ -261,6 +275,7 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two.FN_LOADUI()
         self.window_two.show()
 
+
     def FN_ModifyCoupon(self):
         self.window_two = CL_modifyCoupon()
         self.window_two.FN_LOADUI()
@@ -270,6 +285,33 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two = CL_EditCoupon()
         self.window_two.FN_LOADUI()
         self.window_two.show()
+
+    def FN_PrintCoupon(self):
+        self.window_two = CL_printCoupon()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+
+    def FN_CreateVoucher(self):
+        self.window_two=CL_CreateVoucher()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_EditVoucher(self):
+        self.window_two=CL_EditVoucher()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    # close application event
+    def closeEvent(self, event):
+        # print("event")
+        reply = QMessageBox.question(self, 'Message',
+                                     "Are you sure to quit Application?", QMessageBox.Yes, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            QApplication.quit()
+        else:
+            event.ignore()
 
 
     #Installment

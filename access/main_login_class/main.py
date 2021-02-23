@@ -102,7 +102,7 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
         self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
         self.QAct_Coupon_Print.triggered.connect(self.FN_PrintCoupon)
-        self.QAct_Coupon_barcode.triggered.connect(self.FN_PrintCoupon)
+        self.QAct_Coupon_barcode.triggered.connect(self.FN_SerialCoupon)
 
         #Todo: method for Open Create Voucher Window
         self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
@@ -287,6 +287,7 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two = CL_printCoupon()
         self.window_two.FN_LOADUI()
         self.window_two.show()
+
     def FN_SerialCoupon(self):
         self.window_two = CL_StoppedSerial()
         self.window_two.FN_LOADUI()

@@ -198,6 +198,7 @@
      <addaction name="separator"/>
      <addaction name="QAct_Coupon_Print"/>
      <addaction name="separator"/>
+     <addaction name="QAct_Coupon_barcode"/>
     </widget>
     <addaction name="QM_Promotion_Prom"/>
     <addaction name="separator"/>
@@ -1492,6 +1493,11 @@
   <action name="QAct_Parameter">
    <property name="text">
     <string>Parameter</string>
+   </property>
+  </action>
+  <action name="QAct_Coupon_barcode">
+   <property name="text">
+    <string>تفعيل و ايقاف و استبدال باركود</string>
    </property>
   </action>
  </widget>

@@ -15,7 +15,6 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.uic import loadUi
 from mysql.connector import Error
 
-from access.authorization_class.user import CL_user
 # import Controller
 from access.main_login_class.main import CL_main
 from data_connection.h1pos import db1
@@ -69,6 +68,7 @@ class CL_login(QtWidgets.QDialog):
         # print( "MySQL connection is closed" )
 
     def FN_reset(self):
+        from access.authorization_class.user import CL_user
         self.window_two = CL_user()
         self.window_two.FN_LOAD_RESET()
         self.window_two.show()

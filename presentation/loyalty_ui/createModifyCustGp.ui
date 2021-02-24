@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>368</width>
-    <height>412</height>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -220,6 +220,22 @@
    </property>
    <property name="text">
     <string>بحث</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LB_custGpId">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>20</y>
+     <width>31</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

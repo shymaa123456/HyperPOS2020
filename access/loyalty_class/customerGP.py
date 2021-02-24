@@ -74,6 +74,7 @@ class CL_customerGP(QtWidgets.QDialog):
                     self.Qtable_custGP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         #
+            self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
             mycursor.close()
         #self.Qtable_custGP.setItem(0, 0, QTableWidgetItem(str('11111')))
         except Exception as err:
@@ -100,9 +101,22 @@ class CL_customerGP(QtWidgets.QDialog):
                 if column_number == 0:
                     item.setFlags(QtCore.Qt.NoItemFlags)
                 self.Qtable_custGP.setItem(row_number, column_number, item)
+        self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
         mycursor.close()
 
-
+    def FN_GET_CUSTGP(self):
+        try:
+            if len(self.Qtable_custGP.selectedIndexes()) > 0:
+                rowNo = self.Qtable_custGP.selectedItems()[0].row()
+                id = self.Qtable_custGP.item(rowNo, 0).text()
+                desc = self.Qtable_custGP.item(rowNo, 1).text()
+                status = self.Qtable_custGP.item(rowNo, 2).text()
+                self.LE_desc.setText(desc)
+                self.LB_custGpId.setText(id)
+                self.CMB_custGroup.setCurrentText(status)
+                # self.FN_MODIFY_CUSTTP()
+        except Exception as err:
+            print(err)
     def FN_CHECK_DUP_NAME(self,name):
         mycursor1 = self.conn1.cursor()
         # get max userid

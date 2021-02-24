@@ -501,7 +501,7 @@ class CL_loyProg(QtWidgets.QDialog):
             #     QtWidgets.QMessageBox.warning(self, "Error", "أختر أي من محدادات البحث")
             # else:
             # print(whereClause)
-            sql_select_query = "select  LOY_NAME ,LOY_DESC,LOY_VALID_FROM,LOY_VALID_TO, LOY_STATUS,COPMAPNY_ID,BRANCH_NO,CG_GROUP_ID,LOYCT_TYPE_ID,POS_GTIN,BMC_ID,LOY_VALUE,LOY_POINTS from Hyper1_Retail.LOYALITY_PROGRAM    where " + whereClause
+            sql_select_query = "select LOY_PROGRAM_ID, LOY_NAME ,LOY_DESC,LOY_VALID_FROM,LOY_VALID_TO, LOY_STATUS,COPMAPNY_ID,BRANCH_NO,CG_GROUP_ID,LOYCT_TYPE_ID,POS_GTIN,BMC_ID,LOY_VALUE,LOY_POINTS from Hyper1_Retail.LOYALITY_PROGRAM    where " + whereClause
             print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -510,25 +510,55 @@ class CL_loyProg(QtWidgets.QDialog):
 
                 for column_number, data in enumerate(row_data):
 
-                    if column_number == 4:
+                    if column_number == 5:
                         data = self.FN_GET_STATUS_DESC(str(data))
-                    elif column_number == 5:
-                        data = self.FN_GET_COMP_DESC(str(data))
                     elif column_number == 6:
-                        data = self.FN_GET_BRANCH_DESC(str(data))
+                        data = self.FN_GET_COMP_DESC(str(data))
                     elif column_number == 7:
-                        data = self.FN_GET_CUSTGP_DESC(str(data))
+                        data = self.FN_GET_BRANCH_DESC(str(data))
                     elif column_number == 8:
+                        data = self.FN_GET_CUSTGP_DESC(str(data))
+                    elif column_number == 9:
                         data = self.FN_GET_CUSTTP_DESC(str(data))
-                    elif column_number == 10:
+                    elif column_number == 11:
                         data = self.FN_GET_BMC_DESC(str(data))
 
                     self.Qtable_loyality.setItem(row_number, column_number, QTableWidgetItem(str(data)))
             self.Qtable_loyality.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-
+            self.Qtable_loyality.doubleClicked.connect(self.FN_GET_LOYPROG)
             mycursor.close()
        except (Error, Warning) as e:
            print(e)
+    def FN_GET_LOYPROG(self):
+        try:
+            if len(self.Qtable_loyality.selectedIndexes()) > 0:
+                rowNo = self.Qtable_loyality.selectedItems()[0].row()
+                id =self.Qtable_loyality.item(rowNo, 0).text()
+                name = self.Qtable_loyality.item(rowNo, 1).text()
+                desc = self.Qtable_loyality.item(rowNo, 2).text()
+                status = self.Qtable_loyality.item(rowNo, 5).text()
+                amount = self.Qtable_loyality.item(rowNo, 12).text()
+                points = self.Qtable_loyality.item(rowNo, 13).text()
+                valid_from =self.Qtable_loyality.item(rowNo, 3).text()
+                valid_to= self.Qtable_loyality.item(rowNo, 4).text()
+
+
+                self.Qline_name.setText(name)
+                self.label_ID.setText(id)
+                self.Qtext_desc.setText(desc)
+                self.Qline_purchAmount.setText(amount)
+                self.Qline_points.setText(points)
+                if status == 1 :
+                    self.Qradio_active.setChecked(True)
+                else:
+                    self.Qradio_inactive.setChecked(True)
+
+                self.Qdate_from.setText(valid_from)
+
+                # self.FN_MODIFY_CUSTTP()
+        except Exception as err:
+            print(err)
+
     def FN_exit(self):
         QApplication.quit()
     def   FN_CREATE_LOYPROG(self):
@@ -682,7 +712,7 @@ class CL_loyProg(QtWidgets.QDialog):
             i = 0
             for id in ids:
 
-                sql_select_query = "select  LOY_NAME ,LOY_DESC,LOY_VALID_FROM,LOY_VALID_TO, LOY_STATUS,COPMAPNY_ID,BRANCH_NO,CG_GROUP_ID,LOYCT_TYPE_ID,POS_GTIN,BMC_ID,LOY_VALUE,LOY_POINTS from Hyper1_Retail.LOYALITY_PROGRAM    where LOY_PROGRAM_ID =%s"
+                sql_select_query = "select LOY_PROGRAM_ID, LOY_NAME ,LOY_DESC,LOY_VALID_FROM,LOY_VALID_TO, LOY_STATUS,COPMAPNY_ID,BRANCH_NO,CG_GROUP_ID,LOYCT_TYPE_ID,POS_GTIN,BMC_ID,LOY_VALUE,LOY_POINTS from Hyper1_Retail.LOYALITY_PROGRAM    where LOY_PROGRAM_ID =%s"
 
                 val = (id,)
                 mycursor.execute(sql_select_query,val)
@@ -690,17 +720,17 @@ class CL_loyProg(QtWidgets.QDialog):
                 self.Qtable_loyality.insertRow(i)
                 for column_number, data in enumerate(record):
 
-                    if column_number == 4:
+                    if column_number == 5:
                         data = self.FN_GET_STATUS_DESC(str(data))
-                    elif column_number == 5:
-                        data = self.FN_GET_COMP_DESC(str(data))
                     elif column_number == 6:
-                        data = self.FN_GET_BRANCH_DESC(str(data))
+                        data = self.FN_GET_COMP_DESC(str(data))
                     elif column_number == 7:
-                        data = self.FN_GET_CUSTGP_DESC(str(data))
+                        data = self.FN_GET_BRANCH_DESC(str(data))
                     elif column_number == 8:
+                        data = self.FN_GET_CUSTGP_DESC(str(data))
+                    elif column_number == 9:
                         data = self.FN_GET_CUSTTP_DESC(str(data))
-                    elif column_number == 10:
+                    elif column_number == 11:
                         data = self.FN_GET_BMC_DESC(str(data))
 
                     self.Qtable_loyality.setItem(i, column_number, QTableWidgetItem(str(data)))
@@ -853,23 +883,9 @@ class CL_loyProg(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
     def FN_MODIFY_LOYPROG(self):
 
-        self.id = self.LB_custID.text().strip()
-        self.custGroup = self.CMB_custGroup.currentText()
-        self.loyalityType = self.CMB_loyalityType.currentText()
-        self.phone = self.lE_phone.text().strip()
-        self.mobile = self.lE_mobile.text().strip()
-        self.job = self.LE_job.text().strip()
-        self.address = self.LE_address.text().strip()
-        self.city = self.LE_city.text().strip()
-        self.district = self.LE_district.text().strip()
-        self.building = self.LE_building.text().strip()
-        self.LE_floor = self.LE_floor.text().strip()
-        self.email = self.LE_email.text().strip()
-        self.company = self.LE_company.text().strip()
-        self.workPhone = self.LE_workPhone.text().strip()
-        self.workAddress = self.LE_workAddress.text().strip()
-        self.status = self.CMB_status.currentText()
-        self.notes = self.LE_notes.text().strip()
+        id = self.label_ID.text().strip()
+        name=self.Qline_name.text().strip()
+        desc = self.Qtext_desc.toPlainText().strip()
 
         mycursor = self.conn.cursor()
 

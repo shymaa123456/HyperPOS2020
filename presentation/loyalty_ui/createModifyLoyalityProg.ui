@@ -900,6 +900,22 @@ background-color: rgb(198, 207, 199);</string>
      </property>
     </widget>
    </widget>
+   <widget class="QLabel" name="label_ID">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>120</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="gridLayoutWidget_4">
    <property name="geometry">
@@ -913,6 +929,11 @@ background-color: rgb(198, 207, 199);</string>
    <layout class="QGridLayout" name="gridLayout_7">
     <item row="0" column="0">
      <widget class="QTableWidget" name="Qtable_loyality">
+      <column>
+       <property name="text">
+        <string>رقم البرنامج</string>
+       </property>
+      </column>
       <column>
        <property name="text">
         <string>اسم البرنامج</string>

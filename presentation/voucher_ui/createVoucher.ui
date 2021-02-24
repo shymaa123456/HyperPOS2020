@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>انشاء كوبون</string>
+   <string>انشاء قسيمه شراء</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
@@ -19,14 +19,14 @@
   <widget class="QLabel" name="desc">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>100</y>
-     <width>67</width>
-     <height>17</height>
+     <x>300</x>
+     <y>140</y>
+     <width>101</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;*&lt;/span&gt;وصف الكوبون&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;*&lt;/span&gt;وصف قسيمه الشراء&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="BTN_createCoupon">
@@ -34,7 +34,7 @@
     <rect>
      <x>10</x>
      <y>380</y>
-     <width>121</width>
+     <width>131</width>
      <height>25</height>
     </rect>
    </property>
@@ -66,14 +66,14 @@
                                     </string>
    </property>
    <property name="text">
-    <string>انشاء كوبون</string>
+    <string>انشاء قسميه الشراء</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="LE_desc">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>100</y>
+     <y>140</y>
      <width>271</width>
      <height>25</height>
     </rect>
@@ -103,49 +103,11 @@
                                     </string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton_Value">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>140</y>
-     <width>81</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>قيمه الخصم</string>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton_Percentage">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>180</y>
-     <width>91</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="text">
-    <string>نسبه الخصم</string>
-   </property>
-  </widget>
   <widget class="QCheckBox" name="checkBox_Multi">
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>260</y>
+     <y>300</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -161,7 +123,7 @@
    <property name="geometry">
     <rect>
      <x>306</x>
-     <y>220</y>
+     <y>260</y>
      <width>81</width>
      <height>20</height>
     </rect>
@@ -177,7 +139,7 @@
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>320</y>
+     <y>340</y>
      <width>67</width>
      <height>17</height>
     </rect>
@@ -193,7 +155,7 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>320</y>
+     <y>340</y>
      <width>67</width>
      <height>17</height>
     </rect>
@@ -209,7 +171,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>320</y>
+     <y>340</y>
      <width>79</width>
      <height>18</height>
     </rect>
@@ -238,7 +200,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>320</y>
+     <y>340</y>
      <width>79</width>
      <height>18</height>
     </rect>
@@ -283,7 +245,7 @@
    <property name="geometry">
     <rect>
      <x>320</x>
-     <y>40</y>
+     <y>50</y>
      <width>67</width>
      <height>21</height>
     </rect>
@@ -296,22 +258,6 @@
    </property>
   </widget>
   <widget class="QDoubleSpinBox" name="LE_desc_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>140</y>
-     <width>271</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="minimum">
-    <double>0.500000000000000</double>
-   </property>
-  </widget>
-  <widget class="QDoubleSpinBox" name="LE_desc_3">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -328,19 +274,6 @@
    </property>
   </widget>
   <widget class="QSpinBox" name="LE_desc_4">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>220</y>
-     <width>271</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="minimum">
-    <number>1</number>
-   </property>
-  </widget>
-  <widget class="QSpinBox" name="LE_desc_5">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -369,14 +302,104 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>306</x>
+     <x>296</x>
      <y>380</y>
-     <width>61</width>
+     <width>71</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>رقم الكوبون : </string>
+    <string>رقم القسيمه : </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="desc_8">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>90</y>
+     <width>67</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;*&lt;/span&gt;القسم&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_Multi_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>300</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text">
+    <string>قابل اعاده الشحن</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_Multi_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text">
+    <string>قابل للاسترداد</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="LE_desc_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>220</y>
+     <width>271</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="minimum">
+    <double>0.500000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>306</x>
+     <y>180</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>قيمه الخصم</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>296</x>
+     <y>220</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>صافي قيمه الخصم</string>
    </property>
   </widget>
  </widget>

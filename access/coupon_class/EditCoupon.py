@@ -3,7 +3,7 @@ from pathlib import Path
 from random import randint
 
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtCore import QDate
+from PyQt5.QtCore import QDate, QDateTime
 from PyQt5.uic import loadUi
 
 from access.promotion_class.Promotion_Add import CheckableComboBox
@@ -26,6 +26,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
     new_branch_list = []
     multiusage=0
     serial_type=0
+    dfrom=QDate(1,1,2000)
 
     def __init__(self):
         super(CL_EditCoupon, self).__init__()
@@ -85,10 +86,12 @@ class CL_EditCoupon(QtWidgets.QDialog):
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
             records = mycursor.fetchall()
             for row, val in records:
+                for bra in self.FN_AuthBranchUser():
+                    if val in bra:
+                        self.Qcombo_branch.addItem(row, val)
+                    i += 1
 
-                if val in self.FN_AuthBranchUser()[i]:
-                    self.Qcombo_branch.addItem(row, val)
-                i += 1
+
             mycursor.close()
         except:
             print(sys.exc_info())
@@ -144,10 +147,9 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
             datefrom = record[11]
             xfrom = datefrom.split("-")
-            d = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
-            self.Qdate_from.setDate(d)
-
-
+            self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
+            self.Qdate_from.setDate(self.dfrom)
+            self.dfrom=QDateTime(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]),00,00,00,00)
 
             self.LE_desc_4.setValue(float(record[4]))
             self.serial_num=int(record[4])
@@ -226,6 +228,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
         if self.checkBox_Multi.isChecked():
             self.LE_desc_5.setEnabled(True)
             self.LE_desc_4.setEnabled(False)
+            self.LE_desc_4.setValue(1.0)
+
         else:
             self.LE_desc_5.setEnabled(False)
             self.LE_desc_4.setEnabled(True)
@@ -238,6 +242,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
             else:
                 if self.Qdate_to.dateTime()<self.Qdate_from.dateTime():
                     QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                elif self.Qdate_from.dateTime()<self.dfrom:
+                    QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانشاء الجديد يجب ان يكون اكبر او يساوي تاريخ الانشاء قبل التعديل")
 
                 else:
                     mycursor = self.conn.cursor()
@@ -262,10 +268,6 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 '1')
                             mycursor.execute(sql7, val7)
                             self.multiusage=1
-
-
-
-
                     else:
                         self.serialCount = self.LE_desc_4.text()
                         self.MultiCount = "0"
@@ -484,7 +486,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"'")
+        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='"+CL_userModule.user_name+"'")
         records = mycursor.fetchall()
         return records
 

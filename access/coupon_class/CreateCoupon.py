@@ -93,21 +93,21 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_Branch(self):
-        i=0
-        try:
+         i=0
+         try:
             # Todo: method for fills the Branch combobox
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
             records = mycursor.fetchall()
             for row, val in records:
-
-                if val in self.FN_AuthBranchUser()[i]:
-                    self.Qcombo_branch.addItem(row, val)
-                i+=1
+                for bra in self.FN_AuthBranchUser():
+                    if val in bra:
+                        self.Qcombo_branch.addItem(row, val)
+                    i += 1
             mycursor.close()
-        except:
-            print(sys.exc_info())
+         except:
+             print(sys.exc_info())
 
 
     def FN_Create(self):
@@ -212,7 +212,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"'")
+        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='"+CL_userModule.user_name+"'")
         records = mycursor.fetchall()
         return records
 

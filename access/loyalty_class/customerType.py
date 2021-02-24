@@ -107,7 +107,7 @@ class CL_customerTP(QtWidgets.QDialog):
                     item = QTableWidgetItem(str(data))
 
                     if column_number == 0:
-                        item.setFlags.(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
+                        item.setFlags.QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable)
                     self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(item ))
             mycursor.close()
         # self.Qtable_custTP.setItem(0, 0, QTableWidgetItem(str('11111')))

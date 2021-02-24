@@ -57,7 +57,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.FN_GET_Branch()
             self.FN_GET_Section()
             self.CMB_CouponStatus.addItems(["Inactive", "Active"])
-            self.FN_getData()
+
         except:
             print(sys.exc_info())
 

@@ -1,22 +1,50 @@
-# Python program to check if  
-# given mobile number is valid 
-import re
+
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
 
 
-def isValid(s):
-    # 1) Begins with 0 or 91
-    # 2) Then contains 7 or 8 or 9. 
-    # 3) Then contains 9 digits 
-    Pattern = re.compile("(0)?[0-9]")
-    return Pattern.match(s)
+class Window(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+
+        # setting title 
+        self.setWindowTitle("Python ")
+
+        # setting geometry 
+        self.setGeometry(100, 100, 500, 400)
+
+        # calling method 
+        self.UiComponents()
+
+        # showing all the widgets 
+        self.show()
+
+        # method for components
+
+    def UiComponents(self):
+        # creating a QDateEdit widget
+        date = QDateEdit(self)
+
+        # setting geometry of the date edit 
+        date.setGeometry(100, 100, 150, 40)
+
+        # date time 
+        d = QDate(2020, 10, 10)
+
+        # setting date time 
+        date.setDate(d)
+
+    # create pyqt5 app
 
 
-# Driver Code
-s = "222ss2222"
-#s='asdfsadsd23432423'
-if (isValid(s)):
-    print("Valid Number")
-else:
-    print("Invalid Number")
+App = QApplication(sys.argv)
 
-    # This code is contributed by rishabh_jain
+# create the instance of our Window 
+window = Window()
+
+# start the app 
+sys.exit(App.exec())

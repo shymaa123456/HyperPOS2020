@@ -12,7 +12,12 @@ from mysql.connector import Error
 import xlrd
 from datetime import datetime
 from PyQt5.QtWidgets import QApplication
-import xlwt.Workbook
+
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore
+
+from PyQt5.QtCore import *
+
 
 class CL_loyProg(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
@@ -202,7 +207,7 @@ class CL_loyProg(QtWidgets.QDialog):
             #self.CMB_level4.addItems( [row[0]] )
             self.Qcombo_group6.addItems([row[0]])
         mycursor.close()
-
+        self.Qcombo_group6.setChecked(0)
     def FN_GET_CUSTGP(self):
         #print("pt11")
 
@@ -542,20 +547,26 @@ class CL_loyProg(QtWidgets.QDialog):
                 valid_from =self.Qtable_loyality.item(rowNo, 3).text()
                 valid_to= self.Qtable_loyality.item(rowNo, 4).text()
 
-
                 self.Qline_name.setText(name)
                 self.label_ID.setText(id)
                 self.Qtext_desc.setText(desc)
                 self.Qline_purchAmount.setText(amount)
                 self.Qline_points.setText(points)
-                if status == 1 :
+
+                if status == 'Active' :
                     self.Qradio_active.setChecked(True)
                 else:
                     self.Qradio_inactive.setChecked(True)
 
-                self.Qdate_from.setText(valid_from)
+                xto = valid_from.split("-")
+                print(xto)
+                d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+                self.Qdate_from.setDate(d)
+                xto = valid_to.split("-")
 
-                # self.FN_MODIFY_CUSTTP()
+                d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+                self.Qdate_to.setDate(d)
+
         except Exception as err:
             print(err)
 
@@ -569,8 +580,8 @@ class CL_loyProg(QtWidgets.QDialog):
         companies = self.Qcombo_group3.currentData()
         self.name = self.Qline_name.text().strip()
         self.desc = self.Qtext_desc.toPlainText().strip()
-        self.date_from = self.Qdate_from.dateTime().toString('yyyy-MM-dd')
-        self.date_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')
+        self.date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
+        self.date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
         BMC_LEVEL4s = self.Qcombo_group6.currentData()
         self.section = self.CMB_section.currentText()
         self.level4 = self.CMB_level4.currentText()
@@ -882,61 +893,39 @@ class CL_loyProg(QtWidgets.QDialog):
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
     def FN_MODIFY_LOYPROG(self):
+        try:
+            id = self.label_ID.text().strip()
+            name=self.Qline_name.text().strip()
+            desc = self.Qtext_desc.toPlainText().strip()
+            purchAmount = self.Qline_purchAmount.text().strip()
+            points = self.Qline_points.text().strip()
+            date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
+            date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
 
-        id = self.label_ID.text().strip()
-        name=self.Qline_name.text().strip()
-        desc = self.Qtext_desc.toPlainText().strip()
+            if self.Qradio_active.isChecked():
+                self.status = 1
+            else:
+                self.status = 0
+            mycursor = self.conn.cursor()
 
-        mycursor = self.conn.cursor()
+            changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+            # get customer gp id
 
-        changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-        # get customer gp id
-        mycursor.execute( "SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '" + self.custGroup + "'" )
-        myresult = mycursor.fetchone()
-        self.custGroup = myresult[0]
-
-        # get customer type
-        mycursor.execute(
-            "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + self.loyalityType + "'" )
-        myresult = mycursor.fetchone()
-        self.loyalityType = myresult[0]
-
-        self.status = self.CMB_status.currentText()
-        if self.status == 'Active':
-            self.status = 1
-        else:
-            self.status = 0
-
-        if  self.lE_mobile == '' or self.LE_job == '' or self.LE_address == '' or self.LE_city == '' or self.LE_district == '' or self.LE_building == '' \
-                or self.LE_floor == '' or self.LE_email == '':
-            QtWidgets.QMessageBox.warning( self, "Error", "Please enter all required fields" )
-
-        else:
-
-            sql = "update  Hyper1_Retail.POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,   POSC_PHONE=%s," \
-                  " POSC_MOBILE=%s, POSC_JOB=%s, POSC_ADDRESS=%s, POSC_CITY=%s, POSC_DISTICT=%s, POSC_BUILDING=%s,POSC_FLOOR=%s, POSC_EMAIL=%s, " \
-                  "POSC_CHANGED_BY =%s, POSC_CHANGED_ON =%s, POSC_COMPANY=%s, " \
-                  "POSC_WORK_PHONE=%s, POSC_WORK_ADDRESS=%s, POSC_NOTES=%s, POSC_STATUS=%s where POSC_CUST_ID = %s"
-
-            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = ( self.loyalityType, self.custGroup,  self.phone, self.mobile,
-                   self.job, self.address, self.city, self.district, self.building, self.LE_floor ,self.email,
-                   CL_userModule.user_name, changeDate,  self.company, self.workPhone, self.workAddress,
-                   self.notes, self.status ,self.id  )
-            mycursor.execute( sql, val )
-            # mycursor.execute(sql)
-
+            sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
+            val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
+            mycursor.execute(sql, val)
             mycursor.close()
 
             print( mycursor.rowcount, "record updated." )
-            QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
+            QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
 
             db1.connectionCommit( self.conn )
             db1.connectionClose( self.conn )
-            self.close()
+            #self.close()
 
-        print( "in modify cust", self.CMB_custName )
-
+            print( "in modify cust" )
+        except Exception as err:
+            print(err)
   # def FN_ADD_LOYPROG(self):
     #     for i in reversed(range(self.Qtable_loyality.rowCount())):
     #         self.Qtable_loyality.removeRow(i)

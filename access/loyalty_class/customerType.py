@@ -63,7 +63,7 @@ class CL_customerTP(QtWidgets.QDialog):
 
             self.CMB_custType.setCurrentText(status)
             self.CMB_nextLevel.setCurrentText(nextLevel)
-            print(rowNo)
+            #print(rowNo)
             self.FN_MODIFY_CUSTTP()
      except Exception as err:
          print(err)
@@ -107,7 +107,7 @@ class CL_customerTP(QtWidgets.QDialog):
                     item = QTableWidgetItem(str(data))
 
                     if column_number == 0:
-                        item.setFlags.(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
+                        item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(item ))
             mycursor.close()
         # self.Qtable_custTP.setItem(0, 0, QTableWidgetItem(str('11111')))

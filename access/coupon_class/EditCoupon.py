@@ -6,7 +6,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate, QDateTime
 from PyQt5.uic import loadUi
 
-from access.promotion_class.Promotion_Add import CheckableComboBox
+from access.Checkable import CheckableComboBox
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
 
@@ -463,7 +463,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
     def FN_unCheckedALL(self):
         mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"'"
+        sql_select_branch = "Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = (SELECT USER_ID FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"')"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
         i=0
@@ -483,10 +483,11 @@ class CL_EditCoupon(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='"+CL_userModule.user_name+"'")
+        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = (SELECT USER_ID FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"')")
         records = mycursor.fetchall()
         return records
 

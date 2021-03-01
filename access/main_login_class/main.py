@@ -5,6 +5,7 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.configuration_class.Parameters import CL_Parameters
 from access.coupon_class.CreateCoupon import CL_CreateCoupon
 from access.coupon_class.EditCoupon import CL_EditCoupon
 from access.coupon_class.StoppedSerial import CL_StoppedSerial
@@ -110,8 +111,8 @@ class CL_main(QtWidgets.QMainWindow):
 
 
 
-
-
+        # Parameter Form
+        self.QAct_Parameter.triggered.connect(self.FN_Parameters)
 
         self.QAct_Exit.triggered.connect(self.FN_exit)
         self.setWindowTitle('HyperPOS Main Page')
@@ -302,6 +303,12 @@ class CL_main(QtWidgets.QMainWindow):
     def FN_EditVoucher(self):
         self.window_two=CL_EditVoucher()
         self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    # Configuration Parametrs
+    def FN_Parameters(self):
+        self.window_two =CL_Parameters()
+        self.window_two.FN_LOAD_CREATE()
         self.window_two.show()
 
     # close application event

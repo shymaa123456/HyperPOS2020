@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>460</width>
-    <height>619</height>
+    <width>861</width>
+    <height>570</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,13 +26,15 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(200, 200, 200, 0), stop:1 rgba(200, 20, 250, 20));</string>
+   <string notr="true">
+                    background-color: rgb(198, 207, 199);
+                </string>
   </property>
   <widget class="QLineEdit" name="LE_name">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>20</y>
+     <x>210</x>
+     <y>10</y>
      <width>281</width>
      <height>25</height>
     </rect>
@@ -68,8 +70,8 @@
   <widget class="QLineEdit" name="LE_Value">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>50</y>
+     <x>210</x>
+     <y>40</y>
      <width>281</width>
      <height>25</height>
     </rect>
@@ -105,7 +107,7 @@
     <number>32767</number>
    </property>
    <property name="echoMode">
-    <enum>QLineEdit::Password</enum>
+    <enum>QLineEdit::Normal</enum>
    </property>
    <property name="placeholderText">
     <string>Value</string>
@@ -114,10 +116,10 @@
   <widget class="QPushButton" name="BTN_createParameter">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>240</y>
+     <x>600</x>
+     <y>30</y>
      <width>121</width>
-     <height>31</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -158,7 +160,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>60</y>
+     <y>50</y>
      <width>38</width>
      <height>13</height>
     </rect>
@@ -170,8 +172,8 @@
   <widget class="QLineEdit" name="LE_Notes">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>110</y>
+     <x>210</x>
+     <y>100</y>
      <width>281</width>
      <height>81</height>
     </rect>
@@ -214,7 +216,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>140</y>
+     <y>130</y>
      <width>39</width>
      <height>13</height>
     </rect>
@@ -226,8 +228,8 @@
   <widget class="QLineEdit" name="LE_D_Value">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>80</y>
+     <x>210</x>
+     <y>70</y>
      <width>281</width>
      <height>25</height>
     </rect>
@@ -264,7 +266,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>200</y>
+     <y>190</y>
      <width>47</width>
      <height>16</height>
     </rect>
@@ -277,7 +279,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>90</y>
+     <y>80</y>
      <width>82</width>
      <height>13</height>
     </rect>
@@ -290,7 +292,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>30</y>
+     <y>20</y>
      <width>71</width>
      <height>13</height>
     </rect>
@@ -308,8 +310,8 @@
   <widget class="QComboBox" name="CMB_Status">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>200</y>
+     <x>210</x>
+     <y>190</y>
      <width>281</width>
      <height>25</height>
     </rect>
@@ -318,10 +320,10 @@
   <widget class="QPushButton" name="BTN_ModifyParameter">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>240</y>
+     <x>600</x>
+     <y>100</y>
      <width>121</width>
-     <height>31</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -358,18 +360,67 @@
     <string>Modify Parameter</string>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView">
+  <widget class="QTableWidget" name="w1">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>290</y>
-     <width>441</width>
-     <height>321</height>
+     <x>0</x>
+     <y>230</y>
+     <width>861</width>
+     <height>331</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
+    <string notr="true">font: 75 8pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 127);
+alternate-background-color: rgb(73, 255, 249);</string>
    </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="columnCount">
+    <number>8</number>
+   </property>
+   <column>
+    <property name="text">
+     <string>PID</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Desc</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Value</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>D Value</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Notes</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Change date</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Changed By</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Status</string>
+    </property>
+   </column>
   </widget>
   <zorder>LBL_Desc</zorder>
   <zorder>LE_name</zorder>
@@ -383,7 +434,7 @@
   <zorder>LBL_DValue</zorder>
   <zorder>CMB_Status</zorder>
   <zorder>BTN_ModifyParameter</zorder>
-  <zorder>tableView</zorder>
+  <zorder>w1</zorder>
  </widget>
  <tabstops>
   <tabstop>LE_name</tabstop>
@@ -393,7 +444,6 @@
   <tabstop>CMB_Status</tabstop>
   <tabstop>BTN_ModifyParameter</tabstop>
   <tabstop>BTN_createParameter</tabstop>
-  <tabstop>tableView</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -431,9 +431,6 @@ class CL_user(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-
-
-
     def FN_RESET_USER(self):
         mycursor = self.conn.cursor()
 

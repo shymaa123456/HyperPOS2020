@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 from PyQt5 import QtWidgets
@@ -6,7 +7,7 @@ from qtpy import QtCore
 
 from Validation.Validation import CL_validation
 from access.authorization_class.user_module import CL_userModule
-from access.Checkable import CheckableComboBox
+from access.Checkable import CheckableComboBox, Qt
 from data_connection.h1pos import db1
 
 from datetime import datetime
@@ -17,6 +18,10 @@ class CL_user(QtWidgets.QDialog):
     userid=''
     branch_list = []
     new_branch_list = []
+    section_list = []
+    new_section_list = []
+
+
     def __init__(self):
         super(CL_user, self).__init__()
         cwd = Path.cwd()
@@ -28,36 +33,50 @@ class CL_user(QtWidgets.QDialog):
         filename = self.dirname + '/modifyUser.ui'
         loadUi(filename, self)
         self.CMB_branch = CheckableComboBox(self)
-        self.CMB_branch.setGeometry(160, 155, 150, 25)
+        self.CMB_branch.setGeometry(150, 120, 171, 25)
         self.CMB_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CMB_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
+
+        self.CMB_section = CheckableComboBox(self)
+        self.CMB_section.setGeometry(150, 170, 171, 25)
+        self.CMB_section.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.CMB_section.setStyleSheet("background-color: rgb(198, 207, 199)")
+
         self.FN_GET_BRANCHES()
+        self.FN_GET_Section()
         self.FN_GET_USERTYPE()
         self.CMB_userStatus.addItems(["Active", "Inactive"])
         records = self.FN_GET_USERS()
         for row in records:
             self.CMB_userName.addItems([row[0]])
-        self.CMB_userName.currentIndexChanged.connect(self.FN_GET_USER)
         self.FN_GET_USER()
-
+        self.CMB_userName.currentIndexChanged.connect(self.FN_GET_USER)
         self.BTN_modifyUser.clicked.connect(self.FN_MODIFY_USER)
 
 
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createUser.ui'
         loadUi(filename, self)
-
         self.setWindowTitle('Users')
         self.BTN_createUser.clicked.connect(self.FN_CREATE_USER)
-
         self.CMB_branch = CheckableComboBox(self)
-        self.CMB_branch.setGeometry(160, 85, 150, 25)
+        self.CMB_branch.setGeometry(150, 85, 171, 25)
         self.CMB_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CMB_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
 
+
+        self.CMB_section = CheckableComboBox(self)
+        self.CMB_section.setGeometry(150, 130, 171, 25)
+        self.CMB_section.setEnabled(False)
+        self.CMB_section.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.CMB_section.setStyleSheet("background-color: rgb(198, 207, 199)")
+
         # self.CMB_branch.addItems(["1","2","3"])
         self.FN_GET_BRANCHES()
+        self.FN_GET_Section()
         self.FN_GET_USERTYPE()
+        self.checkBox.toggled.connect(self.FN_EnableDepartment)
+
         self.CMB_userStatus.addItems(["Active", "Inactive"])
 
     def FN_GET_USERTYPE(self):
@@ -79,13 +98,30 @@ class CL_user(QtWidgets.QDialog):
 
         mycursor = self.conn.cursor()
         self.CMB_branch.clear()
-        sql_select_query = "SELECT BRANCH_DESC_A ,BRANCH_NO  FROM BRANCH where BRANCH_STATUS   = 1 "
+        sql_select_query = "SELECT BRANCH_DESC_A ,BRANCH_NO  FROM BRANCH where BRANCH_STATUS = 1 "
 
         mycursor.execute(sql_select_query)
         records = mycursor.fetchall()
 
         for row,val in records:
             self.CMB_branch.addItem(row,val)
+
+        mycursor.close()
+
+
+
+
+    def FN_GET_Section(self):
+
+        mycursor = self.conn.cursor()
+        self.CMB_section.clear()
+        sql_select_query = "SELECT SECTION_DESC ,SECTION_ID FROM SECTION "
+
+        mycursor.execute(sql_select_query)
+        records = mycursor.fetchall()
+
+        for row,val in records:
+            self.CMB_section.addItem(row,val)
 
         mycursor.close()
 
@@ -181,53 +217,128 @@ class CL_user(QtWidgets.QDialog):
         print(mycursor.rowcount, "record retrieved.")
         mycursor.close()
         self.FN_check_branch()
+        self.FN_check_section()
         self.branch_list.clear()
         if len(self.CMB_branch.currentData()) > 0:
             for i in self.CMB_branch.currentData():
                 self.branch_list.append(i)
+        if len(self.CMB_section.currentData()) > 0:
+            for i in self.CMB_section.currentData():
+                self.section_list.append(i)
+
 
         # print(mycursor.rowcount, "record retrieved.")
 
     def FN_MODIFY_USER(self):
-        self.id = self.LB_userID.text()
-        self.name = self.LE_name.text().strip()
-        self.password = self.LE_password.text().strip()
-        self.branch = self.CMB_branch.currentText()
-        self.fullName = self.LE_fullName.text().strip()
-        self.hrId = self.LE_hrId.text().strip()
-        self.userType = self.CMB_userType.currentText()
-        self.status = self.CMB_userStatus.currentText()
-        if self.status == 'Active':
-            self.status = 1
-        else:
-            self.status = 0
+        try:
+            self.id = self.LB_userID.text()
+            self.name = self.LE_name.text().strip()
+            self.password = self.LE_password.text().strip()
+            self.branch = self.CMB_branch.currentData()[0]
+            self.fullName = self.LE_fullName.text().strip()
+            self.hrId = self.LE_hrId.text().strip()
+            self.userType = self.CMB_userType.currentText()
+            self.status = self.CMB_userStatus.currentText()
+            if self.status == 'Active':
+                self.status = 1
+            else:
+                self.status = 0
 
-        if CL_validation.FN_isEmpty(self.name) or CL_validation.FN_isEmpty(
-                self.password) or CL_validation.FN_isEmpty(self.fullName) or CL_validation.FN_isEmpty(
-            self.hrId):
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+            if CL_validation.FN_isEmpty(self.name) or CL_validation.FN_isEmpty(
+                    self.password) or CL_validation.FN_isEmpty(self.fullName) or CL_validation.FN_isEmpty(
+                self.hrId):
+                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
 
-        else:
-            if CL_validation.FN_validation_password(self, self.password) == False:
-                mycursor = self.conn.cursor()
-                if len(self.Qcombo_branch.currentData()) > 0:
-                    for i in self.Qcombo_branch.currentData():
-                        self.new_branch_list.append(i)
-                changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+            else:
+                if CL_validation.FN_validation_password(self, self.password) == False:
+                    mycursor = self.conn.cursor()
+                    if len(self.CMB_branch.currentData()) > 0:
+                        for i in self.CMB_branch.currentData():
+                            self.new_branch_list.append(i)
+                    if len(self.CMB_section.currentData()) > 0:
+                        for i in self.CMB_section.currentData():
+                            self.new_section_list.append(i)
+                    changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-                sql = "UPDATE SYS_USER   set USER_NAME= %s ,  USER_PASSWORD= %s  ,  BRANCH_NO = %s, USER_FULLNAME = %s , USER_HR_ID = %s, USER_CHANGED_ON = %s , USER_CHANGED_BY = %s, USER_STATUS = %s, USERTYPE_ID = %s where USER_id= %s "
-                val = (
-                self.name, self.password, self.branch, self.fullName, self.hrId, changeDate, CL_userModule.user_name,
-                self.status, self.userType, self.id)
+                    sql = "UPDATE SYS_USER   set USER_NAME= %s ,  USER_PASSWORD= %s  ,  BRANCH_NO = %s, USER_FULLNAME = %s , USER_HR_ID = %s, USER_CHANGED_ON = %s , USER_CHANGED_BY = %s, USER_STATUS = %s, USERTYPE_ID = %s where USER_id= %s "
+                    val = (
+                        self.name, self.password, self.branch, self.fullName, self.hrId, changeDate,
+                        CL_userModule.user_name,
+                        self.status, self.userType, self.id)
 
-                mycursor.execute(sql, val)
+                    mycursor.execute(sql, val)
+                    if len(self.branch_list) > len(self.new_branch_list):
+                        for row in self.branch_list:
+                            print(row)
+                            if row in self.new_branch_list:
+                                print("found")
+                            else:
+                                print("not found")
+                                mycursor = self.conn.cursor()
+                                sql5 = "update SYS_USER_BRANCH set STATUS= 0 where USER_ID='" + self.userid + "' and BRANCH_NO = '" + row + "'"
+                                mycursor.execute(sql5)
+                    else:
+                        for row in self.new_branch_list:
+                            print(row)
+                            if row in self.branch_list:
+                                print("found")
+                            else:
 
-                mycursor.close()
-                db1.connectionCommit(self.conn)
-                print(mycursor.rowcount, "record Modified.")
-                QtWidgets.QMessageBox.information(self, "Success", "User is modified successfully")
-                db1.connectionClose(self.conn)
-                self.close()
+                                mycursor = self.conn.cursor()
+                                mycursor.execute(
+                                    "SELECT * FROM SYS_USER_BRANCH where BRANCH_NO='" + row + "' and USER_ID='" + self.userid + "'")
+                                record = mycursor.fetchall()
+                                if mycursor.rowcount > 0:
+                                    mycursor = self.conn.cursor()
+                                    sql8 = "update SYS_USER_BRANCH set STATUS= 1 where USER_ID='" + self.userid + "' and BRANCH_NO = '" + row + "'"
+                                    mycursor.execute(sql8)
+                                    print(sql8)
+                                else:
+                                    mycursor = self.conn.cursor()
+                                    sql6 = "INSERT INTO SYS_USER_BRANCH (USER_ID,COMPANY_ID,BRANCH_NO,STATUS) VALUES (%s,%s,%s,%s)"
+                                    val6 = (self.userid, '1', row, '1')
+                                    mycursor.execute(sql6, val6)
+                    if len(self.section_list) > len(self.new_section_list):
+                        for row in self.section_list:
+                            print(row)
+                            if row in self.new_section_list:
+                                print("found")
+                            else:
+                                print("not found")
+                                mycursor = self.conn.cursor()
+                                sql5 = "update SYS_USER_SECTION set STATUS= 0 where USER_ID='" + self.userid + "' and SECTION_ID = '" + row + "'"
+                                mycursor.execute(sql5)
+                    else:
+                        for row in self.new_section_list:
+                            print(row)
+                            if row in self.section_list:
+                                print("found")
+                            else:
+
+                                mycursor = self.conn.cursor()
+                                mycursor.execute(
+                                    "SELECT * FROM SYS_USER_SECTION where SECTION_ID='" + row + "' and USER_ID='" + self.userid + "'")
+                                record = mycursor.fetchall()
+                                if mycursor.rowcount > 0:
+                                    mycursor = self.conn.cursor()
+                                    sql8 = "update SYS_USER_SECTION set STATUS= 1 where USER_ID='" + self.userid + "' and SECTION_ID = '" + row + "'"
+                                    mycursor.execute(sql8)
+                                    print(sql8)
+                                else:
+                                    mycursor = self.conn.cursor()
+                                    sql6 = "INSERT INTO SYS_USER_SECTION (USER_ID,SECTION_ID,STATUS) VALUES (%s,%s,%s)"
+                                    val6 = (self.userid, row, '1')
+                                    mycursor.execute(sql6, val6)
+
+                    mycursor.close()
+                    db1.connectionCommit(self.conn)
+                    print(mycursor.rowcount, "record Modified.")
+                    QtWidgets.QMessageBox.information(self, "Success", "User is modified successfully")
+                    db1.connectionClose(self.conn)
+                    self.close()
+        except:
+            print(sys.exc_info())
+
 
     def FN_GET_USERS(self):
 
@@ -247,70 +358,78 @@ class CL_user(QtWidgets.QDialog):
         return myresult[0]
 
     def FN_CREATE_USER(self):
-        sql_select_Query = "select * from SYS_USER where USER_NAME = '"+self.LE_name.text()+"' and USER_STATUS = 1"
-        print(sql_select_Query)
-        mycursor = self.conn.cursor()
-        mycursor.execute(sql_select_Query)
-        print(mycursor.fetchall())
-        if mycursor.rowcount>0:
-            QtWidgets.QMessageBox.warning(self, "Error", "Username is already exists")
-        else:
-            self.name = self.LE_name.text().strip()
-            self.password = self.LE_password.text().strip()
-            self.branch = self.CMB_branch.currentData()[1]
-            self.fullName = self.LE_fullName.text().strip()
-            self.hrId = self.LE_hrId.text().strip()
-            self.userType = self.CMB_userType.currentText()
-            self.status = self.CMB_userStatus.currentText()
-            if self.status == 'Active':
-                self.status = 1
-            else:
-                self.status = 0
+        try:
+            sql_select_Query = "select * from SYS_USER where USER_NAME = '" + self.LE_name.text() + "' and USER_STATUS = 1"
+            print(sql_select_Query)
             mycursor = self.conn.cursor()
-            # get max userid
-            mycursor.execute("SELECT max(cast(USER_ID  AS UNSIGNED)) FROM SYS_USER")
-            myresult = mycursor.fetchone()
-
-            if myresult[0] == None:
-                self.id = "1"
+            mycursor.execute(sql_select_Query)
+            print(mycursor.fetchall())
+            if mycursor.rowcount > 0:
+                QtWidgets.QMessageBox.warning(self, "Error", "Username is already exists")
             else:
-                self.id = int(myresult[0]) + 1
+                self.name = self.LE_name.text().strip()
+                self.password = self.LE_password.text().strip()
+                self.branch = self.CMB_branch.currentData()[1]
+                self.fullName = self.LE_fullName.text().strip()
+                self.hrId = self.LE_hrId.text().strip()
+                self.userType = self.CMB_userType.currentText()
+                self.status = self.CMB_userStatus.currentText()
+                if self.status == 'Active':
+                    self.status = 1
+                else:
+                    self.status = 0
+                mycursor = self.conn.cursor()
+                # get max userid
+                mycursor.execute("SELECT max(cast(USER_ID  AS UNSIGNED)) FROM SYS_USER")
+                myresult = mycursor.fetchone()
 
-            creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                if myresult[0] == None:
+                    self.id = "1"
+                else:
+                    self.id = int(myresult[0]) + 1
 
-            if CL_validation.FN_isEmpty(self.name) or CL_validation.FN_isEmpty(
-                    self.password) or CL_validation.FN_isEmpty(
+                creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+
+                if CL_validation.FN_isEmpty(self.name) or CL_validation.FN_isEmpty(
+                        self.password) or CL_validation.FN_isEmpty(
                     self.fullName) or CL_validation.FN_isEmpty(self.hrId):
-                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                    QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
 
-            else:
-                if CL_validation.FN_validation_password(self, self.password) == False:
-                    # if  CL_validation.FN_validation_int( self, self.hrId, "HR ID" ) == True:
+                else:
+                    if CL_validation.FN_validation_password(self, self.password) == False:
+                        # if  CL_validation.FN_validation_int( self, self.hrId, "HR ID" ) == True:
 
-                    sql = "INSERT INTO SYS_USER (USER_ID, BRANCH_NO, USER_NAME, USER_PASSWORD, USER_FULLNAME, USER_HR_ID, USER_CREATED_ON, USER_CREATED_BY, USER_CHANGED_ON, USER_CHANGED_BY,USER_STATUS, USERTYPE_ID)         VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"
+                        sql = "INSERT INTO SYS_USER (USER_ID, BRANCH_NO, USER_NAME, USER_PASSWORD, USER_FULLNAME, USER_HR_ID, USER_CREATED_ON, USER_CREATED_BY, USER_CHANGED_ON, USER_CHANGED_BY,USER_STATUS, USERTYPE_ID)         VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"
 
-                    # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-                    val = (
-                        self.id, self.branch, self.name, self.password, self.fullName, self.hrId, creationDate,
-                        CL_userModule.user_name, '', '', self.status,
-                        self.userType)
-                    mycursor.execute(sql, val)
-                    # mycursor.execute(sql)
-                    for i in range(len(self.CMB_branch.currentData())):
-                        sql2 = "INSERT INTO SYS_USER_BRANCH (USER_ID, COMPANY_ID, BRANCH_NO, STATUS) VALUES ( %s, %s, %s, %s)"
+                        # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
                         val = (
-                            self.id, '1',  self.CMB_branch.currentData()[i], '1')
-                        mycursor.execute(sql2, val)
+                            self.id, self.branch, self.name, self.password, self.fullName, self.hrId, creationDate,
+                            CL_userModule.user_name, '', '', self.status,
+                            self.userType)
+                        mycursor.execute(sql, val)
+                        # mycursor.execute(sql)
+                        for i in range(len(self.CMB_branch.currentData())):
+                            sql2 = "INSERT INTO SYS_USER_BRANCH (USER_ID, COMPANY_ID, BRANCH_NO, STATUS) VALUES ( %s, %s, %s, %s)"
+                            val = (
+                                self.id, '1', self.CMB_branch.currentData()[i], '1')
+                            mycursor.execute(sql2, val)
+
+                        if self.checkBox.isChecked():
+                            for i in range(len(self.CMB_section.currentData())):
+                                sql = "INSERT INTO SYS_USER_SECTION (USER_ID, SECTION_ID, STATUS) VALUES (%s, %s, %s)"
+                                val = (self.id, self.CMB_section.currentData()[i], '1')
+                                mycursor.execute(sql, val)
 
 
+                        mycursor.close()
 
-                    mycursor.close()
-
-                    print(mycursor.rowcount, "record inserted.")
-                    QtWidgets.QMessageBox.information(self, "Success", "User is created successfully")
-                    db1.connectionCommit(self.conn)
-                    db1.connectionClose(self.conn)
-                    self.close()
+                        print(mycursor.rowcount, "record inserted.")
+                        QtWidgets.QMessageBox.information(self, "Success", "User is created successfully")
+                        db1.connectionCommit(self.conn)
+                        db1.connectionClose(self.conn)
+                        self.close()
+        except:
+            print(sys.exc_info())
 
 
 
@@ -437,12 +556,56 @@ class CL_user(QtWidgets.QDialog):
         return records
 
     def FN_unCheckedALL(self):
+            mycursor = self.conn.cursor()
+            sql_select_branch = "Select BRANCH_NO from BRANCH where BRANCH_STATUS=1"
+            mycursor.execute(sql_select_branch)
+            record = mycursor.fetchall()
+            print(record)
+            i = 0
+            for row in record:
+                self.CMB_branch.unChecked(i)
+                i += 1
+
+
+    def FN_EnableDepartment(self):
+        if self.checkBox.isChecked():
+            self.CMB_section.setEnabled(True)
+        else:
+            self.CMB_section.setEnabled(False)
+
+    def FN_check_section(self):
+        self.FN_unCheckedSection()
         mycursor = self.conn.cursor()
-        sql_select_branch = "Select BRANCH_NO from SYS_USER_BRANCH where USER_ID ='"+ self.userid +"'"
+        sql_select_branch = "SELECT SECTION_ID FROM SECTION"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
-        print(record)
         i = 0
         for row in record:
-            self.CMB_branch.unChecked(i)
-            i += 1
+            for row1 in self.FN_SELECT_section():
+                if row[0] == row1[0]:
+                    items = self.CMB_section.findText(row[0])
+                    for item in range(items +2):
+                        if int(row1[1])==1:
+                            self.CMB_section.setChecked(i)
+            i = i + 1
+        mycursor.close()
+
+    def FN_SELECT_section(self):
+        mycursor = self.conn.cursor()
+        sql="SELECT SECTION_ID , STATUS FROM SYS_USER_SECTION where USER_ID = %s"
+        c = (self.userid,)
+        mycursor.execute(sql,c)
+        records = mycursor.fetchall()
+        mycursor.close()
+        return records
+
+    def FN_unCheckedSection(self):
+            mycursor = self.conn.cursor()
+            sql_select_branch = "Select SECTION_ID from SECTION where SECTION_STATUS=1"
+            mycursor.execute(sql_select_branch)
+            record = mycursor.fetchall()
+            print(record)
+            i = 0
+            for row in record:
+                self.CMB_section.unChecked(i)
+                i += 1

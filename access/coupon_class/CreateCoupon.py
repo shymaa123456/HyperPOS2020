@@ -187,7 +187,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                     if mycursor.rowcount > 0:
                         value=value+1
                     sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-                    val2 = (id, bin(value), CL_userModule.user_name,self.serialType ,creationDate, 0,
+                    val2 = (id, "HCOP"+bin(value), CL_userModule.user_name,self.serialType ,creationDate, 0,
                             '1')
                     print(sql2, val2)
                     mycursor.execute(sql2, val2)
@@ -212,7 +212,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='"+CL_userModule.user_name+"'")
+        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = (SELECT USER_ID FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"')")
         records = mycursor.fetchall()
         return records
 

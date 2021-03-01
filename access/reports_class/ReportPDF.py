@@ -30,6 +30,7 @@ branch=""
 tel=""
 query=""
 cursortest=0
+
 class Text():
     def setCursor(self,cursor):
         global cursortest
@@ -86,6 +87,7 @@ class Text():
         query = waterText
     def getQuery(self):
         return query
+
 class body():
     def __init__(self):
         title=Text()

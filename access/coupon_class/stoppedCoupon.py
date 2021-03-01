@@ -2,13 +2,12 @@ import sys
 from pathlib import Path
 
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QMessageBox
 from PyQt5.uic import loadUi
 from data_connection.h1pos import db1
 from PyQt5.QtCore import QDate
 
-from access.authorization_class.user_module import CL_userModule
 
-from datetime import datetime
 
 
 class CL_modifyCoupon(QtWidgets.QDialog):
@@ -22,18 +21,23 @@ class CL_modifyCoupon(QtWidgets.QDialog):
 
 
     def FN_LOADUI(self):
-        filename = self.dirname + '/stoppedCoupon.ui'
-        loadUi(filename, self)
-        self.CMB_CouponStatus.addItems(["Inactive","Active"])
-        self.CMB_CouponDes.activated[str].connect(self.FN_getStatus)
-        self.FN_getData()
-        self.FN_getDatabyID()
-        self.FN_getStatus()
-        self.BTN_modifyCoupon.clicked.connect(self.FN_UpdateStatus)
-        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+        try:
+            filename = self.dirname + '/stoppedCoupon.ui'
+            loadUi(filename, self)
+            self.CMB_CouponStatus.addItems(["Inactive", "Active"])
+            self.CMB_CouponDes.activated[str].connect(self.FN_getStatus)
+            self.FN_getData()
+            self.FN_getDatabyID()
+            self.FN_getStatus()
+            self.BTN_modifyCoupon.clicked.connect(self.FN_UpdateStatus)
+            self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+        except:
+            print(sys.exc_info())
+
 
 
     def FN_getData(self):
+
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COP_DESC,COP_ID FROM COUPON")
@@ -86,7 +90,6 @@ class CL_modifyCoupon(QtWidgets.QDialog):
             else:
                 self.checkBox_Multi.setChecked(False)
 
-
             self.CMB_CouponStatus.setCurrentIndex(int(record[13]))
             mycursor.close()
         except:
@@ -114,11 +117,11 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         print(self.CMB_CouponDes.currentData())
         sql = "update COUPON set COP_STATUS='"+str(self.CMB_CouponStatus.currentIndex())+"' where COP_ID='"+str(self.CMB_CouponDes.currentData())+"'"
         mycursor.execute(sql)
-        sql2 = "update COUPON_SERIAL set COPS_STATUS='" + str(self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
-        mycursor.execute(sql2)
-        sql3 = "update COUPON_BRANCH set STATUS='" + str(
-            self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
-        mycursor.execute(sql3)
+        # sql2 = "update COUPON_SERIAL set COPS_STATUS='" + str(self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
+        # mycursor.execute(sql2)
+        # sql3 = "update COUPON_BRANCH set STATUS='" + str(
+        #     self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
+        # mycursor.execute(sql3)
         db1.connectionCommit(self.conn)
         mycursor.close()
         QtWidgets.QMessageBox.warning(self, "Done", "Done")
@@ -130,3 +133,13 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         self.LE_desc_3.clear()
         self.LE_desc_4.clear()
         self.LE_desc_5.clear()
+
+    # def showDialog(self):
+    #     # print("event")
+    #     buttonReply = QMessageBox.question(self, 'PyQt5 message', "هناك فروع غير فعاله سيتم تفعيلها؟",
+    #                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+    #     if buttonReply == QMessageBox.Yes:
+    #         print('Yes clicked.')
+    #     else:
+    #         print('No clicked.')
+

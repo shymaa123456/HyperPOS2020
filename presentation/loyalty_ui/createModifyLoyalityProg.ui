@@ -275,38 +275,25 @@ background-color: rgb(198, 207, 199);</string>
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>241</width>
+       <width>121</width>
        <height>22</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>التاريخ</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDateTimeEdit" name="Qdate_from">
+       <widget class="QDateEdit" name="Qdate_from">
         <property name="layoutDirection">
-         <enum>Qt::RightToLeft</enum>
-        </property>
-        <property name="minimumDateTime">
-         <datetime>
-          <hour>0</hour>
-          <minute>0</minute>
-          <second>0</second>
-          <year>2020</year>
-          <month>1</month>
-          <day>1</day>
-         </datetime>
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="displayFormat">
-         <string>d/M/yyyy</string>
+         <string>dd-MM-yyyy</string>
         </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
+        <property name="date">
+         <date>
+          <year>2020</year>
+          <month>1</month>
+          <day>3</day>
+         </date>
         </property>
        </widget>
       </item>
@@ -315,27 +302,27 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>205</x>
        <y>30</y>
-       <width>26</width>
-       <height>19</height>
+       <width>81</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>من</string>
+      <string>من تاريخ</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>215</x>
        <y>60</y>
-       <width>26</width>
-       <height>19</height>
+       <width>71</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>الى</string>
+      <string>الى تاريخ</string>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget_2">
@@ -343,35 +330,28 @@ background-color: rgb(198, 207, 199);</string>
       <rect>
        <x>10</x>
        <y>60</y>
-       <width>241</width>
+       <width>121</width>
        <height>22</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>التاريخ</string>
+       <widget class="QDateEdit" name="Qdate_to">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDateTimeEdit" name="Qdate_to">
-        <property name="minimumDateTime">
-         <datetime>
-          <hour>0</hour>
-          <minute>0</minute>
-          <second>0</second>
-          <year>2020</year>
-          <month>1</month>
-          <day>1</day>
-         </datetime>
+        <property name="autoFillBackground">
+         <bool>false</bool>
         </property>
         <property name="displayFormat">
-         <string>d/M/yyyy</string>
+         <string>dd-MM-yyyy</string>
         </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
+        <property name="date">
+         <date>
+          <year>2021</year>
+          <month>1</month>
+          <day>3</day>
+         </date>
         </property>
        </widget>
       </item>
@@ -900,6 +880,22 @@ background-color: rgb(198, 207, 199);</string>
      </property>
     </widget>
    </widget>
+   <widget class="QLabel" name="label_ID">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>120</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="gridLayoutWidget_4">
    <property name="geometry">
@@ -913,6 +909,11 @@ background-color: rgb(198, 207, 199);</string>
    <layout class="QGridLayout" name="gridLayout_7">
     <item row="0" column="0">
      <widget class="QTableWidget" name="Qtable_loyality">
+      <column>
+       <property name="text">
+        <string>رقم البرنامج</string>
+       </property>
+      </column>
       <column>
        <property name="text">
         <string>اسم البرنامج</string>

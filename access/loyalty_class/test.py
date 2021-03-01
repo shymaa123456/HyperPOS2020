@@ -1,38 +1,50 @@
-import sys
-from PyQt5 import QtWidgets, QtCore
 
-class Window(QtWidgets.QMainWindow):
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+
+class Window(QMainWindow):
 
     def __init__(self):
-        super(Window, self).__init__()
-        self.setGeometry(50,50,500,500)
-        self.setWindowTitle('PyQt Tuts')
-        self.table()
+        super().__init__()
+
+        # setting title 
+        self.setWindowTitle("Python ")
+
+        # setting geometry 
+        self.setGeometry(100, 100, 500, 400)
+
+        # calling method 
+        self.UiComponents()
+
+        # showing all the widgets 
+        self.show()
+
+        # method for components
+
+    def UiComponents(self):
+        # creating a QDateEdit widget
+        date = QDateEdit(self)
+
+        # setting geometry of the date edit 
+        date.setGeometry(100, 100, 150, 40)
+
+        # date time 
+        d = QDate(2020, 10, 10)
+
+        # setting date time 
+        date.setDate(d)
+
+    # create pyqt5 app
 
 
-    def table(self):
+App = QApplication(sys.argv)
 
-        comboBox = QtWidgets.QComboBox()
+# create the instance of our Window 
+window = Window()
 
-        self.tableWidget = QtWidgets.QTableWidget()
-        self.tableWidget.setGeometry(QtCore.QRect(220, 100, 411, 392))
-        self.tableWidget.setColumnCount(2)
-        self.tableWidget.setRowCount(5)
-        self.tableWidget.show()
-
-        attr = ['one', 'two', 'three', 'four', 'five']
-        i = 0
-        for j in attr:
-            self.tableWidget.setItem(i, 0, QtWidgets.QTableWidgetItem(j))
-            comboBox = QtWidgets.QComboBox()
-            comboBox.addItem('110')
-            comboBox.addItem('210')
-            comboBox.addItem('310')
-            self.tableWidget.setCellWidget(i, 1, comboBox)
-            i += 1
-def run():
-    app = QtWidgets.QApplication(sys.argv)
-    w = Window()
-    sys.exit(app.exec_())
-
-run()
+# start the app 
+sys.exit(App.exec())

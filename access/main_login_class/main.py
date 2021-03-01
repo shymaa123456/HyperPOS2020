@@ -7,6 +7,7 @@ from PyQt5.uic import loadUi
 
 from access.coupon_class.CreateCoupon import CL_CreateCoupon
 from access.coupon_class.EditCoupon import CL_EditCoupon
+from access.coupon_class.StoppedSerial import CL_StoppedSerial
 from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.loyalty_class.loyalityProg import CL_loyProg
@@ -27,6 +28,9 @@ from access.loyalty_class.customerType import CL_customerTP
 # Promotion
 from access.promotion_class.Promotion_Add import CL_create_promotion
 from PyQt5.QtWidgets import QMessageBox
+
+from access.voucher_class.CreateVoucher import CL_CreateVoucher
+from access.voucher_class.EditVoucher import CL_EditVoucher
 
 
 class CL_main(QtWidgets.QMainWindow):
@@ -98,6 +102,14 @@ class CL_main(QtWidgets.QMainWindow):
         self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
         self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
         self.QAct_Coupon_Print.triggered.connect(self.FN_PrintCoupon)
+        self.QAct_Coupon_barcode.triggered.connect(self.FN_SerialCoupon)
+
+        #Todo: method for Open Create Voucher Window
+        self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
+        self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
+
+
+
 
 
 
@@ -273,6 +285,22 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_PrintCoupon(self):
         self.window_two = CL_printCoupon()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_SerialCoupon(self):
+        self.window_two = CL_StoppedSerial()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+
+    def FN_CreateVoucher(self):
+        self.window_two=CL_CreateVoucher()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_EditVoucher(self):
+        self.window_two=CL_EditVoucher()
         self.window_two.FN_LOADUI()
         self.window_two.show()
 

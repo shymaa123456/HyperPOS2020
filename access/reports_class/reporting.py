@@ -58,61 +58,61 @@ class CL_report(QtWidgets.QDialog):
 
     def FN_loadData(self, PROM_ID):
         #Todo: method for searching about promotions in data base
+        try:
+            self.customer_group_list.clear()
+            self.sponsor_list.clear()
+            self.magazine_list.clear()
+            self.company_list.clear()
+            self.branch_list.clear()
 
-        self.customer_group_list.clear()
-        self.sponsor_list.clear()
-        self.magazine_list.clear()
-        self.company_list.clear()
-        self.branch_list.clear()
+            if len(self.Qcombo_company.currentData()) > 0:
+                for i in self.Qcombo_company.currentData():
+                    self.company_list.append("'" + i + "'")
+            else:
+                self.company_list.append("'" "'")
 
-        if len(self.Qcombo_company.currentData()) > 0:
-            for i in self.Qcombo_company.currentData():
-                self.company_list.append("'" + i + "'")
-        else:
-            self.company_list.append("'" "'")
+            if len(self.Qcombo_branchEdition.currentData()) > 0:
+                for i in self.Qcombo_branchEdition.currentData():
+                    self.branch_list.append("'" + i + "'")
+            else:
+                self.branch_list.append("'" "'")
 
-        if len(self.Qcombo_branchEdition.currentData()) > 0:
-            for i in self.Qcombo_branchEdition.currentData():
-                self.branch_list.append("'" + i + "'")
-        else:
-            self.branch_list.append("'" "'")
+            if self.QcheckBox_customer_group.isChecked():
+                if len(self.Qcombo_cust_group.currentData()) > 0:
+                    for i in self.Qcombo_cust_group.currentData():
+                        self.customer_group_list.append("'" + i + "'")
+                    self.prom_CG = "and `PROMOTION_GROUP`.`CG_GROUP_ID` IN (" + ','.join(
+                        self.customer_group_list) + ")"
+            if self.QcheckBox_sponsor_prom.isChecked():
+                if len(self.Qcombo_sponsor.currentData()) > 0:
+                    for i in self.Qcombo_sponsor.currentData():
+                        self.sponsor_list.append("'" + i + "'")
 
+                    self.sponsor_prom = "and `PROMOTION_SPONSER`.`SPONSER_ID`IN(" + ','.join(
+                        self.sponsor_list) + ")"
+            if self.QcheckBox_magazine.isChecked():
+                if len(self.Qcombo_magazine.currentData()) > 0:
+                    for i in self.Qcombo_magazine.currentData():
+                        self.magazine_list.append("'" + i + "'")
+                    self.magazine_prom = "AND `PROMOTION_HEADER`.`MAGAZINE_ID` IN (" + ','.join(
+                        self.magazine_list) + ")"
 
-        if self.QcheckBox_customer_group.isChecked():
-            if len(self.Qcombo_cust_group.currentData()) > 0:
-                for i in self.Qcombo_cust_group.currentData():
-                    self.customer_group_list.append("'" + i + "'")
-                self.prom_CG = "and `PROMOTION_GROUP`.`CG_GROUP_ID` IN (" + ','.join(
-                    self.customer_group_list) + ")"
-        if self.QcheckBox_sponsor_prom.isChecked():
-            if len(self.Qcombo_sponsor.currentData()) > 0:
-                for i in self.Qcombo_sponsor.currentData():
-                    self.sponsor_list.append("'" + i + "'")
+            if self.QcheckBox_department.isChecked():
+                self.bmc = "AND `PROMOTION_DETAIL`.`BMC_ID` IN (" + self.Qcombo_classification.currentData() + ")"
 
-                self.sponsor_prom = "and `PROMOTION_SPONSER`.`SPONSER_ID`IN(" + ','.join(
-                    self.sponsor_list) + ")"
-        if self.QcheckBox_magazine.isChecked():
-            if len(self.Qcombo_magazine.currentData()) > 0:
-                for i in self.Qcombo_magazine.currentData():
-                    self.magazine_list.append("'" + i + "'")
-                self.magazine_prom = "AND `PROMOTION_HEADER`.`MAGAZINE_ID` IN (" + ','.join(self.magazine_list) + ")"
+            self.Qtable_promotion.setRowCount(0)
+            self.conn = db1.connect()
 
-        if self.QcheckBox_department.isChecked():
-            self.bmc = "AND `PROMOTION_DETAIL`.`BMC_ID` IN (" + self.Qcombo_classification.currentData() + ")"
+            mycursor = self.conn.cursor()
+            query = ""
+            if self.cond == 1:
+                self.query = (
+                        "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_ID`= '" + self.Qline_promotion.text() + "'")
+                self.runQuery(mycursor)
 
-        self.Qtable_promotion.setRowCount(0)
-        self.conn = db1.connect()
+            elif self.cond == 2:
 
-        mycursor = self.conn.cursor()
-        query = ""
-        if self.cond == 1:
-            self.query = (
-                    "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`and `PROMOTION_HEADER`.`PROM_ID`= '" + self.Qline_promotion.text() + "'")
-            self.runQuery(mycursor)
-
-        elif self.cond == 2:
-
-            self.query = (
+                self.query = (
                         "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` "
                         "JOIN `PROM_BRANCH` ON `PROM_BRANCH`.`PROM_ID` = `PROMOTION_HEADER`.`PROM_ID`"
                         "JOIN `PROMOTION_GROUP` ON   `PROMOTION_GROUP`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
@@ -121,37 +121,39 @@ class CL_report(QtWidgets.QDialog):
 
                         "where"
                         "`PROM_BRANCH`.`COMPANY_ID` IN (" + ','.join(self.company_list) + ")"
-                        "and `PROM_BRANCH`.`BRANCH_NO`IN (" + ','.join(self.branch_list) + ")"
-                        "and `PROMOTION_HEADER`.`PROM_TYPE_ID`= '" + self.Qcombo_promotion.currentData() + "'"
+                                                                                          "and `PROM_BRANCH`.`BRANCH_NO`IN (" + ','.join(self.branch_list) + ")"
+                                        "and `PROMOTION_HEADER`.`PROM_TYPE_ID`= '" +str(self.Qcombo_promotion.currentData()) + "'"
                         + self.magazine_prom + " " + self.prom_CG + " " + self.sponsor_prom + " " + self.bmc +
                         "and `PROMOTION_DETAIL`.`PROM_START_DATE` <= '" + self.Qdate_from.dateTime().toString(
-                        'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`>='"
+                    'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`>='"
                         + self.Qdate_to.dateTime().toString(
-                        'yyyy-MM-dd') + " " + "23:59:00" + "'" + self.prom_status)
-            self.runQuery(mycursor)
+                    'yyyy-MM-dd') + " " + "23:59:00" + "'" + self.prom_status)
+                self.runQuery(mycursor)
 
 
-        elif self.cond == 3:
-            self.query = (
-                    "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` "
-                    "JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`"
-                    "JOIN `PROMOTION_GROUP` ON   `PROMOTION_GROUP`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
-                    "JOIN `PROMOTION_SPONSER` ON   `PROMOTION_SPONSER`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
-                    "JOIN `PROM_BRANCH` ON `PROM_BRANCH`.`PROM_ID` = `PROMOTION_HEADER`.`PROM_ID`"
-                    "where"
-                    "`PROM_BRANCH`.`COMPANY_ID` IN (" + ','.join(self.company_list) + ")"
-                    " and `PROM_BRANCH`.`BRANCH_NO`IN (" + ','.join(self.branch_list) + ")"
-                    " " + self.prom_CG + " " + self.sponsor_prom + " " + self.magazine_prom+" "+ self.bmc +" "
-                    "and `PROMOTION_DETAIL`.`POS_GTIN`= '" + self.Qline_promotion_2.text() + "'" + self.prom_status + " "  + "and `PROMOTION_DETAIL`.`PROM_START_DATE`>='" + self.Qdate_from.dateTime().toString(
+            elif self.cond == 3:
+                self.query = (
+                        "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` "
+                        "JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`"
+                        "JOIN `PROMOTION_GROUP` ON   `PROMOTION_GROUP`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
+                        "JOIN `PROMOTION_SPONSER` ON   `PROMOTION_SPONSER`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
+                        "JOIN `PROM_BRANCH` ON `PROM_BRANCH`.`PROM_ID` = `PROMOTION_HEADER`.`PROM_ID`"
+                        "where"
+                        "`PROM_BRANCH`.`COMPANY_ID` IN (" + ','.join(self.company_list) + ")"
+                                                                                          " and `PROM_BRANCH`.`BRANCH_NO`IN (" + ','.join(
+                    self.branch_list) + ")"
+                                        " " + self.prom_CG + " " + self.sponsor_prom + " " + self.magazine_prom + " " + self.bmc + " "
+                                                                                                                                   "and `PROMOTION_DETAIL`.`POS_GTIN`= '" + self.Qline_promotion_2.text() + "'" + self.prom_status + " " + "and `PROMOTION_DETAIL`.`PROM_START_DATE`>='" + self.Qdate_from.dateTime().toString(
                     'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`<='" + self.Qdate_to.dateTime().toString(
-                    'yyyy-MM-dd') + " " + "23:59:00"+"'" )
-            self.runQuery(mycursor)
-        elif self.cond==0:
-            QtWidgets.QMessageBox.warning(self, "Error", "برجاء تحديد محددات البحث")
-            mycursor.close()
+                    'yyyy-MM-dd') + " " + "23:59:00" + "'")
+                self.runQuery(mycursor)
+            elif self.cond == 0:
+                QtWidgets.QMessageBox.warning(self, "Error", "برجاء تحديد محددات البحث")
+                mycursor.close()
 
-
-        self.disable()
+            self.disable()
+        except:
+            print(sys.exc_info())
 
     def runQuery(self,mycursor):
         print(self.query)

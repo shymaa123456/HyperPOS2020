@@ -263,7 +263,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                             mycursor = self.conn.cursor()
                             sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val7 = (
-                                str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,self.serial_type,
+                                str(self.CMB_CouponDes.currentData()), "HCOP"+bin(value), CL_userModule.user_name,self.serial_type,
                                 creationDate, 0,
                                 '1')
                             mycursor.execute(sql7, val7)
@@ -365,7 +365,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 mycursor = self.conn.cursor()
                                 sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                                 val7 = (
-                                    str(self.CMB_CouponDes.currentData()), bin(value), CL_userModule.user_name,
+                                    str(self.CMB_CouponDes.currentData()), "HCOP"+bin(value), CL_userModule.user_name,
                                     self.serial_type,
                                     creationDate, 0,
                                     '1')

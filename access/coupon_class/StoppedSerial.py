@@ -15,6 +15,7 @@ from data_connection.h1pos import db1
 class CL_StoppedSerial(QtWidgets.QDialog):
     serialType=0
     cop_id=""
+    serialId=""
     def __init__(self):
         super(CL_StoppedSerial, self).__init__()
         cwd = Path.cwd()
@@ -34,7 +35,9 @@ class CL_StoppedSerial(QtWidgets.QDialog):
 
     def FN_Search(self):
         try:
-            x = (bin(int(self.lineDesc_2.text())))
+            string=self.lineDesc_2.text()
+            x = (string[0:4]+bin(int(string[4:len(string)])))
+            print(x)
             sql_select_Query = "select * from COUPON_SERIAL where COPS_BARCODE='"+x+"' and COPS_STATUS=1"
             mycursor = self.conn.cursor()
             mycursor.execute(sql_select_Query)
@@ -42,6 +45,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
             if mycursor.rowcount > 0:
                 self.serialType=record[3]
                 self.cop_id=record[1]
+                self.serialId=record[0]
                 sql_select_Query = "select * from COUPON where COP_ID='"+str(record[1])+"'"
                 mycursor.execute(sql_select_Query)
                 record = mycursor.fetchone()
@@ -72,9 +76,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
                     self.checkBox_Multi.setChecked(False)
                     self.LE_desc_5.clear()
 
-
                 self.CMB_CouponStatus.setCurrentIndex(int(record[13]))
-
                 self.BTN_stopCoupon.setEnabled(True)
                 self.BTN_recreateCoupon.setEnabled(True)
             else:
@@ -84,7 +86,8 @@ class CL_StoppedSerial(QtWidgets.QDialog):
 
     def FN_Stop(self):
         mycursor = self.conn.cursor()
-        x = (bin(int(self.lineDesc_2.text())))
+        string = self.lineDesc_2.text()
+        x = (string[0:4] + bin(int(string[4:len(string)])))
         sql = " update COUPON_SERIAL set COPS_STATUS=0 where COPS_BARCODE=(%s) "
         val = (x,)
         mycursor.execute(sql, val)
@@ -98,12 +101,13 @@ class CL_StoppedSerial(QtWidgets.QDialog):
             value = randint(0, 1000000000000)
             creationDate = str(datetime.today().strftime('%d-%m-%Y'))
             mycursor = self.conn.cursor()
-            x = (bin(int(self.lineDesc_2.text())))
+            string = self.lineDesc_2.text()
+            x = (string[0:4] + bin(int(string[4:len(string)])))
             sql = " update COUPON_SERIAL set COPS_STATUS=0 where COPS_BARCODE=(%s)"
             val = (x,)
             mycursor.execute(sql, val)
-            sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-            val2 = (self.cop_id, bin(value), CL_userModule.user_name, self.serialType, creationDate, 0, '1')
+            sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_SERIAL_REF,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+            val2 = (self.cop_id, "HCOP"+bin(value), CL_userModule.user_name, self.serialType, creationDate, 0,self.serialId ,'1')
             mycursor.execute(sql2, val2)
             QtWidgets.QMessageBox.warning(self, "Done", "Done")
             db1.connectionCommit(self.conn)

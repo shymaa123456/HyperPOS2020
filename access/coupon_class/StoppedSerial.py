@@ -109,7 +109,8 @@ class CL_StoppedSerial(QtWidgets.QDialog):
             sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_SERIAL_REF,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
             val2 = (self.cop_id, "HCOP"+bin(value), CL_userModule.user_name, self.serialType, creationDate, 0,self.serialId ,'1')
             mycursor.execute(sql2, val2)
-            QtWidgets.QMessageBox.warning(self, "Done", "Done")
+            QtWidgets.QMessageBox.warning(self, "Done", "new serial is"+str("HCOP"+str(value)))
+
             db1.connectionCommit(self.conn)
             mycursor.close()
         except:

@@ -114,7 +114,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
 
         try:
             mycursor = self.conn.cursor()
-            if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text())==0 or len(self.LE_desc_3.text()) == 0 and len(self.LE_desc_2.text()) == 0:
+            if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text().strip())==0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
                 if self.checkBox_Multi.isChecked():
@@ -129,17 +129,17 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                         self.serialType=0
             creationDate = str(datetime.today().strftime('%d-%m-%Y'))
             if self.radioButton_Percentage.isChecked():
-                if len(self.LE_desc_3.text()) == 0:
+                if len(self.LE_desc_3.text().strip()) == 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
                 else:
                     self.valueData = self.LE_desc_3.text()
             elif self.radioButton_Value.isChecked():
-                if len(self.LE_desc_2.text()) == 0:
+                if len(self.LE_desc_2.text().strip()) == 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
                 else:
                     self.valueData = self.LE_desc_2.text()
             self.conn = db1.connect()
-            indx = self.LE_desc.text()
+            indx = self.LE_desc.text().strip()
 
             # sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
             sql_select_Query = "select * from COUPON where COP_DESC = %s "
@@ -204,7 +204,6 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 mycursor.close()
                 QtWidgets.QMessageBox.warning(self, "Done", "رقم الكوبون هو " + str(id))
                 self.label_num.setText(str(id))
-
 
         except:
             print(sys.exc_info())

@@ -211,7 +211,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = (SELECT USER_ID FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"')")
+        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"'")
         records = mycursor.fetchall()
         return records
 

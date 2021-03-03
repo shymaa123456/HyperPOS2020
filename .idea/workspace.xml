@@ -25,11 +25,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="comments on custGp and custTps">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/configuration_class/Parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/configuration_class/Parameters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/configuration_ui/Create_Parameter.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/configuration_ui/Create_Parameter.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -215,10 +211,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.login" />
-      <item itemvalue="Python.reporting" />
-      <item itemvalue="Python.t1" />
-      <item itemvalue="Python.test (1)" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.reporting" />
+      <item itemvalue="Python.test (1)" />
+      <item itemvalue="Python.t1" />
       <item itemvalue="Python tests.pytest in C:/Users/Shaymaa/PycharmProjects_community/HyperPOS2020/access/authorization_class/testt.py" />
     </list>
     <recent_temporary>
@@ -255,13 +251,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00018" summary="loyality ui">
-      <created>1601562609060</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1601562609060</updated>
     </task>
     <task id="LOCAL-00019" summary="loyality ui">
       <created>1601988481817</created>
@@ -599,7 +588,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611671582699</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="comments on custGp and custTps">
+      <created>1614606693770</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1614606693770</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -736,7 +732,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/configuration_class/Parameters.py</url>
-          <line>134</line>
+          <line>154</line>
           <option name="timeStamp" value="178" />
         </line-breakpoint>
       </breakpoints>

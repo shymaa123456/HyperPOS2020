@@ -28,9 +28,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="comments of 10-2-2021">
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/redeemVoucher.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyRedeemType.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/definePointValue.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/redeemGift.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadCustPoints.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/redeemVoucher.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/redeemVoucher.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,15 +81,15 @@
     <property name="settings.editor.selected.configurable" value="build.tools" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/access/loyalty_class" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Shaymaa\PycharmProjects_community\HyperPOS2020\access\loyalty_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\access\loyalty_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\presentation\loyalty_ui" />
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
       <recent name="$PROJECT_DIR$/data_connection" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
   <component name="RunManager" selected="Python.login">
@@ -255,13 +259,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00026" summary="upload">
-      <created>1603869016109</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1603869016109</updated>
     </task>
     <task id="LOCAL-00027" summary="adjust authorization">
       <created>1603958696635</created>
@@ -599,7 +596,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614179007234</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="comments of 10-2-2021">
+      <created>1614849219603</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1614849219604</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -682,39 +686,35 @@
     <MESSAGE value="comments on custGp and custTps" />
     <MESSAGE value="comments on create cust" />
     <MESSAGE value="comments of 3-2-2021" />
-    <MESSAGE value="comments of 10-2-2021" />
     <MESSAGE value="loilty" />
-    <option name="LAST_COMMIT_MESSAGE" value="loilty" />
+    <MESSAGE value="comments of 10-2-2021" />
+    <option name="LAST_COMMIT_MESSAGE" value="comments of 10-2-2021" />
   </component>
   <component name="WindowStateProjectService">
     <state x="48" y="116" key="#xdebugger.XInspectDialog" timestamp="1610380377039">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="48" y="116" key="#xdebugger.XInspectDialog/0.0.1366.728@0.0.1366.728" timestamp="1610380377039" />
-    <state width="792" height="448" key="DebuggerActiveHint" timestamp="1606055766186">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="792" height="448" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1606055766186" />
     <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1609070986320">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
-    <state width="1316" height="190" key="GridCell.Tab.0.bottom" timestamp="1614237265893">
+    <state width="1345" height="323" key="GridCell.Tab.0.bottom" timestamp="1614849327448">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="190" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614237265893" />
-    <state width="1316" height="190" key="GridCell.Tab.0.center" timestamp="1614237265892">
+    <state width="1345" height="323" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614849327448" />
+    <state width="1345" height="323" key="GridCell.Tab.0.center" timestamp="1614849327448">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="190" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614237265892" />
-    <state width="1316" height="190" key="GridCell.Tab.0.left" timestamp="1614237265892">
+    <state width="1345" height="323" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614849327448" />
+    <state width="1345" height="323" key="GridCell.Tab.0.left" timestamp="1614849327447">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="190" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614237265892" />
-    <state width="1316" height="190" key="GridCell.Tab.0.right" timestamp="1614237265892">
+    <state width="1345" height="323" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614849327447" />
+    <state width="1345" height="323" key="GridCell.Tab.0.right" timestamp="1614849327448">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1316" height="190" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614237265892" />
+    <state width="1345" height="323" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614849327448" />
     <state width="1316" height="190" key="GridCell.Tab.1.bottom" timestamp="1614237265894">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -735,10 +735,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="129" y="55" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1614163086645" />
-    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1606056539367">
+    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1614849316381">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056539367" />
+    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1614849316381" />
     <state x="407" y="53" width="511" height="640" key="RollbackChangesDialog" timestamp="1608104489811">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -747,22 +747,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614595978401" />
-    <state x="470" y="79" key="VCS.ChangeListViewerDialog" timestamp="1606056527179">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1614849357969">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="470" y="79" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1606056527179" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1614237766435">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1614237766435" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1614849357969" />
     <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="691" height="372" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1609935341048" />
-    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614162959666">
+    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614849344096">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1614162959666" />
+    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1614849344096" />
     <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1613307460388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>508</width>
-    <height>408</height>
+    <height>428</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>80</y>
+     <y>40</y>
      <width>171</width>
      <height>25</height>
     </rect>
@@ -54,7 +54,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>120</y>
+     <y>80</y>
      <width>171</width>
      <height>25</height>
     </rect>
@@ -100,7 +100,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>240</y>
+     <y>270</y>
      <width>171</width>
      <height>25</height>
     </rect>
@@ -143,7 +143,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>190</y>
+     <y>220</y>
      <width>171</width>
      <height>25</height>
     </rect>
@@ -180,17 +180,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>320</y>
-     <width>86</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="CMB_branch">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>160</y>
+     <y>350</y>
      <width>86</width>
      <height>25</height>
     </rect>
@@ -200,7 +190,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>280</y>
+     <y>310</y>
      <width>86</width>
      <height>25</height>
     </rect>
@@ -210,7 +200,7 @@
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>350</y>
+     <y>380</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -289,7 +279,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>70</y>
+     <y>40</y>
      <width>99</width>
      <height>29</height>
     </rect>
@@ -302,7 +292,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>230</y>
+     <y>260</y>
      <width>99</width>
      <height>29</height>
     </rect>
@@ -315,7 +305,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>110</y>
+     <y>80</y>
      <width>99</width>
      <height>29</height>
     </rect>
@@ -328,7 +318,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>190</y>
+     <y>220</y>
      <width>99</width>
      <height>29</height>
     </rect>
@@ -341,7 +331,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>320</y>
+     <y>350</y>
      <width>99</width>
      <height>29</height>
     </rect>
@@ -355,7 +345,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>270</y>
+     <y>300</y>
      <width>99</width>
      <height>29</height>
     </rect>
@@ -369,13 +359,27 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>150</y>
+     <y>120</y>
      <width>99</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Branch ID&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>170</y>
+     <width>99</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Section&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                 </string>
    </property>
   </widget>

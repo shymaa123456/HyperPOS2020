@@ -1,10 +1,14 @@
+import sys
+
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
+from data_connection.h1pos import db1
 
 
 class CheckableComboBox(QComboBox):
+
     # Subclass Delegate to increase item height
     class Delegate(QStyledItemDelegate):
         def sizeHint(self, option, index):
@@ -29,12 +33,14 @@ class CheckableComboBox(QComboBox):
         # Update the text when an item is toggled
         self.model().dataChanged.connect(self.updateText)
 
+
         # Hide and show popup when clicking the line edit
         self.lineEdit().installEventFilter(self)
         self.closeOnLineEditClick = False
 
         # Prevent popup from closing when clicking on an item
         self.view().viewport().installEventFilter(self)
+
 
     def resizeEvent(self, event):
         # Recompute text to elide as needed
@@ -87,11 +93,11 @@ class CheckableComboBox(QComboBox):
             if self.model().item(i).checkState() == Qt.Checked:
                 texts.append(self.model().item(i).text())
         text = ", ".join(texts)
-
         # Compute elided text (with "...")
         metrics = QFontMetrics(self.lineEdit().font())
         elidedText = metrics.elidedText(text, Qt.ElideRight, self.lineEdit().width())
         self.lineEdit().setText(elidedText)
+
 
     def addItem(self, text, data=None):
         item = QStandardItem()
@@ -127,3 +133,16 @@ class CheckableComboBox(QComboBox):
     def unChecked(self,index):
         item = self.model().item(index)
         item.setCheckState(Qt.Unchecked)
+
+
+
+
+
+
+
+
+
+
+
+
+

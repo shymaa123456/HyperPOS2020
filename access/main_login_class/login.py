@@ -15,10 +15,10 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.uic import loadUi
 from mysql.connector import Error
 
+from access.authorization_class.user_module import CL_userModule
 # import Controller
 from access.main_login_class.main import CL_main
 from data_connection.h1pos import db1
-from access.authorization_class.user_module import CL_userModule
 
 
 class CL_login(QtWidgets.QDialog):
@@ -52,7 +52,7 @@ class CL_login(QtWidgets.QDialog):
 
             if mycursor.rowcount > 0:
                 # save the login in the table
-                CL_userModule.user_name = username
+                CL_userModule.user_name = record[0]
                 print(username)
                 self.switch_window.emit()
 

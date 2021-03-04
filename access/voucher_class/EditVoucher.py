@@ -150,7 +150,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
 
     def FN_unCheckedALL(self):
         mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER where USER_NAME='" + CL_userModule.user_name + "'"
+        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER where USER_ID='" + CL_userModule.user_name + "'"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
         i = 0

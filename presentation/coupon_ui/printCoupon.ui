@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>طباعه الكوبون</string>
   </property>
-  <widget class="QPushButton" name="BTN_modifyCoupon">
+  <widget class="QPushButton" name="BTN_PrintCoupon">
    <property name="geometry">
     <rect>
      <x>30</x>

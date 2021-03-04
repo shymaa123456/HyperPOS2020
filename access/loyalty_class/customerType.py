@@ -154,7 +154,7 @@ class CL_customerTP(QtWidgets.QDialog):
             for column_number, data in enumerate(row_data):
                 item = QTableWidgetItem(str(data))
                 #if column_number == 0:
-                item.setFlagssetFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
+                item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                 self.Qtable_custTP.setItem(row_number, column_number, item)
         mycursor.close()
 

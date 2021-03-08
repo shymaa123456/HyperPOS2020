@@ -39,7 +39,7 @@ class CL_customerTP(QtWidgets.QDialog):
             self.BTN_createCustTp.clicked.connect(self.FN_CREATE_CUSTTP)
             self.BTN_modifyCustTp.clicked.connect(self.FN_MODIFY_CUSTTP)
             self.BTN_searchCustTp.clicked.connect(self.FN_SEARCH_CUSTTP)
-            self.BTN_getCustTp.clicked.connect(self.FN_GET_CUSTTP)
+            #self.BTN_getCustTp.clicked.connect(self.FN_GET_CUSTTP)
             self.CMB_nextLevel.activated.connect (self.FN_GET_ID)
             self.CMB_custType.activated.connect (self.FN_GET_ID_STS)
             self.FN_GET_ID()

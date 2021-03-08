@@ -284,9 +284,6 @@
      <addaction name="QAct_Cust_Gift_Define"/>
      <addaction name="QAct_Cust_Points_Redeem_Define"/>
      <addaction name="separator"/>
-     <addaction name="QAct_Cust_Points_By_Section"/>
-     <addaction name="QAct_Cust_Points_By_Item"/>
-     <addaction name="QAct_Cust_Points_Data_Upload"/>
      <addaction name="separator"/>
     </widget>
     <widget class="QMenu" name="QM_Customer_Redeem">

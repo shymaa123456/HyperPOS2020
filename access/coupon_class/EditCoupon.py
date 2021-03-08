@@ -27,7 +27,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
     multiusage=0
     serial_type=0
     dfrom=QDate(1,1,2000)
-
+    Special=0
     def __init__(self):
         super(CL_EditCoupon, self).__init__()
         cwd = Path.cwd()
@@ -155,6 +155,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
             self.serial_num=int(record[4])
 
             self.multiusage=int(record[5])
+            self.Special=int(record[5])
             if (int(record[5]) == 1):
                 self.checkBox_Multi.setChecked(True)
                 self.LE_desc_5.setValue(float(record[6]))
@@ -229,10 +230,12 @@ class CL_EditCoupon(QtWidgets.QDialog):
             self.LE_desc_5.setEnabled(True)
             self.LE_desc_4.setEnabled(False)
             self.LE_desc_4.setValue(1.0)
+            self.multiusage=1
 
         else:
             self.LE_desc_5.setEnabled(False)
             self.LE_desc_4.setEnabled(True)
+            self.multiusage=0
 
     def FN_editAction(self):
         try:
@@ -335,45 +338,71 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                             str(self.CMB_CouponDes.currentData()),
                                             '1')
                                         mycursor.execute(sql6, val6)
-
-                        if int(self.LE_desc_4.text()) < self.serial_num:
-                            indx = self.CMB_CouponDes.currentData()
-                            sql_select_Query = "SELECT COPS_SERIAL_ID FROM COUPON_SERIAL where COUPON_ID = %s and COPS_STATUS = 1 and COPS_SERIAL_type = 0"
-                            x = (indx,)
+                        if(self.multiusage==1):
                             mycursor = self.conn.cursor()
-                            mycursor.execute(sql_select_Query, x)
-                            record = mycursor.fetchall()
-                            num = 0
-                            for row in range(self.serial_num - int(self.LE_desc_4.text())):
-                                mycursor = self.conn.cursor()
-                                sql9 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(
-                                    self.CMB_CouponDes.currentData()) + "' and COPS_SERIAL_ID = '" + str(
-                                    record[num][0]) + "'"
-                                mycursor.execute(sql9)
-                                print(sql9)
-                                num += 1
-                            self.serial_num=int(self.LE_desc_4.text())
+                            sql9 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(
+                                     self.CMB_CouponDes.currentData()) + "' and COPS_SERIAL_type = 0"
+                            mycursor.execute(sql9)
+                            value = randint(0, 1000000000000)
+                            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                            mycursor = self.conn.cursor()
+                            sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                            val7 = (
+                                str(self.CMB_CouponDes.currentData()), "HCOP" + bin(value),
+                                CL_userModule.user_name,
+                                self.serial_type,
+                                creationDate, 0,
+                                '1')
+                            mycursor.execute(sql7, val7)
+
                         else:
-                            for row in range(self.serial_num):
+                            mycursor = self.conn.cursor()
+
+                            if(int(self.Special)==1):
+                                self.serial_num=0
+                                print("num"+str(self.serial_num))
+                            sql9 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(
+                                self.CMB_CouponDes.currentData()) + "' and COPS_SERIAL_type = 1"
+                            mycursor.execute(sql9)
+                            if int(self.LE_desc_4.text()) < self.serial_num:
+                                indx = self.CMB_CouponDes.currentData()
+                                sql_select_Query = "SELECT COPS_SERIAL_ID FROM COUPON_SERIAL where COUPON_ID = %s and COPS_STATUS = 1 and COPS_SERIAL_type = 0"
+                                x = (indx,)
                                 mycursor = self.conn.cursor()
-                                sql9 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(
-                                    self.CMB_CouponDes.currentData()) + "'"
-                                mycursor.execute(sql9)
-                            for row in range(int(self.LE_desc_4.text())):
-                                value = randint(0, 1000000000000)
-                                creationDate = str(datetime.today().strftime('%d-%m-%Y'))
-                                mycursor = self.conn.cursor()
-                                sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-                                val7 = (
-                                    str(self.CMB_CouponDes.currentData()), "HCOP"+bin(value), CL_userModule.user_name,
-                                    self.serial_type,
-                                    creationDate, 0,
-                                    '1')
-                                mycursor.execute(sql7, val7)
+                                mycursor.execute(sql_select_Query, x)
+                                record = mycursor.fetchall()
+                                print(record)
+                                num = 0
+                                for row in range(self.serial_num - int(self.LE_desc_4.text())):
+                                    mycursor = self.conn.cursor()
+                                    sql9 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(
+                                        self.CMB_CouponDes.currentData()) + "' and COPS_SERIAL_ID = '" + str(
+                                        record[num][0]) + "'"
+                                    mycursor.execute(sql9)
+                                    print(sql9)
+                                    num += 1
+                                self.serial_num = int(self.LE_desc_4.text())
+                            else:
+                                # for row in range(self.serial_num):
+                                #     mycursor = self.conn.cursor()
+                                #     sql9 = "update COUPON_SERIAL set COPS_STATUS= 0 where COUPON_ID='" + str(
+                                #         self.CMB_CouponDes.currentData()) + "'"
+                                #     mycursor.execute(sql9)
+                                for row in range(int(self.LE_desc_4.text()) - self.serial_num):
+                                    value = randint(0, 1000000000000)
+                                    creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                                    mycursor = self.conn.cursor()
+                                    sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                                    val7 = (
+                                        str(self.CMB_CouponDes.currentData()), "HCOP" + bin(value),
+                                        CL_userModule.user_name,
+                                        self.serial_type,
+                                        creationDate, 0,
+                                        '1')
+                                    mycursor.execute(sql7, val7)
+                                self.serial_num = int(self.LE_desc_4.text())
 
 
-
-                            self.serial_num = int(self.LE_desc_4.text())
 
                         db1.connectionCommit(self.conn)
                         mycursor.close()

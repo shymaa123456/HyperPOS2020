@@ -28,13 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="comments of 10-2-2021">
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyRedeemType.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/definePointValue.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/redeemGift.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadCustPoints.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/redeemVoucher.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/redeemVoucher.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,13 +253,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00027" summary="adjust authorization">
-      <created>1603958696635</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1603958696635</updated>
     </task>
     <task id="LOCAL-00028" summary="adjust authorization">
       <created>1604242299569</created>
@@ -603,7 +590,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614849219604</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="comments of 10-2-2021">
+      <created>1614870256916</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1614870256917</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -699,22 +693,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
-    <state width="1345" height="323" key="GridCell.Tab.0.bottom" timestamp="1614849327448">
+    <state width="1345" height="98" key="GridCell.Tab.0.bottom" timestamp="1614870284133">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="323" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614849327448" />
-    <state width="1345" height="323" key="GridCell.Tab.0.center" timestamp="1614849327448">
+    <state width="1345" height="98" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614870284133" />
+    <state width="1345" height="98" key="GridCell.Tab.0.center" timestamp="1614870284133">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="323" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614849327448" />
-    <state width="1345" height="323" key="GridCell.Tab.0.left" timestamp="1614849327447">
+    <state width="1345" height="98" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614870284133" />
+    <state width="1345" height="98" key="GridCell.Tab.0.left" timestamp="1614870284132">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="323" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614849327447" />
-    <state width="1345" height="323" key="GridCell.Tab.0.right" timestamp="1614849327448">
+    <state width="1345" height="98" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614870284132" />
+    <state width="1345" height="98" key="GridCell.Tab.0.right" timestamp="1614870284133">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="323" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614849327448" />
+    <state width="1345" height="98" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614870284133" />
     <state width="1316" height="190" key="GridCell.Tab.1.bottom" timestamp="1614237265894">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -747,18 +741,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614595978401" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1614849357969">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1614870261077">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1614849357969" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1614870261077" />
     <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="691" height="372" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1609935341048" />
-    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614849344096">
+    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615364607443">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1614849344096" />
+    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1615364607443" />
     <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1613307460388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

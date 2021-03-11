@@ -49,22 +49,26 @@ class CL_customerTP(QtWidgets.QDialog):
 
     def FN_GET_CUSTTP(self):
      try:
-        if len(self.Qtable_custTP.selectedIndexes()) > 0:
+        if len(self.Qtable_custTP.selectedIndexes()) >= 0:
             rowNo = self.Qtable_custTP.selectedItems()[0].row()
             id = self.Qtable_custTP.item(rowNo, 0).text()
             desc = self.Qtable_custTP.item(rowNo, 1).text()
             points = self.Qtable_custTP.item(rowNo, 2).text()
-            nextLevel = self.Qtable_custTP.item(rowNo, 3).text()
+
             status = self.Qtable_custTP.item(rowNo, 4).text()
-            nextLevel = self.FN_GET_NEXTlEVEL_DESC(nextLevel)
+            if  rowNo != 0 :
+                nextLevel = self.Qtable_custTP.item(rowNo, 3).text()
+                self.LB_nextLvlId.setText(nextLevel )
+                nextLevel = self.FN_GET_NEXTlEVEL_DESC(nextLevel)
+                self.CMB_nextLevel.setCurrentText(nextLevel)
 
             self.LE_desc.setText(desc)
             self.LE_points.setText(points)
-
+            self.LB_custTpId.setText(id)
             self.CMB_custType.setCurrentText(status)
-            self.CMB_nextLevel.setCurrentText(nextLevel)
+
             #print(rowNo)
-            self.FN_MODIFY_CUSTTP()
+            #self.FN_MODIFY_CUSTTP()
      except Exception as err:
          print(err)
     def FN_GET_ID_STS(self):
@@ -105,12 +109,10 @@ class CL_customerTP(QtWidgets.QDialog):
                 self.Qtable_custTP.insertRow(row_number)
                 for column_number, data in enumerate(row_data):
                     item = QTableWidgetItem(str(data))
-
-                    if column_number == 0:
-                        item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
+                    item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(item ))
             mycursor.close()
-        # self.Qtable_custTP.setItem(0, 0, QTableWidgetItem(str('11111')))
+            self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
         except Exception as err:
             print(err)
     def FN_GET_NEXTlEVEL(self):
@@ -122,7 +124,7 @@ class CL_customerTP(QtWidgets.QDialog):
 
     def FN_GET_NEXTlEVEL_ID(self,desc):
         try:
-            mycursor3 = self.conn1.cursor()
+            mycursor3 = self.conn.cursor()
             mycursor3.execute("SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  where LOYCT_DESC= '"+desc+"'")
             records = mycursor3.fetchone()
             mycursor3.close()
@@ -146,16 +148,16 @@ class CL_customerTP(QtWidgets.QDialog):
     def FN_GET_CUSTTPS(self):
         for i in reversed(range(self.Qtable_custTP.rowCount())):
             self.Qtable_custTP.removeRow(i)
-        mycursor = self.conn1.cursor(buffered=True)
+        mycursor = self.conn.cursor(buffered=True)
         mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID   asc")
         records = mycursor.fetchall()
         for row_number, row_data in enumerate(records):
             self.Qtable_custTP.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 item = QTableWidgetItem(str(data))
-                #if column_number == 0:
                 item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                 self.Qtable_custTP.setItem(row_number, column_number, item)
+        self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
         mycursor.close()
 
     def FN_CHECK_STATUS(self, status):
@@ -202,7 +204,7 @@ class CL_customerTP(QtWidgets.QDialog):
             else:
                status = 0
 
-            mycursor = self.conn1.cursor()
+            mycursor = self.conn.cursor()
             # get max userid
             mycursor.execute("SELECT max(cast(LOYCT_TYPE_ID   AS UNSIGNED))   FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE ")
             myresult = mycursor.fetchone()
@@ -229,8 +231,8 @@ class CL_customerTP(QtWidgets.QDialog):
 
                     print(mycursor.rowcount, "Cust Tp inserted.")
                     QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
-                    db1.connectionCommit(self.conn1)
-                    self.FN_GET_CUSTTPS()
+                    db1.connectionCommit(self.conn)
+                    #self.FN_GET_CUSTTPS()
                 else:
                     QtWidgets.QMessageBox.warning(self, "Error", "Name duplicated' ")
                     #mycursor.close()
@@ -240,15 +242,16 @@ class CL_customerTP(QtWidgets.QDialog):
 
     def FN_MODIFY_CUSTTP(self):
         try:
+                    id = self.LB_custTpId.text()
                     desc = self.LE_desc.text().strip()
                     points = self.LE_points.text().strip()
                     custType = self.CMB_custType.currentText()
-                    nextLevel = self.CMB_nextLevel.currentText()
+                    nextLevel = self.LB_nextLvlId.text().strip()
                     if custType == 'Active':
                         status = 1
                     else:
                         status = 0
-                    mycursor = self.conn1.cursor()
+                    mycursor = self.conn.cursor()
 
                     sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT= %s where LOYCT_TYPE_ID = %s"
                     val = (status,desc,points,nextLevel ,id,)
@@ -256,8 +259,8 @@ class CL_customerTP(QtWidgets.QDialog):
                     mycursor.close()                #
                     print(mycursor.rowcount, "record updated.")
                     QtWidgets.QMessageBox.information(self, "Success", "Cust Tp updated")
-                    db1.connectionCommit(self.conn1)
-
+                    db1.connectionCommit(self.conn)
+                    #self.FN_GET_CUSTTPS()
         except Exception as err:
             mycursor.close()
             print(err)

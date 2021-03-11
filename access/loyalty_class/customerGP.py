@@ -47,7 +47,7 @@ class CL_customerGP(QtWidgets.QDialog):
             for i in reversed(range(self.Qtable_custGP.rowCount())):
                 self.Qtable_custGP.removeRow(i)
 
-            mycursor = self.conn.cursor()
+            mycursor = self.conn1.cursor()
 
             name = self.LE_desc.text().strip()
             self.custGroup = self.CMB_custGroup.currentText()
@@ -61,21 +61,25 @@ class CL_customerGP(QtWidgets.QDialog):
                 whereClause = whereClause + "and CG_DESC = '" + str(name) + "'"
 
             sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause
-            print(sql_select_query)
+            #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable_custGP.insertRow(row_number)
 
                 for column_number, data in enumerate(row_data):
+
+
+                    item = QTableWidgetItem(str(data))
+
                     if column_number == 2:
                         data = self.FN_GET_STATUS_DESC(str(data))
-
-                    self.Qtable_custGP.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+                    item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
+                    self.Qtable_custGP.setItem(row_number, column_number, item)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         #
             self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
-            mycursor.close()
+            #mycursor.close()
         #self.Qtable_custGP.setItem(0, 0, QTableWidgetItem(str('11111')))
         except Exception as err:
              print(err)
@@ -86,34 +90,38 @@ class CL_customerGP(QtWidgets.QDialog):
             return "Inactive"
 
     def FN_GET_CUSTGPS(self):
-        for i in reversed(range(self.Qtable_custGP.rowCount())):
-            self.Qtable_custGP.removeRow(i)
+        try:
+            for i in reversed(range(self.Qtable_custGP.rowCount())):
+                self.Qtable_custGP.removeRow(i)
 
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  order by CG_GROUP_ID   asc")
-        records = mycursor.fetchall()
-        for row_number, row_data in enumerate(records):
-            self.Qtable_custGP.insertRow(row_number)
-            for column_number, data in enumerate(row_data):
-                if column_number == 2:
-                    data = self.FN_GET_STATUS_DESC(str(data))
-                item = QTableWidgetItem(str(data))
-                if column_number == 0:
-                    item.setFlags(QtCore.Qt.NoItemFlags)
-                self.Qtable_custGP.setItem(row_number, column_number, item)
-        self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
-        mycursor.close()
+            mycursor = self.conn.cursor()
+            mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  order by CG_GROUP_ID   asc")
+            records = mycursor.fetchall()
+            for row_number, row_data in enumerate(records):
+                self.Qtable_custGP.insertRow(row_number)
+                for column_number, data in enumerate(row_data):
+                    item = QTableWidgetItem(str(data))
+
+                    if column_number == 2:
+                        data = self.FN_GET_STATUS_DESC(str(data))
+                    item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
+
+                    self.Qtable_custGP.setItem(row_number, column_number, item)
+            self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
+            #mycursor.close()
+        except Exception as err:
+            print(err)
 
     def FN_GET_CUSTGP(self):
         try:
-            if len(self.Qtable_custGP.selectedIndexes()) > 0:
+            if len(self.Qtable_custGP.selectedIndexes()) >= 0:
                 rowNo = self.Qtable_custGP.selectedItems()[0].row()
                 id = self.Qtable_custGP.item(rowNo, 0).text()
                 desc = self.Qtable_custGP.item(rowNo, 1).text()
                 status = self.Qtable_custGP.item(rowNo, 2).text()
                 self.LE_desc.setText(desc)
                 self.LB_custGpId.setText(id)
-                self.CMB_custGroup.setCurrentText(status)
+                self.CMB_custGroup.setCurrentText(self.FN_GET_STATUS_DESC(status))
                 # self.FN_MODIFY_CUSTTP()
         except Exception as err:
             print(err)
@@ -192,33 +200,29 @@ class CL_customerGP(QtWidgets.QDialog):
         # insert into db
 
     def FN_MODIFY_CUSTGP(self):
-        print("here")
+
         if len(self.Qtable_custGP.selectedIndexes()) >0 :
             rowNo = self.Qtable_custGP.selectedItems()[0].row()
             id = self.Qtable_custGP.item(rowNo, 0).text()
             desc = self.Qtable_custGP.item(rowNo, 1).text()
             status = self.Qtable_custGP.item(rowNo, 2).text()
-            ret = self.FN_CHECK_STATUS(status)
-            if ret != False:
-                if status == 'Active':
-                    status = 1
-                else:
-                    status = 0
-                #
-                mycursor = self.conn1.cursor()
-                changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
-                val = (status,desc, changeDate,CL_userModule.user_name,id)
-                mycursor.execute(sql, val)
-                mycursor.close()
-                #
-                print(mycursor.rowcount, "record updated.")
-                QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
-                db1.connectionCommit(self.conn1)
-                # db1.connectionClose(self.conn)
-                #  self.close()
+            #ret = self.FN_CHECK_STATUS(status)
+            #if ret != False:
+            if status == 'Active':
+                status = 1
             else:
+                status = 0
+            #
+            mycursor = self.conn1.cursor()
+            changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+            sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
+            val = (status,desc, changeDate,CL_userModule.user_name,id)
+            mycursor.execute(sql, val)
+            #mycursor.close()
+            #
+            print(mycursor.rowcount, "record updated.")
+            QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
+            db1.connectionCommit(self.conn1)
 
-                QtWidgets.QMessageBox.warning(self, "Error", "Status should be 'Active' or 'Inactive' ")
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")

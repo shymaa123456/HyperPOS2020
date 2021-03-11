@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 from PyQt5 import QtWidgets,QtCore
@@ -21,7 +22,6 @@ class CL_customerTP(QtWidgets.QDialog):
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
-        self.conn1 = db1.connect()
         #mycursor = self.conn.cursor()
 
     def FN_LOAD_DISPlAY(self):
@@ -86,25 +86,24 @@ class CL_customerTP(QtWidgets.QDialog):
         self.LB_nextLvlId.setText (id)
     def FN_SEARCH_CUSTTP(self):
         try:
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
             for i in reversed(range(self.Qtable_custTP.rowCount())):
                 self.Qtable_custTP.removeRow(i)
-
-            mycursor = self.conn.cursor()
             name = self.LE_desc.text().strip()
             self.custType = self.CMB_custType.currentText()
             if self.custType == 'Active':
                 whereClause = "where LOYCT_STATUS =1  "
             else:
                 whereClause = "where LOYCT_STATUS = 0 "
-
             if name != '':
                 whereClause = whereClause + "and LOYCT_DESC = '" + str(name) + "'"
             whereClause = whereClause  + " and LOYCT_TYPE_ID != 'H1'"
-
             sql_select_query = "select  LOYCT_TYPE_ID,LOYCT_DESC , LOYCT_POINTS_TO_PROMOTE,LOYCT_TYPE_NEXT,LOYCT_STATUS from  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE " + whereClause
             print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
+            print(sql_select_query)
             for row_number, row_data in enumerate(records):
                 self.Qtable_custTP.insertRow(row_number)
                 for column_number, data in enumerate(row_data):
@@ -113,10 +112,10 @@ class CL_customerTP(QtWidgets.QDialog):
                     self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(item ))
             mycursor.close()
             self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
-        except Exception as err:
-            print(err)
+        except :
+            print(sys.exc_info())
     def FN_GET_NEXTlEVEL(self):
-        mycursor = self.conn.cursor()
+        mycursor = self.conn.cursor(buffered=True)
         mycursor.execute("SELECT LOYCT_DESC ,LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
         records = mycursor.fetchall()
         #mycursor.close()

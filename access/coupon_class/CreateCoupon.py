@@ -179,7 +179,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
 
                     sql_select_Query = "select * from COUPON_SERIAL where COPS_BARCODE = %s "
 
-                    x = (bin(value),)
+                    x = ("HCOP"+bin(value),)
                     mycursor = self.conn.cursor()
                     mycursor.execute(sql_select_Query, x)
                     record = mycursor.fetchone()

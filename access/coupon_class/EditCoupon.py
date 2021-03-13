@@ -240,7 +240,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
     def FN_editAction(self):
         try:
             if len(self.Qcombo_company.currentData()) == 0 or len(self.Qcombo_branch.currentData()) == 0 or len(
-                    self.LE_desc_1.text()) == 0 or len(self.LE_desc_3.text()) == 0 and len(self.LE_desc_2.text()) == 0:
+                    self.LE_desc_1.text().strip()) == 0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
                 if self.Qdate_to.dateTime()<self.Qdate_from.dateTime():
@@ -281,7 +281,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                     if int(self.LE_desc_4.text()) < self.serial_num and self.movement == 1:
                         QtWidgets.QMessageBox.warning(self, "Error", "برجاء ادخل عدد اكبر من السابق")
                     else:
-                        sql = "update COUPON set COP_DESC='" + self.LE_desc_1.text() + "'," + self.valueType + "=" + self.valueData + ",COP_SERIAL_COUNT=" + self.serialCount + ",COP_MULTI_USE=" + self.MultiUse + ",COP_MULTI_USE_COUNT=" + self.MultiCount + ",COP_CHANGED_BY='" + CL_userModule.user_name + "',COP_CHANGED_ON='" + creationDate + "',COP_VALID_FROM='" + self.Qdate_from.dateTime().toString(
+                        sql = "update COUPON set COP_DESC='" + self.LE_desc_1.text().strip() + "'," + self.valueType + "=" + self.valueData + ",COP_SERIAL_COUNT=" + self.serialCount + ",COP_MULTI_USE=" + self.MultiUse + ",COP_MULTI_USE_COUNT=" + self.MultiCount + ",COP_CHANGED_BY='" + CL_userModule.user_name + "',COP_CHANGED_ON='" + creationDate + "',COP_VALID_FROM='" + self.Qdate_from.dateTime().toString(
                             'dd-MM-yyyy') + "',COP_VALID_TO='" + self.Qdate_to.dateTime().toString(
                             'dd-MM-yyyy') + "',COP_STATUS='" + str(
                             self.CMB_CouponStatus.currentIndex()) + "' where COP_ID='" + str(

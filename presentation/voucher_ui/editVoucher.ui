@@ -269,7 +269,7 @@
   </widget>
   <widget class="QDoubleSpinBox" name="LE_desc_2">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -352,7 +352,7 @@
   </widget>
   <widget class="QLabel" name="label">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -547,6 +547,9 @@
    </property>
   </widget>
   <widget class="QDoubleSpinBox" name="LE_desc_3">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>10</x>

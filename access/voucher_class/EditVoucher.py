@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtCore import QDate
+from PyQt5.QtCore import QDate, QDateTime
 from PyQt5.uic import loadUi
 
 from access.promotion_class.Promotion_Add import CheckableComboBox
@@ -16,6 +16,11 @@ class CL_EditVoucher(QtWidgets.QDialog):
     GV_REFUNDABLE = 0
     GV_RECHARGABLE = 0
     GV_MULTIUSE = 0
+    recharge = 0
+    branch_list = []
+    new_branch_list = []
+    section_list = []
+    new_section_list = []
 
     def __init__(self):
         super(CL_EditVoucher, self).__init__()
@@ -55,14 +60,14 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.checkBox_Multi.toggled.connect(self.FN_multiuse)
             self.checkBox_rechange.toggled.connect(self.FN_Rechangable)
             self.checkBox_refundable.toggled.connect(self.FN_Refundable)
+            self.BTN_editCoupon.clicked.connect(self.FN_editAction)
 
 
         except:
             print(sys.exc_info())
 
-
     def FN_GET_Company(self):
-        #Todo: method for fills the company combobox
+        # Todo: method for fills the company combobox
 
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -91,7 +96,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-
     def FN_SELECT_company(self):
         indx = self.CMB_CouponDes.currentData()
         mycursor = self.conn.cursor()
@@ -111,7 +115,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
         records = mycursor.fetchall()
         mycursor.close()
         return records
-
 
     def FN_SELECT_section(self):
         indx = self.CMB_CouponDes.currentData()
@@ -141,7 +144,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     def FN_check_branch(self, index):
         self.FN_unCheckedALL()
         mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='"+CL_userModule.user_name+"'"
+        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "'"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
         i = 0
@@ -158,7 +161,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     def FN_check_section(self, index):
         self.FN_unCheckedALLsection()
         mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='"+CL_userModule.user_name+"'"
+        sql_select_branch = "SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "'"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
         i = 0
@@ -189,19 +192,18 @@ class CL_EditVoucher(QtWidgets.QDialog):
         record = mycursor.fetchall()
         i = 0
         for row in record:
-            self.Qcombo_branch.unChecked(i)
+            self.Qcombo_section.unChecked(i)
             i += 1
 
     def FN_GetMathchBranch(self):
         indx = self.CMB_CouponDes.currentData()
         mycursor = self.conn.cursor()
-        sql = "SELECT BRANCH_NO FROM COUPON_BRANCH where COUPON_ID = %s and STATUS = 1"
+        sql = "SELECT BRANCH_NO FROM VOUCHER_BRANCH where GV_ID = %s and STATUS = 1"
         c = (indx,)
         mycursor.execute(sql, c)
         records = mycursor.fetchall()
         mycursor.close()
         return records
-
 
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
@@ -211,20 +213,20 @@ class CL_EditVoucher(QtWidgets.QDialog):
         return records
 
     def FN_GET_Section(self):
-            # Todo: method for fills the section combobox
-            try:
-                self.conn = db1.connect()
-                mycursor = self.conn.cursor()
-                mycursor.execute("SELECT SECTION_DESC , SECTION_ID FROM SECTION")
-                records = mycursor.fetchall()
-                print(records)
-                for row, val in records:
-                    for bra in self.FN_AuthSectionUser():
-                        if val in bra:
-                            self.Qcombo_section.addItem(row, val)
-                mycursor.close()
-            except:
-                print(sys.exc_info())
+        # Todo: method for fills the section combobox
+        try:
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            mycursor.execute("SELECT SECTION_DESC , SECTION_ID FROM SECTION")
+            records = mycursor.fetchall()
+            print(records)
+            for row, val in records:
+                for bra in self.FN_AuthSectionUser():
+                    if val in bra:
+                        self.Qcombo_section.addItem(row, val)
+            mycursor.close()
+        except:
+            print(sys.exc_info())
 
     def FN_AuthSectionUser(self):
         self.conn = db1.connect()
@@ -249,14 +251,16 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT GV_DESC,GV_ID FROM VOUCHER")
         records = mycursor.fetchall()
-        for row,val in records:
-            self.CMB_CouponDes.addItem(row,val)
+        for row, val in records:
+            self.CMB_CouponDes.addItem(row, val)
         mycursor.close()
 
     def FN_getDatabyID(self):
-         try:
+        try:
             self.branch_list = []
             self.new_branch_list = []
+            self.section_list = []
+            self.new_section_list = []
             indx = self.CMB_CouponDes.currentData()
             self.labe_id.setText(str(indx))
             self.conn = db1.connect()
@@ -267,35 +271,40 @@ class CL_EditVoucher(QtWidgets.QDialog):
             record = mycursor.fetchone()
             self.LE_desc_1.setText(record[1])
             self.LE_desc_2.setValue(float(record[4]))
-
             self.CMB_CouponStatus.setCurrentIndex(int(record[20]))
-
             datefrom = record[12]
             xfrom = datefrom.split("-")
             self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
             self.Qdate_from.setDate(self.dfrom)
-
+            self.dfrom = QDateTime(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]), 00, 00, 00, 00)
             dateto = record[13]
             xto = dateto.split("-")
             d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
             self.Qdate_to.setDate(d)
-
-
-            if int(record[14])==1:
+            if int(record[14]) == 1:
                 self.checkBox_refundable.setChecked(True)
             else:
                 self.checkBox_refundable.setChecked(False)
-            if int(record[15])==1:
+            if int(record[15]) == 1:
                 self.checkBox_rechange.setChecked(True)
+                self.LE_desc_3.setEnabled(True)
             else:
                 self.checkBox_rechange.setChecked(False)
-            if int(record[16])==1:
+                self.LE_desc_3.setEnabled(False)
+            if int(record[16]) == 1:
                 self.checkBox_Multi.setChecked(True)
             else:
                 self.checkBox_Multi.setChecked(False)
             self.FN_check_section(indx)
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
+            print(record[18])
+            if int(str(record[18])) == 1:
+                self.LE_desc_2.setEnabled(False)
+                self.LE_desc_3.setEnabled(True)
+            elif int(str(record[18])) == 0:
+                self.LE_desc_2.setEnabled(True)
+                self.LE_desc_3.setEnabled(False)
             sql_select = "select * from SPONSER where SPONSER_ID=( SELECT SPONSER_ID FROM VOUCHER_SPONSOR where GV_ID = %s)"
             x = (indx,)
             mycursor.execute(sql_select, x)
@@ -303,55 +312,148 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.Qcombo_sponser.setCurrentText(record[2])
 
             self.branch_list.clear()
+            self.section_list.clear()
             if len(self.Qcombo_branch.currentData()) > 0:
                 for i in self.Qcombo_branch.currentData():
                     self.branch_list.append(i)
-
-         except:
-             print(sys.exc_info())
+            if len(self.Qcombo_section.currentData()) > 0:
+                for x in self.Qcombo_section.currentData():
+                    self.section_list.append(x)
+        except:
+            print(sys.exc_info())
 
     def FN_multiuse(self):
         if self.checkBox_Multi.isChecked():
-            self.GV_MULTIUSE=1
+            self.GV_MULTIUSE = 1
         else:
-            self.GV_MULTIUSE=0
+            self.GV_MULTIUSE = 0
 
     def FN_Rechangable(self):
         if self.checkBox_rechange.isChecked():
-            self.GV_RECHARGABLE=1
+            self.GV_RECHARGABLE = 1
+            self.LE_desc_3.setEnabled(True)
+
         else:
-            self.GV_RECHARGABLE=0
+            self.GV_RECHARGABLE = 0
+            self.LE_desc_3.setEnabled(False)
 
     def FN_Refundable(self):
         if self.checkBox_refundable.isChecked():
-            self.GV_REFUNDABLE=1
+            self.GV_REFUNDABLE = 1
         else:
-            self.GV_REFUNDABLE=0
+            self.GV_REFUNDABLE = 0
 
     def FN_editAction(self):
         try:
             if len(self.Qcombo_company.currentData()) == 0 or len(self.Qcombo_branch.currentData()) == 0 or len(
-                    self.LE_desc_1.text().strip()) == 0 or len(self.Qcombo_section.currentData()) == 0 :
+                    self.LE_desc_1.text().strip()) == 0 or len(self.Qcombo_section.currentData()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
-                if self.Qdate_to.dateTime()<self.Qdate_from.dateTime():
-                    QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
-                elif self.Qdate_from.dateTime()<self.dfrom:
-                    QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانشاء الجديد يجب ان يكون اكبر او يساوي تاريخ الانشاء قبل التعديل")
-
+                if self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
+                    QtWidgets.QMessageBox.warning(self, "Done",
+                                                  "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                elif self.Qdate_from.dateTime() < self.dfrom:
+                    QtWidgets.QMessageBox.warning(self, "Done",
+                                                  "تاريخ الانشاء الجديد يجب ان يكون اكبر او يساوي تاريخ الانشاء قبل التعديل")
                 else:
                     mycursor = self.conn.cursor()
                     creationDate = str(datetime.today().strftime('%d-%m-%Y'))
-                    sql = "update VOUCHER set GV_DESC='" + self.LE_desc_1.text().strip() +",GV_RECHARGE_VALUE="++",GV_REFUNDABLE="+self.GV_REFUNDABLE+",GV_RECHARGABLE="+self.GV_RECHARGABLE+",GV_MULTIUSE=" +self.GV_MULTIUSE+ ",POSC_CUST_ID="+self.LE_desc_5.text().strip()+" ,GV_CHANGED_BY='" + CL_userModule.user_name + "',GV_CHANGE_ON='" + creationDate + "',GV_VALID_FROM='" + self.Qdate_from.dateTime().toString(
+                    sql = "update VOUCHER set GV_DESC='" + self.LE_desc_1.text().strip() + "',GV_RECHARGE_VALUE='" + self.LE_desc_3.text().strip() + "',GV_REFUNDABLE=" + str(
+                        self.GV_REFUNDABLE) + ",GV_RECHARGABLE=" + str(self.GV_RECHARGABLE) + ",GV_MULTIUSE=" + str(
+                        self.GV_MULTIUSE) + " ,GV_CHANGED_BY='" + CL_userModule.user_name + "',GV_CHANGE_ON='" + creationDate + "',GV_VALID_FROM='" + self.Qdate_from.dateTime().toString(
                         'dd-MM-yyyy') + "',GV_VALID_TO='" + self.Qdate_to.dateTime().toString(
                         'dd-MM-yyyy') + "',GV_STATUS='" + str(
                         self.CMB_CouponStatus.currentIndex()) + "' where GV_ID='" + str(
                         self.CMB_CouponDes.currentData()) + "'"
+                    print(sql)
                     mycursor.execute(sql)
+                    if len(self.Qcombo_branch.currentData()) > 0:
+                        for i in self.Qcombo_branch.currentData():
+                            self.new_branch_list.append(i)
+                    if len(self.Qcombo_section.currentData()) > 0:
+                        for i in self.Qcombo_section.currentData():
+                            self.new_section_list.append(i)
+                    if len(self.branch_list) > len(self.new_branch_list):
+                        for row in self.branch_list:
+                            print(row)
+                            if row in self.new_branch_list:
+                                print("found")
+                            else:
+                                print("not found")
+                                mycursor = self.conn.cursor()
+                                sql5 = "update VOUCHER_BRANCH set STATUS= 0 where GV_ID='" + str(
+                                    self.CMB_CouponDes.currentData()) + "' and BRANCH_NO = '" + row + "'"
+                                mycursor.execute(sql5)
+                                print(sql5)
+                    else:
+                        for row in self.new_branch_list:
+                            print(row)
+                            if row in self.branch_list:
+                                print("found")
+                            else:
+
+                                mycursor = self.conn.cursor()
+                                mycursor.execute(
+                                    "SELECT * FROM VOUCHER_BRANCH where BRANCH_NO='" + row + "' and GV_ID='" + str(
+                                        self.CMB_CouponDes.currentData()) + "'")
+                                record = mycursor.fetchall()
+                                if mycursor.rowcount > 0:
+                                    mycursor = self.conn.cursor()
+                                    sql8 = "update VOUCHER_BRANCH set STATUS= 1 where GV_ID='" + str(
+                                        self.CMB_CouponDes.currentData()) + "' and BRANCH_NO = '" + row + "'"
+                                    mycursor.execute(sql8)
+                                    print(sql8)
+                                else:
+                                    mycursor = self.conn.cursor()
+                                    sql6 = "INSERT INTO VOUCHER_BRANCH (COMPANY_ID,BRANCH_NO,GV_ID,STATUS) VALUES (%s,%s,%s,%s)"
+                                    val6 = (
+                                        str(self.Qcombo_company.currentData()[0]), row,
+                                        str(self.CMB_CouponDes.currentData()),
+                                        '1')
+                                    mycursor.execute(sql6, val6)
+
+                    if len(self.section_list) > len(self.new_section_list):
+                        for row in self.section_list:
+                            print(row)
+                            if row in self.new_section_list:
+                                print("found")
+                            else:
+                                print("not found")
+                                mycursor = self.conn.cursor()
+                                sql5 = "update VOUCHER_SECTION set STATUS= 0 where GV_ID='" + str(
+                                    self.CMB_CouponDes.currentData()) + "' and SECTION_ID = '" + row + "'"
+                                mycursor.execute(sql5)
+                                print(sql5)
+                    else:
+                        for row in self.new_branch_list:
+                            print(row)
+                            if row in self.branch_list:
+                                print("found")
+                            else:
+                                mycursor = self.conn.cursor()
+                                mycursor.execute(
+                                    "SELECT * FROM VOUCHER_SECTION where SECTION_ID='" + row + "' and GV_ID='" + str(
+                                        self.CMB_CouponDes.currentData()) + "'")
+                                record = mycursor.fetchall()
+                                if mycursor.rowcount > 0:
+                                    mycursor = self.conn.cursor()
+                                    sql8 = "update VOUCHER_SECTION set STATUS= 1 where GV_ID='" + str(
+                                        self.CMB_CouponDes.currentData()) + "' and SECTION_ID = '" + row + "'"
+                                    mycursor.execute(sql8)
+                                    print(sql8)
+                                else:
+                                    mycursor = self.conn.cursor()
+                                    sql6 = "INSERT INTO VOUCHER_SECTION (SECTION_ID,GV_ID,STATUS) VALUES (%s,%s,%s,%s)"
+                                    val6 = (
+                                        row,
+                                        str(self.CMB_CouponDes.currentData()),
+                                        '1')
+                                    mycursor.execute(sql6, val6)
+
+                    db1.connectionCommit(self.conn)
+                    mycursor.close()
+                    self.FN_getDatabyID()
+                    QtWidgets.QMessageBox.warning(self, "Done", "Done")
 
         except:
             print(sys.exc_info())
-
-
-
-

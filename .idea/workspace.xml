@@ -256,13 +256,6 @@
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
     </task>
-    <task id="LOCAL-00029" summary="add the functionality to select more than one element in combobox">
-      <created>1604405514981</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1604405514981</updated>
-    </task>
     <task id="LOCAL-00030" summary="Create customer group &#10;modify customer gp">
       <created>1604495153025</created>
       <option name="number" value="00030" />
@@ -599,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615364660363</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="resolving comments">
+      <created>1615446764783</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1615446764783</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -695,38 +695,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
-    <state width="1345" height="98" key="GridCell.Tab.0.bottom" timestamp="1615446702868">
+    <state width="1345" height="208" key="GridCell.Tab.0.bottom" timestamp="1615905462657">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="98" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615446702868" />
-    <state width="1345" height="98" key="GridCell.Tab.0.center" timestamp="1615446702868">
+    <state width="1345" height="208" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615905462657" />
+    <state width="1345" height="208" key="GridCell.Tab.0.center" timestamp="1615905462657">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="98" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615446702868" />
-    <state width="1345" height="98" key="GridCell.Tab.0.left" timestamp="1615446702868">
+    <state width="1345" height="208" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615905462657" />
+    <state width="1345" height="208" key="GridCell.Tab.0.left" timestamp="1615905462657">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="98" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615446702868" />
-    <state width="1345" height="98" key="GridCell.Tab.0.right" timestamp="1615446702868">
+    <state width="1345" height="208" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615905462657" />
+    <state width="1345" height="208" key="GridCell.Tab.0.right" timestamp="1615905462657">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="98" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615446702868" />
-    <state width="1345" height="208" key="GridCell.Tab.1.bottom" timestamp="1615383961028">
+    <state width="1345" height="208" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615905462657" />
+    <state width="1345" height="208" key="GridCell.Tab.1.bottom" timestamp="1615905462533">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615383961028" />
-    <state width="1345" height="208" key="GridCell.Tab.1.center" timestamp="1615383961028">
+    <state width="1345" height="208" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615905462533" />
+    <state width="1345" height="208" key="GridCell.Tab.1.center" timestamp="1615905462532">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1615383961028" />
-    <state width="1345" height="208" key="GridCell.Tab.1.left" timestamp="1615383961028">
+    <state width="1345" height="208" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1615905462532" />
+    <state width="1345" height="208" key="GridCell.Tab.1.left" timestamp="1615905462532">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1615383961028" />
-    <state width="1345" height="208" key="GridCell.Tab.1.right" timestamp="1615383961028">
+    <state width="1345" height="208" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1615905462532" />
+    <state width="1345" height="208" key="GridCell.Tab.1.right" timestamp="1615905462533">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1615383961028" />
+    <state width="1345" height="208" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1615905462533" />
     <state x="129" y="55" key="MergeDialog" timestamp="1614163086645">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -743,10 +743,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614595978401" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1615364891646">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1615446779174">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1615364891646" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1615446779174" />
     <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -755,10 +755,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1615364607443" />
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1613307460388">
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1615795017367">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1613307460388" />
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1615795017367" />
     <state x="327" y="61" width="710" height="667" key="search.everywhere.popup" timestamp="1613224647921">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -774,18 +774,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
-          <line>259</line>
-          <option name="timeStamp" value="211" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customerGP.py</url>
-          <line>149</line>
-          <option name="timeStamp" value="213" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
-          <line>206</line>
-          <option name="timeStamp" value="215" />
+          <line>201</line>
+          <option name="timeStamp" value="220" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

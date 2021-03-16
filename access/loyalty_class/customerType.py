@@ -22,19 +22,17 @@ class CL_customerTP(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
         self.conn1 = db1.connect()
-        #mycursor = self.conn.cursor()
 
     def FN_LOAD_DISPlAY(self):
         filename = self.dirname + '/createModifyCustTp.ui'
         loadUi(filename, self)
-
-        self.FN_GET_CUSTTPS()
-        records=self.FN_GET_NEXTlEVEL()
-        #id = self.FN_GET_NEXTlEVEL_ID
-        #self.LB_nextLvlId.setText ()
-        for row in records:
-            self.CMB_nextLevel.addItems([row[0]])
         try:
+            self.FN_GET_CUSTTPS()
+            records=self.FN_GET_NEXTlEVEL()
+            #id = self.FN_GET_NEXTlEVEL_ID
+            #self.LB_nextLvlId.setText ()
+            for row in records:
+                self.CMB_nextLevel.addItems([row[0]])
             self.CMB_custType.addItems(["Active", "Inactive"])
             self.BTN_createCustTp.clicked.connect(self.FN_CREATE_CUSTTP)
             self.BTN_modifyCustTp.clicked.connect(self.FN_MODIFY_CUSTTP)
@@ -49,6 +47,7 @@ class CL_customerTP(QtWidgets.QDialog):
 
     def FN_GET_CUSTTP(self):
      try:
+
         if len(self.Qtable_custTP.selectedIndexes()) >= 0:
             rowNo = self.Qtable_custTP.selectedItems()[0].row()
             id = self.Qtable_custTP.item(rowNo, 0).text()
@@ -80,7 +79,6 @@ class CL_customerTP(QtWidgets.QDialog):
             id = 0
         self.LB_status.setText (str(id))
     def FN_GET_ID(self):
-
         desc = self.CMB_nextLevel.currentText()
         id = self.FN_GET_NEXTlEVEL_ID(desc)
         self.LB_nextLvlId.setText (id)
@@ -88,7 +86,7 @@ class CL_customerTP(QtWidgets.QDialog):
         try:
             for i in reversed(range(self.Qtable_custTP.rowCount())):
                 self.Qtable_custTP.removeRow(i)
-
+            self.conn = db1.connect()
             mycursor = self.conn.cursor()
             name = self.LE_desc.text().strip()
             self.custType = self.CMB_custType.currentText()
@@ -116,23 +114,26 @@ class CL_customerTP(QtWidgets.QDialog):
         except Exception as err:
             print(err)
     def FN_GET_NEXTlEVEL(self):
+        self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT LOYCT_DESC ,LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  order by LOYCT_TYPE_ID   asc")
+        mycursor.execute("SELECT LOYCT_DESC ,LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1'  order by LOYCT_TYPE_ID   asc")
         records = mycursor.fetchall()
         #mycursor.close()
         return records
 
     def FN_GET_NEXTlEVEL_ID(self,desc):
         try:
+            self.conn = db1.connect()
             mycursor3 = self.conn.cursor()
             mycursor3.execute("SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  where LOYCT_DESC= '"+desc+"'")
             records = mycursor3.fetchone()
-            mycursor3.close()
+            #mycursor3.close()
             return records[0]
         except Exception as err:
             print(err)
 
     def FN_GET_NEXTlEVEL_DESC(self,id):
+        self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT  LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE  where LOYCT_TYPE_ID= '"+id+"'")
         records = mycursor.fetchone()
@@ -148,6 +149,7 @@ class CL_customerTP(QtWidgets.QDialog):
     def FN_GET_CUSTTPS(self):
         for i in reversed(range(self.Qtable_custTP.rowCount())):
             self.Qtable_custTP.removeRow(i)
+        self.conn = db1.connect()
         mycursor = self.conn.cursor(buffered=True)
         mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID   asc")
         records = mycursor.fetchall()
@@ -167,6 +169,7 @@ class CL_customerTP(QtWidgets.QDialog):
             return False
 
     def FN_CHECK_DUP_NAME(self, name):
+        self.conn = db1.connect()
         mycursor1 = self.conn.cursor()
         # get max userid
         sql = "SELECT LOYCT_DESC  FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC ='"+name+"'"
@@ -180,6 +183,7 @@ class CL_customerTP(QtWidgets.QDialog):
 
     def FN_CHECK_DUP_NEXTLEVEL(self, name):
         try:
+            self.conn = db1.connect()
             mycursor2 = self.conn.cursor()
             print(name)
             sql = "SELECT LOYCT_DESC  FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + name + "'"
@@ -203,8 +207,8 @@ class CL_customerTP(QtWidgets.QDialog):
                 status = 1
             else:
                status = 0
-
-            mycursor = self.conn.cursor()
+            conn = db1.connect()
+            mycursor = conn.cursor()
             # get max userid
             mycursor.execute("SELECT max(cast(LOYCT_TYPE_ID   AS UNSIGNED))   FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE ")
             myresult = mycursor.fetchone()
@@ -227,12 +231,12 @@ class CL_customerTP(QtWidgets.QDialog):
                     val = (self.id, name,points,nextLevel1 ,  status
                            )
                     mycursor.execute(sql, val)
-                    mycursor.close()
+                    #mycursor.close()
 
                     print(mycursor.rowcount, "Cust Tp inserted.")
                     QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
-                    db1.connectionCommit(self.conn)
-                    #self.FN_GET_CUSTTPS()
+                    db1.connectionCommit(conn)
+                    self.FN_GET_CUSTTPS()
                 else:
                     QtWidgets.QMessageBox.warning(self, "Error", "Name duplicated' ")
                     #mycursor.close()
@@ -251,6 +255,7 @@ class CL_customerTP(QtWidgets.QDialog):
                         status = 1
                     else:
                         status = 0
+                    self.conn = db1.connect()
                     mycursor = self.conn.cursor()
 
                     sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT= %s where LOYCT_TYPE_ID = %s"
@@ -260,7 +265,7 @@ class CL_customerTP(QtWidgets.QDialog):
                     print(mycursor.rowcount, "record updated.")
                     QtWidgets.QMessageBox.information(self, "Success", "Cust Tp updated")
                     db1.connectionCommit(self.conn)
-                    #self.FN_GET_CUSTTPS()
+                    self.FN_GET_CUSTTPS()
         except Exception as err:
             mycursor.close()
             print(err)

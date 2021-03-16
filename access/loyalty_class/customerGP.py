@@ -43,6 +43,7 @@ class CL_customerGP(QtWidgets.QDialog):
             print(err)
 
     def FN_SEARCH_CUSTGP(self):
+        self.conn1 = db1.connect()
         try:
             for i in reversed(range(self.Qtable_custGP.rowCount())):
                 self.Qtable_custGP.removeRow(i)
@@ -90,6 +91,7 @@ class CL_customerGP(QtWidgets.QDialog):
             return "Inactive"
 
     def FN_GET_CUSTGPS(self):
+        self.conn = db1.connect()
         try:
             for i in reversed(range(self.Qtable_custGP.rowCount())):
                 self.Qtable_custGP.removeRow(i)
@@ -126,6 +128,7 @@ class CL_customerGP(QtWidgets.QDialog):
         except Exception as err:
             print(err)
     def FN_CHECK_DUP_NAME(self,name):
+        self.conn1 = db1.connect()
         mycursor1 = self.conn1.cursor()
         # get max userid
         mycursor1.execute("SELECT CG_DESC  FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '"+name+"'")
@@ -147,7 +150,7 @@ class CL_customerGP(QtWidgets.QDialog):
             return False
 
     def FN_CREATE_CUSTGP(self):
-        print('kkk')
+        self.conn = db1.connect()
         self.name = self.LE_desc.text().strip()
         self.custGroup = self.CMB_custGroup.currentText()
         if self.custGroup == 'Active':
@@ -200,7 +203,7 @@ class CL_customerGP(QtWidgets.QDialog):
         # insert into db
 
     def FN_MODIFY_CUSTGP(self):
-
+        self.conn1 = db1.connect()
         if len(self.Qtable_custGP.selectedIndexes()) >0 :
             rowNo = self.Qtable_custGP.selectedItems()[0].row()
             id = self.Qtable_custGP.item(rowNo, 0).text()
@@ -223,6 +226,7 @@ class CL_customerGP(QtWidgets.QDialog):
             print(mycursor.rowcount, "record updated.")
             QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
             db1.connectionCommit(self.conn1)
+            self.FN_GET_CUSTGPS()
 
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")

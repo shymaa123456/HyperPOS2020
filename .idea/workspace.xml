@@ -27,19 +27,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="resolving comments">
-      <change afterPath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/access/loyalty_class/redeemWithVoucher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadRedeemItem.ui" afterDir="false" />
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="create redeem item">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Validation/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Validation/Validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,13 +255,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00031" summary="Create customer 7type&#10;modify customer type">
-      <created>1604582481983</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1604582481983</updated>
     </task>
     <task id="LOCAL-00032" summary="Create customer 7type&#10;modify customer type">
       <created>1604583604773</created>
@@ -608,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615905720267</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="create redeem item">
+      <created>1616073512147</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1616073512147</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +659,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="create customer" />
     <MESSAGE value="modify customer" />
     <MESSAGE value="upload" />
     <MESSAGE value="adjust authorization" />
@@ -693,7 +683,8 @@
     <MESSAGE value="loilty" />
     <MESSAGE value="comments of 10-2-2021" />
     <MESSAGE value="resolving comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="resolving comments" />
+    <MESSAGE value="create redeem item" />
+    <option name="LAST_COMMIT_MESSAGE" value="create redeem item" />
   </component>
   <component name="WindowStateProjectService">
     <state x="48" y="116" key="#xdebugger.XInspectDialog" timestamp="1610380377039">
@@ -708,38 +699,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
-    <state width="1323" height="98" key="GridCell.Tab.0.bottom" timestamp="1616072412843">
+    <state width="1323" height="226" key="GridCell.Tab.0.bottom" timestamp="1616079412998">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="98" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616072412843" />
-    <state width="1323" height="98" key="GridCell.Tab.0.center" timestamp="1616072412842">
+    <state width="1323" height="226" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616079412998" />
+    <state width="1323" height="226" key="GridCell.Tab.0.center" timestamp="1616079412998">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="98" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616072412842" />
-    <state width="1323" height="98" key="GridCell.Tab.0.left" timestamp="1616072412842">
+    <state width="1323" height="226" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616079412998" />
+    <state width="1323" height="226" key="GridCell.Tab.0.left" timestamp="1616079412998">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="98" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616072412842" />
-    <state width="1323" height="98" key="GridCell.Tab.0.right" timestamp="1616072412842">
+    <state width="1323" height="226" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616079412998" />
+    <state width="1323" height="226" key="GridCell.Tab.0.right" timestamp="1616079412998">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="98" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616072412842" />
-    <state width="1345" height="226" key="GridCell.Tab.1.bottom" timestamp="1616061195168">
+    <state width="1323" height="226" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616079412998" />
+    <state width="1323" height="226" key="GridCell.Tab.1.bottom" timestamp="1616079428877">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="226" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616061195168" />
-    <state width="1345" height="226" key="GridCell.Tab.1.center" timestamp="1616061195168">
+    <state width="1323" height="226" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616079428877" />
+    <state width="1323" height="226" key="GridCell.Tab.1.center" timestamp="1616079428876">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="226" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1616061195168" />
-    <state width="1345" height="226" key="GridCell.Tab.1.left" timestamp="1616061195168">
+    <state width="1323" height="226" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1616079428876" />
+    <state width="1323" height="226" key="GridCell.Tab.1.left" timestamp="1616079428876">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="226" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1616061195168" />
-    <state width="1345" height="226" key="GridCell.Tab.1.right" timestamp="1616061195168">
+    <state width="1323" height="226" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1616079428876" />
+    <state width="1323" height="226" key="GridCell.Tab.1.right" timestamp="1616079428877">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="226" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1616061195168" />
+    <state width="1323" height="226" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1616079428877" />
     <state x="129" y="55" key="MergeDialog" timestamp="1614163086645">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -756,10 +747,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614595978401" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1615973399159">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1616073845134">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1615973399159" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1616073845134" />
     <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -799,11 +790,6 @@
           <url>file://$PROJECT_DIR$/access/authorization_class/privilage.py</url>
           <line>262</line>
           <option name="timeStamp" value="223" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/main_login_class/main.py</url>
-          <line>167</line>
-          <option name="timeStamp" value="224" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

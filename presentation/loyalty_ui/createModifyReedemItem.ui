@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QTableWidget" name="Qtable_loyality">
+  <widget class="QTableWidget" name="Qtable_redeem">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -204,6 +204,9 @@ background-color: rgb(198, 207, 199);</string>
                                         );
                                         }
                                     </string>
+     </property>
+     <property name="text">
+      <string>98457</string>
      </property>
     </widget>
    </widget>
@@ -614,7 +617,7 @@ background-color: rgb(198, 207, 199);</string>
                                     </string>
      </property>
      <property name="text">
-      <string/>
+      <string>500</string>
      </property>
     </widget>
    </widget>

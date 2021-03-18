@@ -151,7 +151,7 @@ class CL_redItem(QtWidgets.QDialog):
             branch_list = []
             for branch in branchs:
                 sql = "SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + branch + "'"
-                self.mycursor.execute(sql)
+                mycursor.execute(sql)
                 myresult = mycursor.fetchone()
                 branch_list.append(myresult[0])
 
@@ -240,7 +240,7 @@ class CL_redItem(QtWidgets.QDialog):
            for comp in companies:
                sql = "SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + comp + "'"
                mycursor.execute(sql)
-               myresult = self.mycursor.fetchone()
+               myresult = mycursor.fetchone()
                company_list.append(myresult[0])
 
            # get branchs
@@ -248,44 +248,56 @@ class CL_redItem(QtWidgets.QDialog):
            for branch in branchs:
                sql = "SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + branch + "'"
                mycursor.execute(sql)
-               myresult = self.mycursor.fetchone()
+               myresult = mycursor.fetchone()
                branch_list.append(myresult[0])
 
 
 
            if  len(self.Qcombo_group3.currentData()) == 0 or len(
-                   self.Qcombo_group4.currentData()) == 0  or self.bar == ''  or self.points == '' or self.date_from == '' or self.date_to == '' \
-                   :
+                   self.Qcombo_group4.currentData()) == 0  or bar == ''  or points == '' or date_from == '' or date_to == ''    :
                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
            else:
                for com in company_list:
                    for br in branch_list:
-                       ret = self.FN_CHECK_EXIST(com, br,  self.bar)
+                       ret = self.FN_CHECK_EXIST(com, br,  bar)
                        if ret == False:
-                           print("pt1")
-                           # self.mycursor.close()
-                           mycursor1 = conn.cursor()
-
-                           # mycursor = self.conn.cursor()
-                           sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COPMAPNY_ID," \
+                           sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
                                  "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
                                  ",REDEEM_VALID_TO,REDEEM_STATUS)" \
                                  "values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
                            val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status)
 
-                           mycursor1.execute(sql, val)
+                           mycursor.execute(sql, val)
                            db1.connectionCommit(conn)
-                           mycursor1.close()
+                           mycursor.close()
                            self.FN_REFRESH_DATA_GRID()
                        else:
                            QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
-                           continue
+
 
        except Exception as err:
             print(err)
 
-    def    FN_REFRESH_DATA_GRID(self,ids):
+    def FN_CHECK_EXIST(self,comp,branch,barcode):
+        try:
+            conn = db1.connect()
+            cursor = conn.cursor()
+            comp = str(comp)
+            barcode =str(barcode)
+            sql = "SELECT *  FROM Hyper1_Retail.REDEEM_ITEM where  POS_GTIN ='" + str(barcode) + "' and COPMAPNY_ID ='" + str(comp) + "' and BRANCH_NO = '" + branch + "'"
+                #print(sql)
+            cursor.execute(sql)
+            myresult = cursor.fetchone()
+            if cursor.rowcount > 0:
+                return True
+            else:
+                cursor.close()
+                return False
+        except (Error, Warning) as e:
+            return False
+
+    def    FN_REFRESH_DATA_GRID(self):
         try:
             for i in reversed(range(self.Qtable_redeem.rowCount())):
                self.Qtable_redeem.removeRow(i)
@@ -429,8 +441,9 @@ class CL_redItem(QtWidgets.QDialog):
                         ret2 = self.FN_CHECK_VALID_BARCCODE(bar)
                         ret5 = self.FN_CHECK_VALID_BRANCH(branch)
                         ret6 = self.FN_CHECK_VALID_COMPANY(company)
+                        ret = self.FN_CHECK_EXIST(company, branch, bar)
 
-                        if  ret2 == True and  ret5 == True and ret6 == True :
+                        if ret == False and ret2 == True and  ret5 == True and ret6 == True :
                           # get max userid
                             conn = db1.connect()
                             mycursor1 = conn.cursor()
@@ -455,6 +468,10 @@ class CL_redItem(QtWidgets.QDialog):
                             self.msgBox1 = QMessageBox()
                             self.msgBox1.setWindowTitle("Information")
                             self.msgBox1.setStandardButtons(QMessageBox.Ok)
+
+                            if ret == True:
+                                j = i + 1
+                                self.msgBox1.setText("Line " + str(j) + " already exists")
                             if ret2 == False:
                                 j = i + 1
                                 self.msgBox1.setText("Line " + str(j) + " has invalid Barcode")

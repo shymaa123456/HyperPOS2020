@@ -27,9 +27,7 @@ class CL_loyProg(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
-        self.conn = db1.connect()
-        self.conn1 = db1.connect()
-        self.conn2 = db1.connect()
+        
     def onClicked(self):
         #radioButton = self.sender()
         #print(radioButton.name)
@@ -49,7 +47,8 @@ class CL_loyProg(QtWidgets.QDialog):
     def FN_LOAD_DISPLAY(self):
         filename = self.dirname + '/createModifyLoyalityProg.ui'
         loadUi(filename, self)
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
 
         self.Qradio_barcode.clicked.connect(self.onClicked)
         self.Qradio_bmc.clicked.connect(self.onClicked)
@@ -138,7 +137,8 @@ class CL_loyProg(QtWidgets.QDialog):
         except (Error, Warning) as e:
             print(e)
     def FN_GET_BRANCHES(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         self.company = self.CMB_company.currentText()
         mycursor.execute("SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + self.company + "'")
         myresult = mycursor.fetchone()
@@ -155,7 +155,8 @@ class CL_loyProg(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_COMPANIES(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         self.CMB_company.clear()
         sql_select_query = "SELECT COMPANY_DESC  FROM Hyper1_Retail.COMPANY where COMPANY_STATUS   = 1 "
         mycursor.execute( sql_select_query )
@@ -166,7 +167,8 @@ class CL_loyProg(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_DEPARTMENTS(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         self.CMB_department.clear()
         sql_select_query = "SELECT DEPARTMENT_DESC FROM Hyper1_Retail.DEPARTMENT where DEPARTMENT_STATUS   = 1 "
         mycursor.execute( sql_select_query )
@@ -177,7 +179,8 @@ class CL_loyProg(QtWidgets.QDialog):
         mycursor.close()
         self.FN_GET_SECTIONS()
     def FN_GET_SECTIONS(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         self.CMB_section.clear()
         dept = self.CMB_department.currentText()
 
@@ -193,7 +196,8 @@ class CL_loyProg(QtWidgets.QDialog):
         self.FN_GET_BMCLEVEL4()
 
     def FN_GET_BMCLEVEL4(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         self.Qcombo_group6.clear()
         sec = self.CMB_section.currentText()
 
@@ -210,8 +214,8 @@ class CL_loyProg(QtWidgets.QDialog):
         self.Qcombo_group6.setChecked(0)
     def FN_GET_CUSTGP(self):
         #print("pt11")
-
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute( "SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP order by CG_GROUP_ID asc" )
         records = mycursor.fetchall()
         mycursor.close()
@@ -222,7 +226,8 @@ class CL_loyProg(QtWidgets.QDialog):
         #print(self.Qcombo_group2.currentData())
 
     def FN_GET_CUSTTP(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute( "SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE order by LOYCT_TYPE_ID asc" )
         records = mycursor.fetchall()
         mycursor.close()
@@ -231,7 +236,8 @@ class CL_loyProg(QtWidgets.QDialog):
             self.Qcombo_group5.addItems([row[0]])
 
     def FN_GET_CUSTTP_ID(self,desc):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute( "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+desc+"'" )
         records = mycursor.fetchone()
         mycursor.close()
@@ -239,7 +245,8 @@ class CL_loyProg(QtWidgets.QDialog):
 
     def FN_CHECK_VALID_BMC(self,id):
         try:
-            mycursor11 = self.conn1.cursor()
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
             sql="SELECT * FROM Hyper1_Retail.BMC_LEVEL4 where BMC_LEVEL4 = '" + str(id) + "'"
             #print(sql)
             mycursor11.execute(sql)
@@ -257,7 +264,8 @@ class CL_loyProg(QtWidgets.QDialog):
 
     def FN_CHECK_VALID_BARCCODE(self,id):
         try:
-            mycursor11 = self.conn1.cursor()
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
             sql = "SELECT * FROM Hyper1_Retail.POS_ITEM where POS_GTIN = '" + str(id) + "'"
             mycursor11.execute(sql)
             myresult = mycursor11.fetchone()
@@ -272,7 +280,8 @@ class CL_loyProg(QtWidgets.QDialog):
 
     def FN_CHECK_VALID_CUSTGP(self,id):
         try:
-            mycursor11 = self.conn1.cursor()
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
             sql = "SELECT * FROM Hyper1_Retail.CUSTOMER_GROUP where CG_GROUP_ID  ='" + str(id) + "'"
             mycursor11.execute(sql)
             myresult = mycursor11.fetchone()
@@ -286,7 +295,8 @@ class CL_loyProg(QtWidgets.QDialog):
             print(e)
     def FN_CHECK_VALID_CUSTTP(self,id):
         try:
-            mycursor11 = self.conn1.cursor()
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
             sql = "SELECT * FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID ='" + str(id) + "'"
             mycursor11.execute(sql)
             myresult = mycursor11.fetchone()
@@ -300,7 +310,8 @@ class CL_loyProg(QtWidgets.QDialog):
             print(e)
     def FN_CHECK_VALID_COMPANY(self,id):
         try:
-            mycursor11 = self.conn1.cursor()
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
             sql = "SELECT * FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + str(id) + "'"
             #print(sql)
             mycursor11.execute(sql)
@@ -315,7 +326,8 @@ class CL_loyProg(QtWidgets.QDialog):
             print(e)
     def FN_CHECK_VALID_BRANCH(self,id):
         try:
-            mycursor11 = self.conn1.cursor()
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
             sql = "SELECT * FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + str(id) + "'"
             #print(sql)
             mycursor11.execute(sql)
@@ -330,7 +342,8 @@ class CL_loyProg(QtWidgets.QDialog):
             print(e)
     # # endregion
     def FN_CHECK_EXIST(self,comp,branch,ctgp,cttp,level4,barcode):
-        cursor = self.conn.cursor()
+        conn = db1.connect()
+        cursor = conn.cursor()
         comp = str(comp)
         level4= str(level4)
         if barcode =='' :
@@ -360,29 +373,34 @@ class CL_loyProg(QtWidgets.QDialog):
             return "Inactive"
 
     def FN_GET_COMP_DESC(self,id):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
 
     def FN_GET_BRANCH_DESC(self, id):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
 
     def FN_GET_CUSTGP_DESC(self, id):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute("SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where CG_GROUP_ID = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
     def FN_GET_CUSTTP_DESC(self, id):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
     def FN_GET_BMC_DESC(self, id):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute("SELECT BMC_LEVEL4_DESC  FROM Hyper1_Retail.BMC_LEVEL4 where BMC_LEVEL4=  '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
@@ -402,8 +420,8 @@ class CL_loyProg(QtWidgets.QDialog):
             companies = self.Qcombo_group3.currentData()
             date_from = self.Qdate_from.dateTime().toString('yyyy-MM-dd')
             date_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')
-
-            mycursor = self.conn.cursor()
+            conn = db1.connect()
+            mycursor = conn.cursor()
             whereClause = ""
 
             if self.Qradio_active.isChecked():
@@ -592,9 +610,9 @@ class CL_loyProg(QtWidgets.QDialog):
             self.status = 1
         else:
             self.status = 0
-
+        conn = db1.connect()
         # mycursor = self.conn.cursor(buffered=True)
-        self.mycursor = self.conn.cursor()
+        self.mycursor = conn.cursor()
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
         # get COMPANY
@@ -671,7 +689,8 @@ class CL_loyProg(QtWidgets.QDialog):
                                     try:
                                         print("pt1")
                                         # self.mycursor.close()
-                                        self.mycursor1 = self.conn1.cursor()
+
+                                        self.mycursor1 = conn.cursor()
                                         self.mycursor1.execute(
                                             "SELECT max(cast(LOY_PROGRAM_ID AS UNSIGNED)) FROM Hyper1_Retail.LOYALITY_PROGRAM")
                                         myresult = self.mycursor1.fetchone()
@@ -696,7 +715,8 @@ class CL_loyProg(QtWidgets.QDialog):
 
                                         self.mycursor1.execute(sql, val)
                                         # mycursor1.close()
-                                        db1.connectionCommit(self.conn1)
+
+                                        db1.connectionCommit(conn)
                                         self.mycursor1.close()
 
                                     except (Error, Warning) as e:
@@ -719,7 +739,8 @@ class CL_loyProg(QtWidgets.QDialog):
             for i in reversed(range(self.Qtable_loyality.rowCount())):
                self.Qtable_loyality.removeRow(i)
             time.sleep(5)
-            mycursor = self.conn2.cursor()
+            conn = db1.connect()
+            mycursor = conn.cursor()
             i = 0
             for id in ids:
 
@@ -816,7 +837,8 @@ class CL_loyProg(QtWidgets.QDialog):
                     try:
                         if ret == False and ret1 == True and ret2 == True and ret3 == True and ret4 == True and ret5 == True and ret6 == True :
                           # get max userid
-                            mycursor1 = self.conn.cursor()
+                            conn = db1.connect()
+                            mycursor1 = conn.cursor()
                             mycursor1.execute("SELECT max(cast(LOY_PROGRAM_ID AS UNSIGNED)) FROM Hyper1_Retail.LOYALITY_PROGRAM")
                             myresult = mycursor1.fetchone()
 
@@ -839,7 +861,7 @@ class CL_loyProg(QtWidgets.QDialog):
                                    purchAmount, points, loyalityType, status)
                             mycursor1.execute(sql, val)
                             createdProg = createdProg + 1
-                            db1.connectionCommit(self.conn)
+                            db1.connectionCommit(conn)
                             mycursor1.close()
                 #
                         else:
@@ -877,7 +899,7 @@ class CL_loyProg(QtWidgets.QDialog):
                     except Exception as err:
                         print(err)
 
-            db1.connectionClose(self.conn)
+            db1.connectionClose(conn)
             # QtWidgets.QMessageBox.warning( self, "Information", "No of created user ",counter)
             self.msgBox = QMessageBox()
 
@@ -906,7 +928,8 @@ class CL_loyProg(QtWidgets.QDialog):
                 self.status = 1
             else:
                 self.status = 0
-            mycursor = self.conn.cursor()
+            conn = db1.connect()
+            mycursor = conn.cursor()
 
             changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
             # get customer gp id
@@ -919,91 +942,10 @@ class CL_loyProg(QtWidgets.QDialog):
             print( mycursor.rowcount, "record updated." )
             QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
 
-            db1.connectionCommit( self.conn )
-            db1.connectionClose( self.conn )
+            db1.connectionCommit( conn )
+            db1.connectionClose( conn )
             #self.close()
 
             print( "in modify cust" )
         except Exception as err:
             print(err)
-  # def FN_ADD_LOYPROG(self):
-    #     for i in reversed(range(self.Qtable_loyality.rowCount())):
-    #         self.Qtable_loyality.removeRow(i)
-    #
-    #     BMC_LEVEL4 = self.CMB_level4.currentText()
-    #     # self.mycursor = self.conn.cursor()
-    #     cust_gps = self.Qcombo_group2.currentData()
-    #     cust_tps = self.Qcombo_group5.currentData()
-    #     branchs = self.Qcombo_group4.currentData()
-    #     companies = self.Qcombo_group3.currentData()
-    #     date_from = self.Qdate_from.dateTime().toString('yyyy-MM-dd')
-    #     date_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')
-    #     barcode = self.Qline_barcode.text().strip()
-    #     mycursor = self.conn.cursor()
-    #     #whereClause = ""
-    #
-    #     if self.Qradio_active.isChecked():
-    #         status = 'Active'
-    #     elif self.Qradio_inactive.isChecked():
-    #         status = 'Inactive'
-    #
-    #
-    #
-    #     # get COMPANY
-    #     company_list = []
-    #     for comp in companies:
-    #         sql = "SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + comp + "'"
-    #         self.mycursor.execute(sql)
-    #         myresult = mycursor.fetchone()
-    #         company_list.append(myresult[0])
-    #
-    #     if len(company_list) > 0:
-    #         if len(company_list) == 1:
-    #             whereClause = whereClause + " and COPMAPNY_ID = '" + company_list[0] + "'"
-    #         else:
-    #             company_list_tuple = tuple(company_list)
-    #             whereClause = whereClause + " and COPMAPNY_ID in {}".format(company_list_tuple)
-    #             # get branchs
-    #     branch_list = []
-    #     for branch in branchs:
-    #         sql = "SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + branch + "'"
-    #         self.mycursor.execute(sql)
-    #         myresult = mycursor.fetchone()
-    #         branch_list.append(myresult[0])
-    #
-    #     if len(branch_list) > 0:
-    #         if len(branch_list) == 1:
-    #             whereClause = whereClause + " and BRANCH_NO ='" + branch_list[0] + "'"
-    #         else:
-    #             branch_list_tuple = tuple(branch_list)
-    #             whereClause = whereClause + " and BRANCH_NO in {} ".format(branch_list_tuple)
-    #     # print(whereClause)
-    #
-    #     # get customer gp id
-    #     cust_gp_list = []
-    #     for cust_gp in cust_gps:
-    #         self.mycursor.execute(
-    #             "SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '" + cust_gp + "'")
-    #         myresult = mycursor.fetchone()
-    #         cust_gp_list.append(myresult[0])
-    #
-    #     if len(cust_gp_list) > 0:
-    #         if len(cust_gp_list) == 1:
-    #             whereClause = whereClause + " and CG_GROUP_ID ='" + cust_gp_list[0] + "'"
-    #         else:
-    #             cust_gp_list_tuple = tuple(cust_gp_list)
-    #             whereClause = whereClause + " and CG_GROUP_ID in {}".format(cust_gp_list_tuple)
-    #
-    #     # get customer type
-    #     cust_tp_list = []
-    #     for cust_tp in cust_tps:
-    #         self.mycursor.execute(
-    #             "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + cust_tp + "'")
-    #         myresult = mycursor.fetchone()
-    #         cust_tp_list.append(myresult[0])
-    #     if len(cust_tp_list) > 0:
-    #         if len(cust_tp_list) > 0:
-    #             whereClause = whereClause + " and LOYCT_TYPE_ID = '" + cust_tp_list[0] + "'"
-    #         else:
-    #             cust_tp_list_tuple = tuple(cust_tp_list)
-    #             whereClause = whereClause + " and LOYCT_TYPE_ID in {}".format(cust_tp_list_tuple)

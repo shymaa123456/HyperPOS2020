@@ -28,9 +28,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="resolving comments">
+      <change afterPath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/access/loyalty_class/redeemWithVoucher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/loyalty_ui/uploadRedeemItem.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerGP.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerType.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerType.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Validation/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Validation/Validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/authorization_class/privilage.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/privilage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +98,27 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.login">
+    <configuration name="Validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HyperPOS2020" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Validation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Validation/Validation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="login" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HyperPOS2020" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -103,27 +133,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/main_login_class/login.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="reporting" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="HyperPOS2020" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/reports_class" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/reports_class/reporting.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -215,19 +224,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.login" />
-      <item itemvalue="Python.reporting" />
       <item itemvalue="Python.t1" />
       <item itemvalue="Python.test (1)" />
       <item itemvalue="Python.test" />
       <item itemvalue="Python tests.pytest in C:/Users/Shaymaa/PycharmProjects_community/HyperPOS2020/access/authorization_class/testt.py" />
+      <item itemvalue="Python.Validation" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
+        <item itemvalue="Python.Validation" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.t1" />
         <item itemvalue="Python.test (1)" />
-        <item itemvalue="Python.reporting" />
       </list>
     </recent_temporary>
   </component>
@@ -255,13 +264,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00030" summary="Create customer group &#10;modify customer gp">
-      <created>1604495153025</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1604495153025</updated>
     </task>
     <task id="LOCAL-00031" summary="Create customer 7type&#10;modify customer type">
       <created>1604582481983</created>
@@ -599,7 +601,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615446764783</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="resolving comments">
+      <created>1615905720266</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1615905720267</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -691,50 +700,54 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="48" y="116" key="#xdebugger.XInspectDialog/0.0.1366.728@0.0.1366.728" timestamp="1610380377039" />
+    <state width="644" height="446" key="DebuggerActiveHint" timestamp="1615905594436">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="644" height="446" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1615905594436" />
     <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1609070986320">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
-    <state width="1345" height="208" key="GridCell.Tab.0.bottom" timestamp="1615905462657">
+    <state width="1323" height="98" key="GridCell.Tab.0.bottom" timestamp="1616072412843">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615905462657" />
-    <state width="1345" height="208" key="GridCell.Tab.0.center" timestamp="1615905462657">
+    <state width="1323" height="98" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616072412843" />
+    <state width="1323" height="98" key="GridCell.Tab.0.center" timestamp="1616072412842">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615905462657" />
-    <state width="1345" height="208" key="GridCell.Tab.0.left" timestamp="1615905462657">
+    <state width="1323" height="98" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616072412842" />
+    <state width="1323" height="98" key="GridCell.Tab.0.left" timestamp="1616072412842">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615905462657" />
-    <state width="1345" height="208" key="GridCell.Tab.0.right" timestamp="1615905462657">
+    <state width="1323" height="98" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616072412842" />
+    <state width="1323" height="98" key="GridCell.Tab.0.right" timestamp="1616072412842">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615905462657" />
-    <state width="1345" height="208" key="GridCell.Tab.1.bottom" timestamp="1615905462533">
+    <state width="1323" height="98" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616072412842" />
+    <state width="1345" height="226" key="GridCell.Tab.1.bottom" timestamp="1616061195168">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615905462533" />
-    <state width="1345" height="208" key="GridCell.Tab.1.center" timestamp="1615905462532">
+    <state width="1345" height="226" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616061195168" />
+    <state width="1345" height="226" key="GridCell.Tab.1.center" timestamp="1616061195168">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1615905462532" />
-    <state width="1345" height="208" key="GridCell.Tab.1.left" timestamp="1615905462532">
+    <state width="1345" height="226" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1616061195168" />
+    <state width="1345" height="226" key="GridCell.Tab.1.left" timestamp="1616061195168">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1615905462532" />
-    <state width="1345" height="208" key="GridCell.Tab.1.right" timestamp="1615905462533">
+    <state width="1345" height="226" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1616061195168" />
+    <state width="1345" height="226" key="GridCell.Tab.1.right" timestamp="1616061195168">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="208" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1615905462533" />
+    <state width="1345" height="226" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1616061195168" />
     <state x="129" y="55" key="MergeDialog" timestamp="1614163086645">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="129" y="55" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1614163086645" />
-    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1614849316381">
+    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1615905746179">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1614849316381" />
+    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1615905746179" />
     <state x="407" y="53" width="511" height="640" key="RollbackChangesDialog" timestamp="1608104489811">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -743,18 +756,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614595978401" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1615446779174">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1615973399159">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1615446779174" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1615973399159" />
     <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="691" height="372" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1609935341048" />
-    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615364607443">
+    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615980024131">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1615364607443" />
+    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1615980024131" />
     <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1615795017367">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -769,13 +782,28 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>896</line>
+          <line>920</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
           <line>201</line>
           <option name="timeStamp" value="220" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>507</line>
+          <option name="timeStamp" value="221" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/authorization_class/privilage.py</url>
+          <line>262</line>
+          <option name="timeStamp" value="223" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/main_login_class/main.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="224" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

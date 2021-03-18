@@ -12,6 +12,7 @@ from access.coupon_class.StoppedSerial import CL_StoppedSerial
 from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.loyalty_class.loyalityProg import CL_loyProg
+from access.loyalty_class.redeemItem import CL_redItem
 from access.reports_class.reporting import CL_report
 
 from access.authorization_class.Role import CL_role
@@ -39,83 +40,84 @@ class CL_main(QtWidgets.QMainWindow):
 
 
     def __init__(self):
-        forms = []
-        super(CL_main, self).__init__()
-        cwd = Path.cwd()
-        mod_path = Path(__file__).parent.parent.parent
-        dirname = mod_path.__str__() + '/presentation/main_login_ui'
-        filename = dirname + '/main.ui'
-        loadUi(filename, self)
+        try:
+            forms = []
+            super(CL_main, self).__init__()
+            cwd = Path.cwd()
+            mod_path = Path(__file__).parent.parent.parent
+            dirname = mod_path.__str__() + '/presentation/main_login_ui'
+            filename = dirname + '/main.ui'
+            loadUi(filename, self)
 
-        # print (CL_userModule.user_name)
-        CL_userModule.loadPrivilages(self)
-        for row_number, row_data in enumerate(CL_userModule.myList):
-            forms.append(row_data[1])
+            # print (CL_userModule.user_name)
+            CL_userModule.loadPrivilages(self)
+            for row_number, row_data in enumerate(CL_userModule.myList):
+                forms.append(row_data[1])
 
-        forms = list(dict.fromkeys(forms))
+            forms = list(dict.fromkeys(forms))
 
-        print(forms)
-        for row in forms:
-            # print(row)
-            but_name = 'QAct_' + row
-            self.findChild(QObject, but_name).setEnabled(True)
+            print(forms)
+            for row in forms:
+                # print(row)
+                but_name = 'QAct_' + row
+                self.findChild(QObject, but_name).setEnabled(True)
 
-        self.QAct_Create_User.triggered.connect(self.FN_CREATE_USER)
-        self.QAct_Modify_User.triggered.connect(self.FN_MODIFY_USER)
-        self.QAct_Copy_User.triggered.connect(self.FN_COPY_USER)
-        self.QAct_Reset_User_Password.triggered.connect(self.FN_RESET_USER)
-        self.QAct_Assign_User_to_Roles.triggered.connect(self.FN_ASSIGN)
-        # print("hi")
-        self.QAct_Create_Role.triggered.connect(self.FN_CREATE_ROLE)
-        self.QAct_Modify_Role.triggered.connect(self.FN_MODIFY_ROLE)
-        self.QAct_Copy_Role.triggered.connect(self.FN_COPY_ROLE)
+            self.QAct_Create_User.triggered.connect(self.FN_CREATE_USER)
+            self.QAct_Modify_User.triggered.connect(self.FN_MODIFY_USER)
+            self.QAct_Copy_User.triggered.connect(self.FN_COPY_USER)
+            self.QAct_Reset_User_Password.triggered.connect(self.FN_RESET_USER)
+            self.QAct_Assign_User_to_Roles.triggered.connect(self.FN_ASSIGN)
+            # print("hi")
+            self.QAct_Create_Role.triggered.connect(self.FN_CREATE_ROLE)
+            self.QAct_Modify_Role.triggered.connect(self.FN_MODIFY_ROLE)
+            self.QAct_Copy_Role.triggered.connect(self.FN_COPY_ROLE)
 
-        # self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
-        # self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
-        # self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
-        self.QAct_Display_Customer.triggered.connect(self.FN_DISPLAY_CUST)
-        self.QAct_Display_Loyality.triggered.connect(self.FN_CREATE_LOYPROG)
+            # self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
+            # self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
+            # self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
+            self.QAct_Display_Customer.triggered.connect(self.FN_DISPLAY_CUST)
+            self.QAct_Display_Loyality.triggered.connect(self.FN_CREATE_LOYPROG)
 
-        self.QAct_Display_CustGp.triggered.connect(self.FN_DISPLAY_CUSTGP)
-        self.QAct_Display_CustTp.triggered.connect(self.FN_DISPLAY_CUSTTP)
-        #self.QAct_Deactivate_CustGp.triggered.connect(self.FN_MODIFY_CUSTGP)
+            self.QAct_Display_CustGp.triggered.connect(self.FN_DISPLAY_CUSTGP)
+            self.QAct_Display_CustTp.triggered.connect(self.FN_DISPLAY_CUSTTP)
 
-        #self.QAct_Create_CustTp.triggered.connect(self.FN_CREATE_CUSTTP)
-        #self.QAct_Modify_CustTp.triggered.connect(self.FN_MODIFY_CUSTTP)
-
-        # self.QAct_Cust_Upload_Data.triggered.connect(self.FN_UPLOAD_CUST)
-
-        self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
-        self.QAct_Create_Form.triggered.connect(self.FN_create_form)
-        self.QAct_Modify_Form.triggered.connect(self.FN_modify_form)
-
-        self.QAct_Create_Form_Item.triggered.connect(self.FN_create_form_item)
-        self.QAct_Modify_Form_Item.triggered.connect(self.FN_modify_form_item)
-
-        """ Promotion """
-        self.QAct_Prom_Add.triggered.connect(self.FN_search_promotion)
-        self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)
-
-
-        #Todo: method for Open Create Coupon Window
-        self.QAct_Coupon_Add.triggered.connect(self.FN_CreateCoupon)
-        self.QAct_Coupon_Deactivate.triggered.connect(self.FN_ModifyCoupon)
-        self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
-        self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
-        self.QAct_Coupon_Print.triggered.connect(self.FN_PrintCoupon)
-        self.QAct_Coupon_barcode.triggered.connect(self.FN_SerialCoupon)
-
-        #Todo: method for Open Create Voucher Window
-        self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
-        self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
+            self.QAct_Redeem_Item.triggered.connect(self.FN_DISPLAY_REDITEM)
 
 
 
-        # Parameter Form
-        self.QAct_Parameter.triggered.connect(self.FN_Parameters)
+            self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
+            self.QAct_Create_Form.triggered.connect(self.FN_create_form)
+            self.QAct_Modify_Form.triggered.connect(self.FN_modify_form)
 
-        self.QAct_Exit.triggered.connect(self.FN_exit)
-        self.setWindowTitle('HyperPOS Main Page')
+            self.QAct_Create_Form_Item.triggered.connect(self.FN_create_form_item)
+            self.QAct_Modify_Form_Item.triggered.connect(self.FN_modify_form_item)
+
+            """ Promotion """
+            self.QAct_Prom_Add.triggered.connect(self.FN_search_promotion)
+            self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)
+
+
+            #Todo: method for Open Create Coupon Window
+            self.QAct_Coupon_Add.triggered.connect(self.FN_CreateCoupon)
+            self.QAct_Coupon_Deactivate.triggered.connect(self.FN_ModifyCoupon)
+            self.QAct_Coupon_Activate.triggered.connect(self.FN_ModifyCoupon)
+            self.QAct_Coupon_Edit.triggered.connect(self.FN_EditCoupon)
+            self.QAct_Coupon_Print.triggered.connect(self.FN_PrintCoupon)
+            self.QAct_Coupon_barcode.triggered.connect(self.FN_SerialCoupon)
+
+            #Todo: method for Open Create Voucher Window
+            self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
+            self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
+
+
+
+            # Parameter Form
+            self.QAct_Parameter.triggered.connect(self.FN_Parameters)
+
+            self.QAct_Exit.triggered.connect(self.FN_exit)
+            self.setWindowTitle('HyperPOS Main Page')
+        except Exception as err:
+            print(err)
 
     def FN_CREATE_LOYPROG(self):
         self.window_two = CL_loyProg()
@@ -161,6 +163,14 @@ class CL_main(QtWidgets.QMainWindow):
             print(err)
 
 
+    def FN_DISPLAY_REDITEM(self):
+        try:
+            self.window_two = CL_redItem()
+
+            self.window_two.FN_LOAD_DISPlAY()
+            self.window_two.show()
+        except Exception as err:
+            print(err)
 
     def FN_exit(self):
         QApplication.quit()

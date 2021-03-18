@@ -281,7 +281,7 @@
      <property name="title">
       <string>الهدايا والنقاط المكتسبة</string>
      </property>
-     <addaction name="QAct_Cust_Gift_Define"/>
+     <addaction name="QAct_Redeem_Item"/>
      <addaction name="QAct_Cust_Points_Redeem_Define"/>
      <addaction name="separator"/>
      <addaction name="separator"/>
@@ -1269,7 +1269,7 @@
     <string>تحميل ملف بيانات عملاء</string>
    </property>
   </action>
-  <action name="QAct_Cust_Gift_Define">
+  <action name="QAct_Redeem_Item">
    <property name="text">
     <string>تعريف اصناف الهدايا</string>
    </property>

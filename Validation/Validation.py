@@ -94,4 +94,4 @@ class CL_validation():
 
 if __name__ == '__main__':
     data=CL_validation()
-    print(data.FN_valedation_mail("hossam.goog@gmail."))
+    print(data.FN_valedation_mail("shymaa.helal@gmail.com123"))

@@ -37,7 +37,8 @@ class CL_form(QtWidgets.QDialog):
 
     @staticmethod
     def FN_GET_FORMS(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute("SELECT FORM_DESC FROM SYS_FORM  where FORM_STATUS  = 1 order by FORM_ID  asc")
         records = mycursor.fetchall()
         for row in records:

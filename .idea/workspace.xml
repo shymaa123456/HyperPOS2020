@@ -30,7 +30,6 @@
     <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="create redeem item">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,13 +254,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00032" summary="Create customer 7type&#10;modify customer type">
-      <created>1604583604773</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1604583604773</updated>
     </task>
     <task id="LOCAL-00033" summary="Create customer 7type&#10;modify customer type">
       <created>1604584634687</created>
@@ -599,7 +591,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616073512147</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="create redeem item">
+      <created>1616080135116</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1616080135117</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -699,38 +698,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
-    <state width="1323" height="226" key="GridCell.Tab.0.bottom" timestamp="1616079412998">
+    <state width="1323" height="162" key="GridCell.Tab.0.bottom" timestamp="1616328167043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="226" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616079412998" />
-    <state width="1323" height="226" key="GridCell.Tab.0.center" timestamp="1616079412998">
+    <state width="1323" height="162" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616328167043" />
+    <state width="1323" height="162" key="GridCell.Tab.0.center" timestamp="1616328167042">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="226" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616079412998" />
-    <state width="1323" height="226" key="GridCell.Tab.0.left" timestamp="1616079412998">
+    <state width="1323" height="162" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616328167042" />
+    <state width="1323" height="162" key="GridCell.Tab.0.left" timestamp="1616328167042">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="226" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616079412998" />
-    <state width="1323" height="226" key="GridCell.Tab.0.right" timestamp="1616079412998">
+    <state width="1323" height="162" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616328167042" />
+    <state width="1323" height="162" key="GridCell.Tab.0.right" timestamp="1616328167043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="226" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616079412998" />
-    <state width="1323" height="226" key="GridCell.Tab.1.bottom" timestamp="1616079428877">
+    <state width="1323" height="162" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616328167043" />
+    <state width="1323" height="266" key="GridCell.Tab.1.bottom" timestamp="1616328073654">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="226" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616079428877" />
-    <state width="1323" height="226" key="GridCell.Tab.1.center" timestamp="1616079428876">
+    <state width="1323" height="266" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616328073654" />
+    <state width="1323" height="266" key="GridCell.Tab.1.center" timestamp="1616328073654">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="226" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1616079428876" />
-    <state width="1323" height="226" key="GridCell.Tab.1.left" timestamp="1616079428876">
+    <state width="1323" height="266" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1616328073654" />
+    <state width="1323" height="266" key="GridCell.Tab.1.left" timestamp="1616328073654">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="226" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1616079428876" />
-    <state width="1323" height="226" key="GridCell.Tab.1.right" timestamp="1616079428877">
+    <state width="1323" height="266" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1616328073654" />
+    <state width="1323" height="266" key="GridCell.Tab.1.right" timestamp="1616328073654">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="226" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1616079428877" />
+    <state width="1323" height="266" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1616328073654" />
     <state x="129" y="55" key="MergeDialog" timestamp="1614163086645">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -747,10 +746,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614595978401" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1616073845134">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1616080140227">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1616073845134" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1616080140227" />
     <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -791,6 +790,11 @@
           <line>262</line>
           <option name="timeStamp" value="223" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
+          <line>338</line>
+          <option name="timeStamp" value="233" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -810,6 +814,10 @@
         <watch expression="records" language="Python" />
         <watch expression="BMC_LEVEL4_list" language="Python" />
         <watch expression="range(self.Qtable_custTP.rowCount())" language="Python" />
+        <watch expression="self.Qdate_from" language="Python" />
+        <watch expression="self.qdate_from.date().toString('yyyy-MM-dd')" language="Python" />
+        <watch expression="self.Qdate_from.date().toString('yyyy-MM-dd')" language="Python" />
+        <watch expression="xto1" />
       </configuration>
     </watches-manager>
   </component>

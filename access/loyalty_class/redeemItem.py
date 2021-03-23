@@ -143,10 +143,10 @@ class CL_redItem(QtWidgets.QDialog):
 
             if len(company_list) > 0:
                 if len(company_list) == 1:
-                    whereClause = whereClause + " and COPMAPNY_ID = '" + company_list[0] + "'"
+                    whereClause = whereClause + " and COMPANY_ID = '" + company_list[0] + "'"
                 else:
                     company_list_tuple = tuple(company_list)
-                    whereClause = whereClause + " and COPMAPNY_ID in {}".format(company_list_tuple)
+                    whereClause = whereClause + " and COMPANY_ID in {}".format(company_list_tuple)
                     # get branchs
             branch_list = []
             for branch in branchs:
@@ -203,16 +203,20 @@ class CL_redItem(QtWidgets.QDialog):
                     self.Qradio_inactive.setChecked(True)
 
                 xto = valid_from.split("-")
-                print(xto)
-                d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+                xto1 = xto[2].split(" ")
+                print(xto1)
+                d = QDate(int(xto[0]), int(xto[1]), int(xto1[0]))
                 self.Qdate_from.setDate(d)
+
                 xto = valid_to.split("-")
+                xto1 = xto[2].split(" ")
+                d1 = QDate(int(xto[0]), int(xto[1]), int(xto1[0]))
+                self.Qdate_to.setDate(d1)
 
-                d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
-                self.Qdate_to.setDate(d)
 
-        except Exception as err:
-            print(err)
+        except (Error, Warning) as e:
+
+            return False
 
     def FN_CREATE_REDITEM(self):
        try:
@@ -285,8 +289,8 @@ class CL_redItem(QtWidgets.QDialog):
             cursor = conn.cursor()
             comp = str(comp)
             barcode =str(barcode)
-            sql = "SELECT *  FROM Hyper1_Retail.REDEEM_ITEM where  POS_GTIN ='" + str(barcode) + "' and COPMAPNY_ID ='" + str(comp) + "' and BRANCH_NO = '" + branch + "'"
-                #print(sql)
+            sql = "SELECT *  FROM Hyper1_Retail.REDEEM_ITEM where  POS_GTIN ='" + barcode + "' and COMPANY_ID ='" + comp + "' and BRANCH_NO = '" + branch + "'"
+            print(sql)
             cursor.execute(sql)
             myresult = cursor.fetchone()
             if cursor.rowcount > 0:
@@ -443,14 +447,16 @@ class CL_redItem(QtWidgets.QDialog):
                         ret6 = self.FN_CHECK_VALID_COMPANY(company)
                         ret = self.FN_CHECK_EXIST(company, branch, bar)
 
-                        if ret == False and ret2 == True and  ret5 == True and ret6 == True :
+                        if ret == False and  ret5 == True and ret6 == True and ret2 == True:
+                               # \
+
                           # get max userid
                             conn = db1.connect()
                             mycursor1 = conn.cursor()
 
 
                             creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                            sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COPMAPNY_ID," \
+                            sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
                               "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
                               ",REDEEM_VALID_TO,REDEEM_STATUS)" \
                               "values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"

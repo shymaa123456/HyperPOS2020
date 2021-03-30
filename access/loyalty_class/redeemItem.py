@@ -189,13 +189,26 @@ class CL_redItem(QtWidgets.QDialog):
                 rowNo = self.Qtable_redeem.selectedItems()[0].row()
 
                 bar = self.Qtable_redeem.item(rowNo, 0).text()
-
+                company = self.Qtable_redeem.item(rowNo, 1).text()
+                branch = self.Qtable_redeem.item(rowNo, 2).text()
                 points = self.Qtable_redeem.item(rowNo, 3).text()
                 valid_from =self.Qtable_redeem.item(rowNo, 4).text()
                 valid_to= self.Qtable_redeem.item(rowNo, 5).text()
                 status = self.Qtable_redeem.item(rowNo, 6).text()
                 self.Qline_barcode.setText(bar)
                 self.Qline_points.setText(points)
+
+                self.CMB_branch.show()
+                self.CMB_company.show()
+                comp=self.FN_GET_COMP_DESC(company)
+                br =self.FN_GET_BRANCH_DESC(branch,company)
+                #self. self.Qcombo_group3.hide()
+                self.CMB_branch.setCurrentText(br)
+                self.CMB_company.setCurrentText(comp)
+                self.Qcombo_group3.hide()
+                self.Qcombo_group4.hide()
+                self.Qline_barcode.setEnabled(False)
+
 
                 if status == 'Active' :
                     self.Qradio_active.setChecked(True)
@@ -333,25 +346,40 @@ class CL_redItem(QtWidgets.QDialog):
 
     def FN_MODIFY_REDITEM(self):
         try:
+            self.CMB_branch.hide()
+            self.CMB_company.hide()
+            self.Qcombo_group3.show()
+            self.Qcombo_group4.show()
+            self.Qline_barcode.setEnabled(True)
 
+
+            branch = self.CMB_branch.currentText()
+            comp = self.CMB_company.currentText()
             bar = self.Qline_barcode.text().strip()
-
             date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
             date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
-
+            comp = self.FN_GET_COMP_ID(comp)
+            branch = self.FN_GET_BRANCH_ID(branch,comp)
             points = self.Qline_points.text().strip()
+
+            self.Qline_barcode.setText('')
+            self.Qline_points.setText('')
             if self.Qradio_active.isChecked():
                 status = 1
             else:
                 status = 0
+
+
             conn = db1.connect()
             mycursor = conn.cursor()
 
             changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
             # get customer gp id
 
-            sql = "update   Hyper1_Retail.REDEEM_ITEM set POS_GTIN =%s ,REDEEM_POINTS_QTY =%s,REDEEM_VALID_FROM ,REDEEM_VALID_TO,REDEEM_STATUS "
-            val = (bar, points,  CL_userModule.user_name, date_from, date_to, status)
+            sql = "update   Hyper1_Retail.REDEEM_ITEM " \
+                  "set REDEEM_POINTS_QTY =%s,REDEEM_VALID_FROM =%s , REDEEM_VALID_TO = %s , " \
+                  "REDEEM_STATUS =%s where POS_GTIN = %s and COMPANY_ID = %s and BRANCH_NO = %s "
+            val = ( points,   date_from, date_to, status,bar,comp,branch)
 
             mycursor.execute(sql, val)
             mycursor.close()
@@ -360,10 +388,24 @@ class CL_redItem(QtWidgets.QDialog):
             QtWidgets.QMessageBox.information(self, "Success", "redeem item is modified successfully")
 
             db1.connectionCommit(conn)
-
+            self.FN_REFRESH_DATA_GRID()
             print("in modify red item")
         except Exception as err:
             print(err)
+
+    def FN_GET_COMP_ID(self,desc):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + desc + "'")
+        myresult = mycursor.fetchone()
+        return myresult[0]
+
+    def FN_GET_BRANCH_ID(self, desc,comp ):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + desc + "' and COMPANY_ID ='"+comp+"'" )
+        myresult = mycursor.fetchone()
+        return myresult[0]
 
     def FN_UPLOAD_REDITEM(self):
        try:
@@ -396,10 +438,10 @@ class CL_redItem(QtWidgets.QDialog):
         myresult = mycursor.fetchone()
         return myresult[0]
 
-    def FN_GET_BRANCH_DESC(self, id):
+    def FN_GET_BRANCH_DESC(self, id,comp):
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
+        mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "' and COMPANY_ID = '"+comp+ "'" )
         myresult = mycursor.fetchone()
         return myresult[0]
 
@@ -425,10 +467,11 @@ class CL_redItem(QtWidgets.QDialog):
 
                 for i in range(sheet.nrows):
 
-                    bar = sheet.cell_value(i, 0)
-                    points = int(sheet.cell_value(i, 1))
-                    company = int(sheet.cell_value(i, 2))
-                    branch = sheet.cell_value(i, 3)
+                    bar = int(sheet.cell_value(i, 0))
+
+                    company = int(sheet.cell_value(i, 1))
+                    branch = sheet.cell_value(i, 2)
+                    points = int(sheet.cell_value(i, 3))
                     validFrom = sheet.cell_value(i, 4)
                     validTo = sheet.cell_value(i, 5)
                     status = int(sheet.cell_value(i, 6))

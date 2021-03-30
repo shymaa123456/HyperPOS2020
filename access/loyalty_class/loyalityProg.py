@@ -808,7 +808,7 @@ class CL_loyProg(QtWidgets.QDialog):
                 branch = sheet.cell_value(i, 6)
                 custGroup = int(sheet.cell_value(i, 7))
                 loyalityType = int(sheet.cell_value(i, 8))
-                barcode = sheet.cell_value(i, 9)
+                barcode = int(sheet.cell_value(i, 9))
                 bmc = int(sheet.cell_value(i, 10))
                 purchAmount = int(sheet.cell_value(i, 11))
                 points = int(sheet.cell_value(i, 12))

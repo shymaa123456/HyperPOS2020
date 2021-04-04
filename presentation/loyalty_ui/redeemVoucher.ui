@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Voucher</class>
+ <widget class="QDialog" name="Voucher">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>483</width>
-    <height>300</height>
+    <width>497</width>
+    <height>281</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="Qline_barcode">
+  <widget class="QLineEdit" name="Qline_cust">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -73,7 +73,7 @@
     <string>اسم  العميل</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="Qline_barcode_2">
+  <widget class="QLineEdit" name="Qline_name">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -110,7 +110,7 @@
                                     </string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="Qline_barcode_3">
+  <widget class="QLineEdit" name="Qline_points">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -163,9 +163,9 @@
     <string>نقاط  العميل</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="Qline_barcode_4">
+  <widget class="QLineEdit" name="Qline_replace">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -216,7 +216,7 @@
     <string>عدد النقاط المستبدله</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="Qline_barcode_5">
+  <widget class="QLineEdit" name="Qline_remainder">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -282,7 +282,7 @@
     <string>القيمه المستحقه</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="Qline_barcode_6">
+  <widget class="QLineEdit" name="Qline_point_value">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -363,9 +363,9 @@
     <string>بحث</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Qbtn_search_2">
+  <widget class="QPushButton" name="Qbtn_replace">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -404,9 +404,9 @@
     <string>إستبدال</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Qbtn_search_3">
+  <widget class="QPushButton" name="Qbtn_print">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>

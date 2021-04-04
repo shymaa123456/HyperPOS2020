@@ -798,43 +798,52 @@ class CL_loyProg(QtWidgets.QDialog):
             nonCreatedProg = 0
 
             for i in range(sheet.nrows):
-
-                name = sheet.cell_value(i, 0)
-                desc = sheet.cell_value(i, 1)
-                validFrom = sheet.cell_value(i, 2)
-                validTo = sheet.cell_value(i, 3)
-                status = int(sheet.cell_value(i, 4))
-                company = int(sheet.cell_value(i, 5))
-                branch = sheet.cell_value(i, 6)
-                custGroup = int(sheet.cell_value(i, 7))
-                loyalityType = int(sheet.cell_value(i, 8))
-                barcode = int(sheet.cell_value(i, 9))
-                bmc = int(sheet.cell_value(i, 10))
-                purchAmount = int(sheet.cell_value(i, 11))
-                points = int(sheet.cell_value(i, 12))
+                try:
+                    name = sheet.cell_value(i, 0)
+                    desc = sheet.cell_value(i, 1)
+                    #validFrom = sheet.cell_value(i, 2)
+                    validFrom =  str(sheet.cell_value(i, 2))
+                    validTo = sheet.cell_value(i, 3)
+                    status = int(sheet.cell_value(i, 4))
+                    company = int(sheet.cell_value(i, 5))
+                    branch = sheet.cell_value(i, 6)
+                    custGroup = int(sheet.cell_value(i, 7))
+                    loyalityType = int(sheet.cell_value(i, 8))
+                    barcode = ''
+                    if sheet.cell_value(i, 9) == '' :
+                        print('barcode')
+                    else:
+                        barcode = int(sheet.cell_value(i, 9))
+                    bmc = int(sheet.cell_value(i, 10))
+                    purchAmount = int(sheet.cell_value(i, 11))
+                    points = int(sheet.cell_value(i, 12))
+                except Exception as err:
+                    print(err)
                 if name == '' or desc == '' or validFrom == '' or validTo == '' or status == '' or company == '' or branch == '' \
-                        or custGroup == '' or loyalityType == ''  or purchAmount == '' or points == '':
-                    nonCreatedProg = nonCreatedProg + 1
-                    QtWidgets.QMessageBox.warning(self, "Error", "Some fields arenot filled")
-                    break
+                            or custGroup == '' or loyalityType == ''  or purchAmount == '' or points == '':
+                        nonCreatedProg = nonCreatedProg + 1
+                        QtWidgets.QMessageBox.warning(self, "Error", "Some fields arenot filled")
+                        break
+
                 #                 #     try:
                 #elif CL_validation.FN_validate_date1(validFrom) == True and CL_validation.FN_validation_int(status):
                 else:
-                    ret= self.FN_CHECK_EXIST(company, branch, custGroup, loyalityType, bmc,barcode)
-                    ids = []
-                    if barcode == '':
-                        ret2 = True
-                        bmc = int(bmc)
-                        ret1 = self.FN_CHECK_VALID_BMC(bmc)
-                    else:
-                        ret1=True
-                        ret2 = self.FN_CHECK_VALID_BARCCODE(barcode)
-
-                    ret3 = self.FN_CHECK_VALID_CUSTGP(custGroup)
-                    ret4 = self.FN_CHECK_VALID_CUSTTP(loyalityType)
-                    ret5 = self.FN_CHECK_VALID_BRANCH(branch)
-                    ret6 = self.FN_CHECK_VALID_COMPANY(company)
                     try:
+                        ret= self.FN_CHECK_EXIST(company, branch, custGroup, loyalityType, bmc,barcode)
+                        ids = []
+                        if barcode == '':
+                            ret2 = True
+                            bmc = int(bmc)
+                            ret1 = self.FN_CHECK_VALID_BMC(bmc)
+                        else:
+                            ret1=True
+                            ret2 = self.FN_CHECK_VALID_BARCCODE(barcode)
+
+                        ret3 = self.FN_CHECK_VALID_CUSTGP(custGroup)
+                        ret4 = self.FN_CHECK_VALID_CUSTTP(loyalityType)
+                        ret5 = self.FN_CHECK_VALID_BRANCH(branch)
+                        ret6 = self.FN_CHECK_VALID_COMPANY(company)
+
                         if ret == False and ret1 == True and ret2 == True and ret3 == True and ret4 == True and ret5 == True and ret6 == True :
                           # get max userid
                             conn = db1.connect()
@@ -898,8 +907,8 @@ class CL_loyProg(QtWidgets.QDialog):
                             break
                     except Exception as err:
                         print(err)
-
-            db1.connectionClose(conn)
+            if createdProg >0:
+                db1.connectionClose(conn)
             # QtWidgets.QMessageBox.warning( self, "Information", "No of created user ",counter)
             self.msgBox = QMessageBox()
 
@@ -911,7 +920,7 @@ class CL_loyProg(QtWidgets.QDialog):
             self.msgBox.show()
             #if createdProg>0:
                 #self.FN_REFRESH_DATA_GRID(ids)
-            #self.close()
+            self.close()
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
     def FN_MODIFY_LOYPROG(self):

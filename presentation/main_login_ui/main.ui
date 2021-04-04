@@ -290,7 +290,7 @@
      <property name="title">
       <string>منح الهدايا واستبدال النقاط</string>
      </property>
-     <addaction name="QAct_Cust_Redeem_Voucher"/>
+     <addaction name="QAct_Redeem_Voucher"/>
      <addaction name="QAct_Cust_Redeem_Gift"/>
      <addaction name="QAct_Cust_Gift_make"/>
      <addaction name="QAct_Cust_Redeem_Voucher_Print"/>
@@ -1304,7 +1304,7 @@
     <string>تحميل نقاط عملاء من خارج النظام</string>
    </property>
   </action>
-  <action name="QAct_Cust_Redeem_Voucher">
+  <action name="QAct_Redeem_Voucher">
    <property name="text">
     <string>استبدال النقاط بقسيمة شراء</string>
    </property>

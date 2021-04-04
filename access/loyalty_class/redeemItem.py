@@ -546,6 +546,7 @@ class CL_redItem(QtWidgets.QDialog):
                 self.msgBox.setText(
                     "No of created items '" + str(createdItem) + "'  No of non created items  '" + str(nonCreatedItem) + "'")
                 self.msgBox.show()
+                self.close()
 
             else:
                 QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")

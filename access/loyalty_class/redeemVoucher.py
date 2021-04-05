@@ -36,8 +36,21 @@ class CL_redVouch(QtWidgets.QDialog):
             actualPoints = int(self.Qline_points.text().strip())
             remainingPoints = actualPoints - replacedPoints
             self.Qline_remainder.setText(str(remainingPoints))
+            self.FN_GET_POINTS_VALUE(replacedPoints)
         except (Error, Warning) as e:
             print(e)
+
+    def FN_GET_POINTS_VALUE(self,replacedPoints):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        sql_select_query = "SELECT POINTS_QTY,POINTS_VALUE FROM Hyper1_Retail.LOYALITY_POINT where POINTS_VALID_FROM <= %s and POINTS_VALID_TO >= %s"
+        currentDate =str(datetime.today().strftime('%Y-%m-%d'))
+        x = (currentDate,currentDate,)
+        mycursor.execute(sql_select_query,x)
+        result = mycursor.fetchone()
+        value = replacedPoints * int(result[1] )/int(result[0])
+        print(result)
+        self.Qline_point_value.setText(str(value))
 
     def FN_LOAD_DISPlAY(self):
         try:
@@ -97,7 +110,7 @@ class CL_redVouch(QtWidgets.QDialog):
                    ##get customer points
                    conn = db1.connect()
                    mycursor = conn.cursor()
-                   sql = "SELECT cp.TRANS_POINTS , c.POSC_NAME  FROM Hyper1_Retail.POS_CUSTOMER_POINT  cp " \
+                   sql = "SELECT cp.POSC_POINTS_AFTER , c.POSC_NAME  FROM Hyper1_Retail.POS_CUSTOMER_POINT  cp " \
                          " inner join Hyper1_Retail.POS_CUSTOMER  c " \
                          " on cp.POSC_CUSTOMER_ID = c.POSC_CUST_ID " \
                          " where c.POSC_CUST_ID = '" + str(customer) + "'"

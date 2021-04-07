@@ -17,7 +17,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 
 from PyQt5.QtCore import *
-
+from random import randint
 
 class CL_redVouch(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
@@ -37,6 +37,7 @@ class CL_redVouch(QtWidgets.QDialog):
             remainingPoints = actualPoints - replacedPoints
             self.Qline_remainder.setText(str(remainingPoints))
             self.FN_GET_POINTS_VALUE(replacedPoints)
+
         except (Error, Warning) as e:
             print(e)
 
@@ -81,7 +82,22 @@ class CL_redVouch(QtWidgets.QDialog):
 
     def FN_REPLACE_VOUCHER(self):
         try:
-            print('in replace')
+            value =self.Qline_point_value.text().strip()
+            customer = self.Qline_cust.text().strip()
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+            # insert voucher
+            value11 = randint(0, 1000000000000)
+            sql = "INSERT INTO VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s,  %s, %s, %s, %s, %s, %s) "
+            val = ('Redeem Points', '1', "RVOU" + bin(value11), value,value,
+                    CL_userModule.user_name, creationDate,
+                   creationDate, '31.12.9999',customer,
+                    '0', '0')
+            mycursor.execute(sql, val)
+            db1.connectionCommit(conn)
+            QtWidgets.QMessageBox.warning(self, "Done", "Voucher is created")
+
         except Exception as err:
             print(err)
     def FN_CHECK_CUSTOMER(self,id):

@@ -81,25 +81,68 @@ class CL_redVouch(QtWidgets.QDialog):
                 print(e)
 
     def FN_REPLACE_VOUCHER(self):
+        ret = self.FN_VALIDATE()
+        if ret == True:
+            self.FN_CREATE_VOUCHER()
+            self.FN_UPDATE_CUST_POINTS()
+        else :
+            QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
+
+    def FN_CREATE_VOUCHER(self):
         try:
-            value =self.Qline_point_value.text().strip()
+            # insert voucher
+            value = self.Qline_point_value.text().strip()
             customer = self.Qline_cust.text().strip()
+
             conn = db1.connect()
             mycursor = conn.cursor()
             creationDate = str(datetime.today().strftime('%d-%m-%Y'))
             # insert voucher
             value11 = randint(0, 1000000000000)
-            sql = "INSERT INTO VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s,  %s, %s, %s, %s, %s, %s) "
-            val = ('Redeem Points', '1', "RVOU" + bin(value11), value,value,
-                    CL_userModule.user_name, creationDate,
-                   creationDate, '31.12.9999',customer,
-                    '0', '0')
+            sql = "INSERT INTO Hyper1_Retail.VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s,  %s, %s, %s, %s, %s, %s) "
+            val = ('Redeem Points', '1', "RVOU" + bin(value11), value, value,
+                   CL_userModule.user_name, creationDate,
+                   creationDate, '31.12.9999', customer,
+                   '0', '0')
             mycursor.execute(sql, val)
             db1.connectionCommit(conn)
             QtWidgets.QMessageBox.warning(self, "Done", "Voucher is created")
+            # update customer points
+            actualPoints = self.Qline_points.text().strip()
+            remainingPoints = self.Qline_remainder.text().strip()
+
 
         except Exception as err:
             print(err)
+
+    def FN_UPDATE_CUST_POINTS(self):
+        try:
+            # insert voucher
+            value = self.Qline_point_value.text().strip()
+            customer = self.Qline_cust.text().strip()
+
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+
+            actualPoints = self.Qline_points.text().strip()
+            remainingPoints = self.Qline_remainder.text().strip()
+            sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set POSC_POINTS_BEFORE =%s ,POSC_POINTS_AFTER=%s , POINTS_CHANGED_ON =%s , TRANS_SIGN = '0' where POSC_CUSTOMER_ID = %s"
+            val = (actualPoints, remainingPoints, creationDate, customer)
+            mycursor.execute(sql, val)
+            db1.connectionCommit(conn)
+            # QtWidgets.QMessageBox.warning(self, "Done", "Voucher is created")
+            print("customer points are updated")
+        except Exception as err:
+            print(err)
+
+    def FN_VALIDATE(self):
+        replacedPoints = int(self.Qline_replace.text().strip())
+        actualPoints = int(self.Qline_points.text().strip())
+        if replacedPoints > actualPoints:
+            return False
+        else:
+            return True
     def FN_CHECK_CUSTOMER(self,id):
         try:
             conn = db1.connect()

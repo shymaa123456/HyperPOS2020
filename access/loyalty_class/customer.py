@@ -81,6 +81,15 @@ class CL_customer(QtWidgets.QDialog):
         self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP)
         self.fileName = ''
 
+    def FN_LOAD_UPLOAD_PT(self):
+
+        filename = self.dirname + '/uploadCustPt.ui'
+        loadUi(filename, self)
+        self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
+        self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD1)
+        self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP1)
+        self.fileName = ''
+
     def FN_DISPLAY_TEMP(self):
          try:
              filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
@@ -114,7 +123,25 @@ class CL_customer(QtWidgets.QDialog):
          except Exception as err:
              print(err)
 # get customer type desc
+    def FN_DISPLAY_TEMP1(self):
+         try:
+             filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
+             print(filename)
 
+             wb = xlwt.Workbook()
+
+             # add_sheet is used to create sheet.
+             sheet = wb.add_sheet('Sheet 1')
+             sheet.write(0, 0, 'رقم العميل')
+             sheet.write(0, 1, 'عدد النقاط')
+
+             # # wb.save('test11.xls')
+             wb.save(str(filename[0]))
+             # wb.close()
+             import webbrowser
+             webbrowser.open(filename[0])
+         except Exception as err:
+             print(err)
     def FN_GET_CUSTTP_DESC(self, id):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -257,7 +284,53 @@ class CL_customer(QtWidgets.QDialog):
         #Extracting number of rows
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
+    def FN_SAVE_UPLOAD1(self):
 
+        if self.fileName !='':
+            self.LE_fileName.setText(self.fileName)
+            wb = xlrd.open_workbook( self.fileName )
+            sheet = wb.sheet_by_index( 0 )
+            conn = db1.connect()
+            mycursor = conn.cursor()
+
+            for i in range( sheet.nrows ):
+                error = 0
+                try:
+                    cust = sheet.cell_value( i, 0 )
+                    pts = sheet.cell_value(i, 1)
+                    #QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+                    if cust == ''   or pts == '':
+                        error = 1
+                        error_message= " there is an empty fields"
+                    ret = self.FN_VALIDATE_CUST()
+                    if ret == False:
+                        error_message = " Invalid customer id"
+                        error = 1
+
+                    if error != 1:
+                        sql = "select POSC_POINTS_AFTER Hyper1_Retail.POS_CUSTOMER_POINT where POSC_CUSTOMER_ID = %s"
+                        val = (cust)
+                        mycursor.execute(sql, val)
+                        result = mycursor.fetchone()
+                        before_points = result[0]
+
+                        creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+                        sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set POSC_POINTS_BEFORE =%s ,POSC_POINTS_AFTER=%s , POINTS_CHANGED_ON =%s , TRANS_SIGN = '0' where POSC_CUSTOMER_ID = %s"
+                        val = (before_points, pts, creationDate, cust)
+                        mycursor.execute(sql, val)
+                        db1.connectionCommit(conn)
+                        # QtWidgets.QMessageBox.warning(self, "Done", "Voucher is created")
+                        print("customer points are updated")
+                        #print(val)
+                        mycursor.execute( sql, val )
+                        db1.connectionCommit( conn )
+                except Exception as err:
+                     print(err)
+            mycursor.close()
+            self.close()
+        #Extracting number of rows
+        else:
+            QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
     def FN_GET_CUST(self,id):
         #self.FN_GET_CustID()
         #self.id = self.LB_custID.text()
@@ -320,7 +393,10 @@ class CL_customer(QtWidgets.QDialog):
         self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
 
-
+    def FN_UP_CUST_PT(self, funct):
+        self.window_two = CL_customer()
+        self.window_two.FN_LOAD_UPLOAD_PT()
+        self.window_two.show()
 
 
     def FN_LOAD_CREATE(self):

@@ -307,28 +307,35 @@ class CL_customer(QtWidgets.QDialog):
             sheet = wb.sheet_by_index( 0 )
             conn = db1.connect()
             mycursor = conn.cursor()
-
-
-            for i in range( sheet.nrows ):
-                error = 0
+            error = 0
+            error1 = 0
+            for i in range(sheet.nrows):
                 try:
-                    cust = sheet.cell_value( i, 0 )
+                    cust = sheet.cell_value(i, 0)
                     pts = sheet.cell_value(i, 1)
                     cust = int(cust)
                     ret = self.FN_VALIDATE_CUST(cust)
-                    if cust == ''   or pts == '':
+                    if cust == '' or pts == '':
                         error = 1
-                        error_message= " there is an empty fields"
-                        cust = int(cust)
-
+                        break
                     if ret == False:
-                        print("7test")
-                    if error != 1:
+                        error1 = 1
+                        break
+                except Exception as err:
+                     print(err)
+
+            if error == 0 and error1 ==0 :
+                for i in range( sheet.nrows ):
+
+                    try:
+                        cust = sheet.cell_value( i, 0 )
+                        pts = sheet.cell_value(i, 1)
+                        cust = int(cust)
+                        pts = int(pts)
                         sql = "select POSC_POINTS_AFTER from Hyper1_Retail.POS_CUSTOMER_POINT where POSC_CUSTOMER_ID = '"+str(cust)+"'"
-                        print(sql)
                         mycursor.execute(sql)
                         result = mycursor.fetchone()
-                        before_points = result[0]
+                        before_points = int(result[0])
 
                         creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
                         sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set POSC_POINTS_BEFORE =%s ,POSC_POINTS_AFTER=%s , POINTS_CHANGED_ON =%s , TRANS_SIGN = '0' where POSC_CUSTOMER_ID = %s"
@@ -336,11 +343,16 @@ class CL_customer(QtWidgets.QDialog):
                         mycursor.execute(sql, val)
                         db1.connectionCommit(conn)
                         QtWidgets.QMessageBox.warning(self, "Done", "customer points are updated")
-                        print("customer points are updated")
+
                         mycursor.execute( sql, val )
                         db1.connectionCommit( conn )
-                except Exception as err:
-                     print(err)
+                    except Exception as err:
+                         print(err)
+            elif error == 1:
+                QtWidgets.QMessageBox.warning(self, "Error", "Sheet contain empty fields")
+            elif error1 == 1:
+                QtWidgets.QMessageBox.warning(self, "Error", "Sheet contain invalid customers")
+
             mycursor.close()
 #            self.close()
         #Extracting number of rows

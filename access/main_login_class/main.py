@@ -77,14 +77,18 @@ class CL_main(QtWidgets.QMainWindow):
             # self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
             # self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
             self.QAct_Display_Customer.triggered.connect(self.FN_DISPLAY_CUST)
+            self.QAct_Cust_Points_Upload.triggered.connect(self.FN_UP_CUST_PT)
+
             self.QAct_Display_Loyality.triggered.connect(self.FN_CREATE_LOYPROG)
 
             self.QAct_Display_CustGp.triggered.connect(self.FN_DISPLAY_CUSTGP)
             self.QAct_Display_CustTp.triggered.connect(self.FN_DISPLAY_CUSTTP)
 
             self.QAct_Redeem_Item.triggered.connect(self.FN_DISPLAY_REDITEM)
-
             self.QAct_Redeem_Voucher.triggered.connect(self.FN_DISPLAY_REDITEMVOUCHER)
+
+
+
 
             self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
             self.QAct_Create_Form.triggered.connect(self.FN_create_form)
@@ -120,6 +124,15 @@ class CL_main(QtWidgets.QMainWindow):
         except Exception as err:
             print(err)
 
+    def FN_UP_CUST_PT(self):
+
+        try:
+            self.window_two = CL_customer()
+            self.window_two.FN_LOAD_UPLOAD_PT()
+            self.window_two.show()
+
+        except Exception as err:
+         print(err)
     def FN_CREATE_LOYPROG(self):
         self.window_two = CL_loyProg()
         self.window_two.FN_LOAD_DISPLAY()

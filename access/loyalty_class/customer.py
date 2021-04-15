@@ -284,6 +284,21 @@ class CL_customer(QtWidgets.QDialog):
         #Extracting number of rows
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
+    def FN_VALIDATE_CUST(self,id ):
+
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
+            sql = "SELECT * FROM Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = '" + str(id) + "'"
+            #print(sql)
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+
     def FN_SAVE_UPLOAD1(self):
 
         if self.fileName !='':
@@ -293,41 +308,41 @@ class CL_customer(QtWidgets.QDialog):
             conn = db1.connect()
             mycursor = conn.cursor()
 
+
             for i in range( sheet.nrows ):
                 error = 0
                 try:
                     cust = sheet.cell_value( i, 0 )
                     pts = sheet.cell_value(i, 1)
-                    #QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+                    cust = int(cust)
+                    ret = self.FN_VALIDATE_CUST(cust)
                     if cust == ''   or pts == '':
                         error = 1
                         error_message= " there is an empty fields"
-                    ret = self.FN_VALIDATE_CUST()
-                    if ret == False:
-                        error_message = " Invalid customer id"
-                        error = 1
+                        cust = int(cust)
 
+                    if ret == False:
+                        print("7test")
                     if error != 1:
-                        sql = "select POSC_POINTS_AFTER Hyper1_Retail.POS_CUSTOMER_POINT where POSC_CUSTOMER_ID = %s"
-                        val = (cust)
-                        mycursor.execute(sql, val)
+                        sql = "select POSC_POINTS_AFTER from Hyper1_Retail.POS_CUSTOMER_POINT where POSC_CUSTOMER_ID = '"+str(cust)+"'"
+                        print(sql)
+                        mycursor.execute(sql)
                         result = mycursor.fetchone()
                         before_points = result[0]
 
                         creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
                         sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set POSC_POINTS_BEFORE =%s ,POSC_POINTS_AFTER=%s , POINTS_CHANGED_ON =%s , TRANS_SIGN = '0' where POSC_CUSTOMER_ID = %s"
-                        val = (before_points, pts, creationDate, cust)
+                        val = (before_points, pts, creationDate, str(cust))
                         mycursor.execute(sql, val)
                         db1.connectionCommit(conn)
-                        # QtWidgets.QMessageBox.warning(self, "Done", "Voucher is created")
+                        QtWidgets.QMessageBox.warning(self, "Done", "customer points are updated")
                         print("customer points are updated")
-                        #print(val)
                         mycursor.execute( sql, val )
                         db1.connectionCommit( conn )
                 except Exception as err:
                      print(err)
             mycursor.close()
-            self.close()
+#            self.close()
         #Extracting number of rows
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
@@ -393,10 +408,10 @@ class CL_customer(QtWidgets.QDialog):
         self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
 
-    def FN_UP_CUST_PT(self, funct):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_UPLOAD_PT()
-        self.window_two.show()
+    # def FN_UP_CUST_PT(self, funct):
+    #     self.window_two = CL_customer()
+    #     self.window_two.FN_LOAD_UPLOAD_PT()
+    #     self.window_two.show()
 
 
     def FN_LOAD_CREATE(self):

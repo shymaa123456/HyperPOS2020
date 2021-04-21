@@ -59,7 +59,7 @@ class CL_customerGP(QtWidgets.QDialog):
                 whereClause = "where CG_Status = 0 "
 
             if name != '' :
-                whereClause = whereClause + "and CG_DESC = '" + str(name) + "'"
+                whereClause = whereClause + "and CG_DESC like '%" + str(name) + "%'"
 
             sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause
             #print(sql_select_query)
@@ -130,10 +130,9 @@ class CL_customerGP(QtWidgets.QDialog):
     def FN_CHECK_DUP_NAME(self,name):
         self.conn1 = db1.connect()
         mycursor1 = self.conn1.cursor()
-        # get max userid
-        mycursor1.execute("SELECT CG_DESC  FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '"+name+"'")
-        #myresult = mycursor1.fetchone()
-        #print("testing")
+        sql = "SELECT CG_DESC  FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '"+name+"'"
+        mycursor1.execute(sql)
+        myresult = mycursor1.fetchall()
         len = mycursor1.rowcount
         print(len)
         if len > 0:

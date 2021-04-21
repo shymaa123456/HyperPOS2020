@@ -52,7 +52,12 @@ class CL_redVouch(QtWidgets.QDialog):
         value = replacedPoints * int(result[1] )/int(result[0])
         print(result)
         self.Qline_point_value.setText(str(value))
-
+    def FN_CLEAR_FEILDS (self):
+        self.Qline_points.setText("")
+        self.Qline_name.setText('')
+        self.Qline_replace.setText("")
+        self.Qline_remainder.setText("")
+        self.Qline_point_value.setText("")
     def FN_LOAD_DISPlAY(self):
         try:
             filename = self.dirname + '/redeemVoucher.ui'
@@ -63,6 +68,7 @@ class CL_redVouch(QtWidgets.QDialog):
             #self.Qbtn_export.clicked.connect(self.FN_SAVE)
             #self.Qbtn_exit.clicked.connect(self.FN_exit)
             self.Qline_replace.textChanged.connect(self.textchanged)
+            self.Qline_cust.textChanged.connect(self.FN_CLEAR_FEILDS)
             for row_number, row_data in enumerate(CL_userModule.myList):
                 if row_data[1] == 'Redeem_Voucher':
                     if row_data[4] == 'None':
@@ -99,6 +105,7 @@ class CL_redVouch(QtWidgets.QDialog):
             creationDate = str(datetime.today().strftime('%d-%m-%Y'))
             # insert voucher
             value11 = randint(0, 1000000000000)
+            voucherBarcode ="RVOU" + bin(value11)
             sql = "INSERT INTO Hyper1_Retail.VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s,  %s, %s, %s, %s, %s, %s) "
             val = ('Redeem Points', '1', "RVOU" + bin(value11), value, value,
                    CL_userModule.user_name, creationDate,
@@ -106,7 +113,9 @@ class CL_redVouch(QtWidgets.QDialog):
                    '0', '0')
             mycursor.execute(sql, val)
             db1.connectionCommit(conn)
-            QtWidgets.QMessageBox.warning(self, "Done", "Voucher is created")
+            mycursor.execute( "select GV_ID from Hyper1_Retail.VOUCHER where GV_BARCODE ='"+voucherBarcode+"'")
+            result= mycursor.fetchone()
+            QtWidgets.QMessageBox.information(self, "Done", "Voucher is created with number "+str(result[0]))
             # update customer points
             actualPoints = self.Qline_points.text().strip()
             remainingPoints = self.Qline_remainder.text().strip()

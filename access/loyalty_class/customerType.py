@@ -96,7 +96,7 @@ class CL_customerTP(QtWidgets.QDialog):
                 whereClause = "where LOYCT_STATUS = 0 "
 
             if name != '':
-                whereClause = whereClause + "and LOYCT_DESC = '" + str(name) + "'"
+                whereClause = whereClause + "and LOYCT_DESC like '%" + str(name) + "%'"
             whereClause = whereClause  + " and LOYCT_TYPE_ID != 'H1'"
 
             sql_select_query = "select  LOYCT_TYPE_ID,LOYCT_DESC , LOYCT_POINTS_TO_PROMOTE,LOYCT_TYPE_NEXT,LOYCT_STATUS from  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE " + whereClause

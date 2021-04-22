@@ -33,6 +33,7 @@ class CL_redVouch(QtWidgets.QDialog):
         try:
             print( "contents of text box: " )
             replacedPoints = int(self.Qline_replace.text().strip())
+
             actualPoints = int(self.Qline_points.text().strip())
             remainingPoints = actualPoints - replacedPoints
             self.Qline_remainder.setText(str(remainingPoints))
@@ -87,12 +88,16 @@ class CL_redVouch(QtWidgets.QDialog):
                 print(e)
 
     def FN_REPLACE_VOUCHER(self):
-        ret = self.FN_VALIDATE()
-        if ret == True:
-            self.FN_CREATE_VOUCHER()
-            self.FN_UPDATE_CUST_POINTS()
-        else :
-            QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
+        replacedPoints = int(self.Qline_replace.text().strip())
+        if replacedPoints > 0 :
+            ret = self.FN_VALIDATE()
+            if ret == True:
+                self.FN_CREATE_VOUCHER()
+                self.FN_UPDATE_CUST_POINTS()
+            else :
+                QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
+        else:
+            QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أكثر من صفر")
 
     def FN_CREATE_VOUCHER(self):
         try:

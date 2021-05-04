@@ -39,7 +39,6 @@ from access.voucher_class.EditVoucher import CL_EditVoucher
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
 
-
     def __init__(self):
         forms = []
         super(CL_main, self).__init__()
@@ -109,9 +108,6 @@ class CL_main(QtWidgets.QMainWindow):
         #Todo: method for Open Create Voucher Window
         self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
         self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
-
-
-
 
         # for installment
         self.QAct_Create_Bank.triggered.connect(self.FN_CREATE_Bank)
@@ -318,7 +314,10 @@ class CL_main(QtWidgets.QMainWindow):
     def FN_CREATE_Bank(self):
         self.window_two = CL_CreateBank()
         self.window_two.FN_LOAD_CREATE()
-        self.window_two.show()
+#        self.window_two.MdiParent = self.ParentForm
+       # self.window_two.show()
+        self.window_two.setModal(self, True)
+        self.window_two.exec()
 
     def FN_Modify_Bank(self):
         self.window_two = CL_CreateBank()

@@ -198,6 +198,7 @@
      <addaction name="separator"/>
      <addaction name="QAct_Coupon_Print"/>
      <addaction name="separator"/>
+     <addaction name="QAct_Coupon_barcode"/>
     </widget>
     <addaction name="QM_Promotion_Prom"/>
     <addaction name="separator"/>
@@ -279,19 +280,16 @@
      <property name="title">
       <string>الهدايا والنقاط المكتسبة</string>
      </property>
-     <addaction name="QAct_Cust_Gift_Define"/>
+     <addaction name="QAct_Redeem_Item"/>
      <addaction name="QAct_Cust_Points_Redeem_Define"/>
      <addaction name="separator"/>
-     <addaction name="QAct_Cust_Points_By_Section"/>
-     <addaction name="QAct_Cust_Points_By_Item"/>
-     <addaction name="QAct_Cust_Points_Data_Upload"/>
      <addaction name="separator"/>
     </widget>
     <widget class="QMenu" name="QM_Customer_Redeem">
      <property name="title">
       <string>منح الهدايا واستبدال النقاط</string>
      </property>
-     <addaction name="QAct_Cust_Redeem_Voucher"/>
+     <addaction name="QAct_Redeem_Voucher"/>
      <addaction name="QAct_Cust_Redeem_Gift"/>
      <addaction name="QAct_Cust_Gift_make"/>
      <addaction name="QAct_Cust_Redeem_Voucher_Print"/>
@@ -1272,7 +1270,7 @@
     <string>تحميل ملف بيانات عملاء</string>
    </property>
   </action>
-  <action name="QAct_Cust_Gift_Define">
+  <action name="QAct_Redeem_Item">
    <property name="text">
     <string>تعريف اصناف الهدايا</string>
    </property>
@@ -1307,7 +1305,7 @@
     <string>تحميل نقاط عملاء من خارج النظام</string>
    </property>
   </action>
-  <action name="QAct_Cust_Redeem_Voucher">
+  <action name="QAct_Redeem_Voucher">
    <property name="text">
     <string>استبدال النقاط بقسيمة شراء</string>
    </property>
@@ -1503,6 +1501,11 @@
   <action name="QAct_Modify_Bank">
    <property name="text">
     <string>تعديل بنك</string>
+   </property>
+  </action>
+  <action name="QAct_Coupon_barcode">
+   <property name="text">
+    <string>تفعيل و ايقاف و استبدال باركود</string>
    </property>
   </action>
  </widget>

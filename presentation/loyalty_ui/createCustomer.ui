@@ -177,7 +177,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string/>
+       <string>Ahmed Hamam</string>
       </property>
      </widget>
     </item>
@@ -214,6 +214,9 @@
                                     
                             </string>
       </property>
+      <property name="text">
+       <string>024350508</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -243,6 +246,9 @@
                                     
                             </string>
       </property>
+      <property name="text">
+       <string>01003890287</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -270,6 +276,9 @@
                                         );
                                         }
                                     </string>
+      </property>
+      <property name="text">
+       <string>developer</string>
       </property>
      </widget>
     </item>
@@ -299,6 +308,9 @@
                                         }
                                     
                             </string>
+      </property>
+      <property name="text">
+       <string>zayed</string>
       </property>
      </widget>
     </item>
@@ -342,6 +354,9 @@
                                         }
                                     </string>
       </property>
+      <property name="text">
+       <string>110</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -370,6 +385,9 @@
                                         }
                                     </string>
       </property>
+      <property name="text">
+       <string>2</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -397,6 +415,9 @@
                                         );
                                         }
                                     </string>
+      </property>
+      <property name="text">
+       <string>shymaa.helal@gmail.com</string>
       </property>
      </widget>
     </item>
@@ -427,6 +448,9 @@
                                     
                             </string>
       </property>
+      <property name="text">
+       <string>Hyper</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -456,6 +480,9 @@
                                     
                             </string>
       </property>
+      <property name="text">
+       <string>010025947786</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -484,6 +511,9 @@
                                         }
                                     
                             </string>
+      </property>
+      <property name="text">
+       <string>zayed</string>
       </property>
      </widget>
     </item>

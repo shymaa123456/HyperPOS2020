@@ -93,28 +93,28 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_GET_Branch(self):
-        i=0
-        try:
+         i=0
+         try:
             # Todo: method for fills the Branch combobox
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
             records = mycursor.fetchall()
             for row, val in records:
-
-                if val in self.FN_AuthBranchUser()[i]:
-                    self.Qcombo_branch.addItem(row, val)
-                i+=1
+                for bra in self.FN_AuthBranchUser():
+                    if val in bra:
+                        self.Qcombo_branch.addItem(row, val)
+                    i += 1
             mycursor.close()
-        except:
-            print(sys.exc_info())
+         except:
+             print(sys.exc_info())
 
 
     def FN_Create(self):
 
         try:
             mycursor = self.conn.cursor()
-            if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text())==0 or len(self.LE_desc_3.text()) == 0 and len(self.LE_desc_2.text()) == 0:
+            if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text().strip())==0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
                 if self.checkBox_Multi.isChecked():
@@ -129,17 +129,17 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                         self.serialType=0
             creationDate = str(datetime.today().strftime('%d-%m-%Y'))
             if self.radioButton_Percentage.isChecked():
-                if len(self.LE_desc_3.text()) == 0:
+                if len(self.LE_desc_3.text().strip()) == 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
                 else:
                     self.valueData = self.LE_desc_3.text()
             elif self.radioButton_Value.isChecked():
-                if len(self.LE_desc_2.text()) == 0:
+                if len(self.LE_desc_2.text().strip()) == 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
                 else:
                     self.valueData = self.LE_desc_2.text()
             self.conn = db1.connect()
-            indx = self.LE_desc.text()
+            indx = self.LE_desc.text().strip()
 
             # sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
             sql_select_Query = "select * from COUPON where COP_DESC = %s "
@@ -179,7 +179,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
 
                     sql_select_Query = "select * from COUPON_SERIAL where COPS_BARCODE = %s "
 
-                    x = (bin(value),)
+                    x = ("HCOP"+bin(value),)
                     mycursor = self.conn.cursor()
                     mycursor.execute(sql_select_Query, x)
                     record = mycursor.fetchone()
@@ -187,7 +187,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                     if mycursor.rowcount > 0:
                         value=value+1
                     sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-                    val2 = (id, bin(value), CL_userModule.user_name,self.serialType ,creationDate, 0,
+                    val2 = (id, "HCOP"+bin(value), CL_userModule.user_name,self.serialType ,creationDate, 0,
                             '1')
                     print(sql2, val2)
                     mycursor.execute(sql2, val2)
@@ -205,14 +205,13 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "Done", "رقم الكوبون هو " + str(id))
                 self.label_num.setText(str(id))
 
-
         except:
             print(sys.exc_info())
 
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER where USER_NAME='"+CL_userModule.user_name+"'")
+        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"'")
         records = mycursor.fetchall()
         return records
 

@@ -1,53 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QForm_prom_create</class>
- <widget class="QWidget" name="QForm_prom_create">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1028</width>
-    <height>560</height>
+    <width>789</width>
+    <height>571</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>1028</width>
-    <height>560</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>1028</width>
-    <height>560</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>انشاء برنامج عضويه</string>
+   <string>Dialog</string>
   </property>
-  <property name="toolTip">
-   <string/>
-  </property>
-  <property name="layoutDirection">
-   <enum>Qt::RightToLeft</enum>
-  </property>
-  <widget class="QWidget" name="gridLayoutWidget">
+  <widget class="QTableWidget" name="Qtable_redeem">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>70</y>
-     <width>2</width>
-     <height>2</height>
+     <x>10</x>
+     <y>290</y>
+     <width>761</width>
+     <height>271</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2"/>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <column>
+    <property name="text">
+     <string>الباركود</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الشركه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الفرع</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>النقاط المستحقه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>تاريخ البدايه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>تاريخ النهايه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الحاله</string>
+    </property>
+   </column>
   </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1021</width>
+     <x>10</x>
+     <y>10</y>
+     <width>771</width>
      <height>271</height>
     </rect>
    </property>
@@ -71,7 +90,7 @@ background-color: rgb(198, 207, 199);</string>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>140</x>
       <y>10</y>
       <width>301</width>
       <height>111</height>
@@ -83,7 +102,7 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>40</x>
        <y>10</y>
        <width>181</width>
        <height>92</height>
@@ -96,20 +115,14 @@ background-color: rgb(198, 207, 199);</string>
       <item>
        <widget class="QComboBox" name="CMB_branch"/>
       </item>
-      <item>
-       <widget class="QComboBox" name="CMB_custGroup"/>
-      </item>
-      <item>
-       <widget class="QComboBox" name="CMB_loyalityType"/>
-      </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="layoutWidget_2">
      <property name="geometry">
       <rect>
-       <x>214</x>
+       <x>239</x>
        <y>10</y>
-       <width>76</width>
+       <width>51</width>
        <height>91</height>
       </rect>
      </property>
@@ -128,27 +141,13 @@ background-color: rgb(198, 207, 199);</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>مجموعة العملاء</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>نوع العضويه</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
      <rect>
-      <x>691</x>
+      <x>450</x>
       <y>10</y>
       <width>311</width>
       <height>111</height>
@@ -160,38 +159,25 @@ background-color: rgb(198, 207, 199);</string>
     <property name="title">
      <string/>
     </property>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="label_14">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>10</y>
-       <width>112</width>
-       <height>18</height>
+       <x>240</x>
+       <y>40</y>
+       <width>41</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>اسم البرنامج</string>
+      <string>الباركود</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLineEdit" name="Qline_barcode">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>50</y>
-       <width>112</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>وصف البرنامج</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="Qline_name">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>201</width>
+       <x>20</x>
+       <y>40</y>
+       <width>181</width>
        <height>20</height>
       </rect>
      </property>
@@ -219,47 +205,16 @@ background-color: rgb(198, 207, 199);</string>
                                         }
                                     </string>
      </property>
-    </widget>
-    <widget class="QTextEdit" name="Qtext_desc">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>201</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QTextEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QTextEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QTextEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+     <property name="text">
+      <string>98457</string>
      </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>130</y>
+      <x>450</x>
+      <y>120</y>
       <width>311</width>
       <height>91</height>
      </rect>
@@ -270,7 +225,7 @@ background-color: rgb(198, 207, 199);</string>
     <property name="title">
      <string>فترة البرنامج</string>
     </property>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="layoutWidget_3">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -325,7 +280,7 @@ background-color: rgb(198, 207, 199);</string>
       <string>الى تاريخ</string>
      </property>
     </widget>
-    <widget class="QWidget" name="layoutWidget_2">
+    <widget class="QWidget" name="layoutWidget_4">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -362,7 +317,7 @@ background-color: rgb(198, 207, 199);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
+      <y>80</y>
       <width>111</width>
       <height>151</height>
      </rect>
@@ -370,7 +325,7 @@ background-color: rgb(198, 207, 199);</string>
     <property name="title">
      <string/>
     </property>
-    <widget class="QWidget" name="layoutWidget_3">
+    <widget class="QWidget" name="layoutWidget_5">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -446,7 +401,7 @@ background-color: rgb(198, 207, 199);</string>
                                     </string>
         </property>
         <property name="text">
-         <string>إنشاء البرنامج</string>
+         <string>إنشاء </string>
         </property>
        </widget>
       </item>
@@ -481,7 +436,7 @@ background-color: rgb(198, 207, 199);</string>
                                     </string>
         </property>
         <property name="text">
-         <string>تعديل البرنامج</string>
+         <string>تعديل </string>
         </property>
        </widget>
       </item>
@@ -558,8 +513,8 @@ background-color: rgb(198, 207, 199);</string>
    <widget class="QGroupBox" name="groupBox_6">
     <property name="geometry">
      <rect>
-      <x>788</x>
-      <y>222</y>
+      <x>540</x>
+      <y>220</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -606,8 +561,8 @@ background-color: rgb(198, 207, 199);</string>
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
+      <x>140</x>
+      <y>130</y>
       <width>301</width>
       <height>71</height>
      </rect>
@@ -615,24 +570,11 @@ background-color: rgb(198, 207, 199);</string>
     <property name="title">
      <string/>
     </property>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>211</x>
-       <y>10</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>مبلغ الشراء</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>40</y>
+       <y>20</y>
        <width>81</width>
        <height>20</height>
       </rect>
@@ -641,48 +583,11 @@ background-color: rgb(198, 207, 199);</string>
       <string>النقاط المستحقه</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="Qline_purchAmount">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>10</y>
-       <width>171</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
-     </property>
-     <property name="text">
-      <string>1000</string>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="Qline_points">
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>40</y>
+       <y>20</y>
        <width>171</width>
        <height>20</height>
       </rect>
@@ -712,276 +617,10 @@ background-color: rgb(198, 207, 199);</string>
                                     </string>
      </property>
      <property name="text">
-      <string>17</string>
+      <string>500</string>
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_7">
-    <property name="geometry">
-     <rect>
-      <x>136</x>
-      <y>130</y>
-      <width>541</width>
-      <height>121</height>
-     </rect>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
-    </property>
-    <property name="title">
-     <string>يطبق البرنامج على </string>
-    </property>
-    <widget class="QLabel" name="label_13">
-     <property name="geometry">
-      <rect>
-       <x>462</x>
-       <y>20</y>
-       <width>41</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>الإداره</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="CMB_department">
-     <property name="geometry">
-      <rect>
-       <x>383</x>
-       <y>20</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_14">
-     <property name="geometry">
-      <rect>
-       <x>473</x>
-       <y>70</y>
-       <width>41</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>الباركود</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="Qline_barcode">
-     <property name="geometry">
-      <rect>
-       <x>284</x>
-       <y>74</y>
-       <width>181</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_15">
-     <property name="geometry">
-      <rect>
-       <x>335</x>
-       <y>20</y>
-       <width>41</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>القسم</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="CMB_section">
-     <property name="geometry">
-      <rect>
-       <x>253</x>
-       <y>20</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_16">
-     <property name="geometry">
-      <rect>
-       <x>175</x>
-       <y>20</y>
-       <width>71</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>التصنيف الرابع</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="CMB_level4">
-     <property name="geometry">
-      <rect>
-       <x>93</x>
-       <y>20</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="Qradio_bmc">
-     <property name="geometry">
-      <rect>
-       <x>506</x>
-       <y>23</y>
-       <width>20</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="Qradio_barcode">
-     <property name="geometry">
-      <rect>
-       <x>507</x>
-       <y>71</y>
-       <width>20</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QLabel" name="label_ID">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>120</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="gridLayoutWidget_4">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>270</y>
-     <width>1011</width>
-     <height>271</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_7">
-    <item row="0" column="0">
-     <widget class="QTableWidget" name="Qtable_loyality">
-      <column>
-       <property name="text">
-        <string>رقم البرنامج</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>اسم البرنامج</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>وصف البرنامج</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>تاريخ البدايه</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>تاريخ النهايه</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>الحاله</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>الشركه </string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>الفرع</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>مجموعه العملاء</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>نوع العضويه </string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>الباركود</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>التصنيف الرابع</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>مبلغ الشراء</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>النقاط المستحقه</string>
-       </property>
-      </column>
-     </widget>
-    </item>
-   </layout>
   </widget>
  </widget>
  <resources/>

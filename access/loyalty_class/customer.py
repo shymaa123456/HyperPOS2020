@@ -18,13 +18,14 @@ class CL_customer(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
-        self.conn = db1.connect()
+        conn = db1.connect()
 
 
     def FN_LOAD_DISPLAY(self):
         filename = self.dirname + '/customer_display.ui'
         loadUi(filename, self)
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
         self.Qbtn_export.clicked.connect(self.FN_SAVE_CUST)
         self.Rbtn_custNo.clicked.connect(self.onClicked)
@@ -80,6 +81,15 @@ class CL_customer(QtWidgets.QDialog):
         self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP)
         self.fileName = ''
 
+    def FN_LOAD_UPLOAD_PT(self):
+
+        filename = self.dirname + '/uploadCustPt.ui'
+        loadUi(filename, self)
+        self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
+        self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD1)
+        self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP1)
+        self.fileName = ''
+
     def FN_DISPLAY_TEMP(self):
          try:
              filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
@@ -113,9 +123,28 @@ class CL_customer(QtWidgets.QDialog):
          except Exception as err:
              print(err)
 # get customer type desc
+    def FN_DISPLAY_TEMP1(self):
+         try:
+             filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
+             print(filename)
 
+             wb = xlwt.Workbook()
+
+             # add_sheet is used to create sheet.
+             sheet = wb.add_sheet('Sheet 1')
+             sheet.write(0, 0, 'رقم العميل')
+             sheet.write(0, 1, 'عدد النقاط')
+
+             # # wb.save('test11.xls')
+             wb.save(str(filename[0]))
+             # wb.close()
+             import webbrowser
+             webbrowser.open(filename[0])
+         except Exception as err:
+             print(err)
     def FN_GET_CUSTTP_DESC(self, id):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
@@ -141,7 +170,8 @@ class CL_customer(QtWidgets.QDialog):
             self.LE_fileName.setText(self.fileName)
             wb = xlrd.open_workbook( self.fileName )
             sheet = wb.sheet_by_index( 0 )
-            mycursor = self.conn.cursor()
+            conn = db1.connect()
+            mycursor = conn.cursor()
             errorMsg =''
             createdCust =0
             nonCreatedCust=0
@@ -201,7 +231,7 @@ class CL_customer(QtWidgets.QDialog):
                         error = 1
 
                     ret = CL_validation.FN_valedation_mail(self.email)
-                    if ret == True:
+                    if ret == False:
                         error_message = error_message + " ,has Invalid email"
 
                         error = 1
@@ -234,7 +264,7 @@ class CL_customer(QtWidgets.QDialog):
                         #print(val)
                         mycursor.execute( sql, val )
                         createdCust=createdCust+1
-                        db1.connectionCommit( self.conn )
+                        db1.connectionCommit( conn )
                     else:
                         nonCreatedCust = nonCreatedCust + 1
                     #     self.msgBox1.setText(error_message)
@@ -254,12 +284,86 @@ class CL_customer(QtWidgets.QDialog):
         #Extracting number of rows
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
+    def FN_VALIDATE_CUST(self,id ):
 
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
+            sql = "SELECT * FROM Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = '" + str(id) + "'"
+            #print(sql)
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+
+    def FN_SAVE_UPLOAD1(self):
+
+        if self.fileName !='':
+            self.LE_fileName.setText(self.fileName)
+            wb = xlrd.open_workbook( self.fileName )
+            sheet = wb.sheet_by_index( 0 )
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            error = 0
+            error1 = 0
+            for i in range(sheet.nrows):
+                try:
+                    cust = sheet.cell_value(i, 0)
+                    pts = sheet.cell_value(i, 1)
+                    cust = int(cust)
+                    ret = self.FN_VALIDATE_CUST(cust)
+                    if cust == '' or pts == '':
+                        error = 1
+                        break
+                    if ret == False:
+                        error1 = 1
+                        break
+                except Exception as err:
+                     print(err)
+
+            if error == 0 and error1 ==0 :
+                for i in range( sheet.nrows ):
+
+                    try:
+                        cust = sheet.cell_value( i, 0 )
+                        pts = sheet.cell_value(i, 1)
+                        cust = int(cust)
+                        pts = int(pts)
+                        sql = "select POSC_POINTS_AFTER from Hyper1_Retail.POS_CUSTOMER_POINT where POSC_CUSTOMER_ID = '"+str(cust)+"'"
+                        mycursor.execute(sql)
+                        result = mycursor.fetchone()
+                        before_points = int(result[0])
+
+                        creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+                        sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set POSC_POINTS_BEFORE =%s ,POSC_POINTS_AFTER=%s , POINTS_CHANGED_ON =%s , TRANS_SIGN = '0' where POSC_CUSTOMER_ID = %s"
+                        val = (before_points, pts, creationDate, str(cust))
+                        mycursor.execute(sql, val)
+                        db1.connectionCommit(conn)
+                        QtWidgets.QMessageBox.warning(self, "Done", "customer points are updated")
+
+                        mycursor.execute( sql, val )
+                        db1.connectionCommit( conn )
+                    except Exception as err:
+                         print(err)
+            elif error == 1:
+                QtWidgets.QMessageBox.warning(self, "Error", "Sheet contain empty fields")
+            elif error1 == 1:
+                QtWidgets.QMessageBox.warning(self, "Error", "Sheet contain invalid customers")
+
+            mycursor.close()
+#            self.close()
+        #Extracting number of rows
+        else:
+            QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
     def FN_GET_CUST(self,id):
         #self.FN_GET_CustID()
         #self.id = self.LB_custID.text()
         self.LB_custID.setText(id)
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         sql_select_query = "select * from Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = %s "
         x = (id,)
         mycursor.execute( sql_select_query, x )
@@ -316,7 +420,10 @@ class CL_customer(QtWidgets.QDialog):
         self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
 
-
+    # def FN_UP_CUST_PT(self, funct):
+    #     self.window_two = CL_customer()
+    #     self.window_two.FN_LOAD_UPLOAD_PT()
+    #     self.window_two.show()
 
 
     def FN_LOAD_CREATE(self):
@@ -332,7 +439,8 @@ class CL_customer(QtWidgets.QDialog):
         self.BTN_createCustomer.clicked.connect(self.FN_CREATE_CUST)
 
     def FN_GET_CITIES(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute("SELECT CITY_NAME FROM Hyper1_Retail.City  where CITY_STATUS = 1 order by CITY_ID asc")
         records = mycursor.fetchall()
 
@@ -342,7 +450,8 @@ class CL_customer(QtWidgets.QDialog):
     def FN_GET_DISTRICT(self):
         self.CMB_district.clear()
         if self.CMB_city.currentText() !=None:
-            mycursor = self.conn.cursor()
+            conn = db1.connect()
+            mycursor = conn.cursor()
             mycursor.execute("SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d inner join Hyper1_Retail.City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+self.CMB_city.currentText()+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
             records = mycursor.fetchall()
 
@@ -353,7 +462,8 @@ class CL_customer(QtWidgets.QDialog):
     def FN_GET_DISTRICTS(self):
         self.CMB_district.clear()
         if self.CMB_city.currentText() != None:
-            mycursor = self.conn.cursor()
+            conn = db1.connect()
+            mycursor = conn.cursor()
             mycursor.execute(
                 "SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d where DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
             records = mycursor.fetchall()
@@ -363,7 +473,8 @@ class CL_customer(QtWidgets.QDialog):
             mycursor.close()
 #fill the combo box of customer group
     def FN_GET_CUSTGP(self):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute( "SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP order by CG_GROUP_ID asc" )
         records = mycursor.fetchall()
         mycursor.close()
@@ -373,7 +484,8 @@ class CL_customer(QtWidgets.QDialog):
     # fill the combo box of customer type
     def FN_GET_CUSTTP(self):
         self.CMB_loyalityType.clear()
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute( "SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE order by LOYCT_TYPE_ID asc" )
         records = mycursor.fetchall()
         mycursor.close()
@@ -382,7 +494,8 @@ class CL_customer(QtWidgets.QDialog):
 
     # return customer tye id
     def FN_GET_CUSTTP_ID(self,desc):
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         mycursor.execute( "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+desc+"'" )
         records = mycursor.fetchone()
         mycursor.close()
@@ -461,7 +574,7 @@ class CL_customer(QtWidgets.QDialog):
         self.workPhone = self.LE_workPhone.text().strip()
         self.workAddress = self.LE_workAddress.text().strip()
 
-
+        error = 0
         if self.name == '' or self.mobile == '' or self.job == '' or self.address == '' or self.building == '' \
                 or self.floor == '' or self.email == '':
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
@@ -497,7 +610,7 @@ class CL_customer(QtWidgets.QDialog):
             error = 1
 
         ret = CL_validation.FN_valedation_mail(self.email)
-        if ret == True:
+        if ret == False:
             QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
             error = 1
         return error
@@ -521,8 +634,8 @@ class CL_customer(QtWidgets.QDialog):
             self.workAddress = self.LE_workAddress.text().strip()
             self.status = self.CMB_status.currentText()
             self.notes = self.LE_notes.toPlainText().strip()
-
-            mycursor = self.conn.cursor()
+            conn = db1.connect()
+            mycursor = conn.cursor()
             # get max id
             mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM Hyper1_Retail.POS_CUSTOMER" )
             myresult = mycursor.fetchone()
@@ -574,7 +687,7 @@ class CL_customer(QtWidgets.QDialog):
                 mycursor.close()
 
                 print( mycursor.rowcount, "record inserted." )
-                db1.connectionCommit( self.conn )
+                db1.connectionCommit( conn )
                 #db1.connectionClose( self.conn )
                 QtWidgets.QMessageBox.information(self, "Success", "Customer is created successfully")
 
@@ -605,7 +718,9 @@ class CL_customer(QtWidgets.QDialog):
             self.workAddress = self.LE_workAddress.text().strip()
             self.status = self.CMB_status.currentText()
             self.notes = self.LE_notes.toPlainText().strip()
-            mycursor = self.conn.cursor()
+
+            conn = db1.connect()
+            mycursor = conn.cursor()
 
             changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
             # get customer gp id
@@ -648,7 +763,7 @@ class CL_customer(QtWidgets.QDialog):
                 print( mycursor.rowcount, "record updated." )
                 QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
 
-                db1.connectionCommit( self.conn )
+                db1.connectionCommit( conn )
                 #db1.connectionClose( self.conn )
                 self.close()
         except Exception as err:
@@ -700,8 +815,8 @@ class CL_customer(QtWidgets.QDialog):
         # self.Qtable_customer.clearcontents()
         for i in reversed(range(self.Qtable_customer.rowCount())):
             self.Qtable_customer.removeRow(i)
-
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         whereClause = ""
         if self.chk_search_other.isChecked():
             if self.Rbtn_custNo.isChecked():

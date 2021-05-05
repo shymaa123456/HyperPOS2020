@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 from PyQt5 import QtWidgets
@@ -22,13 +23,21 @@ class CL_printCoupon(QtWidgets.QDialog):
         self.FN_getData()
 
     def FN_getData(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT COP_DESC,COP_ID FROM COUPON")
-        records = mycursor.fetchall()
-        for row,val in records:
-            self.CMB_CouponDes.addItem(row,val)
-        mycursor.close()
+        try:
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            mycursor.execute("SELECT COP_DESC,COP_ID FROM COUPON where COP_STATUS = 1 and COP_VALID_TO >= COP_VALID_FROM")
+            records = mycursor.fetchall()
+            for row, val in records:
+                self.CMB_CouponDes.addItem(row, val)
+            mycursor.close()
+        except:
+            print(sys.exc_info())
+
+
+
+
+
 
 
 

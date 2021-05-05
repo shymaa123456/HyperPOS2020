@@ -127,7 +127,8 @@ class CheckableComboBox(QComboBox):
         self.startTimer(100)
         # Refresh the display text when closing
         self.updateText()
-
+    def hide(self):
+        super().hide()
     def timerEvent(self, event):
         # After timeout, kill timer, and reenable click on line edit
         self.killTimer(event.timerId())

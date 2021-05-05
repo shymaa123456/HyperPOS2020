@@ -29,16 +29,21 @@ class CL_redVouch(QtWidgets.QDialog):
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
 
+    from Validation.Validation import CL_validation
     def textchanged(self):
         try:
             print( "contents of text box: " )
-            replacedPoints = int(self.Qline_replace.text().strip())
+            if self.Qline_replace.text().strip() !='' and self.Qline_points.text().strip() !='' :
+                ret = CL_validation.FN_validation_int(self.Qline_replace.text().strip())
+                if ret == True:
+                    replacedPoints = int(self.Qline_replace.text().strip())
 
-            actualPoints = int(self.Qline_points.text().strip())
-            remainingPoints = actualPoints - replacedPoints
-            self.Qline_remainder.setText(str(remainingPoints))
-            self.FN_GET_POINTS_VALUE(replacedPoints)
-
+                    actualPoints = int(self.Qline_points.text().strip())
+                    remainingPoints = actualPoints - replacedPoints
+                    self.Qline_remainder.setText(str(remainingPoints))
+                    self.FN_GET_POINTS_VALUE(replacedPoints)
+                else:
+                    QtWidgets.QMessageBox.warning(self, "Error", "replaced points is not integer ")
         except (Error, Warning) as e:
             print(e)
 
@@ -94,6 +99,9 @@ class CL_redVouch(QtWidgets.QDialog):
             if ret == True:
                 self.FN_CREATE_VOUCHER()
                 self.FN_UPDATE_CUST_POINTS()
+                self.FN_CLEAR_FEILDS()
+                self.Qline_cust.setText("")
+
             else :
                 QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
         else:

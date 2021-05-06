@@ -17,7 +17,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 
 from PyQt5.QtCore import *
-
+import xlwt.Workbook
 
 class CL_redItem(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
@@ -77,6 +77,12 @@ class CL_redItem(QtWidgets.QDialog):
                         except Exception as err:
                             print(err)
 
+        valid_from = str(datetime.today().strftime('%Y-%m-%d'))
+
+        xto = valid_from.split("-")
+        print(xto)
+        d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+        self.Qdate_from.setDate(d)
     def FN_GET_BRANCHES(self):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -274,28 +280,50 @@ class CL_redItem(QtWidgets.QDialog):
                    self.Qcombo_group4.currentData()) == 0  or bar == ''  or points == '' or date_from == '' or date_to == ''    :
                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
            else:
-               for com in company_list:
-                   for br in branch_list:
-                       ret = self.FN_CHECK_EXIST(com, br,  bar)
-                       if ret == False:
-                           sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
-                                 "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
-                                 ",REDEEM_VALID_TO,REDEEM_STATUS)" \
-                                 "values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+               ret1 = self.FN_CHECK_VALID_BARCCODE(bar)
+               if ret1 == True :
+                   ret2= CL_validation.FN_validation_int(points)
+                   if ret2 == True:
+                       for com in company_list:
+                           for br in branch_list:
+                               ret = self.FN_CHECK_EXIST(com, br,  bar)
+                               if ret == False:
+                                   sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
+                                         "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
+                                         ",REDEEM_VALID_TO,REDEEM_STATUS)" \
+                                         "values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
-                           val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status)
+                                   val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status)
 
-                           mycursor.execute(sql, val)
-                           db1.connectionCommit(conn)
-                           mycursor.close()
-                           self.FN_REFRESH_DATA_GRID()
-                       else:
-                           QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
-
+                                   mycursor.execute(sql, val)
+                                   db1.connectionCommit(conn)
+                                   mycursor.close()
+                                   self.FN_REFRESH_DATA_GRID()
+                               else:
+                                   QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
+                   else:
+                       QtWidgets.QMessageBox.warning(self, "Error", "Points must be an integer")
+               else:
+                   QtWidgets.QMessageBox.warning(self, "Error", "Barcodes doesnot exists")
 
        except Exception as err:
             print(err)
 
+    def FN_CHECK_VALID_BARCCODE(self, id):
+        try:
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
+            sql = "SELECT * FROM Hyper1_Retail.POS_ITEM where POS_GTIN = '" + str(id) + "'"
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+        except (Error, Warning) as e:
+            print(e)
     def FN_CHECK_EXIST(self,comp,branch,barcode):
         try:
             conn = db1.connect()
@@ -421,10 +449,33 @@ class CL_redItem(QtWidgets.QDialog):
             loadUi(filename, self)
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
             self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
+            self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP1)
             #self.fileName = ''
         except (Error, Warning) as e:
             print(e)
+    def FN_DISPLAY_TEMP1(self):
+         try:
+             filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
+             print(filename)
 
+             wb = xlwt.Workbook()
+
+             # add_sheet is used to create sheet.
+             sheet = wb.add_sheet('Sheet 1')
+             sheet.write(0, 0, 'باركود')
+             sheet.write(0, 1, 'الشركه')
+             sheet.write(0, 2, 'الفرع')
+             sheet.write(0, 3, 'النقاط')
+             sheet.write(0, 4, 'من تاريخ')
+             sheet.write(0, 5, 'إلى تاريخ')
+             sheet.write(0, 6, 'الحاله')
+             # # wb.save('test11.xls')
+             wb.save(str(filename[0]))
+             # wb.close()
+             import webbrowser
+             webbrowser.open(filename[0])
+         except Exception as err:
+             print(err)
     def FN_GET_STATUS_DESC(self,id):
         if id == '1':
             return "Active"

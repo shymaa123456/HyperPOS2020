@@ -63,7 +63,7 @@ class CL_customerGP(QtWidgets.QDialog):
             if name != '' :
                 whereClause = whereClause + "and CG_DESC like '%" + str(name) + "%'"
 
-            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + " order by CG_GROUP_ID*1"
+            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + " order by CG_GROUP_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -209,7 +209,9 @@ class CL_customerGP(QtWidgets.QDialog):
     def FN_MODIFY_CUSTGP(self):
         self.conn1 = db1.connect()
         if len(self.Qtable_custGP.selectedIndexes()) >0 :
+            rowNo = self.Qtable_custGP.selectedItems()[0].row()
             id = self.LB_custGpId.text().strip()
+            desc_old = self.Qtable_custGP.item(rowNo, 1).text()
             desc = self.LE_desc.text().strip()
             custGroup = self.CMB_custGroup.currentText()
             if custGroup == 'Active':
@@ -217,18 +219,29 @@ class CL_customerGP(QtWidgets.QDialog):
             else:
                 status = 0
             #
-            mycursor = self.conn1.cursor()
-            changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-            sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
-            val = (status,desc, changeDate,CL_userModule.user_name,id)
-            mycursor.execute(sql, val)
-            #mycursor.close()
-            #
-            print(mycursor.rowcount, "record updated.")
-            QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
-            db1.connectionCommit(self.conn1)
-            self.FN_GET_CUSTGPS()
-            self.FN_CLEAR_FEILDS ()
+            error = 0
+            if self.desc == '':
+                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+
+            else:
+                if desc != desc_old:
+                    if self.FN_CHECK_DUP_NAME(desc) != False:
+                        QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                        error=1
+
+                if error!=1:
+                    mycursor = self.conn1.cursor()
+                    changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                    sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
+                    val = (status,desc, changeDate,CL_userModule.user_name,id)
+                    mycursor.execute(sql, val)
+                    #mycursor.close()
+                    #
+                    print(mycursor.rowcount, "record updated.")
+                    QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
+                    db1.connectionCommit(self.conn1)
+                    self.FN_GET_CUSTGPS()
+                    self.FN_CLEAR_FEILDS ()
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
 

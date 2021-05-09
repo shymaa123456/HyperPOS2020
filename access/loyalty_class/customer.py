@@ -99,8 +99,8 @@ class CL_customer(QtWidgets.QDialog):
 
              # add_sheet is used to create sheet.
              sheet = wb.add_sheet('Sheet 1')
-             sheet.write(0, 0, 'رقم العميل')
-             sheet.write(0, 1, 'اسم العميل')
+             sheet.write(0, 0, 'اسم العميل')
+             sheet.write(0, 1, 'مجموعه العملاء')
              sheet.write(0, 2, 'نوع العضويه')
              sheet.write(0, 3, 'رقم الهاتف')
              sheet.write(0, 4, 'الموبايل')
@@ -224,11 +224,11 @@ class CL_customer(QtWidgets.QDialog):
 
                         error = 1
 
-                    ret = CL_validation.FN_validation_int(self. workPhone)
-                    if ret == False:
-                        error_message = error_message + " ,has Invalid work Phone"
-
-                        error = 1
+                    # ret = CL_validation.FN_validation_int(self.workPhone)
+                    # if ret == False:
+                    #     error_message = error_message + " ,has Invalid work Phone"
+                    #
+                    #     error = 1
 
                     ret = CL_validation.FN_valedation_mail(self.email)
                     if ret == False:

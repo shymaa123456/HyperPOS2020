@@ -94,18 +94,22 @@ class CL_redVouch(QtWidgets.QDialog):
 
     def FN_REPLACE_VOUCHER(self):
         replacedPoints = int(self.Qline_replace.text().strip())
-        if replacedPoints > 0 :
-            ret = self.FN_VALIDATE()
-            if ret == True:
-                self.FN_CREATE_VOUCHER()
-                self.FN_UPDATE_CUST_POINTS()
-                self.FN_CLEAR_FEILDS()
-                self.Qline_cust.setText("")
+        customer = self.Qline_cust.text().strip()
+        if customer !='':
+            if replacedPoints > 0 :
+                ret = self.FN_VALIDATE()
+                if ret == True:
+                    self.FN_CREATE_VOUCHER()
+                    self.FN_UPDATE_CUST_POINTS()
+                    self.FN_CLEAR_FEILDS()
+                    self.Qline_cust.setText("")
 
-            else :
-                QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
+                else :
+                    QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
+            else:
+                QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أكثر من صفر")
         else:
-            QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أكثر من صفر")
+            QtWidgets.QMessageBox.warning(self, "Error", "يجب إدخال رقم عميل")
 
     def FN_CREATE_VOUCHER(self):
         try:

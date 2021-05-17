@@ -187,7 +187,6 @@ class CL_create_promotion(QtWidgets.QDialog):
     dirname = ''
     query = ""
 
-
     def __init__(self):
         super(CL_create_promotion, self).__init__()
 
@@ -314,6 +313,7 @@ class CL_create_promotion(QtWidgets.QDialog):
             self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)  # search barcodes
             self.QcheckBox_all.stateChanged.connect(self.changeTitle)  # select all
             self.Qbtn_add.clicked.connect(self.add_items)  # add_items  to Qtable_promotion datatable
+            self.Qbtn_remove.clicked.connect(self.remove_selected)  # remove items from Qtable_promotion datatable
 
             # save promotion
             self.Qbtn_save.clicked.connect(self.save_items)  # create promotion items
@@ -324,6 +324,15 @@ class CL_create_promotion(QtWidgets.QDialog):
         except:
             print("An exception occurred")
 
+    # @window.event
+    # def on_key_press(symbol, modifiers):
+    #     if symbol == pyglet.window.key.ESCAPE:
+    #         return pyglet.event.EVENT_HANDLED
+    # def on_key_press(symbol, modifiers):
+    #     if symbol == key.ESCAPE:
+    #         return True
+    #
+    #     window.push_handlers(on_key_press)
 
     def save_items(self):
         if self.Qtable_promotion.rowCount() < 1:
@@ -640,6 +649,16 @@ class CL_create_promotion(QtWidgets.QDialog):
         #     identity.append((name, email))
         #     names.append(name)
         #     emails.append(email)
+
+
+    def remove_selected(self):
+        indexes = self.Qtable_promotion.selectionModel().selectedRows()
+        for index in reversed(sorted(indexes)):
+
+            self.Qtable_promotion.removeRow(index.row())
+
+
+
 
     def iterate(self):  # delete duplicated barcodes from search
         #column = 1
@@ -998,3 +1017,12 @@ class CL_create_promotion(QtWidgets.QDialog):
     def updateBMCcombo(self):
         indx = self.Qcombo_section.currentData()
         self.FN_GET_classification(indx)
+
+
+
+    # #######  prevent Escape CHAR
+    def keyPressEvent(self, event):
+        if not event.key() == Qt.Key_Escape:
+            super(CL_create_promotion, self).keyPressEvent(event)
+    # #######  # #######  # #######  # #######
+

@@ -177,7 +177,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string>Ahmed Hamam</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -215,7 +215,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>024350508</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -247,7 +247,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>01003890287</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -278,7 +278,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string>developer</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -310,7 +310,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>zayed</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -329,64 +329,16 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_building">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
-      </property>
-      <property name="text">
-       <string>110</string>
+     <widget class="QSpinBox" name="LE_building">
+      <property name="maximum">
+       <number>99999</number>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_floor">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
-      </property>
-      <property name="text">
-       <string>2</string>
+     <widget class="QSpinBox" name="LE_floor">
+      <property name="maximum">
+       <number>999</number>
       </property>
      </widget>
     </item>
@@ -417,7 +369,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string>shymaa.helal@gmail.com</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -449,7 +401,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>Hyper</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -481,7 +433,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>010025947786</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -513,7 +465,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>zayed</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -527,8 +479,6 @@
    <zorder>LE_job</zorder>
    <zorder>lE_mobile</zorder>
    <zorder>LE_address</zorder>
-   <zorder>LE_building</zorder>
-   <zorder>LE_floor</zorder>
    <zorder>LE_email</zorder>
    <zorder>LE_company</zorder>
    <zorder>LE_workPhone</zorder>
@@ -537,6 +487,8 @@
    <zorder>CMB_status</zorder>
    <zorder>CMB_district</zorder>
    <zorder>CMB_city</zorder>
+   <zorder>LE_building</zorder>
+   <zorder>LE_floor</zorder>
   </widget>
   <widget class="QPushButton" name="BTN_createCustomer">
    <property name="geometry">

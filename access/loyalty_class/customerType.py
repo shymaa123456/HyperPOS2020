@@ -53,18 +53,21 @@ class CL_customerTP(QtWidgets.QDialog):
             id = self.Qtable_custTP.item(rowNo, 0).text()
             desc = self.Qtable_custTP.item(rowNo, 1).text()
             points = self.Qtable_custTP.item(rowNo, 2).text()
-
+            self.CMB_nextLevel.show()
             status = self.Qtable_custTP.item(rowNo, 4).text()
             if  rowNo != 0 :
                 nextLevel = self.Qtable_custTP.item(rowNo, 3).text()
                 self.LB_nextLvlId.setText(nextLevel )
                 nextLevel = self.FN_GET_NEXTlEVEL_DESC(nextLevel)
                 self.CMB_nextLevel.setCurrentText(nextLevel)
-
+            else:
+                self.LB_nextLvlId.setText(' ')
+                self.CMB_nextLevel.hide()
             self.LE_desc.setText(desc)
             self.LE_points.setText(points)
             self.LB_custTpId.setText(id)
-            self.CMB_custType.setCurrentText(status)
+            self.CMB_custType.setCurrentText(self.FN_GET_STATUS_DESC(status))
+            self.FN_GET_ID_STS()
 
             #print(rowNo)
             #self.FN_MODIFY_CUSTTP()
@@ -99,7 +102,7 @@ class CL_customerTP(QtWidgets.QDialog):
                 whereClause = whereClause + "and LOYCT_DESC like '%" + str(name) + "%'"
             whereClause = whereClause  + " and LOYCT_TYPE_ID != 'H1'"
 
-            sql_select_query = "select  LOYCT_TYPE_ID,LOYCT_DESC , LOYCT_POINTS_TO_PROMOTE,LOYCT_TYPE_NEXT,LOYCT_STATUS from  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE " + whereClause
+            sql_select_query = "select  LOYCT_TYPE_ID,LOYCT_DESC , LOYCT_POINTS_TO_PROMOTE,LOYCT_TYPE_NEXT,LOYCT_STATUS from  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE " + whereClause +"order by LOYCT_TYPE_ID*1 asc"
             print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -151,7 +154,7 @@ class CL_customerTP(QtWidgets.QDialog):
             self.Qtable_custTP.removeRow(i)
         self.conn = db1.connect()
         mycursor = self.conn.cursor(buffered=True)
-        mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID   asc")
+        mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID*1   asc")
         records = mycursor.fetchall()
         for row_number, row_data in enumerate(records):
             self.Qtable_custTP.insertRow(row_number)
@@ -175,6 +178,7 @@ class CL_customerTP(QtWidgets.QDialog):
         sql = "SELECT LOYCT_DESC  FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC ='"+name+"'"
         #val = (name,)
         mycursor1.execute(sql)
+        myresult = mycursor1.fetchall()
         len = mycursor1.rowcount
         if len > 0:
             return True
@@ -217,12 +221,14 @@ class CL_customerTP(QtWidgets.QDialog):
                 self.id = "1"
             else:
                 self.id = int(myresult[0]) + 1
-            ret = self.FN_CHECK_DUP_NAME(name)
+
             if name == '':
                 QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
             else:
-                if ret != True :
+                if self.FN_CHECK_DUP_NAME(name) != False:
+                    QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
 
+                else:
                     nextLevel1 = self.FN_GET_NEXTlEVEL_ID(nextLevel)
                     sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
                           "         VALUES ( %s, %s, %s,  %s,%s)"
@@ -237,42 +243,67 @@ class CL_customerTP(QtWidgets.QDialog):
                     QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
                     db1.connectionCommit(conn)
                     self.FN_GET_CUSTTPS()
-                else:
-                    QtWidgets.QMessageBox.warning(self, "Error", "Name duplicated' ")
-                    #mycursor.close()
+                    self.FN_CLEAR_FEILDS()
+
         except Exception as err:
             #mycursor.close()
             print(err)
 
     def FN_MODIFY_CUSTTP(self):
         try:
-                    id = self.LB_custTpId.text()
-                    desc = self.LE_desc.text().strip()
-                    points = self.LE_points.text().strip()
-                    custType = self.CMB_custType.currentText()
-                    nextLevel = self.LB_nextLvlId.text().strip()
-                    if custType == 'Active':
-                        status = 1
-                    else:
-                        status = 0
-                    self.conn = db1.connect()
-                    mycursor = self.conn.cursor()
+            if len(self.Qtable_custTP.selectedIndexes()) > 0:
+                rowNo = self.Qtable_custTP.selectedItems()[0].row()
 
-                    sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT= %s where LOYCT_TYPE_ID = %s"
-                    val = (status,desc,points,nextLevel ,id,)
-                    mycursor.execute(sql, val)
-                    mycursor.close()                #
-                    print(mycursor.rowcount, "record updated.")
-                    QtWidgets.QMessageBox.information(self, "Success", "Cust Tp updated")
-                    db1.connectionCommit(self.conn)
-                    self.FN_GET_CUSTTPS()
+                desc_old = self.Qtable_custTP.item(rowNo, 1).text()
+
+                id = self.LB_custTpId.text()
+                desc = self.LE_desc.text().strip()
+                points = self.LE_points.text().strip()
+                custType = self.CMB_custType.currentText()
+                nextLevel = self.LB_nextLvlId.text().strip()
+                if custType == 'Active':
+                    status = 1
+                else:
+                    status = 0
+                ret = self.FN_CHECK_DUP_NAME(desc)
+                error = 0
+                if desc == '':
+                    QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                else:
+                    if desc != desc_old:
+                        if self.FN_CHECK_DUP_NAME(desc) != False:
+                            QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                            error=1
+
+                    if error != 1:
+                        self.conn = db1.connect()
+                        mycursor = self.conn.cursor()
+
+                        sql = "update  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE set LOYCT_STATUS= %s ,LOYCT_DESC= %s,LOYCT_POINTS_TO_PROMOTE=%s ,LOYCT_TYPE_NEXT= %s where LOYCT_TYPE_ID = %s"
+                        val = (status,desc,points,nextLevel ,id,)
+                        mycursor.execute(sql, val)
+                        mycursor.close()                #
+                        print(mycursor.rowcount, "record updated.")
+                        QtWidgets.QMessageBox.information(self, "Success", "Cust Tp updated")
+                        db1.connectionCommit(self.conn)
+                        self.FN_GET_CUSTTPS()
+                        self.FN_CLEAR_FEILDS()
+            else:
+                QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+
         except Exception as err:
             mycursor.close()
             print(err)
         #db1.connectionClose(self.conn)
         #self.close()
 
+    def FN_CLEAR_FEILDS (self):
 
-
+        self.LE_desc.clear()
+        self.LE_points.clear()
+        self.LB_nextLvlId.clear()
+        self.LB_status.clear()
+        self.CMB_custType.setCurrentText('Active')
+        self.CMB_nextLevel.setCurrentText('')
 
 

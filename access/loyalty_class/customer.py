@@ -36,7 +36,8 @@ class CL_customer(QtWidgets.QDialog):
         self.chk_search_status.stateChanged.connect(self.onClickedCheckBox)
 
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
-
+        self.setFixedWidth(1028)
+        self.setFixedHeight(560)
         #check authorization
         for row_number, row_data in enumerate( CL_userModule.myList ):
            if  row_data[1] =='Display_Customer':
@@ -71,7 +72,8 @@ class CL_customer(QtWidgets.QDialog):
         self.CMB_city.currentIndexChanged.connect(self.FN_GET_DISTRICT)
         self.BTN_modifyCustomer.clicked.connect(self.FN_MODIFY_CUST)
         self.CMB_status.addItems(["Active", "Inactive"])
-
+        self.setFixedWidth(1001)
+        self.setFixedHeight(648)
     def FN_LOAD_UPLOAD(self):
 
         filename = self.dirname + '/uploadCustomers.ui'
@@ -81,6 +83,8 @@ class CL_customer(QtWidgets.QDialog):
         self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP)
         self.fileName = ''
 
+        self.setFixedWidth(576)
+        self.setFixedHeight(178)
     def FN_LOAD_UPLOAD_PT(self):
 
         filename = self.dirname + '/uploadCustPt.ui'
@@ -89,7 +93,8 @@ class CL_customer(QtWidgets.QDialog):
         self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD1)
         self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP1)
         self.fileName = ''
-
+        self.setFixedWidth(576)
+        self.setFixedHeight(178)
     def FN_DISPLAY_TEMP(self):
          try:
              filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
@@ -397,6 +402,7 @@ class CL_customer(QtWidgets.QDialog):
         self.window_two.FN_LOAD_CREATE()
         self.window_two.show()
 
+
     def FN_MD_CUST(self, funct):
 
         self.window_two = CL_customer()
@@ -438,6 +444,8 @@ class CL_customer(QtWidgets.QDialog):
         self.CMB_status.addItems( ["Active", "Inactive"] )
         self.BTN_createCustomer.clicked.connect(self.FN_CREATE_CUST)
 
+        self.setFixedWidth(1034)
+        self.setFixedHeight(651)
     def FN_GET_CITIES(self):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -745,7 +753,7 @@ class CL_customer(QtWidgets.QDialog):
             if error != 1:
 
 
-                sql = "update  Hyper1_Retail.POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,  POSC_NAME = %s  POSC_PHONE=%s," \
+                sql = "update  Hyper1_Retail.POS_CUSTOMER  set  LOYCT_TYPE_ID=%s, CG_GROUP_ID=%s,  POSC_NAME = %s , POSC_PHONE=%s," \
                       " POSC_MOBILE=%s, POSC_JOB=%s, POSC_ADDRESS=%s, POSC_CITY=%s, POSC_DISTICT=%s, POSC_BUILDING=%s,POSC_FLOOR=%s, POSC_EMAIL=%s, " \
                       "POSC_CHANGED_BY =%s, POSC_CHANGED_ON =%s, POSC_COMPANY=%s, " \
                       "POSC_WORK_PHONE=%s, POSC_WORK_ADDRESS=%s, POSC_NOTES=%s, POSC_STATUS=%s where POSC_CUST_ID = %s"
@@ -813,6 +821,7 @@ class CL_customer(QtWidgets.QDialog):
     def FN_SEARCH_CUST(self):
         # print('in search')
         # self.Qtable_customer.clearcontents()
+        self.Qbtn_search.setEnabled(False)
         for i in reversed(range(self.Qtable_customer.rowCount())):
             self.Qtable_customer.removeRow(i)
         conn = db1.connect()
@@ -865,5 +874,6 @@ class CL_customer(QtWidgets.QDialog):
             self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
             mycursor.close()
+        self.Qbtn_search.setEnabled(True)
 
 

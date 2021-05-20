@@ -90,7 +90,8 @@ class CL_login(QtWidgets.QDialog):
         self.label_logo.setPixmap(self.pixmap)
         self.btn_login.clicked.connect(self.FN_login)
         self.btn_reset.clicked.connect(self.FN_reset)
-
+        self.setFixedWidth(400)
+        self.setFixedHeight(250)
 
 class CL_controller():
     def __init__(self):

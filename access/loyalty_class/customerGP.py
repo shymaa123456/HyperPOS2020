@@ -40,7 +40,8 @@ class CL_customerGP(QtWidgets.QDialog):
             self.BTN_modifyCustGp.clicked.connect(self.FN_MODIFY_CUSTGP)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_searchCustGp.clicked.connect(self.FN_SEARCH_CUSTGP)
-
+            self.setFixedWidth(368)
+            self.setFixedHeight(430)
         except Exception as err:
             print(err)
 

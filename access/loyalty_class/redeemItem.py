@@ -53,6 +53,8 @@ class CL_redItem(QtWidgets.QDialog):
 
         self.FN_GET_COMPANIES()
         self.FN_GET_BRANCHES()
+        self.setFixedWidth(789)
+        self.setFixedHeight(571)
         for row_number, row_data in enumerate(CL_userModule.myList):
             if row_data[1] == 'Redeem_Item':
                 if row_data[4] == 'None':
@@ -440,6 +442,7 @@ class CL_redItem(QtWidgets.QDialog):
            self.window_two = CL_redItem()
            self.window_two.FN_LOAD_UPLOAD()
            self.window_two.show()
+
        except Exception as err:
             print(err)
 
@@ -450,6 +453,8 @@ class CL_redItem(QtWidgets.QDialog):
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
             self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
             self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP1)
+            self.setFixedWidth(576)
+            self.setFixedHeight(178)
             #self.fileName = ''
         except (Error, Warning) as e:
             print(e)

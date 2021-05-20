@@ -74,7 +74,8 @@ class CL_loyProg(QtWidgets.QDialog):
         self.Qcombo_group6 = CheckableComboBox(self)
         self.Qcombo_group6.setGeometry(205, 152, 120, 18)
         self.Qcombo_group6.setStyleSheet("background-color: rgb(198, 207, 199)")
-
+        self.setFixedWidth(1028)
+        self.setFixedHeight(560)
         self.CMB_custGroup.hide()
         self.CMB_branch.hide()
         self.CMB_company.hide()
@@ -134,6 +135,8 @@ class CL_loyProg(QtWidgets.QDialog):
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
             self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
             #self.fileName = ''
+            self.setFixedWidth(576)
+            self.setFixedHeight(178)
         except (Error, Warning) as e:
             print(e)
     def FN_GET_BRANCHES(self):
@@ -776,6 +779,7 @@ class CL_loyProg(QtWidgets.QDialog):
         self.window_two = CL_loyProg()
         self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
+
 
     def FN_OPEN_FILE(self):
         options = QFileDialog.Options()

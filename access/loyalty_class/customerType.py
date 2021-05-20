@@ -42,6 +42,8 @@ class CL_customerTP(QtWidgets.QDialog):
             self.CMB_custType.activated.connect (self.FN_GET_ID_STS)
             self.FN_GET_ID()
             self.FN_GET_ID_STS()
+            self.setFixedWidth(406)
+            self.setFixedHeight(399)
         except Exception as err:
             print(err)
 

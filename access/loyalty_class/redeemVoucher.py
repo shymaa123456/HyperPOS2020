@@ -75,6 +75,8 @@ class CL_redVouch(QtWidgets.QDialog):
             #self.Qbtn_exit.clicked.connect(self.FN_exit)
             self.Qline_replace.textChanged.connect(self.textchanged)
             self.Qline_cust.textChanged.connect(self.FN_CLEAR_FEILDS)
+            self.setFixedWidth(497)
+            self.setFixedHeight(281)
             for row_number, row_data in enumerate(CL_userModule.myList):
                 if row_data[1] == 'Redeem_Voucher':
                     if row_data[4] == 'None':

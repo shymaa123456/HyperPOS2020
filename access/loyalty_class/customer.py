@@ -601,7 +601,10 @@ class CL_customer(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile no,no must start with '01'")
             error = 1
 
-
+        ret = self.FN_CHECK_REPEATED_MOBILE(self.mobile)
+        if ret == False:
+            QtWidgets.QMessageBox.warning(self, "Error", "Repeated Mobile no ")
+            error = 1
 
         ret = CL_validation.FN_validation_int(self.workPhone)
         if ret == False:
@@ -622,6 +625,21 @@ class CL_customer(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
             error = 1
         return error
+    def FN_CHECK_REPEATED_MOBILE(self,mobile):
+       try:
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            # get max id
+            mycursor.execute("SELECT POSC_MOBILE FROM Hyper1_Retail.POS_CUSTOMER where POSC_MOBILE ='"+mobile+"'")
+            myresult = mycursor.fetchone()
+
+            if myresult[0] == None:
+                return True
+            else:
+                return False
+
+       except Exception as err:
+             print(err)
     def FN_CREATE_CUST(self):
         #get customer data
         try:

@@ -5,7 +5,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate, QDateTime
 from PyQt5.uic import loadUi
 
-from access.promotion_class.Promotion_Add import CheckableComboBox
+from access.Checkable import CheckableComboBox
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
 
@@ -158,6 +158,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             i = i + 1
         mycursor.close()
 
+
     def FN_check_section(self, index):
         self.FN_unCheckedALLsection()
         mycursor = self.conn.cursor()
@@ -210,6 +211,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "'")
         records = mycursor.fetchall()
+        mycursor.close()
         return records
 
     def FN_GET_Section(self):
@@ -233,6 +235,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "'")
         records = mycursor.fetchall()
+        mycursor.close()
         return records
 
     def FN_GET_sponsor(self):

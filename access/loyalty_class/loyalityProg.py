@@ -470,7 +470,7 @@ class CL_loyProg(QtWidgets.QDialog):
             company_list = []
             for comp in companies:
                 sql = "SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + comp + "'"
-                self.mycursor.execute(sql)
+                mycursor.execute(sql)
                 myresult = mycursor.fetchone()
                 company_list.append(myresult[0])
 
@@ -484,7 +484,7 @@ class CL_loyProg(QtWidgets.QDialog):
             branch_list = []
             for branch in branchs:
                 sql = "SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + branch + "'"
-                self.mycursor.execute(sql)
+                mycursor.execute(sql)
                 myresult = mycursor.fetchone()
                 branch_list.append(myresult[0])
 
@@ -499,7 +499,7 @@ class CL_loyProg(QtWidgets.QDialog):
             # get customer gp id
             cust_gp_list = []
             for cust_gp in cust_gps:
-                self.mycursor.execute("SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '" + cust_gp + "'")
+                mycursor.execute("SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '" + cust_gp + "'")
                 myresult = mycursor.fetchone()
                 cust_gp_list.append(myresult[0])
 
@@ -513,7 +513,7 @@ class CL_loyProg(QtWidgets.QDialog):
             # get customer type
             cust_tp_list = []
             for cust_tp in cust_tps:
-                self.mycursor.execute(
+                mycursor.execute(
                     "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + cust_tp + "'")
                 myresult = mycursor.fetchone()
                 cust_tp_list.append(myresult[0])

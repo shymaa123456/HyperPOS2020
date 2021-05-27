@@ -5,7 +5,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate, QDateTime
 from PyQt5.uic import loadUi
 
-from access.promotion_class.Promotion_Add import CheckableComboBox
+from access.Checkable import CheckableComboBox
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
 
@@ -21,6 +21,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     new_branch_list = []
     section_list = []
     new_section_list = []
+    searchpos=False
 
     def __init__(self):
         super(CL_EditVoucher, self).__init__()
@@ -61,6 +62,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.checkBox_rechange.toggled.connect(self.FN_Rechangable)
             self.checkBox_refundable.toggled.connect(self.FN_Refundable)
             self.BTN_editCoupon.clicked.connect(self.FN_editAction)
+            self.btn_search.clicked.connect(self.FN_search)
 
 
         except:
@@ -158,6 +160,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             i = i + 1
         mycursor.close()
 
+
     def FN_check_section(self, index):
         self.FN_unCheckedALLsection()
         mycursor = self.conn.cursor()
@@ -210,6 +213,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "'")
         records = mycursor.fetchall()
+        mycursor.close()
         return records
 
     def FN_GET_Section(self):
@@ -233,6 +237,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "'")
         records = mycursor.fetchall()
+        mycursor.close()
         return records
 
     def FN_GET_sponsor(self):
@@ -272,6 +277,8 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.LE_desc_1.setText(record[1])
             self.LE_desc_2.setValue(float(record[4]))
             self.CMB_CouponStatus.setCurrentIndex(int(record[20]))
+            self.LE_desc_5.setText(record[17])
+            self.FN_search()
             datefrom = record[12]
             xfrom = datefrom.split("-")
             self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
@@ -345,8 +352,10 @@ class CL_EditVoucher(QtWidgets.QDialog):
 
     def FN_editAction(self):
         try:
+            self.FN_search()
             if len(self.Qcombo_company.currentData()) == 0 or len(self.Qcombo_branch.currentData()) == 0 or len(
-                    self.LE_desc_1.text().strip()) == 0 or len(self.Qcombo_section.currentData()) == 0:
+                    self.LE_desc_1.text().strip()) == 0 or len(self.Qcombo_section.currentData()) == 0 or len(
+                    self.LE_desc_5.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
                 if self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
@@ -355,7 +364,11 @@ class CL_EditVoucher(QtWidgets.QDialog):
                 elif self.Qdate_from.dateTime() < self.dfrom:
                     QtWidgets.QMessageBox.warning(self, "Done",
                                                   "تاريخ الانشاء الجديد يجب ان يكون اكبر او يساوي تاريخ الانشاء قبل التعديل")
+                elif self.searchpos== False :
+                    QtWidgets.QMessageBox.warning(self, "Done",
+                                                  "العميل غير موجود")
                 else:
+
                     mycursor = self.conn.cursor()
                     creationDate = str(datetime.today().strftime('%d-%m-%Y'))
                     sql = "update VOUCHER set GV_DESC='" + self.LE_desc_1.text().strip() + "',GV_RECHARGE_VALUE='" + self.LE_desc_3.text().strip() + "',GV_REFUNDABLE=" + str(
@@ -363,7 +376,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
                         self.GV_MULTIUSE) + " ,GV_CHANGED_BY='" + CL_userModule.user_name + "',GV_CHANGE_ON='" + creationDate + "',GV_VALID_FROM='" + self.Qdate_from.dateTime().toString(
                         'dd-MM-yyyy') + "',GV_VALID_TO='" + self.Qdate_to.dateTime().toString(
                         'dd-MM-yyyy') + "',GV_STATUS='" + str(
-                        self.CMB_CouponStatus.currentIndex()) + "' where GV_ID='" + str(
+                        self.CMB_CouponStatus.currentIndex()) + "',POSC_CUST_ID='"+self.LE_desc_5.text().strip()+"' where GV_ID='" + str(
                         self.CMB_CouponDes.currentData()) + "'"
                     print(sql)
                     mycursor.execute(sql)
@@ -443,7 +456,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
                                     print(sql8)
                                 else:
                                     mycursor = self.conn.cursor()
-                                    sql6 = "INSERT INTO VOUCHER_SECTION (SECTION_ID,GV_ID,STATUS) VALUES (%s,%s,%s,%s)"
+                                    sql6 = "INSERT INTO VOUCHER_SECTION (SECTION_ID,GV_ID,STATUS) VALUES (%s,%s,%s)"
                                     val6 = (
                                         row,
                                         str(self.CMB_CouponDes.currentData()),
@@ -455,5 +468,23 @@ class CL_EditVoucher(QtWidgets.QDialog):
                     self.FN_getDatabyID()
                     QtWidgets.QMessageBox.warning(self, "Done", "Done")
 
+        except:
+            print(sys.exc_info())
+
+    def FN_search(self):
+        try:
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            name = self.LE_desc_5.text().strip()
+            sql_select_Query = "select * from POS_CUSTOMER where POSC_CUST_ID = '" + name + "'"
+            mycursor.execute(sql_select_Query)
+            records = mycursor.fetchone()
+            if mycursor.rowcount > 0:
+                self.desc_13.setText(str(records[3]))
+                self.searchpos=True
+            else:
+                self.desc_13.setText("العميل غير موجود")
+                self.searchpos=False
+            mycursor.close()
         except:
             print(sys.exc_info())

@@ -791,9 +791,22 @@ class CL_customer(QtWidgets.QDialog):
 
                 db1.connectionCommit( conn )
                 #db1.connectionClose( self.conn )
+               # self.FN_INSERT_IN_LOG(tableName,)
                 self.close()
         except Exception as err:
             print(err)
+
+
+   # def FN_INSERT_IN_LOG(tableName,fieldName,value):
+       # try:
+       #     conn = db1.connect()
+        #    mycursor = conn.cursor()
+
+        #    changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+       # except Exception as err:
+         #   print(err)
+
+
 
 # export to a file
 

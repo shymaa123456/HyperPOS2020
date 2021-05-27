@@ -1,20 +1,19 @@
-from pathlib import Path
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.uic import loadUi
-from data_connection.h1pos import db1
-
-from access.main_login_class.main import *
 
 from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui, uic
+from PyQt5 import QtCore, QtGui, uic, QtWidgets
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-
+from pathlib import Path
+from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QMessageBox
+from data_connection.h1pos import db1
 import mysql.connector
 from datetime import datetime
 from access.authorization_class.user_module import *
+from access.main_login_class.main import *
 from decimal import Decimal
+
+from access.promotion_class.animation import LoginButton as anim_but
 
 import sys
 
@@ -196,6 +195,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.conn = db1.connect()
         self.prom_idd = ''
 
+
         # self.title = QLabel("My Own Bar")
         # self.title.setAlignment(Qt.AlignCenter)
 
@@ -262,12 +262,52 @@ class CL_create_promotion(QtWidgets.QDialog):
         ###############################################################################
         ###############################################################################
 
+        ###########test Qbtn_search animation#############################################################
+
+        self.Qbtn_search = anim_but(self)
+        self.Qbtn_search.setMinimumSize(60, 5)
+        self.Qbtn_search.setGeometry(10, 30, 127, 23)
+        self.Qbtn_search.setText('بحث')
+        self.Qbtn_search.setShortcut('Ctrl+D')  # shortcut key
+        # self.Qbtn_search.setToolTip("search")  # Tool tip
+
+        self.Qbtn_add = anim_but(self)
+        self.Qbtn_add.setMinimumSize(60, 5)
+        self.Qbtn_add.setGeometry(10, 180, 127, 23)
+        self.Qbtn_add.setText('اضافة')
+
+
+        self.Qbtn_remove = anim_but(self)
+        self.Qbtn_remove.setMinimumSize(60, 5)
+        self.Qbtn_remove.setGeometry(10, 220, 127, 23)
+        self.Qbtn_remove.setText('ازالة')
+
+
+
+        self.Qbtn_add_list = anim_but(self)
+        self.Qbtn_add_list.setMinimumSize(60, 5)
+        self.Qbtn_add_list.setGeometry(10, 70, 127, 23)
+        self.Qbtn_add_list.setText('تحميل اصناف')
+
+        self.Qbtn_exit = anim_but(self)
+        self.Qbtn_exit.setMinimumSize(60, 5)
+        self.Qbtn_exit.setGeometry(10, 560, 131, 23)
+        self.Qbtn_exit.setText('خروج')
+
+        self.Qbtn_add_list = anim_but(self)
+        self.Qbtn_add_list.setMinimumSize(60, 5)
+        self.Qbtn_add_list.setGeometry(190, 560, 131, 23)
+        self.Qbtn_add_list.setText('حفظ بيانات العرض')
+
+        ###############################################################################
+
         """ checked combobox sample >>> Branch"""
         self.Qcombo_branch2 = CheckableComboBox(self)
         self.Qcombo_branch2.setGeometry(621, 44, 179, 18)
         self.Qcombo_branch2.setLayoutDirection(Qt.RightToLeft)
         self.Qcombo_branch2.setStyleSheet("background-color: rgb(198, 207, 199)")
         # self.Qcombo_branch.hide()
+
 
         """ checked combobox sample """
         self.Qcombo_cust_group2 = CheckableComboBox(self)
@@ -319,20 +359,11 @@ class CL_create_promotion(QtWidgets.QDialog):
             self.Qbtn_save.clicked.connect(self.save_items)  # create promotion items
 
 
-
-
         except:
             print("An exception occurred")
 
-    # @window.event
-    # def on_key_press(symbol, modifiers):
-    #     if symbol == pyglet.window.key.ESCAPE:
-    #         return pyglet.event.EVENT_HANDLED
-    # def on_key_press(symbol, modifiers):
-    #     if symbol == key.ESCAPE:
-    #         return True
-    #
-    #     window.push_handlers(on_key_press)
+
+
 
     def save_items(self):
         if self.Qtable_promotion.rowCount() < 1:
@@ -462,7 +493,6 @@ class CL_create_promotion(QtWidgets.QDialog):
                 self.conn.close()
                 print("connection is closed")
 
-
     def get_id(self):
 
         try:
@@ -528,7 +558,6 @@ class CL_create_promotion(QtWidgets.QDialog):
             event.accept()
         else:
             event.ignore()
-
 
     def add_items(self):     # add_items to Qtable_promotion datatable
 
@@ -650,15 +679,14 @@ class CL_create_promotion(QtWidgets.QDialog):
         #     names.append(name)
         #     emails.append(email)
 
+    def remove_selected(self):## remove barcode from promotion
+        reply = QMessageBox.question(self, 'Message',
+                                     "Are you sure to delete barcode from promotion?", QMessageBox.Yes, QMessageBox.No)
 
-    def remove_selected(self):
-        indexes = self.Qtable_promotion.selectionModel().selectedRows()
-        for index in reversed(sorted(indexes)):
-
-            self.Qtable_promotion.removeRow(index.row())
-
-
-
+        if reply == QMessageBox.Yes:
+            indexes = self.Qtable_promotion.selectionModel().selectedRows()
+            for index in reversed(sorted(indexes)):
+                self.Qtable_promotion.removeRow(index.row())
 
     def iterate(self):  # delete duplicated barcodes from search
         #column = 1
@@ -733,6 +761,7 @@ class CL_create_promotion(QtWidgets.QDialog):
 
     # SEARCH BUTTON # FILL SERCH DATA TABLE  >> tableWidget
     def FN_SEARCH_BARCODES(self):
+        # self.Qbtn_search.setEnabled(False)
         self.tableWidget.clearSelection() # clear selection
         self.QcheckBox_all.setChecked(False)
         self.tableWidget.setRowCount(0)
@@ -765,6 +794,11 @@ class CL_create_promotion(QtWidgets.QDialog):
             mycursor.close()
 
         self.iterate()
+        # self.Qbtn_search.ff = '1'
+        # self.Qbtn_search.setEnabled(True)
+        # self.Qbtn_search.ff = '2'
+        #
+
 
     def FN_SEARCH_BARCODES_test(self):
 

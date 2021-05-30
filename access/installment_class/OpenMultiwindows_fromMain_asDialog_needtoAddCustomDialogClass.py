@@ -19,8 +19,6 @@ class Window(QWidget):
         self.left = 500
         self.width = 400
         self.height = 300
- 
- 
         self.InitWindow()
  
  
@@ -35,30 +33,30 @@ class Window(QWidget):
  
         self.btn = QPushButton("Open Second Dialog")
         self.btn.setFont(QtGui.QFont("Sanserif", 15))
-        self.btn.clicked.connect(self.openSecondDialog)
-        #self.btn.clicked.connect(self.openSecondCustomDialog)
+        #self.btn.clicked.connect(self.openSecondDialog)
+        self.btn.clicked.connect(self.openSecondCustomDialog)
 
         vbox.addWidget(self.btn)
  
         self.setLayout(vbox)
 
-        self.show()
-        #parent.show()
+        #self.show()
+        parent.show()
  
-    
+    """
     def openSecondDialog(self):
         mydialog = QDialog(self)
-        #mydialog.setModal(True)
+        mydialog.setModal(True)
         #mydialog.exec()
- 
         mydialog.show()
     """
     def openSecondCustomDialog(self):
-        mydialog = WindowTwo(self)
-        #mydialog.setModal(True)
-        #mydialog.exec()
-        mydialog.show()
-   """
+        self.mydialog = WindowTwo(self)
+        self.mydialog.setModal(True)
+        #self.mydialog.exec()
+        self.mydialog.show()
+   
+   
 App = QApplication(sys.argv)
 window = Window()
 sys.exit(App.exec())

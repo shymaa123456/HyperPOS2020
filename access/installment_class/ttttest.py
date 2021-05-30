@@ -2,16 +2,20 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 
 from PyQt5.QtWidgets import QWidget ,QDialog
+from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtWidgets
 
+#to import QT
+from PyQt5.QtGui import *
 
-class MainWindow(QDialog):
+class MainWindow(QWidget):
 
-    switch_window = QtCore.pyqtSignal(str)
+    #switch_window = QtCore.pyqtSignal(str)
 
-    def __init__(self):
-        QDialog.__init__(self)
+    def __init__(self, *args):
+        QWidget.__init__(self, *args)
         self.setWindowTitle('Main Window')
-
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)
         layout = QtWidgets.QGridLayout()
 
         self.line_edit = QtWidgets.QLineEdit()
@@ -29,7 +33,7 @@ class MainWindow(QDialog):
 
     def switch(self, text):
         self.window_two = WindowTwo(text)
-        self.window_two.switch_window.connect(self.show_window_two)
+        self.window_two.connect(self.show_window_two)
 
         #self.window.close()
         #self.window_two.show()
@@ -38,12 +42,12 @@ class MainWindow(QDialog):
         self.window_two.exec()
 
 
-class WindowTwo(QDialog):
-    switch_window = QtCore.pyqtSignal(str)
+class WindowTwo(QWidget):
+    #switch_window = QtCore.pyqtSignal(str)
 
-    def __init__(self, text):
-        QDialog.__init__(self)
-       
+    def __init__(self, text, *args):
+        QWidget.__init__(self, *args)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.setWindowTitle('Window Two')
 
         layout = QtWidgets.QGridLayout()
@@ -67,12 +71,12 @@ class WindowTwo(QDialog):
         self.window_two.setModal(True)
         self.window_two.exec()
         
-class Login(QDialog):
+class Login(QWidget):
 
-    switch_window = QtCore.pyqtSignal()
+    #switch_window = QtCore.pyqtSignal()
 
     def __init__(self):
-        QDialog.__init__(self)
+        super().__init__(self)
         self.setWindowTitle('Login')
 
         layout = QtWidgets.QGridLayout()
@@ -94,12 +98,15 @@ class Login(QDialog):
         #self.window.show()
         #window.setModal(True)
         #window.exec()
-        self.mydialog = MainWindow()
-        self.mydialog.switch_window.connect(self.show_main)
-        self.mydialog.setModal(True)
-        self.mydialog.exec()
+        #self.mydialog = MainWindow()
+        #self.mydialog.switch_window.connect(self.show_main)
+        #self.mydialog.setModal(True)
+        #self.mydialog.exec()
+        mainw = MainWindow(self)
+        mainw.setWindowFlags(mainw.windowFlags() | Qt.Window)
+        mainw.show()
 
-
+"""
 class Controller:
 
     def __init__(self):
@@ -127,12 +134,15 @@ class Controller:
         #ex = self.login
         self.window_two.setModal(True)
         self.window_two.exec()
-
+"""
 
 def main():
-    app = QtWidgets.QApplication(sys.argv)
-    controller = Controller()
-    controller.show_login()
+    app = QApplication(sys.argv)
+    #app = QtWidgets.QApplication(sys.argv)
+    login = Login()
+    #login.show_login()
+    #self.login.show()
+    #login.setModal(True)
     sys.exit(app.exec_())
 
 

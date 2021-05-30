@@ -632,6 +632,9 @@
      <property name="text">
       <string/>
      </property>
+     <property name="maxLength">
+      <number>20</number>
+     </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
@@ -998,6 +1001,22 @@
     </property>
     <property name="text">
      <string>الكل</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="QLilne_promotion">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>560</y>
+      <width>411</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

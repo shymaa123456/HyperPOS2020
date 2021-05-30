@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>استبدال النقاط بقسيمه شراء</string>
   </property>
   <widget class="QLineEdit" name="Qline_cust">
    <property name="geometry">

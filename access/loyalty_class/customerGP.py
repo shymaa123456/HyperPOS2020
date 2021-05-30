@@ -34,11 +34,14 @@ class CL_customerGP(QtWidgets.QDialog):
         # self.FN_GET_CUSTGP()
         try:
             self.CMB_custGroup.addItems(["Active", "Inactive"])
+            self.LB_status.setText('1')
+            self.CMB_custGroup.activated.connect(self.FN_GET_STATUS)
             self.BTN_createCustGp.clicked.connect(self.FN_CREATE_CUSTGP)
             self.BTN_modifyCustGp.clicked.connect(self.FN_MODIFY_CUSTGP)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_searchCustGp.clicked.connect(self.FN_SEARCH_CUSTGP)
-
+            self.setFixedWidth(368)
+            self.setFixedHeight(430)
         except Exception as err:
             print(err)
 
@@ -61,7 +64,7 @@ class CL_customerGP(QtWidgets.QDialog):
             if name != '' :
                 whereClause = whereClause + "and CG_DESC like '%" + str(name) + "%'"
 
-            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause
+            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + " order by CG_GROUP_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -97,7 +100,7 @@ class CL_customerGP(QtWidgets.QDialog):
                 self.Qtable_custGP.removeRow(i)
 
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  order by CG_GROUP_ID   asc")
+            mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  order by CG_GROUP_ID*1   asc")
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable_custGP.insertRow(row_number)
@@ -123,6 +126,7 @@ class CL_customerGP(QtWidgets.QDialog):
                 status = self.Qtable_custGP.item(rowNo, 2).text()
                 self.LE_desc.setText(desc)
                 self.LB_custGpId.setText(id)
+                self.LB_status.setText(status)
                 self.CMB_custGroup.setCurrentText(self.FN_GET_STATUS_DESC(status))
                 # self.FN_MODIFY_CUSTTP()
         except Exception as err:
@@ -142,11 +146,12 @@ class CL_customerGP(QtWidgets.QDialog):
             #mycursor1.close()
             return False
 
-    def FN_CHECK_STATUS(self, status):
-        if status == 'Active' or status == 'Inactive' :
-            return True
+    def FN_GET_STATUS(self):
+        status = self.CMB_custGroup.currentText()
+        if status == 'Active'  :
+            self.LB_status.setText('1')
         else :
-            return False
+            self.LB_status.setText('0')
 
     def FN_CREATE_CUSTGP(self):
         self.conn = db1.connect()
@@ -193,6 +198,7 @@ class CL_customerGP(QtWidgets.QDialog):
                     QtWidgets.QMessageBox.information(self, "Success", "Cust Gp inserted.")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_CUSTGPS()
+                    self.FN_CLEAR_FEILDS()
                     #db1.connectionClose(self.conn)
                     #self.close()
             except Exception as err:
@@ -205,27 +211,42 @@ class CL_customerGP(QtWidgets.QDialog):
         self.conn1 = db1.connect()
         if len(self.Qtable_custGP.selectedIndexes()) >0 :
             rowNo = self.Qtable_custGP.selectedItems()[0].row()
-            id = self.Qtable_custGP.item(rowNo, 0).text()
-            desc = self.Qtable_custGP.item(rowNo, 1).text()
-            status = self.Qtable_custGP.item(rowNo, 2).text()
-            #ret = self.FN_CHECK_STATUS(status)
-            #if ret != False:
-            if status == 'Active':
+            id = self.LB_custGpId.text().strip()
+            desc_old = self.Qtable_custGP.item(rowNo, 1).text()
+            desc = self.LE_desc.text().strip()
+            custGroup = self.CMB_custGroup.currentText()
+            if custGroup == 'Active':
                 status = 1
             else:
                 status = 0
             #
-            mycursor = self.conn1.cursor()
-            changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-            sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
-            val = (status,desc, changeDate,CL_userModule.user_name,id)
-            mycursor.execute(sql, val)
-            #mycursor.close()
-            #
-            print(mycursor.rowcount, "record updated.")
-            QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
-            db1.connectionCommit(self.conn1)
-            self.FN_GET_CUSTGPS()
+            error = 0
+            if self.desc == '':
+                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
 
+            else:
+                if desc != desc_old:
+                    if self.FN_CHECK_DUP_NAME(desc) != False:
+                        QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                        error=1
+
+                if error!=1:
+                    mycursor = self.conn1.cursor()
+                    changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                    sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
+                    val = (status,desc, changeDate,CL_userModule.user_name,id)
+                    mycursor.execute(sql, val)
+                    #mycursor.close()
+                    #
+                    print(mycursor.rowcount, "record updated.")
+                    QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
+                    db1.connectionCommit(self.conn1)
+                    self.FN_GET_CUSTGPS()
+                    self.FN_CLEAR_FEILDS ()
         else:
             QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+
+    def FN_CLEAR_FEILDS (self):
+        self.LB_custGpId.clear()
+        self.LE_desc.clear()
+        self.CMB_custGroup.setCurrentText('Active')

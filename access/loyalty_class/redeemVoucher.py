@@ -29,16 +29,21 @@ class CL_redVouch(QtWidgets.QDialog):
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
 
+    from Validation.Validation import CL_validation
     def textchanged(self):
         try:
             print( "contents of text box: " )
-            replacedPoints = int(self.Qline_replace.text().strip())
+            if self.Qline_replace.text().strip() !='' and self.Qline_points.text().strip() !='' :
+                ret = CL_validation.FN_validation_int(self.Qline_replace.text().strip())
+                if ret == True:
+                    replacedPoints = int(self.Qline_replace.text().strip())
 
-            actualPoints = int(self.Qline_points.text().strip())
-            remainingPoints = actualPoints - replacedPoints
-            self.Qline_remainder.setText(str(remainingPoints))
-            self.FN_GET_POINTS_VALUE(replacedPoints)
-
+                    actualPoints = int(self.Qline_points.text().strip())
+                    remainingPoints = actualPoints - replacedPoints
+                    self.Qline_remainder.setText(str(remainingPoints))
+                    self.FN_GET_POINTS_VALUE(replacedPoints)
+                else:
+                    QtWidgets.QMessageBox.warning(self, "Error", "replaced points is not integer ")
         except (Error, Warning) as e:
             print(e)
 
@@ -70,6 +75,8 @@ class CL_redVouch(QtWidgets.QDialog):
             #self.Qbtn_exit.clicked.connect(self.FN_exit)
             self.Qline_replace.textChanged.connect(self.textchanged)
             self.Qline_cust.textChanged.connect(self.FN_CLEAR_FEILDS)
+            self.setFixedWidth(497)
+            self.setFixedHeight(281)
             for row_number, row_data in enumerate(CL_userModule.myList):
                 if row_data[1] == 'Redeem_Voucher':
                     if row_data[4] == 'None':
@@ -89,15 +96,22 @@ class CL_redVouch(QtWidgets.QDialog):
 
     def FN_REPLACE_VOUCHER(self):
         replacedPoints = int(self.Qline_replace.text().strip())
-        if replacedPoints > 0 :
-            ret = self.FN_VALIDATE()
-            if ret == True:
-                self.FN_CREATE_VOUCHER()
-                self.FN_UPDATE_CUST_POINTS()
-            else :
-                QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
+        customer = self.Qline_cust.text().strip()
+        if customer !='':
+            if replacedPoints > 0 :
+                ret = self.FN_VALIDATE()
+                if ret == True:
+                    self.FN_CREATE_VOUCHER()
+                    self.FN_UPDATE_CUST_POINTS()
+                    self.FN_CLEAR_FEILDS()
+                    self.Qline_cust.setText("")
+
+                else :
+                    QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
+            else:
+                QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أكثر من صفر")
         else:
-            QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أكثر من صفر")
+            QtWidgets.QMessageBox.warning(self, "Error", "يجب إدخال رقم عميل")
 
     def FN_CREATE_VOUCHER(self):
         try:

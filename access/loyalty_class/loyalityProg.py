@@ -74,7 +74,8 @@ class CL_loyProg(QtWidgets.QDialog):
         self.Qcombo_group6 = CheckableComboBox(self)
         self.Qcombo_group6.setGeometry(205, 152, 120, 18)
         self.Qcombo_group6.setStyleSheet("background-color: rgb(198, 207, 199)")
-
+        self.setFixedWidth(1028)
+        self.setFixedHeight(560)
         self.CMB_custGroup.hide()
         self.CMB_branch.hide()
         self.CMB_company.hide()
@@ -134,6 +135,8 @@ class CL_loyProg(QtWidgets.QDialog):
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
             self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
             #self.fileName = ''
+            self.setFixedWidth(576)
+            self.setFixedHeight(178)
         except (Error, Warning) as e:
             print(e)
     def FN_GET_BRANCHES(self):
@@ -467,7 +470,7 @@ class CL_loyProg(QtWidgets.QDialog):
             company_list = []
             for comp in companies:
                 sql = "SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + comp + "'"
-                self.mycursor.execute(sql)
+                mycursor.execute(sql)
                 myresult = mycursor.fetchone()
                 company_list.append(myresult[0])
 
@@ -481,7 +484,7 @@ class CL_loyProg(QtWidgets.QDialog):
             branch_list = []
             for branch in branchs:
                 sql = "SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + branch + "'"
-                self.mycursor.execute(sql)
+                mycursor.execute(sql)
                 myresult = mycursor.fetchone()
                 branch_list.append(myresult[0])
 
@@ -496,7 +499,7 @@ class CL_loyProg(QtWidgets.QDialog):
             # get customer gp id
             cust_gp_list = []
             for cust_gp in cust_gps:
-                self.mycursor.execute("SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '" + cust_gp + "'")
+                mycursor.execute("SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '" + cust_gp + "'")
                 myresult = mycursor.fetchone()
                 cust_gp_list.append(myresult[0])
 
@@ -510,7 +513,7 @@ class CL_loyProg(QtWidgets.QDialog):
             # get customer type
             cust_tp_list = []
             for cust_tp in cust_tps:
-                self.mycursor.execute(
+                mycursor.execute(
                     "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + cust_tp + "'")
                 myresult = mycursor.fetchone()
                 cust_tp_list.append(myresult[0])
@@ -776,6 +779,7 @@ class CL_loyProg(QtWidgets.QDialog):
         self.window_two = CL_loyProg()
         self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
+
 
     def FN_OPEN_FILE(self):
         options = QFileDialog.Options()

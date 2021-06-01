@@ -62,7 +62,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.checkBox_rechange.toggled.connect(self.FN_Rechangable)
             self.checkBox_refundable.toggled.connect(self.FN_Refundable)
             self.BTN_editCoupon.clicked.connect(self.FN_editAction)
-            self.btn_search.clicked.connect(self.FN_search)
+            self.LE_desc_5.textChanged.connect(self.FN_search)
 
 
         except:
@@ -367,6 +367,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
                 elif self.searchpos== False :
                     QtWidgets.QMessageBox.warning(self, "Done",
                                                   "العميل غير موجود")
+
                 else:
 
                     mycursor = self.conn.cursor()

@@ -176,7 +176,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
             self.FN_search()
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
-            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+            creationDate = str(datetime.today().strftime('%Y-%m-%d'))
             if len(self.Qcombo_company.currentData()) == 0 or len(self.Qcombo_branch.currentData()) == 0 or len(self.Qcombo_section.currentData()) == 0 or len(self.Qcombo_sponser.currentData()) == 0 or len(
                     self.LE_desc.text().strip()) == 0 or len(self.LE_desc_3.text().strip()) == 0 or len(
                     self.LE_desc_2.text().strip()) == 0 :

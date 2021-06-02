@@ -22,6 +22,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     section_list = []
     new_section_list = []
     searchpos=False
+    oldValue=""
 
     def __init__(self):
         super(CL_EditVoucher, self).__init__()
@@ -279,6 +280,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.CMB_CouponStatus.setCurrentIndex(int(record[20]))
             self.LE_desc_5.setText(record[17])
             self.FN_search()
+            self.oldValue=record[1]
             datefrom = record[12]
             xfrom = datefrom.split("-")
             self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
@@ -369,9 +371,8 @@ class CL_EditVoucher(QtWidgets.QDialog):
                                                   "العميل غير موجود")
 
                 else:
-
                     mycursor = self.conn.cursor()
-                    creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                    creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                     sql = "update VOUCHER set GV_DESC='" + self.LE_desc_1.text().strip() + "',GV_RECHARGE_VALUE='" + self.LE_desc_3.text().strip() + "',GV_REFUNDABLE=" + str(
                         self.GV_REFUNDABLE) + ",GV_RECHARGABLE=" + str(self.GV_RECHARGABLE) + ",GV_MULTIUSE=" + str(
                         self.GV_MULTIUSE) + " ,GV_CHANGED_BY='" + CL_userModule.user_name + "',GV_CHANGE_ON='" + creationDate + "',GV_VALID_FROM='" + self.Qdate_from.dateTime().toString(
@@ -463,6 +464,12 @@ class CL_EditVoucher(QtWidgets.QDialog):
                                         str(self.CMB_CouponDes.currentData()),
                                         '1')
                                     mycursor.execute(sql6, val6)
+                    if(self.LE_desc_1.text!=self.oldValue):
+
+
+                        sql7 = "INSERT INTO SYS_CHANGE_LOG (TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s)"
+                        val7 = ('VOUCHER','GV_DESC',self.oldValue,self.LE_desc_1.text().strip(),creationDate,CL_userModule.user_name)
+                        mycursor.execute(sql7, val7)
 
                     db1.connectionCommit(self.conn)
                     mycursor.close()

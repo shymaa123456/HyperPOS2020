@@ -128,7 +128,7 @@ class CL_redVouch(QtWidgets.QDialog):
             sql = "INSERT INTO Hyper1_Retail.VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s,  %s, %s, %s, %s, %s, %s) "
             val = ('Redeem Points', '1', "RVOU" + bin(value11), value, value,
                    CL_userModule.user_name, creationDate,
-                   creationDate, '31.12.9999', customer,
+                   creationDate, '31-12-9999', customer,
                    '0', '0')
             mycursor.execute(sql, val)
             db1.connectionCommit(conn)

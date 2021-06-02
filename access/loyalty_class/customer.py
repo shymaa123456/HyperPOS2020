@@ -16,6 +16,9 @@ class CL_customer_modify(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
     parent =''
+    oldmobile=''
+    oldstatus=''
+    oldemail=''
     def __init__(self,pp):
         super(CL_customer_modify, self).__init__()
         cwd = Path.cwd()
@@ -63,8 +66,11 @@ class CL_customer_modify(QtWidgets.QDialog):
     def FN_MODIFY_CUST(self):
         #get customer data
         try:
-            print("here")
             self.id = self.LB_custID.text().strip()
+            print("here")
+            #get the old values
+
+
             self.name = self.LE_name.text().strip()
             self.custGroup = self.CMB_custGroup.currentText()
             self.loyalityType = self.CMB_loyalityType.currentText()
@@ -131,8 +137,36 @@ class CL_customer_modify(QtWidgets.QDialog):
                 # self.FN_INSERT_IN_LOG(tableName,)
                 self.close()
                 self.FN_REFRESH_GRID(self.id)
+                if self.mobile != self.oldmobile:
+                    self.FN_INSERT_IN_LOG("POS_CUSTOMER","mobile",self.mobile,self.oldmobile)
+                if self.email != self.oldemail:
+                    self.FN_INSERT_IN_LOG("POS_CUSTOMER","email",self.email,self.oldemail)
+                if str(self.status) != str(self.oldstatus):
+                    self.FN_INSERT_IN_LOG("POS_CUSTOMER","status",self.status,self.oldstatus)
         except Exception as err:
             print(err)
+
+    def FN_INSERT_IN_LOG(self,tableName,fieldName,newValue,oldValue):
+        try:
+           conn = db1.connect()
+           mycursor = conn.cursor()
+           # get max id
+           mycursor.execute("SELECT max(cast(ROW_ID  AS UNSIGNED)) FROM  Hyper1_Retail.SYS_CHANGE_LOG")
+           myresult = mycursor.fetchone()
+
+           if myresult[0] == None:
+               id = "1"
+           else:
+              id = int(myresult[0]) + 1
+           changeDate = str(datetime.today().strftime('%Y-%m-%d'))
+           sql = "insert into Hyper1_Retail.SYS_CHANGE_LOG values(%s,%s,%s,%s,%s,%s,%s)"
+           val= (id,tableName,fieldName,newValue,oldValue,changeDate,CL_userModule.user_name)
+           mycursor.execute(sql, val)
+           mycursor.close()
+           db1.connectionCommit(conn)
+        except Exception as err:
+          print(err)
+
     def FN_GET_CUST(self,id):
         #self.FN_GET_CustID()
         #self.id = self.LB_custID.text()
@@ -165,7 +199,11 @@ class CL_customer_modify(QtWidgets.QDialog):
 
         self.CMB_custGroup.setCurrentText( record[2] )
         self.CMB_loyalityType.setCurrentText( record[1] )
+        self.oldmobile = record[5]
+        self.oldstatus = record[21]
+        self.oldemail = record[12]
         mycursor.close()
+
     def FN_REFRESH_GRID(self,id):
         for i in reversed(range(self.parent.Qtable_customer.rowCount())):
             self.parent .Qtable_customer.removeRow(i)
@@ -187,7 +225,7 @@ class CL_customer_modify(QtWidgets.QDialog):
         self.parent .Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
     def FN_VALIDATE_FIELDS(self):
-
+        id = self.LB_custID.text().strip()
         self.name = self.LE_name.text().strip()
 
         self.phone = self.lE_phone.text().strip()
@@ -220,7 +258,7 @@ class CL_customer_modify(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile no,no must start with '01'")
             error = 1
 
-        ret = self.FN_CHECK_REPEATED_MOBILE(self.mobile)
+        ret = self.FN_CHECK_REPEATED_MOBILE(self.mobile,id)
         if ret == False:
             QtWidgets.QMessageBox.warning(self, "Error", "Repeated Mobile no ")
             error = 1
@@ -244,12 +282,12 @@ class CL_customer_modify(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
             error = 1
         return error
-    def FN_CHECK_REPEATED_MOBILE(self,mobile):
+    def FN_CHECK_REPEATED_MOBILE(self,mobile,id):
        try:
             conn = db1.connect()
             mycursor = conn.cursor()
             # get max id
-            mycursor.execute("SELECT POSC_MOBILE FROM Hyper1_Retail.POS_CUSTOMER where POSC_MOBILE ='"+mobile+"'")
+            mycursor.execute("SELECT POSC_MOBILE FROM Hyper1_Retail.POS_CUSTOMER where POSC_MOBILE ='"+mobile+"' and POSC_CUST_ID  !='"+id+"'")
             myresult = mycursor.fetchone()
 
             if myresult[0] == None:
@@ -1025,14 +1063,6 @@ class CL_customer(QtWidgets.QDialog):
        except Exception as err:
              print(err)
 
-       # def FN_INSERT_IN_LOG(tableName,fieldName,value):
-       # try:
-       #     conn = db1.connect()
-        #    mycursor = conn.cursor()
-
-        #    changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-       # except Exception as err:
-         #   print(err)
 
 
 

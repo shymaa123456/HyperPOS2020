@@ -197,7 +197,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                                                       "العميل غير موجود")
                 elif float(self.LE_desc_3.text())+float(self.LE_desc_6.text())!=100:
                     QtWidgets.QMessageBox.warning(self, "Done",
-                                                  "مجموع الدعم اقل من 100")
+                                                  "يرجى مراجعة نسبة الدعم")
                 else:
                     value = randint(0, 1000000000000)
                     sql = "INSERT INTO VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, GV_REFUNDABLE, GV_RECHARGABLE,GV_MULTIUSE, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s, %s, %s , %s, %s, %s, %s, %s, %s, %s) "

@@ -17,7 +17,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 
 from PyQt5.QtCore import *
-
+from access.utils.util import *
 
 class CL_loyProg(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
@@ -568,6 +568,13 @@ class CL_loyProg(QtWidgets.QDialog):
                 valid_from =self.Qtable_loyality.item(rowNo, 3).text()
                 valid_to= self.Qtable_loyality.item(rowNo, 4).text()
 
+                self.old_name=name
+                self.old_status=util.FN_GET_STATUS_id(status)
+                self.old_amount=amount
+                self.old_points=points
+                self.old_valid_from = valid_from
+                self.old_valid_to = valid_to
+
                 self.Qline_name.setText(name)
                 self.label_ID.setText(id)
                 self.Qtext_desc.setText(desc)
@@ -959,6 +966,21 @@ class CL_loyProg(QtWidgets.QDialog):
             db1.connectionClose( conn )
             #self.close()
 
+            if str(self.status) != str(self.old_status):
+                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "status", self.status, self.old_status,id)
+            if str(points) != str(self.old_points):
+                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "points", points, self.old_points,id)
+
+            if str(date_from) != str(self.old_valid_from):
+                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_from", date_from, self.old_valid_from,id)
+
+            if str(date_to) != str(self.old_valid_to):
+                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_to", date_to, self.old_valid_to,id)
+
+            if str(purchAmount) != str(self.old_amount):
+                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "amount", purchAmount, self.old_amount,id)
+            if str(name) != str(self.old_name):
+                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "name", name, self.old_name,id)
             print( "in modify cust" )
         except Exception as err:
             print(err)

@@ -17,6 +17,8 @@ class CL_CreateVoucher(QtWidgets.QDialog):
     GV_REFUNDABLE=0
     GV_RECHARGABLE=0
     GV_MULTIUSE=0
+    searchpos=False
+
     def __init__(self):
         super(CL_CreateVoucher, self).__init__()
         cwd = Path.cwd()
@@ -63,7 +65,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
 
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_createVoucher.clicked.connect(self.FN_Create_Voucher)
-            self.btn_search.clicked.connect(self.FN_search)
+            self.LE_desc_5.textChanged.connect(self.FN_search)
         except:
             print(sys.exc_info())
 
@@ -171,6 +173,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
 
     def FN_Create_Voucher(self):
         try:
+            self.FN_search()
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             creationDate = str(datetime.today().strftime('%d-%m-%Y'))
@@ -184,10 +187,17 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                 x = (indx,)
                 mycursor.execute(sql_select_Query, x)
                 record = mycursor.fetchone()
-
                 if mycursor.rowcount > 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "الاسم موجود بالفعل")
-
+                elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
+                        QtWidgets.QMessageBox.warning(self, "Done",
+                                                      "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                elif self.searchpos == False:
+                        QtWidgets.QMessageBox.warning(self, "Done",
+                                                      "العميل غير موجود")
+                elif float(self.LE_desc_3.text())+float(self.LE_desc_6.text())!=100:
+                    QtWidgets.QMessageBox.warning(self, "Done",
+                                                  "مجموع الدعم اقل من 100")
                 else:
                     value = randint(0, 1000000000000)
                     sql = "INSERT INTO VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, GV_REFUNDABLE, GV_RECHARGABLE,GV_MULTIUSE, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s, %s, %s , %s, %s, %s, %s, %s, %s, %s) "
@@ -198,7 +208,6 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                     mycursor.execute("SELECT * FROM VOUCHER Where GV_DESC = '" + indx + "'")
                     c = mycursor.fetchone()
                     id = c[0]
-
                     sql3 = "INSERT INTO VOUCHER_SPONSOR (SPONSER_ID,GV_ID,SPONSOR_SHARE,HYPER_SHARE,NOTES) VALUES (%s,%s,%s,%s,%s)"
                     val3 = (
                             self.Qcombo_sponser.currentData(), id,
@@ -238,18 +247,10 @@ class CL_CreateVoucher(QtWidgets.QDialog):
             records = mycursor.fetchone()
             if mycursor.rowcount > 0:
                 self.desc_13.setText(str(records[3]))
+                self.searchpos = True
             else:
                 self.desc_13.setText("العميل غير موجود")
+                self.searchpos = False
             mycursor.close()
         except:
             print(sys.exc_info())
-
-
-
-
-
-
-
-
-
-

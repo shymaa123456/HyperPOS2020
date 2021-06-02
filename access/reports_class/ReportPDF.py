@@ -98,46 +98,36 @@ class body():
                 ['mobile number', title.gettelText(), '                             ', 'TEST', 'Customer Name'],
                 ['', '', '                                ', 'Giza', 'City']]
         f = Table(data, repeatRows=1, repeatCols=1, hAlign='CENTER')
-
         d = Drawing(100, 5)
         d.add(Line(16, 6, 500, 6))
         connection = db1.connect()
         frame = pd.read_sql(str(title.getQuery()), connection)
         df = pd.DataFrame(frame, columns=['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
-
-
         df = df.reset_index()
         df = df.rename(columns={"index": ""})
 
         z = df.size
         print(z)
         row, col = df.shape
-        df['PROM_ID'] = df['PROM_ID'].str.wrap(60)
+       # df['PROM_ID'] = df['PROM_ID'].str.wrap(60)
         total = 0
-        numCount = 0
-        for x in range(row):
-            val = df['PROM_ID'].values[x]
-            arabic_text = arabic_reshaper.reshape(val)
-            arabic_text = get_display(arabic_text)
-            df.at[x, 'PROM_ID'] = arabic_text
-            numCount += 1
+        # numCount = 0
+        # for x in range(row):
+        #     val = df['PROM_ID'].values[x]
+        #     arabic_text = arabic_reshaper.reshape(val)
+        #     arabic_text = get_display(arabic_text)
+        #     df.at[x, 'PROM_ID'] = arabic_text
+        #     numCount += 1
         num = 0
         for x in range(row):
             val = df['PROM_ID'].values[x]
             total += int(val)
             num = x
-
         df.sort_values(by=['PROM_ID'], inplace=True)
-
         df.at[num + 2, 'PROM_ID'] = str(total)
-        df.at[num + 2, 'PROM_ID'] = str(numCount)
-        df.at[num + 2, 'PROM_ID'] = str(numCount)
-
         data = [df.columns.to_list()] + df.values.tolist()
-
         table = Table(data, repeatRows=1, repeatCols=1,
                       rowHeights=20, hAlign='CENTER')
-
         table.setStyle(TableStyle([
             ('INNERGRID', (0, 0), (-1, -1), 0.2, colors.black),
             ('BOX', (0, 0), (-1, -1), 0.2, colors.black),

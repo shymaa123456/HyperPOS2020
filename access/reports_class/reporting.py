@@ -431,7 +431,6 @@ class CL_report(QtWidgets.QDialog):
         title.setbrachText("Entrance 1,EL Sheikh Zayed City")
         title.setCursor(self.Qline_promotion.text)
         title.setQuery(self.query)
-
         body()
         QtWidgets.QMessageBox.information(self, "Success", "Report is printed successfully")
         import os

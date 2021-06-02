@@ -431,15 +431,15 @@ class CL_redItem(QtWidgets.QDialog):
             self.FN_REFRESH_DATA_GRID()
             self.old_status = util.FN_GET_STATUS_id(str(self.old_status))
             if str(status) != str(self.old_status):
-                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "status", status, self.old_status)
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "status", status, self.old_status,bar,comp,branch)
             if str(points) != str(self.old_points):
-                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "points", points, self.old_points)
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "points", points, self.old_points,bar,comp,branch)
 
             if str(date_from) != str(self.old_valid_from):
-                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_from", date_from, self.old_valid_from)
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_from", date_from, self.old_valid_from,bar,comp,branch)
 
             if str(date_to) != str(self.old_valid_to):
-                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_to", date_to, self.old_valid_to)
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_to", date_to, self.old_valid_to,bar,comp,branch)
             print("in modify red item")
         except Exception as err:
             print(err)

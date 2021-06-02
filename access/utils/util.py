@@ -68,21 +68,14 @@ class util():
             return "Inactive"
 
     @staticmethod
-    def FN_INSERT_IN_LOG(tableName,fieldName,newValue,oldValue):
+    def FN_INSERT_IN_LOG(tableName,fieldName,newValue,oldValue,pk1,pk2=None,pk3=None,pk4=None,pk5=None):
         try:
            conn = db1.connect()
            mycursor = conn.cursor()
-           # get max id
-           mycursor.execute("SELECT max(cast(ROW_ID  AS UNSIGNED)) FROM  Hyper1_Retail.SYS_CHANGE_LOG")
-           myresult = mycursor.fetchone()
 
-           if myresult[0] == None:
-               id = "1"
-           else:
-              id = int(myresult[0]) + 1
            changeDate = str(datetime.today().strftime('%Y-%m-%d'))
-           sql = "insert into Hyper1_Retail.SYS_CHANGE_LOG values(%s,%s,%s,%s,%s,%s,%s)"
-           val= (id,tableName,fieldName,oldValue,newValue,changeDate,CL_userModule.user_name)
+           sql = "insert into Hyper1_Retail.SYS_CHANGE_LOG (TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY,ROW_KEY_ID,ROW_KEY_ID2,ROW_KEY_ID3,ROW_KEY_ID4,ROW_KEY_ID5) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+           val= (tableName,fieldName,oldValue,newValue,changeDate,CL_userModule.user_name,pk1,pk2,pk3,pk4,pk5)
            mycursor.execute(sql, val)
            mycursor.close()
            db1.connectionCommit(conn)

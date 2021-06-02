@@ -138,34 +138,15 @@ class CL_customer_modify(QtWidgets.QDialog):
                 self.close()
                 self.FN_REFRESH_GRID(self.id)
                 if self.mobile != self.oldmobile:
-                    self.FN_INSERT_IN_LOG("POS_CUSTOMER","mobile",self.mobile,self.oldmobile)
+                    util.FN_INSERT_IN_LOG("POS_CUSTOMER","mobile",self.mobile,self.oldmobile,self.id)
                 if self.email != self.oldemail:
-                    self.FN_INSERT_IN_LOG("POS_CUSTOMER","email",self.email,self.oldemail)
+                    util.FN_INSERT_IN_LOG("POS_CUSTOMER","email",self.email,self.oldemail,self.id)
                 if str(self.status) != str(self.oldstatus):
-                    self.FN_INSERT_IN_LOG("POS_CUSTOMER","status",self.status,self.oldstatus)
+                    util.FN_INSERT_IN_LOG("POS_CUSTOMER","status",self.status,self.oldstatus,self.id)
         except Exception as err:
             print(err)
 
-    def FN_INSERT_IN_LOG(self,tableName,fieldName,newValue,oldValue):
-        try:
-           conn = db1.connect()
-           mycursor = conn.cursor()
-           # get max id
-           mycursor.execute("SELECT max(cast(ROW_ID  AS UNSIGNED)) FROM  Hyper1_Retail.SYS_CHANGE_LOG")
-           myresult = mycursor.fetchone()
 
-           if myresult[0] == None:
-               id = "1"
-           else:
-              id = int(myresult[0]) + 1
-           changeDate = str(datetime.today().strftime('%Y-%m-%d'))
-           sql = "insert into Hyper1_Retail.SYS_CHANGE_LOG values(%s,%s,%s,%s,%s,%s,%s)"
-           val= (id,tableName,fieldName,newValue,oldValue,changeDate,CL_userModule.user_name)
-           mycursor.execute(sql, val)
-           mycursor.close()
-           db1.connectionCommit(conn)
-        except Exception as err:
-          print(err)
 
     def FN_GET_CUST(self,id):
         #self.FN_GET_CustID()

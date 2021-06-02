@@ -34,6 +34,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 from access.voucher_class.CreateVoucher import CL_CreateVoucher
 from access.voucher_class.EditVoucher import CL_EditVoucher
+from access.voucher_class.stoppedVoucher import CL_modifyVoucher
 
 
 class CL_main(QtWidgets.QMainWindow):
@@ -113,6 +114,8 @@ class CL_main(QtWidgets.QMainWindow):
             #Todo: method for Open Create Voucher Window
             self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
             self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
+            self.QAct_Voucher_Activate.triggered.connect(self.FN_StoppedVoucher)
+            self.QAct_Voucher_Deactivate.triggered.connect(self.FN_StoppedVoucher)
 
 
 
@@ -335,6 +338,11 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_EditVoucher(self):
         self.window_two=CL_EditVoucher()
+        self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_StoppedVoucher(self):
+        self.window_two = CL_modifyVoucher()
         self.window_two.FN_LOADUI()
         self.window_two.show()
 

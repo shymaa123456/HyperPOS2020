@@ -18,10 +18,15 @@ from PyQt5 import QtCore
 
 from PyQt5.QtCore import *
 import xlwt.Workbook
-
+from access.utils.util import *
 class CL_redItem(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
+    old_points =''
+
+    old_valid_from =''
+    old_valid_to =''
+    old_status= ''
 
     def __init__(self):
         super(CL_redItem, self).__init__()
@@ -205,6 +210,11 @@ class CL_redItem(QtWidgets.QDialog):
                 status = self.Qtable_redeem.item(rowNo, 6).text()
                 self.Qline_barcode.setText(bar)
                 self.Qline_points.setText(points)
+
+                self.old_points = points
+                self.old_valid_from = valid_from
+                self.old_valid_to = valid_to
+                self.old_status = status
 
                 self.CMB_branch.show()
                 self.CMB_company.show()
@@ -419,6 +429,17 @@ class CL_redItem(QtWidgets.QDialog):
 
             db1.connectionCommit(conn)
             self.FN_REFRESH_DATA_GRID()
+            self.old_status = util.FN_GET_STATUS_id(str(self.old_status))
+            if str(status) != str(self.old_status):
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "status", status, self.old_status)
+            if str(points) != str(self.old_points):
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "points", points, self.old_points)
+
+            if str(date_from) != str(self.old_valid_from):
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_from", date_from, self.old_valid_from)
+
+            if str(date_to) != str(self.old_valid_to):
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_to", date_to, self.old_valid_to)
             print("in modify red item")
         except Exception as err:
             print(err)
@@ -445,6 +466,8 @@ class CL_redItem(QtWidgets.QDialog):
 
        except Exception as err:
             print(err)
+
+
 
     def FN_LOAD_UPLOAD(self):
         try:

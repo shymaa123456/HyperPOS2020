@@ -3,7 +3,7 @@ from pathlib import Path
 from PyQt5 import QtWidgets,QtCore
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
 from PyQt5.uic import loadUi
-
+import xlwt.Workbook
 from Validation.Validation import CL_validation
 from access.authorization_class.user_module import CL_userModule
 from access.promotion_class.Promotion_Add import CheckableComboBox
@@ -128,12 +128,47 @@ class CL_loyProg(QtWidgets.QDialog):
 
 
     #
+
+    def FN_DISPLAY_TEMP(self):
+         try:
+             filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
+             print(filename)
+
+             wb = xlwt.Workbook()
+
+             # add_sheet is used to create sheet.
+             sheet = wb.add_sheet('Sheet 1')
+             sheet.write(0, 0, 'اسم البرنامج')
+             sheet.write(0, 1, 'الوصف')
+             sheet.write(0, 2, 'تاريخ البدايه')
+             sheet.write(0, 3, 'تاريخ النهايه')
+
+
+             sheet.write(0, 4, 'الحاله')
+             sheet.write(0, 5, 'الشركه')
+             sheet.write(0, 6, 'الفرع')
+             sheet.write(0, 7, 'مجموعه العملاء')
+             sheet.write(0, 8, 'نوع العضويه')
+             sheet.write(0, 9, 'الباركود')
+             sheet.write(0, 10, 'BMC')
+
+             sheet.write(0, 11, 'مبلغ الشراء')
+             sheet.write(0, 12, 'النقاط المستحقه')
+
+             # # wb.save('test11.xls')
+             wb.save(str(filename[0]))
+             # wb.close()
+             import webbrowser
+             webbrowser.open(filename[0])
+         except Exception as err:
+             print(err)
     def FN_LOAD_UPLOAD(self):
         try:
             filename = self.dirname + '/uploadLoyalityProg.ui'
             loadUi(filename, self)
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
             self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
+            self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP)
             #self.fileName = ''
             self.setFixedWidth(576)
             self.setFixedHeight(178)
@@ -440,6 +475,8 @@ class CL_loyProg(QtWidgets.QDialog):
             elif self.Qradio_bmc.isChecked():
                 # get bmc_level4
                 BMC_LEVEL4_list = []
+                if len(BMC_LEVEL4s) == 0:
+                    BMC_LEVEL4s[0] = 'All'
                 if BMC_LEVEL4s[0] == 'All':
                     mycursor.execute(
                         "SELECT BMC_LEVEL4  FROM Hyper1_Retail.BMC_LEVEL4 b inner join Hyper1_Retail.SECTION s ON " \
@@ -936,51 +973,57 @@ class CL_loyProg(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
     def FN_MODIFY_LOYPROG(self):
         try:
+
+            ids=[]
             id = self.label_ID.text().strip()
-            name=self.Qline_name.text().strip()
-            desc = self.Qtext_desc.toPlainText().strip()
-            purchAmount = self.Qline_purchAmount.text().strip()
-            points = self.Qline_points.text().strip()
-            date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
-            date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
-
-            if self.Qradio_active.isChecked():
-                self.status = 1
+            if len(id) == 0:
+                QtWidgets.QMessageBox.information(self, "Error", "No LoyProg selected")
             else:
-                self.status = 0
-            conn = db1.connect()
-            mycursor = conn.cursor()
+                name=self.Qline_name.text().strip()
+                desc = self.Qtext_desc.toPlainText().strip()
+                purchAmount = self.Qline_purchAmount.text().strip()
+                points = self.Qline_points.text().strip()
+                date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
+                date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
 
-            changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-            # get customer gp id
+                if self.Qradio_active.isChecked():
+                    self.status = 1
+                else:
+                    self.status = 0
+                conn = db1.connect()
+                mycursor = conn.cursor()
 
-            sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
-            val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
-            mycursor.execute(sql, val)
-            mycursor.close()
+                changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+                # get customer gp id
 
-            print( mycursor.rowcount, "record updated." )
-            QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
+                sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
+                val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
+                mycursor.execute(sql, val)
+                mycursor.close()
+                ids.append(id)
+                print( mycursor.rowcount, "record updated." )
+                QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
 
-            db1.connectionCommit( conn )
-            db1.connectionClose( conn )
-            #self.close()
+                db1.connectionCommit( conn )
+                db1.connectionClose( conn )
+                #self.close()
 
-            if str(self.status) != str(self.old_status):
-                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "status", self.status, self.old_status,id)
-            if str(points) != str(self.old_points):
-                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "points", points, self.old_points,id)
+                if str(self.status) != str(self.old_status):
+                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "status", self.status, self.old_status,id)
+                if str(points) != str(self.old_points):
+                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "points", points, self.old_points,id)
 
-            if str(date_from) != str(self.old_valid_from):
-                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_from", date_from, self.old_valid_from,id)
+                if str(date_from) != str(self.old_valid_from):
+                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_from", date_from, self.old_valid_from,id)
 
-            if str(date_to) != str(self.old_valid_to):
-                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_to", date_to, self.old_valid_to,id)
+                if str(date_to) != str(self.old_valid_to):
+                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_to", date_to, self.old_valid_to,id)
 
-            if str(purchAmount) != str(self.old_amount):
-                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "amount", purchAmount, self.old_amount,id)
-            if str(name) != str(self.old_name):
-                util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "name", name, self.old_name,id)
-            print( "in modify cust" )
+                if str(purchAmount) != str(self.old_amount):
+                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "amount", purchAmount, self.old_amount,id)
+                if str(name) != str(self.old_name):
+                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "name", name, self.old_name,id)
+                print( "in modify cust" )
+                self.FN_REFRESH_DATA_GRID(ids)
         except Exception as err:
             print(err)

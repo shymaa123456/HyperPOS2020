@@ -74,9 +74,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Modify_Role.triggered.connect(self.FN_MODIFY_ROLE)
             self.QAct_Copy_Role.triggered.connect(self.FN_COPY_ROLE)
 
-            # self.QAct_Create_Customer.triggered.connect( self.FN_CREATE_CUST )
-            # self.QAct_Modify_Customer.triggered.connect( self.FN_MODIFY_CUST )
-            # self.QAct_Deactivate_Customer.triggered.connect(self.FN_DEACTIVATE_CUST)
+
             self.QAct_Display_Customer.triggered.connect(self.FN_DISPLAY_CUST)
             self.QAct_Cust_Points_Upload.triggered.connect(self.FN_UP_CUST_PT)
 
@@ -141,25 +139,12 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two.FN_LOAD_DISPLAY()
         self.window_two.show()
 
-    def FN_CREATE_CUST(self):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_CREATE()
-        self.window_two.show()
 
-    def FN_DISPLAY_CUST(self):
+    def  FN_DISPLAY_CUST(self):
         self.window_two = CL_customer()
         self.window_two.FN_LOAD_DISPLAY()
         self.window_two.show()
 
-    def FN_MODIFY_CUST(self):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_MODIFY()
-        self.window_two.show()
-
-    def FN_DEACTIVATE_CUST(self):
-        self.window_two = CL_customer()
-        self.window_two.FN_LOAD_DEACTIVATE()
-        self.window_two.show()
 
     def FN_UPLOAD_CUST(self):
         self.window_two = CL_customer()

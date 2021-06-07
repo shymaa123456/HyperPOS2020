@@ -647,22 +647,6 @@ background-color: rgb(198, 207, 199);</string>
       <string>النقاط المستحقه</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="Qline_purchAmount">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>10</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <number>999999</number>
-     </property>
-     <property name="singleStep">
-      <number>3</number>
-     </property>
-    </widget>
     <widget class="QSpinBox" name="Qline_points">
      <property name="geometry">
       <rect>
@@ -674,6 +658,22 @@ background-color: rgb(198, 207, 199);</string>
      </property>
      <property name="maximum">
       <number>99999</number>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="Qline_purchAmount">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>10</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="decimals">
+      <number>2</number>
+     </property>
+     <property name="maximum">
+      <double>99999.990000000005239</double>
      </property>
     </widget>
    </widget>

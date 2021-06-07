@@ -1,10 +1,11 @@
 import re
 import datetime
 from PyQt5 import QtWidgets
-
+from data_connection.h1pos import db1
 
 class CL_validation():
     email_address = "hossam.nabi.cs@gmail.com"
+
 
     @staticmethod
     def FN_valedation_mail(email):

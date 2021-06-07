@@ -443,10 +443,17 @@ class CL_loyProg(QtWidgets.QDialog):
         myresult = mycursor.fetchone()
         return myresult[0]
 
+    def FN_CLEAR_FEILDS(self):
+        self.label_ID.setText("")
+        self.Qline_name.setText("")
 
+        self.Qtext_desc.setText("")
+        self.Qline_purchAmount.setValue(0)
+        self.Qline_points.setValue(0)
     def FN_SEARCH_LOYPROG(self):
 
        try:
+            self.FN_CLEAR_FEILDS()
             for i in reversed(range(self.Qtable_loyality.rowCount())):
                 self.Qtable_loyality.removeRow(i)
             sec = self.CMB_section.currentText()
@@ -615,8 +622,8 @@ class CL_loyProg(QtWidgets.QDialog):
                 self.Qline_name.setText(name)
                 self.label_ID.setText(id)
                 self.Qtext_desc.setText(desc)
-                self.Qline_purchAmount.setText(amount)
-                self.Qline_points.setText(points)
+                self.Qline_purchAmount.setValue(float(amount))
+                self.Qline_points.setValue(int(points))
 
                 if status == 'Active' :
                     self.Qradio_active.setChecked(True)
@@ -721,7 +728,7 @@ class CL_loyProg(QtWidgets.QDialog):
 
         if len(self.Qcombo_group2.currentData()) == 0 or len(self.Qcombo_group3.currentData()) == 0 or len(
                 self.Qcombo_group4.currentData()) == 0 or  len(self.Qcombo_group6.currentData()) == 0 or len(
-                self.Qcombo_group5.currentData()) == 0 or self.name == '' or self.desc == '' or self.purchAmount == '' or self.points == '' or self.date_from == '' or self.date_to == '' \
+                self.Qcombo_group5.currentData()) == 0 or self.name == '' or self.desc == '' or float(self.purchAmount) == 0 or self.points == '0' or self.date_from == '' or self.date_to == '' \
                 :
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
         else:
@@ -979,51 +986,56 @@ class CL_loyProg(QtWidgets.QDialog):
             if len(id) == 0:
                 QtWidgets.QMessageBox.information(self, "Error", "No LoyProg selected")
             else:
-                name=self.Qline_name.text().strip()
+                name = self.Qline_name.text().strip()
                 desc = self.Qtext_desc.toPlainText().strip()
                 purchAmount = self.Qline_purchAmount.text().strip()
                 points = self.Qline_points.text().strip()
                 date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
                 date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
-
-                if self.Qradio_active.isChecked():
-                    self.status = 1
+                if name == '' or desc == '' or float(purchAmount) == 0 or points == '0' or date_from == '' or date_to == '' \
+                        :
+                    QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
                 else:
-                    self.status = 0
-                conn = db1.connect()
-                mycursor = conn.cursor()
 
-                changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-                # get customer gp id
 
-                sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
-                val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
-                mycursor.execute(sql, val)
-                mycursor.close()
-                ids.append(id)
-                print( mycursor.rowcount, "record updated." )
-                QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
+                    if self.Qradio_active.isChecked():
+                        self.status = 1
+                    else:
+                        self.status = 0
+                    conn = db1.connect()
+                    mycursor = conn.cursor()
 
-                db1.connectionCommit( conn )
-                db1.connectionClose( conn )
-                #self.close()
+                    changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+                    # get customer gp id
 
-                if str(self.status) != str(self.old_status):
-                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "status", self.status, self.old_status,id)
-                if str(points) != str(self.old_points):
-                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "points", points, self.old_points,id)
+                    sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
+                    val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
+                    mycursor.execute(sql, val)
+                    mycursor.close()
+                    ids.append(id)
+                    print( mycursor.rowcount, "record updated." )
+                    QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
 
-                if str(date_from) != str(self.old_valid_from):
-                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_from", date_from, self.old_valid_from,id)
+                    db1.connectionCommit( conn )
+                    db1.connectionClose( conn )
+                    #self.close()
 
-                if str(date_to) != str(self.old_valid_to):
-                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_to", date_to, self.old_valid_to,id)
+                    if str(self.status) != str(self.old_status):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "status", self.status, self.old_status,id)
+                    if str(points) != str(self.old_points):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "points", points, self.old_points,id)
 
-                if str(purchAmount) != str(self.old_amount):
-                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "amount", purchAmount, self.old_amount,id)
-                if str(name) != str(self.old_name):
-                    util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "name", name, self.old_name,id)
-                print( "in modify cust" )
-                self.FN_REFRESH_DATA_GRID(ids)
+                    if str(date_from) != str(self.old_valid_from):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_from", date_from, self.old_valid_from,id)
+
+                    if str(date_to) != str(self.old_valid_to):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_to", date_to, self.old_valid_to,id)
+
+                    if str(purchAmount) != str(self.old_amount):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "amount", purchAmount, self.old_amount,id)
+                    if str(name) != str(self.old_name):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "name", name, self.old_name,id)
+                    print( "in modify cust" )
+                    self.FN_REFRESH_DATA_GRID(ids)
         except Exception as err:
             print(err)

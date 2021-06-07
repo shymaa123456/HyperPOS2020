@@ -24,7 +24,7 @@ class util():
         else:
             return "0"
 
-
+    @staticmethod
     def FN_GET_CUSTTP():
 
         conn = db1.connect()

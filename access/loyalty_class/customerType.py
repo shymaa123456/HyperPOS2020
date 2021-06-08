@@ -28,11 +28,7 @@ class CL_customerTP(QtWidgets.QDialog):
         loadUi(filename, self)
         try:
             self.FN_GET_CUSTTPS()
-            records=self.FN_GET_NEXTlEVEL()
-            #id = self.FN_GET_NEXTlEVEL_ID
-            #self.LB_nextLvlId.setText ()
-            for row in records:
-                self.CMB_nextLevel.addItems([row[0]])
+            self.FN_GET_NEXTLVL()
             self.CMB_custType.addItems(["Active", "Inactive"])
             self.BTN_createCustTp.clicked.connect(self.FN_CREATE_CUSTTP)
             self.BTN_modifyCustTp.clicked.connect(self.FN_MODIFY_CUSTTP)
@@ -40,10 +36,13 @@ class CL_customerTP(QtWidgets.QDialog):
             #self.BTN_getCustTp.clicked.connect(self.FN_GET_CUSTTP)
             self.CMB_nextLevel.activated.connect (self.FN_GET_ID)
             self.CMB_custType.activated.connect (self.FN_GET_ID_STS)
+            self.BTN_searchCustTp_all.clicked.connect(self.FN_GET_CUSTTPS)
+            self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
             self.FN_GET_ID()
             self.FN_GET_ID_STS()
-            self.setFixedWidth(406)
-            self.setFixedHeight(399)
+            self.Qtable_custTP.setColumnHidden(0, True)
+            self.setFixedWidth(520)
+            self.setFixedHeight(415)
         except Exception as err:
             print(err)
 
@@ -57,7 +56,7 @@ class CL_customerTP(QtWidgets.QDialog):
             points = self.Qtable_custTP.item(rowNo, 2).text()
             self.CMB_nextLevel.show()
             status = self.Qtable_custTP.item(rowNo, 4).text()
-            if  rowNo != 0 :
+            if  id != 1 :
                 nextLevel = self.Qtable_custTP.item(rowNo, 3).text()
                 self.LB_nextLvlId.setText(nextLevel )
                 nextLevel = self.FN_GET_NEXTlEVEL_DESC(nextLevel)
@@ -115,13 +114,14 @@ class CL_customerTP(QtWidgets.QDialog):
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(item ))
             mycursor.close()
-            self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
+            #self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
         except Exception as err:
             print(err)
+
     def FN_GET_NEXTlEVEL(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT LOYCT_DESC ,LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1'  order by LOYCT_TYPE_ID   asc")
+        mycursor.execute("SELECT LOYCT_DESC ,LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1'  order by LOYCT_TYPE_ID*1   asc")
         records = mycursor.fetchall()
         #mycursor.close()
         return records
@@ -164,14 +164,15 @@ class CL_customerTP(QtWidgets.QDialog):
                 item = QTableWidgetItem(str(data))
                 item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                 self.Qtable_custTP.setItem(row_number, column_number, item)
-        self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
-        mycursor.close()
+        #self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
 
-    def FN_CHECK_STATUS(self, status):
-        if status == 1 or status == 0 :
-            return True
-        else :
-            return False
+    def FN_GET_NEXTLVL(self):
+        self.CMB_nextLevel.clear()
+        records = self.FN_GET_NEXTlEVEL()
+        for row in records:
+            self.CMB_nextLevel.addItems([row[0]])
+
+
 
     def FN_CHECK_DUP_NAME(self, name):
         self.conn = db1.connect()
@@ -192,8 +193,9 @@ class CL_customerTP(QtWidgets.QDialog):
             self.conn = db1.connect()
             mycursor2 = self.conn.cursor()
             print(name)
-            sql = "SELECT LOYCT_DESC  FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + name + "'"
+            sql = "SELECT * FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_NEXT = '" + name + "' and LOYCT_STATUS =1"
             mycursor2.execute(sql)
+            myresult = mycursor2.fetchall()
             len = mycursor2.rowcount
             if len > 0:
                 return True
@@ -232,20 +234,24 @@ class CL_customerTP(QtWidgets.QDialog):
 
                 else:
                     nextLevel1 = self.FN_GET_NEXTlEVEL_ID(nextLevel)
-                    sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
-                          "         VALUES ( %s, %s, %s,  %s,%s)"
+                    if  self.FN_CHECK_DUP_NEXTLEVEL(nextLevel1)!=False:
+                        QtWidgets.QMessageBox.warning(self, "Error", "Next Level is duplicated")
+                    else:
+                        sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
+                              "         VALUES ( %s, %s, %s,  %s,%s)"
 
-                    # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-                    val = (self.id, name,points,nextLevel1 ,  status
-                           )
-                    mycursor.execute(sql, val)
-                    #mycursor.close()
+                        # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+                        val = (self.id, name,points,nextLevel1 ,  status
+                               )
+                        mycursor.execute(sql, val)
+                        #mycursor.close()
 
-                    print(mycursor.rowcount, "Cust Tp inserted.")
-                    QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
-                    db1.connectionCommit(conn)
-                    self.FN_GET_CUSTTPS()
-                    self.FN_CLEAR_FEILDS()
+                        print(mycursor.rowcount, "Cust Tp inserted.")
+                        QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
+                        db1.connectionCommit(conn)
+                        self.FN_GET_CUSTTPS()
+                        self.FN_GET_NEXTLVL()
+                        self.FN_CLEAR_FEILDS()
 
         except Exception as err:
             #mycursor.close()
@@ -257,7 +263,7 @@ class CL_customerTP(QtWidgets.QDialog):
                 rowNo = self.Qtable_custTP.selectedItems()[0].row()
 
                 desc_old = self.Qtable_custTP.item(rowNo, 1).text()
-
+                next_level_old = self.Qtable_custTP.item(rowNo, 3).text()
                 id = self.LB_custTpId.text()
                 desc = self.LE_desc.text().strip()
                 points = self.LE_points.text().strip()
@@ -276,6 +282,10 @@ class CL_customerTP(QtWidgets.QDialog):
                         if self.FN_CHECK_DUP_NAME(desc) != False:
                             QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
                             error=1
+                    if next_level_old != nextLevel :
+                        if self.FN_CHECK_DUP_NEXTLEVEL(nextLevel) != False:
+                            QtWidgets.QMessageBox.warning(self, "Error", "Next Level is duplicated")
+                            error = 1
 
                     if error != 1:
                         self.conn = db1.connect()

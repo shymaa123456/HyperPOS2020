@@ -8,7 +8,7 @@ from PyQt5.QtCore import QRegExp
 
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
-
+from access.utils.util import *
 from datetime import datetime
 
 
@@ -40,6 +40,7 @@ class CL_customerGP(QtWidgets.QDialog):
             self.BTN_modifyCustGp.clicked.connect(self.FN_MODIFY_CUSTGP)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_searchCustGp.clicked.connect(self.FN_SEARCH_CUSTGP)
+            self.BTN_searchCustGp_all.clicked.connect(self.FN_SEARCH_CUSTGP_all)
             self.setFixedWidth(368)
             self.setFixedHeight(430)
         except Exception as err:
@@ -77,7 +78,7 @@ class CL_customerGP(QtWidgets.QDialog):
                     item = QTableWidgetItem(str(data))
 
                     if column_number == 2:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable_custGP.setItem(row_number, column_number, item)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
@@ -87,12 +88,35 @@ class CL_customerGP(QtWidgets.QDialog):
         #self.Qtable_custGP.setItem(0, 0, QTableWidgetItem(str('11111')))
         except Exception as err:
              print(err)
-    def FN_GET_STATUS_DESC(self,id):
-        if id == '1':
-            return "Active"
-        else:
-            return "Inactive"
 
+    def FN_SEARCH_CUSTGP_all(self):
+        self.conn1 = db1.connect()
+        try:
+            for i in reversed(range(self.Qtable_custGP.rowCount())):
+                self.Qtable_custGP.removeRow(i)
+            mycursor = self.conn1.cursor()
+            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP  order by CG_GROUP_ID*1 asc"
+            #print(sql_select_query)
+            mycursor.execute(sql_select_query)
+            records = mycursor.fetchall()
+            for row_number, row_data in enumerate(records):
+                self.Qtable_custGP.insertRow(row_number)
+                for column_number, data in enumerate(row_data):
+
+
+                    item = QTableWidgetItem(str(data))
+
+                    if column_number == 2:
+                        data = util.FN_GET_STATUS_DESC(str(data))
+                    item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
+                    self.Qtable_custGP.setItem(row_number, column_number, item)
+            #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        #
+            self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
+            #mycursor.close()
+        #self.Qtable_custGP.setItem(0, 0, QTableWidgetItem(str('11111')))
+        except Exception as err:
+             print(err)
     def FN_GET_CUSTGPS(self):
         self.conn = db1.connect()
         try:
@@ -108,11 +132,12 @@ class CL_customerGP(QtWidgets.QDialog):
                     item = QTableWidgetItem(str(data))
 
                     if column_number == 2:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
 
                     self.Qtable_custGP.setItem(row_number, column_number, item)
             self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
+            self.Qtable_custGP.setColumnHidden(0, True)
             #mycursor.close()
         except Exception as err:
             print(err)
@@ -127,7 +152,7 @@ class CL_customerGP(QtWidgets.QDialog):
                 self.LE_desc.setText(desc)
                 self.LB_custGpId.setText(id)
                 self.LB_status.setText(status)
-                self.CMB_custGroup.setCurrentText(self.FN_GET_STATUS_DESC(status))
+                self.CMB_custGroup.setCurrentText(util.FN_GET_STATUS_DESC(status))
                 # self.FN_MODIFY_CUSTTP()
         except Exception as err:
             print(err)

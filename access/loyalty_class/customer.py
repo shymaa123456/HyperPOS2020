@@ -1097,6 +1097,7 @@ class CL_customer(QtWidgets.QDialog):
         conn = db1.connect()
         mycursor = conn.cursor()
         whereClause = ""
+        orderClause = " order by POSC_CUST_ID*1 asc"
         if self.chk_search_other.isChecked():
             if self.Rbtn_custNo.isChecked():
                 id = self.LE_custNo.text()
@@ -1108,7 +1109,7 @@ class CL_customer(QtWidgets.QDialog):
 
             elif self.Rbtn_custPhone.isChecked():
                 phone = self.LE_custPhone.text()
-                whereClause = " POSC_PHONE = '" + phone + "'"
+                whereClause = "  (POSC_PHONE = '" + phone + "' or POSC_MOBILE = '"+phone+"')"
 
         if self.chk_search_status.isChecked():
             if self.Rbtn_stsActive.isChecked():
@@ -1126,8 +1127,8 @@ class CL_customer(QtWidgets.QDialog):
         if self.chk_search_status.isChecked() == False and self.chk_search_other.isChecked() == False:
             QtWidgets.QMessageBox.warning(self, "Error", "أختر أي من محدادات البحث")
         else:
-            # print(whereClause)
-            sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where " + whereClause
+            print(whereClause)
+            sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where " + whereClause + orderClause
             print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()

@@ -29,7 +29,7 @@ class util():
 
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute( "SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE order by LOYCT_TYPE_ID asc" )
+        mycursor.execute( "SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID*1 asc" )
         records = mycursor.fetchall()
         mycursor.close()
         return records

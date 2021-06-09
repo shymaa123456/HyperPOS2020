@@ -404,25 +404,25 @@ class CL_loyProg(QtWidgets.QDialog):
         except (Error, Warning) as e:
             return False
 
-    def FN_GET_STATUS_DESC(self,id):
-        if id == '1':
-            return "Active"
-        else:
-            return "Inactive"
-
-    def FN_GET_COMP_DESC(self,id):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
-
-    def FN_GET_BRANCH_DESC(self, id):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
+    # def FN_GET_STATUS_DESC(self,id):
+    #     if id == '1':
+    #         return "Active"
+    #     else:
+    #         return "Inactive"
+    #
+    # def FN_GET_COMP_DESC(self,id):
+    #     conn = db1.connect()
+    #     mycursor = conn.cursor()
+    #     mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
+    #     myresult = mycursor.fetchone()
+    #     return myresult[0]
+    #
+    # def FN_GET_BRANCH_DESC(self, id):
+    #     conn = db1.connect()
+    #     mycursor = conn.cursor()
+    #     mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
+    #     myresult = mycursor.fetchone()
+    #     return myresult[0]
 
     def FN_GET_CUSTGP_DESC(self, id):
         conn = db1.connect()
@@ -430,12 +430,12 @@ class CL_loyProg(QtWidgets.QDialog):
         mycursor.execute("SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where CG_GROUP_ID = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
-    def FN_GET_CUSTTP_DESC(self, id):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
+    # def FN_GET_CUSTTP_DESC(self, id):
+    #     conn = db1.connect()
+    #     mycursor = conn.cursor()
+    #     mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
+    #     myresult = mycursor.fetchone()
+    #     return myresult[0]
     def FN_GET_BMC_DESC(self, id):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -581,15 +581,15 @@ class CL_loyProg(QtWidgets.QDialog):
                 for column_number, data in enumerate(row_data):
 
                     if column_number == 5:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                     elif column_number == 6:
-                        data = self.FN_GET_COMP_DESC(str(data))
+                        data = util.FN_GET_COMP_DESC(str(data))
                     elif column_number == 7:
-                        data = self.FN_GET_BRANCH_DESC(str(data))
+                        data = util.FN_GET_BRANCH_DESC(str(data))
                     elif column_number == 8:
                         data = self.FN_GET_CUSTGP_DESC(str(data))
                     elif column_number == 9:
-                        data = self.FN_GET_CUSTTP_DESC(str(data))
+                        data = util.FN_GET_CUSTTP_DESC(str(data))
                     elif column_number == 11:
                         data = self.FN_GET_BMC_DESC(str(data))
 
@@ -807,15 +807,15 @@ class CL_loyProg(QtWidgets.QDialog):
                 for column_number, data in enumerate(record):
 
                     if column_number == 5:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                     elif column_number == 6:
-                        data = self.FN_GET_COMP_DESC(str(data))
+                        data = util.FN_GET_COMP_DESC(str(data))
                     elif column_number == 7:
-                        data = self.FN_GET_BRANCH_DESC(str(data))
+                        data = util.FN_GET_BRANCH_DESC(str(data))
                     elif column_number == 8:
                         data = self.FN_GET_CUSTGP_DESC(str(data))
                     elif column_number == 9:
-                        data = self.FN_GET_CUSTTP_DESC(str(data))
+                        data = util.FN_GET_CUSTTP_DESC(str(data))
                     elif column_number == 11:
                         data = self.FN_GET_BMC_DESC(str(data))
 

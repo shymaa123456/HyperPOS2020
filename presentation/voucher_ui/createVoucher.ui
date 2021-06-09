@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>407</width>
-    <height>506</height>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>240</y>
+     <y>260</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -73,7 +73,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>240</y>
+     <y>260</y>
      <width>271</width>
      <height>25</height>
     </rect>
@@ -353,27 +353,11 @@
     <string>قيمه الخصم</string>
    </property>
   </widget>
-  <widget class="QLabel" name="desc_9">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>130</y>
-     <width>67</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ef2929;&quot;&gt;*&lt;/span&gt;الممول &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="desc_11">
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>270</y>
+     <y>290</y>
      <width>81</width>
      <height>21</height>
     </rect>
@@ -388,9 +372,9 @@
   <widget class="QLineEdit" name="LE_desc_5">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>270</y>
-     <width>121</width>
+     <x>120</x>
+     <y>290</y>
+     <width>171</width>
      <height>25</height>
     </rect>
    </property>
@@ -419,27 +403,11 @@
                                     </string>
    </property>
   </widget>
-  <widget class="QLabel" name="desc_12">
-   <property name="geometry">
-    <rect>
-     <x>296</x>
-     <y>300</y>
-     <width>91</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ef2929;&quot;&gt;&lt;/span&gt;اسم العميل&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="desc_13">
    <property name="geometry">
     <rect>
-     <x>166</x>
-     <y>300</y>
+     <x>0</x>
+     <y>290</y>
      <width>91</width>
      <height>21</height>
     </rect>
@@ -579,6 +547,35 @@
    </property>
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>130</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>الممول</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton_2">
+   <property name="geometry">
+    <rect>
+     <x>241</x>
+     <y>230</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PREPAID (Visa,Cash)</string>
    </property>
   </widget>
  </widget>

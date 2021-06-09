@@ -101,7 +101,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
             records = mycursor.fetchall()
             for row, val in records:
-                for bra in self.FN_AuthBranchUser():
+                for bra in CL_userModule.branch:
                     if val in bra:
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
@@ -208,12 +208,12 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-    def FN_AuthBranchUser(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"'")
-        records = mycursor.fetchall()
-        return records
+    # def FN_AuthBranchUser(self):
+    #     self.conn = db1.connect()
+    #     mycursor = self.conn.cursor()
+    #     mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"' and STATUS = 1")
+    #     records = mycursor.fetchall()
+    #     return records
 
 
 

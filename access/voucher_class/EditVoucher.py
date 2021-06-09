@@ -90,7 +90,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
             records = mycursor.fetchall()
             for row, val in records:
-                for bra in self.FN_AuthBranchUser():
+                for bra in CL_userModule.branch:
                     if val in bra:
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
@@ -181,7 +181,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
 
     def FN_unCheckedALL(self):
         mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "'"
+        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
         i = 0
@@ -191,7 +191,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
 
     def FN_unCheckedALLsection(self):
         mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "'"
+        sql_select_branch = "SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
         i = 0
@@ -212,7 +212,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "'")
+        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
         records = mycursor.fetchall()
         mycursor.close()
         return records
@@ -226,7 +226,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             records = mycursor.fetchall()
             print(records)
             for row, val in records:
-                for bra in self.FN_AuthSectionUser():
+                for bra in CL_userModule.section:
                     if val in bra:
                         self.Qcombo_section.addItem(row, val)
             mycursor.close()
@@ -236,7 +236,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     def FN_AuthSectionUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "'")
+        mycursor.execute("SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
         records = mycursor.fetchall()
         mycursor.close()
         return records
@@ -255,7 +255,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     def FN_getData(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT GV_DESC,GV_ID FROM VOUCHER")
+        mycursor.execute("SELECT GV_DESC,GV_ID FROM VOUCHER where GVT_ID in (2,3)")
         records = mycursor.fetchall()
         for row, val in records:
             self.CMB_CouponDes.addItem(row, val)
@@ -290,30 +290,36 @@ class CL_EditVoucher(QtWidgets.QDialog):
             xto = dateto.split("-")
             d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
             self.Qdate_to.setDate(d)
+
+            print("record"+record[15])
+
             if int(record[14]) == 1:
                 self.checkBox_refundable.setChecked(True)
             else:
                 self.checkBox_refundable.setChecked(False)
+
             if int(record[15]) == 1:
                 self.checkBox_rechange.setChecked(True)
                 self.LE_desc_3.setEnabled(True)
             else:
                 self.checkBox_rechange.setChecked(False)
                 self.LE_desc_3.setEnabled(False)
+
             if int(record[16]) == 1:
                 self.checkBox_Multi.setChecked(True)
             else:
                 self.checkBox_Multi.setChecked(False)
+
             self.FN_check_section(indx)
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
             print(record[18])
-            if int(str(record[18])) == 1:
-                self.LE_desc_2.setEnabled(False)
-                self.LE_desc_3.setEnabled(True)
-            elif int(str(record[18])) == 0:
-                self.LE_desc_2.setEnabled(True)
-                self.LE_desc_3.setEnabled(False)
+            # if int(str(record[18])) == 1:
+            #     self.LE_desc_2.setEnabled(False)
+            #     self.LE_desc_3.setEnabled(True)
+            # elif int(str(record[18])) == 0:
+            #     self.LE_desc_2.setEnabled(True)
+            #     self.LE_desc_3.setEnabled(False)
             sql_select = "select * from SPONSER where SPONSER_ID=( SELECT SPONSER_ID FROM VOUCHER_SPONSOR where GV_ID = %s)"
             x = (indx,)
             mycursor.execute(sql_select, x)
@@ -341,7 +347,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
         if self.checkBox_rechange.isChecked():
             self.GV_RECHARGABLE = 1
             self.LE_desc_3.setEnabled(True)
-
         else:
             self.GV_RECHARGABLE = 0
             self.LE_desc_3.setEnabled(False)
@@ -464,11 +469,10 @@ class CL_EditVoucher(QtWidgets.QDialog):
                                         str(self.CMB_CouponDes.currentData()),
                                         '1')
                                     mycursor.execute(sql6, val6)
-                    if(self.LE_desc_1.text!=self.oldValue):
-
-
+                    if (self.LE_desc_1.text() != self.oldValue):
                         sql7 = "INSERT INTO SYS_CHANGE_LOG (TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s)"
-                        val7 = ('VOUCHER','GV_DESC',self.oldValue,self.LE_desc_1.text().strip(),creationDate,CL_userModule.user_name)
+                        val7 = ('VOUCHER', 'GV_DESC', self.oldValue, self.LE_desc_1.text().strip(), creationDate,
+                                CL_userModule.user_name)
                         mycursor.execute(sql7, val7)
 
                     db1.connectionCommit(self.conn)

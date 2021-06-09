@@ -53,6 +53,7 @@ class CL_login(QtWidgets.QDialog):
             if mycursor.rowcount > 0:
                 # save the login in the table
                 CL_userModule.user_name = record[0]
+
                 print(username)
                 self.switch_window.emit()
 

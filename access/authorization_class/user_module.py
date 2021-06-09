@@ -11,6 +11,8 @@ from data_connection.h1pos import db1
 class CL_userModule(object):
     user_name = ''
     myList = []
+    branch = []
+    section = []
 
     def init(self):
         self.conn = db1.connect()
@@ -38,3 +40,23 @@ class CL_userModule(object):
         # print(records)
         CL_userModule.myList = records
         # print(CL_userModule.myList)
+
+
+    def FN_AuthBranchUser(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"' and STATUS = 1")
+        records = mycursor.fetchall()
+        CL_userModule.branch = records
+        return records
+
+
+    def FN_AuthSectionUser(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
+        records = mycursor.fetchall()
+        CL_userModule.section = records
+        return records
+
+

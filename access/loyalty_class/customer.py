@@ -539,6 +539,7 @@ class CL_customer(QtWidgets.QDialog):
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
         self.Qbtn_export.clicked.connect(self.FN_SAVE_CUST)
         self.Rbtn_custNo.clicked.connect(self.onClicked)
+        self.Rbtn_custName.clicked.connect(self.onClicked)
         self.Rbtn_custTp.clicked.connect(self.onClicked)
 
         self.Rbtn_custPhone.clicked.connect(self.onClicked)
@@ -913,15 +914,18 @@ class CL_customer(QtWidgets.QDialog):
         if self.chk_search_other.isChecked():
             # self.Rbtn_custNo.setEnabled(True)
             self.Rbtn_custNo.setChecked(True)
-
+            #self.Rbtn_custName.setChecked(True)
             self.Rbtn_custNo.setEnabled(True)
+            self.Rbtn_custName.setEnabled(True)
             self.Rbtn_custTp.setEnabled(True)
             self.Rbtn_custPhone.setEnabled(True)
             self.LE_custNo.setEnabled(True)
+            self.LE_custName.setEnabled(True)
             self.LE_custPhone.setEnabled(True)
             self.CMB_loyalityType.setEnabled(True)
         else:
             self.Rbtn_custNo.setChecked(False)
+            self.Rbtn_custName.setChecked(False)
             self.Rbtn_custTp.setChecked(False)
             self.Rbtn_custPhone.setChecked(False)
 
@@ -956,20 +960,27 @@ class CL_customer(QtWidgets.QDialog):
 
             self.CMB_loyalityType.setEnabled(True)
             self.LE_custNo.setEnabled(False)
+            self.LE_custName.setEnabled(False)
             self.LE_custNo.setText('')
             self.LE_custPhone.setEnabled(False)
         elif self.Rbtn_custNo.isChecked():
             self.CMB_loyalityType.setEnabled(False)
             self.LE_custNo.setEnabled(True)
-
+            self.LE_custName.setEnabled(False)
             self.LE_custPhone.setEnabled(False)
             self.LE_custPhone.setText('')
         elif self.Rbtn_custPhone.isChecked():
             self.CMB_loyalityType.setEnabled(False)
             self.LE_custNo.setEnabled(False)
             self.LE_custNo.setText('')
-
+            self.LE_custName.setEnabled(False)
             self.LE_custPhone.setEnabled(True)
+        elif self.Rbtn_custName.isChecked():
+            self.CMB_loyalityType.setEnabled(False)
+            self.LE_custNo.setEnabled(False)
+            self.LE_custName.setEnabled(True)
+            self.LE_custPhone.setEnabled(False)
+            self.LE_custPhone.setText('')
     def FN_VALIDATE_FIELDS(self):
 
         self.name = self.LE_name.text().strip()
@@ -1103,6 +1114,10 @@ class CL_customer(QtWidgets.QDialog):
                 id = self.LE_custNo.text()
                 whereClause = " POSC_CUST_ID = '" + id + "'"
 
+            if  self.Rbtn_custName.isChecked():
+                name = self.LE_custName.text()
+                whereClause = " POSC_NAME like '%" + name + "%'"
+
             elif self.Rbtn_custTp.isChecked():
                 type = self.CMB_loyalityType.currentText()
                 whereClause = " LOYCT_TYPE_ID ='" + self.FN_GET_CUSTTP_ID(type) + "'"
@@ -1127,9 +1142,9 @@ class CL_customer(QtWidgets.QDialog):
         if self.chk_search_status.isChecked() == False and self.chk_search_other.isChecked() == False:
             QtWidgets.QMessageBox.warning(self, "Error", "أختر أي من محدادات البحث")
         else:
-            print(whereClause)
+            #print(whereClause)
             sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where " + whereClause + orderClause
-            print(sql_select_query)
+            #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):

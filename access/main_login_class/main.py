@@ -53,6 +53,8 @@ class CL_main(QtWidgets.QMainWindow):
 
             # print (CL_userModule.user_name)
             CL_userModule.loadPrivilages(self)
+            CL_userModule.FN_AuthBranchUser(self)
+            CL_userModule.FN_AuthSectionUser(self)
             for row_number, row_data in enumerate(CL_userModule.myList):
                 forms.append(row_data[1])
 

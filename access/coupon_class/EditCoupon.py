@@ -1,3 +1,4 @@
+import collections
 import sys
 from pathlib import Path
 from random import randint
@@ -28,6 +29,13 @@ class CL_EditCoupon(QtWidgets.QDialog):
     serial_type=0
     dfrom=QDate(1,1,2000)
     Special=0
+    DescOldValue= ""
+    COPDISCOUNToldVAL= ""
+    COPDISCOUNToldprecnt= ""
+    Othertype=""
+    row=""
+    oldlist=[]
+
     def __init__(self):
         super(CL_EditCoupon, self).__init__()
         cwd = Path.cwd()
@@ -83,15 +91,13 @@ class CL_EditCoupon(QtWidgets.QDialog):
             # Todo: method for fills the Branch combobox
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
+            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH where BRANCH_STATUS=1")
             records = mycursor.fetchall()
             for row, val in records:
-                for bra in self.FN_AuthBranchUser():
+                for bra in CL_userModule.branch:
                     if val in bra:
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
-
-
             mycursor.close()
         except:
             print(sys.exc_info())
@@ -123,7 +129,13 @@ class CL_EditCoupon(QtWidgets.QDialog):
             mycursor = self.conn.cursor()
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
+            self.row=record[0]
             self.LE_desc_1.setText(record[1])
+            self.DescOldValue=record[1]
+            self.COPDISCOUNToldVAL=str(record[2])
+            self.COPDISCOUNToldprecnt=str(record[3])
+
+
             if (record[2]!=None and len(record[2]) > 0):
                 self.radioButton_Value.setChecked(True)
                 self.LE_desc_2.setValue(float(record[2]))
@@ -132,6 +144,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.LE_desc_3.clear()
                 self.valueType = "COP_DISCOUNT_VAL"
                 self.valueData = self.LE_desc_2.text()
+                self.Othertype="COP_DISCOUNT_PERCENT"
             else:
                 self.radioButton_Percentage.setChecked(True)
                 self.LE_desc_3.setValue(float(record[3]))
@@ -140,6 +153,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.LE_desc_2.clear()
                 self.valueType = "COP_DISCOUNT_PERCENT"
                 self.valueData = self.LE_desc_3.text()
+                self.Othertype="COP_DISCOUNT_VAL"
+
             dateto = record[12]
             xto = dateto.split("-")
             d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
@@ -221,6 +236,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
             if len(self.Qcombo_branch.currentData()) > 0:
                 for i in self.Qcombo_branch.currentData():
                     self.branch_list.append(i)
+            self.oldlist=self.Qcombo_branch.currentData()
+
 
          except:
              print(sys.exc_info())
@@ -236,6 +253,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
             self.LE_desc_5.setEnabled(False)
             self.LE_desc_4.setEnabled(True)
             self.multiusage=0
+
 
     def FN_editAction(self):
         try:
@@ -281,11 +299,16 @@ class CL_EditCoupon(QtWidgets.QDialog):
                     if int(self.LE_desc_4.text()) < self.serial_num and self.movement == 1:
                         QtWidgets.QMessageBox.warning(self, "Error", "برجاء ادخل عدد اكبر من السابق")
                     else:
-                        sql = "update COUPON set COP_DESC='" + self.LE_desc_1.text().strip() + "'," + self.valueType + "=" + self.valueData + ",COP_SERIAL_COUNT=" + self.serialCount + ",COP_MULTI_USE=" + self.MultiUse + ",COP_MULTI_USE_COUNT=" + self.MultiCount + ",COP_CHANGED_BY='" + CL_userModule.user_name + "',COP_CHANGED_ON='" + creationDate + "',COP_VALID_FROM='" + self.Qdate_from.dateTime().toString(
+                        if self.valueType == "COP_DISCOUNT_VAL":
+                            self.valueData = self.LE_desc_2.text()
+                        elif self.valueType == "COP_DISCOUNT_PERCENT":
+                            self.valueData = self.LE_desc_3.text()
+                        sql = "update COUPON set COP_DESC='" + self.LE_desc_1.text().strip() + "'," + self.valueType + "=" + self.valueData +","+self.Othertype+"="+"null"+",COP_SERIAL_COUNT=" + self.serialCount + ",COP_MULTI_USE=" + self.MultiUse + ",COP_MULTI_USE_COUNT=" + self.MultiCount + ",COP_CHANGED_BY='" + CL_userModule.user_name + "',COP_CHANGED_ON='" + creationDate + "',COP_VALID_FROM='" + self.Qdate_from.dateTime().toString(
                             'dd-MM-yyyy') + "',COP_VALID_TO='" + self.Qdate_to.dateTime().toString(
                             'dd-MM-yyyy') + "',COP_STATUS='" + str(
                             self.CMB_CouponStatus.currentIndex()) + "' where COP_ID='" + str(
                             self.CMB_CouponDes.currentData()) + "'"
+                        print(sql)
                         mycursor.execute(sql)
                         # sql2 = "update COUPON_SERIAL set COPS_STATUS='" + str(
                         #     self.CMB_CouponStatus.currentIndex()) + "' where COUPON_ID='" + str(
@@ -403,6 +426,29 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 self.serial_num = int(self.LE_desc_4.text())
 
 
+                        if (self.LE_desc_1.text() != self.DescOldValue):
+                            sql7 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                            val7 = (self.row,'COUPON', 'COP_DESC', self.DescOldValue, self.LE_desc_1.text().strip(), creationDate,
+                                    CL_userModule.user_name)
+                            mycursor.execute(sql7, val7)
+                        elif collections.Counter(self.oldlist) == collections.Counter(self.Qcombo_branch.currentData()):
+                             print("the same list")
+
+                        elif(self.LE_desc_2.text() != self.COPDISCOUNToldVAL):
+                            sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                            val8 = (self.row, 'COUPON', 'COP_DISCOUNT_VAL', self.COPDISCOUNToldVAL, self.LE_desc_2.text().strip(),
+                                    creationDate,
+                                    CL_userModule.user_name)
+                            mycursor.execute(sql8, val8)
+                        elif (self.LE_desc_3.text() != self.COPDISCOUNToldprecnt):
+                            sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                            val8 = (self.row, 'COUPON', 'COP_DISCOUNT_PERCENT', self.COPDISCOUNToldprecnt,
+                                    self.LE_desc_3.text().strip(),
+                                    creationDate,
+                                    CL_userModule.user_name)
+                            mycursor.execute(sql8, val8)
+
+
 
                         db1.connectionCommit(self.conn)
                         mycursor.close()
@@ -420,11 +466,13 @@ class CL_EditCoupon(QtWidgets.QDialog):
         self.valueType="COP_DISCOUNT_VAL"
         self.LE_desc_2.setEnabled(True)
         self.LE_desc_3.setEnabled(False)
+        self.Othertype="COP_DISCOUNT_PERCENT"
 
     def FN_EnablePercentage(self):
         self.valueType = "COP_DISCOUNT_PERCENT"
         self.LE_desc_3.setEnabled(True)
         self.LE_desc_2.setEnabled(False)
+        self.Othertype="COP_DISCOUNT_VAL"
 
     def FN_Clear(self):
         self.LE_desc_1.clear()
@@ -492,7 +540,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
     def FN_unCheckedALL(self):
         mycursor = self.conn.cursor()
-        sql_select_branch = "Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"'"
+        sql_select_branch = "Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"'and STATUS = 1"
         mycursor.execute(sql_select_branch)
         record = mycursor.fetchall()
         i=0
@@ -514,9 +562,15 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
 
     def FN_AuthBranchUser(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"'")
-        records = mycursor.fetchall()
-        return records
+        try:
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            c = (CL_userModule.user_name,)
+            mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = "+CL_userModule.user_name+" and STATUS = 1")
+            print("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = "+CL_userModule.user_name+"")
+            records = mycursor.fetchall()
+            return records
+        except:
+         print(sys.exc_info())
+
 

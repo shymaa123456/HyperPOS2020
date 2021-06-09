@@ -40,9 +40,12 @@ class CL_redItem(QtWidgets.QDialog):
         conn = db1.connect()
         mycursor = conn.cursor()
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_REDITEM)
+        self.Qbtn_search_all.clicked.connect(self.FN_REFRESH_DATA_GRID)
+
         #self.Qbtn_export.clicked.connect(self.FN_SAVE)
         self.Qbtn_exit.clicked.connect(self.FN_exit)
-
+        self.Qtable_redeem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        self.Qtable_redeem.doubleClicked.connect(self.FN_GET_REDITEM)
         self.Qradio_active.setChecked(True)
 
         self.Qcombo_group3 = CheckableComboBox(self)
@@ -188,11 +191,14 @@ class CL_redItem(QtWidgets.QDialog):
                 for column_number, data in enumerate(row_data):
 
                     if column_number == 6:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
+                    elif column_number == 1:
+                        data = util.FN_GET_COMP_DESC(str(data))
+                    elif column_number == 2:
+                        data = util.FN_GET_BRANCH_DESC(str(data))
 
                     self.Qtable_redeem.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-            self.Qtable_redeem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-            self.Qtable_redeem.doubleClicked.connect(self.FN_GET_REDITEM)
+
             mycursor.close()
        except Exception as err:
             print(err)
@@ -300,6 +306,7 @@ class CL_redItem(QtWidgets.QDialog):
                            for br in branch_list:
                                ret = self.FN_CHECK_EXIST(com, br,  bar)
                                if ret == False:
+                                   mycursor1 = conn.cursor()
                                    sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
                                          "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
                                          ",REDEEM_VALID_TO,REDEEM_STATUS)" \
@@ -307,12 +314,13 @@ class CL_redItem(QtWidgets.QDialog):
 
                                    val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status)
 
-                                   mycursor.execute(sql, val)
+                                   mycursor1.execute(sql, val)
                                    db1.connectionCommit(conn)
-                                   mycursor.close()
-                                   self.FN_REFRESH_DATA_GRID()
+                                   mycursor1.close()
+
                                else:
                                    QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
+                       self.FN_REFRESH_DATA_GRID()
                    else:
                        QtWidgets.QMessageBox.warning(self, "Error", "Points must be an integer")
                else:
@@ -343,7 +351,7 @@ class CL_redItem(QtWidgets.QDialog):
             comp = str(comp)
             barcode =str(barcode)
             sql = "SELECT *  FROM Hyper1_Retail.REDEEM_ITEM where  POS_GTIN ='" + barcode + "' and COMPANY_ID ='" + comp + "' and BRANCH_NO = '" + branch + "'"
-            print(sql)
+            #print(sql)
             cursor.execute(sql)
             myresult = cursor.fetchone()
             if cursor.rowcount > 0:
@@ -358,7 +366,7 @@ class CL_redItem(QtWidgets.QDialog):
         try:
             for i in reversed(range(self.Qtable_redeem.rowCount())):
                self.Qtable_redeem.removeRow(i)
-            time.sleep(5)
+
             conn = db1.connect()
             mycursor = conn.cursor()
 
@@ -372,11 +380,14 @@ class CL_redItem(QtWidgets.QDialog):
                 for column_number, data in enumerate(row_data):
 
                     if column_number == 6:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
+                    elif column_number == 1:
+                        data = util.FN_GET_COMP_DESC(str(data))
+                    elif column_number == 2:
+                        data = util.FN_GET_BRANCH_DESC(str(data))
 
                     self.Qtable_redeem.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-            self.Qtable_redeem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-            self.Qtable_redeem.doubleClicked.connect(self.FN_GET_REDITEM)
+
             mycursor.close()
 
         except (Error, Warning) as e:

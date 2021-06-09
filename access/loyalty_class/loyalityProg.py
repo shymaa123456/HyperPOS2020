@@ -764,8 +764,8 @@ class CL_loyProg(QtWidgets.QDialog):
                                         val = (self.id, com, br, ctgp, BMC_LEVEL4, self.barcode, self.name, self.desc,
                                                creationDate, CL_userModule.user_name, self.date_from, self.date_to,
                                                self.purchAmount, self.points, cttp, self.status)
-                                        print(sql)
-                                        print(val)
+                                        #print(sql)
+                                        #print(val)
 
                                         self.mycursor1.execute(sql, val)
                                         # mycursor1.close()

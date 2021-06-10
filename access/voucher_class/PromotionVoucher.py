@@ -60,8 +60,7 @@ class CL_PromVoucher(QtWidgets.QDialog):
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             creationDate = str(datetime.today().strftime('%Y-%m-%d'))
-            if len( self.LE_desc.text().strip()) == 0  or len(
-                    self.LE_value.text().strip()== 0 or self.LE_maxCount.text().strip() == 0):
+            if len( self.LE_desc.text().strip()) == 0  or len(self.LE_value.text().strip())== 0 or len(self.LE_maxCount.text().strip() )== 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
 

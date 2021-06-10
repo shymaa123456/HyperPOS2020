@@ -32,9 +32,10 @@ from access.loyalty_class.customerType import CL_customerTP
 from access.promotion_class.Promotion_Add import CL_create_promotion
 from PyQt5.QtWidgets import QMessageBox
 
-from access.voucher_class.CreateVoucher import CL_CreateVoucher
+from access.voucher_class.CreateVoucher import   CL_CreateVoucher
 from access.voucher_class.EditVoucher import CL_EditVoucher
 from access.voucher_class.stoppedVoucher import CL_modifyVoucher
+from access.voucher_class.PromotionVoucher import CL_PromVoucher
 
 
 class CL_main(QtWidgets.QMainWindow):
@@ -60,9 +61,9 @@ class CL_main(QtWidgets.QMainWindow):
 
             forms = list(dict.fromkeys(forms))
 
-            #print(forms)
+            print(forms)
             for row in forms:
-                # print(row)
+                print(row)
                 but_name = 'QAct_' + row
                 self.findChild(QObject, but_name).setEnabled(True)
 
@@ -117,7 +118,10 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Voucher_Activate.triggered.connect(self.FN_StoppedVoucher)
             self.QAct_Voucher_Deactivate.triggered.connect(self.FN_StoppedVoucher)
 
-
+            self.QAct_Prom_Voucher_Add.triggered.connect(self.FN_CreatePromVoucher)
+            self.QAct_Prom_Voucher_Edit.triggered.connect(self.FN_EditPromVoucher)
+            self.QAct_Prom_Voucher_Act.triggered.connect(self.FN_LOAD_CHANGE_STATUS_ACTIVE)
+            self.QAct_Prom_Voucher_Act.triggered.connect(self.FN_LOAD_CHANGE_STATUS_INACTIVE)
 
             # Parameter Form
             self.QAct_Parameter.triggered.connect(self.FN_Parameters)
@@ -331,6 +335,26 @@ class CL_main(QtWidgets.QMainWindow):
     def FN_StoppedVoucher(self):
         self.window_two = CL_modifyVoucher()
         self.window_two.FN_LOADUI()
+        self.window_two.show()
+
+    def FN_CreatePromVoucher(self):
+        self.window_two = CL_PromVoucher()
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
+
+    def FN_EditPromVoucher(self):
+        self.window_two = CL_PromVoucher()
+        self.window_two.FN_LOAD_MODIIFY()
+        self.window_two.show()
+
+    def FN_LOAD_CHANGE_STATUS_ACTIVE(self):
+        self.window_two = CL_PromVoucher()
+        self.window_two.FN_LOAD_CHANGE_STATUS("1")
+        self.window_two.show()
+
+    def FN_LOAD_CHANGE_STATUS_INACTIVE(self):
+        self.window_two = CL_PromVoucher()
+        self.window_two.FN_LOAD_CHANGE_STATUS("0")
         self.window_two.show()
 
     # Configuration Parametrs

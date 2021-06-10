@@ -61,9 +61,9 @@ class CL_main(QtWidgets.QMainWindow):
 
             forms = list(dict.fromkeys(forms))
 
-            print(forms)
+            #print(forms)
             for row in forms:
-                print(row)
+                #print(row)
                 but_name = 'QAct_' + row
                 self.findChild(QObject, but_name).setEnabled(True)
 
@@ -121,7 +121,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Prom_Voucher_Add.triggered.connect(self.FN_CreatePromVoucher)
             self.QAct_Prom_Voucher_Edit.triggered.connect(self.FN_EditPromVoucher)
             self.QAct_Prom_Voucher_Act.triggered.connect(self.FN_LOAD_CHANGE_STATUS_ACTIVE)
-            self.QAct_Prom_Voucher_Act.triggered.connect(self.FN_LOAD_CHANGE_STATUS_INACTIVE)
+            self.QAct_Prom_Voucher_Deact.triggered.connect(self.FN_LOAD_CHANGE_STATUS_INACTIVE)
 
             # Parameter Form
             self.QAct_Parameter.triggered.connect(self.FN_Parameters)
@@ -353,6 +353,7 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two.show()
 
     def FN_LOAD_CHANGE_STATUS_INACTIVE(self):
+
         self.window_two = CL_PromVoucher()
         self.window_two.FN_LOAD_CHANGE_STATUS("0")
         self.window_two.show()

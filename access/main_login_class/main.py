@@ -117,19 +117,19 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Voucher_Add.triggered.connect(self.FN_CreateVoucher)
             self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
 
-        # for installment
-        self.QAct_Create_Bank.triggered.connect(self.FN_CREATE_Bank)
-        self.QAct_Modify_Bank.triggered.connect(self.FN_Modify_Bank)
-        self.QAct_Install_Add.triggered.connect(self.FN_CREATE_installment)
+            # for installment
+            self.QAct_Create_Bank.triggered.connect(self.FN_CREATE_Bank)
+            self.QAct_Modify_Bank.triggered.connect(self.FN_Modify_Bank)
+            self.QAct_Install_Add.triggered.connect(self.FN_CREATE_installment)
 
-        # Parameter Form
-        self.QAct_Parameter.triggered.connect(self.FN_Parameters)
+            # Parameter Form
+            self.QAct_Parameter.triggered.connect(self.FN_Parameters)
 
-        self.QAct_Exit.triggered.connect(self.FN_exit)
-        self.setWindowTitle('HyperPOS Main Page')
+            self.QAct_Exit.triggered.connect(self.FN_exit)
+            self.setWindowTitle('HyperPOS Main Page')
 
-    except Exception as err:
-        print(err)
+        except Exception as err:
+            print(err)
 
     def FN_UP_CUST_PT(self):
 

@@ -5,6 +5,18 @@ from PyQt5.uic import loadUi
 
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
+import sys
+
+from pathlib import Path
+from random import randint
+
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import QDate ,QTime
+from PyQt5.uic import loadUi
+
+from access.promotion_class.Promotion_Add import CheckableComboBox
+from data_connection.h1pos import db1
+from access.authorization_class.user_module import CL_userModule
 
 from datetime import datetime
 
@@ -18,6 +30,191 @@ class CL_installment(QtWidgets.QDialog):
         self.conn = db1.connect()
 
 
+    def FN_LOAD_CREATE(self):
+        filename = self.dirname + '/Installment_create.ui'
+        loadUi(filename, self)
+
+        #this function for what enabled or not when start
+        self.EnabledWhenOpen()
+
+        #Get installment type
+        self.FN_GET_installment_types_period()
+
+        #drob down list with multiselection for company
+        self.Qcombo_company = CheckableComboBox(self)
+        self.Qcombo_company.setGeometry(570,20,179,20)
+        self.Qcombo_company.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
+        self.FN_GET_Company()
+
+        #drob down list with multiselection for bracnch
+        self.Qcombo_branch = CheckableComboBox(self)
+        self.Qcombo_branch.setGeometry(570,60,179,20)
+        self.Qcombo_branch.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
+        self.FN_GET_Branch()
+
+        #validation for not pick date before today
+        datefrom = str(datetime.today().strftime('%Y-%m-%d'))
+        xfrom = datefrom.split("-")
+        d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
+        self.Qdate_from.setMinimumDate(d)
+        self.Qdate_to.setMinimumDate(d)
+
+        # Get customer Groupe
+        self.Qcombo_customerGroupe = CheckableComboBox(self)
+        self.Qcombo_customerGroupe.setGeometry(570, 100, 179, 20)
+        self.Qcombo_customerGroupe.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.Qcombo_customerGroupe.setStyleSheet("background-color: rgb(198, 207, 199)")
+        self.FN_GET_customerGroupe()
+
+        # get Department list if check box
+        self.FN_WhenCheckDepartment()
+
+        # get sections list
+        self.FN_GET_sections()
+
+        # get BMC LEVEL4 list
+        self.FN_GET_BMC_Level()
+
+        """"
+        timefrom = str(datetime.today().strftime('%h:%m'))
+        xfromt = timefrom.split(":")
+        t = QTime(int(xfromt[0]), int(xfromt[1]) )
+        self.Qtime_from.setMinimumTime(t)
+        """
+        # self.setWindowTitle('Users')
+        #self.Qbtn_saveInstallment.clicked.connect(self.FN_CREATE_Installment)
+
+        #self.Qcombo_company.addItems(["1", "2", "3"])
+        #self.Qcombo_branch.addItems(["1", "2", "3"])
+        #self.Qcombo_group.addItems(["0", "1"])
+
+    # this function for what enabled or not when start
+    def EnabledWhenOpen(self):
+        self.checkBox_department.setEnabled(True)
+        self.checkBox_section.setEnabled(False)
+        self.Qcombo_section.setEnabled(False)
+        self.checkBox_BMCLevel.setEnabled(False)
+        self.Qcombo_BMCLevel.setEnabled(False)
+
+    #get companys list
+    def FN_GET_installment_types_period(self):
+        self.Qcombo_installmentType.clear()
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT InstT_Installment_Period FROM INSTALLMENT_TYPE")
+        records = mycursor.fetchall()
+        mycursor.close()
+        for row in records:
+            self.Qcombo_installmentType.addItems([row[0]])
+
+    #get companys list
+    def FN_GET_Company(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
+        records = mycursor.fetchall()
+        print(records)
+        for row, val in records:
+            self.Qcombo_company.addItem(row, val)
+        mycursor.close()
+        """" in line 194 create coupon
+        to get multselection drop down list items id ex get company id 
+                        for j in range(len(self.Qcombo_company.currentData())):
+                    for i in range(len(self.Qcombo_branch.currentData())):
+                        sql3 = "INSERT INTO COUPON_BRANCH (COMPANY_ID,BRANCH_NO,COUPON_ID,STATUS) VALUES (%s,%s,%s,%s)"
+                        val3 = (
+                            self.Qcombo_company.currentData()[j], self.Qcombo_branch.currentData()[i],
+                            id,
+                            '1')
+                        mycursor.execute(sql3, val3)
+        """
+
+    #get branches list
+    def FN_GET_Branch(self):
+         i=0
+         try:
+            # Todo: method for fills the Branch combobox
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
+            records = mycursor.fetchall()
+            for row, val in records:
+                for bra in self.FN_AuthBranchUser():
+                    if val in bra:
+                        self.Qcombo_branch.addItem(row, val)
+                    i += 1
+            mycursor.close()
+         except:
+             print(sys.exc_info())
+
+    #get branch of user that have authorization to see it
+    def FN_AuthBranchUser(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"'")
+        records = mycursor.fetchall()
+        return records
+
+    #get customer Groupe list
+    def FN_GET_customerGroupe(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT CG_DESC,CG_GROUP_ID FROM CUSTOMER_GROUP")
+        records = mycursor.fetchall()
+        print(records)
+        for row, val in records:
+            self.Qcombo_customerGroupe.addItem(row, val)
+        mycursor.close()
+
+    #after check department check box
+    def FN_WhenCheckDepartment(self):
+        if self.checkBox_department.isChecked():
+            self.FN_GET_Department()
+            self.checkBox_section.setEnabled(True)
+            self.Qtable_acceptedItems.setEnabled(False)
+        else:
+            self.checkBox_section.setEnabled(False)
+            self.checkBox_section.setChecked(False)
+            self.Qtable_acceptedItems.setEnabled(True)
+
+
+    #get Department list
+    def FN_GET_Department(self):
+        self.Qcombo_department.clear()
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT DEPARTMENT_DESC FROM DEPARTMENT")
+        records = mycursor.fetchall()
+        mycursor.close()
+        for row in records:
+            self.Qcombo_department.addItems([row[0]])
+
+    #get sections list
+    def FN_GET_sections(self):
+        self.Qcombo_section.clear()
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT SECTION_DESC FROM SECTION")
+        records = mycursor.fetchall()
+        mycursor.close()
+        for row in records:
+            self.Qcombo_section.addItems([row[0]])
+
+    #get BMC LEVEL4 list
+    def FN_GET_BMC_Level(self):
+        self.Qcombo_BMCLevel.clear()
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT BMC_LEVEL4_DESC FROM BMC_LEVEL4")
+        records = mycursor.fetchall()
+        mycursor.close()
+        for row in records:
+            self.Qcombo_BMCLevel.addItems([row[0]])
+
+
+""""
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyUser.ui'
         loadUi(filename , self)
@@ -33,16 +230,7 @@ class CL_installment(QtWidgets.QDialog):
         self.CMB_userType.addItems(["1", "2", "3"])
         self.CMB_userStatus.addItems(["0", "1"])
 
-    def FN_LOAD_CREATE(self):
-        filename = self.dirname + '/Installment_create.ui'
-        loadUi( filename, self )
-
-        #self.setWindowTitle('Users')
-        self.Qbtn_saveInstallment.clicked.connect(self.FN_CREATE_Installment)
-
-        self.Qcombo_company.addItems(["1","2","3"])
-        self.Qcombo_branch.addItems(["1","2","3"])
-        self.Qcombo_group.addItems(["0","1"])
+    
 
     def FN_CREATE_Installment(self):
         DT_from = self.Qdate_from.dateTime()
@@ -281,3 +469,4 @@ class CL_installment(QtWidgets.QDialog):
         filename = self.dirname + '/resetUserPassword.ui'
         loadUi( filename, self )
         self.BTN_resetPass.clicked.connect(self.FN_RESET_USER)
+"""

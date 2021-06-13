@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>407</width>
-    <height>506</height>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>240</y>
+     <y>260</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -73,7 +73,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>240</y>
+     <y>260</y>
      <width>271</width>
      <height>25</height>
     </rect>
@@ -253,7 +253,16 @@
    <property name="styleSheet">
     <string notr="true"/>
    </property>
+   <property name="decimals">
+    <number>1</number>
+   </property>
    <property name="minimum">
+    <double>0.500000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>99999.000000000000000</double>
+   </property>
+   <property name="value">
     <double>0.500000000000000</double>
    </property>
   </widget>
@@ -344,27 +353,11 @@
     <string>قيمه الخصم</string>
    </property>
   </widget>
-  <widget class="QLabel" name="desc_9">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>130</y>
-     <width>67</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ef2929;&quot;&gt;*&lt;/span&gt;الممول &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="desc_11">
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>270</y>
+     <y>290</y>
      <width>81</width>
      <height>21</height>
     </rect>
@@ -379,9 +372,9 @@
   <widget class="QLineEdit" name="LE_desc_5">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>270</y>
-     <width>121</width>
+     <x>120</x>
+     <y>290</y>
+     <width>171</width>
      <height>25</height>
     </rect>
    </property>
@@ -410,64 +403,11 @@
                                     </string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_search">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>270</y>
-     <width>80</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 1px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
-   </property>
-   <property name="text">
-    <string>بحث</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="desc_12">
-   <property name="geometry">
-    <rect>
-     <x>296</x>
-     <y>300</y>
-     <width>91</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ef2929;&quot;&gt;&lt;/span&gt;اسم العميل&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="desc_13">
    <property name="geometry">
     <rect>
-     <x>166</x>
-     <y>300</y>
+     <x>0</x>
+     <y>290</y>
      <width>91</width>
      <height>21</height>
     </rect>
@@ -505,7 +445,13 @@
     <string notr="true"/>
    </property>
    <property name="minimum">
-    <double>0.500000000000000</double>
+    <double>0.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>100.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>0.000000000000000</double>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
@@ -534,7 +480,13 @@
     <string notr="true"/>
    </property>
    <property name="minimum">
-    <double>0.500000000000000</double>
+    <double>0.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>100.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>0.000000000000000</double>
    </property>
   </widget>
   <widget class="QLabel" name="desc_5">
@@ -595,6 +547,35 @@
    </property>
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>130</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>الممول</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton_2">
+   <property name="geometry">
+    <rect>
+     <x>241</x>
+     <y>230</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PREPAID (Visa,Cash)</string>
    </property>
   </widget>
  </widget>

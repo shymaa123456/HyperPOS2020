@@ -127,7 +127,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>50</y>
+         <y>68</y>
          <width>281</width>
          <height>21</height>
         </rect>
@@ -157,8 +157,8 @@
        </property>
        <property name="geometry">
         <rect>
-         <x>310</x>
-         <y>50</y>
+         <x>311</x>
+         <y>68</y>
          <width>81</width>
          <height>20</height>
         </rect>
@@ -271,6 +271,59 @@
                                         );
                                         }
                                     </string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="LE_custName">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>38</y>
+         <width>281</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="Rbtn_custName">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>38</y>
+         <width>82</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>اسم العميل</string>
        </property>
       </widget>
      </widget>

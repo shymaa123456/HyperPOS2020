@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>789</width>
+    <width>790</width>
     <height>571</height>
    </rect>
   </property>
@@ -243,6 +243,9 @@ background-color: rgb(198, 207, 199);</string>
         <property name="displayFormat">
          <string>dd-MM-yyyy</string>
         </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
         <property name="date">
          <date>
           <year>2020</year>
@@ -303,7 +306,7 @@ background-color: rgb(198, 207, 199);</string>
           <hour>0</hour>
           <minute>0</minute>
           <second>0</second>
-          <year>9999</year>
+          <year>2021</year>
           <month>12</month>
           <day>31</day>
          </datetime>
@@ -311,9 +314,12 @@ background-color: rgb(198, 207, 199);</string>
         <property name="displayFormat">
          <string>dd-MM-yyyy</string>
         </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
         <property name="date">
          <date>
-          <year>9999</year>
+          <year>2021</year>
           <month>12</month>
           <day>31</day>
          </date>
@@ -327,9 +333,9 @@ background-color: rgb(198, 207, 199);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>20</y>
       <width>111</width>
-      <height>151</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="title">
@@ -341,7 +347,7 @@ background-color: rgb(198, 207, 199);</string>
        <x>10</x>
        <y>10</y>
        <width>91</width>
-       <height>151</height>
+       <height>191</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -377,6 +383,41 @@ background-color: rgb(198, 207, 199);</string>
         </property>
         <property name="text">
          <string>بحث</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Qbtn_search_all">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width:6em;
+                                       }
+                                        QPushButton:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                        QPushButton:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    
+                                    </string>
+        </property>
+        <property name="text">
+         <string>عرض الكل</string>
         </property>
        </widget>
       </item>

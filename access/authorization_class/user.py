@@ -369,7 +369,9 @@ class CL_user(QtWidgets.QDialog):
             else:
                 self.name = self.LE_name.text().strip()
                 self.password = self.LE_password.text().strip()
-                self.branch = self.CMB_branch.currentData()[1]
+
+                print(self.CMB_branch.currentData()[0])
+                self.branch = self.CMB_branch.currentData()[0]
                 self.fullName = self.LE_fullName.text().strip()
                 self.hrId = self.LE_hrId.text().strip()
                 self.userType = self.CMB_userType.currentText()

@@ -200,11 +200,25 @@
      <addaction name="separator"/>
      <addaction name="QAct_Coupon_barcode"/>
     </widget>
+    <widget class="QMenu" name="QM_Prom_Voucher">
+     <property name="title">
+      <string>قسيمه مشتريات عروض</string>
+     </property>
+     <addaction name="QAct_Prom_Voucher_Add"/>
+     <addaction name="QAct_Prom_Voucher_Edit"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Prom_Voucher_Act"/>
+     <addaction name="QAct_Prom_Voucher_Deact"/>
+     <addaction name="separator"/>
+     <addaction name="separator"/>
+    </widget>
     <addaction name="QM_Promotion_Prom"/>
     <addaction name="separator"/>
     <addaction name="QM_Promotion_Coupon"/>
     <addaction name="separator"/>
     <addaction name="QM_Promotion_Voucher"/>
+    <addaction name="separator"/>
+    <addaction name="QM_Prom_Voucher"/>
     <addaction name="separator"/>
     <addaction name="QM_Promotion_Magazine"/>
     <addaction name="separator"/>
@@ -1504,6 +1518,36 @@
   <action name="QAct_Coupon_barcode">
    <property name="text">
     <string>تفعيل و ايقاف و استبدال باركود</string>
+   </property>
+  </action>
+  <action name="action_12">
+   <property name="text">
+    <string>انشاء قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Add">
+   <property name="text">
+    <string>إنشاء قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Edit">
+   <property name="text">
+    <string>تعديل قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Act">
+   <property name="text">
+    <string>تنشيط قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Deact">
+   <property name="text">
+    <string>إيقاف قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Print">
+   <property name="text">
+    <string>طباعه قسيمه مشتريات</string>
    </property>
   </action>
  </widget>

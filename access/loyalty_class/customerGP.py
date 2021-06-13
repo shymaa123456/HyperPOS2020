@@ -8,7 +8,7 @@ from PyQt5.QtCore import QRegExp
 
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
-
+from access.utils.util import *
 from datetime import datetime
 
 
@@ -40,8 +40,11 @@ class CL_customerGP(QtWidgets.QDialog):
             self.BTN_modifyCustGp.clicked.connect(self.FN_MODIFY_CUSTGP)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_searchCustGp.clicked.connect(self.FN_SEARCH_CUSTGP)
+            self.BTN_searchCustGp_all.clicked.connect(self.FN_GET_CUSTGPS)
             self.setFixedWidth(368)
             self.setFixedHeight(430)
+            self.Qtable_custGP.setColumnHidden(0, True)
+            self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
         except Exception as err:
             print(err)
 
@@ -77,7 +80,7 @@ class CL_customerGP(QtWidgets.QDialog):
                     item = QTableWidgetItem(str(data))
 
                     if column_number == 2:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable_custGP.setItem(row_number, column_number, item)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
@@ -87,11 +90,6 @@ class CL_customerGP(QtWidgets.QDialog):
         #self.Qtable_custGP.setItem(0, 0, QTableWidgetItem(str('11111')))
         except Exception as err:
              print(err)
-    def FN_GET_STATUS_DESC(self,id):
-        if id == '1':
-            return "Active"
-        else:
-            return "Inactive"
 
     def FN_GET_CUSTGPS(self):
         self.conn = db1.connect()
@@ -108,11 +106,12 @@ class CL_customerGP(QtWidgets.QDialog):
                     item = QTableWidgetItem(str(data))
 
                     if column_number == 2:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
 
                     self.Qtable_custGP.setItem(row_number, column_number, item)
-            self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
+            #self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
+
             #mycursor.close()
         except Exception as err:
             print(err)
@@ -127,7 +126,7 @@ class CL_customerGP(QtWidgets.QDialog):
                 self.LE_desc.setText(desc)
                 self.LB_custGpId.setText(id)
                 self.LB_status.setText(status)
-                self.CMB_custGroup.setCurrentText(self.FN_GET_STATUS_DESC(status))
+                self.CMB_custGroup.setCurrentText(util.FN_GET_STATUS_DESC(status))
                 # self.FN_MODIFY_CUSTTP()
         except Exception as err:
             print(err)

@@ -189,6 +189,9 @@
                                         }
                                     </string>
       </property>
+      <property name="text">
+       <string>028741</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -216,6 +219,9 @@
                                         );
                                         }
                                     </string>
+      </property>
+      <property name="text">
+       <string>01002874528</string>
       </property>
      </widget>
     </item>
@@ -245,6 +251,9 @@
                                         }
                                     </string>
       </property>
+      <property name="text">
+       <string>dsf</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -272,6 +281,9 @@
                                         );
                                         }
                                     </string>
+      </property>
+      <property name="text">
+       <string>sdf</string>
       </property>
      </widget>
     </item>
@@ -371,6 +383,9 @@
                                         }
                                     </string>
       </property>
+      <property name="text">
+       <string>ss@fff.com</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -398,6 +413,9 @@
                                         );
                                         }
                                     </string>
+      </property>
+      <property name="text">
+       <string>234</string>
       </property>
      </widget>
     </item>
@@ -427,6 +445,9 @@
                                         }
                                     </string>
       </property>
+      <property name="text">
+       <string>234</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -455,6 +476,9 @@
                                         }
                                     
                             </string>
+      </property>
+      <property name="text">
+       <string>sdfds</string>
       </property>
      </widget>
     </item>
@@ -588,6 +612,9 @@
                                         );
                                         }
                                     </string>
+   </property>
+   <property name="text">
+    <string>asdas</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="LE_notes">

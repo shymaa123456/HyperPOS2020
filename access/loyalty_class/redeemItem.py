@@ -18,10 +18,15 @@ from PyQt5 import QtCore
 
 from PyQt5.QtCore import *
 import xlwt.Workbook
-
+from access.utils.util import *
 class CL_redItem(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
+    old_points =''
+
+    old_valid_from =''
+    old_valid_to =''
+    old_status= ''
 
     def __init__(self):
         super(CL_redItem, self).__init__()
@@ -35,9 +40,12 @@ class CL_redItem(QtWidgets.QDialog):
         conn = db1.connect()
         mycursor = conn.cursor()
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_REDITEM)
+        self.Qbtn_search_all.clicked.connect(self.FN_REFRESH_DATA_GRID)
+
         #self.Qbtn_export.clicked.connect(self.FN_SAVE)
         self.Qbtn_exit.clicked.connect(self.FN_exit)
-
+        self.Qtable_redeem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        self.Qtable_redeem.doubleClicked.connect(self.FN_GET_REDITEM)
         self.Qradio_active.setChecked(True)
 
         self.Qcombo_group3 = CheckableComboBox(self)
@@ -183,11 +191,14 @@ class CL_redItem(QtWidgets.QDialog):
                 for column_number, data in enumerate(row_data):
 
                     if column_number == 6:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
+                    elif column_number == 1:
+                        data = util.FN_GET_COMP_DESC(str(data))
+                    elif column_number == 2:
+                        data = util.FN_GET_BRANCH_DESC(str(data))
 
                     self.Qtable_redeem.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-            self.Qtable_redeem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-            self.Qtable_redeem.doubleClicked.connect(self.FN_GET_REDITEM)
+
             mycursor.close()
        except Exception as err:
             print(err)
@@ -205,6 +216,11 @@ class CL_redItem(QtWidgets.QDialog):
                 status = self.Qtable_redeem.item(rowNo, 6).text()
                 self.Qline_barcode.setText(bar)
                 self.Qline_points.setText(points)
+
+                self.old_points = points
+                self.old_valid_from = valid_from
+                self.old_valid_to = valid_to
+                self.old_status = status
 
                 self.CMB_branch.show()
                 self.CMB_company.show()
@@ -290,6 +306,7 @@ class CL_redItem(QtWidgets.QDialog):
                            for br in branch_list:
                                ret = self.FN_CHECK_EXIST(com, br,  bar)
                                if ret == False:
+                                   mycursor1 = conn.cursor()
                                    sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
                                          "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
                                          ",REDEEM_VALID_TO,REDEEM_STATUS)" \
@@ -297,12 +314,13 @@ class CL_redItem(QtWidgets.QDialog):
 
                                    val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status)
 
-                                   mycursor.execute(sql, val)
+                                   mycursor1.execute(sql, val)
                                    db1.connectionCommit(conn)
-                                   mycursor.close()
-                                   self.FN_REFRESH_DATA_GRID()
+                                   mycursor1.close()
+
                                else:
                                    QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
+                       self.FN_REFRESH_DATA_GRID()
                    else:
                        QtWidgets.QMessageBox.warning(self, "Error", "Points must be an integer")
                else:
@@ -333,7 +351,7 @@ class CL_redItem(QtWidgets.QDialog):
             comp = str(comp)
             barcode =str(barcode)
             sql = "SELECT *  FROM Hyper1_Retail.REDEEM_ITEM where  POS_GTIN ='" + barcode + "' and COMPANY_ID ='" + comp + "' and BRANCH_NO = '" + branch + "'"
-            print(sql)
+            #print(sql)
             cursor.execute(sql)
             myresult = cursor.fetchone()
             if cursor.rowcount > 0:
@@ -348,7 +366,7 @@ class CL_redItem(QtWidgets.QDialog):
         try:
             for i in reversed(range(self.Qtable_redeem.rowCount())):
                self.Qtable_redeem.removeRow(i)
-            time.sleep(5)
+
             conn = db1.connect()
             mycursor = conn.cursor()
 
@@ -362,11 +380,14 @@ class CL_redItem(QtWidgets.QDialog):
                 for column_number, data in enumerate(row_data):
 
                     if column_number == 6:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
+                    elif column_number == 1:
+                        data = util.FN_GET_COMP_DESC(str(data))
+                    elif column_number == 2:
+                        data = util.FN_GET_BRANCH_DESC(str(data))
 
                     self.Qtable_redeem.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-            self.Qtable_redeem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-            self.Qtable_redeem.doubleClicked.connect(self.FN_GET_REDITEM)
+
             mycursor.close()
 
         except (Error, Warning) as e:
@@ -419,6 +440,17 @@ class CL_redItem(QtWidgets.QDialog):
 
             db1.connectionCommit(conn)
             self.FN_REFRESH_DATA_GRID()
+            self.old_status = util.FN_GET_STATUS_id(str(self.old_status))
+            if str(status) != str(self.old_status):
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "status", status, self.old_status,bar,comp,branch)
+            if str(points) != str(self.old_points):
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "points", points, self.old_points,bar,comp,branch)
+
+            if str(date_from) != str(self.old_valid_from):
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_from", date_from, self.old_valid_from,bar,comp,branch)
+
+            if str(date_to) != str(self.old_valid_to):
+                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_to", date_to, self.old_valid_to,bar,comp,branch)
             print("in modify red item")
         except Exception as err:
             print(err)
@@ -445,6 +477,8 @@ class CL_redItem(QtWidgets.QDialog):
 
        except Exception as err:
             print(err)
+
+
 
     def FN_LOAD_UPLOAD(self):
         try:

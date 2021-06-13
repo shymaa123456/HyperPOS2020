@@ -288,6 +288,9 @@ background-color: rgb(198, 207, 199);</string>
         <property name="displayFormat">
          <string>dd-MM-yyyy</string>
         </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
         <property name="date">
          <date>
           <year>2020</year>
@@ -345,6 +348,9 @@ background-color: rgb(198, 207, 199);</string>
         </property>
         <property name="displayFormat">
          <string>dd-MM-yyyy</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
         </property>
         <property name="date">
          <date>
@@ -641,78 +647,33 @@ background-color: rgb(198, 207, 199);</string>
       <string>النقاط المستحقه</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="Qline_purchAmount">
+    <widget class="QSpinBox" name="Qline_points">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>10</y>
-       <width>171</width>
-       <height>20</height>
+       <x>40</x>
+       <y>40</y>
+       <width>81</width>
+       <height>21</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
-     </property>
-     <property name="text">
-      <string>1000</string>
+     <property name="maximum">
+      <number>99999</number>
      </property>
     </widget>
-    <widget class="QLineEdit" name="Qline_points">
+    <widget class="QDoubleSpinBox" name="Qline_purchAmount">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>40</y>
-       <width>171</width>
-       <height>20</height>
+       <x>40</x>
+       <y>10</y>
+       <width>71</width>
+       <height>22</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+     <property name="decimals">
+      <number>2</number>
      </property>
-     <property name="text">
-      <string>17</string>
+     <property name="maximum">
+      <double>99999.990000000005239</double>
      </property>
     </widget>
    </widget>

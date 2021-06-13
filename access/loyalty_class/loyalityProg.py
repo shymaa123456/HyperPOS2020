@@ -3,7 +3,7 @@ from pathlib import Path
 from PyQt5 import QtWidgets,QtCore
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
 from PyQt5.uic import loadUi
-
+import xlwt.Workbook
 from Validation.Validation import CL_validation
 from access.authorization_class.user_module import CL_userModule
 from access.promotion_class.Promotion_Add import CheckableComboBox
@@ -17,7 +17,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 
 from PyQt5.QtCore import *
-
+from access.utils.util import *
 
 class CL_loyProg(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
@@ -128,12 +128,47 @@ class CL_loyProg(QtWidgets.QDialog):
 
 
     #
+
+    def FN_DISPLAY_TEMP(self):
+         try:
+             filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
+             print(filename)
+
+             wb = xlwt.Workbook()
+
+             # add_sheet is used to create sheet.
+             sheet = wb.add_sheet('Sheet 1')
+             sheet.write(0, 0, 'اسم البرنامج')
+             sheet.write(0, 1, 'الوصف')
+             sheet.write(0, 2, 'تاريخ البدايه')
+             sheet.write(0, 3, 'تاريخ النهايه')
+
+
+             sheet.write(0, 4, 'الحاله')
+             sheet.write(0, 5, 'الشركه')
+             sheet.write(0, 6, 'الفرع')
+             sheet.write(0, 7, 'مجموعه العملاء')
+             sheet.write(0, 8, 'نوع العضويه')
+             sheet.write(0, 9, 'الباركود')
+             sheet.write(0, 10, 'BMC')
+
+             sheet.write(0, 11, 'مبلغ الشراء')
+             sheet.write(0, 12, 'النقاط المستحقه')
+
+             # # wb.save('test11.xls')
+             wb.save(str(filename[0]))
+             # wb.close()
+             import webbrowser
+             webbrowser.open(filename[0])
+         except Exception as err:
+             print(err)
     def FN_LOAD_UPLOAD(self):
         try:
             filename = self.dirname + '/uploadLoyalityProg.ui'
             loadUi(filename, self)
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
             self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
+            self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP)
             #self.fileName = ''
             self.setFixedWidth(576)
             self.setFixedHeight(178)
@@ -369,25 +404,25 @@ class CL_loyProg(QtWidgets.QDialog):
         except (Error, Warning) as e:
             return False
 
-    def FN_GET_STATUS_DESC(self,id):
-        if id == '1':
-            return "Active"
-        else:
-            return "Inactive"
-
-    def FN_GET_COMP_DESC(self,id):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
-
-    def FN_GET_BRANCH_DESC(self, id):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
+    # def FN_GET_STATUS_DESC(self,id):
+    #     if id == '1':
+    #         return "Active"
+    #     else:
+    #         return "Inactive"
+    #
+    # def FN_GET_COMP_DESC(self,id):
+    #     conn = db1.connect()
+    #     mycursor = conn.cursor()
+    #     mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
+    #     myresult = mycursor.fetchone()
+    #     return myresult[0]
+    #
+    # def FN_GET_BRANCH_DESC(self, id):
+    #     conn = db1.connect()
+    #     mycursor = conn.cursor()
+    #     mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
+    #     myresult = mycursor.fetchone()
+    #     return myresult[0]
 
     def FN_GET_CUSTGP_DESC(self, id):
         conn = db1.connect()
@@ -395,12 +430,12 @@ class CL_loyProg(QtWidgets.QDialog):
         mycursor.execute("SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where CG_GROUP_ID = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
-    def FN_GET_CUSTTP_DESC(self, id):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
+    # def FN_GET_CUSTTP_DESC(self, id):
+    #     conn = db1.connect()
+    #     mycursor = conn.cursor()
+    #     mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
+    #     myresult = mycursor.fetchone()
+    #     return myresult[0]
     def FN_GET_BMC_DESC(self, id):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -408,10 +443,17 @@ class CL_loyProg(QtWidgets.QDialog):
         myresult = mycursor.fetchone()
         return myresult[0]
 
+    def FN_CLEAR_FEILDS(self):
+        self.label_ID.setText("")
+        self.Qline_name.setText("")
 
+        self.Qtext_desc.setText("")
+        self.Qline_purchAmount.setValue(0)
+        self.Qline_points.setValue(0)
     def FN_SEARCH_LOYPROG(self):
 
        try:
+            self.FN_CLEAR_FEILDS()
             for i in reversed(range(self.Qtable_loyality.rowCount())):
                 self.Qtable_loyality.removeRow(i)
             sec = self.CMB_section.currentText()
@@ -440,6 +482,8 @@ class CL_loyProg(QtWidgets.QDialog):
             elif self.Qradio_bmc.isChecked():
                 # get bmc_level4
                 BMC_LEVEL4_list = []
+                if len(BMC_LEVEL4s) == 0:
+                    BMC_LEVEL4s[0] = 'All'
                 if BMC_LEVEL4s[0] == 'All':
                     mycursor.execute(
                         "SELECT BMC_LEVEL4  FROM Hyper1_Retail.BMC_LEVEL4 b inner join Hyper1_Retail.SECTION s ON " \
@@ -537,15 +581,15 @@ class CL_loyProg(QtWidgets.QDialog):
                 for column_number, data in enumerate(row_data):
 
                     if column_number == 5:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                     elif column_number == 6:
-                        data = self.FN_GET_COMP_DESC(str(data))
+                        data = util.FN_GET_COMP_DESC(str(data))
                     elif column_number == 7:
-                        data = self.FN_GET_BRANCH_DESC(str(data))
+                        data = util.FN_GET_BRANCH_DESC(str(data))
                     elif column_number == 8:
                         data = self.FN_GET_CUSTGP_DESC(str(data))
                     elif column_number == 9:
-                        data = self.FN_GET_CUSTTP_DESC(str(data))
+                        data = util.FN_GET_CUSTTP_DESC(str(data))
                     elif column_number == 11:
                         data = self.FN_GET_BMC_DESC(str(data))
 
@@ -568,11 +612,18 @@ class CL_loyProg(QtWidgets.QDialog):
                 valid_from =self.Qtable_loyality.item(rowNo, 3).text()
                 valid_to= self.Qtable_loyality.item(rowNo, 4).text()
 
+                self.old_name=name
+                self.old_status=util.FN_GET_STATUS_id(status)
+                self.old_amount=amount
+                self.old_points=points
+                self.old_valid_from = valid_from
+                self.old_valid_to = valid_to
+
                 self.Qline_name.setText(name)
                 self.label_ID.setText(id)
                 self.Qtext_desc.setText(desc)
-                self.Qline_purchAmount.setText(amount)
-                self.Qline_points.setText(points)
+                self.Qline_purchAmount.setValue(float(amount))
+                self.Qline_points.setValue(int(points))
 
                 if status == 'Active' :
                     self.Qradio_active.setChecked(True)
@@ -677,7 +728,7 @@ class CL_loyProg(QtWidgets.QDialog):
 
         if len(self.Qcombo_group2.currentData()) == 0 or len(self.Qcombo_group3.currentData()) == 0 or len(
                 self.Qcombo_group4.currentData()) == 0 or  len(self.Qcombo_group6.currentData()) == 0 or len(
-                self.Qcombo_group5.currentData()) == 0 or self.name == '' or self.desc == '' or self.purchAmount == '' or self.points == '' or self.date_from == '' or self.date_to == '' \
+                self.Qcombo_group5.currentData()) == 0 or self.name == '' or self.desc == '' or float(self.purchAmount) == 0 or self.points == '0' or self.date_from == '' or self.date_to == '' \
                 :
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
         else:
@@ -713,8 +764,8 @@ class CL_loyProg(QtWidgets.QDialog):
                                         val = (self.id, com, br, ctgp, BMC_LEVEL4, self.barcode, self.name, self.desc,
                                                creationDate, CL_userModule.user_name, self.date_from, self.date_to,
                                                self.purchAmount, self.points, cttp, self.status)
-                                        print(sql)
-                                        print(val)
+                                        #print(sql)
+                                        #print(val)
 
                                         self.mycursor1.execute(sql, val)
                                         # mycursor1.close()
@@ -756,15 +807,15 @@ class CL_loyProg(QtWidgets.QDialog):
                 for column_number, data in enumerate(record):
 
                     if column_number == 5:
-                        data = self.FN_GET_STATUS_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                     elif column_number == 6:
-                        data = self.FN_GET_COMP_DESC(str(data))
+                        data = util.FN_GET_COMP_DESC(str(data))
                     elif column_number == 7:
-                        data = self.FN_GET_BRANCH_DESC(str(data))
+                        data = util.FN_GET_BRANCH_DESC(str(data))
                     elif column_number == 8:
                         data = self.FN_GET_CUSTGP_DESC(str(data))
                     elif column_number == 9:
-                        data = self.FN_GET_CUSTTP_DESC(str(data))
+                        data = util.FN_GET_CUSTTP_DESC(str(data))
                     elif column_number == 11:
                         data = self.FN_GET_BMC_DESC(str(data))
 
@@ -929,36 +980,62 @@ class CL_loyProg(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
     def FN_MODIFY_LOYPROG(self):
         try:
+
+            ids=[]
             id = self.label_ID.text().strip()
-            name=self.Qline_name.text().strip()
-            desc = self.Qtext_desc.toPlainText().strip()
-            purchAmount = self.Qline_purchAmount.text().strip()
-            points = self.Qline_points.text().strip()
-            date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
-            date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
-
-            if self.Qradio_active.isChecked():
-                self.status = 1
+            if len(id) == 0:
+                QtWidgets.QMessageBox.information(self, "Error", "No LoyProg selected")
             else:
-                self.status = 0
-            conn = db1.connect()
-            mycursor = conn.cursor()
+                name = self.Qline_name.text().strip()
+                desc = self.Qtext_desc.toPlainText().strip()
+                purchAmount = self.Qline_purchAmount.text().strip()
+                points = self.Qline_points.text().strip()
+                date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
+                date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
+                if name == '' or desc == '' or float(purchAmount) == 0 or points == '0' or date_from == '' or date_to == '' \
+                        :
+                    QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                else:
 
-            changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-            # get customer gp id
 
-            sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
-            val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
-            mycursor.execute(sql, val)
-            mycursor.close()
+                    if self.Qradio_active.isChecked():
+                        self.status = 1
+                    else:
+                        self.status = 0
+                    conn = db1.connect()
+                    mycursor = conn.cursor()
 
-            print( mycursor.rowcount, "record updated." )
-            QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
+                    changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
+                    # get customer gp id
 
-            db1.connectionCommit( conn )
-            db1.connectionClose( conn )
-            #self.close()
+                    sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
+                    val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
+                    mycursor.execute(sql, val)
+                    mycursor.close()
+                    ids.append(id)
+                    print( mycursor.rowcount, "record updated." )
+                    QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
 
-            print( "in modify cust" )
+                    db1.connectionCommit( conn )
+                    db1.connectionClose( conn )
+                    #self.close()
+
+                    if str(self.status) != str(self.old_status):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "status", self.status, self.old_status,id)
+                    if str(points) != str(self.old_points):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "points", points, self.old_points,id)
+
+                    if str(date_from) != str(self.old_valid_from):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_from", date_from, self.old_valid_from,id)
+
+                    if str(date_to) != str(self.old_valid_to):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "valid_to", date_to, self.old_valid_to,id)
+
+                    if str(purchAmount) != str(self.old_amount):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "amount", purchAmount, self.old_amount,id)
+                    if str(name) != str(self.old_name):
+                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "name", name, self.old_name,id)
+                    print( "in modify cust" )
+                    self.FN_REFRESH_DATA_GRID(ids)
         except Exception as err:
             print(err)

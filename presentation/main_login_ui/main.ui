@@ -609,6 +609,9 @@
    </property>
   </action>
   <action name="QAct_Install_Add">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>انشاء نظام التقسيط</string>
    </property>

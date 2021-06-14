@@ -180,22 +180,22 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor.close()
 
     def FN_unCheckedALL(self):
-        mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1"
-        mycursor.execute(sql_select_branch)
-        record = mycursor.fetchall()
+        # mycursor = self.conn.cursor()
+        # sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1"
+        # mycursor.execute(sql_select_branch)
+        # record = mycursor.fetchall()
         i = 0
-        for row in record:
+        for row in CL_userModule.branch:
             self.Qcombo_branch.unChecked(i)
             i += 1
 
     def FN_unCheckedALLsection(self):
-        mycursor = self.conn.cursor()
-        sql_select_branch = "SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1"
-        mycursor.execute(sql_select_branch)
-        record = mycursor.fetchall()
+        # mycursor = self.conn.cursor()
+        # sql_select_branch = "SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1"
+        # mycursor.execute(sql_select_branch)
+        # record = mycursor.fetchall()
         i = 0
-        for row in record:
+        for row in CL_userModule.section:
             self.Qcombo_section.unChecked(i)
             i += 1
 
@@ -209,13 +209,13 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor.close()
         return records
 
-    def FN_AuthBranchUser(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
-        records = mycursor.fetchall()
-        mycursor.close()
-        return records
+    # def FN_AuthBranchUser(self):
+    #     self.conn = db1.connect()
+    #     mycursor = self.conn.cursor()
+    #     mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
+    #     records = mycursor.fetchall()
+    #     mycursor.close()
+    #     return records
 
     def FN_GET_Section(self):
         # Todo: method for fills the section combobox
@@ -275,10 +275,10 @@ class CL_EditVoucher(QtWidgets.QDialog):
             x = (indx,)
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
-            self.LE_desc_1.setText(record[1])
+            self.LE_desc_1.setText(str(record[1]))
             self.LE_desc_2.setValue(float(record[4]))
             self.CMB_CouponStatus.setCurrentIndex(int(record[20]))
-            self.LE_desc_5.setText(record[17])
+            self.LE_desc_5.setText(str(record[17]))
             self.FN_search()
             self.oldValue=record[1]
             datefrom = record[12]

@@ -164,35 +164,6 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QDateTimeEdit" name="Qdate_from">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>180</y>
-     <width>79</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="minimumDateTime">
-    <datetime>
-     <hour>0</hour>
-     <minute>0</minute>
-     <second>0</second>
-     <year>2020</year>
-     <month>1</month>
-     <day>1</day>
-    </datetime>
-   </property>
-   <property name="displayFormat">
-    <string>yyyy-MM-dd</string>
-   </property>
-   <property name="calendarPopup">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QDoubleSpinBox" name="LE_maxCount">
    <property name="geometry">
     <rect>
@@ -258,19 +229,6 @@
    </property>
    <property name="text">
     <string>قيمه القسيمه</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="CMB_PromVoucherStatus">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>220</y>
-     <width>86</width>
-     <height>25</height>
-    </rect>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -343,7 +301,7 @@
     <double>1.000000000000000</double>
    </property>
   </widget>
-  <widget class="QLabel" name="labe_id">
+  <widget class="QLabel" name="voucher_id">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -356,7 +314,70 @@
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="LE_PromVoucherStatus">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>220</y>
+     <width>82</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="Qdate_from">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>180</y>
+     <width>119</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="displayFormat">
+    <string>dd-MM-yyyy</string>
+   </property>
+   <property name="calendarPopup">
+    <bool>true</bool>
+   </property>
+   <property name="date">
+    <date>
+     <year>2020</year>
+     <month>1</month>
+     <day>3</day>
+    </date>
    </property>
   </widget>
  </widget>

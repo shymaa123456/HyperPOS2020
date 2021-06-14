@@ -350,7 +350,7 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_EditPromVoucher(self):
         self.window_two = CL_PromVoucher()
-        self.window_two.FN_LOAD_MODIIFY()
+        self.window_two.FN_LOAD_MODIFY()
         self.window_two.show()
 
     def FN_LOAD_CHANGE_STATUS_ACTIVE(self):

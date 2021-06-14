@@ -14,7 +14,7 @@ from datetime import datetime
 
 from access.utils.util import *
 class CL_PromVoucher(QtWidgets.QDialog):
-
+    status = ''
 
     def __init__(self):
         super(CL_PromVoucher, self).__init__()
@@ -44,11 +44,6 @@ class CL_PromVoucher(QtWidgets.QDialog):
         try:
             filename = self.dirname + '/modifyPromVoucher.ui'
             loadUi(filename, self)
-            # datefrom = str(datetime.today().strftime('%Y-%m-%d'))
-            # xfrom = datefrom.split("-")
-            # d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
-            # self.Qdate_from.setMinimumDate(d)
-            # self.Qdate_to.setMinimumDate(d)
 
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_modifyVoucher.clicked.connect(self.FN_MODIFY_VOUCHER)
@@ -74,7 +69,9 @@ class CL_PromVoucher(QtWidgets.QDialog):
     def FN_GET_VOUCHER(self):
         try :
             desc = self.CMB_PromVoucher.currentText()
-            self.LE_desc.setText(desc)
+            if self.status == '':
+                print("ee")
+                #self.LE_desc.setText(desc)
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             mycursor.execute(
@@ -87,11 +84,11 @@ class CL_PromVoucher(QtWidgets.QDialog):
 
             xto = records[3].split("-")
             print(xto)
-            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_from.setDate(d)
 
             xto1 = records[4].split("-")
-            d1 = QDate(int(xto1[2]), int(xto1[1]), int(xto1[0]))
+            d1 = QDate(int(xto1[0]), int(xto1[1]), int(xto1[2]))
             self.Qdate_to.setDate(d1)
             print(xto)
             status = util.FN_GET_STATUS_DESC(str(records[5]))
@@ -123,7 +120,8 @@ class CL_PromVoucher(QtWidgets.QDialog):
                 else:
 
 
-                    sql = "INSERT INTO `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` (`PROMV_VOUCHER_DESC`,`PROMV_VOUCHER_VAL`,`PROMV_MAX_COUNT`,`PROMV_CREATED_BY`,`PROMV_CREATED_ON`,`PROMV_VALID_FROM`,`PROMV_VALID_TO`,`PROMV_STATUS`)VALUES ('"+self.LE_desc.text().strip()+"',"+self.LE_value.text().strip()+ ","+self.LE_maxCount.text().strip()+ ",'" +CL_userModule.user_name+"','"+ creationDate+"','"+self.Qdate_from.dateTime().toString('dd-MM-yyyy')+"','"+self.Qdate_to.dateTime().toString('dd-MM-yyyy')+"','0')"
+                    sql = "INSERT INTO `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` (`PROMV_VOUCHER_DESC`,`PROMV_VOUCHER_VAL`,`PROMV_MAX_COUNT`,`PROMV_CREATED_BY`,`PROMV_CREATED_ON`,`PROMV_VALID_FROM`,`PROMV_VALID_TO`,`PROMV_STATUS`)VALUES " \
+                          "('"+self.LE_desc.text().strip()+"',"+self.LE_value.text().strip()+ ","+self.LE_maxCount.text().strip()+ ",'" +CL_userModule.user_name+"','"+ creationDate+"','"+self.Qdate_from.dateTime().toString('yyyy-MM-dd')+"','"+self.Qdate_to.dateTime().toString('yyyy-MM-dd')+"','0')"
                     print (sql)
                     mycursor.execute(sql)
                     db1.connectionCommit(self.conn)
@@ -139,26 +137,54 @@ class CL_PromVoucher(QtWidgets.QDialog):
         except Exception as err:
                     print(err)
 
-
-
-    def FN_LOAD_CHANGE_ACTIVE(self):
+    def FN_LOAD_CHANGE_STATUS_INACTIVE(self):
         try:
             filename = self.dirname + '/stopPromVoucher.ui'
             loadUi(filename, self)
-
+            self.status = '0'
+            self.FN_GET_VOUCHERS()
+            self.FN_GET_VOUCHER()
+            self.CMB_PromVoucher.currentIndexChanged.connect(self.FN_GET_VOUCHER)
+            self.setFixedWidth(443)
+            self.setFixedHeight(236)
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_changeStatus.clicked.connect(self.FN_CHANGE_STATUS)
         except Exception as err:
             print(err)
 
-    def FN_LOAD_CHANGE_STATUS(self,ss):
+    def FN_LOAD_CHANGE_STATUS_ACTIVE(self):
         try:
-
             filename = self.dirname + '/stopPromVoucher.ui'
             loadUi(filename, self)
-
+            self.status = '1'
+            self.FN_GET_VOUCHERS()
+            self.FN_GET_VOUCHER()
+            self.CMB_PromVoucher.currentIndexChanged.connect(self.FN_GET_VOUCHER)
+            self.setFixedWidth(443)
+            self.setFixedHeight(236)
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_changeStatus.clicked.connect(self.FN_CHANGE_STATUS)
+        except Exception as err:
+            print(err)
+
+    def FN_CHANGE_STATUS(self):
+        try:
+
+
+                id = self.voucher_id.text()
+                self.conn = db1.connect()
+                mycursor = self.conn.cursor()
+                changeDate = str(datetime.today().strftime('%Y-%m-%d'))
+                sql = "update `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` set PROMV_STATUS =%s where PROMV_VOUCHER_ID = %s "
+
+                val = (self.status, id)
+                mycursor.execute(sql, val)
+                db1.connectionCommit(self.conn)
+
+                mycursor.close()
+                self.LE_PromVoucherStatus.setText(util.FN_GET_STATUS_DESC(str(self.status)))
+                self.status=''
+
         except Exception as err:
             print(err)
     def FN_MODIFY_VOUCHER(self):
@@ -183,19 +209,14 @@ class CL_PromVoucher(QtWidgets.QDialog):
                                                   "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
 
                 else:
+                    id = self.voucher_id.text()
+                    sql = "update `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` set PROMV_VOUCHER_DESC = %s , `PROMV_VOUCHER_VAL` = %s,`PROMV_MAX_COUNT`  = %s,`PROMV_CHANGED_BY`  = %s,`PROMV_CHANGED_ON`  = %s,`PROMV_VALID_FROM`  = %s,`PROMV_VALID_TO`  = %s where PROMV_VOUCHER_ID =%s" \
 
-                    sql = "update `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` set PROMV_VOUCHER_DESC = %s , `PROMV_VOUCHER_VAL` = %s,`PROMV_MAX_COUNT`  = %s,`PROMV_CHANGED_BY`  = %s,`PROMV_CHANGED_ON`  = %s,`PROMV_VALID_FROM`  = %s,`PROMV_VALID_TO`  = %s" \
-
-                    val = (self.LE_desc.text().strip() , self.LE_value.text().strip(),self.LE_maxCount.text().strip(),changeDate,CL_userModule.user_name,self.Qdate_from.dateTime().toString('dd-MM-yyyy'),self.Qdate_to.dateTime().toString('dd-MM-yyyy'))
-                    print(sql)
+                    val = (self.LE_desc.text().strip() , self.LE_value.text().strip(),self.LE_maxCount.text().strip(),changeDate,CL_userModule.user_name,self.Qdate_from.dateTime().toString('yyyy-MM-dd'),self.Qdate_to.dateTime().toString('yyyy-MM-dd'),id)
+                    #print(sql)
                     mycursor.execute(sql,val)
                     db1.connectionCommit(self.conn)
-
-
-
                     mycursor.close()
         except Exception as err:
             print(err)
 
-    def FN_CHANGE_STATUS(self):
-        print("hhh")

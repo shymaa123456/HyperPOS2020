@@ -30,6 +30,7 @@ branch=""
 tel=""
 query=""
 cursortest=0
+field_names = []
 
 class Text():
     def setCursor(self,cursor):
@@ -88,6 +89,12 @@ class Text():
     def getQuery(self):
         return query
 
+    def setCursor(self, col_names):
+        global field_names
+        field_names = col_names
+    def getCursor(self):
+        return field_names
+
 class body():
     def __init__(self):
         title=Text()
@@ -102,7 +109,9 @@ class body():
         d.add(Line(16, 6, 500, 6))
         connection = db1.connect()
         frame = pd.read_sql(str(title.getQuery()), connection)
-        df = pd.DataFrame(frame, columns=['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
+
+        df = pd.DataFrame(frame, columns= field_names)
+        # ['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
         df = df.reset_index()
         df = df.rename(columns={"index": ""})
 
@@ -120,11 +129,11 @@ class body():
         #     numCount += 1
         num = 0
         for x in range(row):
-            val = df['PROM_ID'].values[x]
+            val = df[field_names[0]].values[x]
             total += int(val)
             num = x
-        df.sort_values(by=['PROM_ID'], inplace=True)
-        df.at[num + 2, 'PROM_ID'] = str(total)
+        df.sort_values(by=field_names[0], inplace=True)
+        df.at[num + 2, field_names[0]] = str(total)
         data = [df.columns.to_list()] + df.values.tolist()
         table = Table(data, repeatRows=1, repeatCols=1,
                       rowHeights=20, hAlign='CENTER')

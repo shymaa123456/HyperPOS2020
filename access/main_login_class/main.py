@@ -15,6 +15,7 @@ from access.loyalty_class.loyalityProg import CL_loyProg
 from access.loyalty_class.redeemItem import CL_redItem
 from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.reports_class.reporting import CL_report
+from access.reports_class.reporting1 import CL_report1
 
 from access.authorization_class.Role import CL_role
 from access.authorization_class.branch import CL_branch
@@ -102,6 +103,7 @@ class CL_main(QtWidgets.QMainWindow):
             """ Promotion """
             self.QAct_Prom_Add.triggered.connect(self.FN_search_promotion)
             self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)
+            self.QAct_Report_Promotion_2.triggered.connect(self.FN_search_reporting1)
 
 
             #Todo: method for Open Create Coupon Window
@@ -292,6 +294,10 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_search_reporting(self):
         self.window_two = CL_report()
+        self.window_two.show()
+
+    def FN_search_reporting1(self):
+        self.window_two = CL_report1()
         self.window_two.show()
 
 

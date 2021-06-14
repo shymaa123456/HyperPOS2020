@@ -164,35 +164,6 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QDateTimeEdit" name="Qdate_from">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>180</y>
-     <width>79</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="minimumDateTime">
-    <datetime>
-     <hour>0</hour>
-     <minute>0</minute>
-     <second>0</second>
-     <year>2020</year>
-     <month>1</month>
-     <day>1</day>
-    </datetime>
-   </property>
-   <property name="displayFormat">
-    <string>yyyy-MM-dd</string>
-   </property>
-   <property name="calendarPopup">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QDoubleSpinBox" name="LE_maxCount">
    <property name="geometry">
     <rect>
@@ -381,6 +352,32 @@
                                         );
                                         }
                                     </string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="Qdate_from">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>180</y>
+     <width>119</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="displayFormat">
+    <string>dd-MM-yyyy</string>
+   </property>
+   <property name="calendarPopup">
+    <bool>true</bool>
+   </property>
+   <property name="date">
+    <date>
+     <year>2020</year>
+     <month>1</month>
+     <day>3</day>
+    </date>
    </property>
   </widget>
  </widget>

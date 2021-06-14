@@ -612,31 +612,36 @@
        <string notr="true"/>
       </property>
       <property name="columnCount">
-       <number>12</number>
+       <number>13</number>
       </property>
       <column>
        <property name="text">
-        <string>رقم الكوبون</string>
+        <string>Coupon No</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>وصف الكوبون</string>
+        <string>Coupon Description</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>قيمة الخصم</string>
+        <string>Company Name</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>نسبة الخصم</string>
+        <string>Discount Value</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>عدد السريال</string>
+        <string>Discount Percent</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Serial Count</string>
        </property>
       </column>
       <column>

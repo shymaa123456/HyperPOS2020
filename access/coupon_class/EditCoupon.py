@@ -184,7 +184,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.LE_desc_4.setEnabled(True)
 
             self.CMB_CouponStatus.setCurrentIndex(int(record[13]))
-            self.oldstatus=record[13]
+            self.oldstatus =int(record[13])
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
 
@@ -438,12 +438,13 @@ class CL_EditCoupon(QtWidgets.QDialog):
                             val7 = (self.row,'COUPON', 'COP_DESC', self.DescOldValue, self.LE_desc_1.text().strip(), creationDate,
                                     CL_userModule.user_name)
                             mycursor.execute(sql7, val7)
-                        elif (self.CMB_CouponDes.currentIndex() != self.oldstatus):
+                        elif (str(self.CMB_CouponStatus.currentIndex()) != str(self.oldstatus)):
                             sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val8 = (self.row, 'COUPON', 'STATUS', self.oldstatus,
-                                    self.CMB_CouponDes.currentIndex(),
+                                    str(self.CMB_CouponDes.currentIndex()),
                                     creationDate,
                                     CL_userModule.user_name)
+                            self.oldstatus=str(self.CMB_CouponDes.currentIndex())
                             mycursor.execute(sql8, val8)
 
                         elif collections.Counter(self.Qcombo_branch.currentData())== collections.Counter(self.oldlist):

@@ -275,10 +275,10 @@ class CL_EditVoucher(QtWidgets.QDialog):
             x = (indx,)
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
-            self.LE_desc_1.setText(record[1])
+            self.LE_desc_1.setText(str(record[1]))
             self.LE_desc_2.setValue(float(record[4]))
             self.CMB_CouponStatus.setCurrentIndex(int(record[20]))
-            self.LE_desc_5.setText(record[17])
+            self.LE_desc_5.setText(str(record[17]))
             self.FN_search()
             self.oldValue=record[1]
             datefrom = record[12]

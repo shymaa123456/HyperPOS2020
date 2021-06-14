@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 from random import randint
 
+import mysql
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate
 from PyQt5.uic import loadUi
@@ -205,8 +206,10 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "Done", "رقم الكوبون هو " + str(id))
                 self.label_num.setText(str(id))
 
-        except:
+        except mysql.connector.Error as error:
             print(sys.exc_info())
+            self.conn.rollback()
+
 
     # def FN_AuthBranchUser(self):
     #     self.conn = db1.connect()

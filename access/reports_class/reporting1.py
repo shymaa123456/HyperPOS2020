@@ -45,7 +45,7 @@ class CL_report1(QtWidgets.QDialog):
     prom_status = ""
     prom_CG = ""
     sponsor_prom = ""
-    magazine_prom = ""
+    multi = ""
     list_num = []
     field_names = []
 
@@ -58,30 +58,48 @@ class CL_report1(QtWidgets.QDialog):
 
     def FN_loadData(self, PROM_ID):
         #Todo: method for searching about promotions in data base
+
+        self.company_list.clear()
+        self.branch_list.clear()
+
+        if len(self.Qcombo_company.currentData()) > 0:
+            for i in self.Qcombo_company.currentData():
+                self.company_list.append("'" + i + "'")
+        else:
+            self.company_list.append("'" "'")
+
+        if len(self.Qcombo_branchEdition.currentData()) > 0:
+            for i in self.Qcombo_branchEdition.currentData():
+                self.branch_list.append("'" + i + "'")
+
+
         try:
             self.company_list.clear()
             self.branch_list.clear()
 
-            if len(self.Qcombo_company.currentData()) > 0:
+            if len(self.Qcombo_company.currentData()) > 0 and len(self.Qcombo_branchEdition.currentData()) > 0:
                 for i in self.Qcombo_company.currentData():
                     self.company_list.append("'" + i + "'")
-            else:
-                self.company_list.append("'" "'")
-
-            if len(self.Qcombo_branchEdition.currentData()) > 0:
                 for i in self.Qcombo_branchEdition.currentData():
                     self.branch_list.append("'" + i + "'")
             else:
+                QtWidgets.QMessageBox.warning(self, "Error", "برجاء تحديد محددات البحث")
+                self.company_list.append("'" "'")
                 self.branch_list.append("'" "'")
 
+            # if len(self.Qcombo_branchEdition.currentData()) > 0:
+            #     for i in self.Qcombo_branchEdition.currentData():
+            #         self.branch_list.append("'" + i + "'")
+            # else:
+            #     QtWidgets.QMessageBox.warning(self, "Error", "برجاء تحديد محددات البحث")
+            #     self.branch_list.append("'" "'")
 
 
-            # if self.QcheckBox_magazine.isChecked():
-            #     if len(self.Qcombo_magazine.currentData()) > 0:
-            #         for i in self.Qcombo_magazine.currentData():
-            #             self.magazine_list.append("'" + i + "'")
-            #         self.magazine_prom = "AND `PROMOTION_HEADER`.`MAGAZINE_ID` IN (" + ','.join(
-            #             self.magazine_list) + ")"
+
+            if self.QcheckBox_multi.isChecked():
+                    self.multi = "AND COP_MULTI_USE = 1 "
+            else:
+                self.multi = ""
 
 
             self.Qtable_promotion.setRowCount(0)
@@ -91,11 +109,20 @@ class CL_report1(QtWidgets.QDialog):
             query = ""
             if self.cond == 1:
                 self.query = (
-                        "SELECT COP_ID , COP_DESC, COP_DISCOUNT_VAL , COP_DISCOUNT_PERCENT , COP_SERIAL_COUNT , COP_MULTI_USE , COP_MULTI_USE_COUNT , COP_CREAED_ON , COP_CHANGED_ON , COP_VALID_FROM , COP_VALID_TO , COP_STATUS FROM COUPON WHERE COP_ID = '" + self.Qline_promotion.text() + "'"+self.prom_status)
+                        "SELECT COP_ID , COP_DESC, BRANCH_DESC_A, COP_DISCOUNT_VAL , COP_DISCOUNT_PERCENT , COP_SERIAL_COUNT , COP_MULTI_USE , COP_MULTI_USE_COUNT , COP_CREAED_ON , COP_CHANGED_ON , COP_VALID_FROM , COP_VALID_TO , COP_STATUS FROM COUPON "
+                        "join COUPON_BRANCH on COP_ID = COUPON_ID "
+                        "join BRANCH on COUPON_BRANCH.BRANCH_NO = BRANCH.BRANCH_NO "
+                        "WHERE COP_ID = '" + self.Qline_promotion.text() + "'"+self.prom_status+" and COP_VALID_FROM >= '" + self.Qdate_from.dateTime().toString(
+                    'yyyy-MM-dd') + "' and COP_VALID_TO<='"
+                        + self.Qdate_to.dateTime().toString(
+                    'yyyy-MM-dd') + "'") + self.multi + "AND BRANCH.COMPANY_ID IN (" + ','.join(self.company_list) + ")" \
+                                                                                                              "and BRANCH.BRANCH_NO IN (" + ','.join(self.branch_list) + ")"
+                # self.query = (
+                #         "SELECT COP_ID , COP_DESC, COP_DISCOUNT_VAL , COP_DISCOUNT_PERCENT , COP_SERIAL_COUNT , COP_MULTI_USE , COP_MULTI_USE_COUNT , COP_CREAED_ON , COP_CHANGED_ON , COP_VALID_FROM , COP_VALID_TO , COP_STATUS FROM COUPON WHERE COP_ID = '" + self.Qline_promotion.text() + "'" + self.prom_status )
                 self.runQuery(mycursor)
                 # # print(mycursor.description)
                 # print(mycursor.column_names)
-                self.field_names = ['COP_ID' , 'COP_DESC', 'COP_DISCOUNT_VAL' , 'COP_DISCOUNT_PERCENT' , 'COP_SERIAL_COUNT' , 'COP_MULTI_USE' , 'COP_MULTI_USE_COUNT' , 'COP_CREAED_ON' , 'COP_CHANGED_ON' , 'COP_VALID_FROM' , 'COP_VALID_TO' , 'COP_STATUS']
+                self.field_names = ['COP_ID', 'COP_DESC', 'BRANCH_DESC_A', 'COP_DISCOUNT_VAL' , 'COP_DISCOUNT_PERCENT' , 'COP_SERIAL_COUNT' , 'COP_MULTI_USE' , 'COP_MULTI_USE_COUNT' , 'COP_VALID_FROM' , 'COP_VALID_TO' , 'COP_STATUS']
 
             elif self.cond == 0:
                 QtWidgets.QMessageBox.warning(self, "Error", "برجاء تحديد محددات البحث")
@@ -243,12 +270,12 @@ class CL_report1(QtWidgets.QDialog):
             self.setWindowTitle('HyperPOS Reporting')
 
             self.Qcombo_company = CheckableComboBox(self)
-            self.Qcombo_company.setGeometry(242, 20, 179, 18)
+            self.Qcombo_company.setGeometry(290, 50, 200, 18)
             self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
 
             self.Qcombo_branchEdition = CheckableComboBox(self)
-            self.Qcombo_branchEdition.setGeometry(242, 45, 179, 18)
+            self.Qcombo_branchEdition.setGeometry(290, 100, 200, 18)
             self.Qcombo_branchEdition.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_branchEdition.setStyleSheet("background-color: rgb(198, 207, 199)")
 
@@ -270,14 +297,8 @@ class CL_report1(QtWidgets.QDialog):
             # self.radioBtnPromAll.clicked.connect(self.FN_Check_All)
 
             self.Qline_promotion.setEnabled(False)
-            # self.QcheckBox_customer_group.toggled.connect(self.FN_Check_Group)
-            # self.QcheckBox_sponsor_prom.toggled.connect(self.FN_Check_Sponsor)
-            # self.QcheckBox_department.toggled.connect(self.FN_Check_department)
-            # self.QcheckBox_magazine.toggled.connect(self.FN_Check_Magazine)
+            # self.QcheckBox_multi.toggled.connect(self.FN_Check_Multi)
             self.Qbtn_exprot.clicked.connect(self.handleSave)
-            self.groupBox_2.setEnabled(False)
-            # self.Qcombo_promotion.setEnabled(False)
-            # self.Qline_promotion_2.setEnabled(False)
             self.Qbtn_print.clicked.connect(self.printpreviewDialog)
 
             self.disable()

@@ -113,7 +113,7 @@ class body():
         df = pd.DataFrame(frame, columns= field_names)
         # ['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
         df = df.reset_index()
-        df = df.rename(columns={"index": ""})
+        df = df.rename(columns={"index": "ID"})
 
         z = df.size
         print(z)

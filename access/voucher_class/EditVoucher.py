@@ -283,12 +283,12 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.oldValue=record[1]
             datefrom = record[12]
             xfrom = datefrom.split("-")
-            self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
+            self.dfrom = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setDate(self.dfrom)
-            self.dfrom = QDateTime(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]), 00, 00, 00, 00)
+            self.dfrom = QDateTime(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]), 00, 00, 00, 00)
             dateto = record[13]
             xto = dateto.split("-")
-            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)
 
             print("record"+record[15])
@@ -381,8 +381,8 @@ class CL_EditVoucher(QtWidgets.QDialog):
                     sql = "update VOUCHER set GV_DESC='" + self.LE_desc_1.text().strip() + "',GV_RECHARGE_VALUE='" + self.LE_desc_3.text().strip() + "',GV_REFUNDABLE=" + str(
                         self.GV_REFUNDABLE) + ",GV_RECHARGABLE=" + str(self.GV_RECHARGABLE) + ",GV_MULTIUSE=" + str(
                         self.GV_MULTIUSE) + " ,GV_CHANGED_BY='" + CL_userModule.user_name + "',GV_CHANGE_ON='" + creationDate + "',GV_VALID_FROM='" + self.Qdate_from.dateTime().toString(
-                        'dd-MM-yyyy') + "',GV_VALID_TO='" + self.Qdate_to.dateTime().toString(
-                        'dd-MM-yyyy') + "',GV_STATUS='" + str(
+                        'yyyy-MM-dd') + "',GV_VALID_TO='" + self.Qdate_to.dateTime().toString(
+                        'yyyy-MM-dd') + "',GV_STATUS='" + str(
                         self.CMB_CouponStatus.currentIndex()) + "',POSC_CUST_ID='"+self.LE_desc_5.text().strip()+"' where GV_ID='" + str(
                         self.CMB_CouponDes.currentData()) + "'"
                     print(sql)

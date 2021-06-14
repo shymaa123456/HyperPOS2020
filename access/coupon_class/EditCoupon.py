@@ -159,14 +159,14 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
             dateto = record[12]
             xto = dateto.split("-")
-            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)
 
             datefrom = record[11]
             xfrom = datefrom.split("-")
-            self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
+            self.dfrom = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setDate(self.dfrom)
-            self.dfrom=QDateTime(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]),00,00,00,00)
+            self.dfrom=QDateTime(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]),00,00,00,00)
 
             self.LE_desc_4.setValue(float(record[4]))
             self.serial_num=int(record[4])
@@ -275,7 +275,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
                 else:
                     mycursor = self.conn.cursor()
-                    creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                    creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                     if self.checkBox_Multi.isChecked():
                         self.serialCount = "1"
                         self.MultiCount = self.LE_desc_5.text()
@@ -287,7 +287,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 self.CMB_CouponDes.currentData()) + "'"
                             mycursor.execute(sql2)
                             value = randint(0, 1000000000000)
-                            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                            creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                             mycursor = self.conn.cursor()
                             sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val7 = (
@@ -374,7 +374,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                      self.CMB_CouponDes.currentData()) + "' and COPS_SERIAL_type = 0"
                             mycursor.execute(sql9)
                             value = randint(0, 1000000000000)
-                            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                            creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                             mycursor = self.conn.cursor()
                             sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val7 = (
@@ -420,7 +420,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 #     mycursor.execute(sql9)
                                 for row in range(int(self.LE_desc_4.text()) - self.serial_num):
                                     value = randint(0, 1000000000000)
-                                    creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                                    creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                                     mycursor = self.conn.cursor()
                                     sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                                     val7 = (

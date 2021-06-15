@@ -27,15 +27,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="modify promotion voucher">
-      <change afterPath="$PROJECT_DIR$/access/main_login_class/testExp.xls" afterDir="false" />
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="modify">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/utils/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/utils/util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/voucher_class/PromotionVoucher.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/voucher_class/PromotionVoucher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,13 +256,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00081" summary="create redeem item">
-      <created>1616080135116</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1616080135117</updated>
     </task>
     <task id="LOCAL-00082" summary="create redeem item">
       <created>1616495742685</created>
@@ -605,7 +593,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623676777968</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="modify">
+      <created>1623753815058</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1623753815058</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +660,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="resolving comments" />
     <MESSAGE value="create redeem item" />
     <MESSAGE value="create redeem with voucher" />
     <MESSAGE value="upload customer points" />
@@ -690,7 +684,8 @@
     <MESSAGE value="unpdate redeem item" />
     <MESSAGE value="create promotion voucher" />
     <MESSAGE value="modify promotion voucher" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify promotion voucher" />
+    <MESSAGE value="modify" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622563373979">
@@ -717,38 +712,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1622026200369" />
-    <state width="1345" height="136" key="GridCell.Tab.0.bottom" timestamp="1623753610056">
+    <state width="1345" height="136" key="GridCell.Tab.0.bottom" timestamp="1623763467369">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="136" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1623753610056" />
-    <state width="1345" height="136" key="GridCell.Tab.0.center" timestamp="1623753610056">
+    <state width="1345" height="136" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1623763467369" />
+    <state width="1345" height="136" key="GridCell.Tab.0.center" timestamp="1623763467368">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="136" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1623753610056" />
-    <state width="1345" height="136" key="GridCell.Tab.0.left" timestamp="1623753610056">
+    <state width="1345" height="136" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1623763467368" />
+    <state width="1345" height="136" key="GridCell.Tab.0.left" timestamp="1623763467368">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="136" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1623753610056" />
-    <state width="1345" height="136" key="GridCell.Tab.0.right" timestamp="1623753610056">
+    <state width="1345" height="136" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1623763467368" />
+    <state width="1345" height="136" key="GridCell.Tab.0.right" timestamp="1623763467368">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="136" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1623753610056" />
-    <state width="1345" height="176" key="GridCell.Tab.1.bottom" timestamp="1623752590352">
+    <state width="1345" height="136" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1623763467368" />
+    <state width="1345" height="176" key="GridCell.Tab.1.bottom" timestamp="1623761105257">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="176" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1623752590352" />
-    <state width="1345" height="176" key="GridCell.Tab.1.center" timestamp="1623752590352">
+    <state width="1345" height="176" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1623761105257" />
+    <state width="1345" height="176" key="GridCell.Tab.1.center" timestamp="1623761105256">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="176" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1623752590352" />
-    <state width="1345" height="176" key="GridCell.Tab.1.left" timestamp="1623752590352">
+    <state width="1345" height="176" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1623761105256" />
+    <state width="1345" height="176" key="GridCell.Tab.1.left" timestamp="1623761105256">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="176" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1623752590352" />
-    <state width="1345" height="176" key="GridCell.Tab.1.right" timestamp="1623752590352">
+    <state width="1345" height="176" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1623761105256" />
+    <state width="1345" height="176" key="GridCell.Tab.1.right" timestamp="1623761105256">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="176" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1623752590352" />
+    <state width="1345" height="176" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1623761105256" />
     <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1615905746179">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -765,10 +760,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="278" key="VCS.EditChangelistDialog/0.0.1366.728@0.0.1366.728" timestamp="1617628855663" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1623676784987">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1623753832146">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1623676784987" />
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1623753832146" />
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1623332244171">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -781,10 +776,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1623228986332" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1622707899819">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1623760389041">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1622707899819" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1623760389041" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -796,7 +791,7 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
-          <line>663</line>
+          <line>667</line>
           <option name="timeStamp" value="236" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
@@ -826,7 +821,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
-          <line>137</line>
+          <line>138</line>
           <option name="timeStamp" value="324" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -836,13 +831,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
-          <line>235</line>
+          <line>236</line>
           <option name="timeStamp" value="345" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="346" />
+          <line>159</line>
+          <option name="timeStamp" value="348" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -860,6 +855,8 @@
         <watch expression="self.Qdate_from.dateTime().toString('dd-MM-yyyy')" language="Python" />
         <watch expression="ss" language="Python" />
         <watch expression="self.Qdate_from.dateTime().toString('yyyy-mm-dd')" language="Python" />
+        <watch expression="record[8]" language="Python" />
+        <watch expression="record[9]" language="Python" />
       </configuration>
     </watches-manager>
   </component>

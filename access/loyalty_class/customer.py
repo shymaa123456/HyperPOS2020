@@ -32,18 +32,10 @@ class CL_customer_modify(QtWidgets.QDialog):
             filename = self.dirname + '/modifyCustomer.ui'
             loadUi(filename, self)
 
-            records = util.FN_GET_CITIES()
-            for row in records:
-                self.CMB_city.addItems([row[0]])
-            records = util.FN_GET_CUSTTP()
-            for row in records:
-                self.CMB_loyalityType.addItems([row[0]])
-            self.FN_GET_DISTRICT()
+
             self.FN_GET_CUST(id)
 
-            records = util.FN_GET_CUSTGP()
-            for row in records:
-                self.CMB_custGroup.addItems([row[0]])
+
             self.CMB_city.currentIndexChanged.connect(self.FN_GET_DISTRICT)
             self.BTN_modifyCustomer.clicked.connect(self.FN_MODIFY_CUST)
             self.CMB_status.addItems(["Active", "Inactive"])
@@ -149,41 +141,57 @@ class CL_customer_modify(QtWidgets.QDialog):
 
 
     def FN_GET_CUST(self,id):
+        try:
         #self.FN_GET_CustID()
         #self.id = self.LB_custID.text()
-        self.LB_custID.setText(id)
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        sql_select_query = "select * from Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = %s "
-        x = (id,)
-        mycursor.execute( sql_select_query, x )
-        record = mycursor.fetchone()
-        #print( record )
-        self.LE_name.setText(record[3])
-        self.lE_phone.setText( record[4] )
-        self.lE_mobile.setText( record[5] )
-        self.LE_job.setText( record[6] )
-        self.LE_address.setText( record[7] )
-        self.CMB_city.setCurrentText( record[8] )
-        self.CMB_district.setCurrentText( record[9] )
-        self.LE_building.setText( record[10] )
-        self.LE_floor.setText( record[11] )
-        self.LE_email.setText( record[12] )
-        self.LE_company.setText( record[17] )
-        self.LE_workPhone.setText( record[18] )
-        self.LE_workAddress.setText( record[19] )
-        self.LE_notes.setText( record[20] )
-        if record[21] == '1':
-            self.CMB_status.setCurrentText('Active')
-        else:
-            self.CMB_status.setCurrentText( 'Inactive' )
+            self.LB_custID.setText(id)
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            sql_select_query = "select * from Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = %s "
+            x = (id,)
+            mycursor.execute( sql_select_query, x )
+            record = mycursor.fetchone()
+            #print( record )
+            self.LE_name.setText(record[3])
+            self.lE_phone.setText( record[4] )
+            self.lE_mobile.setText( record[5] )
+            self.LE_job.setText( record[6] )
+            self.LE_address.setText( record[7] )
+            self.CMB_city.setCurrentText( record[8] )
+            self.CMB_district.setCurrentText( record[9] )
+            self.LE_building.setText( record[10] )
+            self.LE_floor.setText( record[11] )
+            self.LE_email.setText( record[12] )
+            self.LE_company.setText( record[17] )
+            self.LE_workPhone.setText( record[18] )
+            self.LE_workAddress.setText( record[19] )
+            self.LE_notes.setText( record[20] )
+            # if record[21] == '1':
+            #     self.CMB_status.setCurrentText('Active')
+            # else:
+            #     self.CMB_status.setCurrentText( 'Inactive' )
+            records = util.FN_GET_CITIES()
+            for row in records:
+                self.CMB_city.addItems([row[0]])
+            records = util.FN_GET_CUSTTP()
+            for row in records:
+                self.CMB_loyalityType.addItems([row[0]])
+            self.FN_GET_DISTRICT()
+            records = util.FN_GET_CUSTGP()
+            for row in records:
+                self.CMB_custGroup.addItems([row[0]])
 
-        self.CMB_custGroup.setCurrentText( record[2] )
-        self.CMB_loyalityType.setCurrentText( record[1] )
-        self.oldmobile = record[5]
-        self.oldstatus = record[21]
-        self.oldemail = record[12]
-        mycursor.close()
+            self.CMB_status.setCurrentText(util.FN_GET_STATUS_DESC(record[21]))
+            self.CMB_custGroup.setCurrentText(str(record[2] ))
+            self.CMB_loyalityType.setCurrentText( record[1] )
+            self.oldmobile = record[5]
+            self.oldstatus = record[21]
+            self.oldemail = record[12]
+            mycursor.close()
+
+
+        except Exception as err:
+            print(err)
 
     def FN_REFRESH_GRID(self,id):
         for i in reversed(range(self.parent.Qtable_customer.rowCount())):

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>429</width>
+    <width>443</width>
     <height>236</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>44</x>
      <y>150</y>
      <width>79</width>
      <height>18</height>
@@ -54,7 +54,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>264</x>
      <y>110</y>
      <width>71</width>
      <height>21</height>
@@ -79,7 +79,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>334</x>
      <y>110</y>
      <width>91</width>
      <height>21</height>
@@ -92,7 +92,7 @@
   <widget class="QLabel" name="desc_11">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>344</x>
      <y>70</y>
      <width>81</width>
      <height>21</height>
@@ -108,7 +108,7 @@
   <widget class="QLabel" name="desc_4">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>134</x>
      <y>150</y>
      <width>67</width>
      <height>17</height>
@@ -127,7 +127,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>254</x>
      <y>150</y>
      <width>79</width>
      <height>18</height>
@@ -153,47 +153,10 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="LE_value">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>70</y>
-     <width>171</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>374</x>
      <y>190</y>
      <width>41</width>
      <height>20</height>
@@ -209,7 +172,7 @@
   <widget class="QPushButton" name="BTN_changeStatus">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>24</x>
      <y>200</y>
      <width>131</width>
      <height>25</height>
@@ -249,7 +212,7 @@
   <widget class="QLabel" name="desc_3">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>354</x>
      <y>150</y>
      <width>67</width>
      <height>17</height>
@@ -262,29 +225,86 @@
     <string>صالح من تاريخ</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="MB_PromVoucherStatus">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <widget class="QLabel" name="desc_2">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>190</y>
-     <width>86</width>
-     <height>25</height>
+     <x>304</x>
+     <y>20</y>
+     <width>121</width>
+     <height>21</height>
     </rect>
    </property>
+   <property name="text">
+    <string>وصف قسيمه الشراء</string>
+   </property>
   </widget>
-  <widget class="QLineEdit" name="LE_desc">
+  <widget class="QDoubleSpinBox" name="LE_value">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>264</x>
+     <y>70</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="decimals">
+    <number>0</number>
+   </property>
+   <property name="minimum">
+    <double>1.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>99997.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>1.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="CMB_PromVoucher">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
      <y>20</y>
-     <width>271</width>
-     <height>25</height>
+     <width>251</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="voucher_id">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>304</x>
+     <y>40</y>
+     <width>51</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="LE_PromVoucherStatus">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>264</x>
+     <y>190</y>
+     <width>82</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -310,19 +330,6 @@
                                         );
                                         }
                                     </string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="desc_2">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>20</y>
-     <width>121</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>وصف قسيمه الشراء</string>
    </property>
   </widget>
  </widget>

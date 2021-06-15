@@ -355,13 +355,13 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_LOAD_CHANGE_STATUS_ACTIVE(self):
         self.window_two = CL_PromVoucher()
-        self.window_two.FN_LOAD_CHANGE_STATUS("1")
+        self.window_two.FN_LOAD_CHANGE_STATUS_ACTIVE()
         self.window_two.show()
 
     def FN_LOAD_CHANGE_STATUS_INACTIVE(self):
 
         self.window_two = CL_PromVoucher()
-        self.window_two.FN_LOAD_CHANGE_STATUS("0")
+        self.window_two.FN_LOAD_CHANGE_STATUS_INACTIVE()
         self.window_two.show()
 
     # Configuration Parametrs

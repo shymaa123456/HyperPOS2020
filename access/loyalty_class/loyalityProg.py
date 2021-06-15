@@ -1017,7 +1017,7 @@ class CL_loyProg(QtWidgets.QDialog):
                     # get customer gp id
 
                     sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
-                    val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
+                    val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,CL_userModule.user_name,id)
                     mycursor.execute(sql, val)
                     mycursor.close()
                     ids.append(id)

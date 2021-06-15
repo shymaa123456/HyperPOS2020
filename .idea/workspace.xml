@@ -27,14 +27,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="finalize loyality comments">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="modify promotion voucher">
+      <change afterPath="$PROJECT_DIR$/access/main_login_class/testExp.xls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Validation/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Validation/Validation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/redeemItem.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/access/utils/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/utils/util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyLoyalityProg.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyLoyalityProg.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/modifyCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/voucher_class/PromotionVoucher.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/voucher_class/PromotionVoucher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createCustomer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyReedemItem.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,19 +78,20 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/access/voucher_class" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/access/loyalty_class" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Shaymaa\PycharmProjects_community\HyperPOS2020\access\voucher_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects_community\HyperPOS2020\access\loyalty_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\access\loyalty_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\presentation\loyalty_ui" />
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
-      <recent name="$PROJECT_DIR$/data_connection" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
   <component name="RunManager" selected="Python.login">
@@ -218,11 +220,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.Validation" />
       <item itemvalue="Python.login" />
       <item itemvalue="Python.t1" />
       <item itemvalue="Python.test (1)" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.Validation" />
       <item itemvalue="Python tests.pytest in C:/Users/Shaymaa/PycharmProjects_community/HyperPOS2020/access/authorization_class/testt.py" />
     </list>
     <recent_temporary>
@@ -259,90 +261,6 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-    </task>
-    <task id="LOCAL-00069" summary="comments of 3-2-2021">
-      <created>1612951486594</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1612951486594</updated>
-    </task>
-    <task id="LOCAL-00070" summary="comments of 10-2-2021">
-      <created>1613224942123</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1613224942124</updated>
-    </task>
-    <task id="LOCAL-00071" summary="comments of 10-2-2021">
-      <created>1613408306240</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1613408306240</updated>
-    </task>
-    <task id="LOCAL-00072" summary="comments of 10-2-2021">
-      <created>1614163115969</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1614163115970</updated>
-    </task>
-    <task id="LOCAL-00073" summary="comments of 10-2-2021">
-      <created>1614178786545</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1614178786545</updated>
-    </task>
-    <task id="LOCAL-00074" summary="comments of 10-2-2021">
-      <created>1614179007234</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1614179007234</updated>
-    </task>
-    <task id="LOCAL-00075" summary="comments of 10-2-2021">
-      <created>1614849219603</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1614849219604</updated>
-    </task>
-    <task id="LOCAL-00076" summary="comments of 10-2-2021">
-      <created>1614870256916</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1614870256917</updated>
-    </task>
-    <task id="LOCAL-00077" summary="resolving comments">
-      <created>1615364660362</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1615364660363</updated>
-    </task>
-    <task id="LOCAL-00078" summary="resolving comments">
-      <created>1615446764783</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1615446764783</updated>
-    </task>
-    <task id="LOCAL-00079" summary="resolving comments">
-      <created>1615905720266</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1615905720267</updated>
-    </task>
-    <task id="LOCAL-00080" summary="create redeem item">
-      <created>1616073512147</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1616073512147</updated>
     </task>
     <task id="LOCAL-00081" summary="create redeem item">
       <created>1616080135116</created>
@@ -603,7 +521,91 @@
       <option name="project" value="LOCAL" />
       <updated>1622718941114</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="finalize loyality comments">
+      <created>1623069893651</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1623069893652</updated>
+    </task>
+    <task id="LOCAL-00119" summary="unpdate customerGP">
+      <created>1623157832485</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1623157832485</updated>
+    </task>
+    <task id="LOCAL-00120" summary="unpdate customer type">
+      <created>1623163843060</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1623163843060</updated>
+    </task>
+    <task id="LOCAL-00121" summary="unpdate customer">
+      <created>1623165557856</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1623165557856</updated>
+    </task>
+    <task id="LOCAL-00122" summary="unpdate customer">
+      <created>1623229889810</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1623229889811</updated>
+    </task>
+    <task id="LOCAL-00123" summary="unpdate redeem item">
+      <created>1623234705876</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1623234705876</updated>
+    </task>
+    <task id="LOCAL-00124" summary="unpdate redeem item">
+      <created>1623234906989</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1623234906989</updated>
+    </task>
+    <task id="LOCAL-00125" summary="create promotion voucher">
+      <created>1623332278228</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1623332278229</updated>
+    </task>
+    <task id="LOCAL-00126" summary="create promotion voucher">
+      <created>1623336775936</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1623336775937</updated>
+    </task>
+    <task id="LOCAL-00127" summary="create promotion voucher">
+      <created>1623338388174</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1623338388174</updated>
+    </task>
+    <task id="LOCAL-00128" summary="modify promotion voucher">
+      <created>1623667573520</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1623667573520</updated>
+    </task>
+    <task id="LOCAL-00129" summary="modify promotion voucher">
+      <created>1623676777968</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1623676777968</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,12 +665,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="customer type" />
-    <MESSAGE value="comments on custGp and custTps" />
-    <MESSAGE value="comments on create cust" />
-    <MESSAGE value="comments of 3-2-2021" />
-    <MESSAGE value="loilty" />
-    <MESSAGE value="comments of 10-2-2021" />
     <MESSAGE value="resolving comments" />
     <MESSAGE value="create redeem item" />
     <MESSAGE value="create redeem with voucher" />
@@ -688,13 +684,23 @@
     <MESSAGE value="update date format" />
     <MESSAGE value="adding log" />
     <MESSAGE value="finalize loyality comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="finalize loyality comments" />
+    <MESSAGE value="unpdate customerGP" />
+    <MESSAGE value="unpdate customer type" />
+    <MESSAGE value="unpdate customer" />
+    <MESSAGE value="unpdate redeem item" />
+    <MESSAGE value="create promotion voucher" />
+    <MESSAGE value="modify promotion voucher" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify promotion voucher" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622563373979">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1622563373979" />
+    <state x="0" y="116" key="#xdebugger.XInspectDialog" timestamp="1623655912400">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="0" y="116" key="#xdebugger.XInspectDialog/0.0.1366.728@0.0.1366.728" timestamp="1623655912400" />
     <state x="317" y="0" key="CommitChangelistDialog2" timestamp="1617628921132">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -711,42 +717,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1622026200369" />
-    <state width="1345" height="91" key="GridCell.Tab.0.bottom" timestamp="1622731265800">
+    <state width="1345" height="136" key="GridCell.Tab.0.bottom" timestamp="1623753610056">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="91" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1622731265800" />
-    <state width="1345" height="91" key="GridCell.Tab.0.center" timestamp="1622731265800">
+    <state width="1345" height="136" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1623753610056" />
+    <state width="1345" height="136" key="GridCell.Tab.0.center" timestamp="1623753610056">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="91" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1622731265800" />
-    <state width="1345" height="91" key="GridCell.Tab.0.left" timestamp="1622731265799">
+    <state width="1345" height="136" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1623753610056" />
+    <state width="1345" height="136" key="GridCell.Tab.0.left" timestamp="1623753610056">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="91" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1622731265799" />
-    <state width="1345" height="91" key="GridCell.Tab.0.right" timestamp="1622731265800">
+    <state width="1345" height="136" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1623753610056" />
+    <state width="1345" height="136" key="GridCell.Tab.0.right" timestamp="1623753610056">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="91" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1622731265800" />
-    <state width="1345" height="196" key="GridCell.Tab.1.bottom" timestamp="1622731071207">
+    <state width="1345" height="136" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1623753610056" />
+    <state width="1345" height="176" key="GridCell.Tab.1.bottom" timestamp="1623752590352">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="196" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1622731071207" />
-    <state width="1345" height="196" key="GridCell.Tab.1.center" timestamp="1622731071207">
+    <state width="1345" height="176" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1623752590352" />
+    <state width="1345" height="176" key="GridCell.Tab.1.center" timestamp="1623752590352">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="196" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1622731071207" />
-    <state width="1345" height="196" key="GridCell.Tab.1.left" timestamp="1622731071207">
+    <state width="1345" height="176" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1623752590352" />
+    <state width="1345" height="176" key="GridCell.Tab.1.left" timestamp="1623752590352">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="196" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1622731071207" />
-    <state width="1345" height="196" key="GridCell.Tab.1.right" timestamp="1622731071207">
+    <state width="1345" height="176" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1623752590352" />
+    <state width="1345" height="176" key="GridCell.Tab.1.right" timestamp="1623752590352">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="196" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1622731071207" />
-    <state x="129" y="55" key="MergeDialog" timestamp="1614163086645">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="129" y="55" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1614163086645" />
+    <state width="1345" height="176" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1623752590352" />
     <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1615905746179">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -763,22 +765,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="278" key="VCS.EditChangelistDialog/0.0.1366.728@0.0.1366.728" timestamp="1617628855663" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1622718951392">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1623676784987">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1622718951392" />
-    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1622463627436">
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1623676784987" />
+    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1623332244171">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1622463627436" />
+    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1623332244171" />
     <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1621522130903">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1621522130903" />
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1619005545456">
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1623228986332">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1619005545456" />
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1623228986332" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1622707899819">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -787,50 +789,60 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/authorization_class/privilage.py</url>
           <line>262</line>
           <option name="timeStamp" value="223" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
-          <line>520</line>
-          <option name="timeStamp" value="235" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
-          <line>636</line>
+          <line>663</line>
           <option name="timeStamp" value="236" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>859</line>
+          <line>863</line>
           <option name="timeStamp" value="241" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>915</line>
+          <line>919</line>
           <option name="timeStamp" value="242" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/redeemVoucher.py</url>
           <line>36</line>
           <option name="timeStamp" value="255" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customerGP.py</url>
-          <line>210</line>
+          <line>209</line>
           <option name="timeStamp" value="257" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>730</line>
-          <option name="timeStamp" value="310" />
+          <line>994</line>
+          <option name="timeStamp" value="312" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>990</line>
-          <option name="timeStamp" value="312" />
+          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
+          <line>137</line>
+          <option name="timeStamp" value="324" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/voucher_class/PromotionVoucher.py</url>
+          <line>129</line>
+          <option name="timeStamp" value="341" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
+          <line>235</line>
+          <option name="timeStamp" value="345" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="346" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -843,46 +855,11 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="mycursor" language="Python" />
-        <watch expression="self.conn" language="Python" />
-        <watch expression="self.conn.cursor()" language="Python" />
-        <watch expression="self.Qtable_custTP.selectedIndexes()" language="Python" />
-        <watch expression="self.section" language="Python" />
-        <watch expression="records" language="Python" />
-        <watch expression="BMC_LEVEL4_list" language="Python" />
-        <watch expression="range(self.Qtable_custTP.rowCount())" language="Python" />
         <watch expression="self.Qdate_from" language="Python" />
-        <watch expression="self.qdate_from.date().toString('yyyy-MM-dd')" language="Python" />
-        <watch expression="self.Qdate_from.date().toString('yyyy-MM-dd')" language="Python" />
-        <watch expression="xto1" />
-        <watch expression="e" language="Python" />
-        <watch expression="comp" language="Python" />
-        <watch expression="sql" language="Python" />
-        <watch expression="validFrom" language="Python" />
-        <watch expression="remainingPoints" language="Python" />
-        <watch expression="sql" language="Python" />
-        <watch expression="sheet.nrows" language="Python" />
-        <watch expression="sql" language="Python" />
-        <watch expression="self.section" language="Python" />
-        <watch expression="self.Qline_replace.text().strip()" language="Python" />
-        <watch expression="self.Qline_replace.text().strip()" language="Python" />
-        <watch expression="self.name" language="Python" />
-        <watch expression="self.mobile" language="Python" />
-        <watch expression="self.company" language="Python" />
-        <watch expression="sql" />
-        <watch expression="self.parent" language="Python" />
-        <watch expression="self" language="Python" />
-        <watch expression="datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' )" language="Python" />
-        <watch expression="pp" language="Python" />
-        <watch expression="err" language="Python" />
-        <watch expression="err" language="Python" />
-        <watch expression="len(BMC_LEVEL4s)" language="Python" />
-        <watch expression="id" language="Python" />
-        <watch expression="self.Qline_purchAmount.text()" language="Python" />
-        <watch expression="self.Qline_points.text()" language="Python" />
-        <watch expression="points" language="Python" />
-        <watch expression="len(points)" language="Python" />
-        <watch expression="float(purchAmount)" language="Python" />
+        <watch expression="self.Qdate_from.dateTime()" language="Python" />
+        <watch expression="self.Qdate_from.dateTime().toString('dd-MM-yyyy')" language="Python" />
+        <watch expression="ss" language="Python" />
+        <watch expression="self.Qdate_from.dateTime().toString('yyyy-mm-dd')" language="Python" />
       </configuration>
     </watches-manager>
   </component>

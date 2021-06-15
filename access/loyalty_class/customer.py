@@ -863,10 +863,10 @@ class CL_customer(QtWidgets.QDialog):
         #get first selected row
         try:
             rowNo=self.Qtable_customer.selectedItems()[0].row()
-            if rowNo >0 :
-                id =self.Qtable_customer.item(rowNo, 0).text()
-                self.window_two.FN_LOAD_MODIFY(id)
-                self.window_two.show()
+            #if rowNo >0 :
+            id =self.Qtable_customer.item(rowNo, 0).text()
+            self.window_two.FN_LOAD_MODIFY(id)
+            self.window_two.show()
         except Exception as err:
             print(err)
             #QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")

@@ -69,9 +69,10 @@ class CL_PromVoucher(QtWidgets.QDialog):
     def FN_GET_VOUCHER(self):
         try :
             desc = self.CMB_PromVoucher.currentText()
+
             if self.status == '':
                 print("ee")
-                #self.LE_desc.setText(desc)
+                self.LE_desc.setText(desc)
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             mycursor.execute(
@@ -81,6 +82,12 @@ class CL_PromVoucher(QtWidgets.QDialog):
             self.voucher_id.setText(str(records[0]))
             self.LE_value.setValue(records[1])
             self.LE_maxCount.setValue(records[2])
+            #for logging
+            self.oldDesc = desc
+            self.oldValue=records[1]
+            self.oldMaxVal = records[2]
+            self.oldValidFrom = records[3]
+            self.oldValidTo = records[4]
 
             xto = records[3].split("-")
             print(xto)
@@ -114,7 +121,7 @@ class CL_PromVoucher(QtWidgets.QDialog):
                 if mycursor.rowcount > 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "الاسم موجود بالفعل")
                 elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
-                        QtWidgets.QMessageBox.warning(self, "Done",
+                        QtWidgets.QMessageBox.warning(self, "Error",
                                                       "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
 
                 else:
@@ -171,18 +178,33 @@ class CL_PromVoucher(QtWidgets.QDialog):
         try:
 
 
+
                 id = self.voucher_id.text()
                 self.conn = db1.connect()
                 mycursor = self.conn.cursor()
-                changeDate = str(datetime.today().strftime('%Y-%m-%d'))
-                sql = "update `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` set PROMV_STATUS =%s where PROMV_VOUCHER_ID = %s "
 
-                val = (self.status, id)
+                # get old status
+                sql = "select PROMV_STATUS from `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` where PROMV_VOUCHER_ID = %s"
+                val = ( id,)
                 mycursor.execute(sql, val)
-                db1.connectionCommit(self.conn)
+                records = mycursor.fetchone()
+                print (records[0])
+                print(self.status)
+                if self.status!=records[0]:
 
-                mycursor.close()
-                self.LE_PromVoucherStatus.setText(util.FN_GET_STATUS_DESC(str(self.status)))
+                    changeDate = str(datetime.today().strftime('%Y-%m-%d'))
+                    sql = "update `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` set PROMV_STATUS =%s where PROMV_VOUCHER_ID = %s "
+
+                    val = (self.status, id)
+                    mycursor.execute(sql, val)
+                    db1.connectionCommit(self.conn)
+
+                    mycursor.close()
+                    self.LE_PromVoucherStatus.setText(util.FN_GET_STATUS_DESC(str(self.status)))
+                    #add in log table
+
+                    util.FN_INSERT_IN_LOG("PROMOTIONAL_VOUCHER", "status", self.status , records[0], id)
+
                 self.status=''
 
         except Exception as err:
@@ -198,18 +220,19 @@ class CL_PromVoucher(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
                 desc = self.LE_desc.text().strip()
-                sql_select_Query = "select * from `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` where PROMV_VOUCHER_DESC = %s"
-                x = (desc,)
+                id= self.voucher_id.text().strip()
+                sql_select_Query = "select * from `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` where PROMV_VOUCHER_DESC = %s and PROMV_VOUCHER_ID != %s "
+                x = (desc,id)
                 mycursor.execute(sql_select_Query, x)
                 record = mycursor.fetchone()
                 if mycursor.rowcount > 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "الاسم موجود بالفعل")
                 elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
-                    QtWidgets.QMessageBox.warning(self, "Done",
+                    QtWidgets.QMessageBox.warning(self, "Error",
                                                   "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
 
                 else:
-                    id = self.voucher_id.text()
+
                     sql = "update `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` set PROMV_VOUCHER_DESC = %s , `PROMV_VOUCHER_VAL` = %s,`PROMV_MAX_COUNT`  = %s,`PROMV_CHANGED_BY`  = %s,`PROMV_CHANGED_ON`  = %s,`PROMV_VALID_FROM`  = %s,`PROMV_VALID_TO`  = %s where PROMV_VOUCHER_ID =%s" \
 
                     val = (self.LE_desc.text().strip() , self.LE_value.text().strip(),self.LE_maxCount.text().strip(),changeDate,CL_userModule.user_name,self.Qdate_from.dateTime().toString('yyyy-MM-dd'),self.Qdate_to.dateTime().toString('yyyy-MM-dd'),id)
@@ -217,6 +240,21 @@ class CL_PromVoucher(QtWidgets.QDialog):
                     mycursor.execute(sql,val)
                     db1.connectionCommit(self.conn)
                     mycursor.close()
+
+
+                    valid_from =self.Qdate_from.dateTime().toString('yyyy-MM-dd')
+                    valid_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')
+                    if self.oldDesc != desc:
+                        util.FN_INSERT_IN_LOG("PROMOTIONAL_VOUCHER", "desc",  desc,self.oldDesc, id)
+                    if int(self.oldValue) != int(self.LE_value.text().strip()):
+                        util.FN_INSERT_IN_LOG("PROMOTIONAL_VOUCHER", "value",  self.LE_value.text().strip(),self.oldValue, id)
+                    if self.oldMaxVal != int(self.LE_maxCount.text().strip()):
+                        util.FN_INSERT_IN_LOG("PROMOTIONAL_VOUCHER", "max count", self.LE_maxCount.text().strip(),self.oldMaxVal,  id)
+                    if self.oldValidFrom != valid_from:
+                        util.FN_INSERT_IN_LOG("PROMOTIONAL_VOUCHER", "valid from",valid_from, self.oldValidFrom,  id)
+                    if self.oldValidTo != valid_to:
+                        util.FN_INSERT_IN_LOG("PROMOTIONAL_VOUCHER", "valid to", valid_to,self.oldValidTo,  id)
+
         except Exception as err:
             print(err)
 

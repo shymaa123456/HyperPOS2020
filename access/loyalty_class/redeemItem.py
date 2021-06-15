@@ -125,6 +125,10 @@ class CL_redItem(QtWidgets.QDialog):
 
     def FN_SEARCH_REDITEM(self):
        try:
+            self.Qcombo_group3.show()
+            self.Qcombo_group4.show()
+            self.CMB_branch.hide()
+            self.CMB_company.hide()
             for i in reversed(range(self.Qtable_redeem.rowCount())):
                 self.Qtable_redeem.removeRow(i)
 
@@ -204,6 +208,7 @@ class CL_redItem(QtWidgets.QDialog):
             print(err)
     def FN_GET_REDITEM(self):
         try:
+
             if len(self.Qtable_redeem.selectedIndexes()) > 0:
                 rowNo = self.Qtable_redeem.selectedItems()[0].row()
 
@@ -222,32 +227,35 @@ class CL_redItem(QtWidgets.QDialog):
                 self.old_valid_to = valid_to
                 self.old_status = status
 
-                self.CMB_branch.show()
-                self.CMB_company.show()
-                comp=self.FN_GET_COMP_DESC(company)
-                br =self.FN_GET_BRANCH_DESC(branch,company)
-                #self. self.Qcombo_group3.hide()
-                self.CMB_branch.setCurrentText(br)
-                self.CMB_company.setCurrentText(comp)
                 self.Qcombo_group3.hide()
                 self.Qcombo_group4.hide()
+                self.CMB_branch.show()
+                self.CMB_company.show()
+
+                comp = util.FN_GET_COMP_ID(company)
+                br =util.FN_GET_BRANCH_ID(branch,comp)
+                #self. self.Qcombo_group3.hide()
+                self.CMB_branch.setCurrentText(br)
+                self.CMB_company.setCurrentText(company)
+
                 self.Qline_barcode.setEnabled(False)
 
-
+                #self.CMB_company.hide()
+                #self.CMB_branch.hide()
                 if status == 'Active' :
                     self.Qradio_active.setChecked(True)
                 else:
                     self.Qradio_inactive.setChecked(True)
 
                 xto = valid_from.split("-")
-                xto1 = xto[2].split(" ")
-                print(xto1)
-                d = QDate(int(xto[0]), int(xto[1]), int(xto1[0]))
+
+
+                d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
                 self.Qdate_from.setDate(d)
 
                 xto = valid_to.split("-")
-                xto1 = xto[2].split(" ")
-                d1 = QDate(int(xto[0]), int(xto[1]), int(xto1[0]))
+
+                d1 = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
                 self.Qdate_to.setDate(d1)
 
 
@@ -297,6 +305,10 @@ class CL_redItem(QtWidgets.QDialog):
            if  len(self.Qcombo_group3.currentData()) == 0 or len(
                    self.Qcombo_group4.currentData()) == 0  or bar == ''  or points == '' or date_from == '' or date_to == ''    :
                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+           elif date_to < date_from:
+               QtWidgets.QMessageBox.warning(self, "Error",
+                                             "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+
            else:
                ret1 = self.FN_CHECK_VALID_BARCCODE(bar)
                if ret1 == True :
@@ -309,10 +321,10 @@ class CL_redItem(QtWidgets.QDialog):
                                    mycursor1 = conn.cursor()
                                    sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
                                          "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
-                                         ",REDEEM_VALID_TO,REDEEM_STATUS)" \
-                                         "values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                                         ",REDEEM_VALID_TO,REDEEM_STATUS,BMC_ID)" \
+                                         "values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
-                                   val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status)
+                                   val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status,' ')
 
                                    mycursor1.execute(sql, val)
                                    db1.connectionCommit(conn)
@@ -364,6 +376,10 @@ class CL_redItem(QtWidgets.QDialog):
 
     def    FN_REFRESH_DATA_GRID(self):
         try:
+            self.Qcombo_group3.show()
+            self.Qcombo_group4.show()
+            self.CMB_branch.hide()
+            self.CMB_company.hide()
             for i in reversed(range(self.Qtable_redeem.rowCount())):
                self.Qtable_redeem.removeRow(i)
 
@@ -521,19 +537,19 @@ class CL_redItem(QtWidgets.QDialog):
         else:
             return "Inactive"
 
-    def FN_GET_COMP_DESC(self,id):
-        conn=db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
-
-    def FN_GET_BRANCH_DESC(self, id,comp):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "' and COMPANY_ID = '"+comp+ "'" )
-        myresult = mycursor.fetchone()
-        return myresult[0]
+    # def FN_GET_COMP_DESC(self,id):
+    #     conn=db1.connect()
+    #     mycursor = conn.cursor()
+    #     mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
+    #     myresult = mycursor.fetchone()
+    #     return myresult[0]
+    #
+    # def FN_GET_BRANCH_DESC(self, id,comp):
+    #     conn = db1.connect()
+    #     mycursor = conn.cursor()
+    #     mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "' and COMPANY_ID = '"+comp+ "'" )
+    #     myresult = mycursor.fetchone()
+    #     return myresult[0]
 
 
     def FN_OPEN_FILE(self):

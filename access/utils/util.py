@@ -97,3 +97,20 @@ class util():
         mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
+
+    @staticmethod
+    def FN_GET_COMP_ID(desc):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + desc + "'")
+        myresult = mycursor.fetchone()
+        return myresult[0]
+
+    @staticmethod
+    def FN_GET_BRANCH_ID(desc,comp):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + desc + "' and COMPANY_ID = '"+comp+ "'")
+        myresult = mycursor.fetchone()
+        return myresult[0]
+

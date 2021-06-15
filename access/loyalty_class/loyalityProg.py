@@ -731,6 +731,10 @@ class CL_loyProg(QtWidgets.QDialog):
                 self.Qcombo_group5.currentData()) == 0 or self.name == '' or self.desc == '' or float(self.purchAmount) == 0 or self.points == '0' or self.date_from == '' or self.date_to == '' \
                 :
             QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+        elif self.date_to  < self.date_from :
+            QtWidgets.QMessageBox.warning(self, "Error",
+                                          "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+
         else:
             for com in company_list:
                 for br in branch_list:
@@ -995,6 +999,10 @@ class CL_loyProg(QtWidgets.QDialog):
                 if name == '' or desc == '' or float(purchAmount) == 0 or points == '0' or date_from == '' or date_to == '' \
                         :
                     QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                elif date_to < date_from:
+                    QtWidgets.QMessageBox.warning(self, "Error",
+                                                  "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+
                 else:
 
 

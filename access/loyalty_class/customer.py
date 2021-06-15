@@ -32,6 +32,16 @@ class CL_customer_modify(QtWidgets.QDialog):
             filename = self.dirname + '/modifyCustomer.ui'
             loadUi(filename, self)
 
+            records = util.FN_GET_CITIES()
+            for row in records:
+                self.CMB_city.addItems([row[0]])
+            records = util.FN_GET_CUSTTP()
+            for row in records:
+                self.CMB_loyalityType.addItems([row[0]])
+            self.FN_GET_DISTRICT()
+            records = util.FN_GET_CUSTGP()
+            for row in records:
+                self.CMB_custGroup.addItems([row[0]])
 
             self.FN_GET_CUST(id)
 
@@ -170,16 +180,7 @@ class CL_customer_modify(QtWidgets.QDialog):
             #     self.CMB_status.setCurrentText('Active')
             # else:
             #     self.CMB_status.setCurrentText( 'Inactive' )
-            records = util.FN_GET_CITIES()
-            for row in records:
-                self.CMB_city.addItems([row[0]])
-            records = util.FN_GET_CUSTTP()
-            for row in records:
-                self.CMB_loyalityType.addItems([row[0]])
-            self.FN_GET_DISTRICT()
-            records = util.FN_GET_CUSTGP()
-            for row in records:
-                self.CMB_custGroup.addItems([row[0]])
+
 
             self.CMB_status.setCurrentText(util.FN_GET_STATUS_DESC(record[21]))
             self.CMB_custGroup.setCurrentText(str(record[2] ))

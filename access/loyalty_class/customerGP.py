@@ -81,6 +81,7 @@ class CL_customerGP(QtWidgets.QDialog):
 
                     if column_number == 2:
                         data = util.FN_GET_STATUS_DESC(str(data))
+                        item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable_custGP.setItem(row_number, column_number, item)
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
@@ -107,6 +108,7 @@ class CL_customerGP(QtWidgets.QDialog):
 
                     if column_number == 2:
                         data = util.FN_GET_STATUS_DESC(str(data))
+                        item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
 
                     self.Qtable_custGP.setItem(row_number, column_number, item)

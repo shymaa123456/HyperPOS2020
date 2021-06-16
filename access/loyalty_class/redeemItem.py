@@ -109,7 +109,7 @@ class CL_redItem(QtWidgets.QDialog):
             self.Qcombo_group4.addItems([row[0]])
             self.CMB_branch.addItems([row[0]])
         mycursor.close()
-
+        print(records)
     def FN_GET_COMPANIES(self):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -187,7 +187,7 @@ class CL_redItem(QtWidgets.QDialog):
 
             # print(whereClause)
             sql_select_query = "select POS_GTIN, COMPANY_ID,BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_VALID_FROM,REDEEM_VALID_TO,REDEEM_STATUS from Hyper1_Retail.REDEEM_ITEM   where " + whereClause
-            print(sql_select_query)
+            #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
@@ -233,10 +233,11 @@ class CL_redItem(QtWidgets.QDialog):
                 self.CMB_branch.show()
                 self.CMB_company.show()
 
-                comp = util.FN_GET_COMP_ID(company)
-                br =util.FN_GET_BRANCH_ID(branch,comp)
-                #self. self.Qcombo_group3.hide()
-                self.CMB_branch.setCurrentText(br)
+                #comp = util.FN_GET_COMP_ID(company)
+                #br =util.FN_GET_BRANCH_DESC(branch)
+
+                #print(br)
+                self.CMB_branch.setCurrentText(branch)
                 self.CMB_company.setCurrentText(company)
 
                 self.Qline_barcode.setEnabled(False)

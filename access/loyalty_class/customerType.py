@@ -11,7 +11,7 @@ from data_connection.h1pos import db1
 
 from datetime import datetime
 
-
+from access.utils.util import *
 class CL_customerTP(QtWidgets.QDialog):
     dirname = ''
 
@@ -56,10 +56,10 @@ class CL_customerTP(QtWidgets.QDialog):
             points = self.Qtable_custTP.item(rowNo, 2).text()
             self.CMB_nextLevel.show()
             status = self.Qtable_custTP.item(rowNo, 4).text()
-            if  id != 1 :
+            if  rowNo != 0 :
                 nextLevel = self.Qtable_custTP.item(rowNo, 3).text()
-                self.LB_nextLvlId.setText(nextLevel )
-                nextLevel = self.FN_GET_NEXTlEVEL_DESC(nextLevel)
+                #self.LB_nextLvlId.setText(nextLevel )
+                #nextLevel = self.FN_GET_NEXTlEVEL_DESC(nextLevel)
                 self.CMB_nextLevel.setCurrentText(nextLevel)
             else:
                 self.LB_nextLvlId.setText(' ')
@@ -67,7 +67,7 @@ class CL_customerTP(QtWidgets.QDialog):
             self.LE_desc.setText(desc)
             self.LE_points.setText(points)
             self.LB_custTpId.setText(id)
-            self.CMB_custType.setCurrentText(self.FN_GET_STATUS_DESC(status))
+            self.CMB_custType.setCurrentText(status)
             self.FN_GET_ID_STS()
 
             #print(rowNo)
@@ -86,6 +86,7 @@ class CL_customerTP(QtWidgets.QDialog):
         desc = self.CMB_nextLevel.currentText()
         id = self.FN_GET_NEXTlEVEL_ID(desc)
         self.LB_nextLvlId.setText (id)
+
     def FN_SEARCH_CUSTTP(self):
         try:
             for i in reversed(range(self.Qtable_custTP.rowCount())):
@@ -104,13 +105,20 @@ class CL_customerTP(QtWidgets.QDialog):
             whereClause = whereClause  + " and LOYCT_TYPE_ID != 'H1'"
 
             sql_select_query = "select  LOYCT_TYPE_ID,LOYCT_DESC , LOYCT_POINTS_TO_PROMOTE,LOYCT_TYPE_NEXT,LOYCT_STATUS from  Hyper1_Retail.LOYALITY_CUSTOMER_TYPE " + whereClause +"order by LOYCT_TYPE_ID*1 asc"
-            print(sql_select_query)
+            #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable_custTP.insertRow(row_number)
                 for column_number, data in enumerate(row_data):
                     item = QTableWidgetItem(str(data))
+                    if column_number == 3  :
+                        data = util.FN_GET_STATUS_DESC(str(data))
+                        item = QTableWidgetItem(str(data))
+                    if column_number == 2 and row_number!=0 :
+                        data = self.FN_GET_NEXTlEVEL_DESC(str(data))
+                        item = QTableWidgetItem(str(data))
+
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(item ))
             mycursor.close()
@@ -162,8 +170,15 @@ class CL_customerTP(QtWidgets.QDialog):
             self.Qtable_custTP.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 item = QTableWidgetItem(str(data))
+                if column_number == 4:
+                    data = util.FN_GET_STATUS_DESC(str(data))
+                    item = QTableWidgetItem(str(data))
+                if column_number == 3 and row_number != 0:
+                    data = self.FN_GET_NEXTlEVEL_DESC(str(data))
+                    item = QTableWidgetItem(str(data))
+
                 item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
-                self.Qtable_custTP.setItem(row_number, column_number, item)
+                self.Qtable_custTP.setItem(row_number, column_number, QTableWidgetItem(item))
         #self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
 
     def FN_GET_NEXTLVL(self):
@@ -188,12 +203,12 @@ class CL_customerTP(QtWidgets.QDialog):
         else:
             return False
 
-    def FN_CHECK_DUP_NEXTLEVEL(self, name):
+    def FN_CHECK_DUP_NEXTLEVEL(self, name,id):
         try:
             self.conn = db1.connect()
             mycursor2 = self.conn.cursor()
-            print(name)
-            sql = "SELECT * FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_NEXT = '" + name + "' and LOYCT_STATUS =1"
+            #print(name)
+            sql = "SELECT * FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_NEXT = '" + name + "' and LOYCT_TYPE_ID !='"+id+"'"
             mycursor2.execute(sql)
             myresult = mycursor2.fetchall()
             len = mycursor2.rowcount
@@ -234,7 +249,7 @@ class CL_customerTP(QtWidgets.QDialog):
 
                 else:
                     nextLevel1 = self.FN_GET_NEXTlEVEL_ID(nextLevel)
-                    if  self.FN_CHECK_DUP_NEXTLEVEL(nextLevel1)!=False:
+                    if  self.FN_CHECK_DUP_NEXTLEVEL(nextLevel1,id)!=False:
                         QtWidgets.QMessageBox.warning(self, "Error", "Next Level is duplicated")
                     else:
                         sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
@@ -279,11 +294,11 @@ class CL_customerTP(QtWidgets.QDialog):
                     QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
                 else:
                     if desc != desc_old:
-                        if self.FN_CHECK_DUP_NAME(desc) != False:
+                        if self.FN_CHECK_DUP_NAME(desc,id) != False:
                             QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
                             error=1
                     if next_level_old != nextLevel :
-                        if self.FN_CHECK_DUP_NEXTLEVEL(nextLevel) != False:
+                        if self.FN_CHECK_DUP_NEXTLEVEL(nextLevel,id) != False:
                             QtWidgets.QMessageBox.warning(self, "Error", "Next Level is duplicated")
                             error = 1
 
@@ -300,11 +315,12 @@ class CL_customerTP(QtWidgets.QDialog):
                         db1.connectionCommit(self.conn)
                         self.FN_GET_CUSTTPS()
                         self.FN_CLEAR_FEILDS()
+                        mycursor.close()
             else:
                 QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
 
         except Exception as err:
-            mycursor.close()
+
             print(err)
         #db1.connectionClose(self.conn)
         #self.close()

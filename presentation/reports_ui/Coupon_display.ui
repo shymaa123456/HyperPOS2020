@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1028</width>
+    <width>1200</width>
     <height>560</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1028</width>
+    <width>1200</width>
     <height>560</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1028</width>
+    <width>1200</width>
     <height>560</height>
    </size>
   </property>
@@ -31,24 +31,13 @@
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
   </property>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>70</y>
-     <width>2</width>
-     <height>2</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_2"/>
-  </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>0</y>
-     <width>1031</width>
-     <height>241</height>
+     <width>1201</width>
+     <height>221</height>
     </rect>
    </property>
    <property name="font">
@@ -75,10 +64,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>400</x>
       <y>10</y>
       <width>361</width>
-      <height>221</height>
+      <height>201</height>
      </rect>
     </property>
     <property name="title">
@@ -108,59 +97,7 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QCheckBox" name="QcheckBox_multi">
-        <property name="layoutDirection">
-         <enum>Qt::RightToLeft</enum>
-        </property>
-        <property name="text">
-         <string>متعدد الاستخدام</string>
-        </property>
-       </widget>
-      </item>
      </layout>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_6">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>160</y>
-       <width>341</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
-     </property>
-     <property name="title">
-      <string>الحالة</string>
-     </property>
-     <widget class="QRadioButton" name="radioBtnPromActive">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>20</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>فعال</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioBtnPromExpired">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>151</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>منتهي</string>
-      </property>
-     </widget>
     </widget>
     <widget class="QComboBox" name="CMB_level4">
      <property name="geometry">
@@ -172,14 +109,30 @@
       </rect>
      </property>
     </widget>
+    <widget class="QCheckBox" name="QcheckBox_multi">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>170</y>
+       <width>101</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>متعدد الاستخدام</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>770</x>
       <y>10</y>
       <width>421</width>
-      <height>221</height>
+      <height>201</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -229,9 +182,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>405</width>
-       <height>181</height>
+       <height>151</height>
       </rect>
      </property>
      <property name="title">
@@ -244,7 +197,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>90</y>
+        <y>80</y>
         <width>391</width>
         <height>51</height>
        </rect>
@@ -260,7 +213,7 @@
         <rect>
          <x>160</x>
          <y>20</y>
-         <width>115</width>
+         <width>121</width>
          <height>22</height>
         </rect>
        </property>
@@ -300,10 +253,10 @@
       <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
-         <x>280</x>
+         <x>286</x>
          <y>20</y>
-         <width>26</width>
-         <height>19</height>
+         <width>20</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="text">
@@ -376,27 +329,60 @@
        </property>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="groupBox_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>391</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="title">
+       <string>الحالة</string>
+      </property>
+      <widget class="QRadioButton" name="radioBtnPromActive">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>20</y>
+         <width>141</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>فعال</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioBtnPromExpired">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>منتهي</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
-    <widget class="QRadioButton" name="radioBtnPromNum">
+    <widget class="QLabel" name="labelCopNum">
      <property name="geometry">
       <rect>
        <x>320</x>
        <y>10</y>
        <width>81</width>
-       <height>20</height>
+       <height>16</height>
       </rect>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
      </property>
      <property name="text">
       <string>رقم الكوبون</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
      </property>
     </widget>
    </widget>
@@ -406,7 +392,7 @@
       <x>10</x>
       <y>10</y>
       <width>201</width>
-      <height>221</height>
+      <height>201</height>
      </rect>
     </property>
     <property name="title">
@@ -418,7 +404,7 @@
        <x>7</x>
        <y>10</y>
        <width>191</width>
-       <height>211</height>
+       <height>181</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -599,10 +585,10 @@
   <widget class="QWidget" name="gridLayoutWidget_4">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>240</y>
-     <width>1001</width>
-     <height>301</height>
+     <x>0</x>
+     <y>220</y>
+     <width>1201</width>
+     <height>321</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_7">
@@ -616,67 +602,67 @@
       </property>
       <column>
        <property name="text">
-        <string>Coupon No</string>
+        <string>رقم الكوبون</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Coupon Description</string>
+        <string>وصف الكوبون</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Company Name</string>
+        <string>اسم الشركة</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Discount Value</string>
+        <string>قيمة الخصم</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Discount Percent</string>
+        <string>نسبة الخصم</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Serial Count</string>
+        <string>عدد السريال</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Multi_Use</string>
+        <string>متعدد الاستخدام</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Multi_Use_Count</string>
+        <string>عدد الاستخدامات المتاحة</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Created_At</string>
+        <string>تاريخ الانشاء</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Changed_At</string>
+        <string>تاريخ التغيير</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Valid_From</string>
+        <string>متاح من</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Valid_To</string>
+        <string>متاح الي</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Status</string>
+        <string>الحالة</string>
        </property>
       </column>
      </widget>

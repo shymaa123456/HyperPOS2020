@@ -61,6 +61,16 @@ class util():
         return myresult[0]
 
     @staticmethod
+    def FN_GET_CUSTTG_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute(
+            "SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where CG_GROUP_ID = '" + id + "'")
+        myresult = mycursor.fetchone()
+        return myresult[0]
+
+
+    @staticmethod
     def FN_GET_STATUS_DESC(id):
         if id == '1':
             return "Active"

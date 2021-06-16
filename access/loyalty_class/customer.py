@@ -35,20 +35,24 @@ class CL_customer_modify(QtWidgets.QDialog):
             records = util.FN_GET_CITIES()
             for row in records:
                 self.CMB_city.addItems([row[0]])
+            self.FN_GET_DISTRICT()
+
             records = util.FN_GET_CUSTTP()
             for row in records:
                 self.CMB_loyalityType.addItems([row[0]])
-            self.FN_GET_DISTRICT()
+
             records = util.FN_GET_CUSTGP()
+            print(records)
             for row in records:
                 self.CMB_custGroup.addItems([row[0]])
-
+            print(records)
+            self.CMB_status.addItems(["Active", "Inactive"])
             self.FN_GET_CUST(id)
 
 
             self.CMB_city.currentIndexChanged.connect(self.FN_GET_DISTRICT)
             self.BTN_modifyCustomer.clicked.connect(self.FN_MODIFY_CUST)
-            self.CMB_status.addItems(["Active", "Inactive"])
+
             self.setFixedWidth(1001)
             self.setFixedHeight(648)
 
@@ -62,6 +66,7 @@ class CL_customer_modify(QtWidgets.QDialog):
             mycursor.execute("SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d inner join Hyper1_Retail.City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+self.CMB_city.currentText()+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
             records = mycursor.fetchall()
 
+
             for row in records:
                 self.CMB_district.addItems([row[0]])
             mycursor.close()
@@ -69,9 +74,6 @@ class CL_customer_modify(QtWidgets.QDialog):
         #get customer data
         try:
             self.id = self.LB_custID.text().strip()
-            print("here")
-            #get the old values
-
 
             self.name = self.LE_name.text().strip()
             self.custGroup = self.CMB_custGroup.currentText()
@@ -168,7 +170,10 @@ class CL_customer_modify(QtWidgets.QDialog):
             self.LE_job.setText( record[6] )
             self.LE_address.setText( record[7] )
             self.CMB_city.setCurrentText( record[8] )
-            self.CMB_district.setCurrentText( record[9] )
+
+            self.FN_GET_DISTRICT()
+            self.CMB_district.setCurrentText(record[9] )
+
             self.LE_building.setText( record[10] )
             self.LE_floor.setText( record[11] )
             self.LE_email.setText( record[12] )
@@ -183,8 +188,10 @@ class CL_customer_modify(QtWidgets.QDialog):
 
 
             self.CMB_status.setCurrentText(util.FN_GET_STATUS_DESC(record[21]))
-            self.CMB_custGroup.setCurrentText(str(record[2] ))
-            self.CMB_loyalityType.setCurrentText( record[1] )
+            self.CMB_custGroup.setCurrentText(util.FN_GET_CUSTTG_DESC(str(record[2] )))
+
+            self.CMB_loyalityType.setCurrentText( util.FN_GET_CUSTTP_DESC(record[1] ))
+
             self.oldmobile = record[5]
             self.oldstatus = record[21]
             self.oldemail = record[12]

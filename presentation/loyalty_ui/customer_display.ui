@@ -1023,7 +1023,7 @@
       </column>
       <column>
        <property name="text">
-        <string>مجموعه العملاء</string>
+        <string>نوع العضويه</string>
        </property>
       </column>
       <column>

@@ -1,3 +1,4 @@
+import collections
 import sys
 from pathlib import Path
 
@@ -23,6 +24,9 @@ class CL_EditVoucher(QtWidgets.QDialog):
     new_section_list = []
     searchpos=False
     oldValue=""
+    oldlist = []
+    newlist = []
+    row=""
 
     def __init__(self):
         super(CL_EditVoucher, self).__init__()
@@ -275,6 +279,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             x = (indx,)
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
+            self.row=str(record[0])
             self.LE_desc_1.setText(str(record[1]))
             self.LE_desc_2.setValue(float(record[4]))
             self.CMB_CouponStatus.setCurrentIndex(int(record[20]))
@@ -334,6 +339,8 @@ class CL_EditVoucher(QtWidgets.QDialog):
             if len(self.Qcombo_section.currentData()) > 0:
                 for x in self.Qcombo_section.currentData():
                     self.section_list.append(x)
+            self.oldlist=self.Qcombo_branch.currentData()
+
         except:
             print(sys.exc_info())
 
@@ -360,6 +367,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     def FN_editAction(self):
         try:
             self.FN_search()
+            self.newlist = self.Qcombo_branch.currentData()
             if len(self.Qcombo_company.currentData()) == 0 or len(self.Qcombo_branch.currentData()) == 0 or len(
                     self.LE_desc_1.text().strip()) == 0 or len(self.Qcombo_section.currentData()) == 0 or len(
                     self.LE_desc_5.text().strip()) == 0:
@@ -475,6 +483,66 @@ class CL_EditVoucher(QtWidgets.QDialog):
                                 CL_userModule.user_name)
                         mycursor.execute(sql7, val7)
 
+
+                    # elif collections.Counter(self.Qcombo_branch.currentData()) == collections.Counter(self.oldlist):
+                    #
+                    #     print("the same list")
+                    #
+                    # elif len(collections.Counter(self.Qcombo_branch.currentData())) > len(
+                    #         collections.Counter(self.oldlist)):
+                    #
+                    #     print(self.Diff(self.newlist, self.oldlist))
+                    #
+                    #     if len(collections.Counter(self.Qcombo_branch.currentData())) > len(
+                    #             collections.Counter(record)):
+                    #
+                    #         for row in self.Diff(record, self.newlist):
+                    #             sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY,ROW_KEY_ID2) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+                    #
+                    #             val8 = (self.row, 'COUPON_BRANCH', 'STATUS', "null",
+                    #
+                    #                     "1",
+                    #
+                    #                     creationDate,
+                    #
+                    #                     CL_userModule.user_name, row)
+                    #
+                    #             mycursor.execute(sql8, val8)
+                    #
+                    #     else:
+                    #
+                    #         for row in self.Diff(self.oldlist, self.newlist):
+                    #             sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY,ROW_KEY_ID2) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+                    #
+                    #             val8 = (self.row, 'COUPON_BRANCH', 'STATUS', "0",
+                    #
+                    #                     "1",
+                    #
+                    #                     creationDate,
+                    #
+                    #                     CL_userModule.user_name, row)
+                    #
+                    #             mycursor.execute(sql8, val8)
+                    #
+                    #
+                    # elif len(collections.Counter(self.Qcombo_branch.currentData())) < len(
+                    #         collections.Counter(self.oldlist)):
+                    #
+                    #     print(self.Diff(self.oldlist, self.newlist))
+                    #
+                    #     for row in self.Diff(self.oldlist, self.newlist):
+                    #         sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY,ROW_KEY_ID2) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+                    #
+                    #         val8 = (self.row, 'COUPON_BRANCH', 'STATUS', "1",
+                    #
+                    #                 "0",
+                    #
+                    #                 creationDate,
+                    #
+                    #                 CL_userModule.user_name, row)
+                    #
+                    #         mycursor.execute(sql8, val8)
+
                     db1.connectionCommit(self.conn)
                     mycursor.close()
                     self.FN_getDatabyID()
@@ -500,3 +568,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
             mycursor.close()
         except:
             print(sys.exc_info())
+
+    def Diff(self,li1, li2):
+        return list(set(li1) - set(li2)) + list(set(li2) - set(li1))

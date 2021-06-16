@@ -18,7 +18,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
     GV_RECHARGABLE=0
     GV_MULTIUSE=0
     searchpos=False
-    VGType="1"
+    VGType="2"
 
     def __init__(self):
         super(CL_CreateVoucher, self).__init__()

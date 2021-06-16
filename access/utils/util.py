@@ -60,6 +60,7 @@ class util():
         myresult = mycursor.fetchone()
         return myresult[0]
 
+
     @staticmethod
     def FN_GET_CUSTTG_DESC(id):
         conn = db1.connect()

@@ -146,11 +146,10 @@ class body():
             ('FONTSIZE', (0, 0), (-1, -1), 6),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('FONT', (0, 0), (-1, 0), 'Times-Bold'),
+            ('FONT', (0, 0), (-1, 0), 'Scheherazade'),
             ('FONTSIZE', (0, 0), (-1, 0), 6),
-            ('FONT', (0,-1), (-1,-1), 'Times-Bold'),
+            ('FONT', (0,-1), (-1,-1), 'Scheherazade'),
             ('FONTSIZE', (0,-1), (-1,-1), 10)
-
 
         ]))
         genStr = "Total LienceNumber: " + str(total)
@@ -175,5 +174,8 @@ class body():
         foo.settelText(title.gettelText())
         foo.setbrachText(title.getbrachText())
         p = FooterCanvas
-        doc = SimpleDocTemplate("my_file.pdf", pagesize=A4, rightMargin=30, leftMargin=30, topMargin=100)
+        size=210/len(field_names)
+        print(len(field_names))
+        print(size)
+        doc = SimpleDocTemplate("my_file.pdf", pagesize=A4, rightMargin=50, leftMargin=50, topMargin=100)
         doc.multiBuild(elements, canvasmaker=p)

@@ -125,8 +125,8 @@ class CL_report(QtWidgets.QDialog):
                                                                                           "and `PROM_BRANCH`.`BRANCH_NO`IN (" + ','.join(self.branch_list) + ")"
                                         "and `PROMOTION_HEADER`.`PROM_TYPE_ID`= '" +str(self.Qcombo_promotion.currentData()) + "'"
                         + self.magazine_prom + " " + self.prom_CG + " " + self.sponsor_prom + " " + self.bmc +
-                        "and `PROMOTION_DETAIL`.`PROM_START_DATE` <= '" + self.Qdate_from.dateTime().toString(
-                    'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`>='"
+                        "and `PROMOTION_DETAIL`.`PROM_START_DATE` >= '" + self.Qdate_from.dateTime().toString(
+                    'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`<='"
                         + self.Qdate_to.dateTime().toString(
                     'yyyy-MM-dd') + " " + "23:59:00" + "'" + self.prom_status)
                 self.runQuery(mycursor)

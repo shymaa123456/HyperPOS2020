@@ -159,14 +159,14 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
             dateto = record[12]
             xto = dateto.split("-")
-            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)
 
             datefrom = record[11]
             xfrom = datefrom.split("-")
-            self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
+            self.dfrom = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setDate(self.dfrom)
-            self.dfrom=QDateTime(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]),00,00,00,00)
+            self.dfrom=QDateTime(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]),00,00,00,00)
 
             self.LE_desc_4.setValue(float(record[4]))
             self.serial_num=int(record[4])
@@ -184,7 +184,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.LE_desc_4.setEnabled(True)
 
             self.CMB_CouponStatus.setCurrentIndex(int(record[13]))
-            self.oldstatus =int(record[13])
+            self.oldstatus =str(record[13])
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
 
@@ -261,9 +261,6 @@ class CL_EditCoupon(QtWidgets.QDialog):
     def FN_editAction(self):
         try:
             self.newlist = self.Qcombo_branch.currentData()
-
-            n = len(self.oldlist)
-            m = len(self.Qcombo_branch.currentData())
             if len(self.Qcombo_company.currentData()) == 0 or len(self.Qcombo_branch.currentData()) == 0 or len(
                     self.LE_desc_1.text().strip()) == 0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
@@ -275,7 +272,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
 
                 else:
                     mycursor = self.conn.cursor()
-                    creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                    creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                     if self.checkBox_Multi.isChecked():
                         self.serialCount = "1"
                         self.MultiCount = self.LE_desc_5.text()
@@ -287,7 +284,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 self.CMB_CouponDes.currentData()) + "'"
                             mycursor.execute(sql2)
                             value = randint(0, 1000000000000)
-                            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                            creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                             mycursor = self.conn.cursor()
                             sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val7 = (
@@ -374,7 +371,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                      self.CMB_CouponDes.currentData()) + "' and COPS_SERIAL_type = 0"
                             mycursor.execute(sql9)
                             value = randint(0, 1000000000000)
-                            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                            creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                             mycursor = self.conn.cursor()
                             sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val7 = (
@@ -420,7 +417,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                 #     mycursor.execute(sql9)
                                 for row in range(int(self.LE_desc_4.text()) - self.serial_num):
                                     value = randint(0, 1000000000000)
-                                    creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+                                    creationDate = str(datetime.today().strftime('%Y-%m-%d'))
                                     mycursor = self.conn.cursor()
                                     sql7 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                                     val7 = (
@@ -438,13 +435,12 @@ class CL_EditCoupon(QtWidgets.QDialog):
                             val7 = (self.row,'COUPON', 'COP_DESC', self.DescOldValue, self.LE_desc_1.text().strip(), creationDate,
                                     CL_userModule.user_name)
                             mycursor.execute(sql7, val7)
-                        elif (str(self.CMB_CouponStatus.currentIndex()) != str(self.oldstatus)):
+                        elif (self.CMB_CouponStatus.currentIndex() != self.oldstatus):
                             sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val8 = (self.row, 'COUPON', 'STATUS', self.oldstatus,
-                                    str(self.CMB_CouponDes.currentIndex()),
+                                    str(self.CMB_CouponStatus.currentIndex()),
                                     creationDate,
                                     CL_userModule.user_name)
-                            self.oldstatus=str(self.CMB_CouponDes.currentIndex())
                             mycursor.execute(sql8, val8)
 
                         elif collections.Counter(self.Qcombo_branch.currentData())== collections.Counter(self.oldlist):

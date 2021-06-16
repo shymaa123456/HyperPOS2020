@@ -99,7 +99,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
     def FN_Recreate(self):
         try:
             value = randint(0, 1000000000000)
-            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+            creationDate = str(datetime.today().strftime('%Y-%m-%d'))
             mycursor = self.conn.cursor()
             string = self.lineDesc_2.text()
             x = (string[0:4] + bin(int(string[4:len(string)])))

@@ -730,7 +730,7 @@ class CL_loyProg(QtWidgets.QDialog):
                 self.Qcombo_group4.currentData()) == 0 or  len(self.Qcombo_group6.currentData()) == 0 or len(
                 self.Qcombo_group5.currentData()) == 0 or self.name == '' or self.desc == '' or float(self.purchAmount) == 0 or self.points == '0' or self.date_from == '' or self.date_to == '' \
                 :
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+            QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
         elif self.date_to  < self.date_from :
             QtWidgets.QMessageBox.warning(self, "Error",
                                           "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
@@ -780,7 +780,7 @@ class CL_loyProg(QtWidgets.QDialog):
                                     except (Error, Warning) as e:
                                         print(e)
                                 else:
-                                    QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
+                                    QtWidgets.QMessageBox.warning(self, "Error", "المدخلات بالفعل نوجوده")
                                     continue
         # mycursor.execute(sql)
         # if self.mycursor.rowcount>0:
@@ -881,7 +881,7 @@ class CL_loyProg(QtWidgets.QDialog):
                 if name == '' or desc == '' or validFrom == '' or validTo == '' or status == '' or company == '' or branch == '' \
                             or custGroup == '' or loyalityType == ''  or purchAmount == '' or points == '':
                         nonCreatedProg = nonCreatedProg + 1
-                        QtWidgets.QMessageBox.warning(self, "Error", "Some fields arenot filled")
+                        QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
                         break
 
                 #                 #     try:
@@ -981,14 +981,14 @@ class CL_loyProg(QtWidgets.QDialog):
                 #self.FN_REFRESH_DATA_GRID(ids)
             self.close()
         else:
-            QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
+            QtWidgets.QMessageBox.warning(self, "Error", "برجاء إختيار الملف ")
     def FN_MODIFY_LOYPROG(self):
         try:
 
             ids=[]
             id = self.label_ID.text().strip()
             if len(id) == 0:
-                QtWidgets.QMessageBox.information(self, "Error", "No LoyProg selected")
+                QtWidgets.QMessageBox.information(self, "Error", "لم يتم إختيار أي برنامج")
             else:
                 name = self.Qline_name.text().strip()
                 desc = self.Qtext_desc.toPlainText().strip()
@@ -998,7 +998,7 @@ class CL_loyProg(QtWidgets.QDialog):
                 date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
                 if name == '' or desc == '' or float(purchAmount) == 0 or points == '0' or date_from == '' or date_to == '' \
                         :
-                    QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                    QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
                 elif date_to < date_from:
                     QtWidgets.QMessageBox.warning(self, "Error",
                                                   "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
@@ -1022,7 +1022,7 @@ class CL_loyProg(QtWidgets.QDialog):
                     mycursor.close()
                     ids.append(id)
                     print( mycursor.rowcount, "record updated." )
-                    QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
+                    QtWidgets.QMessageBox.information(self, "Success", "تم التعديل")
 
                     db1.connectionCommit( conn )
                     db1.connectionClose( conn )

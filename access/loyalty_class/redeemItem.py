@@ -306,7 +306,7 @@ class CL_redItem(QtWidgets.QDialog):
 
            if  len(self.Qcombo_group3.currentData()) == 0 or len(
                    self.Qcombo_group4.currentData()) == 0  or bar == ''  or points == '' or date_from == '' or date_to == ''    :
-               QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+               QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
            elif date_to < date_from:
                QtWidgets.QMessageBox.warning(self, "Error",
                                              "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
@@ -333,12 +333,12 @@ class CL_redItem(QtWidgets.QDialog):
                                    mycursor1.close()
 
                                else:
-                                   QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
+                                   QtWidgets.QMessageBox.warning(self, "Error", "المدخلات موجوده بالفعل ")
                        self.FN_REFRESH_DATA_GRID()
                    else:
                        QtWidgets.QMessageBox.warning(self, "Error", "Points must be an integer")
                else:
-                   QtWidgets.QMessageBox.warning(self, "Error", "Barcodes doesnot exists")
+                   QtWidgets.QMessageBox.warning(self, "Error", "الباركود غير صحيح")
 
        except Exception as err:
             print(err)
@@ -433,7 +433,7 @@ class CL_redItem(QtWidgets.QDialog):
             conn = db1.connect()
             mycursor = conn.cursor()
             if  points == '' :
-                QtWidgets.QMessageBox.warning(self, "Error", "Please enter Points ")
+                QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال النقاط ")
             elif date_to < date_from:
                 QtWidgets.QMessageBox.warning(self, "Error",
                                               "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
@@ -457,7 +457,7 @@ class CL_redItem(QtWidgets.QDialog):
                         mycursor.close()
 
                         print(mycursor.rowcount, "record updated.")
-                        QtWidgets.QMessageBox.information(self, "Success", "redeem item is modified successfully")
+                        QtWidgets.QMessageBox.information(self, "Success", "تم التعديل ")
 
                         db1.connectionCommit(conn)
                         self.FN_REFRESH_DATA_GRID()
@@ -590,7 +590,7 @@ class CL_redItem(QtWidgets.QDialog):
                     if validFrom == '' or validTo == '' or status == '' or company == '' or branch == '' \
                            or points == '':
                         nonCreatedItem = nonCreatedItem + 1
-                        QtWidgets.QMessageBox.warning(self, "Error", "Some fields arenot filled")
+                        QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
                         break
                     #                 #     try:
                     #elif CL_validation.FN_validate_date1(validFrom) == True and CL_validation.FN_validation_int(status):
@@ -660,7 +660,7 @@ class CL_redItem(QtWidgets.QDialog):
                 self.close()
 
             else:
-                QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
+                QtWidgets.QMessageBox.warning(self, "Error", "اختر الملف ")
         except Exception as err:
            print(err)
 

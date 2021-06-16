@@ -242,15 +242,15 @@ class CL_customerTP(QtWidgets.QDialog):
                 self.id = int(myresult[0]) + 1
 
             if name == '':
-                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
             else:
                 if self.FN_CHECK_DUP_NAME(name) != False:
-                    QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                    QtWidgets.QMessageBox.warning(self, "Error", "الاسم مكرر")
 
                 else:
                     nextLevel1 = self.FN_GET_NEXTlEVEL_ID(nextLevel)
                     if  self.FN_CHECK_DUP_NEXTLEVEL(nextLevel1,id)!=False:
-                        QtWidgets.QMessageBox.warning(self, "Error", "Next Level is duplicated")
+                        QtWidgets.QMessageBox.warning(self, "Error", "المستوى التالي مكرر")
                     else:
                         sql = "INSERT INTO Hyper1_Retail.LOYALITY_CUSTOMER_TYPE" \
                               "         VALUES ( %s, %s, %s,  %s,%s)"
@@ -262,7 +262,7 @@ class CL_customerTP(QtWidgets.QDialog):
                         #mycursor.close()
 
                         print(mycursor.rowcount, "Cust Tp inserted.")
-                        QtWidgets.QMessageBox.information(self, "Success", "Cust Tp inserted.")
+                        QtWidgets.QMessageBox.information(self, "Success", "تم الإنشاء")
                         db1.connectionCommit(conn)
                         self.FN_GET_CUSTTPS()
                         self.FN_GET_NEXTLVL()
@@ -291,15 +291,15 @@ class CL_customerTP(QtWidgets.QDialog):
                 ret = self.FN_CHECK_DUP_NAME(desc)
                 error = 0
                 if desc == '':
-                    QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                    QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
                 else:
                     if desc != desc_old:
                         if self.FN_CHECK_DUP_NAME(desc,id) != False:
-                            QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                            QtWidgets.QMessageBox.warning(self, "Error", "الاسم مكرر")
                             error=1
                     if next_level_old != nextLevel :
                         if self.FN_CHECK_DUP_NEXTLEVEL(nextLevel,id) != False:
-                            QtWidgets.QMessageBox.warning(self, "Error", "Next Level is duplicated")
+                            QtWidgets.QMessageBox.warning(self, "Error", "المستوى التالي مكرر")
                             error = 1
 
                     if error != 1:
@@ -311,13 +311,13 @@ class CL_customerTP(QtWidgets.QDialog):
                         mycursor.execute(sql, val)
                         mycursor.close()                #
                         print(mycursor.rowcount, "record updated.")
-                        QtWidgets.QMessageBox.information(self, "Success", "Cust Tp updated")
+                        QtWidgets.QMessageBox.information(self, "Success", "تم التعديل")
                         db1.connectionCommit(self.conn)
                         self.FN_GET_CUSTTPS()
                         self.FN_CLEAR_FEILDS()
                         mycursor.close()
             else:
-                QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+                QtWidgets.QMessageBox.warning(self, "Error", "برجاء اختيار السطر المراد تعديله ")
 
         except Exception as err:
 

@@ -176,12 +176,12 @@ class CL_customerGP(QtWidgets.QDialog):
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
         if self.name == '' :
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+            QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
 
         else:
             try:
                 if self.FN_CHECK_DUP_NAME(self.name) != False:
-                    QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                    QtWidgets.QMessageBox.warning(self, "Error", "الاسم مكرر")
                     mycursor.close()
                 else:
                     sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
@@ -196,7 +196,7 @@ class CL_customerGP(QtWidgets.QDialog):
                     mycursor.close()
 
                     print(mycursor.rowcount, "Cust Gp inserted.")
-                    QtWidgets.QMessageBox.information(self, "Success", "Cust Gp inserted.")
+                    QtWidgets.QMessageBox.information(self, "Success", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_CUSTGPS()
                     self.FN_CLEAR_FEILDS()
@@ -223,12 +223,12 @@ class CL_customerGP(QtWidgets.QDialog):
             #
             error = 0
             if self.desc == '':
-                QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
 
             else:
                 if desc != desc_old:
                     if self.FN_CHECK_DUP_NAME(desc) != False:
-                        QtWidgets.QMessageBox.warning(self, "Error", "Name is duplicated")
+                        QtWidgets.QMessageBox.warning(self, "Error", "الاسم مكرر")
                         error=1
 
                 if error!=1:
@@ -240,12 +240,12 @@ class CL_customerGP(QtWidgets.QDialog):
                     #mycursor.close()
                     #
                     print(mycursor.rowcount, "record updated.")
-                    QtWidgets.QMessageBox.information(self, "Success", "Cust Gp updated.")
+                    QtWidgets.QMessageBox.information(self, "Success", "تم التعديل")
                     db1.connectionCommit(self.conn1)
                     self.FN_GET_CUSTGPS()
                     self.FN_CLEAR_FEILDS ()
         else:
-            QtWidgets.QMessageBox.warning(self, "Error", "Please select the row you want to modify ")
+            QtWidgets.QMessageBox.warning(self, "Error", "برجاء اختيار السطر المراد تعديله ")
 
     def FN_CLEAR_FEILDS (self):
         self.LB_custGpId.clear()

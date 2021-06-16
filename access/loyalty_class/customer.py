@@ -134,7 +134,7 @@ class CL_customer_modify(QtWidgets.QDialog):
                 mycursor.close()
 
                 print(mycursor.rowcount, "record updated.")
-                QtWidgets.QMessageBox.information(self, "Success", "Customer is modified successfully")
+                QtWidgets.QMessageBox.information(self, "Success", "تم التعديل")
 
                 db1.connectionCommit(conn)
                 # db1.connectionClose( self.conn )
@@ -239,30 +239,30 @@ class CL_customer_modify(QtWidgets.QDialog):
         error = 0
         if self.name == '' or self.mobile == '' or self.job == '' or self.address == '' or self.building == '' \
                 or self.floor == '' or self.email == '':
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+            QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
             error = 1
             return error
         ret = CL_validation.FN_validation_int(self.phone)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم التليفون غير صحيح")
             error = 1
 
         ret = CL_validation.FN_validation_mobile(self.mobile)
         if ret == 3:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile n0,len must be = 11")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم الموبايل يجب أن يكون 11 رقم")
             error = 1
         elif ret == 2:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile no,no must start with '01'")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم الموبايل يجب أن يبدأ ب 01")
             error = 1
 
         ret = self.FN_CHECK_REPEATED_MOBILE(self.mobile,id)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Repeated Mobile no ")
+            QtWidgets.QMessageBox.warning(self, "Error", "موبايل مكرر ")
             error = 1
 
         ret = CL_validation.FN_validation_int(self.workPhone)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم هاتف غير صحيح")
             error = 1
         ret = CL_validation.FN_validation_int(self.building)
         if ret == False:
@@ -276,7 +276,7 @@ class CL_customer_modify(QtWidgets.QDialog):
 
         ret = CL_validation.FN_valedation_mail(self.email)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
+            QtWidgets.QMessageBox.warning(self, "Error", "إيميل غير صحسح")
             error = 1
         return error
     def FN_CHECK_REPEATED_MOBILE(self,mobile,id):
@@ -483,25 +483,25 @@ class CL_customer_create(QtWidgets.QDialog):
             return error
         ret = CL_validation.FN_validation_int(self.phone)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم التليفون غير صحيح")
             error = 1
 
         ret = CL_validation.FN_validation_mobile(self.mobile)
         if ret == 3:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile n0,len must be = 11")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم الموبايل يجب أن يكون 11 رقم")
             error = 1
         elif ret == 2:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile no,no must start with '01'")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم الموبايل يجب أن يبدأ ب 01")
             error = 1
 
         ret = self.FN_CHECK_REPEATED_MOBILE(self.mobile)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Repeated Mobile no ")
+            QtWidgets.QMessageBox.warning(self, "Error", "موبايل مكرر ")
             error = 1
 
         ret = CL_validation.FN_validation_int(self.workPhone)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم هاتف غير صحيح")
             error = 1
         ret = CL_validation.FN_validation_int(self.building)
         if ret == False:
@@ -515,7 +515,7 @@ class CL_customer_create(QtWidgets.QDialog):
 
         ret = CL_validation.FN_valedation_mail(self.email)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
+            QtWidgets.QMessageBox.warning(self, "Error",  "إيميل غير صحسح")
             error = 1
         return error
     def FN_CHECK_REPEATED_MOBILE(self,mobile):
@@ -553,6 +553,7 @@ class CL_customer(QtWidgets.QDialog):
         conn = db1.connect()
         mycursor = conn.cursor()
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
+        self.Qbtn_search_all.clicked.connect(self.FN_SEARCH_CUST_ALL)
         self.Qbtn_export.clicked.connect(self.FN_SAVE_CUST)
         self.Rbtn_custNo.clicked.connect(self.onClicked)
         self.Rbtn_custName.clicked.connect(self.onClicked)
@@ -721,17 +722,17 @@ class CL_customer(QtWidgets.QDialog):
                     ret = CL_validation.FN_validation_mobile(self.mobile)
                     if ret == 3:
 
-                        error_message = error_message + " has Invalid mobile no ,len must be = 11"
+                        error_message = error_message + "رقم الموبايل يجب أن يكون 11 رقم"
 
                         error = 1
                     elif ret == 2:
-                        error_message = error_message + ", has Invalid mobile no,no must start with '01'"
+                        error_message = error_message + " رقم الموبايل يجب أن يبدأ ب 01"
 
                         error = 1
 
                     ret = CL_validation.FN_validation_int(self.phone)
                     if ret == False:
-                        error_message = error_message + " , has Invalid phone number"
+                        error_message = error_message + " , صحيح غير الهاتف رقم "
 
                         error = 1
 
@@ -743,8 +744,7 @@ class CL_customer(QtWidgets.QDialog):
 
                     ret = CL_validation.FN_valedation_mail(self.email)
                     if ret == False:
-                        error_message = error_message + " ,has Invalid email"
-
+                        error_message = error_message +  "  إيميل غير صحسح"
                         error = 1
 
 
@@ -1020,25 +1020,25 @@ class CL_customer(QtWidgets.QDialog):
             return error
         ret = CL_validation.FN_validation_int(self.phone)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid phone number")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم التليفون غير صحيح")
             error = 1
 
         ret = CL_validation.FN_validation_mobile(self.mobile)
         if ret == 3:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile n0,len must be = 11")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم الموبايل يجب أن يكون 11 رقم")
             error = 1
         elif ret == 2:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid mobile no,no must start with '01'")
+            QtWidgets.QMessageBox.warning(self, "Error"," رقم الموبايل يجب أن يبدأ ب  01")
             error = 1
 
         ret = self.FN_CHECK_REPEATED_MOBILE(self.mobile)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Repeated Mobile no ")
+            QtWidgets.QMessageBox.warning(self, "Error", "موبايل مكرر ")
             error = 1
 
         ret = CL_validation.FN_validation_int(self.workPhone)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid work Phone")
+            QtWidgets.QMessageBox.warning(self, "Error", "رقم هاتف غير صحيح")
             error = 1
         ret = CL_validation.FN_validation_int(self.building)
         if ret == False:
@@ -1052,7 +1052,7 @@ class CL_customer(QtWidgets.QDialog):
 
         ret = CL_validation.FN_valedation_mail(self.email)
         if ret == False:
-            QtWidgets.QMessageBox.warning(self, "Error", "Invalid email")
+            QtWidgets.QMessageBox.warning(self, "Error",  "إيميل غير صحسح")
             error = 1
         return error
     def FN_CHECK_REPEATED_MOBILE(self,mobile):
@@ -1116,7 +1116,7 @@ class CL_customer(QtWidgets.QDialog):
 
 #search for a customer
     def FN_SEARCH_CUST(self):
-        # print('in search')
+        #print('in search' +var)
         # self.Qtable_customer.clearcontents()
         self.Qbtn_search.setEnabled(False)
         for i in reversed(range(self.Qtable_customer.rowCount())):
@@ -1178,4 +1178,32 @@ class CL_customer(QtWidgets.QDialog):
             mycursor.close()
         self.Qbtn_search.setEnabled(True)
 
+    def FN_SEARCH_CUST_ALL(self):
+        #print('in search' +var)
+        # self.Qtable_customer.clearcontents()
+        self.Qbtn_search.setEnabled(False)
+        for i in reversed(range(self.Qtable_customer.rowCount())):
+            self.Qtable_customer.removeRow(i)
+        conn = db1.connect()
+        mycursor = conn.cursor()
+
+        orderClause = " order by POSC_CUST_ID*1 asc"
+        sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER  " + orderClause
+        # print(sql_select_query)
+        mycursor.execute(sql_select_query)
+        records = mycursor.fetchall()
+        for row_number, row_data in enumerate(records):
+            self.Qtable_customer.insertRow(row_number)
+
+            for column_number, data in enumerate(row_data):
+                if column_number == 12:
+                    data = util.FN_GET_STATUS_DESC(str(data))
+
+                elif column_number == 2:
+                    data = util.FN_GET_CUSTTP_DESC(str(data))
+                self.Qtable_customer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+        self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
+        mycursor.close()
+        #self.Qbtn_search.setEnabled(True)
 

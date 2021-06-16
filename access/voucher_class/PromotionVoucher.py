@@ -240,7 +240,7 @@ class CL_PromVoucher(QtWidgets.QDialog):
                     mycursor.execute(sql,val)
                     db1.connectionCommit(self.conn)
                     mycursor.close()
-
+                    QtWidgets.QMessageBox.warning(self, "sucess", "تم التعديل")
 
                     valid_from =self.Qdate_from.dateTime().toString('yyyy-MM-dd')
                     valid_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')

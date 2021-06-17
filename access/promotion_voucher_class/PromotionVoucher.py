@@ -136,7 +136,7 @@ class CL_PromVoucher(QtWidgets.QDialog):
                     mycursor.execute("SELECT * FROM `Hyper1_Retail`.`PROMOTIONAL_VOUCHER` Where PROMV_VOUCHER_DESC = '" + desc + "'")
                     c = mycursor.fetchone()
                     id = c[0]
-                    QtWidgets.QMessageBox.warning(self, "Done", "رقم قسيمه الشراء هو " + str(id))
+                    QtWidgets.QMessageBox.information(self, "Done", "رقم قسيمه الشراء هو " + str(id))
                     self.voucher_num.setText(str(id))
 
 
@@ -240,7 +240,7 @@ class CL_PromVoucher(QtWidgets.QDialog):
                     mycursor.execute(sql,val)
                     db1.connectionCommit(self.conn)
                     mycursor.close()
-                    QtWidgets.QMessageBox.warning(self, "sucess", "تم التعديل")
+                    QtWidgets.QMessageBox.information(self, "sucess", "تم التعديل")
 
                     valid_from =self.Qdate_from.dateTime().toString('yyyy-MM-dd')
                     valid_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')

@@ -119,6 +119,9 @@
                                         }
                                     </string>
    </property>
+   <property name="maxLength">
+    <number>50</number>
+   </property>
   </widget>
   <widget class="QTableWidget" name="Qtable_custGP">
    <property name="geometry">

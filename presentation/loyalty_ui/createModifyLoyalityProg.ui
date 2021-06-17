@@ -219,6 +219,9 @@ background-color: rgb(198, 207, 199);</string>
                                         }
                                     </string>
      </property>
+     <property name="maxLength">
+      <number>30</number>
+     </property>
     </widget>
     <widget class="QTextEdit" name="Qtext_desc">
      <property name="geometry">

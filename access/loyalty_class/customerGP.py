@@ -184,6 +184,7 @@ class CL_customerGP(QtWidgets.QDialog):
                     QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
                     mycursor.close()
                 else:
+
                     sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
                           "         VALUES ( %s, %s, %s,  %s,%s)"
 

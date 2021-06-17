@@ -190,7 +190,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string>028741</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -221,7 +221,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string>01002874528</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -252,7 +252,10 @@
                                     </string>
       </property>
       <property name="text">
-       <string>dsf</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>25</number>
       </property>
      </widget>
     </item>
@@ -283,7 +286,10 @@
                                     </string>
       </property>
       <property name="text">
-       <string>sdf</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
       </property>
      </widget>
     </item>
@@ -384,7 +390,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string>ss@fff.com</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -415,7 +421,10 @@
                                     </string>
       </property>
       <property name="text">
-       <string>234</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>35</number>
       </property>
      </widget>
     </item>
@@ -446,7 +455,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string>234</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -478,7 +487,10 @@
                             </string>
       </property>
       <property name="text">
-       <string>sdfds</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>25</number>
       </property>
      </widget>
     </item>
@@ -614,7 +626,10 @@
                                     </string>
    </property>
    <property name="text">
-    <string>asdas</string>
+    <string/>
+   </property>
+   <property name="maxLength">
+    <number>50</number>
    </property>
   </widget>
   <widget class="QTextEdit" name="LE_notes">

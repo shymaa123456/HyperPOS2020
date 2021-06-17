@@ -326,17 +326,21 @@ class CL_redItem(QtWidgets.QDialog):
                                ret = self.FN_CHECK_EXIST(com, br,  bar)
                                if ret == False:
                                    mycursor1 = conn.cursor()
+                                   #get BMC ID
+                                   mycursor1.execute("select BMC_ID from Hyper1_Retail.POS_ITEM where POS_GTIN ='"+bar+"'")
+                                   myresult = mycursor1.fetchone()
+                                   BMC_ID = myresult[0]
                                    sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
                                          "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
                                          ",REDEEM_VALID_TO,REDEEM_STATUS,BMC_ID)" \
                                          "values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
-                                   val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status,' ')
+                                   val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status,BMC_ID)
 
                                    mycursor1.execute(sql, val)
                                    db1.connectionCommit(conn)
                                    mycursor1.close()
-                                   QtWidgets.QMessageBox.warning(self, "نجاح", "تم الإنشاء")
+                                   QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                                else:
                                    QtWidgets.QMessageBox.warning(self, "خطأ", "المدخلات موجوده بالفعل ")
                        self.FN_REFRESH_DATA_GRID()

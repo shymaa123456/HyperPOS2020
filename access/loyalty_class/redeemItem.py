@@ -450,7 +450,7 @@ class CL_redItem(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "خطأ",
                                               "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
             elif date_from < creationDate1:
-                QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ التعديل  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
 
             else:
                     self.CMB_branch.hide()

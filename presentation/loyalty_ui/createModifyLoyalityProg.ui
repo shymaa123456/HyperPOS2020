@@ -349,6 +349,26 @@ background-color: rgb(198, 207, 199);</string>
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
+        <property name="dateTime">
+         <datetime>
+          <hour>23</hour>
+          <minute>59</minute>
+          <second>59</second>
+          <year>9999</year>
+          <month>12</month>
+          <day>25</day>
+         </datetime>
+        </property>
+        <property name="maximumDateTime">
+         <datetime>
+          <hour>23</hour>
+          <minute>59</minute>
+          <second>59</second>
+          <year>9999</year>
+          <month>12</month>
+          <day>25</day>
+         </datetime>
+        </property>
         <property name="displayFormat">
          <string>dd-MM-yyyy</string>
         </property>
@@ -357,9 +377,9 @@ background-color: rgb(198, 207, 199);</string>
         </property>
         <property name="date">
          <date>
-          <year>2021</year>
-          <month>1</month>
-          <day>3</day>
+          <year>9999</year>
+          <month>12</month>
+          <day>25</day>
          </date>
         </property>
        </widget>
@@ -371,9 +391,9 @@ background-color: rgb(198, 207, 199);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
-      <width>111</width>
-      <height>151</height>
+      <y>100</y>
+      <width>121</width>
+      <height>161</height>
      </rect>
     </property>
     <property name="title">
@@ -456,6 +476,41 @@ background-color: rgb(198, 207, 199);</string>
         </property>
         <property name="text">
          <string>إنشاء البرنامج</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Qbtn_activate">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width:6em;
+                                       }
+                                        QPushButton:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                        QPushButton:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    
+                                    </string>
+        </property>
+        <property name="text">
+         <string>تعديل الحاله</string>
         </property>
        </widget>
       </item>
@@ -564,7 +619,10 @@ background-color: rgb(198, 207, 199);</string>
      </layout>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_6">
+   <widget class="QGroupBox" name="Qgrp_status">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>788</x>

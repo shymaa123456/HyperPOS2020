@@ -67,7 +67,7 @@ class CL_customerGP(QtWidgets.QDialog):
             if name != '' :
                 whereClause = whereClause + "and CG_DESC like '%" + str(name) + "%'"
 
-            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + " order by CG_GROUP_ID*1 asc"
+            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + " and CG_DESC !='H1' order by CG_GROUP_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -99,7 +99,7 @@ class CL_customerGP(QtWidgets.QDialog):
                 self.Qtable_custGP.removeRow(i)
 
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  order by CG_GROUP_ID*1   asc")
+            mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  where  CG_DESC !='H1' order by CG_GROUP_ID*1   asc")
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable_custGP.insertRow(row_number)

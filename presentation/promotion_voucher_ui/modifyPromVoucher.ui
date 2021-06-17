@@ -102,6 +102,9 @@
                                         }
                                     </string>
    </property>
+   <property name="maxLength">
+    <number>30</number>
+   </property>
   </widget>
   <widget class="QLabel" name="desc_3">
    <property name="geometry">

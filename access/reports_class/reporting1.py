@@ -29,15 +29,11 @@ import sys
 
 
 class CL_report1(QtWidgets.QDialog):
-    # self.Qtime_from.dateTime().toString('hh:mm:ss')
     model = QStandardItemModel()
 
     switch_window = QtCore.pyqtSignal()
-    cond = 0
-    status = 0
+    cond = 1
     query = ""
-    # sponsor_list = []
-    magazine_list = []
     company_list = []
     branch_list = []
     conn = db1.connect()
@@ -46,6 +42,7 @@ class CL_report1(QtWidgets.QDialog):
     prom_CG = ""
     sponsor_prom = ""
     multi = ""
+    copNum = ""
     list_num = []
     field_names = []
 
@@ -87,19 +84,17 @@ class CL_report1(QtWidgets.QDialog):
                 self.company_list.append("'" "'")
                 self.branch_list.append("'" "'")
 
-            # if len(self.Qcombo_branchEdition.currentData()) > 0:
-            #     for i in self.Qcombo_branchEdition.currentData():
-            #         self.branch_list.append("'" + i + "'")
-            # else:
-            #     QtWidgets.QMessageBox.warning(self, "Error", "برجاء تحديد محددات البحث")
-            #     self.branch_list.append("'" "'")
-
-
 
             if self.QcheckBox_multi.isChecked():
                     self.multi = "AND COP_MULTI_USE = 1 "
             else:
                 self.multi = ""
+
+            if len(self.Qline_promotion.text()) > 0:
+                self.copNum = "Cop_ID = '" + self.Qline_promotion.text() + "' AND "
+            else:
+                self.copNum = ""
+
 
 
             self.Qtable_promotion.setRowCount(0)
@@ -108,20 +103,21 @@ class CL_report1(QtWidgets.QDialog):
             mycursor = self.conn.cursor()
             query = ""
             if self.cond == 1:
+                self.Qbtn_search.setEnabled(False)
                 self.query = (
-                        "SELECT COP_ID , COP_DESC, BRANCH_DESC_A, COP_DISCOUNT_VAL , COP_DISCOUNT_PERCENT , COP_SERIAL_COUNT , COP_MULTI_USE , COP_MULTI_USE_COUNT , COP_CREAED_ON , COP_CHANGED_ON , COP_VALID_FROM , COP_VALID_TO , COP_STATUS FROM COUPON "
+                        "SELECT COP_ID , COP_DESC, BRANCH_DESC_A, COP_DISCOUNT_VAL , COP_DISCOUNT_PERCENT , "
+                        "COP_SERIAL_COUNT , COP_MULTI_USE , COP_MULTI_USE_COUNT , COP_CREAED_ON , COP_CHANGED_ON , "
+                        "COP_VALID_FROM , COP_VALID_TO , COP_STATUS FROM COUPON "
                         "join COUPON_BRANCH on COP_ID = COUPON_ID "
                         "join BRANCH on COUPON_BRANCH.BRANCH_NO = BRANCH.BRANCH_NO "
-                        "WHERE COP_ID = '" + self.Qline_promotion.text() + "'"+self.prom_status+" and COP_VALID_FROM >= '" + self.Qdate_from.dateTime().toString(
+                        "WHERE " + self.copNum + self.prom_status+" COP_VALID_FROM >= '" + self.Qdate_from.dateTime().toString(
                     'yyyy-MM-dd') + "' and COP_VALID_TO<='"
                         + self.Qdate_to.dateTime().toString(
-                    'yyyy-MM-dd') + "'") + self.multi + "AND BRANCH.COMPANY_ID IN (" + ','.join(self.company_list) + ")" \
-                                                                                                              "and BRANCH.BRANCH_NO IN (" + ','.join(self.branch_list) + ")"
-                # self.query = (
-                #         "SELECT COP_ID , COP_DESC, COP_DISCOUNT_VAL , COP_DISCOUNT_PERCENT , COP_SERIAL_COUNT , COP_MULTI_USE , COP_MULTI_USE_COUNT , COP_CREAED_ON , COP_CHANGED_ON , COP_VALID_FROM , COP_VALID_TO , COP_STATUS FROM COUPON WHERE COP_ID = '" + self.Qline_promotion.text() + "'" + self.prom_status )
+                    'yyyy-MM-dd') + "'") + self.multi + "AND BRANCH.COMPANY_ID IN (" + ','.join(self.company_list) + ") " \
+                    "and BRANCH.BRANCH_NO IN (" + ','.join(self.branch_list) + ")"
+
                 self.runQuery(mycursor)
-                # # print(mycursor.description)
-                # print(mycursor.column_names)
+                self.Qbtn_search.setEnabled(True)
                 self.field_names = ['COP_ID', 'COP_DESC', 'BRANCH_DESC_A', 'COP_DISCOUNT_VAL' , 'COP_DISCOUNT_PERCENT' , 'COP_SERIAL_COUNT' , 'COP_MULTI_USE' , 'COP_MULTI_USE_COUNT' , 'COP_VALID_FROM' , 'COP_VALID_TO' , 'COP_STATUS']
 
             elif self.cond == 0:
@@ -166,44 +162,30 @@ class CL_report1(QtWidgets.QDialog):
                   self.Qcombo_branchEdition.addItem(row,val)
         mycursor.close()
 
-    def FN_GET_MAGAZINE(self):
-        #Todo: method for fills the MAGAZINE combobox
-
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT MAGAZINE_DESC , MAGAZINE_ID FROM MAGAZINE")
-        records = mycursor.fetchall()
-        for row, val in records:
-            self.Qcombo_magazine.addItem(row, val)
-        mycursor.close()
 
 
-    def FN_Checked_Selected2(self):
-        #Todo: method for change kind of Search parameters to search by promotion number
 
-        self.radioBtnPromNum.setChecked(True)
-        self.Qline_promotion.setEnabled(True)
-        self.cond = 1
-        self.Qtable_promotion.setRowCount(0)
-        self.disable()
 
 
     def FN_Check_Active(self):
         #Todo: method for change status to active
 
-        self.status = 1
-        self.Qtable_promotion.setRowCount(0)
         self.disable()
-        self.prom_status = "and `COUPON`.`COP_STATUS`='1'"
+        self.prom_status = "COP_STATUS = '1' AND "
 
 
     def FN_Check_Expired(self):
         #Todo: method for change status to Expired
 
-        self.status = 2
-        self.Qtable_promotion.setRowCount(0)
         self.disable()
-        self.prom_status = "and `COUPON`.`COP_STATUS`='0'"
+        self.prom_status = "COP_STATUS = '0' AND "
+
+
+    def FN_Check_All(self):
+        #Todo: method for change status to Expired
+
+        self.disable()
+        self.prom_status = ""
 
 
     def handleSave(self):
@@ -211,7 +193,7 @@ class CL_report1(QtWidgets.QDialog):
 
         frame = pd.read_sql(str(self.query), self.conn)
         df = pd.DataFrame(frame,
-                          columns=['COP_ID' , 'COP_DESC', 'COP_DISCOUNT_VAL' , 'COP_DISCOUNT_PERCENT' , 'COP_SERIAL_COUNT' , 'COP_MULTI_USE' , 'COP_MULTI_USE_COUNT' , 'COP_CREAED_ON' , 'COP_CHANGED_ON' , 'COP_VALID_FROM' , 'COP_VALID_TO' , 'COP_STATUS'])
+                          columns=self.field_names)
 
         # Dump Pandas DataFrame to Excel sheet
         writer = pd.ExcelWriter('myreport.xlsx', engine='xlsxwriter')
@@ -265,17 +247,17 @@ class CL_report1(QtWidgets.QDialog):
             cwd = Path.cwd()
             mod_path = Path(__file__).parent.parent.parent
             dirname = mod_path.__str__() + '/presentation/reports_ui'
-            filename = dirname + '/Coupon_display.ui'
+            filename = dirname + '/Coupon_display_1.ui'
             loadUi(filename, self)
-            self.setWindowTitle('HyperPOS Reporting')
+            self.setWindowTitle('تقرير الكوبون')
 
             self.Qcombo_company = CheckableComboBox(self)
-            self.Qcombo_company.setGeometry(290, 50, 200, 18)
+            self.Qcombo_company.setGeometry(450, 50, 200, 18)
             self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
 
             self.Qcombo_branchEdition = CheckableComboBox(self)
-            self.Qcombo_branchEdition.setGeometry(290, 100, 200, 18)
+            self.Qcombo_branchEdition.setGeometry(450, 120, 200, 18)
             self.Qcombo_branchEdition.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_branchEdition.setStyleSheet("background-color: rgb(198, 207, 199)")
 
@@ -286,18 +268,11 @@ class CL_report1(QtWidgets.QDialog):
             self.FN_GET_Branch()
 
 
-            # self.FN_GET_promotion_type()
             self.Qtable_promotion.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-            self.radioBtnPromNum.clicked.connect(self.FN_Checked_Selected2)
-            # self.radioButton_2.clicked.connect(self.FN_Checked_Selected)
-            # self.radioBtnPromNum_2.clicked.connect(self.FN_Checked_Selected3)
             self.radioBtnPromExpired.clicked.connect(self.FN_Check_Expired)
-            # self.radioBtnPromStop.clicked.connect(self.FN_Check_Stopped)
             self.radioBtnPromActive.clicked.connect(self.FN_Check_Active)
-            # self.radioBtnPromAll.clicked.connect(self.FN_Check_All)
+            self.radioBtnPromAll.clicked.connect(self.FN_Check_All)
 
-            self.Qline_promotion.setEnabled(False)
-            # self.QcheckBox_multi.toggled.connect(self.FN_Check_Multi)
             self.Qbtn_exprot.clicked.connect(self.handleSave)
             self.Qbtn_print.clicked.connect(self.printpreviewDialog)
 

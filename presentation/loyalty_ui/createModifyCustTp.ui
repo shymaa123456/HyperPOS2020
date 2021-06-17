@@ -214,7 +214,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>النقاط</string>
+    <string>نقاط الترقيه</string>
    </property>
   </widget>
   <widget class="QComboBox" name="CMB_nextLevel">

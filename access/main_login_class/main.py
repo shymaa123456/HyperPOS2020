@@ -36,7 +36,7 @@ from PyQt5.QtWidgets import QMessageBox
 from access.voucher_class.CreateVoucher import   CL_CreateVoucher
 from access.voucher_class.EditVoucher import CL_EditVoucher
 from access.voucher_class.stoppedVoucher import CL_modifyVoucher
-from access.voucher_class.PromotionVoucher import CL_PromVoucher
+from access.promotion_voucher_class.PromotionVoucher import CL_PromVoucher
 
 
 class CL_main(QtWidgets.QMainWindow):
@@ -119,7 +119,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
             self.QAct_Voucher_Activate.triggered.connect(self.FN_StoppedVoucher)
             self.QAct_Voucher_Deactivate.triggered.connect(self.FN_StoppedVoucher)
-
+            # Todo: method for Open promotion Voucher Window
             self.QAct_Prom_Voucher_Add.triggered.connect(self.FN_CreatePromVoucher)
             self.QAct_Prom_Voucher_Edit.triggered.connect(self.FN_EditPromVoucher)
             self.QAct_Prom_Voucher_Act.triggered.connect(self.FN_LOAD_CHANGE_STATUS_ACTIVE)

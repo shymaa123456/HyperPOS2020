@@ -20,7 +20,7 @@ class CL_PromVoucher(QtWidgets.QDialog):
         super(CL_PromVoucher, self).__init__()
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
-        self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
+        self.dirname = mod_path.__str__() + '/presentation/promotion_voucher_ui'
         self.conn = db1.connect()
 
 
@@ -228,7 +228,7 @@ class CL_PromVoucher(QtWidgets.QDialog):
                 if mycursor.rowcount > 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "الاسم موجود بالفعل")
                 elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
-                    QtWidgets.QMessageBox.warning(self, "Error",
+                    QtWidgets.QMessageBox.warning(self, "خطا",
                                                   "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
 
                 else:

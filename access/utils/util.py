@@ -19,10 +19,11 @@ class util():
 
     @staticmethod
     def FN_GET_STATUS_id(desc):
-        if id == 'Active':
+        if desc == 'Active':
             return "1"
         else:
             return "0"
+
 
     @staticmethod
     def FN_GET_CUSTTP():

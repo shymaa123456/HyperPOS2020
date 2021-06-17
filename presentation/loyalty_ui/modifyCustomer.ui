@@ -35,7 +35,7 @@
     <item>
      <widget class="QLabel" name="label_17">
       <property name="text">
-       <string>نوع العميل</string>
+       <string>مجموعه العملاء</string>
       </property>
      </widget>
     </item>
@@ -49,21 +49,21 @@
     <item>
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>رقم الهاتف</string>
+       <string>رقم الهاتف  *</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>رقم الموبايل</string>
+       <string>رقم الموبايل  *</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>الوظيفه</string>
+       <string>الوظيفه  *</string>
       </property>
      </widget>
     </item>
@@ -105,7 +105,7 @@
     <item>
      <widget class="QLabel" name="label_10">
       <property name="text">
-       <string>اﻹيميل</string>
+       <string>اﻹيميل  *</string>
       </property>
      </widget>
     </item>

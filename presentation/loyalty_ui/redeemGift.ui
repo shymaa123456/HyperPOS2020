@@ -169,8 +169,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>259</x>
-     <y>130</y>
+     <x>239</x>
+     <y>180</y>
      <width>82</width>
      <height>20</height>
     </rect>
@@ -206,8 +206,8 @@
   <widget class="QLabel" name="label_17">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>130</y>
+     <x>330</x>
+     <y>180</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -222,8 +222,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>170</y>
+     <x>240</x>
+     <y>220</y>
      <width>82</width>
      <height>20</height>
     </rect>
@@ -259,8 +259,8 @@
   <widget class="QLabel" name="label_18">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>170</y>
+     <x>350</x>
+     <y>220</y>
      <width>91</width>
      <height>20</height>
     </rect>
@@ -272,8 +272,8 @@
   <widget class="QLabel" name="label_19">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>210</y>
+     <x>350</x>
+     <y>260</y>
      <width>91</width>
      <height>20</height>
     </rect>
@@ -288,8 +288,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>210</y>
+     <x>240</x>
+     <y>260</y>
      <width>82</width>
      <height>20</height>
     </rect>
@@ -408,7 +408,7 @@
    <property name="geometry">
     <rect>
      <x>370</x>
-     <y>250</y>
+     <y>130</y>
      <width>91</width>
      <height>20</height>
     </rect>
@@ -421,7 +421,7 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>250</y>
+     <y>130</y>
      <width>179</width>
      <height>18</height>
     </rect>

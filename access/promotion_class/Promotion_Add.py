@@ -15,6 +15,10 @@ from decimal import Decimal
 
 from access.promotion_class.animation import LoginButton as anim_but
 
+
+
+
+
 import sys
 
 """ 
@@ -294,10 +298,10 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.Qbtn_exit.setGeometry(10, 560, 131, 23)
         self.Qbtn_exit.setText('خروج')
 
-        self.Qbtn_add_list = anim_but(self)
-        self.Qbtn_add_list.setMinimumSize(60, 5)
-        self.Qbtn_add_list.setGeometry(190, 560, 131, 23)
-        self.Qbtn_add_list.setText('حفظ بيانات العرض')
+        self.Qbtn_save = anim_but(self)
+        self.Qbtn_save.setMinimumSize(60, 5)
+        self.Qbtn_save.setGeometry(190, 560, 131, 23)
+        self.Qbtn_save.setText('حفظ بيانات العرض')
 
         ###############################################################################
 
@@ -388,7 +392,7 @@ class CL_create_promotion(QtWidgets.QDialog):
             self.conn = db1.connect()
             self.conn.autocommit = False
             mycursor = self.conn.cursor()
-            # self.conn.start_transaction()
+            self.conn.start_transaction()
 
             ####   loop at table data
             # roows = self.Qtable_promotion.rowCount()
@@ -403,21 +407,29 @@ class CL_create_promotion(QtWidgets.QDialog):
             # creationDate = str(datetime.today().strftime('%d-%m-%Y'))
             SPONSER_ID = self.Qcombo_sponsor2.itemData(self.Qcombo_sponsor2.currentIndex())
 
+            #
+            # # lock table for new record:
+            sql0 = "  LOCK  TABLES    Hyper1_Retail.PROMOTION_HEADER   WRITE , " \
+                   "    Hyper1_Retail.PROMOTION_DETAIL   WRITE  "
+            mycursor.execute(sql0)
+
             # create promotion in header
             sql1 = "  insert into Hyper1_Retail.PROMOTION_HEADER " \
-                   "  ( PROM_ID , PROM_TYPE_ID , PROM_DESC , PROM_START_DATE , PROM_END_DATE , " \
+                   "  ( PROM_ID , PROM_TYPE_ID ,  PROM_START_DATE , PROM_END_DATE , " \
                    "  PROM_NO_OF_USAGE_PER_DAY , PROM_CREATED_BY , PROM_CREATED_ON ,     " \
                    "  COUPON_ID , MAGAZINE_ID , PROMV_VOUCHER_ID , PROM_MIN_RCT_VAL ,PROM_MAX_DISC_VAL ,PROM_STATUS ) " \
-                   "  VALUES ( %s, %s , %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s , %s )"
+                   "  VALUES (  %s , %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s , %s )"
             # self.Qdate_from.dateTime().toString('dd-MM-yyyy'),
             # self.Qdate_to.dateTime().toString('dd-MM-yyyy'),
-            val = (self.prom_idd, comb_promotion, self.QLilne_promotion.text(),
+            val = (self.prom_idd, comb_promotion,
                    self.Qdate_from.dateTime().toString('yyyy-MM-dd'),
                    self.Qdate_to.dateTime().toString('yyyy-MM-dd'),
                    "100", CL_userModule.user_name, creationDate,
-                   "", "", "", "100", "100", "0")
+                   "0", "0", "0", "100", "100", "0")
 
             mycursor.execute(sql1, val)
+
+
 
             PROM_LINE_NO = 0
             for row in range(self.Qtable_promotion.rowCount()):
@@ -429,7 +441,7 @@ class CL_create_promotion(QtWidgets.QDialog):
                 #        item = self.Qtable_promotion.item(row, column).text()
 
                        # print(f'row: {row}, column: {column}, item={item}')
-                # " SELECT BMD_ID ,POS_GTIN ,  POS_ITEM_NO ,  POS_UOM, POS_GTIN_DESC_A ,POS_SELL_PRICE, POS_VATRATE ,"
+                # " SELECT BMC_ID ,POS_GTIN ,  POS_ITEM_NO ,  POS_UOM, POS_GTIN_DESC_A ,POS_SELL_PRICE, POS_VATRATE ,"
                 # " '' , '' , 1 , 0 from Hyper1_Retail.POS_ITEM  where POS_GTIN = '" + barcode + "'")
                 # self.Qtable_promotion.setHorizontalHeaderLabels(['القسم الفرعى', 'الباركود', 'رقم الصنف', 'وحدة القياس',
                 #                                                  'الوصف', 'سعر الصنف قبل الخصم', 'نسبة الضريبة',
@@ -444,7 +456,12 @@ class CL_create_promotion(QtWidgets.QDialog):
                 POS_SELL_PRICE = self.Qtable_promotion.item(row, 5).text().strip()
                 POS_VATRATE = self.Qtable_promotion.item(row, 6).text()
                 PROM_DISCOUNT_FLAG = self.Qtable_promotion.item(row, 7).text()
-                PROM_ITEM_DISCOUNT = self.Qtable_promotion.item(row, 8).text().strip()
+
+                if self.Qtable_promotion.item(row, 8).text().strip() == '':
+                    PROM_ITEM_DISCOUNT = '0.0'
+                else:
+                    PROM_ITEM_DISCOUNT = self.Qtable_promotion.item(row, 8).text().strip()
+
                 PROM_ITEM_QTY = self.Qtable_promotion.item(row, 9).text()
                 PROM_MAX_DISC_QTY = self.Qtable_promotion.item(row, 10).text()
                 if PROM_ITEM_DISCOUNT is None or PROM_ITEM_DISCOUNT == '':
@@ -480,6 +497,9 @@ class CL_create_promotion(QtWidgets.QDialog):
             #        )
             # mycursor.execute(sql2, val)
 
+            # # unlock table :
+            sql00 = "  UNLOCK   tables    "
+            mycursor.execute(sql00)
             self.conn.commit()
 
         except mysql.connector.Error as error:
@@ -576,7 +596,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         # self.conn = db1.connect()
         # mycursor = self.conn.cursor()
         # mycursor.execute(
-        #     " SELECT BMD_ID ,POS_GTIN ,  POS_ITEM_NO ,  POS_UOM, POS_GTIN_DESC_A ,POS_SELL_PRICE, POS_VATRATE ,"
+        #     " SELECT BMC_ID ,POS_GTIN ,  POS_ITEM_NO ,  POS_UOM, POS_GTIN_DESC_A ,POS_SELL_PRICE, POS_VATRATE ,"
         #     " '' , '' , 1 , 0 from Hyper1_Retail.POS_ITEM   ")
         # # mycursor.execute("SELECT * from Hyper1_Retail.POS_ITEM   ")
         #
@@ -628,7 +648,7 @@ class CL_create_promotion(QtWidgets.QDialog):
                 self.conn = db1.connect()
                 mycursor = self.conn.cursor()
                 mycursor.execute(
-                    " SELECT BMD_ID ,POS_GTIN ,  POS_ITEM_NO ,  POS_UOM, POS_GTIN_DESC_A ,POS_SELL_PRICE, POS_VATRATE ,"
+                    " SELECT BMC_ID ,POS_GTIN ,  POS_ITEM_NO ,  POS_UOM, POS_GTIN_DESC_A ,POS_SELL_PRICE, POS_VATRATE ,"
                     " '' , '' , 1 , 0 from Hyper1_Retail.POS_ITEM  where POS_GTIN = '" + barcode + "'")
 
                 records = mycursor.fetchall()
@@ -773,7 +793,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute(
-            " SELECT POS_GTIN ,  POS_ITEM_NO , BMD_ID , POS_UOM, POS_GTIN_DESC_A  from Hyper1_Retail.POS_ITEM   ")
+            " SELECT POS_GTIN ,  POS_ITEM_NO , BMC_ID , POS_UOM, POS_GTIN_DESC_A  from Hyper1_Retail.POS_ITEM   ")
         # mycursor.execute("SELECT * from Hyper1_Retail.POS_ITEM   ")
 
         # print(self.query)

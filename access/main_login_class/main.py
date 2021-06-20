@@ -11,6 +11,7 @@ from access.coupon_class.EditCoupon import CL_EditCoupon
 from access.coupon_class.StoppedSerial import CL_StoppedSerial
 from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
+from access.loyalty_class.CL_loyPoint import CL_loyPoint
 from access.loyalty_class.loyalityProg import CL_loyProg
 from access.loyalty_class.redeemItem import CL_redItem
 from access.loyalty_class.redeemType import CL_redeemType
@@ -93,6 +94,7 @@ class CL_main(QtWidgets.QMainWindow):
 
             """ redeem type """
             self.QAct_Redeem_Type.triggered.connect(self.FN_DISPLAY_REDEEMTP)
+            self.QAct_Loyality_Point.triggered.connect(self.FN_DISPLAY_LOYPOINTS)
 
 
             self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
@@ -202,6 +204,14 @@ class CL_main(QtWidgets.QMainWindow):
         except Exception as err:
             print(err)
 
+    def FN_DISPLAY_LOYPOINTS(self):
+        try:
+            self.window_two = CL_loyPoint()
+
+            self.window_two.FN_LOAD_DISPlAY()
+            self.window_two.show()
+        except Exception as err:
+            print(err)
     def FN_exit(self):
         QApplication.quit()
 

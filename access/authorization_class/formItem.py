@@ -50,7 +50,7 @@ class CL_formItem(QtWidgets.QDialog):
 
         for row in records:
             self.CMB_formName.addItems([row[0]])
-            print("adding form", row[0])
+            #print("adding form", row[0])
 
         mycursor.close()
 

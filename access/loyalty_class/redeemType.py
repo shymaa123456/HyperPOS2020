@@ -28,7 +28,8 @@ class CL_redeemType(QtWidgets.QDialog):
     def FN_LOAD_DISPlAY(self):
         filename = self.dirname + '/createModifyRedeemType.ui'
         loadUi(filename, self)
-
+        conn = db1.connect()
+        mycursor = conn.cursor()
         self.FN_GET_REDEEMTPS()
         # self.FN_GET_CustGPID()
         # self.FN_GET_CUSTGP()
@@ -36,15 +37,31 @@ class CL_redeemType(QtWidgets.QDialog):
             self.CMB_redeemType.addItems(["Active", "Inactive"])
             self.LB_status.setText('1')
             self.CMB_redeemType.activated.connect(self.FN_GET_STATUS)
-            self.BTN_createRedeemTp.clicked.connect(self.FN_CREATE_REDEEMTP)
-            self.BTN_modifyRedeemTp.clicked.connect(self.FN_MODIFY_REDEEMTP)
-            #self.Qtable_redeemTp.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
+            self.Qtable_redeemTp.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_searchRedeemTp.clicked.connect(self.FN_SEARCH_REDEEMTP)
             self.BTN_searchRedeemTp_all.clicked.connect(self.FN_GET_REDEEMTPS)
             self.setFixedWidth(380)
             self.setFixedHeight(448)
             self.Qtable_redeemTp.setColumnHidden(0, True)
             self.Qtable_redeemTp.doubleClicked.connect(self.FN_GET_REDEEMTYPE)
+            for row_number, row_data in enumerate(CL_userModule.myList):
+                if row_data[1] == 'Redeem_Type':
+                    if row_data[4] == 'None':
+                        print('hh')
+                    else:
+                        sql_select_query = "select  i.ITEM_DESC from Hyper1_Retail.SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
+                        x = (row_data[4],)
+                        mycursor.execute(sql_select_query, x)
+
+                        result = mycursor.fetchone()
+                        # print(result)
+                        if result[0] == 'create':
+                            self.BTN_createRedeemTp.setEnabled(True)
+                            self.BTN_createRedeemTp.clicked.connect(self.FN_CREATE_REDEEMTP)
+                        elif result[0] == 'modify':
+                            self.BTN_modifyRedeemTp.setEnabled(True)
+                            self.BTN_modifyRedeemTp.clicked.connect(self.FN_MODIFY_REDEEMTP)
         except Exception as err:
             print(err)
 

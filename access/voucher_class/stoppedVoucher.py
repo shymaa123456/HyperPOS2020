@@ -19,6 +19,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
         self.conn = db1.connect()
 
+    # Todo: method to load ui of stoppedVoucher
     def FN_LOADUI(self):
         try:
             filename = self.dirname + '/stoppedVoucher.ui'
@@ -33,6 +34,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method to get all voucher
     def FN_getData(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -42,6 +44,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
             self.CMB_CouponDes.addItem(row,val)
         mycursor.close()
 
+    # Todo: method to get data of voucher
     def FN_getDatabyID(self):
         try:
             indx = self.CMB_CouponDes.currentData()
@@ -83,6 +86,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method to get status of voucher
     def FN_getStatus(self):
         indx = self.CMB_CouponDes.currentData()
         self.conn = db1.connect()
@@ -97,6 +101,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         mycursor.close()
         self.FN_getDatabyID()
 
+    # Todo: method to change status of voucher
     def FN_UpdateStatus(self):
         mycursor = self.conn.cursor()
         print(self.CMB_CouponStatus.currentIndex())
@@ -108,6 +113,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         QtWidgets.QMessageBox.warning(self, "Done", "Done")
         self.close()
 
+    # Todo: method to clear edit text
     def FN_Clear(self):
         self.LE_desc_2.clear()
         self.LE_desc_3.clear()

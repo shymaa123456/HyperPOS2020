@@ -27,7 +27,7 @@ class CL_loyProg(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
-        
+        self.creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
     def onClicked(self):
         #radioButton = self.sender()
         #print(radioButton.name)
@@ -49,6 +49,13 @@ class CL_loyProg(QtWidgets.QDialog):
         loadUi(filename, self)
         conn = db1.connect()
         mycursor = conn.cursor()
+
+        valid_from = str(datetime.today().strftime('%Y-%m-%d'))
+
+        xto = valid_from.split("-")
+        print(xto)
+        d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+        self.Qdate_from.setDate(d)
 
         self.Qradio_barcode.clicked.connect(self.onClicked)
         self.Qradio_bmc.clicked.connect(self.onClicked)
@@ -125,9 +132,39 @@ class CL_loyProg(QtWidgets.QDialog):
                         self.Qbtn_upload.clicked.connect(self.FN_UPLOAD_LOYPROG)
                        except Exception as err:
                          print(err)
+                   elif result[0] == 'activate':
+                       try:
+                        self.Qbtn_activate.setEnabled(True)
+                        self.Qbtn_activate.clicked.connect(self.FN_ACTIVATE_LOYPROG)
+                       except Exception as err:
+                         print(err)
 
 
     #
+    def FN_ACTIVATE_LOYPROG(self):
+
+        ids = []
+        id = self.label_ID.text().strip()
+        if self.Qradio_active.isChecked():
+            status = 1
+        else:
+            status = 0
+        conn = db1.connect()
+        mycursor = conn.cursor()
+
+
+        sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_STATUS=%s where LOY_PROGRAM_ID = %s "
+        val = (status, id)
+        mycursor.execute(sql, val)
+        mycursor.close()
+        QtWidgets.QMessageBox.information(self, "نجاح", "  تم تعديل الحاله")
+
+        db1.connectionCommit(conn)
+        db1.connectionClose(conn)
+        if str(status) != str(self.old_status):
+            util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "status", status, self.old_status, id)
+        ids.append(id)
+        self.FN_REFRESH_DATA_GRID(ids)
 
     def FN_DISPLAY_TEMP(self):
          try:
@@ -660,16 +697,12 @@ class CL_loyProg(QtWidgets.QDialog):
         self.barcode = self.Qline_barcode.text().strip()
         self.purchAmount = self.Qline_purchAmount.text().strip()
         self.points = self.Qline_points.text().strip()
-        if self.Qradio_active.isChecked():
-            self.status = 1
-        else:
-            self.status = 0
+
         conn = db1.connect()
         # mycursor = self.conn.cursor(buffered=True)
         self.mycursor = conn.cursor()
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-        # get COMPANY
         company_list = []
         for comp in companies:
             sql = "SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + comp + "'"
@@ -730,7 +763,13 @@ class CL_loyProg(QtWidgets.QDialog):
                 self.Qcombo_group4.currentData()) == 0 or  len(self.Qcombo_group6.currentData()) == 0 or len(
                 self.Qcombo_group5.currentData()) == 0 or self.name == '' or self.desc == '' or float(self.purchAmount) == 0 or self.points == '0' or self.date_from == '' or self.date_to == '' \
                 :
-            QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات")
+        elif self.date_to  < self.date_from :
+            QtWidgets.QMessageBox.warning(self, "خطأ",
+                                          "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+        elif self.date_from < self.creationDate1:
+                QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+
         else:
             for com in company_list:
                 for br in branch_list:
@@ -763,7 +802,7 @@ class CL_loyProg(QtWidgets.QDialog):
 
                                         val = (self.id, com, br, ctgp, BMC_LEVEL4, self.barcode, self.name, self.desc,
                                                creationDate, CL_userModule.user_name, self.date_from, self.date_to,
-                                               self.purchAmount, self.points, cttp, self.status)
+                                               self.purchAmount, self.points, cttp, '0')
                                         #print(sql)
                                         #print(val)
 
@@ -776,7 +815,7 @@ class CL_loyProg(QtWidgets.QDialog):
                                     except (Error, Warning) as e:
                                         print(e)
                                 else:
-                                    QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
+                                    QtWidgets.QMessageBox.warning(self, "Error", "المدخلات بالفعل نوجوده")
                                     continue
         # mycursor.execute(sql)
         # if self.mycursor.rowcount>0:
@@ -877,8 +916,15 @@ class CL_loyProg(QtWidgets.QDialog):
                 if name == '' or desc == '' or validFrom == '' or validTo == '' or status == '' or company == '' or branch == '' \
                             or custGroup == '' or loyalityType == ''  or purchAmount == '' or points == '':
                         nonCreatedProg = nonCreatedProg + 1
-                        QtWidgets.QMessageBox.warning(self, "Error", "Some fields arenot filled")
-                        break
+                        QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات")
+
+                elif validTo < validFrom:
+                    QtWidgets.QMessageBox.warning(self, "خطأ",
+                                                  "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                    break
+                elif validFrom < self.creationDate1:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+                    break
 
                 #                 #     try:
                 #elif CL_validation.FN_validate_date1(validFrom) == True and CL_validation.FN_validation_int(status):
@@ -977,14 +1023,14 @@ class CL_loyProg(QtWidgets.QDialog):
                 #self.FN_REFRESH_DATA_GRID(ids)
             self.close()
         else:
-            QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إختيار الملف ")
     def FN_MODIFY_LOYPROG(self):
         try:
 
             ids=[]
             id = self.label_ID.text().strip()
             if len(id) == 0:
-                QtWidgets.QMessageBox.information(self, "Error", "No LoyProg selected")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "لم يتم إختيار أي برنامج")
             else:
                 name = self.Qline_name.text().strip()
                 desc = self.Qtext_desc.toPlainText().strip()
@@ -994,34 +1040,34 @@ class CL_loyProg(QtWidgets.QDialog):
                 date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
                 if name == '' or desc == '' or float(purchAmount) == 0 or points == '0' or date_from == '' or date_to == '' \
                         :
-                    QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات")
+                elif date_to < date_from:
+                    QtWidgets.QMessageBox.warning(self, "خطأ",
+                                                  "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                elif date_from < self.creationDate1:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ التعديل  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+
                 else:
 
-
-                    if self.Qradio_active.isChecked():
-                        self.status = 1
-                    else:
-                        self.status = 0
                     conn = db1.connect()
                     mycursor = conn.cursor()
 
                     changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
                     # get customer gp id
 
-                    sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s,LOY_STATUS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
-                    val = (name ,desc ,date_from,date_to, purchAmount ,points,self.status ,changeDate,id)
+                    sql = "update   Hyper1_Retail.LOYALITY_PROGRAM set LOY_NAME = %s , LOY_DESC = %s , LOY_VALID_FROM = %s ,LOY_VALID_TO = %s ,LOY_VALUE = %s ,LOY_POINTS = %s  , LOY_CHANGED_BY = %s where LOY_PROGRAM_ID = %s "
+                    val = (name ,desc ,date_from,date_to, purchAmount ,points,CL_userModule.user_name,id)
                     mycursor.execute(sql, val)
                     mycursor.close()
                     ids.append(id)
                     print( mycursor.rowcount, "record updated." )
-                    QtWidgets.QMessageBox.information(self, "Success", "LoyProg is modified successfully")
+                    QtWidgets.QMessageBox.information(self, "Success", "تم التعديل")
 
                     db1.connectionCommit( conn )
                     db1.connectionClose( conn )
                     #self.close()
 
-                    if str(self.status) != str(self.old_status):
-                        util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "status", self.status, self.old_status,id)
+
                     if str(points) != str(self.old_points):
                         util.FN_INSERT_IN_LOG("LOYALITY_PROGRAM", "points", points, self.old_points,id)
 

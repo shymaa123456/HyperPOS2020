@@ -13,8 +13,10 @@ from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.loyalty_class.loyalityProg import CL_loyProg
 from access.loyalty_class.redeemItem import CL_redItem
+from access.loyalty_class.redeemType import CL_redeemType
 from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.reports_class.reporting import CL_report
+from access.reports_class.reporting1 import CL_report1
 
 from access.authorization_class.Role import CL_role
 from access.authorization_class.branch import CL_branch
@@ -40,7 +42,7 @@ from access.installment_class.installment import CL_installment
 from access.voucher_class.CreateVoucher import CL_CreateVoucher
 from access.voucher_class.EditVoucher import CL_EditVoucher
 from access.voucher_class.stoppedVoucher import CL_modifyVoucher
-from access.voucher_class.PromotionVoucher import CL_PromVoucher
+from access.promotion_voucher_class.PromotionVoucher import CL_PromVoucher
 
 
 class CL_main(QtWidgets.QMainWindow):
@@ -93,7 +95,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Redeem_Item.triggered.connect(self.FN_DISPLAY_REDITEM)
             self.QAct_Redeem_Voucher.triggered.connect(self.FN_DISPLAY_REDITEMVOUCHER)
 
-
+            """ redeem type """
+            self.QAct_Redeem_Type.triggered.connect(self.FN_DISPLAY_REDEEMTP)
 
 
             self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
@@ -106,6 +109,7 @@ class CL_main(QtWidgets.QMainWindow):
             """ Promotion """
             self.QAct_Prom_Add.triggered.connect(self.FN_search_promotion)
             self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)
+            self.QAct_Report_Promotion_2.triggered.connect(self.FN_search_reporting1)
 
 
             #Todo: method for Open Create Coupon Window
@@ -121,7 +125,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Voucher_Edit.triggered.connect(self.FN_EditVoucher)
             self.QAct_Voucher_Activate.triggered.connect(self.FN_StoppedVoucher)
             self.QAct_Voucher_Deactivate.triggered.connect(self.FN_StoppedVoucher)
-
+            # Todo: method for Open promotion Voucher Window
             self.QAct_Prom_Voucher_Add.triggered.connect(self.FN_CreatePromVoucher)
             self.QAct_Prom_Voucher_Edit.triggered.connect(self.FN_EditPromVoucher)
             self.QAct_Prom_Voucher_Act.triggered.connect(self.FN_LOAD_CHANGE_STATUS_ACTIVE)
@@ -192,6 +196,15 @@ class CL_main(QtWidgets.QMainWindow):
     def FN_DISPLAY_REDITEMVOUCHER(self):
         try:
             self.window_two = CL_redVouch()
+
+            self.window_two.FN_LOAD_DISPlAY()
+            self.window_two.show()
+        except Exception as err:
+            print(err)
+
+    def FN_DISPLAY_REDEEMTP(self):
+        try:
+            self.window_two = CL_redeemType()
 
             self.window_two.FN_LOAD_DISPlAY()
             self.window_two.show()
@@ -303,6 +316,10 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two = CL_report()
         self.window_two.show()
 
+    def FN_search_reporting1(self):
+        self.window_two = CL_report1()
+        self.window_two.show()
+
 
     def FN_CreateCoupon(self):
         self.window_two = CL_CreateCoupon()
@@ -353,18 +370,18 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_EditPromVoucher(self):
         self.window_two = CL_PromVoucher()
-        self.window_two.FN_LOAD_MODIIFY()
+        self.window_two.FN_LOAD_MODIFY()
         self.window_two.show()
 
     def FN_LOAD_CHANGE_STATUS_ACTIVE(self):
         self.window_two = CL_PromVoucher()
-        self.window_two.FN_LOAD_CHANGE_STATUS("1")
+        self.window_two.FN_LOAD_CHANGE_STATUS_ACTIVE()
         self.window_two.show()
 
     def FN_LOAD_CHANGE_STATUS_INACTIVE(self):
 
         self.window_two = CL_PromVoucher()
-        self.window_two.FN_LOAD_CHANGE_STATUS("0")
+        self.window_two.FN_LOAD_CHANGE_STATUS_INACTIVE()
         self.window_two.show()
 
     # Configuration Parametrs

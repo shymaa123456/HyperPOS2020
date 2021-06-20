@@ -93,6 +93,7 @@ class CL_redItem(QtWidgets.QDialog):
         print(xto)
         d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
         self.Qdate_from.setDate(d)
+        # Todo: method for get branches
     def FN_GET_BRANCHES(self):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -109,7 +110,8 @@ class CL_redItem(QtWidgets.QDialog):
             self.Qcombo_group4.addItems([row[0]])
             self.CMB_branch.addItems([row[0]])
         mycursor.close()
-
+        print(records)
+        # Todo: method for get companies
     def FN_GET_COMPANIES(self):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -125,6 +127,11 @@ class CL_redItem(QtWidgets.QDialog):
 
     def FN_SEARCH_REDITEM(self):
        try:
+            self.Qline_barcode.setEnabled(True)
+            self.Qcombo_group3.show()
+            self.Qcombo_group4.show()
+            self.CMB_branch.hide()
+            self.CMB_company.hide()
             for i in reversed(range(self.Qtable_redeem.rowCount())):
                 self.Qtable_redeem.removeRow(i)
 
@@ -182,7 +189,7 @@ class CL_redItem(QtWidgets.QDialog):
 
             # print(whereClause)
             sql_select_query = "select POS_GTIN, COMPANY_ID,BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_VALID_FROM,REDEEM_VALID_TO,REDEEM_STATUS from Hyper1_Retail.REDEEM_ITEM   where " + whereClause
-            print(sql_select_query)
+            #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
@@ -202,8 +209,10 @@ class CL_redItem(QtWidgets.QDialog):
             mycursor.close()
        except Exception as err:
             print(err)
+            # Todo: method for get the redeem item details that is mentioned to modify
     def FN_GET_REDITEM(self):
         try:
+
             if len(self.Qtable_redeem.selectedIndexes()) > 0:
                 rowNo = self.Qtable_redeem.selectedItems()[0].row()
 
@@ -222,32 +231,36 @@ class CL_redItem(QtWidgets.QDialog):
                 self.old_valid_to = valid_to
                 self.old_status = status
 
-                self.CMB_branch.show()
-                self.CMB_company.show()
-                comp=self.FN_GET_COMP_DESC(company)
-                br =self.FN_GET_BRANCH_DESC(branch,company)
-                #self. self.Qcombo_group3.hide()
-                self.CMB_branch.setCurrentText(br)
-                self.CMB_company.setCurrentText(comp)
                 self.Qcombo_group3.hide()
                 self.Qcombo_group4.hide()
+                self.CMB_branch.show()
+                self.CMB_company.show()
+
+                #comp = util.FN_GET_COMP_ID(company)
+                #br =util.FN_GET_BRANCH_DESC(branch)
+
+                #print(br)
+                self.CMB_branch.setCurrentText(branch)
+                self.CMB_company.setCurrentText(company)
+
                 self.Qline_barcode.setEnabled(False)
 
-
+                #self.CMB_company.hide()
+                #self.CMB_branch.hide()
                 if status == 'Active' :
                     self.Qradio_active.setChecked(True)
                 else:
                     self.Qradio_inactive.setChecked(True)
 
                 xto = valid_from.split("-")
-                xto1 = xto[2].split(" ")
-                print(xto1)
-                d = QDate(int(xto[0]), int(xto[1]), int(xto1[0]))
+
+
+                d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
                 self.Qdate_from.setDate(d)
 
                 xto = valid_to.split("-")
-                xto1 = xto[2].split(" ")
-                d1 = QDate(int(xto[0]), int(xto[1]), int(xto1[0]))
+
+                d1 = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
                 self.Qdate_to.setDate(d1)
 
 
@@ -275,6 +288,7 @@ class CL_redItem(QtWidgets.QDialog):
            conn=db1.connect()
            mycursor = conn.cursor()
            creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+           creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
 
            # get COMPANY
            company_list = []
@@ -296,7 +310,12 @@ class CL_redItem(QtWidgets.QDialog):
 
            if  len(self.Qcombo_group3.currentData()) == 0 or len(
                    self.Qcombo_group4.currentData()) == 0  or bar == ''  or points == '' or date_from == '' or date_to == ''    :
-               QtWidgets.QMessageBox.warning(self, "Error", "Please enter all required fields")
+               QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
+           elif date_to < date_from:
+               QtWidgets.QMessageBox.warning(self, "خطأ",
+                                             "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+           elif date_from < creationDate1:
+               QtWidgets.QMessageBox.warning(self, "خطأ","تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
            else:
                ret1 = self.FN_CHECK_VALID_BARCCODE(bar)
                if ret1 == True :
@@ -307,24 +326,28 @@ class CL_redItem(QtWidgets.QDialog):
                                ret = self.FN_CHECK_EXIST(com, br,  bar)
                                if ret == False:
                                    mycursor1 = conn.cursor()
+                                   #get BMC ID
+                                   mycursor1.execute("select BMC_ID from Hyper1_Retail.POS_ITEM where POS_GTIN ='"+bar+"'")
+                                   myresult = mycursor1.fetchone()
+                                   BMC_ID = myresult[0]
                                    sql = "INSERT INTO Hyper1_Retail.REDEEM_ITEM (POS_GTIN,COMPANY_ID," \
                                          "BRANCH_NO,REDEEM_POINTS_QTY,REDEEM_CREATED_ON,REDEEM_CREATED_BY,REDEEM_VALID_FROM" \
-                                         ",REDEEM_VALID_TO,REDEEM_STATUS)" \
-                                         "values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                                         ",REDEEM_VALID_TO,REDEEM_STATUS,BMC_ID)" \
+                                         "values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
-                                   val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status)
+                                   val = (bar, com, br,points, creationDate, CL_userModule.user_name, date_from, date_to,  status,BMC_ID)
 
                                    mycursor1.execute(sql, val)
                                    db1.connectionCommit(conn)
                                    mycursor1.close()
-
+                                   QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                                else:
-                                   QtWidgets.QMessageBox.warning(self, "Error", "your inputs already exists ")
+                                   QtWidgets.QMessageBox.warning(self, "خطأ", "المدخلات موجوده بالفعل ")
                        self.FN_REFRESH_DATA_GRID()
                    else:
-                       QtWidgets.QMessageBox.warning(self, "Error", "Points must be an integer")
+                       QtWidgets.QMessageBox.warning(self, "خطأ", "النقاط يجب أن تكون أرقام")
                else:
-                   QtWidgets.QMessageBox.warning(self, "Error", "Barcodes doesnot exists")
+                   QtWidgets.QMessageBox.warning(self, "خطأ", "الباركود غير صحيح")
 
        except Exception as err:
             print(err)
@@ -364,6 +387,11 @@ class CL_redItem(QtWidgets.QDialog):
 
     def    FN_REFRESH_DATA_GRID(self):
         try:
+            self.Qline_barcode.setEnabled(True)
+            self.Qcombo_group3.show()
+            self.Qcombo_group4.show()
+            self.CMB_branch.hide()
+            self.CMB_company.hide()
             for i in reversed(range(self.Qtable_redeem.rowCount())):
                self.Qtable_redeem.removeRow(i)
 
@@ -397,88 +425,78 @@ class CL_redItem(QtWidgets.QDialog):
 
     def FN_MODIFY_REDITEM(self):
         try:
-            self.CMB_branch.hide()
-            self.CMB_company.hide()
-            self.Qcombo_group3.show()
-            self.Qcombo_group4.show()
-            self.Qline_barcode.setEnabled(True)
-
-
             branch = self.CMB_branch.currentText()
             comp = self.CMB_company.currentText()
             bar = self.Qline_barcode.text().strip()
             date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
             date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
-            comp = self.FN_GET_COMP_ID(comp)
-            branch = self.FN_GET_BRANCH_ID(branch,comp)
+            comp = util.FN_GET_COMP_ID(comp)
+            branch = util.FN_GET_BRANCH_ID(branch,comp)
             points = self.Qline_points.text().strip()
 
-            self.Qline_barcode.setText('')
-            self.Qline_points.setText('')
+            creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
+
+
             if self.Qradio_active.isChecked():
                 status = 1
             else:
                 status = 0
 
-
             conn = db1.connect()
             mycursor = conn.cursor()
+            if  points == '' :
+                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال النقاط ")
+            elif date_to < date_from:
+                QtWidgets.QMessageBox.warning(self, "خطأ",
+                                              "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+            elif date_from < creationDate1:
+                QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ التعديل  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
 
-            changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-            # get customer gp id
+            else:
+                    self.CMB_branch.hide()
+                    self.CMB_company.hide()
+                    self.Qcombo_group3.show()
+                    self.Qcombo_group4.show()
+                    self.Qline_barcode.setEnabled(True)
+                    self.Qline_barcode.setText('')
+                    self.Qline_points.setText('')
+                    ret2 = CL_validation.FN_validation_int(points)
+                    if ret2 == True:
+                        sql = "update   Hyper1_Retail.REDEEM_ITEM " \
+                              "set REDEEM_POINTS_QTY =%s,REDEEM_VALID_FROM =%s , REDEEM_VALID_TO = %s , " \
+                              "REDEEM_STATUS =%s where POS_GTIN = %s and COMPANY_ID = %s and BRANCH_NO = %s "
+                        val = ( points,   date_from, date_to, status,bar,comp,branch)
 
-            sql = "update   Hyper1_Retail.REDEEM_ITEM " \
-                  "set REDEEM_POINTS_QTY =%s,REDEEM_VALID_FROM =%s , REDEEM_VALID_TO = %s , " \
-                  "REDEEM_STATUS =%s where POS_GTIN = %s and COMPANY_ID = %s and BRANCH_NO = %s "
-            val = ( points,   date_from, date_to, status,bar,comp,branch)
+                        mycursor.execute(sql, val)
+                        mycursor.close()
 
-            mycursor.execute(sql, val)
-            mycursor.close()
+                        print(mycursor.rowcount, "record updated.")
+                        QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل ")
 
-            print(mycursor.rowcount, "record updated.")
-            QtWidgets.QMessageBox.information(self, "Success", "redeem item is modified successfully")
+                        db1.connectionCommit(conn)
+                        self.FN_REFRESH_DATA_GRID()
+                        self.old_status = util.FN_GET_STATUS_id(str(self.old_status))
+                        if str(status) != str(self.old_status):
+                            util.FN_INSERT_IN_LOG("REDEEM_ITEM", "status", status, self.old_status,bar,comp,branch)
+                        if str(points) != str(self.old_points):
+                            util.FN_INSERT_IN_LOG("REDEEM_ITEM", "points", points, self.old_points,bar,comp,branch)
 
-            db1.connectionCommit(conn)
-            self.FN_REFRESH_DATA_GRID()
-            self.old_status = util.FN_GET_STATUS_id(str(self.old_status))
-            if str(status) != str(self.old_status):
-                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "status", status, self.old_status,bar,comp,branch)
-            if str(points) != str(self.old_points):
-                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "points", points, self.old_points,bar,comp,branch)
+                        if str(date_from) != str(self.old_valid_from):
+                            util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_from", date_from, self.old_valid_from,bar,comp,branch)
 
-            if str(date_from) != str(self.old_valid_from):
-                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_from", date_from, self.old_valid_from,bar,comp,branch)
-
-            if str(date_to) != str(self.old_valid_to):
-                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_to", date_to, self.old_valid_to,bar,comp,branch)
-            print("in modify red item")
+                        if str(date_to) != str(self.old_valid_to):
+                            util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_to", date_to, self.old_valid_to,bar,comp,branch)
+                        print("in modify red item")
         except Exception as err:
             print(err)
-
-    def FN_GET_COMP_ID(self,desc):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + desc + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
-
-    def FN_GET_BRANCH_ID(self, desc,comp ):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + desc + "' and COMPANY_ID ='"+comp+"'" )
-        myresult = mycursor.fetchone()
-        return myresult[0]
 
     def FN_UPLOAD_REDITEM(self):
        try:
            self.window_two = CL_redItem()
            self.window_two.FN_LOAD_UPLOAD()
            self.window_two.show()
-
        except Exception as err:
             print(err)
-
-
 
     def FN_LOAD_UPLOAD(self):
         try:
@@ -487,8 +505,8 @@ class CL_redItem(QtWidgets.QDialog):
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
             self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
             self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP1)
-            self.setFixedWidth(576)
-            self.setFixedHeight(178)
+            self.setFixedWidth(590)
+            self.setFixedHeight(175)
             #self.fileName = ''
         except (Error, Warning) as e:
             print(e)
@@ -515,25 +533,7 @@ class CL_redItem(QtWidgets.QDialog):
              webbrowser.open(filename[0])
          except Exception as err:
              print(err)
-    def FN_GET_STATUS_DESC(self,id):
-        if id == '1':
-            return "Active"
-        else:
-            return "Inactive"
 
-    def FN_GET_COMP_DESC(self,id):
-        conn=db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
-        myresult = mycursor.fetchone()
-        return myresult[0]
-
-    def FN_GET_BRANCH_DESC(self, id,comp):
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "' and COMPANY_ID = '"+comp+ "'" )
-        myresult = mycursor.fetchone()
-        return myresult[0]
 
 
     def FN_OPEN_FILE(self):
@@ -565,14 +565,16 @@ class CL_redItem(QtWidgets.QDialog):
                     validFrom = sheet.cell_value(i, 4)
                     validTo = sheet.cell_value(i, 5)
                     status = int(sheet.cell_value(i, 6))
-
+                    creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
                     if validFrom == '' or validTo == '' or status == '' or company == '' or branch == '' \
                            or points == '':
                         nonCreatedItem = nonCreatedItem + 1
-                        QtWidgets.QMessageBox.warning(self, "Error", "Some fields arenot filled")
+                        QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات")
                         break
-                    #                 #     try:
-                    #elif CL_validation.FN_validate_date1(validFrom) == True and CL_validation.FN_validation_int(status):
+                    elif validFrom < creationDate1:
+                        QtWidgets.QMessageBox.warning(self, "خطأ",
+                                                      "تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+                        break
                     else:
 
                         ret2 = self.FN_CHECK_VALID_BARCCODE(bar)
@@ -581,9 +583,6 @@ class CL_redItem(QtWidgets.QDialog):
                         ret = self.FN_CHECK_EXIST(company, branch, bar)
 
                         if ret == False and  ret5 == True and ret6 == True and ret2 == True:
-                               # \
-
-                          # get max userid
                             conn = db1.connect()
                             mycursor1 = conn.cursor()
 
@@ -639,7 +638,7 @@ class CL_redItem(QtWidgets.QDialog):
                 self.close()
 
             else:
-                QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "اختر الملف ")
         except Exception as err:
            print(err)
 

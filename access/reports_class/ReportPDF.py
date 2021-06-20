@@ -30,6 +30,7 @@ branch=""
 tel=""
 query=""
 cursortest=0
+field_names = []
 
 class Text():
     def setCursor(self,cursor):
@@ -88,6 +89,12 @@ class Text():
     def getQuery(self):
         return query
 
+    def setCursor(self, col_names):
+        global field_names
+        field_names = col_names
+    def getCursor(self):
+        return field_names
+
 class body():
     def __init__(self):
         title=Text()
@@ -102,9 +109,11 @@ class body():
         d.add(Line(16, 6, 500, 6))
         connection = db1.connect()
         frame = pd.read_sql(str(title.getQuery()), connection)
-        df = pd.DataFrame(frame, columns=['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
+
+        df = pd.DataFrame(frame, columns= field_names)
+        # ['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON','PROM_LINE_NO'])
         df = df.reset_index()
-        df = df.rename(columns={"index": ""})
+        df = df.rename(columns={"index": "ID"})
 
         z = df.size
         print(z)
@@ -120,11 +129,11 @@ class body():
         #     numCount += 1
         num = 0
         for x in range(row):
-            val = df['PROM_ID'].values[x]
+            val = df[field_names[0]].values[x]
             total += int(val)
             num = x
-        df.sort_values(by=['PROM_ID'], inplace=True)
-        df.at[num + 2, 'PROM_ID'] = str(total)
+        df.sort_values(by=field_names[0], inplace=True)
+        df.at[num + 2, field_names[0]] = str(total)
         data = [df.columns.to_list()] + df.values.tolist()
         table = Table(data, repeatRows=1, repeatCols=1,
                       rowHeights=20, hAlign='CENTER')
@@ -137,11 +146,10 @@ class body():
             ('FONTSIZE', (0, 0), (-1, -1), 6),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('FONT', (0, 0), (-1, 0), 'Times-Bold'),
+            ('FONT', (0, 0), (-1, 0), 'Scheherazade'),
             ('FONTSIZE', (0, 0), (-1, 0), 6),
-            ('FONT', (0,-1), (-1,-1), 'Times-Bold'),
+            ('FONT', (0,-1), (-1,-1), 'Scheherazade'),
             ('FONTSIZE', (0,-1), (-1,-1), 10)
-
 
         ]))
         genStr = "Total LienceNumber: " + str(total)
@@ -166,5 +174,8 @@ class body():
         foo.settelText(title.gettelText())
         foo.setbrachText(title.getbrachText())
         p = FooterCanvas
-        doc = SimpleDocTemplate("my_file.pdf", pagesize=A4, rightMargin=30, leftMargin=30, topMargin=100)
+        size=210/len(field_names)
+        print(len(field_names))
+        print(size)
+        doc = SimpleDocTemplate("my_file.pdf", pagesize=A4, rightMargin=50, leftMargin=50, topMargin=100)
         doc.multiBuild(elements, canvasmaker=p)

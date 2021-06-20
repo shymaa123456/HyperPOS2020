@@ -11,7 +11,7 @@ class util():
     def FN_GET_CUSTGP():
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP order by CG_GROUP_ID*1   asc")
+        mycursor.execute("SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where  CG_DESC !='H1' order by CG_GROUP_ID*1   asc")
         records = mycursor.fetchall()
         mycursor.close()
 
@@ -19,10 +19,11 @@ class util():
 
     @staticmethod
     def FN_GET_STATUS_id(desc):
-        if id == 'Active':
+        if desc == 'Active':
             return "1"
         else:
             return "0"
+
 
     @staticmethod
     def FN_GET_CUSTTP():
@@ -59,6 +60,17 @@ class util():
         mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
+
+
+    @staticmethod
+    def FN_GET_CUSTTG_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute(
+            "SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where CG_GROUP_ID = '" + id + "'")
+        myresult = mycursor.fetchone()
+        return myresult[0]
+
 
     @staticmethod
     def FN_GET_STATUS_DESC(id):
@@ -97,3 +109,20 @@ class util():
         mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
         myresult = mycursor.fetchone()
         return myresult[0]
+
+    @staticmethod
+    def FN_GET_COMP_ID(desc):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + desc + "'")
+        myresult = mycursor.fetchone()
+        return myresult[0]
+
+    @staticmethod
+    def FN_GET_BRANCH_ID(desc,comp):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + desc + "' and COMPANY_ID = '"+comp+ "'")
+        myresult = mycursor.fetchone()
+        return myresult[0]
+

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>أصناف الهدايا</string>
   </property>
   <widget class="QTableWidget" name="Qtable_redeem">
    <property name="geometry">
@@ -206,7 +206,7 @@ background-color: rgb(198, 207, 199);</string>
                                     </string>
      </property>
      <property name="text">
-      <string>98457</string>
+      <string/>
      </property>
     </widget>
    </widget>

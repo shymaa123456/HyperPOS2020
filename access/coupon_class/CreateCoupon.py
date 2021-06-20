@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 from random import randint
 
+import mysql
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate
 from PyQt5.uic import loadUi
@@ -34,12 +35,12 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         loadUi(filename, self)
 
         self.Qcombo_company = CheckableComboBox(self)
-        self.Qcombo_company.setGeometry(20, 15, 271, 25)
+        self.Qcombo_company.setGeometry(360, 15, 271, 25)
         self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.Qcombo_branch = CheckableComboBox(self)
-        self.Qcombo_branch.setGeometry(20, 55, 271, 25)
+        self.Qcombo_branch.setGeometry(360, 55, 271, 25)
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_Company()
@@ -116,6 +117,8 @@ class CL_CreateCoupon(QtWidgets.QDialog):
             mycursor = self.conn.cursor()
             if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text().strip())==0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
+            elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
+                QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
             else:
                 if self.checkBox_Multi.isChecked():
                         self.serialCount = "1"
@@ -127,7 +130,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                         self.MultiCount = "0"
                         self.MultiUse = "0"
                         self.serialType=0
-            creationDate = str(datetime.today().strftime('%d-%m-%Y'))
+            creationDate = str(datetime.today().strftime('%Y-%m-%d'))
             if self.radioButton_Percentage.isChecked():
                 if len(self.LE_desc_3.text().strip()) == 0:
                     QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
@@ -156,11 +159,11 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 id = 0
                 sql = "INSERT INTO COUPON (COP_DESC, " + self.valueType + ", COP_SERIAL_COUNT,COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_VALID_FROM, COP_VALID_TO, COP_STATUS)" \
                                                                           " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s) "
-                print(self.Qdate_from.dateTime().toString('dd-MM-yyyy'))
+                print(self.Qdate_from.dateTime().toString('yyyy-MM-dd'))
                 val = (self.LE_desc.text(), self.valueData, self.serialCount, self.MultiUse,
                        self.MultiCount, CL_userModule.user_name, creationDate,
-                       self.Qdate_from.dateTime().toString('dd-MM-yyyy'),
-                       self.Qdate_to.dateTime().toString('dd-MM-yyyy'),
+                       self.Qdate_from.dateTime().toString('yyyy-MM-dd'),
+                       self.Qdate_to.dateTime().toString('yyyy-MM-dd'),
                        '0')
                 mycursor.execute(sql, val)
                 db1.connectionCommit(self.conn)
@@ -205,8 +208,10 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "Done", "رقم الكوبون هو " + str(id))
                 self.label_num.setText(str(id))
 
-        except:
+        except mysql.connector.Error as error:
             print(sys.exc_info())
+            self.conn.rollback()
+
 
     # def FN_AuthBranchUser(self):
     #     self.conn = db1.connect()

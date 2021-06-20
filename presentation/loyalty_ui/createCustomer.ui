@@ -36,7 +36,7 @@
     <item>
      <widget class="QLabel" name="label_17">
       <property name="text">
-       <string>نوع العميل</string>
+       <string>مجموعه العملاء</string>
       </property>
      </widget>
     </item>
@@ -64,7 +64,7 @@
     <item>
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>الوظيفه</string>
+       <string>الوظيفه *</string>
       </property>
      </widget>
     </item>
@@ -177,7 +177,10 @@
                                     </string>
       </property>
       <property name="text">
-       <string>asd</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
       </property>
      </widget>
     </item>
@@ -215,7 +218,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>234234</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -247,7 +250,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>01002875482</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -278,7 +281,10 @@
                                     </string>
       </property>
       <property name="text">
-       <string>ertwer</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>25</number>
       </property>
      </widget>
     </item>
@@ -310,7 +316,10 @@
                             </string>
       </property>
       <property name="text">
-       <string>ert</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
       </property>
      </widget>
     </item>
@@ -369,7 +378,7 @@
                                     </string>
       </property>
       <property name="text">
-       <string>fdgs@dfgds.com</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -401,7 +410,10 @@
                             </string>
       </property>
       <property name="text">
-       <string>sdfg</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>35</number>
       </property>
      </widget>
     </item>
@@ -433,7 +445,7 @@
                             </string>
       </property>
       <property name="text">
-       <string>333</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -465,7 +477,10 @@
                             </string>
       </property>
       <property name="text">
-       <string>dsfgsdf</string>
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>20</number>
       </property>
      </widget>
     </item>

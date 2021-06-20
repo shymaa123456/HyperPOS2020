@@ -43,7 +43,7 @@ class CL_redVouch(QtWidgets.QDialog):
                     self.Qline_remainder.setText(str(remainingPoints))
                     self.FN_GET_POINTS_VALUE(replacedPoints)
                 else:
-                    QtWidgets.QMessageBox.warning(self, "Error", "replaced points is not integer ")
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "replaced points is not integer ")
         except (Error, Warning) as e:
             print(e)
 
@@ -107,11 +107,11 @@ class CL_redVouch(QtWidgets.QDialog):
                     self.Qline_cust.setText("")
 
                 else :
-                    QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "النقاط المستبدله يجب أن تكون أقل من أو تساوي نقاط العميل ")
             else:
-                QtWidgets.QMessageBox.warning(self, "Error", "النقاط المستبدله يجب أن تكون أكثر من صفر")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "النقاط المستبدله يجب أن تكون أكثر من صفر")
         else:
-            QtWidgets.QMessageBox.warning(self, "Error", "يجب إدخال رقم عميل")
+            QtWidgets.QMessageBox.warning(self, "خطا", "يجب إدخال رقم عميل")
 
     def FN_CREATE_VOUCHER(self):
         try:
@@ -134,7 +134,7 @@ class CL_redVouch(QtWidgets.QDialog):
             db1.connectionCommit(conn)
             mycursor.execute( "select GV_ID from Hyper1_Retail.VOUCHER where GV_BARCODE ='"+voucherBarcode+"'")
             result= mycursor.fetchone()
-            QtWidgets.QMessageBox.information(self, "Done", "Voucher is created with number "+str(result[0]))
+            QtWidgets.QMessageBox.information(self, "Done", +str(result[0])+"رقم القسيمه هو " )
             # update customer points
             actualPoints = self.Qline_points.text().strip()
             remainingPoints = self.Qline_remainder.text().strip()
@@ -206,9 +206,9 @@ class CL_redVouch(QtWidgets.QDialog):
                    self.Qline_points.setText(myresult[0])
                    self.Qline_name.setText(myresult[1])
                else:
-                   QtWidgets.QMessageBox.warning(self, "Error", "Customer no is invalid")
+                   QtWidgets.QMessageBox.warning(self, "خطأ", "رقم العميل غير صحيح")
            else:
-               QtWidgets.QMessageBox.warning(self, "Error", "Please enter customer no")
+               QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال رقم العميل")
        except Exception as err:
             print(err)
 

@@ -48,6 +48,7 @@ class CL_report(QtWidgets.QDialog):
     magazine_prom = ""
     bmc = ""
     list_num = []
+    field_names = []
 
     def FN_close(self):
         #Todo: method for close window
@@ -124,8 +125,8 @@ class CL_report(QtWidgets.QDialog):
                                                                                           "and `PROM_BRANCH`.`BRANCH_NO`IN (" + ','.join(self.branch_list) + ")"
                                         "and `PROMOTION_HEADER`.`PROM_TYPE_ID`= '" +str(self.Qcombo_promotion.currentData()) + "'"
                         + self.magazine_prom + " " + self.prom_CG + " " + self.sponsor_prom + " " + self.bmc +
-                        "and `PROMOTION_DETAIL`.`PROM_START_DATE` <= '" + self.Qdate_from.dateTime().toString(
-                    'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`>='"
+                        "and `PROMOTION_DETAIL`.`PROM_START_DATE` >= '" + self.Qdate_from.dateTime().toString(
+                    'yyyy-MM-dd') + " " + "00:00:00" + "' and `PROMOTION_DETAIL`.`PROM_END_DATE`<='"
                         + self.Qdate_to.dateTime().toString(
                     'yyyy-MM-dd') + " " + "23:59:00" + "'" + self.prom_status)
                 self.runQuery(mycursor)
@@ -418,7 +419,8 @@ class CL_report(QtWidgets.QDialog):
 
     def printpreviewDialog(self):
         #Todo: method for export reports pdf file
-
+        self.field_names =['PROM_ID', 'PROM_TYPE_ID', 'PROM_CREATED_BY', 'PROM_CREATED_BY', 'PROM_CREATED_ON',
+                                   'PROM_LINE_NO']
         title = Text()
         title.setName("Invoice")
         title.setFooter(
@@ -431,6 +433,7 @@ class CL_report(QtWidgets.QDialog):
         title.setbrachText("Entrance 1,EL Sheikh Zayed City")
         title.setCursor(self.Qline_promotion.text)
         title.setQuery(self.query)
+        title.setCursor(self.field_names)
         body()
         QtWidgets.QMessageBox.information(self, "Success", "Report is printed successfully")
         import os

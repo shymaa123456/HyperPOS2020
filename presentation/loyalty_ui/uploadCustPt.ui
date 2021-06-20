@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>تحميل مجموعه عملاء</string>
+   <string>تحميل تقاط العملاء</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(198, 207, 199);
@@ -149,8 +149,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-                                    </string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>click here to see the layout of the uploaded template</string>

@@ -35,6 +35,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
         self.conn = db1.connect()
 
+    # Todo: method to search about clinte
     def FN_LOADUI(self):
         try:
             filename = self.dirname + '/editVoucher.ui'

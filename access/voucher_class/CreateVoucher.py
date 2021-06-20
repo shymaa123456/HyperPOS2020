@@ -27,6 +27,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
         self.conn = db1.connect()
 
+    #Todo: method for load ui of createVoucher
     def FN_LOADUI(self):
         try:
             filename = self.dirname + '/createVoucher.ui'
@@ -63,6 +64,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    #Todo: method to make voucher type sponser
     def FN_SelectSponser(self):
         self.Qcombo_sponser.setEnabled(True)
         self.LE_desc_3.setEnabled(True)
@@ -70,6 +72,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         self.LE_desc_7.setEnabled(True)
         self.VGType = "2"
 
+    #Todo: method to make voucher prepaid
     def FN_Selectprepaid(self):
         self.Qcombo_sponser.setEnabled(False)
         self.LE_desc_3.setEnabled(False)
@@ -77,8 +80,8 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         self.LE_desc_7.setEnabled(False)
         self.VGType = "3"
 
+    #Todo: method for fills the company combobox
     def FN_GET_Company(self):
-        #Todo: method for fills the company combobox
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
@@ -88,8 +91,8 @@ class CL_CreateVoucher(QtWidgets.QDialog):
             self.Qcombo_company.addItem(row, val)
         mycursor.close()
 
+    #Todo: method for fills the section combobox
     def FN_GET_Section(self):
-        #Todo: method for fills the section combobox
         try:
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
@@ -104,10 +107,10 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method for fills the Branch combobox
     def FN_GET_Branch(self):
         i = 0
         try:
-            # Todo: method for fills the Branch combobox
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
@@ -121,15 +124,8 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-    def FN_AuthSectionUser(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
-        records = mycursor.fetchall()
-        return records
-
+    # Todo: method for fills the sponsor combobox
     def FN_GET_sponsor(self):
-        # Todo: method for fills the sponsor combobox
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT SPONSER_NAME,SPONSER_ID FROM SPONSER")
@@ -139,24 +135,28 @@ class CL_CreateVoucher(QtWidgets.QDialog):
             self.Qcombo_sponser.addItem(row, val)
         mycursor.close()
 
+    # Todo: method to make voucher multi use
     def FN_multiuse(self):
         if self.checkBox_Multi.isChecked():
             self.GV_MULTIUSE=1
         else:
             self.GV_MULTIUSE=0
 
+    # Todo: method to make voucher Rechangable
     def FN_Rechangable(self):
         if self.checkBox_rechange.isChecked():
             self.GV_RECHARGABLE=1
         else:
             self.GV_RECHARGABLE=0
 
+    # Todo: method to make voucher Refundable
     def FN_Refundable(self):
         if self.checkBox_refundable.isChecked():
             self.GV_REFUNDABLE=1
         else:
             self.GV_REFUNDABLE=0
 
+    # Todo: method to create voucher
     def FN_Create_Voucher(self):
         try:
             self.FN_search()
@@ -223,6 +223,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method to search about clint
     def FN_search(self):
         try:
             self.conn = db1.connect()

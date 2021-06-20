@@ -24,6 +24,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
         self.conn = db1.connect()
 
+    # Todo: method to load ui of stoppedSerial
     def FN_LOADUI(self):
         filename = self.dirname + '/stoppedSerial.ui'
         loadUi(filename, self)
@@ -32,6 +33,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
         self.BTN_stopCoupon.clicked.connect(self.FN_Stop)
         self.BTN_recreateCoupon.clicked.connect(self.FN_Recreate)
 
+    # Todo: method to search about coupon by barcode
     def FN_Search(self):
         try:
             string=self.lineDesc_2.text()
@@ -80,6 +82,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method to stop serial of coupon
     def FN_Stop(self):
         mycursor = self.conn.cursor()
         string = self.lineDesc_2.text()
@@ -91,6 +94,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
         mycursor.close()
         QtWidgets.QMessageBox.warning(self, "Done", "Done")
 
+    # Todo: method to refund serial of coupon
     def FN_Recreate(self):
         try:
             value = randint(0, 1000000000000)

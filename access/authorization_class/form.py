@@ -17,6 +17,7 @@ class CL_form(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
         self.conn = db1.connect()
 
+    #Todo: method to load create form ui
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createForm.ui'
         loadUi(filename, self)
@@ -24,6 +25,7 @@ class CL_form(QtWidgets.QDialog):
         self.CMB_formStatus.addItems(["Active", "Inactive"])
         self.CMB_formType.addItems(["Frontend", "Backend"])
 
+    #Todo: method to load modify form ui
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyForm.ui'
         loadUi(filename, self)
@@ -35,6 +37,7 @@ class CL_form(QtWidgets.QDialog):
         self.CMB_formStatus.addItems(["Active", "Inactive"])
         self.CMB_formType.addItems(["Frontend", "Backend"])
 
+    #Todo: method to get forms name
     @staticmethod
     def FN_GET_FORMS(self):
         conn = db1.connect()
@@ -46,6 +49,7 @@ class CL_form(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+    #Todo: method to get form id
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()
         mycursor = self.conn.cursor()
@@ -56,6 +60,7 @@ class CL_form(QtWidgets.QDialog):
         self.LB_formID.setText(myresult[0])
         mycursor.close()
 
+    #Todo: method to get all data about form
     def FN_GET_FORM(self):
         self.FN_GET_FORMID()
         self.id = self.LB_formID.text()
@@ -74,6 +79,7 @@ class CL_form(QtWidgets.QDialog):
         mycursor.close()
         print(mycursor.rowcount, "record retrieved.")
 
+    #Todo: method to modify form
     def FN_MODIFY_FORM(self):
         self.id = self.LB_formID.text()
         self.desc = self.LE_desc.text().strip()
@@ -99,6 +105,7 @@ class CL_form(QtWidgets.QDialog):
             self.close()
             QtWidgets.QMessageBox.information(self, "Success", "Form is modified successfully")
 
+    #Todo: method to create form
     def FN_CREATE_FORM(self):
         self.desc = self.LE_desc.text().strip()
         self.type = self.CMB_formStatus.currentText()

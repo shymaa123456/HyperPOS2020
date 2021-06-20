@@ -15,6 +15,7 @@ class CL_privilage( QtWidgets.QDialog ):
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
 
+    #Todo: method to load ui of create privilage
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createPrivilage.ui'
         loadUi( filename, self )
@@ -37,6 +38,7 @@ class CL_privilage( QtWidgets.QDialog ):
         self.BTN_add.clicked.connect( self.FN_ADD_PRIVILAGE )
         self.BTN_delete.clicked.connect( self.FN_DELETE_PRIVILAGE )
 
+    #Todo: method to delete privilage
     def FN_DELETE_PRIVILAGE(self):
         rows = []
         for idx in self.w1.selectionModel().selectedRows():
@@ -44,6 +46,7 @@ class CL_privilage( QtWidgets.QDialog ):
         for row in rows:
             self.w1.removeRow( row )
 
+    #Todo: method to create privilage
     def FN_ADD_PRIVILAGE(self):
         self.role = self.LB_roleId.text()
         self.form = self.LB_formId.text()
@@ -70,6 +73,7 @@ class CL_privilage( QtWidgets.QDialog ):
                 self.w1.setItem( rowPosition, 4, QTableWidgetItem( str( self.actionName ) ) )
                 self.w1.setItem( rowPosition, 5, QTableWidgetItem( str( self.formItemName ) ) )
 
+    #Todo: method to get check TABLE_WIDGET availabilty
     def FN_CHECK_TABLE_WIDGET_AVAILABILITY(self, var11, var2, var3, var4):
         try:
             conn = db1.connect()
@@ -95,6 +99,7 @@ class CL_privilage( QtWidgets.QDialog ):
         except Exception as err:
             print(err)
 
+    #Todo: method to get check privilage availabilty
     def FN_CHECK_DB_AVAILABILITY(self, var11, var2, var3, var4):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -109,6 +114,7 @@ class CL_privilage( QtWidgets.QDialog ):
         else:
             return False
 
+    #Todo: method to get action name
     def FN_GET_ACTIONS(self):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -118,6 +124,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.CMB_actionName.addItems( [row[0]] )
         mycursor.close()
 
+    #Todo: method to get role name
     def FN_GET_ROLES(self):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -127,6 +134,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.CMB_roleName.addItems( [row[0]] )
         mycursor.close()
 
+    #Todo: method to get form item name
     def FN_GET_FORMItems(self):
         self.form = self.LB_formId.text()
         self.CMB_formItemName.clear()
@@ -140,6 +148,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.CMB_formItemName.addItems( [row1[0]] )
         mycursor.close()
 
+    #Todo: method to get form item id
     def FN_GET_FORMITEMID(self):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -153,6 +162,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.LB_formItemID.setText( myresult[0] )
         mycursor.close()
 
+    #Todo: method to get role id
     def FN_GET_ROLEID(self):
         self.role = self.CMB_roleName.currentText()
         conn = db1.connect()
@@ -166,6 +176,7 @@ class CL_privilage( QtWidgets.QDialog ):
         mycursor.close()
         self.FN_DISPLAY_PRIVILAGE()
 
+    #Todo: method to get role name
     def FN_GET_ROLENAME(self):
         self.role = self.LB_roleId.text()
         conn = db1.connect()
@@ -178,6 +189,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.CMB_roleName.setText( myresult[0] )
         mycursor.close()
 
+    #Todo: method to get form id
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()
         conn = db1.connect()
@@ -193,6 +205,7 @@ class CL_privilage( QtWidgets.QDialog ):
         self.FN_GET_FORMItems()
         self.FN_GET_FORMITEMID()
 
+    #Todo: method to get action id
     def FN_GET_ACTIONID(self):
         self.action = self.CMB_actionName.currentText()
         conn = db1.connect()
@@ -205,6 +218,7 @@ class CL_privilage( QtWidgets.QDialog ):
             self.LB_actionId.setText( myresult[0] )
         mycursor.close()
 
+    #Todo: method to display privilage
     def FN_DISPLAY_PRIVILAGE(self):
         self.w1.clear()
         self.w1.setRowCount( 0 )
@@ -235,6 +249,7 @@ class CL_privilage( QtWidgets.QDialog ):
         self.w1.setHorizontalHeaderLabels( header_labels )
         mycursor.close()
 
+    #Todo: method to create privilage
     def FN_CREATE_PRIVILAGE(self):
         conn = db1.connect()
         mycursor = conn.cursor( buffered=True )

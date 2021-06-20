@@ -19,6 +19,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
         self.conn = db1.connect()
 
+    # Todo: method to load ui of stoppedCoupon
     def FN_LOADUI(self):
         try:
             filename = self.dirname + '/stoppedCoupon.ui'
@@ -33,6 +34,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method to get all coupons
     def FN_getData(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -42,6 +44,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
             self.CMB_CouponDes.addItem(row,val)
         mycursor.close()
 
+    # Todo: method to get data of coupon
     def FN_getDatabyID(self):
         try:
             indx = self.CMB_CouponDes.currentData()
@@ -85,6 +88,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method to get status of coupon
     def FN_getStatus(self):
         indx = self.CMB_CouponDes.currentData()
         self.conn = db1.connect()
@@ -99,6 +103,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         mycursor.close()
         self.FN_getDatabyID()
 
+    # Todo: method to edit status of coupon
     def FN_UpdateStatus(self):
         mycursor = self.conn.cursor()
         print(self.CMB_CouponStatus.currentIndex())
@@ -110,6 +115,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         QtWidgets.QMessageBox.warning(self, "Done", "Done")
         self.close()
 
+    # Todo: method to clear edit text
     def FN_Clear(self):
         self.LE_desc_2.clear()
         self.LE_desc_3.clear()

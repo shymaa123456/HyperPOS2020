@@ -16,6 +16,7 @@ class CL_formItem(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
         self.conn = db1.connect()
 
+    #Todo: method to load ui of create formitem
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createFormItem.ui'
         loadUi(filename, self)
@@ -24,19 +25,19 @@ class CL_formItem(QtWidgets.QDialog):
         self.CMB_formName.currentIndexChanged.connect(self.FN_GET_FORMID)
         self.FN_GET_FORMS()
 
+    #Todo: method to load ui of create modifyFormItem
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyFormItem.ui'
         loadUi(filename, self)
-
         self.BTN_modifyFormItem.clicked.connect(self.FN_MODIFY_FORM)
         self.CMB_formItemStatus.addItems(["Active", "Inactive"])
         self.FN_GET_FORMS()
         self.FN_GET_FORMID()
         self.FN_GET_FORMItems()
-
         self.CMB_formItemName.currentIndexChanged.connect(self.FN_GET_FORM_ITEM)
         self.CMB_formName.currentIndexChanged.connect(self.FN_GET_FORMItems)
 
+    #Todo: method get forms name and id
     def FN_GET_FORMS(self):
         self.CMB_formName.clear()
         mycursor = self.conn.cursor()
@@ -46,6 +47,7 @@ class CL_formItem(QtWidgets.QDialog):
             self.CMB_formName.addItems([row[0]])
         mycursor.close()
 
+    #Todo: method get forms id
     def FN_GET_FORMID(self):
         self.form = self.CMB_formName.currentText()
         mycursor = self.conn.cursor()
@@ -58,6 +60,7 @@ class CL_formItem(QtWidgets.QDialog):
             print("form id id", myresult[0])
         mycursor.close()
 
+    #Todo: method get FORMITEMID
     def FN_GET_FORMITEMID(self):
         self.item = self.CMB_formItemName.currentText()
         mycursor = self.conn.cursor()
@@ -69,6 +72,7 @@ class CL_formItem(QtWidgets.QDialog):
             self.LB_formItemID.setText(myresult[0])
         mycursor.close()
 
+    #Todo: method to create FORMITEMID
     def FN_CREATE_FORM_ITEM(self):
         self.desc = self.LE_desc.text().strip()
         self.form = self.LB_formID.text()
@@ -97,6 +101,7 @@ class CL_formItem(QtWidgets.QDialog):
             self.close()
             QtWidgets.QMessageBox.information(self, "Success", "Form Item is created successfully")
 
+    #Todo: method to get FORMITEM desc assigned to form
     def FN_GET_FORMItems(self):
         self.CMB_formItemName.clear()
         self.LE_desc.setText('')
@@ -113,6 +118,7 @@ class CL_formItem(QtWidgets.QDialog):
         self.FN_GET_FORMITEMID()
         self.FN_GET_FORM_ITEM()
 
+    #Todo: method to get FORMITEM ITEM_DESC
     def FN_GET_FORM_ITEM(self):
         self.LE_desc.clear()
         self.FN_GET_FORMITEMID()
@@ -131,6 +137,7 @@ class CL_formItem(QtWidgets.QDialog):
         mycursor.close()
         print(mycursor.rowcount, "record retrieved.")
 
+    #Todo: method to modify form
     def FN_MODIFY_FORM(self):
         self.id = self.LB_formItemID.text()
         self.form = self.LB_formID.text()

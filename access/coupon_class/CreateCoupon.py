@@ -29,6 +29,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
         self.conn = db1.connect()
 
+    # Todo: method to load ui of create coupon
     def FN_LOADUI(self):
         filename = self.dirname + '/createCoupon.ui'
         loadUi(filename, self)
@@ -55,6 +56,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
         self.LE_desc_5.setEnabled(False)
 
+    # Todo: method to make coupon multi use
     def FN_endableMultiUser(self):
         if self.checkBox_Multi.isChecked():
             self.LE_desc_5.setEnabled(True)
@@ -63,18 +65,20 @@ class CL_CreateCoupon(QtWidgets.QDialog):
             self.LE_desc_5.setEnabled(False)
             self.LE_desc_4.setEnabled(True)
 
+    # Todo: method to make coupon use discount value
     def FN_EnableDiscVal(self):
         self.valueType="COP_DISCOUNT_VAL"
         self.LE_desc_2.setEnabled(True)
         self.LE_desc_3.setEnabled(False)
 
+    # Todo: method to make coupon use percentage value
     def FN_EnablePercentage(self):
         self.valueType="COP_DISCOUNT_PERCENT"
         self.LE_desc_3.setEnabled(True)
         self.LE_desc_2.setEnabled(False)
 
+    # Todo: method for fills the company combobox
     def FN_GET_Company(self):
-        #Todo: method for fills the company combobox
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
@@ -84,10 +88,10 @@ class CL_CreateCoupon(QtWidgets.QDialog):
             self.Qcombo_company.addItem(row, val)
         mycursor.close()
 
+    # Todo: method for fills the Branch combobox
     def FN_GET_Branch(self):
          i=0
          try:
-            # Todo: method for fills the Branch combobox
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
@@ -101,6 +105,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
          except:
              print(sys.exc_info())
 
+    # Todo: method for create coupon
     def FN_Create(self):
         try:
             mycursor = self.conn.cursor()

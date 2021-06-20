@@ -21,6 +21,7 @@ class CL_role(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
         self.conn = db1.connect()
 
+    #Todo: method to load ui of copy role
     def FN_LOAD_COPY(self):
         filename = self.dirname + '/copyRole.ui'
         loadUi(filename, self)
@@ -33,12 +34,14 @@ class CL_role(QtWidgets.QDialog):
         self.CMB_roleName1.currentIndexChanged.connect(self.FN_ASSIGN_ID)
         self.FN_ASSIGN_ID()
 
+    #Todo: method to set text by id
     def FN_ASSIGN_ID(self):
         self.role1 = self.CMB_roleName.currentText()
         self.role2 = self.CMB_roleName1.currentText()
         self.LB_roleID.setText(self.FN_GET_ROLEID_N(self.role1))
         self.LB_roleID2.setText(self.FN_GET_ROLEID_N(self.role2))
 
+    #Todo: method to copy role action
     def FN_COPY_ROLE(self):
         newRole = self.LB_roleID2.text()
         if self.role1 == self.role2:
@@ -73,6 +76,7 @@ class CL_role(QtWidgets.QDialog):
             mycursor.close()
             self.close()
 
+    #Todo: method to get all role name and id
     def FN_GET_ROLES_N(self):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT ROLE_NAME ROLE_ID FROM SYS_ROLE order by ROLE_ID asc")
@@ -80,6 +84,7 @@ class CL_role(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+    #Todo: method to get role id
     def FN_GET_ROLEID_N(self, role):
         mycursor = self.conn.cursor()
         sql_select_query = "SELECT ROLE_ID FROM SYS_ROLE WHERE ROLE_NAME = %s "
@@ -88,6 +93,7 @@ class CL_role(QtWidgets.QDialog):
         myresult = mycursor.fetchone()
         return myresult[0]
 
+    #Todo: method to load ui of assignUserToRole
     def FN_ASSIGN(self):
         self.CMB_roleName = CheckableComboBox(self)
         self.CMB_roleName.setGeometry(100, 85, 179, 18)
@@ -102,6 +108,7 @@ class CL_role(QtWidgets.QDialog):
         self.FN_GET_ROLES()
         self.CMB_userName.currentIndexChanged.connect(self.FN_GET_USERID)
 
+    #Todo: method to load ui of modify role
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyRole.ui'
         loadUi(filename, self)
@@ -112,12 +119,14 @@ class CL_role(QtWidgets.QDialog):
         self.CMB_roleName.currentIndexChanged.connect(self.FN_GET_ROLE)
         self.BTN_modifyRole.clicked.connect(self.FN_MODIFY_ROLE)
 
+    #Todo: method to load ui of create role
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createRole.ui'
         loadUi(filename, self)
         self.BTN_createRole.clicked.connect(self.FN_CREATE_ROLE)
         self.CMB_roleStatus.addItems(["Active", "Inactive"])
 
+    #Todo: method to get user id
     def FN_GET_USERID(self):
         self.user = self.CMB_userName.currentText()
         mycursor = self.conn.cursor()
@@ -128,6 +137,7 @@ class CL_role(QtWidgets.QDialog):
         self.LB_userID.setText(myresult[0])
         self.FN_GET_ROLES()
 
+    #Todo: method to get role id
     def FN_GET_ROLEID1(self, roleNm):
         if roleNm is not None:
             self.role = roleNm
@@ -142,6 +152,7 @@ class CL_role(QtWidgets.QDialog):
         mycursor.close()
         return myresult[0]
 
+    #Todo: method to get role id
     def FN_GET_ROLEID(self):
         self.role = self.CMB_roleName.currentText()
         mycursor = self.conn.cursor()
@@ -153,6 +164,7 @@ class CL_role(QtWidgets.QDialog):
         mycursor.close()
         return myresult[0]
 
+    #Todo: method to get all users name
     def FN_GET_USERS(self):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT USER_NAME FROM SYS_USER where USER_STATUS = 1 order by USER_ID asc")
@@ -161,6 +173,7 @@ class CL_role(QtWidgets.QDialog):
             self.CMB_userName.addItems([row[0]])
         mycursor.close()
 
+    #Todo: method to get role assigned to user and checked it
     def FN_GET_ROLES(self):
         self.CMB_roleName.clear()
         if self.LB_userID is not None:
@@ -179,6 +192,7 @@ class CL_role(QtWidgets.QDialog):
             j = j + 1
         mycursor.close()
 
+    #Todo: method to get all role name
     def FN_GET_ROLES1(self):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT ROLE_NAME FROM SYS_ROLE order by ROLE_ID asc")
@@ -187,6 +201,7 @@ class CL_role(QtWidgets.QDialog):
             self.CMB_roleName.addItems(row)
         mycursor.close()
 
+    #Todo: method to get all role assigned to user
     def FN_SELECT_USER_ROLES(self):
         self.user = self.LB_userID.text()
         mycursor = self.conn.cursor()
@@ -196,6 +211,7 @@ class CL_role(QtWidgets.QDialog):
         records = mycursor.fetchall()
         return records
 
+    #Todo: method to assign role to user
     def FN_ASSIGN_ROLE(self):
         self.status = self.CMB_userRoleStatus.currentText()
         self.user = self.LB_userID.text()
@@ -249,8 +265,8 @@ class CL_role(QtWidgets.QDialog):
         mycursor.close()
         print(mycursor.rowcount, "record retrieved.")
 
+    #Todo: method to modify role
     def FN_MODIFY_ROLE(self):
-        # self.id = self.LB_roleID.text()
         self.old_name = self.CMB_roleName.currentText()
         self.name = self.LE_name.text().strip()
         self.desc = self.LE_DESC.text().strip()
@@ -274,6 +290,7 @@ class CL_role(QtWidgets.QDialog):
             self.close()
             QtWidgets.QMessageBox.information(self, "Success", "Role is modified successfully")
 
+    #Todo: method to get create role
     def FN_CREATE_ROLE(self):
         self.name = self.LE_name.text().strip()
         self.desc = self.LE_DESC.text().strip()

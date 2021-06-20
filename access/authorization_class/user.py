@@ -29,6 +29,7 @@ class CL_user(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
         self.conn = db1.connect()
 
+    #Todo: method for load ui of modify user
     def FN_LOAD_MODIFY(self):
         filename = self.dirname + '/modifyUser.ui'
         loadUi(filename, self)
@@ -51,6 +52,7 @@ class CL_user(QtWidgets.QDialog):
         self.CMB_userName.currentIndexChanged.connect(self.FN_GET_USER)
         self.BTN_modifyUser.clicked.connect(self.FN_MODIFY_USER)
 
+    #Todo: method for load ui of create User
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/createUser.ui'
         loadUi(filename, self)
@@ -71,6 +73,7 @@ class CL_user(QtWidgets.QDialog):
         self.checkBox.toggled.connect(self.FN_EnableDepartment)
         self.CMB_userStatus.addItems(["Active", "Inactive"])
 
+    #Todo: method for get user type
     def FN_GET_USERTYPE(self):
         mycursor = self.conn.cursor()
         self.CMB_userType.clear()
@@ -81,6 +84,7 @@ class CL_user(QtWidgets.QDialog):
             self.CMB_userType.addItems([row[0]])
         mycursor.close()
 
+    #Todo: method for get all branches
     def FN_GET_BRANCHES(self):
         mycursor = self.conn.cursor()
         self.CMB_branch.clear()
@@ -91,6 +95,7 @@ class CL_user(QtWidgets.QDialog):
             self.CMB_branch.addItem(row,val)
         mycursor.close()
 
+    #Todo: method for get all sections
     def FN_GET_Section(self):
         mycursor = self.conn.cursor()
         self.CMB_section.clear()
@@ -101,6 +106,7 @@ class CL_user(QtWidgets.QDialog):
             self.CMB_section.addItem(row,val)
         mycursor.close()
 
+    #Todo: method for load copy ui
     def FN_LOAD_COPY(self):
         filename = self.dirname + '/copyUser.ui'
         loadUi(filename, self)
@@ -113,12 +119,14 @@ class CL_user(QtWidgets.QDialog):
         self.CMB_userName1.currentIndexChanged.connect(self.FN_ASSIGN_ID)
         self.FN_ASSIGN_ID()
 
+    #Todo: method for get data from user combobox
     def FN_ASSIGN_ID(self):
         self.user1 = self.CMB_userName.currentText()
         self.user2 = self.CMB_userName1.currentText()
         self.LB_userID.setText(self.FN_GET_USERID_N(self.user1))
         self.LB_userID2.setText(self.FN_GET_USERID_N(self.user2))
 
+    #Todo: method to copy user
     def FN_COPY_USER(self):
         newUser = self.LB_userID2.text()
         if self.user1 == self.user2:
@@ -157,6 +165,7 @@ class CL_user(QtWidgets.QDialog):
             mycursor.close()
             self.close()
 
+    #Todo: method for get all users and display all data
     def FN_GET_USER(self):
         user = self.CMB_userName.currentText()
         mycursor = self.conn.cursor()
@@ -188,6 +197,7 @@ class CL_user(QtWidgets.QDialog):
             for i in self.CMB_section.currentData():
                 self.section_list.append(i)
 
+    #Todo: method for edit user
     def FN_MODIFY_USER(self):
         try:
             self.id = self.LB_userID.text()
@@ -291,6 +301,7 @@ class CL_user(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    #Todo: method for get user data
     def FN_GET_USERS(self):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT USER_NAME USER_ID FROM SYS_USER order by USER_ID asc")
@@ -298,6 +309,7 @@ class CL_user(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+    #Todo: method for get user id
     def FN_GET_USERID_N(self, user):
         mycursor = self.conn.cursor()
         sql_select_query = "SELECT USER_ID FROM SYS_USER WHERE USER_NAME = %s "
@@ -306,6 +318,7 @@ class CL_user(QtWidgets.QDialog):
         myresult = mycursor.fetchone()
         return myresult[0]
 
+    #Todo: method for create user
     def FN_CREATE_USER(self):
         try:
             sql_select_Query = "select * from SYS_USER where USER_NAME = '" + self.LE_name.text() + "' and USER_STATUS = 1"
@@ -368,6 +381,7 @@ class CL_user(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    #Todo: method for change password
     def FN_RESET_USER(self):
         mycursor = self.conn.cursor()
         changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
@@ -400,11 +414,13 @@ class CL_user(QtWidgets.QDialog):
             else:
                 QtWidgets.QMessageBox.warning(self, "Error", "Please enter 2 different Passwords")
 
+    #Todo: method for load reset password ui
     def FN_LOAD_RESET(self):
         filename = self.dirname + '/resetUserPassword.ui'
         loadUi(filename, self)
         self.BTN_resetPass.clicked.connect(self.FN_RESET_USER)
 
+    #Todo: method for change password
     def FN_RESET_USER_MAIN(self):
         mycursor = self.conn.cursor()
         if CL_validation.FN_isEmpty(self.LE_password.text()):
@@ -437,14 +453,15 @@ class CL_user(QtWidgets.QDialog):
             else:
                 QtWidgets.QMessageBox.warning(self, "Error", "Please enter 2 different Passwords")
 
+    #Todo: method for load reset password ui
     def FN_LOAD_RESET_MAIN(self):
         filename = self.dirname + '/resetUserPasswordMain.ui'
         loadUi(filename, self)
         self.FN_GET_User()
         self.BTN_resetPass.clicked.connect(self.FN_RESET_USER_MAIN)
 
+    #Todo: method for all user name
     def FN_GET_User(self):
-        #Todo: method for fills the department combobox
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT USER_NAME FROM SYS_USER")
@@ -453,6 +470,7 @@ class CL_user(QtWidgets.QDialog):
             self.LE_username.addItems(row)
         mycursor.close()
 
+    #Todo: method for checked branches assigned to user
     def FN_check_branch(self):
         self.FN_unCheckedALL()
         mycursor = self.conn.cursor()
@@ -470,6 +488,7 @@ class CL_user(QtWidgets.QDialog):
             i = i + 1
         mycursor.close()
 
+    #Todo: method for get all branches assigned to user
     def FN_SELECT_branch(self):
         mycursor = self.conn.cursor()
         sql="SELECT BRANCH_NO , STATUS FROM SYS_USER_BRANCH where USER_ID = %s"
@@ -479,6 +498,7 @@ class CL_user(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+    #Todo: method to refresh checkable combobox for branch
     def FN_unCheckedALL(self):
             mycursor = self.conn.cursor()
             sql_select_branch = "Select BRANCH_NO from BRANCH where BRANCH_STATUS=1"
@@ -490,12 +510,14 @@ class CL_user(QtWidgets.QDialog):
                 self.CMB_branch.unChecked(i)
                 i += 1
 
+    #Todo: method to enable department
     def FN_EnableDepartment(self):
         if self.checkBox.isChecked():
             self.CMB_section.setEnabled(True)
         else:
             self.CMB_section.setEnabled(False)
 
+    #Todo: method to get section assigned to user and checked it
     def FN_check_section(self):
         self.FN_unCheckedSection()
         mycursor = self.conn.cursor()
@@ -513,6 +535,7 @@ class CL_user(QtWidgets.QDialog):
             i = i + 1
         mycursor.close()
 
+    #Todo: method to get section assigned to user
     def FN_SELECT_section(self):
         mycursor = self.conn.cursor()
         sql="SELECT SECTION_ID , STATUS FROM SYS_USER_SECTION where USER_ID = %s"
@@ -522,6 +545,7 @@ class CL_user(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+    #Todo: method to refresh checkable combobox for section
     def FN_unCheckedSection(self):
             mycursor = self.conn.cursor()
             sql_select_branch = "Select SECTION_ID from SECTION where SECTION_STATUS=1"

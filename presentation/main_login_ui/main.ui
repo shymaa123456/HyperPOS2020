@@ -322,6 +322,7 @@
     <addaction name="QM_Customer_Points"/>
     <addaction name="QM_Customer_Redeem"/>
     <addaction name="action_2"/>
+    <addaction name="QAct_Redeem_Type"/>
    </widget>
    <widget class="QMenu" name="QM_Report">
     <property name="layoutDirection">
@@ -1540,6 +1541,14 @@
   <action name="QAct_Prom_Voucher_Print">
    <property name="text">
     <string>طباعه قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Redeem_Type">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>ٌRedeem type</string>
    </property>
   </action>
  </widget>

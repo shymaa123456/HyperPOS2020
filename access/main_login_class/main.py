@@ -13,6 +13,7 @@ from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.loyalty_class.loyalityProg import CL_loyProg
 from access.loyalty_class.redeemItem import CL_redItem
+from access.loyalty_class.redeemType import CL_redeemType
 from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.reports_class.reporting import CL_report
 from access.reports_class.reporting1 import CL_report1
@@ -90,7 +91,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Redeem_Item.triggered.connect(self.FN_DISPLAY_REDITEM)
             self.QAct_Redeem_Voucher.triggered.connect(self.FN_DISPLAY_REDITEMVOUCHER)
 
-
+            """ redeem type """
+            self.QAct_Redeem_Type.triggered.connect(self.FN_DISPLAY_REDEEMTP)
 
 
             self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
@@ -185,6 +187,15 @@ class CL_main(QtWidgets.QMainWindow):
     def FN_DISPLAY_REDITEMVOUCHER(self):
         try:
             self.window_two = CL_redVouch()
+
+            self.window_two.FN_LOAD_DISPlAY()
+            self.window_two.show()
+        except Exception as err:
+            print(err)
+
+    def FN_DISPLAY_REDEEMTP(self):
+        try:
+            self.window_two = CL_redeemType()
 
             self.window_two.FN_LOAD_DISPlAY()
             self.window_two.show()

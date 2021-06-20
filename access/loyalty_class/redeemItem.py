@@ -425,68 +425,71 @@ class CL_redItem(QtWidgets.QDialog):
 
     def FN_MODIFY_REDITEM(self):
         try:
-            branch = self.CMB_branch.currentText()
-            comp = self.CMB_company.currentText()
-            bar = self.Qline_barcode.text().strip()
-            date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
-            date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
-            comp = util.FN_GET_COMP_ID(comp)
-            branch = util.FN_GET_BRANCH_ID(branch,comp)
-            points = self.Qline_points.text().strip()
+            if len(self.Qtable_redeemTp.selectedIndexes()) > 0:
+                branch = self.CMB_branch.currentText()
+                comp = self.CMB_company.currentText()
+                bar = self.Qline_barcode.text().strip()
+                date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
+                date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
+                comp = util.FN_GET_COMP_ID(comp)
+                branch = util.FN_GET_BRANCH_ID(branch,comp)
+                points = self.Qline_points.text().strip()
 
-            creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
+                creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
 
 
-            if self.Qradio_active.isChecked():
-                status = 1
+                if self.Qradio_active.isChecked():
+                    status = 1
+                else:
+                    status = 0
+
+                conn = db1.connect()
+                mycursor = conn.cursor()
+                if  points == '' :
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال النقاط ")
+                elif date_to < date_from:
+                    QtWidgets.QMessageBox.warning(self, "خطأ",
+                                                  "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                elif date_from < creationDate1:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ التعديل  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+
+                else:
+                        self.CMB_branch.hide()
+                        self.CMB_company.hide()
+                        self.Qcombo_group3.show()
+                        self.Qcombo_group4.show()
+                        self.Qline_barcode.setEnabled(True)
+                        self.Qline_barcode.setText('')
+                        self.Qline_points.setText('')
+                        ret2 = CL_validation.FN_validation_int(points)
+                        if ret2 == True:
+                            sql = "update   Hyper1_Retail.REDEEM_ITEM " \
+                                  "set REDEEM_POINTS_QTY =%s,REDEEM_VALID_FROM =%s , REDEEM_VALID_TO = %s , " \
+                                  "REDEEM_STATUS =%s where POS_GTIN = %s and COMPANY_ID = %s and BRANCH_NO = %s "
+                            val = ( points,   date_from, date_to, status,bar,comp,branch)
+
+                            mycursor.execute(sql, val)
+                            mycursor.close()
+
+                            print(mycursor.rowcount, "record updated.")
+                            QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل ")
+
+                            db1.connectionCommit(conn)
+                            self.FN_REFRESH_DATA_GRID()
+                            self.old_status = util.FN_GET_STATUS_id(str(self.old_status))
+                            if str(status) != str(self.old_status):
+                                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "status", status, self.old_status,bar,comp,branch)
+                            if str(points) != str(self.old_points):
+                                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "points", points, self.old_points,bar,comp,branch)
+
+                            if str(date_from) != str(self.old_valid_from):
+                                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_from", date_from, self.old_valid_from,bar,comp,branch)
+
+                            if str(date_to) != str(self.old_valid_to):
+                                util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_to", date_to, self.old_valid_to,bar,comp,branch)
+                            print("in modify red item")
             else:
-                status = 0
-
-            conn = db1.connect()
-            mycursor = conn.cursor()
-            if  points == '' :
-                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال النقاط ")
-            elif date_to < date_from:
-                QtWidgets.QMessageBox.warning(self, "خطأ",
-                                              "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
-            elif date_from < creationDate1:
-                QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ التعديل  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
-
-            else:
-                    self.CMB_branch.hide()
-                    self.CMB_company.hide()
-                    self.Qcombo_group3.show()
-                    self.Qcombo_group4.show()
-                    self.Qline_barcode.setEnabled(True)
-                    self.Qline_barcode.setText('')
-                    self.Qline_points.setText('')
-                    ret2 = CL_validation.FN_validation_int(points)
-                    if ret2 == True:
-                        sql = "update   Hyper1_Retail.REDEEM_ITEM " \
-                              "set REDEEM_POINTS_QTY =%s,REDEEM_VALID_FROM =%s , REDEEM_VALID_TO = %s , " \
-                              "REDEEM_STATUS =%s where POS_GTIN = %s and COMPANY_ID = %s and BRANCH_NO = %s "
-                        val = ( points,   date_from, date_to, status,bar,comp,branch)
-
-                        mycursor.execute(sql, val)
-                        mycursor.close()
-
-                        print(mycursor.rowcount, "record updated.")
-                        QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل ")
-
-                        db1.connectionCommit(conn)
-                        self.FN_REFRESH_DATA_GRID()
-                        self.old_status = util.FN_GET_STATUS_id(str(self.old_status))
-                        if str(status) != str(self.old_status):
-                            util.FN_INSERT_IN_LOG("REDEEM_ITEM", "status", status, self.old_status,bar,comp,branch)
-                        if str(points) != str(self.old_points):
-                            util.FN_INSERT_IN_LOG("REDEEM_ITEM", "points", points, self.old_points,bar,comp,branch)
-
-                        if str(date_from) != str(self.old_valid_from):
-                            util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_from", date_from, self.old_valid_from,bar,comp,branch)
-
-                        if str(date_to) != str(self.old_valid_to):
-                            util.FN_INSERT_IN_LOG("REDEEM_ITEM", "valid_to", date_to, self.old_valid_to,bar,comp,branch)
-                        print("in modify red item")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
         except Exception as err:
             print(err)
 

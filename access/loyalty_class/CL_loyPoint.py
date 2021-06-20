@@ -21,7 +21,7 @@ class CL_loyPoint(QtWidgets.QDialog):
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
-        self.conn1 = db1.connect()
+
 
     ###
 
@@ -35,26 +35,24 @@ class CL_loyPoint(QtWidgets.QDialog):
             self.BTN_searchLoyPoint.clicked.connect(self.FN_SEARCH_LOYPOINT)
             self.BTN_searchLoyPoint_all.clicked.connect(self.FN_GET_POINTS)
 
-            self.BTN_createLoyPoint.clicked.connect(self.FN_CREATE_LOYPOINT)
-            self.BTN_modifyLoyPoint.clicked.connect(self.FN_MODIFY_LOYPOINT)
-
-            self.setFixedWidth(380)
-            self.setFixedHeight(448)
+            self.setFixedWidth(511)
+            self.setFixedHeight(450)
             self.Qtable_point.setColumnHidden(0, True)
             self.Qtable_point.doubleClicked.connect(self.FN_GET_LOYPOINT)
             self.Qtable_point.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
             for row_number, row_data in enumerate(CL_userModule.myList):
-                if row_data[1] == 'loyality_points':
+
+                if row_data[1] == 'Loyality_Point':
+
                     if row_data[4] == 'None':
                         print('hh')
                     else:
+
                         sql_select_query = "select  i.ITEM_DESC from Hyper1_Retail.SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
                         x = (row_data[4],)
                         mycursor.execute(sql_select_query, x)
-
                         result = mycursor.fetchone()
-                        # print(result)
                         if result[0] == 'create':
                             self.BTN_createLoyPoint.setEnabled(True)
                             self.BTN_createLoyPoint.clicked.connect(self.FN_CREATE_LOYPOINT)
@@ -72,7 +70,7 @@ class CL_loyPoint(QtWidgets.QDialog):
             print(err)
     def FN_SEARCH_LOYPOINT(self):
         try:
-            for i in reversed(range(self.Qtable_redeem.rowCount())):
+            for i in reversed(range(self.Qtable_point.rowCount())):
                 self.Qtable_point.removeRow(i)
 
             date_from = self.Qdate_from.dateTime().toString('yyyy-MM-dd')
@@ -81,11 +79,11 @@ class CL_loyPoint(QtWidgets.QDialog):
             mycursor = conn.cursor()
             whereClause = ""
 
-            whereClause = whereClause + " and `POINTS_VALID_FROM` >= '" + date_from + "' and `POINTS_VALID_TO` <= '" + date_to + "' "
+            whereClause =" `POINTS_VALID_FROM` >= '" + date_from + "' and `POINTS_VALID_TO` <= '" + date_to + "' "
 
 
             sql_select_query = "select POINTS_ID, POINTS_QTY,POINTS_VALUE,POINTS_VALID_FROM,POINTS_VALID_TO from Hyper1_Retail.LOYALITY_POINT   where " + whereClause
-            # print(sql_select_query)
+            print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
@@ -127,13 +125,13 @@ class CL_loyPoint(QtWidgets.QDialog):
                 qty = self.Qtable_point.item(rowNo, 1).text()
                 val = self.Qtable_point.item(rowNo,2).text()
 
-                valid_from = self.Qtable_redeem.item(rowNo, 3).text()
-                valid_to = self.Qtable_redeem.item(rowNo, 5).text()
+                valid_from = self.Qtable_point.item(rowNo, 3).text()
+                valid_to = self.Qtable_point.item(rowNo, 4).text()
 
                 self.LB_pointId.setText(id)
-                self.LE_pointQty.setValue(qty)
-                self.LE_pointValue.setValue(val)
-
+                self.LE_pointQty.setValue(int(qty))
+                self.LE_pointValue.setValue(float(val))
+                # set old values
                 self.old_qty = qty
                 self.old_valid_from = valid_from
                 self.old_valid_to = valid_to
@@ -154,18 +152,105 @@ class CL_loyPoint(QtWidgets.QDialog):
             print(err)
 
     def FN_CREATE_LOYPOINT(self):
-        date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
-        date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
-        qty=self.LE_pointQty.text().strip()
-        val=self.LE_pointValue.text().strip()
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-        creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
-        if qty == 0 or val==0:
-            QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
-        elif date_to < date_from:
-            QtWidgets.QMessageBox.warning(self, "خطأ",
-                                          "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
-        elif date_from < creationDate1:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+        try:
+            date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
+            date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
+            qty = self.LE_pointQty.text().strip()
+            val = self.LE_pointValue.text().strip()
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+            creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
+            if qty == 0 or val==0:
+                QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
+            elif date_to < date_from:
+                QtWidgets.QMessageBox.warning(self, "خطأ",
+                                              "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+            elif date_from < creationDate1:
+                QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+            else:
+                mycursor.execute("SELECT max(cast(POINTS_ID  AS UNSIGNED)) FROM Hyper1_Retail.LOYALITY_POINT")
+                myresult = mycursor.fetchone()
+
+                if myresult[0] == None:
+                    id = "1"
+                else:
+                    id = int(myresult[0]) + 1
+
+                sql = "INSERT INTO Hyper1_Retail.LOYALITY_POINT ( POINTS_ID, POINTS_QTY,POINTS_VALUE,POINTS_VALID_FROM,POINTS_VALID_TO,POINTS_CREATED_ON,POINTS_CREATED_BY)  " \
+                      "         VALUES ( %s, %s, %s,%s, %s, %s, %s)"
+
+                # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+                print(sql)
+                val = (id, qty, val,date_from,date_to,creationDate,CL_userModule.user_name)
+                print(val)
+                mycursor.execute(sql, val)
+                db1.connectionCommit(self.conn)
+                mycursor.close()
+                print(mycursor.rowcount, "loy point inserted.")
+                QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
+                db1.connectionCommit(self.conn)
+                self.FN_GET_POINTS()
+                self.FN_CLEAR_FEILDS()
+        except Exception as err:
+            print(err)
+    def FN_MODIFY_LOYPOINT(self):
+        try:
+                if len(self.Qtable_point.selectedIndexes()) > 0:
+
+
+                    id = self.LB_pointId.text()
+                    date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
+                    date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
+                    qty=self.LE_pointQty.text().strip()
+                    val=self.LE_pointValue.text().strip()
+                    conn = db1.connect()
+                    mycursor = conn.cursor()
+
+                    creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
+
+                    if qty == 0 or val == 0:
+                        QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
+                    elif date_to < date_from:
+                        QtWidgets.QMessageBox.warning(self, "خطأ",
+                                                      "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                    elif date_from < creationDate1:
+                        QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ التعديل  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+
+                    else:
+
+
+                            sql = "update   Hyper1_Retail.LOYALITY_POINT " \
+                                  "set POINTS_QTY =%s,POINTS_VALUE =%s , POINTS_VALID_FROM = %s , " \
+                                  "POINTS_VALID_TO =%s where POINTS_ID = %s "
+                            val = (qty,val,date_from,date_to,id)
+
+                            mycursor.execute(sql, val)
+                            mycursor.close()
+
+                            print(mycursor.rowcount, "record updated.")
+                            QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل ")
+
+                            db1.connectionCommit(conn)
+                            self.FN_GET_POINTS()
+
+                            if str(qty) != str(self.old_qty):
+                                util.FN_INSERT_IN_LOG("LOYALITY_POINT", "quantity", qty, self.old_qty, id)
+                            if str(val) != str(self.old_value):
+                                util.FN_INSERT_IN_LOG("LOYALITY_POINT","value", val, self.old_value,id)
+
+                            if str(date_from) != str(self.old_valid_from):
+                                util.FN_INSERT_IN_LOG("LOYALITY_POINT", "valid_from", date_from, self.old_valid_from, id)
+
+                            if str(date_to) != str(self.old_valid_to):
+                                util.FN_INSERT_IN_LOG("LOYALITY_POINT", "valid_to", date_to, self.old_valid_to, id)
+                            print("in modify loy pt")
+                else:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
+        except Exception as err:
+            print(err)
+
+    def FN_CLEAR_FEILDS(self):
+        self.LB_pointId.setText('')
+        self.LE_pointQty.setValue(0)
+        self.LE_pointValue.setValue(0)

@@ -228,6 +228,8 @@ class CL_redeemType(QtWidgets.QDialog):
             desc_old = self.Qtable_redeemTp.item(rowNo, 1).text()
             desc = self.LE_desc.text().strip()
             redeemTp = self.CMB_redeemType.currentText()
+            old_status = self.Qtable_redeemTp.item(rowNo, 2).text()
+            old_status = util.FN_GET_STATUS_id(str(old_status))
             if redeemTp == 'Active':
                 status = 1
             else:
@@ -256,6 +258,11 @@ class CL_redeemType(QtWidgets.QDialog):
                     self.FN_GET_REDEEMTPS()
 
                     self.FN_CLEAR_FEILDS ()
+                    if str(status) != str(old_status):
+                        util.FN_INSERT_IN_LOG("REDEEM_TYPE", "status", status, old_status,id)
+                    if str(desc) != str(desc_old):
+                        util.FN_INSERT_IN_LOG("REDEEM_TYPE", "desc", desc, desc_old,id)
+
         else:
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
 

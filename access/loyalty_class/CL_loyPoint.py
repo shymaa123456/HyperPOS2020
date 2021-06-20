@@ -177,19 +177,18 @@ class CL_loyPoint(QtWidgets.QDialog):
                 else:
                     id = int(myresult[0]) + 1
 
-                sql = "INSERT INTO Hyper1_Retail.LOYALITY_POINT ( POINTS_ID, POINTS_QTY,POINTS_VALUE,POINTS_VALID_FROM,POINTS_VALID_TO,POINTS_CREATED_ON,POINTS_CREATED_BY)  " \
-                      "         VALUES ( %s, %s, %s,%s, %s, %s, %s)"
+                sql = "INSERT INTO Hyper1_Retail.LOYALITY_POINT ( POINTS_ID, POINTS_QTY,POINTS_VALUE,POINTS_VALID_FROM,POINTS_VALID_TO,POINTS_CREATED_ON,POINTS_CREATED_BY)   VALUES ( " +str(id)+", '"+str(qty)+"','"+str(val)+"' ,'"+date_from+"','"+date_to+"','"+creationDate+"','"+CL_userModule.user_name+"')"
 
                 # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
                 print(sql)
-                val = (id, qty, val,date_from,date_to,creationDate,CL_userModule.user_name)
-                print(val)
-                mycursor.execute(sql, val)
+                #val = (id, qty, val,date_from,date_to,creationDate,CL_userModule.user_name)
+                #print(val)
+                mycursor.execute(sql)
                 db1.connectionCommit(self.conn)
                 mycursor.close()
                 print(mycursor.rowcount, "loy point inserted.")
                 QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
-                db1.connectionCommit(self.conn)
+
                 self.FN_GET_POINTS()
                 self.FN_CLEAR_FEILDS()
         except Exception as err:

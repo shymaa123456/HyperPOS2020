@@ -14,31 +14,45 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate ,QTime
 from PyQt5.uic import loadUi
 
-from access.promotion_class.Promotion_Add import CheckableComboBox
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
+
+from access.Checkable import CheckableComboBox
+
+#from access.promotion_class.Promotion_Add import CheckableComboBox
+
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
 
 from datetime import datetime
+from Validation.Validation import CL_validation
+
+import xlrd
+from datetime import datetime
+import xlwt.Workbook
+
+import webbrowser
 
 class CL_installment(QtWidgets.QDialog):
     dirname = ''
-    def __init__(self):
+    parent = ''
+    def __init__(self,parentInit):
         super(CL_installment, self).__init__()
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/installment_ui'
         self.conn = db1.connect()
+        self.parent = parentInit
 
 
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/Installment_create.ui'
         loadUi(filename, self)
 
-        #this function for what enabled or not when start
-        self.EnabledWhenOpen()
-
         #Get installment type
         self.FN_GET_installment_types_period()
+
+        # test Multi selection for company
+        #self.Qcombo_company = CheckableComboBoxM(self, self.Qcombo_installmentTest)
 
         #drob down list with multiselection for company
         self.Qcombo_company = CheckableComboBox(self)
@@ -68,14 +82,55 @@ class CL_installment(QtWidgets.QDialog):
         self.Qcombo_customerGroupe.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_customerGroupe()
 
+
+        #Multi selection for department
+        self.Qcombo_department = CheckableComboBox(self)
+        self.Qcombo_department.setGeometry(570, 150, 171, 22)
+        self.Qcombo_department.setEnabled(False)
+        self.Qcombo_department.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.Qcombo_department.setStyleSheet("background-color: rgb(198, 207, 199)")
+
+        #Click listner for changing list of department
+        self.Qcombo_department.model().dataChanged.connect(self.FN_WhenChecksection)
+
         # get Department list if check box
-        self.FN_WhenCheckDepartment()
+        self.checkBox_department.stateChanged.connect(self.FN_WhenCheckDepartment)
+        #self.FN_WhenCheckDepartment()
 
-        # get sections list
-        self.FN_GET_sections()
+        # Multi selection for sections
+        self.Qcombo_section = CheckableComboBox(self)
+        self.Qcombo_section.setGeometry(570, 175, 171, 22)
+        self.Qcombo_section.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.Qcombo_section.setEnabled(False)
+        self.Qcombo_section.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        # get BMC LEVEL4 list
-        self.FN_GET_BMC_Level()
+        # get sections list if check box
+        self.checkBox_section.stateChanged.connect(self.FN_WhenChecksection)
+        #self.FN_GET_sections()
+
+        # Multi selection for BMCLevel
+        self.Qcombo_BMCLevel = CheckableComboBox(self)
+        self.Qcombo_BMCLevel.setGeometry(570, 200, 171, 22)
+        self.Qcombo_BMCLevel.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.Qcombo_BMCLevel.setEnabled(False)
+        self.Qcombo_BMCLevel.setStyleSheet("background-color: rgb(198, 207, 199)")
+
+        # get BMC LEVEL4 list if check box
+        self.checkBox_BMCLevel.stateChanged.connect(self.FN_WhenCheckBMC_Level)
+        #self.FN_GET_BMC_Level()
+
+        # get Banks list if check box
+        self.checkBox_bank.stateChanged.connect(self.FN_WhenCheckBank)
+
+        # get Vendor list if check box
+        self.checkBox_vendor.stateChanged.connect(self.FN_WhenCheckVendor)
+
+
+        #click button for upload accepted items
+        self.Qbtn_loadItems.clicked.connect(self.FN_UP_CUST)
+
+        # this function for what enabled or not when start
+        self.EnabledWhenOpen()
 
         """"
         timefrom = str(datetime.today().strftime('%h:%m'))
@@ -141,21 +196,13 @@ class CL_installment(QtWidgets.QDialog):
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
             records = mycursor.fetchall()
             for row, val in records:
-                for bra in self.FN_AuthBranchUser():
+                for bra in CL_userModule.branch :
                     if val in bra:
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
             mycursor.close()
          except:
              print(sys.exc_info())
-
-    #get branch of user that have authorization to see it
-    def FN_AuthBranchUser(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"'")
-        records = mycursor.fetchall()
-        return records
 
     #get customer Groupe list
     def FN_GET_customerGroupe(self):
@@ -172,47 +219,254 @@ class CL_installment(QtWidgets.QDialog):
     def FN_WhenCheckDepartment(self):
         if self.checkBox_department.isChecked():
             self.FN_GET_Department()
+            self.Qcombo_department.setEnabled(True)
             self.checkBox_section.setEnabled(True)
             self.Qtable_acceptedItems.setEnabled(False)
+            self.Qbtn_loadItems.setEnabled(False)
+            self.Qbtn_deleteItem.setEnabled(False)
+            self.Qcombo_department.setCurrentIndex(-1)
+
         else:
+            self.Qcombo_department.unCheckedList()
+            self.Qcombo_department.setEnabled(False)
             self.checkBox_section.setEnabled(False)
             self.checkBox_section.setChecked(False)
+            self.checkBox_BMCLevel.setChecked(False)
             self.Qtable_acceptedItems.setEnabled(True)
+            self.Qbtn_loadItems.setEnabled(True)
+            self.Qbtn_deleteItem.setEnabled(True)
+            self.Qcombo_department.setCurrentIndex(-1)
 
 
     #get Department list
     def FN_GET_Department(self):
         self.Qcombo_department.clear()
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT DEPARTMENT_DESC FROM DEPARTMENT")
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        mycursor.execute("SELECT DEPARTMENT_DESC,DEPARTMENT_ID FROM DEPARTMENT")
         records = mycursor.fetchall()
+        for row, val in records:
+            self.Qcombo_department.addItem(row, val)
         mycursor.close()
-        for row in records:
-            self.Qcombo_department.addItems([row[0]])
+
+    # after check section check box
+    def FN_WhenChecksection(self):
+        if self.checkBox_section.isChecked():
+            self.FN_GET_sections()
+            self.checkBox_BMCLevel.setEnabled(True)
+            self.Qcombo_section.setEnabled(True)
+            self.Qcombo_section.setCurrentIndex(-1)
+
+        else:
+            self.Qcombo_section.unCheckedList()
+            self.checkBox_BMCLevel.setChecked(False)
+            self.checkBox_BMCLevel.setEnabled(False)
+            self.Qcombo_section.setEnabled(False)
+            self.Qcombo_section.setCurrentIndex(-1)
+            #self.Qcombo_section.unChecked()
+
 
     #get sections list
     def FN_GET_sections(self):
         self.Qcombo_section.clear()
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT SECTION_DESC FROM SECTION")
-        records = mycursor.fetchall()
-        mycursor.close()
-        for row in records:
-            self.Qcombo_section.addItems([row[0]])
+        i = 0
+        try:
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            print("currentData",self.Qcombo_department.currentData())
+            val3=""
+            for a in range(len(self.Qcombo_department.currentData())):
+                if a< len(self.Qcombo_department.currentData())-1 :
+                    val3 =val3+ "'"+self.Qcombo_department.currentData()[a] + "',"
+                else:
+                    val3 =val3+ "'"+self.Qcombo_department.currentData()[a] + "'"
+
+            print("deparments",val3)
+
+            mycursor.execute("SELECT SECTION_DESC,SECTION_ID FROM SECTION where DEPARTMENT_ID in ("+val3+")")
+            #print("Query"+"SELECT SECTION_DESC,SECTION_ID FROM SECTION where DEPARTMENT_ID in ("+val3+")")
+            records = mycursor.fetchall()
+            mycursor.close()
+            for row, val in records:
+                self.Qcombo_section.addItem(row, val)
+                i += 1
+        except:
+            print(sys.exc_info())
+        # after check department check box
+
+    # after check BMC Level check box
+    def FN_WhenCheckBMC_Level(self):
+        if self.checkBox_BMCLevel.isChecked():
+            self.FN_GET_BMC_Level()
+            self.Qcombo_BMCLevel.setEnabled(True)
+            self.Qcombo_BMCLevel.setCurrentIndex(-1)
+        else:
+            self.Qcombo_BMCLevel.unCheckedList()
+            self.checkBox_BMCLevel.setChecked(False)
+            self.Qcombo_BMCLevel.setEnabled(False)
+            self.Qcombo_BMCLevel.setCurrentIndex(-1)
+
 
     #get BMC LEVEL4 list
     def FN_GET_BMC_Level(self):
         self.Qcombo_BMCLevel.clear()
+        i = 0
+        try:
+
+            conn = db1.connect()
+            mycursor = conn.cursor()
+
+            val3=""
+            for a in range(len(self.Qcombo_section.currentData())):
+                if a< len(self.Qcombo_section.currentData())-1 :
+                    val3 =val3+ "'"+self.Qcombo_section.currentData()[a] + "',"
+                else:
+                    val3 =val3+ "'"+self.Qcombo_section.currentData()[a] + "'"
+
+            print("sections",val3)
+            mycursor.execute("SELECT BMC_LEVEL4_DESC,BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID in ("+val3+")")
+            records = mycursor.fetchall()
+            mycursor.close()
+            for row, val in records:
+                self.Qcombo_BMCLevel.addItem(row, val)
+                i += 1
+        except:
+            print(sys.exc_info())
+    # after check Bank check box
+    def FN_WhenCheckBank(self):
+        if self.checkBox_bank.isChecked():
+            self.FN_GET_Banks()
+            self.Qcombo_bank.setEnabled(True)
+        else:
+            self.Qcombo_bank.setEnabled(False)
+
+    #get Banks list
+    def FN_GET_Banks(self):
+        self.Qcombo_bank.clear()
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT BMC_LEVEL4_DESC FROM BMC_LEVEL4")
+        mycursor.execute("SELECT Bank_Desc FROM BANK")
         records = mycursor.fetchall()
         mycursor.close()
         for row in records:
-            self.Qcombo_BMCLevel.addItems([row[0]])
+            self.Qcombo_bank.addItems([row[0]])
 
+    # after check Vendor check box
+    def FN_WhenCheckVendor(self):
+        if self.checkBox_vendor.isChecked():
+            self.FN_GET_Vendor()
+            self.Qcombo_vendor.setEnabled(True)
+        else:
+            self.Qcombo_vendor.setEnabled(False)
+
+    #get Vendor list
+    def FN_GET_Vendor(self):
+        self.Qcombo_vendor.clear()
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT SPONSER_NAME FROM SPONSER")
+        records = mycursor.fetchall()
+        mycursor.close()
+        for row in records:
+            self.Qcombo_vendor.addItems([row[0]])
+
+    #When click upload button to sellect csv file
+    def FN_UP_CUST(self, funct):
+        self.window_upload = CL_installment(self)
+        self.window_upload.FN_LOAD_UPLOAD()
+        self.window_upload.show()
+
+    #Create Ui for upload screen
+    def FN_LOAD_UPLOAD(self):
+        filename = self.dirname + '/uploadBarcodes.ui'
+        loadUi(filename, self)
+        self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
+        self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
+        self.BTN_saveTemp.clicked.connect(self.FN_DISPLAY_TEMP)
+        self.fileName = ''
+
+    #get sellected file name
+    def FN_OPEN_FILE(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        self.fileName, _ = QFileDialog.getOpenFileName( self, "QFileDialog.getOpenFileName()", "",
+                                                   " Files (*.xls)", options=options )
+        self.LE_fileName.setText(self.fileName)
+
+    #Save Uploaded csv
+    def FN_SAVE_UPLOAD(self):
+
+        if self.fileName !='':
+            self.LE_fileName.setText(self.fileName)
+            wb = xlrd.open_workbook( self.fileName )
+            sheet = wb.sheet_by_index( 0 )
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            errorMsg =''
+            createdCust =0
+            nonCreatedCust=0
+            #print (sheet.nrows)
+            error_message = ''
+            for i in range( sheet.nrows ):
+                error = 0
+                try:
+                    self.barcode = sheet.cell_value( i, 0 )
+                    print("rowNo",i,"barcode",self.barcode)
+                    error_message = error_message + " \n barcode " + self.barcode
+                    self.description = sheet.cell_value( i, 1 )
+                    print("rowNo",i,"description",self.description)
+
+                    if self.barcode == '' or self.description == '':
+                        error = 1
+                        error_message = error_message + " barcode has an empty fields"
+                        print("error 1")
+
+                    else:
+                        #for row_number, row_data in enumerate(records):
+                        self.parent.Qtable_acceptedItems.insertRow(i)
+
+                        self.parent.Qtable_acceptedItems.setItem(i, 0, QTableWidgetItem(str(sheet.cell_value( i, 0 ))))
+                        self.parent.Qtable_acceptedItems.setItem(i, 1, QTableWidgetItem(str(sheet.cell_value( i, 1 ))))
+
+                        #to make rows of table not editable
+                        self.parent.Qtable_acceptedItems.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
+                except Exception as err:
+                     print(err)
+            mycursor.close()
+            self.msgBox = QMessageBox()
+
+            # Set the various texts
+            self.msgBox.setWindowTitle( "Information" )
+            self.msgBox.setStandardButtons( QMessageBox.Ok)
+            self.msgBox.setText(error_message)
+            self.msgBox.show()
+            self.close()
+        #Extracting number of rows
+        else:
+            QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
+
+    #SAve Tem of csv that you use it for upload
+    def FN_DISPLAY_TEMP(self):
+         try:
+             filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
+             print(filename)
+
+             wb = xlwt.Workbook()
+
+             # add_sheet is used to create sheet.
+             sheet = wb.add_sheet('Sheet 1')
+             sheet.write(0, 0, 'الباركود')
+             sheet.write(0, 1, 'الوصف')
+
+
+             # # wb.save('test11.xls')
+             wb.save(str(filename[0]))
+             # wb.close()
+
+             webbrowser.open(filename[0])
+         except Exception as err:
+             print(err)
 
 """"
     def FN_LOAD_MODIFY(self):

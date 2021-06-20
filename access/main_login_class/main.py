@@ -400,6 +400,6 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two.show()
 
     def FN_CREATE_installment(self):
-        self.window_two = CL_installment()
+        self.window_two = CL_installment(self)
         self.window_two.FN_LOAD_CREATE()
         self.window_two.show()

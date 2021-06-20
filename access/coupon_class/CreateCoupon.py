@@ -117,6 +117,8 @@ class CL_CreateCoupon(QtWidgets.QDialog):
             mycursor = self.conn.cursor()
             if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text().strip())==0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
+            elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
+                QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
             else:
                 if self.checkBox_Multi.isChecked():
                         self.serialCount = "1"

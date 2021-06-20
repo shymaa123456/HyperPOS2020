@@ -96,7 +96,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Redeem_Type.triggered.connect(self.FN_DISPLAY_REDEEMTP)
             self.QAct_Loyality_Point.triggered.connect(self.FN_DISPLAY_LOYPOINTS)
 
-
+###test
             self.QAct_Create_Privilage.triggered.connect(self.FN_CREATE_PRIV)
             self.QAct_Create_Form.triggered.connect(self.FN_create_form)
             self.QAct_Modify_Form.triggered.connect(self.FN_modify_form)

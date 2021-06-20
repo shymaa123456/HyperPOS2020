@@ -31,6 +31,9 @@
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ffffff, stop:1 #8c8eff);</string>
+  </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
@@ -51,9 +54,7 @@
     <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-                    background-color: rgb(198, 207, 199);
-                </string>
+    <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ffffff, stop:1 #8c8eff);</string>
    </property>
    <property name="title">
     <string/>
@@ -70,35 +71,12 @@
       <height>201</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ccccff, stop:1 #8c8eff);</string>
+    </property>
     <property name="title">
      <string/>
     </property>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>10</y>
-       <width>103</width>
-       <height>141</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>الشركة</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string>الفرع</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QComboBox" name="CMB_level4">
      <property name="geometry">
       <rect>
@@ -112,17 +90,73 @@
     <widget class="QCheckBox" name="QcheckBox_multi">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>170</y>
-       <width>101</width>
-       <height>17</height>
+       <x>240</x>
+       <y>156</y>
+       <width>111</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 5px;
+border-color:black;</string>
+     </property>
      <property name="text">
       <string>متعدد الاستخدام</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>30</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;</string>
+     </property>
+     <property name="text">
+      <string>الشركة</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>90</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;</string>
+     </property>
+     <property name="text">
+      <string>الفرع</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -137,6 +171,9 @@
     </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #bbbbff, stop:1 #8c8eff);</string>
     </property>
     <property name="title">
      <string/>
@@ -205,127 +242,130 @@
       <property name="layoutDirection">
        <enum>Qt::RightToLeft</enum>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-width: 2px;
+border-radius: 10px;
+border-color:black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ccccff, stop:1 #8c8eff);</string>
+      </property>
       <property name="title">
        <string>فترة الكوبون</string>
       </property>
-      <widget class="QWidget" name="layoutWidget_2">
+      <widget class="QDateTimeEdit" name="Qdate_to">
        <property name="geometry">
         <rect>
-         <x>160</x>
+         <x>30</x>
          <y>20</y>
-         <width>121</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>التاريخ</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateTimeEdit" name="Qdate_from">
-          <property name="layoutDirection">
-           <enum>Qt::RightToLeft</enum>
-          </property>
-          <property name="minimumDateTime">
-           <datetime>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-            <year>2020</year>
-            <month>1</month>
-            <day>1</day>
-           </datetime>
-          </property>
-          <property name="displayFormat">
-           <string>d/M/yyyy</string>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QLabel" name="label_9">
-       <property name="geometry">
-        <rect>
-         <x>286</x>
-         <y>20</y>
-         <width>20</width>
+         <width>91</width>
          <height>20</height>
         </rect>
        </property>
-       <property name="text">
-        <string>من</string>
+       <property name="styleSheet">
+        <string notr="true">color:darkblue;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;
+background-color: #9c9eff;</string>
+       </property>
+       <property name="minimumDateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>2020</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
+       <property name="displayFormat">
+        <string>d/M/yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="label_8">
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>130</x>
          <y>20</y>
-         <width>26</width>
-         <height>19</height>
+         <width>61</width>
+         <height>21</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;</string>
        </property>
        <property name="text">
-        <string>الى</string>
+        <string>الي التاريخ</string>
        </property>
       </widget>
-      <widget class="QWidget" name="layoutWidget_3">
+      <widget class="QDateTimeEdit" name="Qdate_from">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>220</x>
          <y>20</y>
-         <width>115</width>
-         <height>22</height>
+         <width>91</width>
+         <height>20</height>
         </rect>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>التاريخ</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateTimeEdit" name="Qdate_to">
-          <property name="minimumDateTime">
-           <datetime>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-            <year>2020</year>
-            <month>1</month>
-            <day>1</day>
-           </datetime>
-          </property>
-          <property name="displayFormat">
-           <string>d/M/yyyy</string>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:darkblue;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;
+background-color: #9c9eff;</string>
+       </property>
+       <property name="minimumDateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>2020</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
+       <property name="displayFormat">
+        <string>d/M/yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
       </widget>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>330</x>
+         <x>320</x>
          <y>20</y>
-         <width>47</width>
-         <height>13</height>
+         <width>61</width>
+         <height>21</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;</string>
        </property>
        <property name="text">
-        <string>التاريخ</string>
+        <string>من التاريخ</string>
        </property>
       </widget>
      </widget>
@@ -341,17 +381,33 @@
       <property name="layoutDirection">
        <enum>Qt::RightToLeft</enum>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-width: 2px;
+border-radius: 10px;
+border-color:black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ccccff, stop:1 #8c8eff);</string>
+      </property>
       <property name="title">
        <string>الحالة</string>
       </property>
       <widget class="QRadioButton" name="radioBtnPromActive">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>140</x>
          <y>20</y>
-         <width>141</width>
+         <width>71</width>
          <height>20</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;</string>
        </property>
        <property name="text">
         <string>فعال</string>
@@ -360,14 +416,49 @@
       <widget class="QRadioButton" name="radioBtnPromExpired">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>40</x>
          <y>20</y>
-         <width>151</width>
+         <width>71</width>
          <height>20</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;</string>
+       </property>
        <property name="text">
         <string>منتهي</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioBtnPromAll">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>20</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;</string>
+       </property>
+       <property name="text">
+        <string>الكل</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -375,11 +466,19 @@
     <widget class="QLabel" name="labelCopNum">
      <property name="geometry">
       <rect>
-       <x>320</x>
+       <x>330</x>
        <y>10</y>
-       <width>81</width>
-       <height>16</height>
+       <width>71</width>
+       <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:Black;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color:black;</string>
      </property>
      <property name="text">
       <string>رقم الكوبون</string>
@@ -391,9 +490,12 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>201</width>
+      <width>171</width>
       <height>201</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #eeeeff, stop:1 #eeeeff);</string>
     </property>
     <property name="title">
      <string/>
@@ -403,7 +505,7 @@
       <rect>
        <x>7</x>
        <y>10</y>
-       <width>191</width>
+       <width>151</width>
        <height>181</height>
       </rect>
      </property>
@@ -420,28 +522,28 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{background-color: green;
+         <string notr="true">QPushButton{
+                                        background-color: #5356ff;
                                         border-style: outset;
-                                        border-width: 2px;
+                                        border-width: 4px;
                                         border-radius: 10px;
-                                        border-color: beige;
-                                        font: bold 14px;
-                                        min-width: 10em;
-                                        padding: 6px;}
+                                        border-color: darkblue;
+                    color:white;
+	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
+	                                    }
                                         QPushButton:hover {
                                         background: qradialgradient(
                                         cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        radius: 1.35, stop: 0 #3a0dab, stop: 1 #a5a5ff
                                         );
                                         }
                                         QPushButton:pressed {
                                         border-style: inset;
                                         background: qradialgradient(
                                         cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        radius: 1.35, stop: 0 #a5a5ff, stop: 1 #3a0dab
                                         );
-                                        }
-                                    </string>
+                                        }</string>
         </property>
         <property name="text">
          <string>بحث</string>
@@ -457,28 +559,28 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{background-color: green;
+         <string notr="true">QPushButton{
+                                        background-color: #5356ff;
                                         border-style: outset;
-                                        border-width: 2px;
+                                        border-width: 4px;
                                         border-radius: 10px;
-                                        border-color: beige;
-                                        font: bold 14px;
-                                        min-width: 10em;
-                                        padding: 6px;}
+                                        border-color: darkblue;
+                    color:white;
+	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
+	                                    }
                                         QPushButton:hover {
                                         background: qradialgradient(
                                         cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        radius: 1.35, stop: 0 #3a0dab, stop: 1 #a5a5ff
                                         );
                                         }
                                         QPushButton:pressed {
                                         border-style: inset;
                                         background: qradialgradient(
                                         cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        radius: 1.35, stop: 0 #a5a5ff, stop: 1 #3a0dab
                                         );
-                                        }
-                                    </string>
+                                        }</string>
         </property>
         <property name="text">
          <string>طباعة</string>
@@ -495,35 +597,36 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
-          <weight>75</weight>
+          <family>MS Shell Dlg 2</family>
+          <pointsize>14</pointsize>
+          <weight>9</weight>
           <italic>false</italic>
-          <bold>true</bold>
+          <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{background-color: green;
+         <string notr="true">QPushButton{
+                                        background-color: #5356ff;
                                         border-style: outset;
-                                        border-width: 2px;
+                                        border-width: 4px;
                                         border-radius: 10px;
-                                        border-color: beige;
-                                        font: bold 14px;
-                                        min-width: 10em;
-                                        padding: 6px;}
+                                        border-color: darkblue;
+                    color:white;
+	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
+	                                    }
                                         QPushButton:hover {
                                         background: qradialgradient(
                                         cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        radius: 1.35, stop: 0 #3a0dab, stop: 1 #a5a5ff
                                         );
                                         }
                                         QPushButton:pressed {
                                         border-style: inset;
                                         background: qradialgradient(
                                         cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        radius: 1.35, stop: 0 #a5a5ff, stop: 1 #3a0dab
                                         );
-                                        }
-                                    </string>
+                                        }</string>
         </property>
         <property name="text">
          <string>تصدير</string>
@@ -540,35 +643,36 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
-          <weight>75</weight>
+          <family>MS Shell Dlg 2</family>
+          <pointsize>14</pointsize>
+          <weight>9</weight>
           <italic>false</italic>
-          <bold>true</bold>
+          <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{background-color: red;
+         <string notr="true">QPushButton{
+                                        background-color: red;
                                         border-style: outset;
-                                        border-width: 2px;
+                                        border-width: 4px;
                                         border-radius: 10px;
-                                        border-color: beige;
-                                        font: bold 14px;
-                                        min-width: 10em;
-                                        padding: 6px;}
+                                        border-color: whitered;
+                    color:white;
+	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
+	                                    }
                                         QPushButton:hover {
                                         background: qradialgradient(
                                         cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        radius: 1.35, stop: 0 #ff0000, stop: 1 #ff8888
                                         );
                                         }
                                         QPushButton:pressed {
                                         border-style: inset;
                                         background: qradialgradient(
                                         cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        radius: 1.35, stop: 0 #ff8888, stop: 1 #ff0000
                                         );
-                                        }
-                                    </string>
+                                        }</string>
         </property>
         <property name="text">
          <string>خروج</string>
@@ -585,9 +689,9 @@
   <widget class="QWidget" name="gridLayoutWidget_4">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>10</x>
      <y>220</y>
-     <width>1201</width>
+     <width>1181</width>
      <height>321</height>
     </rect>
    </property>
@@ -595,7 +699,7 @@
     <item row="0" column="0">
      <widget class="QTableWidget" name="Qtable_promotion">
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
       <property name="columnCount">
        <number>13</number>

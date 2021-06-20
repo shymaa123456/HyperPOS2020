@@ -29,30 +29,24 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
         self.conn = db1.connect()
 
-
     def FN_LOADUI(self):
         filename = self.dirname + '/createCoupon.ui'
         loadUi(filename, self)
-
         self.Qcombo_company = CheckableComboBox(self)
         self.Qcombo_company.setGeometry(360, 15, 271, 25)
         self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
-
         self.Qcombo_branch = CheckableComboBox(self)
         self.Qcombo_branch.setGeometry(360, 55, 271, 25)
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_Company()
         self.FN_GET_Branch()
-
         self.FN_EnableDiscVal()
-
         self.checkBox_Multi.toggled.connect(self.FN_endableMultiUser)
         self.radioButton_Value.clicked.connect(self.FN_EnableDiscVal)
         self.radioButton_Percentage.clicked.connect(self.FN_EnablePercentage)
         self.BTN_createCoupon.clicked.connect(self.FN_Create)
-
         datefrom = str(datetime.today().strftime('%Y-%m-%d'))
         xfrom = datefrom.split("-")
         d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
@@ -74,16 +68,13 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         self.LE_desc_2.setEnabled(True)
         self.LE_desc_3.setEnabled(False)
 
-
     def FN_EnablePercentage(self):
         self.valueType="COP_DISCOUNT_PERCENT"
         self.LE_desc_3.setEnabled(True)
         self.LE_desc_2.setEnabled(False)
 
-
     def FN_GET_Company(self):
         #Todo: method for fills the company combobox
-
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
@@ -110,9 +101,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
          except:
              print(sys.exc_info())
 
-
     def FN_Create(self):
-
         try:
             mycursor = self.conn.cursor()
             if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text().strip())==0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
@@ -143,22 +132,17 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                     self.valueData = self.LE_desc_2.text()
             self.conn = db1.connect()
             indx = self.LE_desc.text().strip()
-
-            # sql_select_Query = "select * from Hyperpos_users where name = '" + username +"' and password = '"+ password+"'"
             sql_select_Query = "select * from COUPON where COP_DESC = %s "
-
             x = (indx,)
             mycursor = self.conn.cursor()
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
-
             if mycursor.rowcount > 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "الاسم موجود بالفعل")
-
             else:
                 id = 0
                 sql = "INSERT INTO COUPON (COP_DESC, " + self.valueType + ", COP_SERIAL_COUNT,COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_VALID_FROM, COP_VALID_TO, COP_STATUS)" \
-                                                                          " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s) "
+                      " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s) "
                 print(self.Qdate_from.dateTime().toString('yyyy-MM-dd'))
                 val = (self.LE_desc.text(), self.valueData, self.serialCount, self.MultiUse,
                        self.MultiCount, CL_userModule.user_name, creationDate,
@@ -168,25 +152,19 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 mycursor.execute(sql, val)
                 db1.connectionCommit(self.conn)
                 mycursor.close()
-
                 self.conn = db1.connect()
                 mycursor = self.conn.cursor()
-
                 indx = self.LE_desc.text()
                 mycursor.execute("SELECT * FROM COUPON Where COP_DESC = '" + indx + "'")
                 c = mycursor.fetchone()
                 id = c[0]
-
                 for i in range(int(self.serialCount)):
                     value = randint(0, 1000000000000)
-
                     sql_select_Query = "select * from COUPON_SERIAL where COPS_BARCODE = %s "
-
                     x = ("HCOP"+bin(value),)
                     mycursor = self.conn.cursor()
                     mycursor.execute(sql_select_Query, x)
                     record = mycursor.fetchone()
-
                     if mycursor.rowcount > 0:
                         value=value+1
                     sql2 = "INSERT INTO COUPON_SERIAL (COUPON_ID,COPS_BARCODE,COPS_CREATED_BY,COPS_SERIAL_type,COPS_CREATED_On,COPS_PRINT_COUNT,COPS_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
@@ -202,23 +180,14 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                             id,
                             '1')
                         mycursor.execute(sql3, val3)
-
                 db1.connectionCommit(self.conn)
                 mycursor.close()
                 QtWidgets.QMessageBox.warning(self, "Done", "رقم الكوبون هو " + str(id))
                 self.label_num.setText(str(id))
-
         except mysql.connector.Error as error:
             print(sys.exc_info())
             self.conn.rollback()
 
-
-    # def FN_AuthBranchUser(self):
-    #     self.conn = db1.connect()
-    #     mycursor = self.conn.cursor()
-    #     mycursor.execute("Select BRANCH_NO from SYS_USER_BRANCH where USER_ID = '"+CL_userModule.user_name+"' and STATUS = 1")
-    #     records = mycursor.fetchall()
-    #     return records
 
 
 

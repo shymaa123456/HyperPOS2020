@@ -16,7 +16,6 @@ class CL_printCoupon(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
         self.conn = db1.connect()
 
-
     def FN_LOADUI(self):
         filename = self.dirname + '/printCoupon.ui'
         loadUi(filename, self)
@@ -33,16 +32,3 @@ class CL_printCoupon(QtWidgets.QDialog):
             mycursor.close()
         except:
             print(sys.exc_info())
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -41,8 +41,8 @@ class CL_redeemType(QtWidgets.QDialog):
             #self.Qtable_redeemTp.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_searchRedeemTp.clicked.connect(self.FN_SEARCH_REDEEMTP)
             self.BTN_searchRedeemTp_all.clicked.connect(self.FN_GET_REDEEMTPS)
-            self.setFixedWidth(331)
-            self.setFixedHeight(291)
+            self.setFixedWidth(380)
+            self.setFixedHeight(448)
             self.Qtable_redeemTp.setColumnHidden(0, True)
             self.Qtable_redeemTp.doubleClicked.connect(self.FN_GET_REDEEMTYPE)
         except Exception as err:
@@ -67,7 +67,7 @@ class CL_redeemType(QtWidgets.QDialog):
             if name != '' :
                 whereClause = whereClause + "and REDEEMT_DESC like '%" + str(name) + "%'"
 
-            sql_select_query = "select REDEEMT_TYPE_ID,REDEEMT_DESC,REDEEMT_STATUS  from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + "  order by REDEEMT_TYPE_ID*1 asc"
+            sql_select_query = "select REDEEMT_TYPE_ID,REDEEMT_DESC,REDEEMT_STATUS  from Hyper1_Retail.REDEEM_TYPE " + whereClause + "  order by REDEEMT_TYPE_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -207,7 +207,7 @@ class CL_redeemType(QtWidgets.QDialog):
         self.conn1 = db1.connect()
         if len(self.Qtable_redeemTp.selectedIndexes()) >0 :
             rowNo = self.Qtable_redeemTp.selectedItems()[0].row()
-            id = self.LB_custGpId.text().strip()
+            id = self.LB_redeemTpId.text().strip()
             desc_old = self.Qtable_redeemTp.item(rowNo, 1).text()
             desc = self.LE_desc.text().strip()
             redeemTp = self.CMB_redeemType.currentText()
@@ -217,7 +217,7 @@ class CL_redeemType(QtWidgets.QDialog):
                 status = 0
             #
             error = 0
-            if self.desc == '':
+            if desc == '':
                 QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
 
             else:

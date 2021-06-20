@@ -119,6 +119,9 @@
                                         }
                                     </string>
    </property>
+   <property name="maxLength">
+    <number>25</number>
+   </property>
   </widget>
   <widget class="QTableWidget" name="Qtable_custTP">
    <property name="geometry">
@@ -214,7 +217,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>النقاط</string>
+    <string>نقاط الترقيه</string>
    </property>
   </widget>
   <widget class="QComboBox" name="CMB_nextLevel">

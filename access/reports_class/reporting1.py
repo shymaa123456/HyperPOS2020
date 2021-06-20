@@ -247,7 +247,7 @@ class CL_report1(QtWidgets.QDialog):
             cwd = Path.cwd()
             mod_path = Path(__file__).parent.parent.parent
             dirname = mod_path.__str__() + '/presentation/reports_ui'
-            filename = dirname + '/Coupon_display_1.ui'
+            filename = dirname + '/Coupon_display.ui'
             loadUi(filename, self)
             self.setWindowTitle('تقرير الكوبون')
 

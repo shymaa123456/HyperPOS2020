@@ -67,7 +67,7 @@ class CL_customerGP(QtWidgets.QDialog):
             if name != '' :
                 whereClause = whereClause + "and CG_DESC like '%" + str(name) + "%'"
 
-            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + " order by CG_GROUP_ID*1 asc"
+            sql_select_query = "select  CG_GROUP_ID, CG_DESC , CG_Status from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + " and CG_DESC !='H1' order by CG_GROUP_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -99,7 +99,7 @@ class CL_customerGP(QtWidgets.QDialog):
                 self.Qtable_custGP.removeRow(i)
 
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  order by CG_GROUP_ID*1   asc")
+            mycursor.execute("SELECT  CG_group_id, CG_DESC ,cg_status  FROM Hyper1_Retail.CUSTOMER_GROUP  where  CG_DESC !='H1' order by CG_GROUP_ID*1   asc")
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable_custGP.insertRow(row_number)
@@ -127,15 +127,15 @@ class CL_customerGP(QtWidgets.QDialog):
                 status = self.Qtable_custGP.item(rowNo, 2).text()
                 self.LE_desc.setText(desc)
                 self.LB_custGpId.setText(id)
-                self.LB_status.setText(status)
-                self.CMB_custGroup.setCurrentText(util.FN_GET_STATUS_DESC(status))
+                self.LB_status.setText(util.FN_GET_STATUS_id(status))
+                self.CMB_custGroup.setCurrentText(status)
                 # self.FN_MODIFY_CUSTTP()
         except Exception as err:
             print(err)
-    def FN_CHECK_DUP_NAME(self,name):
+    def FN_CHECK_DUP_NAME(self,name,id=''):
         self.conn1 = db1.connect()
         mycursor1 = self.conn1.cursor()
-        sql = "SELECT CG_DESC  FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '"+name+"'"
+        sql = "SELECT CG_DESC  FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '"+name+"' and CG_GROUP_ID !='"+id+"'"
         mycursor1.execute(sql)
         myresult = mycursor1.fetchall()
         len = mycursor1.rowcount
@@ -176,14 +176,15 @@ class CL_customerGP(QtWidgets.QDialog):
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
         if self.name == '' :
-            QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم")
 
         else:
             try:
                 if self.FN_CHECK_DUP_NAME(self.name) != False:
-                    QtWidgets.QMessageBox.warning(self, "Error", "الاسم مكرر")
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
                     mycursor.close()
                 else:
+
                     sql = "INSERT INTO Hyper1_Retail.CUSTOMER_GROUP(CG_GROUP_ID, CG_DESC , CG_CREATED_ON, CG_CREATED_BY , CG_Status) " \
                           "         VALUES ( %s, %s, %s,  %s,%s)"
 
@@ -196,7 +197,7 @@ class CL_customerGP(QtWidgets.QDialog):
                     mycursor.close()
 
                     print(mycursor.rowcount, "Cust Gp inserted.")
-                    QtWidgets.QMessageBox.information(self, "Success", "تم الإنشاء")
+                    QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_CUSTGPS()
                     self.FN_CLEAR_FEILDS()
@@ -223,12 +224,12 @@ class CL_customerGP(QtWidgets.QDialog):
             #
             error = 0
             if self.desc == '':
-                QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
 
             else:
                 if desc != desc_old:
-                    if self.FN_CHECK_DUP_NAME(desc) != False:
-                        QtWidgets.QMessageBox.warning(self, "Error", "الاسم مكرر")
+                    if self.FN_CHECK_DUP_NAME(desc,id) != False:
+                        QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
                         error=1
 
                 if error!=1:
@@ -240,14 +241,15 @@ class CL_customerGP(QtWidgets.QDialog):
                     #mycursor.close()
                     #
                     print(mycursor.rowcount, "record updated.")
-                    QtWidgets.QMessageBox.information(self, "Success", "تم التعديل")
+                    QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل")
                     db1.connectionCommit(self.conn1)
                     self.FN_GET_CUSTGPS()
                     self.FN_CLEAR_FEILDS ()
         else:
-            QtWidgets.QMessageBox.warning(self, "Error", "برجاء اختيار السطر المراد تعديله ")
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
 
     def FN_CLEAR_FEILDS (self):
         self.LB_custGpId.clear()
         self.LE_desc.clear()
         self.CMB_custGroup.setCurrentText('Active')
+        self.LB_status.setText('1')

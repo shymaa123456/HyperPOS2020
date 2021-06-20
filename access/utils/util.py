@@ -11,7 +11,7 @@ class util():
     def FN_GET_CUSTGP():
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP order by CG_GROUP_ID*1   asc")
+        mycursor.execute("SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where  CG_DESC !='H1' order by CG_GROUP_ID*1   asc")
         records = mycursor.fetchall()
         mycursor.close()
 
@@ -19,10 +19,11 @@ class util():
 
     @staticmethod
     def FN_GET_STATUS_id(desc):
-        if id == 'Active':
+        if desc == 'Active':
             return "1"
         else:
             return "0"
+
 
     @staticmethod
     def FN_GET_CUSTTP():

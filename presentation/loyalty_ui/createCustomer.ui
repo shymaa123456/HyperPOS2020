@@ -36,7 +36,7 @@
     <item>
      <widget class="QLabel" name="label_17">
       <property name="text">
-       <string>نوع العميل</string>
+       <string>مجموعه العملاء</string>
       </property>
      </widget>
     </item>
@@ -64,7 +64,7 @@
     <item>
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>الوظيفه</string>
+       <string>الوظيفه *</string>
       </property>
      </widget>
     </item>
@@ -179,6 +179,9 @@
       <property name="text">
        <string/>
       </property>
+      <property name="maxLength">
+       <number>50</number>
+      </property>
      </widget>
     </item>
     <item>
@@ -280,6 +283,9 @@
       <property name="text">
        <string/>
       </property>
+      <property name="maxLength">
+       <number>25</number>
+      </property>
      </widget>
     </item>
     <item>
@@ -311,6 +317,9 @@
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
       </property>
      </widget>
     </item>
@@ -403,6 +412,9 @@
       <property name="text">
        <string/>
       </property>
+      <property name="maxLength">
+       <number>35</number>
+      </property>
      </widget>
     </item>
     <item>
@@ -466,6 +478,9 @@
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="maxLength">
+       <number>20</number>
       </property>
      </widget>
     </item>

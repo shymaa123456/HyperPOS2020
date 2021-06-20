@@ -27,52 +27,44 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
         self.conn = db1.connect()
 
-
+    #Todo: method for load ui of createVoucher
     def FN_LOADUI(self):
         try:
             filename = self.dirname + '/createVoucher.ui'
             loadUi(filename, self)
-
             self.Qcombo_company = CheckableComboBox(self)
             self.Qcombo_company.setGeometry(20, 15, 271, 25)
             self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
-
             self.Qcombo_branch = CheckableComboBox(self)
             self.Qcombo_branch.setGeometry(20, 55, 271, 25)
             self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
-
             self.Qcombo_section = CheckableComboBox(self)
             self.Qcombo_section.setGeometry(20, 90, 271, 25)
             self.Qcombo_section.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_section.setStyleSheet("background-color: rgb(198, 207, 199)")
-
-
             self.FN_GET_Company()
             self.FN_GET_Branch()
             self.FN_GET_Section()
             self.FN_GET_sponsor()
-
             self.checkBox_Multi.toggled.connect(self.FN_multiuse)
             self.checkBox_rechange.toggled.connect(self.FN_Rechangable)
             self.checkBox_refundable.toggled.connect(self.FN_Refundable)
-
             datefrom = str(datetime.today().strftime('%Y-%m-%d'))
             xfrom = datefrom.split("-")
             d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setMinimumDate(d)
             self.Qdate_to.setMinimumDate(d)
-
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_createVoucher.clicked.connect(self.FN_Create_Voucher)
             self.LE_desc_5.textChanged.connect(self.FN_search)
-
             self.radioButton.clicked.connect(self.FN_SelectSponser)
             self.radioButton_2.clicked.connect(self.FN_Selectprepaid)
         except:
             print(sys.exc_info())
 
+    #Todo: method to make voucher type sponser
     def FN_SelectSponser(self):
         self.Qcombo_sponser.setEnabled(True)
         self.LE_desc_3.setEnabled(True)
@@ -80,6 +72,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         self.LE_desc_7.setEnabled(True)
         self.VGType = "2"
 
+    #Todo: method to make voucher prepaid
     def FN_Selectprepaid(self):
         self.Qcombo_sponser.setEnabled(False)
         self.LE_desc_3.setEnabled(False)
@@ -87,9 +80,8 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         self.LE_desc_7.setEnabled(False)
         self.VGType = "3"
 
+    #Todo: method for fills the company combobox
     def FN_GET_Company(self):
-        #Todo: method for fills the company combobox
-
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
@@ -99,8 +91,8 @@ class CL_CreateVoucher(QtWidgets.QDialog):
             self.Qcombo_company.addItem(row, val)
         mycursor.close()
 
+    #Todo: method for fills the section combobox
     def FN_GET_Section(self):
-        #Todo: method for fills the section combobox
         try:
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
@@ -115,13 +107,10 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-
-
-
+    # Todo: method for fills the Branch combobox
     def FN_GET_Branch(self):
         i = 0
         try:
-            # Todo: method for fills the Branch combobox
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
@@ -135,28 +124,8 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-
-
-    # def FN_AuthBranchUser(self):
-    #     self.conn = db1.connect()
-    #     mycursor = self.conn.cursor()
-    #     mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
-    #     records = mycursor.fetchall()
-    #     return records
-
-
-    def FN_AuthSectionUser(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
-        records = mycursor.fetchall()
-        return records
-
-
-
-
+    # Todo: method for fills the sponsor combobox
     def FN_GET_sponsor(self):
-        # Todo: method for fills the sponsor combobox
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT SPONSER_NAME,SPONSER_ID FROM SPONSER")
@@ -166,28 +135,28 @@ class CL_CreateVoucher(QtWidgets.QDialog):
             self.Qcombo_sponser.addItem(row, val)
         mycursor.close()
 
-
+    # Todo: method to make voucher multi use
     def FN_multiuse(self):
         if self.checkBox_Multi.isChecked():
             self.GV_MULTIUSE=1
         else:
             self.GV_MULTIUSE=0
 
+    # Todo: method to make voucher Rechangable
     def FN_Rechangable(self):
         if self.checkBox_rechange.isChecked():
             self.GV_RECHARGABLE=1
         else:
             self.GV_RECHARGABLE=0
 
+    # Todo: method to make voucher Refundable
     def FN_Refundable(self):
         if self.checkBox_refundable.isChecked():
             self.GV_REFUNDABLE=1
         else:
             self.GV_REFUNDABLE=0
 
-
-
-
+    # Todo: method to create voucher
     def FN_Create_Voucher(self):
         try:
             self.FN_search()
@@ -220,7 +189,6 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                     value = randint(0, 1000000000000)
                     sql = "INSERT INTO VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, GV_REFUNDABLE, GV_RECHARGABLE,GV_MULTIUSE, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s, %s, %s , %s, %s, %s, %s, %s, %s, %s) "
                     val = (self.LE_desc.text().strip(),self.VGType,"HVOU"+bin(value),self.LE_desc_2.text().strip(),self.LE_desc_2.text().strip(),CL_userModule.user_name,creationDate,self.Qdate_from.dateTime().toString('yyyy-MM-dd'),self.Qdate_to.dateTime().toString('yyyy-MM-dd'),self.GV_REFUNDABLE,self.GV_RECHARGABLE,self.GV_REFUNDABLE,self.LE_desc_5.text().strip(),'0','0')
-
                     mycursor.execute(sql, val)
                     indx = self.LE_desc.text()
                     mycursor.execute("SELECT * FROM VOUCHER Where GV_DESC = '" + indx + "'")
@@ -255,6 +223,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method to search about clint
     def FN_search(self):
         try:
             self.conn = db1.connect()

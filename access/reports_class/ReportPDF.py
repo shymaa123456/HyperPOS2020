@@ -121,11 +121,15 @@ class body():
        # df['PROM_ID'] = df['PROM_ID'].str.wrap(60)
         total = 0
         # numCount = 0
-        for x in range(row):
-            val = df.iloc[:, 2].values[x]
-            arabic_text = arabic_reshaper.reshape(val)
-            arabic_text = get_display(arabic_text)
-            df.iloc[x, 2] = arabic_text
+        for y in range(col):
+            for x in range(row):
+                val = df.iloc[:, y].values[x]
+                print(type(val))
+                if type(val) == str:
+
+                    arabic_text = arabic_reshaper.reshape(val)
+                    arabic_text = get_display(arabic_text)
+                    df.iloc[x, y] = arabic_text
         #     numCount += 1
         num = 0
         for x in range(row):

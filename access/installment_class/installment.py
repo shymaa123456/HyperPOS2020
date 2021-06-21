@@ -90,7 +90,7 @@ class CL_installment(QtWidgets.QDialog):
         self.Qcombo_department.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.Qcombo_department.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        #Click listner for changing list of department
+        #TODO Click listner for changing list of department
         self.Qcombo_department.model().dataChanged.connect(self.FN_WhenChecksection)
 
         # get Department list if check box
@@ -127,7 +127,10 @@ class CL_installment(QtWidgets.QDialog):
 
 
         #click button for upload accepted items
-        self.Qbtn_loadItems.clicked.connect(self.FN_UP_CUST)
+        self.Qbtn_loadItems.clicked.connect(self.FN_UploadAcceptedItems)
+
+        # click button for remove selected item from accepted Qrable
+        self.Qbtn_deleteItem.clicked.connect(self.FN_remove_selected(self.Qtable_acceptedItems))
 
         # this function for what enabled or not when start
         self.EnabledWhenOpen()
@@ -312,7 +315,6 @@ class CL_installment(QtWidgets.QDialog):
         self.Qcombo_BMCLevel.clear()
         i = 0
         try:
-
             conn = db1.connect()
             mycursor = conn.cursor()
 
@@ -371,7 +373,7 @@ class CL_installment(QtWidgets.QDialog):
             self.Qcombo_vendor.addItems([row[0]])
 
     #When click upload button to sellect csv file
-    def FN_UP_CUST(self, funct):
+    def FN_UploadAcceptedItems(self, funct):
         self.window_upload = CL_installment(self)
         self.window_upload.FN_LOAD_UPLOAD()
         self.window_upload.show()
@@ -467,6 +469,25 @@ class CL_installment(QtWidgets.QDialog):
              webbrowser.open(filename[0])
          except Exception as err:
              print(err)
+
+    #TO clear Data From QTable
+    def FN_ClearAcepptedQTableData(self):
+        for i in reversed(range(self.Qtable_acceptedItems.rowCount())):
+            self.Qtable_acceptedItems.removeRow(i)
+
+    #remove selected Row from Accepted QTable
+    def FN_remove_selected(self,QTableWidgit):
+        def FN_remove_selected_internal():
+            reply = QMessageBox.question(self, 'Message',
+                                         "Are you sure to delete selected rows ?", QMessageBox.Yes, QMessageBox.No)
+
+            if reply == QMessageBox.Yes:
+                # get index of selected rows
+                indexes = QTableWidgit.selectionModel().selectedRows()
+                for index in reversed(sorted(indexes)):
+                    QTableWidgit.removeRow(index.row())
+
+        return FN_remove_selected_internal
 
 """"
     def FN_LOAD_MODIFY(self):

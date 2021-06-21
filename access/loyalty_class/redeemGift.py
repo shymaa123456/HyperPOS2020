@@ -19,12 +19,12 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import *
 from random import randint
 
-class CL_redVouch(QtWidgets.QDialog):
+class CL_redGift(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
 
     def __init__(self):
-        super(CL_redVouch, self).__init__()
+        super(CL_redGift, self).__init__()
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
@@ -66,7 +66,7 @@ class CL_redVouch(QtWidgets.QDialog):
         self.Qline_point_value.setText("")
     def FN_LOAD_DISPlAY(self):
         try:
-            filename = self.dirname + '/redeemVoucher.ui'
+            filename = self.dirname + '/redeemGift.ui'
             loadUi(filename, self)
             conn = db1.connect()
             mycursor = conn.cursor()
@@ -75,10 +75,10 @@ class CL_redVouch(QtWidgets.QDialog):
             #self.Qbtn_exit.clicked.connect(self.FN_exit)
             self.Qline_replace.textChanged.connect(self.textchanged)
             self.Qline_cust.textChanged.connect(self.FN_CLEAR_FEILDS)
-            self.setFixedWidth(497)
-            self.setFixedHeight(281)
+            self.setFixedWidth(513)
+            self.setFixedHeight(330)
             for row_number, row_data in enumerate(CL_userModule.myList):
-                if row_data[1] == 'Redeem_Voucher':
+                if row_data[1] == 'Redeem_Gift':
                     if row_data[4] == 'None':
                         print('hh')
                     else:

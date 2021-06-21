@@ -63,14 +63,15 @@ class CL_formItem(QtWidgets.QDialog):
     #Todo: method get FORMITEMID
     def FN_GET_FORMITEMID(self):
         self.item = self.CMB_formItemName.currentText()
-        mycursor = self.conn.cursor()
+        conn = db1.connect()
+        mycursor = conn.cursor()
         sql_select_query = "SELECT ITEM_ID FROM SYS_FORM_ITEM WHERE ITEM_DESC = %s "
         x = (self.item,)
         mycursor.execute(sql_select_query, x)
         myresult = mycursor.fetchone()
         if mycursor.rowcount > 0:
             self.LB_formItemID.setText(myresult[0])
-        mycursor.close()
+       # mycursor.close()
 
     #Todo: method to create FORMITEMID
     def FN_CREATE_FORM_ITEM(self):
@@ -120,10 +121,11 @@ class CL_formItem(QtWidgets.QDialog):
 
     #Todo: method to get FORMITEM ITEM_DESC
     def FN_GET_FORM_ITEM(self):
+        conn = db1.connect()
         self.LE_desc.clear()
         self.FN_GET_FORMITEMID()
         self.id = self.LB_formItemID.text()
-        mycursor = self.conn.cursor()
+        mycursor = conn.cursor()
         sql_select_query = "select ITEM_DESC ,ITEM_STATUS from SYS_FORM_ITEM where ITEM_ID = %s "
         x = (self.id,)
         mycursor.execute(sql_select_query, x)

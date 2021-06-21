@@ -108,7 +108,7 @@ class CL_form(QtWidgets.QDialog):
     #Todo: method to create form
     def FN_CREATE_FORM(self):
         self.desc = self.LE_desc.text().strip()
-        self.type = self.CMB_formStatus.currentText()
+        self.type = self.CMB_formType.currentText()
         self.help = self.LE_help.text()
         self.status = self.CMB_formStatus.currentText()
         if self.status == 'Active':

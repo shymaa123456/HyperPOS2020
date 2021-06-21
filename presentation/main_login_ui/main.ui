@@ -299,11 +299,14 @@
      <addaction name="separator"/>
     </widget>
     <widget class="QMenu" name="QM_Customer_Redeem">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="title">
       <string>منح الهدايا واستبدال النقاط</string>
      </property>
      <addaction name="QAct_Redeem_Voucher"/>
-     <addaction name="QAct_Cust_Redeem_Gift"/>
+     <addaction name="QAct_Redeem_Gift"/>
      <addaction name="QAct_Cust_Gift_make"/>
      <addaction name="QAct_Cust_Redeem_Voucher_Print"/>
     </widget>
@@ -1286,6 +1289,9 @@
    </property>
   </action>
   <action name="QAct_Redeem_Item">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>تعريف اصناف الهدايا</string>
    </property>
@@ -1324,6 +1330,9 @@
    </property>
   </action>
   <action name="QAct_Redeem_Voucher">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>استبدال النقاط بقسيمة شراء</string>
    </property>
@@ -1333,7 +1342,10 @@
     <string>منح هدايا للعملاء</string>
    </property>
   </action>
-  <action name="QAct_Cust_Redeem_Gift">
+  <action name="QAct_Redeem_Gift">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>استبدال النقاط بالهدايا</string>
    </property>

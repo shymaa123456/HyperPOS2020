@@ -13,6 +13,7 @@ from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.loyalty_class.CL_loyPoint import CL_loyPoint
 from access.loyalty_class.loyalityProg import CL_loyProg
+from access.loyalty_class.redeemGift import CL_redGift
 from access.loyalty_class.redeemItem import CL_redItem
 from access.loyalty_class.redeemType import CL_redeemType
 from access.loyalty_class.redeemVoucher import CL_redVouch
@@ -64,9 +65,9 @@ class CL_main(QtWidgets.QMainWindow):
 
             forms = list(dict.fromkeys(forms))
 
-            #print(forms)
+            print(forms)
             for row in forms:
-                #print(row)
+                print(row)
                 but_name = 'QAct_' + row
                 self.findChild(QObject, but_name).setEnabled(True)
 
@@ -91,6 +92,7 @@ class CL_main(QtWidgets.QMainWindow):
 
             self.QAct_Redeem_Item.triggered.connect(self.FN_DISPLAY_REDITEM)
             self.QAct_Redeem_Voucher.triggered.connect(self.FN_DISPLAY_REDITEMVOUCHER)
+            self.QAct_Redeem_Gift.triggered.connect(self.FN_DISPLAY_REDITEMGIFT)
 
             """ redeem type """
             self.QAct_Redeem_Type.triggered.connect(self.FN_DISPLAY_REDEEMTP)
@@ -194,6 +196,16 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_two.show()
         except Exception as err:
             print(err)
+
+    def FN_DISPLAY_REDITEMGIFT(self):
+        try:
+            self.window_two = CL_redGift()
+
+            self.window_two.FN_LOAD_DISPlAY()
+            self.window_two.show()
+        except Exception as err:
+            print(err)
+
 
     def FN_DISPLAY_REDEEMTP(self):
         try:

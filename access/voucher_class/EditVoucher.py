@@ -35,6 +35,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
         self.conn = db1.connect()
 
+    # Todo: method to load ui of editVoucher
     def FN_LOADUI(self):
         try:
             filename = self.dirname + '/editVoucher.ui'
@@ -43,22 +44,18 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.Qcombo_company.setGeometry(10, 100, 271, 25)
             self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
-
             self.Qcombo_branch = CheckableComboBox(self)
             self.Qcombo_branch.setGeometry(10, 140, 271, 25)
             self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
-
             self.Qcombo_section = CheckableComboBox(self)
             self.Qcombo_section.setGeometry(10, 180, 271, 25)
             self.Qcombo_section.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_section.setStyleSheet("background-color: rgb(198, 207, 199)")
-
             self.FN_GET_Company()
             self.FN_GET_Branch()
             self.FN_GET_Section()
             self.FN_GET_sponsor()
-
             self.CMB_CouponStatus.addItems(["Inactive", "Active"])
             self.FN_getData()
             self.FN_getDatabyID()
@@ -68,14 +65,11 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.checkBox_refundable.toggled.connect(self.FN_Refundable)
             self.BTN_editCoupon.clicked.connect(self.FN_editAction)
             self.LE_desc_5.textChanged.connect(self.FN_search)
-
-
         except:
             print(sys.exc_info())
 
+    # Todo: method for fills the company combobox
     def FN_GET_Company(self):
-        # Todo: method for fills the company combobox
-
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
@@ -84,11 +78,10 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.Qcombo_company.addItem(row, val)
         mycursor.close()
 
+    # Todo: method for fills the Branch combobox
     def FN_GET_Branch(self):
-        # Todo: method for fills the Branch combobox
         i = 0
         try:
-            # Todo: method for fills the Branch combobox
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
@@ -98,11 +91,11 @@ class CL_EditVoucher(QtWidgets.QDialog):
                     if val in bra:
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
-
             mycursor.close()
         except:
             print(sys.exc_info())
 
+    # Todo: method to get company of voucher
     def FN_SELECT_company(self):
         indx = self.CMB_CouponDes.currentData()
         mycursor = self.conn.cursor()
@@ -113,6 +106,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+    # Todo: method to get branches of voucher
     def FN_SELECT_branch(self):
         indx = self.CMB_CouponDes.currentData()
         mycursor = self.conn.cursor()
@@ -123,6 +117,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+    # Todo: method to get sections of voucher
     def FN_SELECT_section(self):
         indx = self.CMB_CouponDes.currentData()
         mycursor = self.conn.cursor()
@@ -133,6 +128,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor.close()
         return records
 
+    # Todo: method to check company assgined to voucher
     def FN_check_company(self, indx):
         mycursor = self.conn.cursor()
         sql_select_company = "SELECT COMPANY_ID  FROM COMPANY"
@@ -148,6 +144,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             i = i + 1
         mycursor.close()
 
+    # Todo: method to check branch assgined to voucher
     def FN_check_branch(self, index):
         self.FN_unCheckedALL()
         mycursor = self.conn.cursor()
@@ -165,7 +162,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             i = i + 1
         mycursor.close()
 
-
+    # Todo: method to check section assgined to voucher
     def FN_check_section(self, index):
         self.FN_unCheckedALLsection()
         mycursor = self.conn.cursor()
@@ -183,26 +180,21 @@ class CL_EditVoucher(QtWidgets.QDialog):
             i = i + 1
         mycursor.close()
 
+    # Todo: method to refresh Qcombo_branch
     def FN_unCheckedALL(self):
-        # mycursor = self.conn.cursor()
-        # sql_select_branch = "SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1"
-        # mycursor.execute(sql_select_branch)
-        # record = mycursor.fetchall()
         i = 0
         for row in CL_userModule.branch:
             self.Qcombo_branch.unChecked(i)
             i += 1
 
+    # Todo: method to refresh Qcombo_section
     def FN_unCheckedALLsection(self):
-        # mycursor = self.conn.cursor()
-        # sql_select_branch = "SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1"
-        # mycursor.execute(sql_select_branch)
-        # record = mycursor.fetchall()
         i = 0
         for row in CL_userModule.section:
             self.Qcombo_section.unChecked(i)
             i += 1
 
+    # Todo: method to get branch of voucher
     def FN_GetMathchBranch(self):
         indx = self.CMB_CouponDes.currentData()
         mycursor = self.conn.cursor()
@@ -213,16 +205,8 @@ class CL_EditVoucher(QtWidgets.QDialog):
         mycursor.close()
         return records
 
-    # def FN_AuthBranchUser(self):
-    #     self.conn = db1.connect()
-    #     mycursor = self.conn.cursor()
-    #     mycursor.execute("SELECT BRANCH_NO FROM SYS_USER_BRANCH where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
-    #     records = mycursor.fetchall()
-    #     mycursor.close()
-    #     return records
-
+    # Todo: method for fills the section combobox
     def FN_GET_Section(self):
-        # Todo: method for fills the section combobox
         try:
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
@@ -237,16 +221,8 @@ class CL_EditVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-    def FN_AuthSectionUser(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT SECTION_ID FROM SYS_USER_SECTION where USER_ID='" + CL_userModule.user_name + "' and STATUS = 1")
-        records = mycursor.fetchall()
-        mycursor.close()
-        return records
-
+    # Todo: method for fills the sponsor combobox
     def FN_GET_sponsor(self):
-        # Todo: method for fills the sponsor combobox
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT SPONSER_NAME,SPONSER_ID FROM SPONSER")
@@ -256,6 +232,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.Qcombo_sponser.addItem(row, val)
         mycursor.close()
 
+    # Todo: method for get all voucher
     def FN_getData(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -265,6 +242,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.CMB_CouponDes.addItem(row, val)
         mycursor.close()
 
+    # Todo: method for get data about voucher
     def FN_getDatabyID(self):
         try:
             self.branch_list = []
@@ -295,42 +273,30 @@ class CL_EditVoucher(QtWidgets.QDialog):
             xto = dateto.split("-")
             d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)
-
             print("record"+record[15])
-
             if int(record[14]) == 1:
                 self.checkBox_refundable.setChecked(True)
             else:
                 self.checkBox_refundable.setChecked(False)
-
             if int(record[15]) == 1:
                 self.checkBox_rechange.setChecked(True)
                 self.LE_desc_3.setEnabled(True)
             else:
                 self.checkBox_rechange.setChecked(False)
                 self.LE_desc_3.setEnabled(False)
-
             if int(record[16]) == 1:
                 self.checkBox_Multi.setChecked(True)
             else:
                 self.checkBox_Multi.setChecked(False)
-
             self.FN_check_section(indx)
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
             print(record[18])
-            # if int(str(record[18])) == 1:
-            #     self.LE_desc_2.setEnabled(False)
-            #     self.LE_desc_3.setEnabled(True)
-            # elif int(str(record[18])) == 0:
-            #     self.LE_desc_2.setEnabled(True)
-            #     self.LE_desc_3.setEnabled(False)
             sql_select = "select * from SPONSER where SPONSER_ID=( SELECT SPONSER_ID FROM VOUCHER_SPONSOR where GV_ID = %s)"
             x = (indx,)
             mycursor.execute(sql_select, x)
             record = mycursor.fetchone()
             self.Qcombo_sponser.setCurrentText(record[2])
-
             self.branch_list.clear()
             self.section_list.clear()
             if len(self.Qcombo_branch.currentData()) > 0:
@@ -340,16 +306,17 @@ class CL_EditVoucher(QtWidgets.QDialog):
                 for x in self.Qcombo_section.currentData():
                     self.section_list.append(x)
             self.oldlist=self.Qcombo_branch.currentData()
-
         except:
             print(sys.exc_info())
 
+    # Todo: method to make voucher multiuse
     def FN_multiuse(self):
         if self.checkBox_Multi.isChecked():
             self.GV_MULTIUSE = 1
         else:
             self.GV_MULTIUSE = 0
 
+    # Todo: method to make voucher Rechangable
     def FN_Rechangable(self):
         if self.checkBox_rechange.isChecked():
             self.GV_RECHARGABLE = 1
@@ -358,12 +325,14 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.GV_RECHARGABLE = 0
             self.LE_desc_3.setEnabled(False)
 
+    # Todo: method to make voucher Refundable
     def FN_Refundable(self):
         if self.checkBox_refundable.isChecked():
             self.GV_REFUNDABLE = 1
         else:
             self.GV_REFUNDABLE = 0
 
+    # Todo: method to edit voucher
     def FN_editAction(self):
         try:
             self.FN_search()
@@ -382,7 +351,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
                 elif self.searchpos== False :
                     QtWidgets.QMessageBox.warning(self, "Done",
                                                   "العميل غير موجود")
-
                 else:
                     mycursor = self.conn.cursor()
                     creationDate = str(datetime.today().strftime('%Y-%m-%d'))
@@ -419,7 +387,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
                             if row in self.branch_list:
                                 print("found")
                             else:
-
                                 mycursor = self.conn.cursor()
                                 mycursor.execute(
                                     "SELECT * FROM VOUCHER_BRANCH where BRANCH_NO='" + row + "' and GV_ID='" + str(
@@ -439,7 +406,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
                                         str(self.CMB_CouponDes.currentData()),
                                         '1')
                                     mycursor.execute(sql6, val6)
-
                     if len(self.section_list) > len(self.new_section_list):
                         for row in self.section_list:
                             print(row)
@@ -482,7 +448,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
                         val7 = ('VOUCHER', 'GV_DESC', self.oldValue, self.LE_desc_1.text().strip(), creationDate,
                                 CL_userModule.user_name)
                         mycursor.execute(sql7, val7)
-
 
                     # elif collections.Counter(self.Qcombo_branch.currentData()) == collections.Counter(self.oldlist):
                     #
@@ -551,6 +516,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method to search about customer
     def FN_search(self):
         try:
             self.conn = db1.connect()
@@ -569,5 +535,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # Todo: method get diff between two list
     def Diff(self,li1, li2):
         return list(set(li1) - set(li2)) + list(set(li2) - set(li1))

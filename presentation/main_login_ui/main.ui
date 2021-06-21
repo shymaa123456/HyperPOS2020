@@ -293,7 +293,7 @@
       <string>الهدايا والنقاط المكتسبة</string>
      </property>
      <addaction name="QAct_Redeem_Item"/>
-     <addaction name="QAct_Cust_Points_Redeem_Define"/>
+     <addaction name="QAct_Loyality_Point"/>
      <addaction name="separator"/>
      <addaction name="separator"/>
     </widget>
@@ -1306,7 +1306,10 @@
     <string>تحميل ملف عدد وقيمة النقاط</string>
    </property>
   </action>
-  <action name="QAct_Cust_Points_Redeem_Define">
+  <action name="QAct_Loyality_Point">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>تعريف قيمة استبدال النقاط</string>
    </property>

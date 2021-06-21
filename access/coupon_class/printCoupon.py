@@ -16,12 +16,13 @@ class CL_printCoupon(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
         self.conn = db1.connect()
 
-
+    # Todo: method load ui of printCoupon
     def FN_LOADUI(self):
         filename = self.dirname + '/printCoupon.ui'
         loadUi(filename, self)
         self.FN_getData()
 
+    # Todo: method to get all coupons
     def FN_getData(self):
         try:
             self.conn = db1.connect()
@@ -33,16 +34,3 @@ class CL_printCoupon(QtWidgets.QDialog):
             mycursor.close()
         except:
             print(sys.exc_info())
-
-
-
-
-
-
-
-
-
-
-
-
-

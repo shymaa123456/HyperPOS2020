@@ -13,10 +13,12 @@ class CL_userModule(object):
     myList = []
     branch = []
     section = []
+    item = []
 
     def init(self):
         self.conn = db1.connect()
 
+    #Todo: method for get all form role ,from and from item assigned to login user
     def loadPrivilages(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -29,19 +31,13 @@ class CL_userModule(object):
                            "inner join Hyper1_Retail.SYS_ROLE r on r.ROLE_ID = p.ROLE_ID " \
                            "inner join Hyper1_Retail.SYS_USER u ON u.USER_ID = ur.USER_ID" \
                            " where  u.USER_ID = %s and u.USER_STATUS= 1 and ur.UR_STATUS = 1 and f.form_status = 1 and r.ROLE_STATUS = 1"
-        # print(sql_select_query)
         x = (CL_userModule.user_name,)
-
-        # print(sql_select_query)
-
         mycursor.execute(sql_select_query, x)
-
         records = mycursor.fetchall()
-        # print(records)
+        print(records)
         CL_userModule.myList = records
-        # print(CL_userModule.myList)
 
-
+    #Todo: method for get branch assigned to login user
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -50,7 +46,7 @@ class CL_userModule(object):
         CL_userModule.branch = records
         return records
 
-
+    #Todo: method for get section assigned to login user
     def FN_AuthSectionUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
@@ -58,5 +54,6 @@ class CL_userModule(object):
         records = mycursor.fetchall()
         CL_userModule.section = records
         return records
+
 
 

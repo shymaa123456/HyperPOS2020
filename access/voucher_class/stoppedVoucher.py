@@ -19,7 +19,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/voucher_ui'
         self.conn = db1.connect()
 
-
+    # Todo: method to load ui of stoppedVoucher
     def FN_LOADUI(self):
         try:
             filename = self.dirname + '/stoppedVoucher.ui'
@@ -34,10 +34,8 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-
-
+    # Todo: method to get all voucher
     def FN_getData(self):
-
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT GV_DESC,GV_ID FROM VOUCHER")
@@ -46,6 +44,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
             self.CMB_CouponDes.addItem(row,val)
         mycursor.close()
 
+    # Todo: method to get data of voucher
     def FN_getDatabyID(self):
         try:
             indx = self.CMB_CouponDes.currentData()
@@ -58,17 +57,14 @@ class CL_modifyVoucher(QtWidgets.QDialog):
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
             self.LE_desc_2.setValue(float(record[4]))
-
             dateto = record[13]
             xto = dateto.split("-")
             d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
             self.Qdate_to.setDate(d)
-
             datefrom = record[12]
             xfrom = datefrom.split("-")
             d = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
             self.Qdate_from.setDate(d)
-
             print(record[16])
             if(record[16]=="1"):
                 self.checkBox_Multi.setChecked(True)
@@ -76,26 +72,21 @@ class CL_modifyVoucher(QtWidgets.QDialog):
                 self.checkBox_rechange.setChecked(True)
             elif (record[14] == "1"):
                 self.checkBox_refundable.setChecked(True)
-
-
-
             sql_select_Query2 = "SELECT * from SPONSER where SPONSER_ID=( SELECT SPONSER_ID FROM VOUCHER_SPONSOR where GV_ID = '"+str(record[0])+"') "
             mycursor.execute(sql_select_Query2)
             record2 = mycursor.fetchone()
             self.LE_desc_6.setText(record2[2])
-
             sql_select_Query3 = "select * from POS_CUSTOMER where POSC_CUST_ID = '" + str(record[17]) + "' "
             print(sql_select_Query3)
             mycursor.execute(sql_select_Query3)
             record3 = mycursor.fetchone()
             self.LE_desc_5.setText(str(record3[0]))
             self.desc_13.setText(record3[3])
-
-
             mycursor.close()
         except:
             print(sys.exc_info())
 
+    # Todo: method to get status of voucher
     def FN_getStatus(self):
         indx = self.CMB_CouponDes.currentData()
         self.conn = db1.connect()
@@ -110,8 +101,7 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         mycursor.close()
         self.FN_getDatabyID()
 
-
-
+    # Todo: method to change status of voucher
     def FN_UpdateStatus(self):
         mycursor = self.conn.cursor()
         print(self.CMB_CouponStatus.currentIndex())
@@ -123,19 +113,9 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         QtWidgets.QMessageBox.warning(self, "Done", "Done")
         self.close()
 
-
+    # Todo: method to clear edit text
     def FN_Clear(self):
         self.LE_desc_2.clear()
         self.LE_desc_3.clear()
         self.LE_desc_4.clear()
         self.LE_desc_5.clear()
-
-    # def showDialog(self):
-    #     # print("event")
-    #     buttonReply = QMessageBox.question(self, 'PyQt5 message', "هناك فروع غير فعاله سيتم تفعيلها؟",
-    #                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-    #     if buttonReply == QMessageBox.Yes:
-    #         print('Yes clicked.')
-    #     else:
-    #         print('No clicked.')
-

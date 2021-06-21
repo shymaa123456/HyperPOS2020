@@ -184,7 +184,7 @@ class CL_loyPoint(QtWidgets.QDialog):
                 #val = (id, qty, val,date_from,date_to,creationDate,CL_userModule.user_name)
                 #print(val)
                 mycursor.execute(sql)
-                db1.connectionCommit(self.conn)
+                db1.connectionCommit(conn)
                 print(mycursor.rowcount, "loy point inserted.")
                 QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                 mycursor.close()

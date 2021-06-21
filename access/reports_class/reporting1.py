@@ -105,9 +105,11 @@ class CL_report1(QtWidgets.QDialog):
             if self.cond == 1:
                 self.Qbtn_search.setEnabled(False)
                 self.query = (
-                        "SELECT COP_ID , COP_DESC, BRANCH_DESC_A, COP_DISCOUNT_VAL , COP_DISCOUNT_PERCENT , "
-                        "COP_SERIAL_COUNT , COP_MULTI_USE , COP_MULTI_USE_COUNT , COP_CREAED_ON , COP_CHANGED_ON , "
-                        "COP_VALID_FROM , COP_VALID_TO , COP_STATUS FROM COUPON "
+                        "SELECT COP_ID رقم_الكوبون, COP_DESC وصف_الكوبون, BRANCH_DESC_A اسم_الشركة, "
+                        "COP_DISCOUNT_VAL قيمة_الخصم, COP_DISCOUNT_PERCENT نسبة_الخصم, "
+                        "COP_SERIAL_COUNT عدد_السريال, COP_MULTI_USE متعدد_الاستخدام, COP_MULTI_USE_COUNT "
+                        "عدد_الاستخدامات_المتاحة, COP_CREAED_ON تاريخ_الانشاء, COP_CHANGED_ON تاريخ_التغيير, "
+                        "COP_VALID_FROM متاح_من, COP_VALID_TO متاح_الي, COP_STATUS الحالة FROM COUPON "
                         "join COUPON_BRANCH on COP_ID = COUPON_ID "
                         "join BRANCH on COUPON_BRANCH.BRANCH_NO = BRANCH.BRANCH_NO "
                         "WHERE " + self.copNum + self.prom_status+" COP_VALID_FROM >= '" + self.Qdate_from.dateTime().toString(
@@ -118,7 +120,9 @@ class CL_report1(QtWidgets.QDialog):
 
                 self.runQuery(mycursor)
                 self.Qbtn_search.setEnabled(True)
-                self.field_names = ['COP_ID', 'COP_DESC', 'BRANCH_DESC_A', 'COP_DISCOUNT_VAL' , 'COP_DISCOUNT_PERCENT' , 'COP_SERIAL_COUNT' , 'COP_MULTI_USE' , 'COP_MULTI_USE_COUNT' , 'COP_VALID_FROM' , 'COP_VALID_TO' , 'COP_STATUS']
+                self.field_names = ['رقم_الكوبون', 'وصف_الكوبون', 'اسم_الشركة', 'قيمة_الخصم' , 'نسبة_الخصم' ,
+                                    'عدد_السريال' , 'متعدد_الاستخدام' , 'عدد_الاستخدامات_المتاحة' , 'متاح_من' ,
+                                    'متاح_الي' , 'الحالة']
 
             elif self.cond == 0:
                 QtWidgets.QMessageBox.warning(self, "Error", "برجاء تحديد محددات البحث")

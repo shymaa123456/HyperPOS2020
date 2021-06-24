@@ -660,7 +660,7 @@ class CL_customer(QtWidgets.QDialog):
              sheet = wb.add_sheet('Sheet 1')
              sheet.write(0, 0, 'رقم العميل')
              sheet.write(0, 1, 'عدد النقاط')
-
+             sheet.write(0, 2, 'الفرع')
              # # wb.save('test11.xls')
              wb.save(str(filename[0]))
              # wb.close()
@@ -824,6 +824,7 @@ class CL_customer(QtWidgets.QDialog):
                 try:
                     cust = sheet.cell_value(i, 0)
                     pts = sheet.cell_value(i, 1)
+                    branch = sheet.cell_value(i, 2)
                     cust = int(cust)
                     ret = self.FN_VALIDATE_CUST(cust)
                     if cust == '' or pts == '':
@@ -860,9 +861,9 @@ class CL_customer(QtWidgets.QDialog):
                     except Exception as err:
                          print(err)
             elif error == 1:
-                QtWidgets.QMessageBox.warning(self, "Error", "Sheet contain empty fields")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "الملف يحتوي على بعض الخانات الفارغه")
             elif error1 == 1:
-                QtWidgets.QMessageBox.warning(self, "Error", "Sheet contain invalid customers")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "الملف يحتوي على عملاء غير متواجدين")
 
             mycursor.close()
 #            self.close()

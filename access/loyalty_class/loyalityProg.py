@@ -22,12 +22,13 @@ from access.utils.util import *
 class CL_loyProg(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
-    def __init__(self):
+    def __init__(self,pp):
         super(CL_loyProg, self).__init__()
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
+        self.p=pp
     def onClicked(self):
         #radioButton = self.sender()
         #print(radioButton.name)

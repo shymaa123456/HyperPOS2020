@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 from random import randint
-
+import mysql
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate
 from PyQt5.uic import loadUi
@@ -159,9 +159,10 @@ class CL_CreateVoucher(QtWidgets.QDialog):
     # Todo: method to create voucher
     def FN_Create_Voucher(self):
         try:
-            self.FN_search()
             self.conn = db1.connect()
+            self.conn.autocommit = False
             mycursor = self.conn.cursor()
+            self.conn.start_transaction()
             creationDate = str(datetime.today().strftime('%Y-%m-%d'))
             if len(self.Qcombo_company.currentData()) == 0 or len(self.Qcombo_branch.currentData()) == 0 or len(self.Qcombo_section.currentData()) == 0 or len(self.Qcombo_sponser.currentData()) == 0 or len(
                     self.LE_desc.text().strip()) == 0 or len(self.LE_desc_3.text().strip()) == 0 or len(
@@ -186,6 +187,11 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                        QtWidgets.QMessageBox.warning(self, "Done",
                                                   "يرجى مراجعة نسبة الدعم")
                 else:
+                    sql0 = "  LOCK  TABLES    Hyper1_Retail.VOUCHER   WRITE , " \
+                           "    Hyper1_Retail.VOUCHER_SPONSOR   WRITE , " \
+                           "    Hyper1_Retail.VOUCHER_BRANCH   WRITE , "\
+                           "    Hyper1_Retail.VOUCHER_SECTION   WRITE  "
+                    mycursor.execute(sql0)
                     value = randint(0, 1000000000000)
                     sql = "INSERT INTO VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, GV_REFUNDABLE, GV_RECHARGABLE,GV_MULTIUSE, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s, %s, %s , %s, %s, %s, %s, %s, %s, %s) "
                     val = (self.LE_desc.text().strip(),self.VGType,"HVOU"+bin(value),self.LE_desc_2.text().strip(),self.LE_desc_2.text().strip(),CL_userModule.user_name,creationDate,self.Qdate_from.dateTime().toString('yyyy-MM-dd'),self.Qdate_to.dateTime().toString('yyyy-MM-dd'),self.GV_REFUNDABLE,self.GV_RECHARGABLE,self.GV_REFUNDABLE,self.LE_desc_5.text().strip(),'0','0')
@@ -216,12 +222,22 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                                 id, self.Qcombo_section.currentData()[a],
                                 '1')
                             mycursor.execute(sql3, val3)
+                    sql00 = "  UNLOCK   tables    "
+                    mycursor.execute(sql00)
                     db1.connectionCommit(self.conn)
+                    mycursor.close()
                     QtWidgets.QMessageBox.warning(self, "Done", "رقم قسيمه الشراء هو " + str(id))
                     self.label_num.setText(str(id))
-                    mycursor.close()
-        except:
-            print(sys.exc_info())
+        except mysql.connector.Error as error:
+            print("Failed to update record to database rollback: {}".format(error))
+            # reverting changes because of exception
+            self.conn.rollback()
+        finally:
+            # closing database connection.
+            if self.conn.is_connected():
+                mycursor.close()
+                self.conn.close()
+                print("connection is closed")
 
     # Todo: method to search about clint
     def FN_search(self):

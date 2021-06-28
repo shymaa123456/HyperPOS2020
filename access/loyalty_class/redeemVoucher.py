@@ -32,13 +32,13 @@ class CL_redVouch(QtWidgets.QDialog):
     from Validation.Validation import CL_validation
     def textchanged(self):
         try:
-            print( "contents of text box: " )
+
             if self.Qline_replace.text().strip() !='' and self.Qline_points.text().strip() !='' :
                 ret = CL_validation.FN_validation_int(self.Qline_replace.text().strip())
                 if ret == True:
-                    replacedPoints = int(self.Qline_replace.text().strip())
+                    replacedPoints = float(self.Qline_replace.text().strip())
 
-                    actualPoints = self.Qline_points.text().strip()
+                    actualPoints = float(self.Qline_points.text().strip())
                     remainingPoints = actualPoints - replacedPoints
                     self.Qline_remainder.setText(str(remainingPoints))
                     self.FN_GET_POINTS_VALUE(replacedPoints)
@@ -56,8 +56,9 @@ class CL_redVouch(QtWidgets.QDialog):
         mycursor.execute(sql_select_query,x)
         result = mycursor.fetchone()
         value = replacedPoints * int(result[1] )/int(result[0])
-        print(result)
+
         self.Qline_point_value.setText(str(value))
+        return result
     def FN_CLEAR_FEILDS (self):
         self.Qline_points.setText("")
         self.Qline_name.setText('')
@@ -134,10 +135,8 @@ class CL_redVouch(QtWidgets.QDialog):
             db1.connectionCommit(conn)
             mycursor.execute( "select GV_ID from Hyper1_Retail.VOUCHER where GV_BARCODE ='"+voucherBarcode+"'")
             result= mycursor.fetchone()
-            QtWidgets.QMessageBox.information(self, "Done", +str(result[0])+"رقم القسيمه هو " )
-            # update customer points
-            actualPoints = self.Qline_points.text().strip()
-            remainingPoints = self.Qline_remainder.text().strip()
+            QtWidgets.QMessageBox.information(self, "Done", str(result[0])+"رقم القسيمه هو " )
+
 
 
         except Exception as err:
@@ -148,18 +147,21 @@ class CL_redVouch(QtWidgets.QDialog):
             # insert voucher
             value = self.Qline_point_value.text().strip()
             customer = self.Qline_cust.text().strip()
-
+            replacedPoints = float(self.Qline_replace.text().strip())
             conn = db1.connect()
             mycursor = conn.cursor()
             creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-            actualPoints = self.Qline_points.text().strip()
-            remainingPoints = self.Qline_remainder.text().strip()
+            actualPoints = float(self.Qline_points.text().strip())
+            remainingPoints = float(self.Qline_remainder.text().strip())
             pts = remainingPoints - actualPoints
 
             sql0 = "  LOCK  TABLES    Hyper1_Retail.POS_CUSTOMER_POINT   WRITE , " \
                    "    Hyper1_Retail.LOYALITY_POINTS_TRANSACTION_LOG   WRITE  "
 
+
+            #get point value
+            result=self.FN_GET_POINTS_VALUE(replacedPoints)
             mycursor.execute(sql0)
             sql = "INSERT INTO `Hyper1_Retail`.`LOYALITY_POINTS_TRANSACTION_LOG` " \
                   "(`POSC_CUST_ID`,`REDEEM_TYPE_ID`,`COMPANY_ID`,`BRANCH_NO`,`TRANS_CREATED_BY`," \
@@ -167,7 +169,7 @@ class CL_redVouch(QtWidgets.QDialog):
                   "                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
             val = (
-            customer, 1, '1', 'H010', CL_userModule.user_name, creationDate, actualPoints, 1, pts, 1, 'voucher redeem', remainingPoints,
+            customer, 1, '1', 'H010', CL_userModule.user_name, creationDate, actualPoints, result[1], pts, float(result[1])*pts, 'voucher redeem', remainingPoints,
             '2')
             mycursor.execute(sql, val)
 
@@ -189,8 +191,8 @@ class CL_redVouch(QtWidgets.QDialog):
             print(err)
 
     def FN_VALIDATE(self):
-        replacedPoints = int(self.Qline_replace.text().strip())
-        actualPoints = int(self.Qline_points.text().strip())
+        replacedPoints = float(self.Qline_replace.text().strip())
+        actualPoints = float(self.Qline_points.text().strip())
         if replacedPoints > actualPoints:
             return False
         else:

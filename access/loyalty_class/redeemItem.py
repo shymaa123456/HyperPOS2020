@@ -94,36 +94,35 @@ class CL_redItem(QtWidgets.QDialog):
         d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
         self.Qdate_from.setDate(d)
         # Todo: method for get branches
+
+
     def FN_GET_BRANCHES(self):
         conn = db1.connect()
         mycursor = conn.cursor()
-        self.company = self.CMB_company.currentText()
-        mycursor.execute("SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + self.company + "'")
-        myresult = mycursor.fetchone()
-        self.companyId = myresult[0]
-
+        self.company = self.CMB_company.currentData()
         self.CMB_branch.clear()
-        sql_select_query = "SELECT BRANCH_DESC_A  FROM Hyper1_Retail.BRANCH where BRANCH_STATUS   = 1 and COMPANY_ID = '" + self.companyId + "'"
-        mycursor.execute(sql_select_query)
+        sql_select_query = "SELECT BRANCH_DESC_A ,`BRANCH_NO`  FROM Hyper1_Retail.BRANCH where BRANCH_STATUS   = 1 and COMPANY_ID = '"+self.company+"'"
+        mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
-        for row in records:
-            self.Qcombo_group4.addItems([row[0]])
-            self.CMB_branch.addItems([row[0]])
+
+        for row, val in records:
+            for br in CL_userModule.branch :
+                if str(val) in  br:
+                    self.Qcombo_group4.addItem(row, val)
+                    self.CMB_branch.addItem(row, val)
         mycursor.close()
-        print(records)
-        # Todo: method for get companies
+
     def FN_GET_COMPANIES(self):
         conn = db1.connect()
         mycursor = conn.cursor()
         self.CMB_company.clear()
-        sql_select_query = "SELECT COMPANY_DESC  FROM Hyper1_Retail.COMPANY where COMPANY_STATUS   = 1 "
-        mycursor.execute(sql_select_query)
+        sql_select_query = "SELECT COMPANY_DESC ,COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_STATUS   = 1 "
+        mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
-        for row in records:
-            self.Qcombo_group3.addItems([row[0]])
-            self.CMB_company.addItems([row[0]])
+        for row, val in records:
+            self.Qcombo_group3.addItem(row, val)
+            self.CMB_company.addItem(row, val)
         mycursor.close()
-
 
     def FN_SEARCH_REDITEM(self):
        try:
@@ -157,12 +156,7 @@ class CL_redItem(QtWidgets.QDialog):
 
 
             # get COMPANY
-            company_list = []
-            for comp in companies:
-                sql = "SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + comp + "'"
-                mycursor.execute(sql)
-                myresult = mycursor.fetchone()
-                company_list.append(myresult[0])
+            company_list = companies
 
             if len(company_list) > 0:
                 if len(company_list) == 1:
@@ -171,12 +165,8 @@ class CL_redItem(QtWidgets.QDialog):
                     company_list_tuple = tuple(company_list)
                     whereClause = whereClause + " and COMPANY_ID in {}".format(company_list_tuple)
                     # get branchs
-            branch_list = []
-            for branch in branchs:
-                sql = "SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + branch + "'"
-                mycursor.execute(sql)
-                myresult = mycursor.fetchone()
-                branch_list.append(myresult[0])
+            branch_list = branchs
+
 
             if len(branch_list) > 0:
                 if len(branch_list) == 1:
@@ -215,53 +205,58 @@ class CL_redItem(QtWidgets.QDialog):
 
             if len(self.Qtable_redeem.selectedIndexes()) > 0:
                 rowNo = self.Qtable_redeem.selectedItems()[0].row()
-
-                bar = self.Qtable_redeem.item(rowNo, 0).text()
-                company = self.Qtable_redeem.item(rowNo, 1).text()
                 branch = self.Qtable_redeem.item(rowNo, 2).text()
-                points = self.Qtable_redeem.item(rowNo, 3).text()
-                valid_from =self.Qtable_redeem.item(rowNo, 4).text()
-                valid_to= self.Qtable_redeem.item(rowNo, 5).text()
-                status = self.Qtable_redeem.item(rowNo, 6).text()
-                self.Qline_barcode.setText(bar)
-                self.Qline_points.setText(points)
+                br_id = util.FN_GET_BRANCH_ID(branch,'1')
 
-                self.old_points = points
-                self.old_valid_from = valid_from
-                self.old_valid_to = valid_to
-                self.old_status = status
+                if br_id in CL_userModule.branch[0] :
+                    bar = self.Qtable_redeem.item(rowNo, 0).text()
+                    company = self.Qtable_redeem.item(rowNo, 1).text()
 
-                self.Qcombo_group3.hide()
-                self.Qcombo_group4.hide()
-                self.CMB_branch.show()
-                self.CMB_company.show()
+                    points = self.Qtable_redeem.item(rowNo, 3).text()
+                    valid_from =self.Qtable_redeem.item(rowNo, 4).text()
+                    valid_to= self.Qtable_redeem.item(rowNo, 5).text()
+                    status = self.Qtable_redeem.item(rowNo, 6).text()
+                    self.Qline_barcode.setText(bar)
+                    self.Qline_points.setText(points)
 
-                #comp = util.FN_GET_COMP_ID(company)
-                #br =util.FN_GET_BRANCH_DESC(branch)
+                    self.old_points = points
+                    self.old_valid_from = valid_from
+                    self.old_valid_to = valid_to
+                    self.old_status = status
 
-                #print(br)
-                self.CMB_branch.setCurrentText(branch)
-                self.CMB_company.setCurrentText(company)
+                    self.Qcombo_group3.hide()
+                    self.Qcombo_group4.hide()
+                    self.CMB_branch.show()
+                    self.CMB_company.show()
 
-                self.Qline_barcode.setEnabled(False)
+                    #comp = util.FN_GET_COMP_ID(company)
+                    #br =util.FN_GET_BRANCH_DESC(branch)
 
-                #self.CMB_company.hide()
-                #self.CMB_branch.hide()
-                if status == 'Active' :
-                    self.Qradio_active.setChecked(True)
+                    #print(br)
+                    self.CMB_branch.setCurrentText(branch)
+                    self.CMB_company.setCurrentText(company)
+
+                    self.Qline_barcode.setEnabled(False)
+
+                    #self.CMB_company.hide()
+                    #self.CMB_branch.hide()
+                    if status == 'Active' :
+                        self.Qradio_active.setChecked(True)
+                    else:
+                        self.Qradio_inactive.setChecked(True)
+
+                    xto = valid_from.split("-")
+
+
+                    d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+                    self.Qdate_from.setDate(d)
+
+                    xto = valid_to.split("-")
+
+                    d1 = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+                    self.Qdate_to.setDate(d1)
                 else:
-                    self.Qradio_inactive.setChecked(True)
-
-                xto = valid_from.split("-")
-
-
-                d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
-                self.Qdate_from.setDate(d)
-
-                xto = valid_to.split("-")
-
-                d1 = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
-                self.Qdate_to.setDate(d1)
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "ليس لك صلاحيه على هذا الفرع")
 
 
         except (Error, Warning) as e:
@@ -291,26 +286,13 @@ class CL_redItem(QtWidgets.QDialog):
            creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
 
            # get COMPANY
-           company_list = []
-           for comp in companies:
-               sql = "SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + comp + "'"
-               mycursor.execute(sql)
-               myresult = mycursor.fetchone()
-               company_list.append(myresult[0])
-
+           company_list = companies
            # get branchs
-           branch_list = []
-           for branch in branchs:
-               sql = "SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + branch + "'"
-               mycursor.execute(sql)
-               myresult = mycursor.fetchone()
-               branch_list.append(myresult[0])
-
-
+           branch_list = branchs
 
            if  len(self.Qcombo_group3.currentData()) == 0 or len(
                    self.Qcombo_group4.currentData()) == 0  or bar == ''  or points == '' or date_from == '' or date_to == ''    :
-               QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
+               QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات")
            elif date_to < date_from:
                QtWidgets.QMessageBox.warning(self, "خطأ",
                                              "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
@@ -340,7 +322,7 @@ class CL_redItem(QtWidgets.QDialog):
                                    mycursor1.execute(sql, val)
                                    db1.connectionCommit(conn)
                                    mycursor1.close()
-                                   QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
+                                   QtWidgets.QMessageBox.information(self, "تم", "تم الإنشاء")
                                else:
                                    QtWidgets.QMessageBox.warning(self, "خطأ", "المدخلات موجوده بالفعل ")
                        self.FN_REFRESH_DATA_GRID()

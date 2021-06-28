@@ -218,8 +218,10 @@ class CL_loyProg(QtWidgets.QDialog):
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
         for row, val in records:
-            self.Qcombo_group4.addItem(row, val)
-            self.CMB_branch.addItem(row, val)
+            for br in CL_userModule.branch:
+                if str(val) in br:
+                    self.Qcombo_group4.addItem(row, val)
+                    self.CMB_branch.addItem(row, val)
         mycursor.close()
 
     def FN_GET_COMPANIES(self):
@@ -252,13 +254,15 @@ class CL_loyProg(QtWidgets.QDialog):
         self.CMB_section.clear()
         dept = self.CMB_department.currentText()
 
-        sql_select_query = "SELECT SECTION_DESC  FROM Hyper1_Retail.SECTION s inner join Hyper1_Retail.DEPARTMENT d ON " \
+        sql_select_query = "SELECT SECTION_DESC ,SECTION_ID  FROM Hyper1_Retail.SECTION s inner join Hyper1_Retail.DEPARTMENT d ON " \
                            "d.`DEPARTMENT_ID` = s.`DEPARTMENT_ID`" \
                            "where SECTION_STATUS   = 1 and `DEPARTMENT_DESC`= '"+dept+"'"
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
-        for row in records:
-            self.CMB_section.addItems( [row[0]] )
+        for row, val in records:
+            for sec in CL_userModule.section:
+                if str(val) in sec:
+                    self.CMB_section.addItem(row, val)
 
         mycursor.close()
         self.FN_GET_BMCLEVEL4()
@@ -267,17 +271,16 @@ class CL_loyProg(QtWidgets.QDialog):
         conn = db1.connect()
         mycursor = conn.cursor()
         self.Qcombo_group6.clear()
-        sec = self.CMB_section.currentText()
+        sec = self.CMB_section.currentData()
 
-        sql_select_query = "SELECT BMC_LEVEL4_DESC  FROM Hyper1_Retail.BMC_LEVEL4 b inner join Hyper1_Retail.SECTION s ON " \
-                           "b.`SECTION_ID` = s.`SECTION_ID`" \
-                           "where BMC_LEVEL4_STATUS   = 1 and `SECTION_DESC`= '"+sec+"'"
+        sql_select_query = "SELECT BMC_LEVEL4_DESC ,BMC_LEVEL4 FROM Hyper1_Retail.BMC_LEVEL4 b where BMC_LEVEL4_STATUS   = 1 " \
+                           "and SECTION_ID= '"+sec+"'"
+        print(sql_select_query)
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
         self.Qcombo_group6.addItem("All")
-        for row in records:
-            #self.CMB_level4.addItems( [row[0]] )
-            self.Qcombo_group6.addItems([row[0]])
+        for row, val in records:
+            self.Qcombo_group6.addItem(row, val)
         mycursor.close()
         self.Qcombo_group6.setChecked(0)
     def FN_GET_CUSTGP(self):
@@ -640,8 +643,8 @@ class CL_loyProg(QtWidgets.QDialog):
         self.date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
         self.date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
         BMC_LEVEL4s = self.Qcombo_group6.currentData()
-        self.section = self.CMB_section.currentText()
-        self.level4 = self.CMB_level4.currentText()
+        self.section = self.CMB_section.currentData()
+        self.level4 = self.CMB_level4.currentData()
         self.barcode = self.Qline_barcode.text().strip()
         self.purchAmount = self.Qline_purchAmount.text().strip()
         self.points = self.Qline_points.text().strip()
@@ -664,21 +667,17 @@ class CL_loyProg(QtWidgets.QDialog):
             BMC_LEVEL4_list = []
             if len(self.Qcombo_group6.currentData()) > 0:
                 if BMC_LEVEL4s[0] =='All' :
-
-                    self.mycursor.execute( "SELECT BMC_LEVEL4  FROM Hyper1_Retail.BMC_LEVEL4 b inner join Hyper1_Retail.SECTION s ON " \
-                                       "b.`SECTION_ID` = s.`SECTION_ID`" \
-                                       "where BMC_LEVEL4_STATUS   = 1 and `SECTION_DESC`= '" + self.section + "'" )
-
-                    records = self.mycursor.fetchall()
+                    conn = db1.connect()
+                    mycursor = conn.cursor()
+                    sql_select_query = "SELECT BMC_LEVEL4_DESC ,BMC_LEVEL4 FROM Hyper1_Retail.BMC_LEVEL4 b where BMC_LEVEL4_STATUS   = 1 " \
+                                       "and SECTION_ID= '" + self.section + "'"
+                    mycursor.execute(sql_select_query)
+                    records = mycursor.fetchall()
                     for row in records:
                         BMC_LEVEL4_list.append(row[0])
+                    mycursor.close()
                 else:
-                    for BMC_LEVEL4 in BMC_LEVEL4s:
-
-                        sql = "SELECT BMC_LEVEL4 FROM Hyper1_Retail.BMC_LEVEL4 where BMC_LEVEL4_DESC = '" + BMC_LEVEL4 + "'"
-                        self.mycursor.execute(sql)
-                        myresult = self.mycursor.fetchone()
-                        BMC_LEVEL4_list.append(myresult[0])
+                        BMC_LEVEL4_list= BMC_LEVEL4s
 
 
         if len(self.Qcombo_group2.currentData()) == 0 or len(self.Qcombo_group3.currentData()) == 0 or len(

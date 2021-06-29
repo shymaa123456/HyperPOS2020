@@ -17,6 +17,7 @@ from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
 
 from access.Checkable import CheckableComboBox
+import mysql.connector
 
 #from access.promotion_class.Promotion_Add import CheckableComboBox
 
@@ -31,6 +32,7 @@ from datetime import datetime
 import xlwt.Workbook
 
 import webbrowser
+from decimal import Decimal
 
 class CL_installment(QtWidgets.QDialog):
     dirname = ''
@@ -75,6 +77,32 @@ class CL_installment(QtWidgets.QDialog):
         self.Qdate_from.setMinimumDate(d)
         self.Qdate_to.setMinimumDate(d)
 
+        # set minimum time
+        # this_moment PyQt5.QtCore.QTime(10, 43, 1, 872)
+        # print(self.Qdate_from.dateTime().toString('yyyy-MM-dd'))
+        this_moment = QtCore.QTime.currentTime()
+        #this_moment = this_moment.toString('hh:mm')
+        print("this_moment", this_moment)
+        self.Qtime_to.setTime(this_moment)
+        self.Qtime_from.setTime(this_moment)
+        self.Qtime_from.setMinimumTime(this_moment)
+        self.Qtime_to.setMinimumTime(this_moment)
+
+        """
+        datefrom = str(datetime.today().strftime('hh:mm:ss'))
+        print("datefrom",datefrom)
+        xfrom = datefrom.split(":")
+        d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
+        self.Qdate_from.setMinimumDate(d)
+        
+        #validation for not pick time before now
+        timefrom = str(datetime.today().strftime('%h:%m'))
+        xfromt = timefrom.split(":")
+        t = QTime(xfromt[0], xfromt[1] ,0 ,0)
+        print("t",t)
+        self.Qtime_from.setMinimumTime(t)
+        """
+
         # Get customer Groupe
         self.Qcombo_customerGroupe = CheckableComboBox(self)
         self.Qcombo_customerGroupe.setGeometry(570, 100, 179, 20)
@@ -108,6 +136,9 @@ class CL_installment(QtWidgets.QDialog):
         self.checkBox_section.stateChanged.connect(self.FN_WhenChecksection)
         #self.FN_GET_sections()
 
+        # TODO Click listner for changing list of department
+        self.Qcombo_section.model().dataChanged.connect(self.FN_WhenCheckBMC_Level)
+
         # Multi selection for BMCLevel
         self.Qcombo_BMCLevel = CheckableComboBox(self)
         self.Qcombo_BMCLevel.setGeometry(570, 200, 171, 22)
@@ -119,18 +150,35 @@ class CL_installment(QtWidgets.QDialog):
         self.checkBox_BMCLevel.stateChanged.connect(self.FN_WhenCheckBMC_Level)
         #self.FN_GET_BMC_Level()
 
-        # get Banks list if check box
-        self.checkBox_bank.stateChanged.connect(self.FN_WhenCheckBank)
+        # get Banks list if readio button clicked
+        self.RBTN_bank.clicked.connect(self.FN_InstallMent_Checked)
 
-        # get Vendor list if check box
-        self.checkBox_vendor.stateChanged.connect(self.FN_WhenCheckVendor)
+        # get Vendor list if readio button clicked
+        self.RBTN_vendor.clicked.connect(self.FN_InstallMent_Checked)
+
+        # if readio button clicked hyperone
+        self.RBTN_hyperone.clicked.connect(self.FN_InstallMent_Checked)
 
 
         #click button for upload accepted items
-        self.Qbtn_loadItems.clicked.connect(self.FN_UploadAcceptedItems)
+        self.Qbtn_loadItems.clicked.connect(self.FN_UploadAcceptedItems(self.Qtable_acceptedItems))
 
-        # click button for remove selected item from accepted Qrable
+        #click button for upload rejected items
+        self.Qbtn_loadRejectItem.clicked.connect(self.FN_UploadAcceptedItems(self.Qtable_rejectedItems))
+
+        # click button for remove selected item from accepted Qtable
         self.Qbtn_deleteItem.clicked.connect(self.FN_remove_selected(self.Qtable_acceptedItems))
+
+        # click button for remove selected item from rejected Qtable
+        self.Qbtn_deleteRejectItem.clicked.connect(self.FN_remove_selected(self.Qtable_rejectedItems))
+
+        #Save installment
+        self.Qbtn_saveInstallment.clicked.connect(self.FN_SaveInstallemt)
+
+        #Total interest rate
+        self.QDubleSpiner_customerRate.valueChanged.connect(self.PutInterestRate)
+        self.QDubleSpiner_vendorRate.valueChanged.connect(self.PutInterestRate)
+        self.QDubleSpiner_hperoneRate.valueChanged.connect(self.PutInterestRate)
 
         # this function for what enabled or not when start
         self.EnabledWhenOpen()
@@ -156,16 +204,16 @@ class CL_installment(QtWidgets.QDialog):
         self.checkBox_BMCLevel.setEnabled(False)
         self.Qcombo_BMCLevel.setEnabled(False)
 
-    #get companys list
+    #get installments period list
     def FN_GET_installment_types_period(self):
         self.Qcombo_installmentType.clear()
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT InstT_Installment_Period FROM INSTALLMENT_TYPE")
+        mycursor.execute("SELECT InstT_Installment_Period ,INSTT_TYPE_ID FROM INSTALLMENT_TYPE")
         records = mycursor.fetchall()
         mycursor.close()
-        for row in records:
-            self.Qcombo_installmentType.addItems([row[0]])
+        for row, val in records:
+            self.Qcombo_installmentType.addItem(row, val)
 
     #get companys list
     def FN_GET_Company(self):
@@ -177,17 +225,6 @@ class CL_installment(QtWidgets.QDialog):
         for row, val in records:
             self.Qcombo_company.addItem(row, val)
         mycursor.close()
-        """" in line 194 create coupon
-        to get multselection drop down list items id ex get company id 
-                        for j in range(len(self.Qcombo_company.currentData())):
-                    for i in range(len(self.Qcombo_branch.currentData())):
-                        sql3 = "INSERT INTO COUPON_BRANCH (COMPANY_ID,BRANCH_NO,COUPON_ID,STATUS) VALUES (%s,%s,%s,%s)"
-                        val3 = (
-                            self.Qcombo_company.currentData()[j], self.Qcombo_branch.currentData()[i],
-                            id,
-                            '1')
-                        mycursor.execute(sql3, val3)
-        """
 
     #get branches list
     def FN_GET_Branch(self):
@@ -225,6 +262,7 @@ class CL_installment(QtWidgets.QDialog):
             self.Qcombo_department.setEnabled(True)
             self.checkBox_section.setEnabled(True)
             self.Qtable_acceptedItems.setEnabled(False)
+            self.FN_ClearAcepptedQTableData()
             self.Qbtn_loadItems.setEnabled(False)
             self.Qbtn_deleteItem.setEnabled(False)
             self.Qcombo_department.setCurrentIndex(-1)
@@ -243,14 +281,27 @@ class CL_installment(QtWidgets.QDialog):
 
     #get Department list
     def FN_GET_Department(self):
-        self.Qcombo_department.clear()
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT DEPARTMENT_DESC,DEPARTMENT_ID FROM DEPARTMENT")
-        records = mycursor.fetchall()
-        for row, val in records:
-            self.Qcombo_department.addItem(row, val)
-        mycursor.close()
+        i = 0
+        try:
+        # Todo: method for fills the section combobox
+            """
+            self.Qcombo_department.clear()
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            mycursor.execute("SELECT DEPARTMENT_DESC,DEPARTMENT_ID FROM DEPARTMENT")
+            records = mycursor.fetchall()
+
+            for row, val in records:
+                for sec in CL_userModule.section :
+                    if val in sec:
+                        self.Qcombo_department.addItem(row, val)
+                    i += 1
+            mycursor.close()
+            """
+            for row,val,row1,val1 in CL_userModule.section:
+                    self.Qcombo_department.addItem(row1, val1)
+        except:
+            print(sys.exc_info())
 
     # after check section check box
     def FN_WhenChecksection(self):
@@ -334,58 +385,91 @@ class CL_installment(QtWidgets.QDialog):
                 i += 1
         except:
             print(sys.exc_info())
-    # after check Bank check box
-    def FN_WhenCheckBank(self):
-        if self.checkBox_bank.isChecked():
+
+    #TODO when any radio button checked(bank ,vendor ,hyperone)
+    def FN_InstallMent_Checked(self):
+        if self.RBTN_bank.isChecked():
             self.FN_GET_Banks()
             self.Qcombo_bank.setEnabled(True)
+            self.Qcombo_vendor.setEnabled(False)
+            self.Qcombo_vendor.clear()
+            self.QTEdit_sponsorReason.setEnabled(False)
+
+        elif self.RBTN_vendor.isChecked():
+            self.Qcombo_bank.setEnabled(False)
+            self.Qcombo_bank.clear()
+            self.FN_GET_Vendor()
+            self.Qcombo_vendor.setEnabled(True)
+            self.QTEdit_sponsorReason.setEnabled(True)
+
+        elif self.RBTN_hyperone.isChecked():
+            self.Qcombo_bank.setEnabled(False)
+            self.Qcombo_bank.clear()
+            self.Qcombo_vendor.setEnabled(False)
+            self.Qcombo_vendor.clear()
+            self.QTEdit_sponsorReason.setEnabled(False)
+
+    # after check Bank check box
+    def FN_WhenCheckBank(self):
+        if self.RBTN_bank.isChecked():
+            self.FN_GET_Banks()
+            self.Qcombo_bank.setEnabled(True)
+
         else:
             self.Qcombo_bank.setEnabled(False)
+            self.Qcombo_bank.clear()
 
     #get Banks list
     def FN_GET_Banks(self):
         self.Qcombo_bank.clear()
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT Bank_Desc FROM BANK")
+        mycursor.execute("SELECT Bank_Desc,Bank_ID FROM BANK")
         records = mycursor.fetchall()
         mycursor.close()
-        for row in records:
-            self.Qcombo_bank.addItems([row[0]])
+        for row, val in records:
+            self.Qcombo_bank.addItem(row, val)
 
     # after check Vendor check box
     def FN_WhenCheckVendor(self):
-        if self.checkBox_vendor.isChecked():
+        if self.RBTN_vendor.isChecked():
             self.FN_GET_Vendor()
             self.Qcombo_vendor.setEnabled(True)
-        else:
+            self.QTEdit_sponsorReason.setEnabled(True)
+        elif not self.RBTN_vendor.isChecked:
             self.Qcombo_vendor.setEnabled(False)
+            self.Qcombo_vendor.clear()
+            self.QTEdit_sponsorReason.setEnabled(False)
+
 
     #get Vendor list
     def FN_GET_Vendor(self):
         self.Qcombo_vendor.clear()
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT SPONSER_NAME FROM SPONSER")
+        mycursor.execute("SELECT SPONSER_NAME,SPONSER_ID FROM SPONSER")
         records = mycursor.fetchall()
         mycursor.close()
-        for row in records:
-            self.Qcombo_vendor.addItems([row[0]])
+        for row, val in records:
+            self.Qcombo_vendor.addItem(row, val)
 
     #When click upload button to sellect csv file
-    def FN_UploadAcceptedItems(self, funct):
-        self.window_upload = CL_installment(self)
-        self.window_upload.FN_LOAD_UPLOAD()
-        self.window_upload.show()
+    def FN_UploadAcceptedItems(self,QTableWidgit):
+        def FN_UploadAcceptedItems_internal():
+            self.window_upload = CL_installment(self)
+            self.window_upload.FN_LOAD_UPLOAD(QTableWidgit)
+            self.window_upload.show()
+        return FN_UploadAcceptedItems_internal
 
     #Create Ui for upload screen
-    def FN_LOAD_UPLOAD(self):
-        filename = self.dirname + '/uploadBarcodes.ui'
-        loadUi(filename, self)
-        self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
-        self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
-        self.BTN_saveTemp.clicked.connect(self.FN_DISPLAY_TEMP)
-        self.fileName = ''
+    def FN_LOAD_UPLOAD(self,QTableWidgit):
+            filename = self.dirname + '/uploadBarcodes.ui'
+            loadUi(filename, self)
+            self.fileName = ''
+            print("QTableWidgit1", QTableWidgit)
+            self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
+            self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD(QTableWidgit))
+            self.BTN_saveTemp.clicked.connect(self.FN_DISPLAY_TEMP)
 
     #get sellected file name
     def FN_OPEN_FILE(self):
@@ -396,73 +480,71 @@ class CL_installment(QtWidgets.QDialog):
         self.LE_fileName.setText(self.fileName)
 
     #Save Uploaded csv
-    def FN_SAVE_UPLOAD(self):
+    def FN_SAVE_UPLOAD(self,QTableWidgit):
+        def FN_SAVE_UPLOAD_internal():
+            if self.fileName !='':
+                self.LE_fileName.setText(self.fileName)
+                wb = xlrd.open_workbook( self.fileName )
+                sheet = wb.sheet_by_index( 0 )
+                conn = db1.connect()
+                mycursor = conn.cursor()
+                errorMsg =''
+                createdCust =0
+                nonCreatedCust=0
+                #print (sheet.nrows)
+                error_message = ''
+                for i in range( sheet.nrows ):
+                    error = 0
+                    try:
+                        self.barcode = sheet.cell_value( i, 0 )
+                        print("rowNo",i,"barcode",self.barcode)
+                        error_message = error_message + " \n barcode " + self.barcode
+                        self.description = sheet.cell_value( i, 1 )
+                        print("rowNo",i,"description",self.description)
 
-        if self.fileName !='':
-            self.LE_fileName.setText(self.fileName)
-            wb = xlrd.open_workbook( self.fileName )
-            sheet = wb.sheet_by_index( 0 )
-            conn = db1.connect()
-            mycursor = conn.cursor()
-            errorMsg =''
-            createdCust =0
-            nonCreatedCust=0
-            #print (sheet.nrows)
-            error_message = ''
-            for i in range( sheet.nrows ):
-                error = 0
-                try:
-                    self.barcode = sheet.cell_value( i, 0 )
-                    print("rowNo",i,"barcode",self.barcode)
-                    error_message = error_message + " \n barcode " + self.barcode
-                    self.description = sheet.cell_value( i, 1 )
-                    print("rowNo",i,"description",self.description)
+                        if self.barcode == '' or self.description == '':
+                            error = 1
+                            error_message = error_message + " barcode has an empty fields"
+                            print("error 1")
 
-                    if self.barcode == '' or self.description == '':
-                        error = 1
-                        error_message = error_message + " barcode has an empty fields"
-                        print("error 1")
+                        else:
+                            #for row_number, row_data in enumerate(records):
+                            QTableWidgit.insertRow(i)
 
-                    else:
-                        #for row_number, row_data in enumerate(records):
-                        self.parent.Qtable_acceptedItems.insertRow(i)
+                            QTableWidgit.setItem(i, 0, QTableWidgetItem(str(sheet.cell_value( i, 0 ))))
+                            QTableWidgit.setItem(i, 1, QTableWidgetItem(str(sheet.cell_value( i, 1 ))))
 
-                        self.parent.Qtable_acceptedItems.setItem(i, 0, QTableWidgetItem(str(sheet.cell_value( i, 0 ))))
-                        self.parent.Qtable_acceptedItems.setItem(i, 1, QTableWidgetItem(str(sheet.cell_value( i, 1 ))))
+                            #to make rows of table not editable
+                            QTableWidgit.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
-                        #to make rows of table not editable
-                        self.parent.Qtable_acceptedItems.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+                    except Exception as err:
+                         print(err)
+                mycursor.close()
+                self.msgBox = QMessageBox()
 
-                except Exception as err:
-                     print(err)
-            mycursor.close()
-            self.msgBox = QMessageBox()
+                # Set the various texts
+                self.msgBox.setWindowTitle( "Information" )
+                self.msgBox.setStandardButtons( QMessageBox.Ok)
+                self.msgBox.setText(error_message)
+                self.msgBox.show()
+                self.close()
+            #Extracting number of rows
+            else:
+                QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
 
-            # Set the various texts
-            self.msgBox.setWindowTitle( "Information" )
-            self.msgBox.setStandardButtons( QMessageBox.Ok)
-            self.msgBox.setText(error_message)
-            self.msgBox.show()
-            self.close()
-        #Extracting number of rows
-        else:
-            QtWidgets.QMessageBox.warning(self, "Error", "Choose a file")
-
+        return FN_SAVE_UPLOAD_internal
     #SAve Tem of csv that you use it for upload
     def FN_DISPLAY_TEMP(self):
          try:
              filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
              print(filename)
-
              wb = xlwt.Workbook()
-
              # add_sheet is used to create sheet.
              sheet = wb.add_sheet('Sheet 1')
              sheet.write(0, 0, 'الباركود')
              sheet.write(0, 1, 'الوصف')
 
-
-             # # wb.save('test11.xls')
+             #wb.save('test11.xls')
              wb.save(str(filename[0]))
              # wb.close()
 
@@ -475,7 +557,7 @@ class CL_installment(QtWidgets.QDialog):
         for i in reversed(range(self.Qtable_acceptedItems.rowCount())):
             self.Qtable_acceptedItems.removeRow(i)
 
-    #remove selected Row from Accepted QTable
+    #remove selected Row from QTable
     def FN_remove_selected(self,QTableWidgit):
         def FN_remove_selected_internal():
             reply = QMessageBox.question(self, 'Message',
@@ -489,259 +571,354 @@ class CL_installment(QtWidgets.QDialog):
 
         return FN_remove_selected_internal
 
-""""
-    def FN_LOAD_MODIFY(self):
-        filename = self.dirname + '/modifyUser.ui'
-        loadUi(filename , self)
-        records = self.FN_GET_USERS()
-        for row in records:
-            self.CMB_userName.addItems( [row[0]] )
+    #put interest rate
+    def PutInterestRate(self):
+        if (self.QDubleSpiner_customerRate.value()
+            +self.QDubleSpiner_vendorRate.value()
+            +self.QDubleSpiner_hperoneRate.value()) <= 100 :
+
+            self.QDubleSpiner_interestRate.setValue(
+                self.QDubleSpiner_customerRate.value()
+                +self.QDubleSpiner_vendorRate.value()
+                +self.QDubleSpiner_hperoneRate.value()
+            )
+        else:
+            QtWidgets.QMessageBox.warning(self, "Error",  "summation of rate  is more than 100")
+            self.QDubleSpiner_customerRate.setValue(0)
+            self.QDubleSpiner_vendorRate.setValue(0)
+            self.QDubleSpiner_hperoneRate.setValue(0)
+
+    #to save installment
+    def FN_SaveInstallemt(self):
+        error = 0
+        Validation_For_installmentProgramm=0
+
+        error = self.FN_ValidateInstallemt()
+        print(error)
+        if error !=0:
+
+            try:
+                self.conn = db1.connect()
+                self.conn.autocommit = False
+                mycursor = self.conn.cursor()
+                self.conn.start_transaction()
+
+                # # lock table for new record:
+                sql0 = "  LOCK  TABLES    Hyper1_Retail.INSTALLMENT_BRANCH   WRITE , " \
+                       "  Hyper1_Retail.INSTALLMENT_GROUP   WRITE ,  Hyper1_Retail.INSTALLMENT_ITEM   WRITE," \
+                       " Hyper1_Retail.INSTALLMENT_REJECTED_ITEM   WRITE ,  Hyper1_Retail.INSTALLMENT_SECTION   WRITE ," \
+                       " Hyper1_Retail.INSTALLMENT_SPONSOR   WRITE ,  Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE ," \
+                       " Hyper1_Retail.INSTALLMENT_RULE    WRITE , Hyper1_Retail.INSTALLMENT_TYPE    WRITE "
+                mycursor.execute(sql0)
+
+                #Check if this program create before or not
+                Validation_For_installmentProgramm = 1
+                #Validation_For_installmentProgramm = self.FN_ValidateInstallemtProgram(mycursor,)
+                if Validation_For_installmentProgramm==1:
+                    #  Get installment Type
+                    Index_installmentType = self.Qcombo_installmentType.currentData()  # installment type id
+                    print("Index_installmentType",Index_installmentType)
+
+                    #insert installment type in INSTALLMENT_RULE Table
+                    sql1 = "INSERT INTO INSTALLMENT_RULE (INSTT_TYPE_ID,INSTR_DESC, INSTR_INTEREST_RATE, INSTR_SPONSOR_RATE , INSTR_HYPER_RATE,  INSTR_CUSTOMER_RATE, INSTR_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                    val1 = (
+                        Index_installmentType,self.QTEdit_descInstallment.toPlainText(),str(self.QDubleSpiner_interestRate.value()),str(self.QDubleSpiner_customerRate.value()),
+                           str(self.QDubleSpiner_vendorRate.value()),str(self.QDubleSpiner_hperoneRate.value()),
+                        '1')
+                    print("val1",val1)
+                    mycursor.execute(sql1, val1)
 
 
-        self.FN_GET_USER()
-        self.CMB_userName.currentIndexChanged.connect( self.FN_GET_USER )
-        self.BTN_modifyUser.clicked.connect(self.FN_MODIFY_USER)
-        self.CMB_branch.addItems(["1", "2", "3"])
-        self.CMB_userType.addItems(["1", "2", "3"])
-        self.CMB_userStatus.addItems(["0", "1"])
+                    #Get max index INSTALLMENT_RULE -- index of inserted
+                    mycursor.execute(
+                        "SELECT max(cast(INSTR_RULEID  AS UNSIGNED)) FROM Hyper1_Retail.INSTALLMENT_RULE")
+                    myresult = mycursor.fetchone()
 
-    
+                    if myresult[0] == None:
+                        self.id_INSTR_RULEID = "1"
+                    else:
+                        self.id_INSTR_RULEID = int(myresult[0])
 
-    def FN_CREATE_Installment(self):
-        DT_from = self.Qdate_from.dateTime()
-        DT_fromString = DT_from.toString(self.Qdate_from.displayFormat())
-        print(DT_fromString)
-        DT_fromTime= self.Qtime_from.dateTime()
-        # dt.toString("dd.MM.yyyy hh:mm:ss.zzz"))
-        DT_fromTime_string = DT_fromTime.toString(self.Qtime_from.displayFormat())
-        print(DT_fromTime_string)
+                    print("self.id_INSTR_RULEID",self.id_INSTR_RULEID)
 
-        '''
-        self.installmentDesc = self.Qline_descInstallment.text().strip()
-        self.password = self.Qdate_from.text().strip()
-        self.branch = self.CMB_branch.currentText()
-        self.fullName = self.LE_fullName.text().strip()
-        self.hrId = self.LE_hrId.text().strip()
-        self.userType = self.CMB_userType.currentText()
-        self.status = self.CMB_userStatus.currentText()
+                    #get values for insert in INSTALLMENT_PROGRAM table
+                    FromDateTime = self.Qdate_from.dateTime().toString('yyyy-MM-dd')+" "+ str(self.Qtime_from.dateTime().toString('hh:mm'))
+                    print("creationDateTime",FromDateTime)
+                    ToDateTime = self.Qdate_to.dateTime().toString('yyyy-MM-dd') + " " + str(self.Qtime_to.dateTime().toString('hh:mm'))
 
-        mycursor = self.conn.cursor()
-        # get max userid
-        mycursor.execute("SELECT max(cast(USER_ID  AS UNSIGNED)) FROM SYS_USER")
+                    creationDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+
+                    #insert to INSTALLMENT_PROGRAM
+                    sql2 = "INSERT INTO INSTALLMENT_PROGRAM (INST_DESC, INSTR_RULEID, INST_CREATED_ON ,  INST_CREATED_BY, INST_VALID_FROM ,INST_VALID_TO ,INST_ADMIN_EXPENSES ,INST_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+                    val2 = (
+                         self.QTEdit_descInstallment.toPlainText(), self.id_INSTR_RULEID ,creationDateTime,
+                        CL_userModule.user_name, FromDateTime,ToDateTime   ,self.QDSpinBox_adminExpendses.value(),
+                        '0')
+                    mycursor.execute(sql2, val2)
+
+                    # Get max index Installment_programm -- index of inserted
+                    mycursor.execute(
+                        "SELECT max(cast(inst_Program_ID  AS UNSIGNED)) FROM Hyper1_Retail.INSTALLMENT_PROGRAM")
+                    myresult = mycursor.fetchone()
+
+                    if myresult[0] == None:
+                        self.inst_Program_ID = "1"
+                    else:
+                        self.inst_Program_ID = int(myresult[0])
+
+                    #to get company and branch Qcombo Data and insert it in DB
+                    for j in range(len(self.Qcombo_company.currentData())):
+                        for i in range(len(self.Qcombo_branch.currentData())):
+                            sql3 = "INSERT INTO INSTALLMENT_BRANCH (COMPANY_ID,BRANCH_NO,inst_Program_ID,STATUS) VALUES (%s,%s,%s,%s)"
+                            val3 = (
+                                self.Qcombo_company.currentData()[j], self.Qcombo_branch.currentData()[i],
+                                self.inst_Program_ID,
+                                '1')
+                            mycursor.execute(sql3, val3)
+
+                    #insert Installment_GROUP
+                    for j in range(len(self.Qcombo_customerGroupe.currentData())):
+                        sql4 = "INSERT INTO INSTALLMENT_GROUP (CG_group_id,inst_Program_ID,STATUS) VALUES (%s,%s,%s)"
+                        val4 = (
+                            self.Qcombo_customerGroupe.currentData()[j], self.inst_Program_ID,
+                                '1')
+                        mycursor.execute(sql4, val4)
+
+                    #insert Installment_item
+                    if self.Qtable_acceptedItems.rowCount() != 0 :
+                        for i in range(self.Qtable_acceptedItems.rowCount()):
+                            barcode = self.Qtable_acceptedItems.item(i, 0).text()
+                            sql5 = "INSERT INTO INSTALLMENT_ITEM (POS_GTIN,instR_RuleID,STATUS) VALUES (%s,%s,%s)"
+                            val5 = (
+                                barcode, self.id_INSTR_RULEID,
+                                '1')
+                            mycursor.execute(sql5, val5)
+
+                    #insert Installment_department_section_BMC
+                    elif self.checkBox_department.isChecked():
+                        self.FN_SaveDepartmentSectionBMCLeve(mycursor)
+
+                    #insert rejected items to Installment_rejected_item
+                    if self.Qtable_rejectedItems.rowCount() != 0 :
+                        for i in range(self.Qtable_rejectedItems.rowCount()):
+                            barcode_rejected = self.Qtable_rejectedItems.item(i, 0).text()
+                            sql7 = "INSERT INTO INSTALLMENT_REJECTED_ITEM (POS_GTIN,instR_RuleID,STATUS) VALUES (%s,%s,%s)"
+                            val7 = (
+                                barcode_rejected, self.id_INSTR_RULEID,
+                                '1')
+                            mycursor.execute(sql7, val7)
+
+                    #insert to Installment_Sponsor table
+                    if self.RBTN_bank.isChecked() or self.RBTN_vendor.isChecked() or self.RBTN_hyperone.isChecked():
+                        self.FN_Insert_If_Bank_Vendor_hyperone_Checked(self.id_INSTR_RULEID , mycursor)
+
+                    QtWidgets.QMessageBox.information(self, "Success", "this installment program has been Saved"+str(self.inst_Program_ID))
+                    self.QL_lastInstallmentNO.setText(str(self.inst_Program_ID))
+                else:
+                    QtWidgets.QMessageBox.warning(self, "Error", "this installment program has been created")
+                # # unlock table :
+                sql00 = "  UNLOCK   tables    "
+                mycursor.execute(sql00)
+                self.conn.commit()
+
+            except mysql.connector.Error as error:
+                print("Failed to update record to database rollback: {}".format(error))
+                # reverting changes because of exception
+                self.conn.rollback()
+            finally:
+                # closing database connection.
+                if self.conn.is_connected():
+                    mycursor.close()
+                    self.conn.close()
+                    print("connection is closed")
+
+
+    # to save installment
+    def FN_ValidateInstallemt(self):
+        print(self.Qcombo_installmentType.currentText())
+        error = 0
+
+        if self.Qcombo_installmentType.currentText() =='' :
+            QtWidgets.QMessageBox.warning(self, "Error",  "installment type is empty")
+            error=0
+
+        elif len(self.QTEdit_descInstallment.toPlainText()) == 0 :
+            QtWidgets.QMessageBox.warning(self, "Error",  " يرجى إدخال الوصف")
+            error=0
+
+        elif len(self.Qcombo_company.currentData()) == 0 :
+            QtWidgets.QMessageBox.warning(self, "Error",  " يرجى أختيار الشركه ")
+            error=0
+
+        elif len(self.Qcombo_branch.currentData()) == 0 :
+            QtWidgets.QMessageBox.warning(self, "Error",  " يرجى أختيار الفرع ")
+            error=0
+
+        elif len(self.Qcombo_customerGroupe.currentData()) == 0 :
+            QtWidgets.QMessageBox.warning(self, "Error",  " يرجى أختيار العملاء ")
+            error=0
+
+        elif self.Qtable_acceptedItems.rowCount() == 0 and not self.checkBox_department.isChecked():
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى إدخال اصناف التقسيط او اختيار الاقسام")
+            error = 0
+
+        elif self.checkBox_department.isChecked() and len(self.Qcombo_department.currentData()) == 0:
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار الأداره")
+            error = 0
+
+        elif self.checkBox_section.isChecked() and len(self.Qcombo_section.currentData()) == 0:
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار القسم")
+            error = 0
+
+        elif self.checkBox_BMCLevel.isChecked() and len(self.Qcombo_BMCLevel.currentData()) == 0:
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار القسم الفرعى")
+            error = 0
+
+            """
+        elif self.checkBox_department.isChecked() and not self.checkBox_section.isChecked():
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار القسم")
+            error = 0
+
+        elif self.checkBox_section.isChecked() and not self.checkBox_BMCLevel.isChecked() :
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار القسم الفرعى")
+            error = 0
+            """
+
+        elif self.QDubleSpiner_customerRate.value() == 0 \
+                and self.QDubleSpiner_vendorRate.value() == 0 \
+                and self.QDubleSpiner_hperoneRate.value() == 0:
+            QtWidgets.QMessageBox.warning(self, "Error", "يرجى أدخال نسبه الفائده للعميل او للممول او للهايبر")
+            error = 0
+
+        else:
+            error=1
+        return error
+
+    #insert to Installment_Sponsor table if checked bank or vendor or hyperone for installment type
+    def FN_Insert_If_Bank_Vendor_hyperone_Checked(self,id_INSTR_RULEID , mycursor) :
+        if self.RBTN_bank.isChecked():
+            print("Bank_ID",self.Qcombo_bank.currentData())
+            sql8 = "INSERT INTO INSTALLMENT_SPONSOR ( INSTR_RULEID ,BANK_ID,STATUS) VALUES (%s,%s,%s)"
+            val8 = (
+                id_INSTR_RULEID, self.Qcombo_bank.currentData(),
+                '1')
+            mycursor.execute(sql8, val8)
+        elif self.RBTN_vendor.isChecked():
+            print("sponsor_Id",self.Qcombo_vendor.currentData())
+            sql8 = "INSERT INTO INSTALLMENT_SPONSOR ( INSTR_RULEID ,SPONSOR_ID ,INSTS_SPONSOR_REASONS ,STATUS) VALUES (%s,%s,%s,%s)"
+            val8 = (
+                id_INSTR_RULEID, self.Qcombo_vendor.currentData(), self.QTEdit_sponsorReason.toPlainText(),
+                '1')
+            mycursor.execute(sql8, val8)
+        elif self.RBTN_hyperone.isChecked():
+            print("HYPERONE")
+            sql8 = "INSERT INTO INSTALLMENT_SPONSOR ( INSTR_RULEID , HYPERONE ,STATUS) VALUES (%s,%s,%s)"
+            val8 = (
+                id_INSTR_RULEID, '1',
+                '1')
+            mycursor.execute(sql8, val8)
+
+    #validate if installment program created before or not
+    def FN_ValidateInstallemtProgram(self,mycursor):
+        Validation_For_installmentProgramm_INSTT_TYPE_ID=0
+
+        Index_installmentType = self.Qcombo_installmentType.currentData()  # installment type id
+        print("Validate_Index_installmentType", Index_installmentType)
+
+        # VALIDATE INSTT_TYPE_ID in INSTALLMENT_RULE Table
+        sql1 = "SELECT INSTT_TYPE_ID,INSTR_DESC FROM INSTALLMENT_RULE WHERE INSTT_TYPE_ID = '"+Index_installmentType
+        mycursor.execute(sql1)
         myresult = mycursor.fetchone()
-
         if myresult[0] == None:
-            self.id = "1"
+            Validation_For_installmentProgramm_INSTT_TYPE_ID = 1
         else:
-            self.id = int(myresult[0]) + 1
+            Validation_For_installmentProgramm_INSTT_TYPE_ID = 0
 
-        creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-
-        if self.name == '' or self.password =='' or self.fullName == ''  or self.hrId == '' :
-            QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
-
-        else:
-
-            sql = "INSERT INTO SYS_USER (USER_ID, BRANCH_NO, USER_NAME, USER_PASSWORD, USER_FULLNAME, USER_HR_ID, USER_CREATED_ON, USER_CREATED_BY, USER_CHANGED_ON, USER_CHENGED_BY,USER_STATUS, USER_TYPE_ID)         VALUES ( %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)"
-
-            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-            val = (
-            self.id, self.branch, self.name, self.password, self.fullName, self.hrId, creationDate, CL_userModule.user_name , '', '', self.status,
-            self.userType)
-            mycursor.execute(sql, val)
-            # mycursor.execute(sql)
-            print(CL_userModule.user_name)
-            mycursor.close()
-
-            print(mycursor.rowcount, "record inserted.")
-            db1.connectionCommit( self.conn )
-            db1.connectionClose(self.conn)
-            self.close()
-    '''
-    def FN_LOAD_COPY(self):
-        filename = self.dirname + '/copyUser.ui'
-        loadUi( filename, self )
-
-        records = self.FN_GET_USERS()
-        for row in records:
-            self.CMB_userName.addItems( [row[0]] )
-            self.CMB_userName1.addItems( [row[0]] )
-
-        self.BTN_copyUser.clicked.connect(self.FN_COPY_USER)
-        self.CMB_userName.currentIndexChanged.connect( self.FN_ASSIGN_ID )
-        self.CMB_userName1.currentIndexChanged.connect(self.FN_ASSIGN_ID)
-        self.FN_ASSIGN_ID()
-
-    def FN_ASSIGN_ID (self):
-        self.user1 = self.CMB_userName.currentText()
-        self.user2 = self.CMB_userName1.currentText()
-        self.LB_userID.setText( self.FN_GET_USERID_N( self.user1 ) )
-        self.LB_userID2.setText( self.FN_GET_USERID_N( self.user2 ) )
-    def FN_COPY_USER(self):
-        newUser=  self.LB_userID2.text()
-
-        if self.user1 == self.user2 :
-            QtWidgets.QMessageBox.warning( self, "Error", "Please enter 2 different users" )
-        else:
-            mycursor = self.conn.cursor()
-            mycursor1 = self.conn.cursor()
-            mycursor2 = self.conn.cursor()
-
-            sql_select_query = "select ur.ROLE_ID ,ur.BRANCH_NO ,ur.UR_STATUS  " \
-                               "from SYS_USER_ROLE  ur  inner join SYS_USER u ON u.USER_ID = ur.USER_ID  " \
-                               "where  u.USER_NAME = %s "
-            x = (self.user1,)
-            mycursor.execute( sql_select_query, x )
-            records = mycursor.fetchall()
-            #delete current assignment if found
-            mycursor2 = self.conn.cursor()
-            sql_select_query1 = "delete from SYS_USER_ROLE where USER_ID = '" + newUser + "'"
-            mycursor2.execute( sql_select_query1 )
-            db1.connectionCommit( self.conn )
-
-            mycursor1.execute( "SELECT max(cast(UR_USER_ROLE_ID  AS UNSIGNED)) FROM SYS_USER_ROLE" )
-            myresult = mycursor1.fetchone()
-
-            creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-            id = int( myresult[0] ) + 1
-            for row in records:
-
-                mycursor3 = self.conn.cursor()
-                # sql = " INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS) VALUES ( "+id+", "+newUser+", "+row[0]+", '"+row[1]+"','"+CL_userModule.user_name+"', '"+creationDate+"',' ',' ' ,'"+row[2]+"')"
-                sql = "INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS)      " \
-                      "VALUES ( %s, %s, %s, %s,%s, %s,%s,%s,%s)"
-
-                val = (id, newUser, row[0], row[1], '', creationDate, '', '', row[2])
-                print( str( sql ) )
-                # val = (id,newUser,  row[0], row[1], CL_userModule.user_name, creationDate, '', '', row[2],)
-                mycursor3.execute( sql, val )
-
-                db1.connectionCommit( self.conn )
-                print( mycursor3.rowcount, "record inserted." )
-                id = id + 1
-
-                # sql_select_query = "select * from SYS_USER_ROLE where USER_ID ='"+newUser+"' and ROLE_ID = '"+row[0]+"'"
-                # print(sql_select_query)
-                #
-                # mycursor2.execute( sql_select_query)
-                # print("mycursor2.rowcount is "+ str(mycursor2.rowcount))
-                # if mycursor2.rowcount > 0:
-                #     print("h")
-                # else:
-                #     mycursor3 = self.conn.cursor()
-                #     #sql = " INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS) VALUES ( "+id+", "+newUser+", "+row[0]+", '"+row[1]+"','"+CL_userModule.user_name+"', '"+creationDate+"',' ',' ' ,'"+row[2]+"')"
-                #     sql = "INSERT INTO SYS_USER_ROLE (UR_USER_ROLE_ID, USER_ID, ROLE_ID, BRANCH_NO, UR_CREATED_BY, UR_CREATED_ON, UR_CHANGED_BY, UR_CHANGED_ON, UR_STATUS)      " \
-                #           "VALUES ( %s, %s, %s, %s,%s, %s,%s,%s,%s)"
-                #
-                #     val = (id, newUser,row[0], row[1], '', creationDate, '', '', row[2])
-                #     print(str(sql))
-                #     #val = (id,newUser,  row[0], row[1], CL_userModule.user_name, creationDate, '', '', row[2],)
-                #     mycursor3.execute( sql, val)
-                #
-                #
-                #     db1.connectionCommit( self.conn )
-                #     print( mycursor3.rowcount, "record inserted." )
-                #     id = id + 1
-            mycursor2.close()
-            mycursor1.close()
-            mycursor.close()
-            self.close()
-
-    def FN_GET_USER(self):
-        user = self.CMB_userName.currentText()
-
-        mycursor = self.conn.cursor()
-        sql_select_query = "select * from SYS_USER where user_name = %s"
-        x = (user,)
-        mycursor.execute(sql_select_query, x)
-        record = mycursor.fetchone()
-        self.LB_userID.setText( record[0] )
-        self.LE_name.setText(record[2])
-        self.LE_fullName.setText(record[4])
-        self.LE_hrId.setText(record[5])
-        self.CMB_branch.setCurrentText(record[1])
-        self.CMB_userType.setCurrentText(record[11])
-        self.CMB_userStatus.setCurrentText(record[10])
+        print("Validate INSTT_TYPE_ID",Validation_For_installmentProgramm_INSTT_TYPE_ID)
 
 
-        mycursor.close()
+        #validate Bank or vendor or hyperone is checked
+        if self.RBTN_bank.isChecked():
+            print("Bank_ID",self.Qcombo_bank.currentData())
+            sql8 = "INSERT INTO INSTALLMENT_SPONSOR ( INSTR_RULEID ,BANK_ID,STATUS) VALUES (%s,%s,%s)"
+            val8 = (
+                id_INSTR_RULEID, self.Qcombo_bank.currentData(),
+                '1')
+            mycursor.execute(sql8, val8)
+        elif self.RBTN_vendor.isChecked():
+            print("sponsor_Id",self.Qcombo_vendor.currentData())
+            sql8 = "INSERT INTO INSTALLMENT_SPONSOR ( INSTR_RULEID ,SPONSOR_ID ,INSTS_SPONSOR_REASONS ,STATUS) VALUES (%s,%s,%s,%s)"
+            val8 = (
+                id_INSTR_RULEID, self.Qcombo_vendor.currentData(), self.QTEdit_sponsorReason.toPlainText(),
+                '1')
+            mycursor.execute(sql8, val8)
+        elif self.RBTN_hyperone.isChecked():
+            print("HYPERONE")
+            sql8 = "INSERT INTO INSTALLMENT_SPONSOR ( INSTR_RULEID , HYPERONE ,STATUS) VALUES (%s,%s,%s)"
+            val8 = (
+                id_INSTR_RULEID, '1',
+                '1')
+            mycursor.execute(sql8, val8)
 
-        print(mycursor.rowcount, "record retrieved.")
+        #elif self.Qtable_acceptedItems.rowCount() == 0 and not self.checkBox_department.isChecked():
 
-    def FN_MODIFY_USER(self):
-        self.id = self.LB_userID.text()
-        self.name = self.LE_name.text().strip()
-        self.password = self.LE_password.text().strip
-        self.branch = self.CMB_branch.currentText()
-        self.fullName = self.LE_fullName.text().strip()
-        self.hrId = self.LE_hrId.text().strip()
-        self.userType = self.CMB_userType.currentText()
-        self.status = self.CMB_userStatus.currentText()
-        if self.name == '' or self.password =='' or self.fullName == ''  or self.hrId == '' :
-            QtWidgets.QMessageBox.warning( self, "Error", "Please all required field" )
-        else:
-            mycursor = self.conn.cursor()
-
-            changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-
-            sql = "UPDATE SYS_USER   set USER_NAME= %s ,  USER_PASSWORD= %s  ,  BRANCH_NO = %s, USER_FULLNAME = %s , USER_HR_ID = %s, USER_CHANGED_ON = %s , USER_CHENGED_BY = %s, USER_STATUS = %s, USER_TYPE_ID = %s where USER_id= %s "
-            val = (self.name  , self.password, self.branch, self.fullName,self.hrId, changeDate, CL_userModule.user_name , self.status, self.userType , self.id)
-            print(val)
-            mycursor.execute(sql, val)
-
-            mycursor.close()
-            db1.connectionCommit( self.conn )
-            print(mycursor.rowcount, "record Modified.")
-            db1.connectionClose( self.conn )
-            self.close()
-
-    def FN_GET_USERS(self):
-
-        mycursor = self.conn.cursor()
-        mycursor.execute( "SELECT USER_NAME USER_ID FROM SYS_USER order by USER_ID asc" )
-        records = mycursor.fetchall()
-        mycursor.close()
-        return  records
-    # def FN_GET_USERID(self):
-    #     self.user = self.CMB_userName.currentText()
-    #     mycursor = self.conn.cursor()
-    #     sql_select_query= "SELECT USER_ID FROM SYS_USER WHERE USER_NAME = %s "
-    #     x = (self.user,)
-    #     mycursor.execute(sql_select_query, x)
-    #     myresult = mycursor.fetchone()
-    #     self.LB_userID.setText(myresult [0])
-
-    def FN_GET_USERID_N(self,user):
-
-        mycursor = self.conn.cursor()
-        sql_select_query= "SELECT USER_ID FROM SYS_USER WHERE USER_NAME = %s "
-        x = (user,)
-        mycursor.execute(sql_select_query, x)
+        sql1 = "select INST_DESC from INSTALLMENT_PROGRAM "
+        """
+                val2 = (
+                    self.QTEdit_descInstallment.toPlainText(), self.id_INSTR_RULEID, creationDateTime,
+                    CL_userModule.user_name, FromDateTime, ToDateTime, self.QDSpinBox_adminExpendses.value(),
+                    '0')
+                    sql1 = "INSERT INTO INSTALLMENT_RULE (INSTT_TYPE_ID,INSTR_DESC, INSTR_INTEREST_RATE, INSTR_SPONSOR_RATE , INSTR_HYPER_RATE,  INSTR_CUSTOMER_RATE, INSTR_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                    val1 = (
+                        Index_installmentType,self.QTEdit_descInstallment.toPlainText(),str(self.QDubleSpiner_interestRate.value()),str(self.QDubleSpiner_customerRate.value()),
+                           str(self.QDubleSpiner_vendorRate.value()),str(self.QDubleSpiner_hperoneRate.value()),
+                        '1')
+        """
+        mycursor.execute(sql1)
         myresult = mycursor.fetchone()
-        return myresult[0]
-
-
-    def FN_RESET_USER(self):
-        mycursor = self.conn.cursor()
-
-        changeDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-        if self.LE_password.text()  == self.LE_password2.text() :
-
-            sql = "UPDATE SYS_USER   set   USER_PASSWORD= %s  , USER_CHANGED_ON = %s , USER_CHENGED_BY = %s where USER_NAME= %s "
-            val = ( self.LE_password.text(), changeDate, CL_userModule.user_name,CL_userModule.user_name)
-            #print( val )
-            mycursor.execute( sql, val )
-            mycursor.close()
-            db1.connectionCommit( self.conn )
-            print( mycursor.rowcount, "password changed" )
-            db1.connectionClose( self.conn )
-            self.close()
+        if myresult[0] == None:
+            Validation_For_installmentProgramm=1
         else:
-            QtWidgets.QMessageBox.warning( self, "Error", "Please enter 2 different Passwords" )
+            Validation_For_installmentProgramm=0
+
+        return  Validation_For_installmentProgramm
+
+    # insert Installment_department_section_BMC
+    def FN_SaveDepartmentSectionBMCLeve(self,mycursor):
+        if self.checkBox_department.isChecked()  and self.checkBox_section.isChecked() and self.checkBox_BMCLevel.isChecked():
+            for j in range(len(self.Qcombo_department.currentData())):
+                for i in range(len(self.Qcombo_section.currentData())):
+                    for k in range(len(self.Qcombo_BMCLevel.currentData())):
+                        sql6 = "INSERT INTO INSTALLMENT_SECTION (INSTR_RULEID, DEPARTMENT_ID, SECTION_ID , BMC_ID ,STATUS) VALUES (%s,%s,%s,%s,%s)"
+                        val6 = (
+                            self.id_INSTR_RULEID,
+                            self.Qcombo_department.currentData()[j],
+                            self.Qcombo_section.currentData()[i],
+                            self.Qcombo_BMCLevel.currentData()[k],
+                            '1')
+                        mycursor.execute(sql6, val6)
+
+        elif self.checkBox_department.isChecked()  and self.checkBox_section.isChecked() and not self.checkBox_BMCLevel.isChecked():
+            for j in range(len(self.Qcombo_department.currentData())):
+                for i in range(len(self.Qcombo_section.currentData())):
+                        sql6 = "INSERT INTO INSTALLMENT_SECTION (INSTR_RULEID, DEPARTMENT_ID, SECTION_ID  ,STATUS) VALUES (%s,%s,%s,%s)"
+                        val6 = (
+                            self.id_INSTR_RULEID,
+                            self.Qcombo_department.currentData()[j],
+                            self.Qcombo_section.currentData()[i],
+                            '1')
+                        mycursor.execute(sql6, val6)
+
+        elif self.checkBox_department.isChecked() and not self.checkBox_section.isChecked() and not self.checkBox_BMCLevel.isChecked():
+            for j in range(len(self.Qcombo_department.currentData())):
+                        sql6 = "INSERT INTO INSTALLMENT_SECTION (INSTR_RULEID, DEPARTMENT_ID, STATUS) VALUES (%s,%s,%s)"
+                        val6 = (
+                            self.id_INSTR_RULEID,
+                            self.Qcombo_department.currentData()[j],
+                            '1')
+                        mycursor.execute(sql6, val6)
 
 
-    def FN_LOAD_RESET(self):
-        filename = self.dirname + '/resetUserPassword.ui'
-        loadUi( filename, self )
-        self.BTN_resetPass.clicked.connect(self.FN_RESET_USER)
-"""
+
+
+

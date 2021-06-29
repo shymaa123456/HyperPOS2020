@@ -83,16 +83,9 @@ class CL_EditCoupon(QtWidgets.QDialog):
     def FN_GET_Branch(self):
         i = 0
         try:
-            self.conn = db1.connect()
-            mycursor = self.conn.cursor()
-            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH where BRANCH_STATUS=1")
-            records = mycursor.fetchall()
-            for row, val in records:
-                for bra in CL_userModule.branch:
-                    if val in bra:
-                        self.Qcombo_branch.addItem(row, val)
-                    i += 1
-            mycursor.close()
+            for row, val in CL_userModule.branch:
+                self.Qcombo_branch.addItem(val, row)
+                i += 1
         except:
             print(sys.exc_info())
 
@@ -388,10 +381,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
                                     mycursor.execute(sql7, val7)
                                 self.serial_num = int(self.LE_desc_4.text())
                         if (self.LE_desc_1.text() != self.DescOldValue):
-                            sql7 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-                            val7 = (self.row,'COUPON', 'COP_DESC', self.DescOldValue, self.LE_desc_1.text().strip(), creationDate,
-                                    CL_userModule.user_name)
-                            mycursor.execute(sql7, val7)
+                            CL_userModule.FN_AddLog(self,'COUPON', 'COP_DESC', self.DescOldValue, self.LE_desc_1.text().strip(), creationDate,
+                                    CL_userModule.user_name,self.row,None,None,None,None,mycursor)
                         elif (self.CMB_CouponStatus.currentIndex() != self.oldstatus):
                             sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             val8 = (self.row, 'COUPON', 'STATUS', self.oldstatus,

@@ -92,16 +92,9 @@ class CL_CreateCoupon(QtWidgets.QDialog):
     def FN_GET_Branch(self):
          i=0
          try:
-            self.conn = db1.connect()
-            mycursor = self.conn.cursor()
-            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
-            records = mycursor.fetchall()
-            for row, val in records:
-                for bra in CL_userModule.branch:
-                    if val in bra:
-                        self.Qcombo_branch.addItem(row, val)
-                    i += 1
-            mycursor.close()
+            for row, val in CL_userModule.branch:
+                self.Qcombo_branch.addItem(val, row)
+                i += 1
          except:
              print(sys.exc_info())
 

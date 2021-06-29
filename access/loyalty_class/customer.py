@@ -1147,37 +1147,31 @@ class CL_customer(QtWidgets.QDialog):
             self.Qtable_customer.removeRow(i)
         conn = db1.connect()
         mycursor = conn.cursor()
-        whereClause = ""
+        whereClause = " POSC_NAME not like '%cust%' and "
         orderClause = " order by POSC_CUST_ID*1 asc"
         if self.chk_search_other.isChecked():
             if self.Rbtn_custNo.isChecked():
                 id = self.LE_custNo.text()
-                whereClause = " POSC_CUST_ID = '" + id + "'"
+                whereClause = " POSC_CUST_ID = '" + id + "' and "
 
             if  self.Rbtn_custName.isChecked():
                 name = self.LE_custName.text()
-                whereClause = " POSC_NAME like '%" + name + "%'"
+                whereClause = " POSC_NAME like '%" + name + "%' and "
 
             elif self.Rbtn_custTp.isChecked():
                 type = self.CMB_loyalityType.currentText()
-                whereClause = " LOYCT_TYPE_ID ='" + self.FN_GET_CUSTTP_ID(type) + "'"
+                whereClause = " LOYCT_TYPE_ID ='" + self.FN_GET_CUSTTP_ID(type) + "' and "
 
             elif self.Rbtn_custPhone.isChecked():
                 phone = self.LE_custPhone.text()
-                whereClause = "  (POSC_PHONE = '" + phone + "' or POSC_MOBILE = '"+phone+"')"
+                whereClause = "  (POSC_PHONE = '" + phone + "' or POSC_MOBILE = '"+phone+"') and "
 
         if self.chk_search_status.isChecked():
             if self.Rbtn_stsActive.isChecked():
-                if whereClause != '':
-                    whereClause = whereClause + ' and '
                 whereClause = whereClause + 'POSC_STATUS = 1'
             elif self.Rbtn_stsInactive.isChecked():
-                if whereClause != '':
-                    whereClause = whereClause + ' and '
                 whereClause = whereClause + 'POSC_STATUS = 0'
             elif self.Rbtn_stsAll.isChecked():
-                if whereClause != '':
-                    whereClause = whereClause + ' and '
                 whereClause = whereClause + 'POSC_STATUS in ( 0,1)'
         if self.chk_search_status.isChecked() == False and self.chk_search_other.isChecked() == False:
             QtWidgets.QMessageBox.warning(self, "Error", "أختر أي من محدادات البحث")

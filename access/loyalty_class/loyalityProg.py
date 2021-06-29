@@ -259,30 +259,32 @@ class CL_loyProg(QtWidgets.QDialog):
                            "where SECTION_STATUS   = 1 and `DEPARTMENT_DESC`= '"+dept+"'"
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
-        for row, val in records:
-            for sec in CL_userModule.section:
-                if str(val) in sec:
-                    self.CMB_section.addItem(row, val)
+        if mycursor.rowcount >0 :
+            for row, val in records:
+                for sec in CL_userModule.section:
+                    if str(val) in sec:
+                        self.CMB_section.addItem(row, val)
 
+
+            self.FN_GET_BMCLEVEL4()
         mycursor.close()
-        self.FN_GET_BMCLEVEL4()
-
     def FN_GET_BMCLEVEL4(self):
         conn = db1.connect()
         mycursor = conn.cursor()
         self.Qcombo_group6.clear()
         sec = self.CMB_section.currentData()
+        if sec !=  None:
 
-        sql_select_query = "SELECT BMC_LEVEL4_DESC ,BMC_LEVEL4 FROM Hyper1_Retail.BMC_LEVEL4 b where BMC_LEVEL4_STATUS   = 1 " \
-                           "and SECTION_ID= '"+sec+"'"
-        print(sql_select_query)
-        mycursor.execute( sql_select_query )
-        records = mycursor.fetchall()
-        self.Qcombo_group6.addItem("All")
-        for row, val in records:
-            self.Qcombo_group6.addItem(row, val)
-        mycursor.close()
-        self.Qcombo_group6.setChecked(0)
+            sql_select_query = "SELECT BMC_LEVEL4_DESC ,BMC_LEVEL4 FROM Hyper1_Retail.BMC_LEVEL4 b where BMC_LEVEL4_STATUS   = 1 " \
+                               "and SECTION_ID= '"+sec+"'"
+            #print(sql_ select_query)
+            mycursor.execute( sql_select_query )
+            records = mycursor.fetchall()
+            self.Qcombo_group6.addItem("All")
+            for row, val in records:
+                self.Qcombo_group6.addItem(row, val)
+            mycursor.close()
+            self.Qcombo_group6.setChecked(0)
     def FN_GET_CUSTGP(self):
         #print("pt11")
         conn = db1.connect()

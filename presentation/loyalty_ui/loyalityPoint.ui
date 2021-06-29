@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>نقاط العضويه</string>
+   <string>تعريف نقاط العضويه</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>

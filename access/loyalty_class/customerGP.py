@@ -14,15 +14,15 @@ from datetime import datetime
 
 class CL_customerGP(QtWidgets.QDialog):
     dirname = ''
-
-    def __init__(self):
+    switch_window = QtCore.pyqtSignal()
+    def __init__(self,pp):
         super(CL_customerGP, self).__init__()
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
         self.conn1 = db1.connect()
-
+        self.p=pp
     ###
 
     def FN_LOAD_DISPlAY(self):

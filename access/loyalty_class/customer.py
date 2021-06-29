@@ -408,6 +408,7 @@ class CL_customer_create(QtWidgets.QDialog):
 
             if error !=1:
 
+
                 sql = "INSERT INTO Hyper1_Retail.POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
                       " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING,POSC_FLOOR, POSC_EMAIL, " \
                       "POSC_CREATED_BY, POSC_CREATED_ON ,POSC_CHANGED_BY ,  POSC_COMPANY, " \
@@ -660,7 +661,7 @@ class CL_customer(QtWidgets.QDialog):
              sheet = wb.add_sheet('Sheet 1')
              sheet.write(0, 0, 'رقم العميل')
              sheet.write(0, 1, 'عدد النقاط')
-
+             sheet.write(0, 2, 'السبب')
              # # wb.save('test11.xls')
              wb.save(str(filename[0]))
              # wb.close()
@@ -824,6 +825,7 @@ class CL_customer(QtWidgets.QDialog):
                 try:
                     cust = sheet.cell_value(i, 0)
                     pts = sheet.cell_value(i, 1)
+
                     cust = int(cust)
                     ret = self.FN_VALIDATE_CUST(cust)
                     if cust == '' or pts == '':
@@ -836,33 +838,55 @@ class CL_customer(QtWidgets.QDialog):
                      print(err)
 
             if error == 0 and error1 ==0 :
+                # lock tables
+                sql0 = "  LOCK  TABLES    Hyper1_Retail.POS_CUSTOMER_POINT   WRITE , " \
+                       "    Hyper1_Retail.LOYALITY_POINTS_TRANSACTION_LOG   WRITE  "
+
+                mycursor.execute(sql0)
                 for i in range( sheet.nrows ):
 
                     try:
                         cust = sheet.cell_value( i, 0 )
                         pts = sheet.cell_value(i, 1)
+
+                        reason     = sheet.cell_value(i, 2)
+                        #branch = sheet.cell_value(i, 3)
                         cust = int(cust)
                         pts = int(pts)
                         sql = "select POSC_POINTS_AFTER from Hyper1_Retail.POS_CUSTOMER_POINT where POSC_CUSTOMER_ID = '"+str(cust)+"'"
                         mycursor.execute(sql)
                         result = mycursor.fetchone()
                         before_points = int(result[0])
-
+                        after_points = before_points+pts
                         creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-                        sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set POSC_POINTS_BEFORE =%s ,POSC_POINTS_AFTER=%s , POINTS_CHANGED_ON =%s , TRANS_SIGN = '0' where POSC_CUSTOMER_ID = %s"
-                        val = (before_points, pts, creationDate, str(cust))
+
+                        sql= "INSERT INTO `Hyper1_Retail`.`LOYALITY_POINTS_TRANSACTION_LOG` " \
+                             "(`POSC_CUST_ID`,`REDEEM_TYPE_ID`,`COMPANY_ID`,`BRANCH_NO`,`TRANS_CREATED_BY`," \
+                             "`TRANS_CREATED_ON`,`POSC_POINTS_BEFORE`,`VALUE_OF_POINTS`,`TRANS_POINTS_QTY`,`TRANS_POINTS_VALUE`,`TRANS_REASON`,`POSC_POINTS_AFTER`,`TRANS_STATUS`)" \
+                             "                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+
+                        val=(cust,1,'1','H010',CL_userModule.user_name,creationDate,before_points,1,pts,1,reason,after_points,'2')
+                        mycursor.execute(sql, val)
+
+                        mycursor.execute("SELECT max(cast(`MEMBERSHIP_POINTS_TRANS`  AS UNSIGNED)) FROM LOYALITY_POINTS_TRANSACTION_LOG")
+                        myresult = mycursor.fetchone()
+                        MEMBERSHIP_POINTS_TRANS = myresult[0]
+                        sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set POSC_POINTS_BEFORE =%s ,POSC_POINTS_AFTER=%s , POINTS_CHANGED_ON =%s , TRANS_SIGN = '0'" \
+                              ",MEMBERSHIP_POINTS_TRANS = %s , TRANS_POINTS = %s where POSC_CUSTOMER_ID = %s"
+                        val = (before_points, after_points, creationDate,MEMBERSHIP_POINTS_TRANS, pts,str(cust))
                         mycursor.execute(sql, val)
                         db1.connectionCommit(conn)
-                        QtWidgets.QMessageBox.warning(self, "Done", "customer points are updated")
-
-                        mycursor.execute( sql, val )
-                        db1.connectionCommit( conn )
                     except Exception as err:
                          print(err)
+
+                sql00 = "  UNLOCK   tables    "
+                mycursor.execute(sql00)
+                db1.connectionCommit(conn)
+                QtWidgets.QMessageBox.warning(self, "تم", "تم رفع نقاط العملاء")
             elif error == 1:
-                QtWidgets.QMessageBox.warning(self, "Error", "Sheet contain empty fields")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "الملف يحتوي على بعض الخانات الفارغه")
             elif error1 == 1:
-                QtWidgets.QMessageBox.warning(self, "Error", "Sheet contain invalid customers")
+                QtWidgets.QMessageBox.warning(self, "خطأ", "الملف يحتوي على عملاء غير متواجدين")
 
             mycursor.close()
 #            self.close()

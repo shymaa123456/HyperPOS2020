@@ -32,13 +32,13 @@ class CL_redVouch(QtWidgets.QDialog):
     from Validation.Validation import CL_validation
     def textchanged(self):
         try:
-            print( "contents of text box: " )
+
             if self.Qline_replace.text().strip() !='' and self.Qline_points.text().strip() !='' :
                 ret = CL_validation.FN_validation_int(self.Qline_replace.text().strip())
                 if ret == True:
-                    replacedPoints = int(self.Qline_replace.text().strip())
+                    replacedPoints = float(self.Qline_replace.text().strip())
 
-                    actualPoints = int(self.Qline_points.text().strip())
+                    actualPoints = float(self.Qline_points.text().strip())
                     remainingPoints = actualPoints - replacedPoints
                     self.Qline_remainder.setText(str(remainingPoints))
                     self.FN_GET_POINTS_VALUE(replacedPoints)
@@ -56,8 +56,9 @@ class CL_redVouch(QtWidgets.QDialog):
         mycursor.execute(sql_select_query,x)
         result = mycursor.fetchone()
         value = replacedPoints * int(result[1] )/int(result[0])
-        print(result)
+
         self.Qline_point_value.setText(str(value))
+        return result
     def FN_CLEAR_FEILDS (self):
         self.Qline_points.setText("")
         self.Qline_name.setText('')
@@ -134,10 +135,8 @@ class CL_redVouch(QtWidgets.QDialog):
             db1.connectionCommit(conn)
             mycursor.execute( "select GV_ID from Hyper1_Retail.VOUCHER where GV_BARCODE ='"+voucherBarcode+"'")
             result= mycursor.fetchone()
-            QtWidgets.QMessageBox.information(self, "Done", +str(result[0])+"رقم القسيمه هو " )
-            # update customer points
-            actualPoints = self.Qline_points.text().strip()
-            remainingPoints = self.Qline_remainder.text().strip()
+            QtWidgets.QMessageBox.information(self, "Done", str(result[0])+"رقم القسيمه هو " )
+
 
 
         except Exception as err:
@@ -148,25 +147,52 @@ class CL_redVouch(QtWidgets.QDialog):
             # insert voucher
             value = self.Qline_point_value.text().strip()
             customer = self.Qline_cust.text().strip()
-
+            replacedPoints = float(self.Qline_replace.text().strip())
             conn = db1.connect()
             mycursor = conn.cursor()
             creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
-            actualPoints = self.Qline_points.text().strip()
-            remainingPoints = self.Qline_remainder.text().strip()
-            sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set POSC_POINTS_BEFORE =%s ,POSC_POINTS_AFTER=%s , POINTS_CHANGED_ON =%s , TRANS_SIGN = '0' where POSC_CUSTOMER_ID = %s"
-            val = (actualPoints, remainingPoints, creationDate, customer)
+            actualPoints = float(self.Qline_points.text().strip())
+            remainingPoints = float(self.Qline_remainder.text().strip())
+            pts = remainingPoints - actualPoints
+
+            sql0 = "  LOCK  TABLES    Hyper1_Retail.POS_CUSTOMER_POINT   WRITE , " \
+                   "    Hyper1_Retail.LOYALITY_POINTS_TRANSACTION_LOG   WRITE  "
+
+
+            #get point value
+            result=self.FN_GET_POINTS_VALUE(replacedPoints)
+            mycursor.execute(sql0)
+            sql = "INSERT INTO `Hyper1_Retail`.`LOYALITY_POINTS_TRANSACTION_LOG` " \
+                  "(`POSC_CUST_ID`,`REDEEM_TYPE_ID`,`COMPANY_ID`,`BRANCH_NO`,`TRANS_CREATED_BY`," \
+                  "`TRANS_CREATED_ON`,`POSC_POINTS_BEFORE`,`VALUE_OF_POINTS`,`TRANS_POINTS_QTY`,`TRANS_POINTS_VALUE`,`TRANS_REASON`,`POSC_POINTS_AFTER`,`TRANS_STATUS`)" \
+                  "                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+
+            val = (
+            customer, 1, '1', 'H010', CL_userModule.user_name, creationDate, actualPoints, result[1], pts, float(result[1])*pts, 'voucher redeem', remainingPoints,
+            '2')
             mycursor.execute(sql, val)
-            db1.connectionCommit(conn)
+
+            mycursor.execute(
+                "SELECT max(cast(`MEMBERSHIP_POINTS_TRANS`  AS UNSIGNED)) FROM LOYALITY_POINTS_TRANSACTION_LOG")
+            myresult = mycursor.fetchone()
+            MEMBERSHIP_POINTS_TRANS = myresult[0]
+
+            sql = "update Hyper1_Retail.POS_CUSTOMER_POINT set MEMBERSHIP_POINTS_TRANS=%s , POSC_POINTS_BEFORE =%s ,TRANS_POINTS = %s ,POSC_POINTS_AFTER=%s, POINTS_CHANGED_ON =%s , TRANS_SIGN = '0' where POSC_CUSTOMER_ID = %s"
+            val = (MEMBERSHIP_POINTS_TRANS,actualPoints,pts, remainingPoints, creationDate, customer)
+            mycursor.execute(sql, val)
+
             # QtWidgets.QMessageBox.warning(self, "Done", "Voucher is created")
+            sql00 = "  UNLOCK   tables    "
+            mycursor.execute(sql00)
+            db1.connectionCommit(conn)
             print("customer points are updated")
         except Exception as err:
             print(err)
 
     def FN_VALIDATE(self):
-        replacedPoints = int(self.Qline_replace.text().strip())
-        actualPoints = int(self.Qline_points.text().strip())
+        replacedPoints = float(self.Qline_replace.text().strip())
+        actualPoints = float(self.Qline_points.text().strip())
         if replacedPoints > actualPoints:
             return False
         else:
@@ -175,8 +201,9 @@ class CL_redVouch(QtWidgets.QDialog):
         try:
             conn = db1.connect()
             mycursor = conn.cursor()
-            sql = "SELECT * FROM Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = '" + str(id) + "'"
+            sql = "SELECT * FROM Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = " + id
             mycursor.execute(sql)
+            print("in check customer ")
             myresult = mycursor.fetchone()
             if mycursor.rowcount > 0:
                 mycursor.close()
@@ -200,11 +227,11 @@ class CL_redVouch(QtWidgets.QDialog):
                    sql = "SELECT cp.POSC_POINTS_AFTER , c.POSC_NAME  FROM Hyper1_Retail.POS_CUSTOMER_POINT  cp " \
                          " inner join Hyper1_Retail.POS_CUSTOMER  c " \
                          " on cp.POSC_CUSTOMER_ID = c.POSC_CUST_ID " \
-                         " where c.POSC_CUST_ID = '" + str(customer) + "'"
+                         " where c.POSC_CUST_ID = " + customer
                    mycursor.execute(sql)
                    myresult = mycursor.fetchone()
-                   self.Qline_points.setText(myresult[0])
-                   self.Qline_name.setText(myresult[1])
+                   self.Qline_points.setText(str(myresult[0]))
+                   self.Qline_name.setText(str(myresult[1]))
                else:
                    QtWidgets.QMessageBox.warning(self, "خطأ", "رقم العميل غير صحيح")
            else:

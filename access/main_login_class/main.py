@@ -70,9 +70,9 @@ class CL_main(QtWidgets.QMainWindow):
 
             forms = list(dict.fromkeys(forms))
 
-            print(forms)
+            #print(forms)
             for row in forms:
-                print(row)
+                #print(row)
                 but_name = 'QAct_' + row
                 self.findChild(QObject, but_name).setEnabled(True)
 
@@ -160,7 +160,7 @@ class CL_main(QtWidgets.QMainWindow):
         except Exception as err:
          print(err)
     def FN_CREATE_LOYPROG(self):
-        self.window_two = CL_loyProg()
+        self.window_two = CL_loyProg(self)
         self.window_two.FN_LOAD_DISPLAY()
         self.window_two.show()
 
@@ -177,7 +177,7 @@ class CL_main(QtWidgets.QMainWindow):
         self.window_two.show()
 
     def FN_DISPLAY_CUSTGP(self):
-        self.window_two = CL_customerGP()
+        self.window_two = CL_customerGP(self)
         self.window_two.FN_LOAD_DISPlAY()
         self.window_two.show()
 

@@ -92,23 +92,19 @@ class CL_CreateCoupon(QtWidgets.QDialog):
     def FN_GET_Branch(self):
          i=0
          try:
-            self.conn = db1.connect()
-            mycursor = self.conn.cursor()
-            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
-            records = mycursor.fetchall()
-            for row, val in records:
-                for bra in CL_userModule.branch:
-                    if val in bra:
-                        self.Qcombo_branch.addItem(row, val)
-                    i += 1
-            mycursor.close()
+            for row, val in CL_userModule.branch:
+                self.Qcombo_branch.addItem(val, row)
+                i += 1
          except:
              print(sys.exc_info())
 
     # Todo: method for create coupon
     def FN_Create(self):
         try:
+            self.conn = db1.connect()
+            self.conn.autocommit = False
             mycursor = self.conn.cursor()
+            self.conn.start_transaction()
             if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text().strip())==0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
@@ -135,16 +131,18 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                     QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
                 else:
                     self.valueData = self.LE_desc_2.text()
-            self.conn = db1.connect()
             indx = self.LE_desc.text().strip()
             sql_select_Query = "select * from COUPON where COP_DESC = %s "
             x = (indx,)
-            mycursor = self.conn.cursor()
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
             if mycursor.rowcount > 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "الاسم موجود بالفعل")
             else:
+                sql0 = "  LOCK  TABLES    Hyper1_Retail.COUPON   WRITE , " \
+                       "    Hyper1_Retail.COUPON_SERIAL   WRITE , "\
+                       "    Hyper1_Retail.COUPON_BRANCH   WRITE  "
+                mycursor.execute(sql0)
                 id = 0
                 sql = "INSERT INTO COUPON (COP_DESC, " + self.valueType + ", COP_SERIAL_COUNT,COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_VALID_FROM, COP_VALID_TO, COP_STATUS)" \
                       " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s) "
@@ -155,10 +153,6 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                        self.Qdate_to.dateTime().toString('yyyy-MM-dd'),
                        '0')
                 mycursor.execute(sql, val)
-                db1.connectionCommit(self.conn)
-                mycursor.close()
-                self.conn = db1.connect()
-                mycursor = self.conn.cursor()
                 indx = self.LE_desc.text()
                 mycursor.execute("SELECT * FROM COUPON Where COP_DESC = '" + indx + "'")
                 c = mycursor.fetchone()
@@ -167,7 +161,6 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                     value = randint(0, 1000000000000)
                     sql_select_Query = "select * from COUPON_SERIAL where COPS_BARCODE = %s "
                     x = ("HCOP"+bin(value),)
-                    mycursor = self.conn.cursor()
                     mycursor.execute(sql_select_Query, x)
                     record = mycursor.fetchone()
                     if mycursor.rowcount > 0:
@@ -185,13 +178,22 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                             id,
                             '1')
                         mycursor.execute(sql3, val3)
+                sql00 = "  UNLOCK   tables    "
+                mycursor.execute(sql00)
                 db1.connectionCommit(self.conn)
                 mycursor.close()
                 QtWidgets.QMessageBox.warning(self, "Done", "رقم الكوبون هو " + str(id))
                 self.label_num.setText(str(id))
         except mysql.connector.Error as error:
-            print(sys.exc_info())
+            print("Failed to update record to database rollback: {}".format(error))
+            # reverting changes because of exception
             self.conn.rollback()
+        finally:
+            # closing database connection.
+            if self.conn.is_connected():
+                mycursor.close()
+                self.conn.close()
+                print("connection is closed")
 
 
 

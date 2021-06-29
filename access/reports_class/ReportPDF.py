@@ -100,10 +100,10 @@ class body():
         title=Text()
         val= CL_validation()
         pdfmetrics.registerFont(TTFont('Scheherazade', 'Scheherazade-Regular.ttf'))
-        data = [['Nubmber reset:', '248361 5/1/2018', '                                      ', '', 'Client Data'],
-                ['phone number:', title.gettelText(), '                           ', title.getcodeText(), 'Customer Code'],
-                ['mobile number', title.gettelText(), '                             ', 'TEST', 'Customer Name'],
-                ['', '', '                                ', 'Giza', 'City']]
+        data = [['Nubmber reset:', '248361 5/1/2018', '                                      ', 'Client Data', ''],
+                ['phone number:', title.gettelText(), '                           ', 'Customer Code', title.getcodeText()],
+                ['mobile number', title.gettelText(), '                             ', 'Customer Name', 'TEST'],
+                ['', '', '                                ', 'City', 'Giza']]
         f = Table(data, repeatRows=1, repeatCols=1, hAlign='CENTER')
         d = Drawing(100, 5)
         d.add(Line(16, 6, 500, 6))
@@ -121,11 +121,15 @@ class body():
        # df['PROM_ID'] = df['PROM_ID'].str.wrap(60)
         total = 0
         # numCount = 0
-        # for x in range(row):
-        #     val = df['PROM_ID'].values[x]
-        #     arabic_text = arabic_reshaper.reshape(val)
-        #     arabic_text = get_display(arabic_text)
-        #     df.at[x, 'PROM_ID'] = arabic_text
+        for y in range(col):
+            for x in range(row):
+                val = df.iloc[:, y].values[x]
+                print(type(val))
+                if type(val) == str:
+
+                    arabic_text = arabic_reshaper.reshape(val)
+                    arabic_text = get_display(arabic_text)
+                    df.iloc[x, y] = arabic_text
         #     numCount += 1
         num = 0
         for x in range(row):
@@ -134,7 +138,15 @@ class body():
             num = x
         df.sort_values(by=field_names[0], inplace=True)
         df.at[num + 2, field_names[0]] = str(total)
-        data = [df.columns.to_list()] + df.values.tolist()
+
+        col_lst = df.columns.to_list()
+        for i in range(1, len(col_lst)):
+            arabic_text = arabic_reshaper.reshape(col_lst[i])
+            arabic_text = get_display(arabic_text)
+            col_lst[i] = arabic_text
+        data = [col_lst] + df.values.tolist()
+
+        # data = [df.columns.to_list()] + df.values.tolist()
         table = Table(data, repeatRows=1, repeatCols=1,
                       rowHeights=20, hAlign='CENTER')
         table.setStyle(TableStyle([

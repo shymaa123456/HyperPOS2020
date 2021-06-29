@@ -56,7 +56,7 @@
   </widget>
   <widget class="QPushButton" name="Qbtn_replace">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>

@@ -499,11 +499,12 @@ class CL_loyProg(QtWidgets.QDialog):
                     for row in records:
                         BMC_LEVEL4_list.append(row[0])
                 else:
-                    for BMC_LEVEL4 in BMC_LEVEL4s:
-                        sql = "SELECT BMC_LEVEL4 FROM Hyper1_Retail.BMC_LEVEL4 where BMC_LEVEL4_DESC = '" + BMC_LEVEL4 + "'"
-                        mycursor.execute(sql)
-                        myresult = mycursor.fetchone()
-                        BMC_LEVEL4_list.append(myresult[0])
+                    # for BMC_LEVEL4 in BMC_LEVEL4s:
+                    #     sql = "SELECT BMC_LEVEL4 FROM Hyper1_Retail.BMC_LEVEL4 where BMC_LEVEL4_DESC = '" + BMC_LEVEL4 + "'"
+                    #     mycursor.execute(sql)
+                    #     myresult = mycursor.fetchone()
+                    #     BMC_LEVEL4_list.append(myresult[0])
+                    BMC_LEVEL4_list = BMC_LEVEL4s
 
                 if len(BMC_LEVEL4_list) > 0:
                     if len(BMC_LEVEL4_list) == 1 :
@@ -547,11 +548,7 @@ class CL_loyProg(QtWidgets.QDialog):
 
             # get customer type
             cust_tp_list = cust_tps
-            # for cust_tp in cust_tps:
-            #     mycursor.execute(
-            #         "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + cust_tp + "'")
-            #     myresult = mycursor.fetchone()
-            #     cust_tp_list.append(myresult[0])
+
             if len(cust_tp_list) > 0:
                 if len(cust_tp_list) == 1:
                     whereClause = whereClause + " and LOYCT_TYPE_ID = '" + cust_tp_list[0] + "'"
@@ -674,7 +671,7 @@ class CL_loyProg(QtWidgets.QDialog):
                     mycursor.execute(sql_select_query)
                     records = mycursor.fetchall()
                     for row in records:
-                        BMC_LEVEL4_list.append(row[0])
+                        BMC_LEVEL4_list.append(row[1])
                     mycursor.close()
                 else:
                         BMC_LEVEL4_list= BMC_LEVEL4s
@@ -740,7 +737,7 @@ class CL_loyProg(QtWidgets.QDialog):
         try:
             for i in reversed(range(self.Qtable_loyality.rowCount())):
                self.Qtable_loyality.removeRow(i)
-            time.sleep(5)
+            #time.sleep(5)
             conn = db1.connect()
             mycursor = conn.cursor()
             i = 0

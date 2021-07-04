@@ -31,21 +31,15 @@ class CL_customer_modify(QtWidgets.QDialog):
             print("id is ", id)
             filename = self.dirname + '/modifyCustomer.ui'
             loadUi(filename, self)
-
-            records = util.FN_GET_CITIES()
-            for row in records:
-                self.CMB_city.addItems([row[0]])
-            self.FN_GET_DISTRICT()
-
             records = util.FN_GET_CUSTTP()
-            for row in records:
-                self.CMB_loyalityType.addItems([row[0]])
+            for row,val in records:
+                self.CMB_loyalityType.addItem(row,val)
 
             records = util.FN_GET_CUSTGP()
-            print(records)
-            for row in records:
-                self.CMB_custGroup.addItems([row[0]])
-            print(records)
+
+            for row, val in records:
+                self.CMB_custGroup.addItem(row, val)
+
             self.CMB_status.addItems(["Active", "Inactive"])
             self.FN_GET_CUST(id)
 
@@ -58,17 +52,19 @@ class CL_customer_modify(QtWidgets.QDialog):
 
         except Exception as err:
             print(err)
+
     def FN_GET_DISTRICT(self):
         self.CMB_district.clear()
-        if self.CMB_city.currentText() !=None:
+        if self.CMB_city.currentData() != None:
             conn = db1.connect()
             mycursor = conn.cursor()
-            mycursor.execute("SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d inner join Hyper1_Retail.City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+self.CMB_city.currentText()+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
+            sql = "SELECT DISTRICT_NAME ,DISTRICT_ID FROM Hyper1_Retail.DISTRICT where CITY_ID = %s and DISTRICT_STATUS = 1  order by DISTRICT_ID asc"
+            val = (self.CMB_city.currentData(),)
+            mycursor.execute(sql, val)
             records = mycursor.fetchall()
 
-
-            for row in records:
-                self.CMB_district.addItems([row[0]])
+            for row, val in records:
+                self.CMB_district.addItem(row, val)
             mycursor.close()
     def FN_MODIFY_CUST(self):
         #get customer data
@@ -76,14 +72,14 @@ class CL_customer_modify(QtWidgets.QDialog):
             self.id = self.LB_custID.text().strip()
 
             self.name = self.LE_name.text().strip()
-            self.custGroup = self.CMB_custGroup.currentText()
-            self.loyalityType = self.CMB_loyalityType.currentText()
+            self.custGroup = self.CMB_custGroup.currentData()
+            self.loyalityType = self.CMB_loyalityType.currentData()
             self.phone = self.lE_phone.text().strip()
             self.mobile = self.lE_mobile.text().strip()
             self.job = self.LE_job.text().strip()
             self.address = self.LE_address.text().strip()
-            self.city = self.CMB_city.currentText()
-            self.district = self.CMB_district.currentText()
+            self.city = self.CMB_city.currentData()
+            self.district = self.CMB_district.currentData()
             self.building = self.LE_building.text().strip()
             self.floor = self.LE_floor.text().strip()
             self.email = self.LE_email.text().strip()
@@ -97,17 +93,6 @@ class CL_customer_modify(QtWidgets.QDialog):
             mycursor = conn.cursor()
 
             changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-            # get customer gp id
-            mycursor.execute(
-                "SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '" + self.custGroup + "'")
-            myresult = mycursor.fetchone()
-            self.custGroup = myresult[0]
-
-            # get customer type
-            mycursor.execute(
-                "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '" + self.loyalityType + "'")
-            myresult = mycursor.fetchone()
-            self.loyalityType = myresult[0]
 
             self.status = self.CMB_status.currentText()
             if self.status == 'Active':
@@ -169,10 +154,6 @@ class CL_customer_modify(QtWidgets.QDialog):
             self.lE_mobile.setText( record[5] )
             self.LE_job.setText( record[6] )
             self.LE_address.setText( record[7] )
-            self.CMB_city.setCurrentText( record[8] )
-
-            self.FN_GET_DISTRICT()
-            self.CMB_district.setCurrentText(record[9] )
 
             self.LE_building.setText( record[10] )
             self.LE_floor.setText( record[11] )
@@ -181,16 +162,21 @@ class CL_customer_modify(QtWidgets.QDialog):
             self.LE_workPhone.setText( record[18] )
             self.LE_workAddress.setText( record[19] )
             self.LE_notes.setText( record[20] )
-            # if record[21] == '1':
-            #     self.CMB_status.setCurrentText('Active')
-            # else:
-            #     self.CMB_status.setCurrentText( 'Inactive' )
-
 
             self.CMB_status.setCurrentText(util.FN_GET_STATUS_DESC(record[21]))
-            self.CMB_custGroup.setCurrentText(util.FN_GET_CUSTTG_DESC(str(record[2] )))
-
+            self.CMB_custGroup.setCurrentText(util.FN_GET_CUSTTG_DESC(record[2] ))
             self.CMB_loyalityType.setCurrentText( util.FN_GET_CUSTTP_DESC(record[1] ))
+
+            records = util.FN_GET_CITIES()
+            for row, val in records:
+                self.CMB_city.addItem(row, val)
+
+            self.CMB_city.setCurrentText( util.FN_GET_CITY_DESC(record[8]))
+
+            records = util.FN_GET_DISTRICT(record[8])
+            for row, val in records:
+                self.CMB_district.addItem(row, val)
+            self.CMB_district.setCurrentText( util.FN_GET_DISTRICT_DESC(record[9]))
 
             self.oldmobile = record[5]
             self.oldstatus = record[21]
@@ -218,6 +204,11 @@ class CL_customer_modify(QtWidgets.QDialog):
                     data = util.FN_GET_STATUS_DESC(str(data))
                 elif column_number == 2:
                     data = util.FN_GET_CUSTTP_DESC(str(data))
+                elif column_number == 7:
+                    data = util.FN_GET_CITY_DESC(str(data))
+
+                elif column_number == 8:
+                    data = util.FN_GET_DISTRICT_DESC(str(data))
                 self.parent .Qtable_customer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
         self.parent .Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         mycursor.close()
@@ -264,15 +255,6 @@ class CL_customer_modify(QtWidgets.QDialog):
         if ret == False:
             QtWidgets.QMessageBox.warning(self, "خطأ", "رقم هاتف غير صحيح")
             error = 1
-        ret = CL_validation.FN_validation_int(self.building)
-        if ret == False:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "Invalid building number")
-            error = 1
-
-        ret = CL_validation.FN_validation_int(self.floor)
-        if ret == False:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "Invalid floor Phone")
-            error = 1
 
         ret = CL_validation.FN_valedation_mail(self.email)
         if ret == False:
@@ -314,22 +296,23 @@ class CL_customer_create(QtWidgets.QDialog):
             loadUi(filename, self)
 
             records = util.FN_GET_CUSTGP()
-            for row in records:
-                self.CMB_custGroup.addItems([row[0]])
+            for row, val in records:
+                self.CMB_custGroup.addItem(row, val)
 
             self.CMB_loyalityType.clear()
             records = util.FN_GET_CUSTTP()
-            for row in records:
-                self.CMB_loyalityType.addItems([row[0]])
+            for row,val in records:
+                self.CMB_loyalityType.addItem(row,val)
 
             records = util.FN_GET_CITIES()
-            for row in records:
-                self.CMB_city.addItems([row[0]])
+            for row ,val in records:
+                self.CMB_city.addItem(row,val)
 
-            city=self.CMB_city.currentText()
+            city=self.CMB_city.currentData()
+
             records = util.FN_GET_DISTRICT(city)
-            for row in records:
-                self.CMB_district.addItems([row[0]])
+            for row ,val in records:
+                self.CMB_district.addItem(row,val)
 
             self.CMB_city.currentIndexChanged.connect(self.FN_GET_DISTRICT)
             self.CMB_status.addItems(["Active", "Inactive"])
@@ -341,32 +324,36 @@ class CL_customer_create(QtWidgets.QDialog):
             self.setFixedHeight(651)
         except Exception as err:
             print(err)
+
     def FN_GET_DISTRICT(self):
         self.CMB_district.clear()
-        if self.CMB_city.currentText() !=None:
+        if self.CMB_city.currentData() != None:
             conn = db1.connect()
             mycursor = conn.cursor()
-            mycursor.execute("SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d inner join Hyper1_Retail.City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+self.CMB_city.currentText()+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
+            sql = "SELECT DISTRICT_NAME ,DISTRICT_ID FROM Hyper1_Retail.DISTRICT where CITY_ID = %s and DISTRICT_STATUS = 1  order by DISTRICT_ID asc"
+            val = (self.CMB_city.currentData(),)
+            mycursor.execute(sql, val)
             records = mycursor.fetchall()
 
-            for row in records:
-                self.CMB_district.addItems([row[0]])
+            for row, val in records:
+                self.CMB_district.addItem(row, val)
             mycursor.close()
+
     def FN_CREATE_CUST(self):
         #get customer data
         try:
+
             print("here")
             self.parent.Qtable_customer.insertRow(0)
             self.name = self.LE_name.text().strip()
-
-            self.custGroup = self.CMB_custGroup.currentText()
-            self.loyalityType =self.CMB_loyalityType.currentText()
+            self.custGroup = self.CMB_custGroup.currentData()
+            self.loyalityType =self.CMB_loyalityType.currentData()
             self.phone = self.lE_phone .text().strip()
             self.mobile = self.lE_mobile.text().strip()
             self.job = self.LE_job.text().strip()
             self.address = self.LE_address.text().strip()
-            self.city = self.CMB_city.currentText()
-            self.district = self.CMB_district.currentText()
+            self.city = self.CMB_city.currentData()
+            self.district = self.CMB_district.currentData()
             self.building = self.LE_building.text().strip()
             self.floor = self.LE_floor.text().strip()
             self.email = self.LE_email.text().strip()
@@ -377,26 +364,8 @@ class CL_customer_create(QtWidgets.QDialog):
             self.notes = self.LE_notes.toPlainText().strip()
             conn = db1.connect()
             mycursor = conn.cursor()
-            # get max id
-            mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM Hyper1_Retail.POS_CUSTOMER" )
-            myresult = mycursor.fetchone()
-
-            if myresult[0] == None:
-                self.id = "1"
-            else:
-                self.id = int( myresult[0] ) + 1
 
             creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-
-            #get customer gp id
-            mycursor.execute( "SELECT CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where CG_DESC = '"+self.custGroup+"'" )
-            myresult = mycursor.fetchone()
-            self.custGroup = myresult[0]
-
-            #get customer type
-            mycursor.execute( "SELECT LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_DESC = '"+self.loyalityType +"'" )
-            myresult = mycursor.fetchone()
-            self.loyalityType = myresult[0]
 
             self.status = self.CMB_status.currentText()
             if self.status == 'Active':
@@ -405,41 +374,44 @@ class CL_customer_create(QtWidgets.QDialog):
                 self.status = 0
 
             error =0
-
             error = self.FN_VALIDATE_FIELDS()
 
             if error !=1:
+                sql0 = "  LOCK  TABLES    Hyper1_Retail.POS_CUSTOMER   WRITE "
+                mycursor.execute(sql0)
 
-
-                sql = "INSERT INTO Hyper1_Retail.POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
+                sql = "INSERT INTO Hyper1_Retail.POS_CUSTOMER( LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
                       " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING,POSC_FLOOR, POSC_EMAIL, " \
                       "POSC_CREATED_BY, POSC_CREATED_ON ,POSC_CHANGED_BY ,  POSC_COMPANY, " \
                       "POSC_WORK_PHONE, POSC_WORK_ADDRESS, POSC_NOTES, POSC_STATUS) " \
-                      "         VALUES ( %s, %s, %s,  %s,%s,%s, %s, %s, %s, %s, " \
+                      "         VALUES (  %s, %s,  %s,%s,%s, %s, %s, %s, %s, " \
                       "%s,%s,  %s, %s,%s, %s,%s, %s, %s, %s,%s)"
 
                            # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-                val = (self.id,self.loyalityType,self.custGroup,self.name,self.phone,self.mobile,
+                val = (self.loyalityType,self.custGroup,self.name,self.phone,self.mobile,
                        self.job, self.address, self.city, self.district, self.building, self.floor ,self.email,
                        CL_userModule.user_name, creationDate, ' ',self.company, self.workPhone, self.workAddress,
                        self.notes, self.status
                 )
                 mycursor.execute( sql, val )
-                # mycursor.execute(sql)
-
-                mycursor.close()
-
                 print( mycursor.rowcount, "record inserted." )
+                #get max id
+                mycursor.execute("SELECT max(POSC_CUST_ID ) FROM Hyper1_Retail.POS_CUSTOMER")
+                myresult = mycursor.fetchone()
+                id = myresult[0]
+                sql00 = "  UNLOCK   tables    "
+                mycursor.execute(sql00)
                 db1.connectionCommit( conn )
                 #db1.connectionClose( self.conn )
                 QtWidgets.QMessageBox.information(self, "تم", "تم الإنشاء بنجاح")
 
                 self.close()
                 #update parent
-                self.FN_REFRESH_GRID(self.id)
+                self.FN_REFRESH_GRID(id)
                 #self.parent.Qtable_customer.insertRow(2)
-
+                print(id)
                 print("in create cust" ,self.name)
+                mycursor.close()
         except Exception as err:
             print(err)
 
@@ -450,7 +422,7 @@ class CL_customer_create(QtWidgets.QDialog):
         mycursor = conn.cursor()
         sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = %s"
         #print(sql_select_query)
-        val = (str(id),)
+        val = (id,)
         mycursor.execute(sql_select_query,val)
         records = mycursor.fetchall()
         for row_number, row_data in enumerate(records):
@@ -460,17 +432,19 @@ class CL_customer_create(QtWidgets.QDialog):
                     data = util.FN_GET_STATUS_DESC(str(data))
                 elif column_number == 2:
                     data = util.FN_GET_CUSTTP_DESC(str(data))
+                elif column_number == 7:
+                    data = util.FN_GET_CITY_DESC(str(data))
+
+                elif column_number == 8:
+                    data = util.FN_GET_DISTRICT_DESC(str(data))
                 self.parent .Qtable_customer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
         self.parent .Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         mycursor.close()
     def FN_VALIDATE_FIELDS(self):
 
         self.name = self.LE_name.text().strip()
-
         self.phone = self.lE_phone.text().strip()
         self.mobile = self.lE_mobile.text().strip()
-
-
         self.building = self.LE_building.text().strip()
         self.floor = self.LE_floor.text().strip()
         self.email = self.LE_email.text().strip()
@@ -479,7 +453,7 @@ class CL_customer_create(QtWidgets.QDialog):
         self.workAddress = self.LE_workAddress.text().strip()
 
         error = 0
-        if self.name == '' or self.mobile == '' or self.job == '' or self.address == '' or self.building == '' \
+        if self.name == '' or self.mobile == '' or self.job == ''  or self.building == '' \
                 or self.floor == '' or self.email == '':
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات")
             error = 1
@@ -505,15 +479,6 @@ class CL_customer_create(QtWidgets.QDialog):
         ret = CL_validation.FN_validation_int(self.workPhone)
         if ret == False:
             QtWidgets.QMessageBox.warning(self, "خطأ", "رقم هاتف غير صحيح")
-            error = 1
-        ret = CL_validation.FN_validation_int(self.building)
-        if ret == False:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "Invalid building number")
-            error = 1
-
-        ret = CL_validation.FN_validation_int(self.floor)
-        if ret == False:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "Invalid floor Phone")
             error = 1
 
         ret = CL_validation.FN_valedation_mail(self.email)
@@ -642,7 +607,11 @@ class CL_customer(QtWidgets.QDialog):
 
              sheet.write(0, 10, 'الطابق')
              sheet.write(0, 11, 'الإيميل')
-             sheet.write(0, 12, 'حاله العميل')
+             sheet.write(0, 12, 'الشركه')
+             sheet.write(0, 13, 'تليفون الشركه')
+             sheet.write(0, 14, 'عنوان الشركه')
+             sheet.write(0, 15, 'الحاله')
+             sheet.write(0, 16, 'ملاحظات')
 
 
              # # wb.save('test11.xls')
@@ -701,13 +670,13 @@ class CL_customer(QtWidgets.QDialog):
                     error_message = error_message + " \n username " + self.name
                     self.custGroup = int(sheet.cell_value( i, 1 ))
                     self.loyalityType = int(sheet.cell_value( i, 2 ))
-                    self.phone = sheet.cell_value( i, 3)
+                    self.phone = int(sheet.cell_value( i, 3))
                     self.mobile = sheet.cell_value( i, 4)
                     self.job = sheet.cell_value( i, 5)
                     self.address = sheet.cell_value( i, 6)
-                    self.city = sheet.cell_value( i, 7 )
-                    self.district = sheet.cell_value( i, 8 )
-                    self.building = sheet.cell_value( i, 9 )
+                    self.city = int(sheet.cell_value( i, 7 ))
+                    self.district = int(sheet.cell_value( i, 8 ))
+                    self.building = int(sheet.cell_value( i, 9 ))
                     self.floor = int(sheet.cell_value( i, 10 ))
                     self.email = sheet.cell_value( i, 11 )
                     self.company = sheet.cell_value( i, 12 )
@@ -723,7 +692,7 @@ class CL_customer(QtWidgets.QDialog):
                         error = 1
                         error_message= error_message + " user has an empty fields"
 
-                    ret = CL_validation.FN_validation_mobile(self.mobile)
+                    ret = CL_validation.FN_validation_mobile(str(self.mobile))
                     if ret == 3:
 
                         error_message = error_message + "رقم الموبايل يجب أن يكون 11 رقم"
@@ -734,51 +703,41 @@ class CL_customer(QtWidgets.QDialog):
 
                         error = 1
 
-                    ret = CL_validation.FN_validation_int(self.phone)
+                    ret = CL_validation.FN_validation_int(str(self.phone))
                     if ret == False:
                         error_message = error_message + " , صحيح غير الهاتف رقم "
 
                         error = 1
-
-                    # ret = CL_validation.FN_validation_int(self.workPhone)
-                    # if ret == False:
-                    #     error_message = error_message + " ,has Invalid work Phone"
-                    #
-                    #     error = 1
 
                     ret = CL_validation.FN_valedation_mail(self.email)
                     if ret == False:
                         error_message = error_message +  "  إيميل غير صحسح"
                         error = 1
 
-
                     if error != 1:
-                    # get max userid
-                        mycursor.execute( "SELECT max(cast(POSC_CUST_ID  AS UNSIGNED)) FROM Hyper1_Retail.POS_CUSTOMER" )
-                        myresult = mycursor.fetchone()
-
-                        if myresult[0] == None:
-                            self.id = "1"
-                        else:
-                            self.id = int( myresult[0] ) + 1
+                        sql0 = "  LOCK  TABLES    Hyper1_Retail.POS_CUSTOMER   WRITE "
+                        mycursor.execute(sql0)
 
                         creationDate = str( datetime.today().strftime( '%Y-%m-%d-%H:%M-%S' ) )
-                        sql = "INSERT INTO Hyper1_Retail.POS_CUSTOMER(POSC_CUST_ID, LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
+                        sql = "INSERT INTO Hyper1_Retail.POS_CUSTOMER( LOYCT_TYPE_ID, CG_GROUP_ID, POSC_NAME, POSC_PHONE," \
                               " POSC_MOBILE, POSC_JOB, POSC_ADDRESS, POSC_CITY, POSC_DISTICT, POSC_BUILDING,POSC_FLOOR, POSC_EMAIL, " \
                               "POSC_CREATED_BY, POSC_CREATED_ON ,POSC_CHANGED_BY ,  POSC_COMPANY, " \
                               "POSC_WORK_PHONE, POSC_WORK_ADDRESS, POSC_NOTES, POSC_STATUS) " \
-                              "         VALUES ( %s, %s, %s,  %s,%s,%s, %s, %s, %s, %s, " \
+                              "         VALUES (%s, %s,  %s,%s,%s, %s, %s, %s, %s, " \
                               "%s,%s,  %s, %s,%s, %s,%s, %s, %s, %s,%s)"
 
                         # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-                        val = (self.id, self.loyalityType, self.custGroup, self.name, self.phone, self.mobile,
-                               self.job, self.address, self.city, self.district, self.building, self.floor, self.email,
+                        val = ( self.loyalityType, self.custGroup, self.name, str(self.phone), self.mobile,
+                               self.job, self.address, str(self.city), str(self.district), str(self.building), self.floor, self.email,
                                CL_userModule.user_name, creationDate, ' ', self.company, self.workPhone, self.workAddress,
                                self.notes, self.status
                                )
                         #print(val)
                         mycursor.execute( sql, val )
                         createdCust=createdCust+1
+                        sql00 = "  UNLOCK   tables    "
+                        mycursor.execute(sql00)
+
                         db1.connectionCommit( conn )
                     else:
                         nonCreatedCust = nonCreatedCust + 1
@@ -915,30 +874,6 @@ class CL_customer(QtWidgets.QDialog):
         self.window_two.FN_LOAD_UPLOAD()
         self.window_two.show()
 
-    def FN_GET_DISTRICT(self):
-        self.CMB_district.clear()
-        if self.CMB_city.currentText() !=None:
-            conn = db1.connect()
-            mycursor = conn.cursor()
-            mycursor.execute("SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d inner join Hyper1_Retail.City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+self.CMB_city.currentText()+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
-            records = mycursor.fetchall()
-
-            for row in records:
-                self.CMB_district.addItems([row[0]])
-            mycursor.close()
-
-    def FN_GET_DISTRICTS(self):
-        self.CMB_district.clear()
-        if self.CMB_city.currentText() != None:
-            conn = db1.connect()
-            mycursor = conn.cursor()
-            mycursor.execute(
-                "SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d where DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
-            records = mycursor.fetchall()
-
-            for row in records:
-                self.CMB_district.addItems([row[0]])
-            mycursor.close()
 
     # return customer tye id
     def FN_GET_CUSTTP_ID(self,desc):
@@ -1063,15 +998,6 @@ class CL_customer(QtWidgets.QDialog):
         if ret == False:
             QtWidgets.QMessageBox.warning(self, "خطأ", "رقم هاتف غير صحيح")
             error = 1
-        ret = CL_validation.FN_validation_int(self.building)
-        if ret == False:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "Invalid building number")
-            error = 1
-
-        ret = CL_validation.FN_validation_int(self.floor)
-        if ret == False:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "Invalid floor Phone")
-            error = 1
 
         ret = CL_validation.FN_valedation_mail(self.email)
         if ret == False:
@@ -1139,9 +1065,6 @@ class CL_customer(QtWidgets.QDialog):
 
 #search for a customer
     def FN_SEARCH_CUST(self):
-        #print('in search' +var)
-        # self.Qtable_customer.clearcontents()
-        #self.Qbtn_search.setEnabled(False)
         for i in reversed(range(self.Qtable_customer.rowCount())):
             self.Qtable_customer.removeRow(i)
         conn = db1.connect()
@@ -1189,6 +1112,11 @@ class CL_customer(QtWidgets.QDialog):
 
                     elif column_number == 2:
                         data = util.FN_GET_CUSTTP_DESC(str(data))
+                    elif column_number == 7:
+                        data = util.FN_GET_CITY_DESC(str(data))
+
+                    elif column_number == 8:
+                        data = util.FN_GET_DISTRICT_DESC(str(data))
                     self.Qtable_customer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
             self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
@@ -1218,6 +1146,11 @@ class CL_customer(QtWidgets.QDialog):
 
                 elif column_number == 2:
                     data = util.FN_GET_CUSTTP_DESC(str(data))
+                elif column_number == 7:
+                    data = util.FN_GET_CITY_DESC(str(data))
+
+                elif column_number == 8:
+                    data = util.FN_GET_DISTRICT_DESC(str(data))
                 self.Qtable_customer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
         self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 

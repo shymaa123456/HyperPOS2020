@@ -65,7 +65,7 @@ class CL_loyPoint(QtWidgets.QDialog):
             d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_from.setDate(d)
             self.Qdate_to.setDate(d)
-
+            self.creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
         except Exception as err:
             print(err)
     def FN_SEARCH_LOYPOINT(self):
@@ -150,48 +150,64 @@ class CL_loyPoint(QtWidgets.QDialog):
 
         except Exception as err:
             print(err)
+    def FN_CHK_PT_VALIDITY (self,f_new ,t_new):
+        ret=False
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT POINTS_VALID_FROM , POINTS_VALID_TO FROM Hyper1_Retail.LOYALITY_POINT  ")
+        records = mycursor.fetchall()
+        if records != None :
+            for date_from,date_to in  records :
+                #t_new = f_new.date().toString('yyyy-MM-dd')
+                #date_to = t_new.date().toString('yyyy-MM-dd')
+                if (f_new < date_from and t_new < date_from ) or ( f_new> date_to and t_new > date_to):
+                    ret = True
+        return ret
 
     def FN_CREATE_LOYPOINT(self):
         try:
             date_from = self.Qdate_from.date().toString('yyyy-MM-dd')
             date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
-            qty = self.LE_pointQty.text().strip()
-            val = self.LE_pointValue.text().strip()
-            conn = db1.connect()
-            mycursor = conn.cursor()
-            creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-            creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
-            if qty == 0 or val==0:
-                QtWidgets.QMessageBox.warning(self, "Error", "برجاء إدخال جميع البيانات")
-            elif date_to < date_from:
-                QtWidgets.QMessageBox.warning(self, "خطأ",
-                                              "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
-            elif date_from < creationDate1:
-                QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
+            ret=self.FN_CHK_PT_VALIDITY(date_from,date_to)
+            if ret == False:
+                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء العلم أنه يوجد فتره فعاله ")
             else:
-                mycursor.execute("SELECT max(cast(POINTS_ID  AS UNSIGNED)) FROM Hyper1_Retail.LOYALITY_POINT")
-                myresult = mycursor.fetchone()
 
-                if myresult[0] == None:
-                    id = "1"
+                qty = self.LE_pointQty.text().strip()
+                val = self.LE_pointValue.text().strip()
+                conn = db1.connect()
+                mycursor = conn.cursor()
+
+                creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
+                if qty == 0 or val==0:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات")
+                elif date_to < date_from:
+                    QtWidgets.QMessageBox.warning(self, "خطأ",
+                                                  "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                elif date_from < creationDate1:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ الإنشاء  يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
                 else:
-                    id = int(myresult[0]) + 1
+                    mycursor.execute("SELECT max(cast(POINTS_ID  AS UNSIGNED)) FROM Hyper1_Retail.LOYALITY_POINT")
+                    myresult = mycursor.fetchone()
 
-                sql = "INSERT INTO Hyper1_Retail.LOYALITY_POINT ( POINTS_ID, POINTS_QTY,POINTS_VALUE,POINTS_VALID_FROM,POINTS_VALID_TO,POINTS_CREATED_ON,POINTS_CREATED_BY)   VALUES ( '" +str(id)+"', '"+str(qty)+"','"+str(val)+"' ,'"+date_from+"','"+date_to+"','"+creationDate+"','"+CL_userModule.user_name+"')"
+                    if myresult[0] == None:
+                        id = "1"
+                    else:
+                        id = int(myresult[0]) + 1
 
-                # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-                print(sql)
-                #val = (id, qty, val,date_from,date_to,creationDate,CL_userModule.user_name)
-                #print(val)
-                mycursor.execute(sql)
-                db1.connectionCommit(conn)
-                print(mycursor.rowcount, "loy point inserted.")
-                QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
-                mycursor.close()
+                    sql = "INSERT INTO Hyper1_Retail.LOYALITY_POINT ( POINTS_ID, POINTS_QTY,POINTS_VALUE,POINTS_VALID_FROM,POINTS_VALID_TO,POINTS_CREATED_ON,POINTS_CREATED_BY)   VALUES ( '" +str(id)+"', '"+str(qty)+"','"+str(val)+"' ,'"+date_from+"','"+date_to+"','"+self.creationDate+"','"+CL_userModule.user_name+"')"
 
-
-                self.FN_GET_POINTS()
-                self.FN_CLEAR_FEILDS()
+                    # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
+                    print(sql)
+                    #val = (id, qty, val,date_from,date_to,creationDate,CL_userModule.user_name)
+                    #print(val)
+                    mycursor.execute(sql)
+                    db1.connectionCommit(conn)
+                    print(mycursor.rowcount, "loy point inserted.")
+                    QtWidgets.QMessageBox.information(self, "تم", "تم الإنشاء")
+                    mycursor.close()
+                    self.FN_GET_POINTS()
+                    self.FN_CLEAR_FEILDS()
         except Exception as err:
             print(err)
     def FN_MODIFY_LOYPOINT(self):

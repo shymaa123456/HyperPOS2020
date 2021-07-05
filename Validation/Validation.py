@@ -51,7 +51,15 @@ class CL_validation():
                     return 2
         except Exception as err:
             print(err)
-
+    @staticmethod
+    def FN_validation_nationalID(nationalID):
+        try:
+            if len(nationalID) != 14:
+                return False
+            else:
+                return True
+        except Exception as err:
+            print(err)
     @staticmethod
     def FN_validation_str(self, data, field_name):
         if type(data) is str:

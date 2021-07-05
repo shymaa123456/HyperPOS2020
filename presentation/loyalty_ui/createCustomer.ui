@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1015</width>
-    <height>561</height>
+    <height>546</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -65,7 +65,7 @@
      <x>473</x>
      <y>122</y>
      <width>531</width>
-     <height>101</height>
+     <height>121</height>
     </rect>
    </property>
    <property name="layoutDirection">
@@ -80,7 +80,7 @@
       <x>432</x>
       <y>20</y>
       <width>91</width>
-      <height>71</height>
+      <height>91</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -105,6 +105,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QLabel" name="label_16">
+       <property name="text">
+        <string>البطاقه *</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget_6">
@@ -113,7 +120,7 @@
       <x>70</x>
       <y>10</y>
       <width>281</width>
-      <height>81</height>
+      <height>100</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -212,6 +219,37 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QLineEdit" name="LE_nationalID">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -219,7 +257,7 @@
    <property name="geometry">
     <rect>
      <x>473</x>
-     <y>232</y>
+     <y>248</y>
      <width>531</width>
      <height>131</height>
     </rect>
@@ -475,7 +513,7 @@
      <item>
       <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>العنوان</string>
+        <string>العنوان *</string>
        </property>
       </widget>
      </item>
@@ -579,7 +617,7 @@
    <property name="geometry">
     <rect>
      <x>470</x>
-     <y>370</y>
+     <y>386</y>
      <width>531</width>
      <height>141</height>
     </rect>

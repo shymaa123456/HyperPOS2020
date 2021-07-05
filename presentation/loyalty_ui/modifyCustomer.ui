@@ -319,7 +319,7 @@
      <item>
       <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>العنوان</string>
+        <string>العنوان *</string>
        </property>
       </widget>
      </item>

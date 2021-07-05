@@ -47,8 +47,8 @@ class CL_customer_modify(QtWidgets.QDialog):
             self.CMB_city.currentIndexChanged.connect(self.FN_GET_DISTRICT)
             self.BTN_modifyCustomer.clicked.connect(self.FN_MODIFY_CUST)
 
-            self.setFixedWidth(1001)
-            self.setFixedHeight(648)
+            self.setFixedWidth(1056)
+            self.setFixedHeight(540)
 
         except Exception as err:
             print(err)
@@ -155,8 +155,8 @@ class CL_customer_modify(QtWidgets.QDialog):
             self.LE_job.setText( record[6] )
             self.LE_address.setText( record[7] )
 
-            self.LE_building.setText( record[10] )
-            self.LE_floor.setText( record[11] )
+            self.LE_building.setValue( int(record[10] ))
+            self.LE_floor.setValue(int( record[11] ))
             self.LE_email.setText( record[12] )
             self.LE_company.setText( record[17] )
             self.LE_workPhone.setText( record[18] )
@@ -320,8 +320,8 @@ class CL_customer_create(QtWidgets.QDialog):
 
             self.BTN_createCustomer.clicked.connect(self.FN_CREATE_CUST)
             #
-            self.setFixedWidth(1034)
-            self.setFixedHeight(651)
+            self.setFixedWidth(1015)
+            self.setFixedHeight(540)
         except Exception as err:
             print(err)
 

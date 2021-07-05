@@ -1,5 +1,3 @@
-
-
 from PyQt5 import QtWidgets
 from datetime import datetime
 from access.authorization_class.user_module import CL_userModule
@@ -11,10 +9,9 @@ class util():
     def FN_GET_CUSTGP():
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where  CG_DESC !='H1' order by CG_GROUP_ID*1   asc")
+        mycursor.execute("SELECT CG_DESC ,CG_GROUP_ID FROM Hyper1_Retail.CUSTOMER_GROUP where  CG_DESC !='H1' order by CG_GROUP_ID*1   asc")
         records = mycursor.fetchall()
         mycursor.close()
-
         return records
 
     @staticmethod
@@ -27,10 +24,9 @@ class util():
 
     @staticmethod
     def FN_GET_CUSTTP():
-
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute( "SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID*1 asc" )
+        mycursor.execute( "SELECT LOYCT_DESC ,LOYCT_TYPE_ID FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID*1 asc" )
         records = mycursor.fetchall()
         mycursor.close()
         return records
@@ -39,16 +35,42 @@ class util():
     def FN_GET_CITIES():
         conn = db1.connect()
         mycursor = conn.cursor()
-        mycursor.execute("SELECT CITY_NAME FROM Hyper1_Retail.City  where CITY_STATUS = 1 order by CITY_ID asc")
+        mycursor.execute("SELECT CITY_NAME ,CITY_ID FROM Hyper1_Retail.City  where CITY_STATUS = 1 order by CITY_ID asc")
         records = mycursor.fetchall()
         mycursor.close()
 
         return records
+
+    @staticmethod
+    def FN_GET_CITY_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        sql=    "SELECT CITY_NAME  FROM Hyper1_Retail.City  where CITY_ID = %s "
+        val=(id,)
+        mycursor.execute(sql,val)
+        myresult = mycursor.fetchone()
+        mycursor.close()
+        return myresult[0]
+
+    @staticmethod
+    def FN_GET_DISTRICT_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        sql = "SELECT DISTRICT_NAME  FROM Hyper1_Retail.DISTRICT  where DISTRICT_ID = %s "
+        val = (id,)
+        mycursor.execute(sql, val)
+        myresult = mycursor.fetchone()
+        mycursor.close()
+        return myresult[0]
+
     @staticmethod
     def FN_GET_DISTRICT(city):
             conn = db1.connect()
             mycursor = conn.cursor()
-            mycursor.execute("SELECT DISTRICT_NAME FROM Hyper1_Retail.DISTRICT d inner join Hyper1_Retail.City c on d.CITY_ID = c.CITY_ID where CITY_NAME = '"+city+"' and DISTRICT_STATUS = 1  order by DISTRICT_ID asc")
+            sql = "SELECT DISTRICT_NAME ,DISTRICT_ID FROM Hyper1_Retail.DISTRICT  where CITY_ID = %s and DISTRICT_STATUS = 1  order by DISTRICT_ID asc"
+            #print(sql)
+            val = (city,)
+            mycursor.execute(sql,val)
             records = mycursor.fetchall()
             mycursor.close()
             return records
@@ -59,6 +81,7 @@ class util():
         mycursor = conn.cursor()
         mycursor.execute("SELECT LOYCT_DESC FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID = '" + id + "'")
         myresult = mycursor.fetchone()
+        mycursor.close()
         return myresult[0]
 
 
@@ -67,8 +90,9 @@ class util():
         conn = db1.connect()
         mycursor = conn.cursor()
         mycursor.execute(
-            "SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where CG_GROUP_ID = '" + id + "'")
+            "SELECT CG_DESC FROM Hyper1_Retail.CUSTOMER_GROUP where CG_GROUP_ID =" + str(id) )
         myresult = mycursor.fetchone()
+        mycursor.close()
         return myresult[0]
 
 
@@ -100,6 +124,7 @@ class util():
         mycursor = conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC FROM Hyper1_Retail.COMPANY where COMPANY_ID = '" + id + "'")
         myresult = mycursor.fetchone()
+        mycursor.close()
         return myresult[0]
 
     @staticmethod
@@ -108,6 +133,7 @@ class util():
         mycursor = conn.cursor()
         mycursor.execute("SELECT `BRANCH_DESC_A` FROM Hyper1_Retail.BRANCH where BRANCH_NO = '" + id + "'")
         myresult = mycursor.fetchone()
+        mycursor.close()
         return myresult[0]
 
     @staticmethod
@@ -116,6 +142,7 @@ class util():
         mycursor = conn.cursor()
         mycursor.execute("SELECT COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '" + desc + "'")
         myresult = mycursor.fetchone()
+        mycursor.close()
         return myresult[0]
 
     @staticmethod
@@ -124,5 +151,6 @@ class util():
         mycursor = conn.cursor()
         mycursor.execute("SELECT BRANCH_NO FROM Hyper1_Retail.BRANCH where BRANCH_DESC_A = '" + desc + "' and COMPANY_ID = '"+comp+ "'")
         myresult = mycursor.fetchone()
+        mycursor.close()
         return myresult[0]
 

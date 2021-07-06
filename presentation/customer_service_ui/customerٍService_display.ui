@@ -78,7 +78,7 @@
       <x>460</x>
       <y>0</y>
       <width>521</width>
-      <height>211</height>
+      <height>221</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -96,7 +96,7 @@
        <x>10</x>
        <y>0</y>
        <width>471</width>
-       <height>211</height>
+       <height>221</height>
       </rect>
      </property>
      <property name="title">
@@ -111,7 +111,7 @@
         <x>0</x>
         <y>20</y>
         <width>411</width>
-        <height>111</height>
+        <height>131</height>
        </rect>
       </property>
       <property name="layoutDirection">
@@ -127,7 +127,7 @@
        <property name="geometry">
         <rect>
          <x>310</x>
-         <y>10</y>
+         <y>40</y>
          <width>82</width>
          <height>17</height>
         </rect>
@@ -143,7 +143,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>10</y>
+         <y>40</y>
          <width>281</width>
          <height>20</height>
         </rect>
@@ -180,7 +180,7 @@
        <property name="geometry">
         <rect>
          <x>310</x>
-         <y>73</y>
+         <y>103</y>
          <width>82</width>
          <height>17</height>
         </rect>
@@ -196,7 +196,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>73</y>
+         <y>103</y>
          <width>281</width>
          <height>20</height>
         </rect>
@@ -233,7 +233,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>38</y>
+         <y>68</y>
          <width>281</width>
          <height>20</height>
         </rect>
@@ -270,13 +270,66 @@
        <property name="geometry">
         <rect>
          <x>310</x>
-         <y>38</y>
+         <y>70</y>
          <width>82</width>
          <height>17</height>
         </rect>
        </property>
        <property name="text">
         <string>اسم العميل</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="LE_custNo_2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>281</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="Rbtn_custNo_2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>10</y>
+         <width>82</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>رقم الشكوى</string>
        </property>
       </widget>
      </widget>
@@ -287,7 +340,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>150</y>
+        <y>157</y>
         <width>401</width>
         <height>51</height>
        </rect>

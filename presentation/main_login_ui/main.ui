@@ -323,7 +323,7 @@
     <addaction name="menu"/>
     <addaction name="QM_Customer_Points"/>
     <addaction name="QM_Customer_Redeem"/>
-    <addaction name="action_2"/>
+    <addaction name="QAct_Customer_Service"/>
     <addaction name="QAct_Redeem_Type"/>
    </widget>
    <widget class="QMenu" name="QM_Report">
@@ -1496,7 +1496,7 @@
     <string>ترقية مستوى عملاء-يدوى</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="QAct_Customer_Service">
    <property name="text">
     <string>خدمة العملاء</string>
    </property>

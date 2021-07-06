@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>723</width>
-    <height>603</height>
+    <height>602</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,7 @@
     <string>نوع الشكوى</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Qbtn_search">
+  <widget class="QPushButton" name="Qbtn_create">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -67,7 +67,7 @@
     <string>إنشاء شكوى</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="CMB_loyalityType">
+  <widget class="QComboBox" name="CMB_complainType">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -231,7 +231,7 @@
      <string>اسم  العميل</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="Qline_cust">
+   <widget class="QLineEdit" name="LE_custNo">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -268,7 +268,7 @@
                                     </string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="Qline_name">
+   <widget class="QLineEdit" name="LE_custName">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -427,7 +427,7 @@
    <property name="title">
     <string/>
    </property>
-   <widget class="QDateEdit" name="Qdate_from">
+   <widget class="QDateEdit" name="Qdate_invoice">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -466,7 +466,7 @@
      <string>رقم الماكينه</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="Qline_cust_2">
+   <widget class="QLineEdit" name="LE_pos">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -556,7 +556,7 @@
        <height>239</height>
       </rect>
      </property>
-     <widget class="QTextBrowser" name="textBrowser">
+     <widget class="QTextBrowser" name="details">
       <property name="geometry">
        <rect>
         <x>15</x>

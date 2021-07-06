@@ -595,7 +595,7 @@ background-color: rgb(198, 207, 199);</string>
         <enum>Qt::RightToLeft</enum>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ef2929;&quot;&gt;*&lt;/span&gt;&lt;span style=&quot; color:#000000;&quot;&gt;نسبه&lt;/span&gt;&lt;span style=&quot; color:#ef2929;&quot;/&gt;الفائدة&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;نسبه&lt;/span&gt;الفائدة&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="scaledContents">
         <bool>false</bool>
@@ -1297,7 +1297,7 @@ background-color: rgb(198, 207, 199);</string>
          <enum>Qt::RightToLeft</enum>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ef2929;&quot;&gt;*&lt;/span&gt;سبب التمويل&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;سبب التمويل&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="scaledContents">
          <bool>false</bool>

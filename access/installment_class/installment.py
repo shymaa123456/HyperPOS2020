@@ -890,6 +890,14 @@ class CL_installment(QtWidgets.QDialog):
             error = 0
             """
 
+        elif self.RBTN_bank.isChecked() and self.Qcombo_bank.currentText() == '' :
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار البنك")
+            error = 0
+
+        elif self.RBTN_vendor.isChecked() and len(self.Qcombo_vendor.currentData()) == 0:
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار الممول")
+            error = 0
+
         elif self.QDubleSpiner_customerRate.value() == 0 \
                 and self.QDubleSpiner_vendorRate.value() == 0 \
                 and self.QDubleSpiner_hperoneRate.value() == 0:
@@ -995,19 +1003,18 @@ class CL_installment(QtWidgets.QDialog):
         return  Validation_For_installmentProgramm
         """
 
-
     # Validate installmentRuleWithBankAndVendorAndHyper
     def FN_ValidateInstallmentRuleWithBankORVendorORHyper(self,INSTR_RULEID_ID , mycursor):
         print("FN_ValidateInstallmentRuleWithBankORVendorORHyper")
         if self.RBTN_bank.isChecked():
             print("Bank_ID", self.Qcombo_bank.currentData())
             sql8 = "SELECT BANK_ID FROM INSTALLMENT_SPONSOR WHERE INSTR_RULEID =" + str(
-                INSTR_RULEID_ID) + " AND BANK_ID =" + str(self.Qcombo_bank.currentData())
+                INSTR_RULEID_ID) + " AND BANK_ID ='" + str(self.Qcombo_bank.currentData())+"'"
 
         elif self.RBTN_vendor.isChecked():
             print("sponsor_Id", self.Qcombo_vendor.currentData())
             sql8 = "SELECT SPONSOR_ID FROM INSTALLMENT_SPONSOR WHERE INSTR_RULEID =" + str(
-                INSTR_RULEID_ID) + " AND SPONSOR_ID =" + str(self.Qcombo_vendor.currentData())
+                INSTR_RULEID_ID) + " AND SPONSOR_ID ='" + str(self.Qcombo_vendor.currentData())+"'"
 
         elif self.RBTN_hyperone.isChecked():
             print("HYPERONE")

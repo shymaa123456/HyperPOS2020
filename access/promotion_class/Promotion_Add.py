@@ -484,7 +484,7 @@ class CL_create_promotion(QtWidgets.QDialog):
                        self.Qdate_from.dateTime().toString('yyyy-MM-dd'),
                        self.Qdate_to.dateTime().toString('yyyy-MM-dd'), "0",
                         CL_userModule.user_name, creationDate , "egp" , PROM_ITEM_DISCOUNT , "1" , PROM_ITEM_PRICE
-                         )
+                        )
                 mycursor.execute(sql2, val2)
             # self.Qdate_from.dateTime().toString('dd-MM-yyyy'),
             # self.Qdate_to.dateTime().toString('dd-MM-yyyy'), "0",

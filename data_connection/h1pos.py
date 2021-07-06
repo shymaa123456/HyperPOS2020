@@ -14,6 +14,8 @@ class db1():
                                              , user='pos', port='3306')
         return connection
 
+
+
     @staticmethod
     def connectionClose(conn):
         conn.close()

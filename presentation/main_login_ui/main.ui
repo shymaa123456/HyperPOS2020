@@ -236,8 +236,7 @@
      </property>
      <addaction name="QAct_Install_Add"/>
      <addaction name="QAct_Install_Edit"/>
-     <addaction name="QAct_Install_Activate"/>
-     <addaction name="QAct_Install_Deactivate"/>
+     <addaction name="QAct_Install_Activate_Deactivate"/>
     </widget>
     <widget class="QMenu" name="QM_Installment_Item">
      <property name="title">
@@ -504,6 +503,8 @@
     <property name="title">
      <string>البنوك</string>
     </property>
+    <addaction name="QAct_Create_Bank"/>
+    <addaction name="QAct_Modify_Bank"/>
    </widget>
    <addaction name="QM_Promotion"/>
    <addaction name="QM_Installment"/>
@@ -625,9 +626,9 @@
     <string>تعديل نظام التقسيط</string>
    </property>
   </action>
-  <action name="QAct_Install_Activate">
+  <action name="QAct_Install_Activate_Deactivate">
    <property name="text">
-    <string>تفعيل نظام التقسيط</string>
+    <string>تفعيل/ايقاف نظام التقسيط</string>
    </property>
   </action>
   <action name="QAct_Install_Deactivate">
@@ -1521,6 +1522,16 @@
   <action name="QAct_Parameter">
    <property name="text">
     <string>Parameter</string>
+   </property>
+  </action>
+  <action name="QAct_Create_Bank">
+   <property name="text">
+    <string>أنشاء بنك</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Bank">
+   <property name="text">
+    <string>تعديل بنك</string>
    </property>
   </action>
   <action name="QAct_Coupon_barcode">

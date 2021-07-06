@@ -106,7 +106,6 @@ class CL_controller():
 
     def FN_show_main(self):
         self.window = CL_main()
-
         self.login.close()
         self.window.showMaximized()
 

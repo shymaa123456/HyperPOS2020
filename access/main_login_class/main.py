@@ -37,6 +37,12 @@ from access.promotion_class.Promotion_Add import CL_create_promotion
 from PyQt5.QtWidgets import QMessageBox
 
 from access.voucher_class.CreateVoucher import   CL_CreateVoucher
+#Installment
+from access.installment_class.Bank import CL_CreateBank
+from access.installment_class.installment import CL_installment
+from access.installment_class.installmentModfiy import CL_installmentModify
+
+from access.voucher_class.CreateVoucher import CL_CreateVoucher
 from access.voucher_class.EditVoucher import CL_EditVoucher
 from access.voucher_class.stoppedVoucher import CL_modifyVoucher
 from access.promotion_voucher_class.PromotionVoucher import CL_PromVoucher
@@ -44,7 +50,6 @@ from access.promotion_voucher_class.PromotionVoucher import CL_PromVoucher
 
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
-
 
     def __init__(self):
         try:
@@ -130,12 +135,18 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Prom_Voucher_Edit.triggered.connect(self.FN_EditPromVoucher)
             self.QAct_Prom_Voucher_Act.triggered.connect(self.FN_LOAD_CHANGE_STATUS_ACTIVE)
             self.QAct_Prom_Voucher_Deact.triggered.connect(self.FN_LOAD_CHANGE_STATUS_INACTIVE)
+            # for installment
+            self.QAct_Create_Bank.triggered.connect(self.FN_CREATE_Bank)
+            self.QAct_Modify_Bank.triggered.connect(self.FN_Modify_Bank)
+            self.QAct_Install_Add.triggered.connect(self.FN_CREATE_installment)
+            self.QAct_Install_Edit.triggered.connect(self.FN_Modify_installment)
 
             # Parameter Form
             self.QAct_Parameter.triggered.connect(self.FN_Parameters)
 
             self.QAct_Exit.triggered.connect(self.FN_exit)
             self.setWindowTitle('HyperPOS Main Page')
+
         except Exception as err:
             print(err)
 
@@ -413,3 +424,28 @@ class CL_main(QtWidgets.QMainWindow):
             QApplication.quit()
         else:
             event.ignore()
+
+
+    #Installment
+    def FN_CREATE_Bank(self):
+        self.window_two = CL_CreateBank()
+        self.window_two.FN_LOAD_CREATE()
+#        self.window_two.MdiParent = self.ParentForm
+       # self.window_two.show()
+        self.window_two.setModal(self, True)
+        self.window_two.exec()
+
+    def FN_Modify_Bank(self):
+        self.window_two = CL_CreateBank()
+        self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
+
+    def FN_CREATE_installment(self):
+        self.window_two = CL_installment(self)
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
+
+    def FN_Modify_installment(self):
+        self.window_two = CL_installmentModify(self)
+        self.window_two.FN_LOAD_Modify()
+        self.window_two.show()

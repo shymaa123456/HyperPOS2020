@@ -134,6 +134,13 @@ class CheckableComboBox(QComboBox):
         item = self.model().item(index)
         item.setCheckState(Qt.Unchecked)
 
+    #Uncheck list of items
+    def unCheckedList(self):
+        for i in range(self.model().rowCount()):
+            item = self.model().item(i)
+            item.setCheckState(Qt.Unchecked)
+
+
 
 
 

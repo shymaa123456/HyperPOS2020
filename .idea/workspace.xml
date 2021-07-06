@@ -27,13 +27,27 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="updates">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="update customer group">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="comments of 3-2-2021">
+    <list default="true" id="ab8e5220-b052-4142-a312-a067ebc898aa" name="Default Changelist" comment="fawzy comments">
+      <change afterPath="$PROJECT_DIR$/access/installment_class/Bank.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/access/installment_class/installment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/installment_ui/Installment_create.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/installment_ui/create_installment_type.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/installment_ui/createbank.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/installment_ui/modifybank.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HyperPOS2020.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at________Default_Changelist_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/authorization_class/user_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/authorization_class/user_module.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/loyalityProg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/access/loyalty_class/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/loyalityPoint.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/loyalityPoint.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/customerType.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/customerType.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/loyalty_class/redeemVoucher.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/loyalty_class/redeemVoucher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/promotion_class/Promotion_Add.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/promotion_class/Promotion_Add.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustGp.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustGp.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/loyalty_ui/createModifyCustTp.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/access/main_login_class/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/access/main_login_class/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_connection/h1pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_connection/h1pos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/main_login_ui/main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,24 +88,23 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/access/loyalty_class" />
+    <property name="settings.editor.selected.configurable" value="build.tools" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/presentation/installment_ui" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Shaymaa\PycharmProjects_community\HyperPOS2020\presentation\promotion_voucher_ui" />
-      <recent name="C:\Users\Shaymaa\PycharmProjects_community\HyperPOS2020\access\promotion_voucher_class" />
-      <recent name="$PROJECT_DIR$/access/loyalty_class" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\MustafaElsayed\Projects\HyperPOS2020\presentation\installment_ui" />
+      <recent name="E:\MustafaElsayed\Projects\HyperPOS2020\access\installment_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects_community\HyperPOS2020\access\loyalty_class" />
-      <recent name="C:\Users\Shaymaa\PycharmProjects_community\HyperPOS2020\access\voucher_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\access\loyalty_class" />
       <recent name="C:\Users\Shaymaa\PycharmProjects\HyperPOS2020\presentation\loyalty_ui" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/access/loyalty_class" />
     </key>
   </component>
@@ -106,9 +119,11 @@
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Validation" />
       <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_HOME" value="C:\Users\mustafa\anaconda3\envs\HyperPOS2020_V3.7\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/access/main_login_class" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Validation/Validation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -134,7 +149,7 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/main_login_class/login.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
@@ -152,7 +167,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/main_login_class/t1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -174,7 +188,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/access/main_login_class/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -224,18 +237,18 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.Validation" />
       <item itemvalue="Python.login" />
       <item itemvalue="Python.t1" />
       <item itemvalue="Python.test (1)" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.Validation" />
       <item itemvalue="Python tests.pytest in C:/Users/Shaymaa/PycharmProjects_community/HyperPOS2020/access/authorization_class/testt.py" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.login" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.Validation" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.t1" />
         <item itemvalue="Python.test (1)" />
       </list>
@@ -265,353 +278,351 @@
       <workItem from="1608104467483" duration="1923000" />
       <workItem from="1608106423543" duration="765000" />
       <workItem from="1608109403377" duration="1632000" />
-      <workItem from="1624435656597" duration="596000" />
-      <workItem from="1624438485904" duration="595000" />
     </task>
-    <task id="LOCAL-00106" summary="testing v1">
-      <created>1622463388368</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
+    <task id="LOCAL-00044" summary="upload the code">
+      <created>1606056566654</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1622463388368</updated>
+      <updated>1606056566654</updated>
     </task>
-    <task id="LOCAL-00107" summary="testing v2">
-      <created>1622463398732</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
+    <task id="LOCAL-00045" summary="upload the code">
+      <created>1606116235145</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
       <option name="project" value="LOCAL" />
-      <updated>1622463398732</updated>
+      <updated>1606116235145</updated>
     </task>
-    <task id="LOCAL-00108" summary="testing v2">
-      <created>1622463606911</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
+    <task id="LOCAL-00046" summary="search customer">
+      <created>1606657272410</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1622463606911</updated>
+      <updated>1606657272410</updated>
     </task>
-    <task id="LOCAL-00109" summary="testing v2">
-      <created>1622463631704</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
+    <task id="LOCAL-00047" summary="create loyality prog design">
+      <created>1606916502775</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
       <option name="project" value="LOCAL" />
-      <updated>1622463631704</updated>
+      <updated>1606916502775</updated>
     </task>
-    <task id="LOCAL-00110" summary="testing v2">
-      <created>1622564984108</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
+    <task id="LOCAL-00048" summary="create loyality prog design">
+      <created>1607267284771</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
       <option name="project" value="LOCAL" />
-      <updated>1622564984109</updated>
+      <updated>1607267284771</updated>
     </task>
-    <task id="LOCAL-00111" summary="refresh parent grid">
-      <created>1622623202488</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
+    <task id="LOCAL-00049" summary="create loyality prog design">
+      <created>1607613188225</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
       <option name="project" value="LOCAL" />
-      <updated>1622623202488</updated>
+      <updated>1607613188225</updated>
     </task>
-    <task id="LOCAL-00112" summary="fill log table">
-      <created>1622631059336</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
+    <task id="LOCAL-00050" summary="create loyality prog design">
+      <created>1607952326464</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
       <option name="project" value="LOCAL" />
-      <updated>1622631059336</updated>
+      <updated>1607952326465</updated>
     </task>
-    <task id="LOCAL-00113" summary="update date format">
-      <created>1622631168726</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
+    <task id="LOCAL-00051" summary="create loyality prog design">
+      <created>1607953340739</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
       <option name="project" value="LOCAL" />
-      <updated>1622631168726</updated>
+      <updated>1607953340739</updated>
     </task>
-    <task id="LOCAL-00114" summary="adding log">
-      <created>1622641910744</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
+    <task id="LOCAL-00052" summary="update create and modify customer">
+      <created>1608020410193</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
       <option name="project" value="LOCAL" />
-      <updated>1622641910744</updated>
+      <updated>1608020410193</updated>
     </task>
-    <task id="LOCAL-00115" summary="adding log">
-      <created>1622646800649</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
+    <task id="LOCAL-00053" summary="update create and modify customer">
+      <created>1608104501173</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
       <option name="project" value="LOCAL" />
-      <updated>1622646800649</updated>
+      <updated>1608104501174</updated>
     </task>
-    <task id="LOCAL-00116" summary="adding log">
-      <created>1622648137619</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
+    <task id="LOCAL-00054" summary="finish Ehab comments">
+      <created>1608204418288</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
       <option name="project" value="LOCAL" />
-      <updated>1622648137619</updated>
+      <updated>1608204418288</updated>
     </task>
-    <task id="LOCAL-00117" summary="finalize loyality comments">
-      <created>1622718941114</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
+    <task id="LOCAL-00055" summary="create and search in loy prog">
+      <created>1609063151859</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
       <option name="project" value="LOCAL" />
-      <updated>1622718941114</updated>
+      <updated>1609063151859</updated>
     </task>
-    <task id="LOCAL-00118" summary="finalize loyality comments">
-      <created>1623069893651</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
+    <task id="LOCAL-00056" summary="create and search in loy prog">
+      <created>1609148970224</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
       <option name="project" value="LOCAL" />
-      <updated>1623069893652</updated>
+      <updated>1609148970225</updated>
     </task>
-    <task id="LOCAL-00119" summary="unpdate customerGP">
-      <created>1623157832485</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
+    <task id="LOCAL-00057" summary="create and search in loy prog">
+      <created>1609164774036</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
       <option name="project" value="LOCAL" />
-      <updated>1623157832485</updated>
+      <updated>1609164774037</updated>
     </task>
-    <task id="LOCAL-00120" summary="unpdate customer type">
-      <created>1623163843060</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
+    <task id="LOCAL-00058" summary="upload screen in loy prog">
+      <created>1609240309792</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
       <option name="project" value="LOCAL" />
-      <updated>1623163843060</updated>
+      <updated>1609240309792</updated>
     </task>
-    <task id="LOCAL-00121" summary="unpdate customer">
-      <created>1623165557856</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
+    <task id="LOCAL-00059" summary="upload screen in loy prog">
+      <created>1609335094701</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
       <option name="project" value="LOCAL" />
-      <updated>1623165557856</updated>
+      <updated>1609335094701</updated>
     </task>
-    <task id="LOCAL-00122" summary="unpdate customer">
-      <created>1623229889810</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
+    <task id="LOCAL-00060" summary="upload screen in loy prog">
+      <created>1609342003501</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
       <option name="project" value="LOCAL" />
-      <updated>1623229889811</updated>
+      <updated>1609342003501</updated>
     </task>
-    <task id="LOCAL-00123" summary="unpdate redeem item">
-      <created>1623234705876</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
+    <task id="LOCAL-00061" summary="solve bug in search">
+      <created>1609935967532</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
       <option name="project" value="LOCAL" />
-      <updated>1623234705876</updated>
+      <updated>1609935967533</updated>
     </task>
-    <task id="LOCAL-00124" summary="unpdate redeem item">
-      <created>1623234906989</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
+    <task id="LOCAL-00062" summary="fawzy comments">
+      <created>1610260206290</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
       <option name="project" value="LOCAL" />
-      <updated>1623234906989</updated>
+      <updated>1610260206291</updated>
     </task>
-    <task id="LOCAL-00125" summary="create promotion voucher">
-      <created>1623332278228</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
+    <task id="LOCAL-00063" summary="fawzy comments">
+      <created>1610451296123</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
       <option name="project" value="LOCAL" />
-      <updated>1623332278229</updated>
+      <updated>1610451296123</updated>
     </task>
-    <task id="LOCAL-00126" summary="create promotion voucher">
-      <created>1623336775936</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
+    <task id="LOCAL-00064" summary="fawzy comments">
+      <created>1611136645652</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
       <option name="project" value="LOCAL" />
-      <updated>1623336775937</updated>
+      <updated>1611136645653</updated>
     </task>
-    <task id="LOCAL-00127" summary="create promotion voucher">
-      <created>1623338388174</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
+    <task id="LOCAL-00065" summary="customer type">
+      <created>1611387085514</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
       <option name="project" value="LOCAL" />
-      <updated>1623338388174</updated>
+      <updated>1611387085514</updated>
     </task>
-    <task id="LOCAL-00128" summary="modify promotion voucher">
-      <created>1623667573520</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
+    <task id="LOCAL-00066" summary="comments on custGp and custTps">
+      <created>1611671582699</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
       <option name="project" value="LOCAL" />
-      <updated>1623667573520</updated>
+      <updated>1611671582699</updated>
     </task>
-    <task id="LOCAL-00129" summary="modify promotion voucher">
-      <created>1623676777968</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
+    <task id="LOCAL-00067" summary="comments on custGp and custTps">
+      <created>1611760179241</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
       <option name="project" value="LOCAL" />
-      <updated>1623676777968</updated>
+      <updated>1611760179241</updated>
     </task>
-    <task id="LOCAL-00130" summary="modify">
-      <created>1623753815058</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
+    <task id="LOCAL-00068" summary="comments on create cust">
+      <created>1612623317497</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
       <option name="project" value="LOCAL" />
-      <updated>1623753815058</updated>
+      <updated>1612623317498</updated>
     </task>
-    <task id="LOCAL-00131" summary="modify">
-      <created>1623765152161</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
+    <task id="LOCAL-00069" summary="comments of 3-2-2021">
+      <created>1612951486594</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
       <option name="project" value="LOCAL" />
-      <updated>1623765152161</updated>
+      <updated>1612951486594</updated>
     </task>
-    <task id="LOCAL-00132" summary="modify">
-      <created>1623765281174</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
+    <task id="LOCAL-00070" summary="comments of 10-2-2021">
+      <created>1613224942123</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
       <option name="project" value="LOCAL" />
-      <updated>1623765281174</updated>
+      <updated>1613224942124</updated>
     </task>
-    <task id="LOCAL-00133" summary="update customer">
-      <created>1623769098246</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
+    <task id="LOCAL-00071" summary="comments of 10-2-2021">
+      <created>1613408306240</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
       <option name="project" value="LOCAL" />
-      <updated>1623769098246</updated>
+      <updated>1613408306240</updated>
     </task>
-    <task id="LOCAL-00134" summary="update customer">
-      <created>1623769574217</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
+    <task id="LOCAL-00072" summary="comments of 10-2-2021">
+      <created>1614163115969</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
       <option name="project" value="LOCAL" />
-      <updated>1623769574217</updated>
+      <updated>1614163115970</updated>
     </task>
-    <task id="LOCAL-00135" summary="update">
-      <created>1623839324544</created>
-      <option name="number" value="00135" />
-      <option name="presentableId" value="LOCAL-00135" />
+    <task id="LOCAL-00073" summary="comments of 10-2-2021">
+      <created>1614178786545</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
       <option name="project" value="LOCAL" />
-      <updated>1623839324544</updated>
+      <updated>1614178786545</updated>
     </task>
-    <task id="LOCAL-00136" summary="update">
-      <created>1623846137450</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
+    <task id="LOCAL-00074" summary="comments of 10-2-2021">
+      <created>1614179007234</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
       <option name="project" value="LOCAL" />
-      <updated>1623846137450</updated>
+      <updated>1614179007234</updated>
     </task>
-    <task id="LOCAL-00137" summary="update">
-      <created>1623846334293</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
+    <task id="LOCAL-00075" summary="comments of 10-2-2021">
+      <created>1614849219603</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
       <option name="project" value="LOCAL" />
-      <updated>1623846334293</updated>
+      <updated>1614849219604</updated>
     </task>
-    <task id="LOCAL-00138" summary="update">
-      <created>1623926233536</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
+    <task id="LOCAL-00076" summary="comments of 10-2-2021">
+      <created>1614870256916</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
       <option name="project" value="LOCAL" />
-      <updated>1623926233536</updated>
+      <updated>1614870256917</updated>
     </task>
-    <task id="LOCAL-00139" summary="update">
-      <created>1623928438029</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
+    <task id="LOCAL-00077" summary="resolving comments">
+      <created>1615364660362</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
       <option name="project" value="LOCAL" />
-      <updated>1623928438029</updated>
+      <updated>1615364660363</updated>
     </task>
-    <task id="LOCAL-00140" summary="update">
-      <created>1623942838835</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
+    <task id="LOCAL-00078" summary="resolving comments">
+      <created>1615446764783</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
       <option name="project" value="LOCAL" />
-      <updated>1623942838835</updated>
+      <updated>1615446764783</updated>
     </task>
-    <task id="LOCAL-00141" summary="redeem type">
-      <created>1624180361834</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
+    <task id="LOCAL-00079" summary="resolving comments">
+      <created>1615905720266</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
       <option name="project" value="LOCAL" />
-      <updated>1624180361834</updated>
+      <updated>1615905720267</updated>
     </task>
-    <task id="LOCAL-00142" summary="redeem type">
-      <created>1624180640622</created>
-      <option name="number" value="00142" />
-      <option name="presentableId" value="LOCAL-00142" />
+    <task id="LOCAL-00080" summary="create redeem item">
+      <created>1616073512147</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
       <option name="project" value="LOCAL" />
-      <updated>1624180640622</updated>
+      <updated>1616073512147</updated>
     </task>
-    <task id="LOCAL-00143" summary="redeem type">
-      <created>1624188250953</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
+    <task id="LOCAL-00081" summary="create redeem item">
+      <created>1616080135116</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
       <option name="project" value="LOCAL" />
-      <updated>1624188250954</updated>
+      <updated>1616080135117</updated>
     </task>
-    <task id="LOCAL-00144" summary="loyality points">
-      <created>1624198871766</created>
-      <option name="number" value="00144" />
-      <option name="presentableId" value="LOCAL-00144" />
+    <task id="LOCAL-00082" summary="create redeem item">
+      <created>1616495742685</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
       <option name="project" value="LOCAL" />
-      <updated>1624198871766</updated>
+      <updated>1616495742686</updated>
     </task>
-    <task id="LOCAL-00145" summary="loyality points">
-      <created>1624199847136</created>
-      <option name="number" value="00145" />
-      <option name="presentableId" value="LOCAL-00145" />
+    <task id="LOCAL-00083" summary="create redeem item">
+      <created>1617091902868</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
       <option name="project" value="LOCAL" />
-      <updated>1624199847136</updated>
+      <updated>1617091902869</updated>
     </task>
-    <task id="LOCAL-00146" summary="loyality points">
-      <created>1624200078967</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
+    <task id="LOCAL-00084" summary="create redeem with voucher">
+      <created>1617530602554</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
       <option name="project" value="LOCAL" />
-      <updated>1624200078967</updated>
+      <updated>1617530602554</updated>
     </task>
-    <task id="LOCAL-00147" summary="redeem gift">
-      <created>1624267635223</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
+    <task id="LOCAL-00085" summary="create redeem with voucher">
+      <created>1617628926229</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
       <option name="project" value="LOCAL" />
-      <updated>1624267635223</updated>
+      <updated>1617628926229</updated>
     </task>
-    <task id="LOCAL-00148" summary="redeem gift">
-      <created>1624538320578</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
+    <task id="LOCAL-00086" summary="create redeem with voucher">
+      <created>1617792227986</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
       <option name="project" value="LOCAL" />
-      <updated>1624538320579</updated>
+      <updated>1617792227986</updated>
     </task>
-    <task id="LOCAL-00149" summary="redeem gift">
-      <created>1624547942607</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
+    <task id="LOCAL-00087" summary="create redeem with voucher">
+      <created>1617871655074</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
       <option name="project" value="LOCAL" />
-      <updated>1624547942607</updated>
+      <updated>1617871655074</updated>
     </task>
-    <task id="LOCAL-00150" summary="redeem gift">
-      <created>1624865098928</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
+    <task id="LOCAL-00088" summary="upload customer points">
+      <created>1617894907131</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
       <option name="project" value="LOCAL" />
-      <updated>1624865098931</updated>
+      <updated>1617894907131</updated>
     </task>
-    <task id="LOCAL-00151" summary="updates">
-      <created>1624881264763</created>
-      <option name="number" value="00151" />
-      <option name="presentableId" value="LOCAL-00151" />
+    <task id="LOCAL-00089" summary="upload customer points">
+      <created>1618472429543</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
       <option name="project" value="LOCAL" />
-      <updated>1624881264763</updated>
+      <updated>1618472429543</updated>
     </task>
-    <task id="LOCAL-00152" summary="updates">
-      <created>1624891667478</created>
-      <option name="number" value="00152" />
-      <option name="presentableId" value="LOCAL-00152" />
+    <task id="LOCAL-00090" summary="upload customer points">
+      <created>1618484552924</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
       <option name="project" value="LOCAL" />
-      <updated>1624891667478</updated>
+      <updated>1618484552925</updated>
     </task>
-    <task id="LOCAL-00153" summary="updates">
-      <created>1624948675979</created>
-      <option name="number" value="00153" />
-      <option name="presentableId" value="LOCAL-00153" />
+    <task id="LOCAL-00091" summary="update customer group">
+      <created>1618995046861</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
       <option name="project" value="LOCAL" />
-      <updated>1624948675979</updated>
+      <updated>1618995046862</updated>
     </task>
-    <task id="LOCAL-00154" summary="updates">
-      <created>1624965160508</created>
-      <option name="number" value="00154" />
-      <option name="presentableId" value="LOCAL-00154" />
+    <task id="LOCAL-00092" summary="update customer group">
+      <created>1619005807293</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
       <option name="project" value="LOCAL" />
-      <updated>1624965160508</updated>
+      <updated>1619005807293</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,236 +682,178 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="resolve comments of customer group" />
-    <MESSAGE value="resolve comments of customer type" />
-    <MESSAGE value="resolve comments of customer" />
-    <MESSAGE value="resolve comments of redeem voucher" />
-    <MESSAGE value="resolve comments of loyality" />
-    <MESSAGE value="testing v1" />
-    <MESSAGE value="testing v2" />
-    <MESSAGE value="refresh parent grid" />
-    <MESSAGE value="fill log table" />
-    <MESSAGE value="update date format" />
-    <MESSAGE value="adding log" />
-    <MESSAGE value="finalize loyality comments" />
-    <MESSAGE value="unpdate customerGP" />
-    <MESSAGE value="unpdate customer type" />
-    <MESSAGE value="unpdate customer" />
-    <MESSAGE value="unpdate redeem item" />
-    <MESSAGE value="create promotion voucher" />
-    <MESSAGE value="modify promotion voucher" />
-    <MESSAGE value="modify" />
-    <MESSAGE value="update customer" />
-    <MESSAGE value="update" />
-    <MESSAGE value="redeem type" />
-    <MESSAGE value="loyality points" />
-    <MESSAGE value="redeem gift" />
-    <MESSAGE value="updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="updates" />
+    <MESSAGE value="add the functionality to select more than one element in combobox" />
+    <MESSAGE value="Create customer group &#10;modify customer gp" />
+    <MESSAGE value="Create customer 7type&#10;modify customer type" />
+    <MESSAGE value="validation" />
+    <MESSAGE value="upload customer" />
+    <MESSAGE value="upload the code" />
+    <MESSAGE value="search customer" />
+    <MESSAGE value="create loyality prog design" />
+    <MESSAGE value="update create and modify customer" />
+    <MESSAGE value="finish Ehab comments" />
+    <MESSAGE value="create and search in loy prog" />
+    <MESSAGE value="upload screen in loy prog" />
+    <MESSAGE value="solve bug in search" />
+    <MESSAGE value="fawzy comments" />
+    <MESSAGE value="customer type" />
+    <MESSAGE value="comments on custGp and custTps" />
+    <MESSAGE value="comments on create cust" />
+    <MESSAGE value="comments of 3-2-2021" />
+    <MESSAGE value="loilty" />
+    <MESSAGE value="comments of 10-2-2021" />
+    <MESSAGE value="resolving comments" />
+    <MESSAGE value="create redeem item" />
+    <MESSAGE value="create redeem with voucher" />
+    <MESSAGE value="upload customer points" />
+    <MESSAGE value="update customer group" />
+    <option name="LAST_COMMIT_MESSAGE" value="update customer group" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622563373979">
+    <state x="48" y="116" key="#xdebugger.XInspectDialog" timestamp="1610380377039">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1622563373979" />
-    <state x="0" y="116" key="#xdebugger.XInspectDialog" timestamp="1623655912400">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="0" y="116" key="#xdebugger.XInspectDialog/0.0.1366.728@0.0.1366.728" timestamp="1623655912400" />
-    <state x="429" y="218" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1624948265614">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="429" y="218" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1624948265614" />
+    <state x="48" y="116" key="#xdebugger.XInspectDialog/0.0.1366.728@0.0.1366.728" timestamp="1610380377039" />
     <state x="317" y="0" key="CommitChangelistDialog2" timestamp="1617628921132">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="317" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1617628921132" />
-    <state width="644" height="446" key="DebuggerActiveHint" timestamp="1624545591297">
+    <state width="644" height="446" key="DebuggerActiveHint" timestamp="1615905594436">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="644" height="446" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1624545591297" />
-    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1622618643029">
+    <state width="644" height="446" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1615905594436" />
+    <state x="443" y="113" width="424" height="520" key="FileChooserDialogImpl" timestamp="1609070986320">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1622618643029" />
-    <state x="463" y="105" key="FileChooserDialogImpl" timestamp="1624445401232">
+    <state x="443" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609070986320" />
+    <state width="1345" height="162" key="GridCell.Tab.0.bottom" timestamp="1619017629837">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1624445401232" />
-    <state width="1345" height="233" key="GridCell.Tab.0.bottom" timestamp="1624972206218">
+    <state width="1345" height="162" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1619017629837" />
+    <state width="1345" height="162" key="GridCell.Tab.0.center" timestamp="1619017629835">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="233" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624972206218" />
-    <state width="1345" height="233" key="GridCell.Tab.0.center" timestamp="1624972206218">
+    <state width="1345" height="162" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1619017629835" />
+    <state width="1345" height="162" key="GridCell.Tab.0.left" timestamp="1619017629835">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="233" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624972206218" />
-    <state width="1345" height="233" key="GridCell.Tab.0.left" timestamp="1624972206217">
+    <state width="1345" height="162" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1619017629835" />
+    <state width="1345" height="162" key="GridCell.Tab.0.right" timestamp="1619017629836">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="233" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624972206217" />
-    <state width="1345" height="233" key="GridCell.Tab.0.right" timestamp="1624972206218">
+    <state width="1345" height="162" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1619017629836" />
+    <state width="1345" height="162" key="GridCell.Tab.1.bottom" timestamp="1619017629838">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="233" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624972206218" />
-    <state width="1345" height="233" key="GridCell.Tab.1.bottom" timestamp="1624972206218">
+    <state width="1345" height="162" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1619017629838" />
+    <state width="1345" height="162" key="GridCell.Tab.1.center" timestamp="1619017629838">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="233" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624972206218" />
-    <state width="1345" height="233" key="GridCell.Tab.1.center" timestamp="1624972206218">
+    <state width="1345" height="162" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1619017629838" />
+    <state width="1345" height="162" key="GridCell.Tab.1.left" timestamp="1619017629837">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="233" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1624972206218" />
-    <state width="1345" height="233" key="GridCell.Tab.1.left" timestamp="1624972206218">
+    <state width="1345" height="162" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1619017629837" />
+    <state width="1345" height="162" key="GridCell.Tab.1.right" timestamp="1619017629838">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="233" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1624972206218" />
-    <state width="1345" height="233" key="GridCell.Tab.1.right" timestamp="1624972206218">
+    <state width="1345" height="162" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1619017629838" />
+    <state x="129" y="55" key="MergeDialog" timestamp="1614163086645">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="233" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1624972206218" />
-    <state x="129" y="54" key="MergeDialog" timestamp="1624198952631">
+    <state x="129" y="55" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1614163086645" />
+    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1615905746179">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="54" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1624198952631" />
-    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1624965190968">
+    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1615905746179" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1614595978401">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1624965190968" />
-    <state x="424" y="66" key="RollbackChangesDialog" timestamp="1622463649285">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="424" y="66" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1622463649285" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1621946982126">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1621946982126" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614595978401" />
     <state x="563" y="278" key="VCS.EditChangelistDialog" timestamp="1617628855663">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="278" key="VCS.EditChangelistDialog/0.0.1366.728@0.0.1366.728" timestamp="1617628855663" />
-    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1624965318718">
+    <state x="255" y="104" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1619005818444">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1624965318718" />
-    <state x="92" y="0" width="1182" height="735" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1624790085051">
+    <state x="255" y="104" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1619005818444" />
+    <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1609935341048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="92" y="0" width="1182" height="735" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1624790085051" />
-    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1624965184612">
+    <state width="691" height="372" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1609935341048" />
+    <state x="452" y="280" width="437" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617792212465">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1624965184612" />
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1624547414518">
+    <state x="452" y="280" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1617792212465" />
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1619005545456">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1624547414518" />
-    <state x="389" y="0" width="587" height="728" key="find.popup" timestamp="1624970309685">
+    <state x="244" y="92" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1619005545456" />
+    <state x="327" y="61" width="710" height="667" key="search.everywhere.popup" timestamp="1613224647921">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="389" y="0" width="587" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1624970309685" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1624546291055">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1624546291055" />
+    <state x="327" y="61" width="710" height="667" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613224647921" />
+    <state x="382" y="89" width="672" height="678" key="search.everywhere.popup/72.27.1294.741@72.27.1294.741" timestamp="1604406788152" />
+    <option name="LAST_COMMIT_MESSAGE" value="fawzy comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint suspend="THREAD" type="python-line">
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
+          <line>929</line>
+          <option name="timeStamp" value="198" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
+          <line>201</line>
+          <option name="timeStamp" value="220" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
+          <line>610</line>
+          <option name="timeStamp" value="221" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/authorization_class/privilage.py</url>
-          <line>222</line>
+          <line>262</line>
           <option name="timeStamp" value="223" />
         </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
-          <line>631</line>
+          <line>358</line>
+          <option name="timeStamp" value="233" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
+          <line>441</line>
+          <option name="timeStamp" value="235" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
+          <line>557</line>
           <option name="timeStamp" value="236" />
         </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>805</line>
+          <line>804</line>
           <option name="timeStamp" value="241" />
         </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>868</line>
+          <line>860</line>
           <option name="timeStamp" value="242" />
         </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemVoucher.py</url>
-          <line>36</line>
-          <option name="timeStamp" value="255" />
-        </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customerGP.py</url>
-          <line>212</line>
-          <option name="timeStamp" value="257" />
-        </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>943</line>
-          <option name="timeStamp" value="312" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/promotion_voucher_class/PromotionVoucher.py</url>
-          <line>129</line>
-          <option name="timeStamp" value="341" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>171</line>
-          <option name="timeStamp" value="348" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
-          <line>113</line>
-          <option name="timeStamp" value="351" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customerType.py</url>
-          <line>29</line>
-          <option name="timeStamp" value="352" />
+          <line>330</line>
+          <option name="timeStamp" value="251" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/access/loyalty_class/customerGP.py</url>
-          <line>123</line>
-          <option name="timeStamp" value="353" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/CL_loyPoint.py</url>
-          <line>179</line>
-          <option name="timeStamp" value="356" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/customer.py</url>
-          <line>845</line>
-          <option name="timeStamp" value="357" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemVoucher.py</url>
-          <line>226</line>
-          <option name="timeStamp" value="359" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemVoucher.py</url>
-          <line>102</line>
-          <option name="timeStamp" value="360" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/redeemItem.py</url>
-          <line>62</line>
-          <option name="timeStamp" value="367" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>268</line>
-          <option name="timeStamp" value="368" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/access/loyalty_class/loyalityProg.py</url>
-          <line>261</line>
-          <option name="timeStamp" value="369" />
+          <line>131</line>
+          <option name="timeStamp" value="253" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -913,24 +866,27 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
+        <watch expression="mycursor" language="Python" />
+        <watch expression="self.conn" language="Python" />
+        <watch expression="self.conn.cursor()" language="Python" />
+        <watch expression="self.Qtable_custTP.selectedIndexes()" language="Python" />
+        <watch expression="self.section" language="Python" />
+        <watch expression="records" language="Python" />
+        <watch expression="BMC_LEVEL4_list" language="Python" />
+        <watch expression="range(self.Qtable_custTP.rowCount())" language="Python" />
         <watch expression="self.Qdate_from" language="Python" />
-        <watch expression="self.Qdate_from.dateTime()" language="Python" />
-        <watch expression="self.Qdate_from.dateTime().toString('dd-MM-yyyy')" language="Python" />
-        <watch expression="ss" language="Python" />
-        <watch expression="self.Qdate_from.dateTime().toString('yyyy-mm-dd')" language="Python" />
-        <watch expression="record[8]" language="Python" />
-        <watch expression="record[9]" language="Python" />
-        <watch expression="self.CMB_city.setCurrentText" language="Python" />
-        <watch expression="self.CMB_city.currentText()" language="Python" />
-        <watch expression="self.CMB_district.currentText()" language="Python" />
-        <watch expression="self.DrawWindowBackground" language="Python" />
-        <watch expression="sheet.nrows" language="Python" />
-        <watch expression="pts" language="Python" />
-        <watch expression="err" language="Python" />
+        <watch expression="self.qdate_from.date().toString('yyyy-MM-dd')" language="Python" />
+        <watch expression="self.Qdate_from.date().toString('yyyy-MM-dd')" language="Python" />
+        <watch expression="xto1" />
+        <watch expression="e" language="Python" />
+        <watch expression="comp" language="Python" />
         <watch expression="sql" language="Python" />
-        <watch expression="myresult" language="Python" />
-        <watch expression="err" language="Python" />
-        <watch expression="CL_userModule.branch" language="Python" />
+        <watch expression="validFrom" language="Python" />
+        <watch expression="remainingPoints" language="Python" />
+        <watch expression="sql" language="Python" />
+        <watch expression="sheet.nrows" language="Python" />
+        <watch expression="sql" language="Python" />
+        <watch expression="self.section" language="Python" />
       </configuration>
     </watches-manager>
   </component>

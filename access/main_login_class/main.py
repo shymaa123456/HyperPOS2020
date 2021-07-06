@@ -11,6 +11,7 @@ from access.coupon_class.EditCoupon import CL_EditCoupon
 from access.coupon_class.StoppedSerial import CL_StoppedSerial
 from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
+from access.customer_service_class.customer_complain import CL_CustService
 from access.loyalty_class.CL_loyPoint import CL_loyPoint
 from access.loyalty_class.loyalityProg import CL_loyProg
 from access.loyalty_class.redeemGift import CL_redGift
@@ -135,6 +136,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Prom_Voucher_Edit.triggered.connect(self.FN_EditPromVoucher)
             self.QAct_Prom_Voucher_Act.triggered.connect(self.FN_LOAD_CHANGE_STATUS_ACTIVE)
             self.QAct_Prom_Voucher_Deact.triggered.connect(self.FN_LOAD_CHANGE_STATUS_INACTIVE)
+
+            self.QAct_Customer_Service.triggered.connect(self.FN_Customer_Service)
+
             # for installment
             self.QAct_Create_Bank.triggered.connect(self.FN_CREATE_Bank)
             self.QAct_Modify_Bank.triggered.connect(self.FN_Modify_Bank)
@@ -406,6 +410,12 @@ class CL_main(QtWidgets.QMainWindow):
 
         self.window_two = CL_PromVoucher()
         self.window_two.FN_LOAD_CHANGE_STATUS_INACTIVE()
+        self.window_two.show()
+
+    def FN_Customer_Service(self):
+
+        self.window_two = CL_CustService()
+        self.window_two.FN_LOAD_DISPLAY()
         self.window_two.show()
 
     # Configuration Parametrs

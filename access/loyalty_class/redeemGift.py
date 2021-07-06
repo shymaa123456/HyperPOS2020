@@ -131,9 +131,10 @@ class CL_redGift(QtWidgets.QDialog):
             sql0 = "  LOCK  TABLES    Hyper1_Retail.POS_CUSTOMER_POINT   WRITE , " \
                    "    Hyper1_Retail.LOYALITY_POINTS_TRANSACTION_LOG   WRITE  "
 
+
+            mycursor.execute(sql0)
             # get point value
             result = self.FN_GET_POINTS_VALUE(replacedPoints)
-            mycursor.execute(sql0)
             sql = "INSERT INTO `Hyper1_Retail`.`LOYALITY_POINTS_TRANSACTION_LOG` " \
                   "(`POSC_CUST_ID`,`REDEEM_TYPE_ID`,`COMPANY_ID`,`BRANCH_NO`,`TRANS_CREATED_BY`," \
                   "`TRANS_CREATED_ON`,`POSC_POINTS_BEFORE`,`VALUE_OF_POINTS`,`TRANS_POINTS_QTY`,`TRANS_POINTS_VALUE`,`TRANS_REASON`,`POSC_POINTS_AFTER`,`TRANS_STATUS` ,REFERENCE_TRANS)" \

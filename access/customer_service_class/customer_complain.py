@@ -125,9 +125,9 @@ class CL_CustService_modify(QtWidgets.QDialog):
             if self.oldStatus != status:
                 util.FN_INSERT_IN_LOG("CUSTOMER_COMPLAINT","status",status,self.oldStatus,id)
             if self.oldResponsible != responsible:
-                util.FN_INSERT_IN_LOG("CUSTOMER_COMPLAINT","email",responsible,self.oldResponsible,id)
+                util.FN_INSERT_IN_LOG("CUSTOMER_COMPLAINT","responsible",responsible,self.oldResponsible,id)
             if str(self.oldComplainType) != str(complainType):
-                util.FN_INSERT_IN_LOG("CUSTOMER_COMPLAINT","status",self.status,self.oldstatus,id)
+                util.FN_INSERT_IN_LOG("CUSTOMER_COMPLAINT","complainType",complainType,self.oldComplainType,id)
         except Exception as err:
             print(err)
 

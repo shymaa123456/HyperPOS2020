@@ -210,11 +210,10 @@ class util():
         return records
 
     @staticmethod
-    def FN_GET_DEPARTMENTS(self):
+    def FN_GET_DEPARTMENTS():
         conn = db1.connect()
         mycursor = conn.cursor()
-        self.CMB_department.clear()
-        sql_select_query = "SELECT DEPARTMENT_DESC FROM Hyper1_Retail.DEPARTMENT where DEPARTMENT_STATUS   = 1 "
+        sql_select_query = "SELECT DEPARTMENT_DESC ,DEPARTMENT_ID FROM Hyper1_Retail.DEPARTMENT where DEPARTMENT_STATUS   = 1 "
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
         mycursor.close()
@@ -230,3 +229,20 @@ class util():
         records = mycursor.fetchall()
         mycursor.close()
         return records
+
+    def FN_GET_COMPLAIN_TYPE_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT CCT_DESC FROM Hyper1_Retail.CUSTOMER_COMPLAINT_TYPE where CCT_TYPE_ID = '" + id + "'")
+        myresult = mycursor.fetchone()
+        mycursor.close()
+        return myresult[0]
+
+    def FN_GET_COMPAIN_STATUS_DESC(id):
+        if id == "0":
+            status='Created'
+        elif id == "1":
+            status='Finished'
+        elif id == "2":
+            status = 'Inprogress'
+        return status

@@ -26,7 +26,7 @@
     <string>نوع الشكوى</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Qbtn_modify">
+  <widget class="QPushButton" name="btn_modify">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -69,7 +69,7 @@
   </widget>
   <widget class="QComboBox" name="CMB_complainType">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -564,11 +564,14 @@
        <height>239</height>
       </rect>
      </property>
-     <widget class="QTextBrowser" name="details">
+     <widget class="QTextEdit" name="details">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>15</x>
-        <y>7</y>
+        <x>10</x>
+        <y>0</y>
         <width>511</width>
         <height>221</height>
        </rect>

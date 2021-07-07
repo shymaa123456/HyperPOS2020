@@ -351,7 +351,7 @@
       <property name="title">
        <string>حاله الشكوى</string>
       </property>
-      <widget class="QRadioButton" name="Rbtn_stsActive">
+      <widget class="QRadioButton" name="Rbtn_stsCreated">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -367,7 +367,7 @@
         <enum>Qt::RightToLeft</enum>
        </property>
        <property name="text">
-        <string>فعال</string>
+        <string>منشأ</string>
        </property>
       </widget>
       <widget class="QRadioButton" name="Rbtn_stsAll">
@@ -389,14 +389,14 @@
         <string>الكل</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="Rbtn_stsInactive">
+      <widget class="QRadioButton" name="Rbtn_stsFinished">
        <property name="enabled">
         <bool>false</bool>
        </property>
        <property name="geometry">
         <rect>
          <x>98</x>
-         <y>20</y>
+         <y>19</y>
          <width>81</width>
          <height>20</height>
         </rect>
@@ -405,7 +405,26 @@
         <enum>Qt::RightToLeft</enum>
        </property>
        <property name="text">
-        <string>موقوف</string>
+        <string>منتهى</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="Rbtn_stsInprogress">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>8</x>
+         <y>18</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>قيد التنفيذ</string>
        </property>
       </widget>
      </widget>

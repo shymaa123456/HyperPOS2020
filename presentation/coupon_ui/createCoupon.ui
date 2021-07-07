@@ -180,7 +180,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-style: outset; border-width: 1px; border-radius: 5px; border-color:black; background-color: rgb(198, 207, 199); color: #28345A;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string/>
@@ -702,12 +702,7 @@
      <enum>Qt::RightToLeft</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:#DA1F05;
-background-color: rgba(0,0,0,0%);
-border-style: outset;
-border-width: 0px;
-border-radius: 0px;
-opacity: 1;</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;%&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

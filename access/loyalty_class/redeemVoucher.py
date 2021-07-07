@@ -169,7 +169,7 @@ class CL_redVouch(QtWidgets.QDialog):
                   "                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
             val = (
-            customer, 1, '1', 'H010', CL_userModule.user_name, creationDate, actualPoints, result[1], pts, float(result[1])*pts, 'voucher redeem', remainingPoints,
+            customer, 3, '1', 'H010', CL_userModule.user_name, creationDate, actualPoints, result[1], pts, float(result[1])*pts, 'voucher redeem', remainingPoints,
             '2')
             mycursor.execute(sql, val)
 

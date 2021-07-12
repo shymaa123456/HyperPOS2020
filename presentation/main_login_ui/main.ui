@@ -267,8 +267,8 @@
      </property>
      <addaction name="QAct_Display_Customer"/>
      <addaction name="separator"/>
-     <addaction name="separator"/>
-     <addaction name="QAct_Cust_Card"/>
+     <addaction name="QAct_Cust_Card_Add"/>
+     <addaction name="QAct_Cust_Card_Edit"/>
      <addaction name="separator"/>
      <addaction name="QAct_Cust_Points_Upload"/>
     </widget>
@@ -1320,9 +1320,12 @@
     <string>تعريف قيمة استبدال النقاط</string>
    </property>
   </action>
-  <action name="QAct_Cust_Card">
+  <action name="QAct_Cust_Card_Add">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
-    <string>اصدار وطباعة كروت العملاء</string>
+    <string> إنشاء كارت عميل</string>
    </property>
   </action>
   <action name="QAct_Cust_Points_Upload">
@@ -1575,6 +1578,14 @@
    </property>
    <property name="text">
     <string>ٌRedeem type</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Card_Edit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>تعديل كارت عميل</string>
    </property>
   </action>
  </widget>

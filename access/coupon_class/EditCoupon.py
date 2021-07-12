@@ -8,6 +8,7 @@ from PyQt5.QtCore import QDate, QDateTime
 from PyQt5.uic import loadUi
 
 from access.Checkable import CheckableComboBox
+from presentation.Themes.Special_StyleSheet import label_num, desc_5
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
 
@@ -50,11 +51,11 @@ class CL_EditCoupon(QtWidgets.QDialog):
         filename = self.dirname + '/editCoupon.ui'
         loadUi(filename, self)
         self.Qcombo_company = CheckableComboBox(self)
-        self.Qcombo_company.setGeometry(350, 100, 271, 25)
+        self.Qcombo_company.setGeometry(350, 135, 271, 25)
         self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.Qcombo_branch = CheckableComboBox(self)
-        self.Qcombo_branch.setGeometry(350, 140, 271, 25)
+        self.Qcombo_branch.setGeometry(350, 165, 271, 25)
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_Company()
@@ -68,6 +69,12 @@ class CL_EditCoupon(QtWidgets.QDialog):
         self.checkBox_Multi.toggled.connect(self.FN_endableMultiUser)
         self.BTN_editCoupon.clicked.connect(self.FN_editAction)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+        # Set Style
+        self.labe_id.setStyleSheet(label_num)
+        self.label.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
 
     #Todo: method for fills the company combobox
     def FN_GET_Company(self):

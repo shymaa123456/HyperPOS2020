@@ -7,6 +7,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate
 from PyQt5.uic import loadUi
 
+from presentation.Themes.Special_StyleSheet import label_num, desc_5
 from access.promotion_class.Promotion_Add import CheckableComboBox
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
@@ -34,11 +35,11 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         filename = self.dirname + '/createCoupon.ui'
         loadUi(filename, self)
         self.Qcombo_company = CheckableComboBox(self)
-        self.Qcombo_company.setGeometry(360, 15, 271, 25)
+        self.Qcombo_company.setGeometry(360, 35, 271, 25)
         self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.Qcombo_branch = CheckableComboBox(self)
-        self.Qcombo_branch.setGeometry(360, 55, 271, 25)
+        self.Qcombo_branch.setGeometry(360, 65, 271, 25)
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_Company()
@@ -55,6 +56,12 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         self.Qdate_to.setMinimumDate(d)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
         self.LE_desc_5.setEnabled(False)
+        css_path = Path(__file__).parent.parent.parent
+        # Apply Style For Design
+        self.label_num.setStyleSheet(label_num)
+        self.desc_5.setStyleSheet(desc_5)
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
 
     # Todo: method to make coupon multi use
     def FN_endableMultiUser(self):
@@ -90,13 +97,13 @@ class CL_CreateCoupon(QtWidgets.QDialog):
 
     # Todo: method for fills the Branch combobox
     def FN_GET_Branch(self):
-         i=0
-         try:
+        i=0
+        try:
             for row, val in CL_userModule.branch:
                 self.Qcombo_branch.addItem(val, row)
                 i += 1
-         except:
-             print(sys.exc_info())
+        except:
+            print(sys.exc_info())
 
     # Todo: method for create coupon
     def FN_Create(self):
@@ -111,15 +118,15 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
             else:
                 if self.checkBox_Multi.isChecked():
-                        self.serialCount = "1"
-                        self.MultiCount = self.LE_desc_5.text()
-                        self.MultiUse = "1"
-                        self.serialType=1
+                    self.serialCount = "1"
+                    self.MultiCount = self.LE_desc_5.text()
+                    self.MultiUse = "1"
+                    self.serialType=1
                 else:
-                        self.serialCount = self.LE_desc_4.text()
-                        self.MultiCount = "0"
-                        self.MultiUse = "0"
-                        self.serialType=0
+                    self.serialCount = self.LE_desc_4.text()
+                    self.MultiCount = "0"
+                    self.MultiUse = "0"
+                    self.serialType=0
             creationDate = str(datetime.today().strftime('%Y-%m-%d'))
             if self.radioButton_Percentage.isChecked():
                 if len(self.LE_desc_3.text().strip()) == 0:
@@ -140,12 +147,12 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "خطا", "الاسم موجود بالفعل")
             else:
                 sql0 = "  LOCK  TABLES    Hyper1_Retail.COUPON   WRITE , " \
-                       "    Hyper1_Retail.COUPON_SERIAL   WRITE , "\
+                       "    Hyper1_Retail.COUPON_SERIAL   WRITE , " \
                        "    Hyper1_Retail.COUPON_BRANCH   WRITE  "
                 mycursor.execute(sql0)
                 id = 0
                 sql = "INSERT INTO COUPON (COP_DESC, " + self.valueType + ", COP_SERIAL_COUNT,COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_VALID_FROM, COP_VALID_TO, COP_STATUS)" \
-                      " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s) "
+                                                                          " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s) "
                 print(self.Qdate_from.dateTime().toString('yyyy-MM-dd'))
                 val = (self.LE_desc.text(), self.valueData, self.serialCount, self.MultiUse,
                        self.MultiCount, CL_userModule.user_name, creationDate,

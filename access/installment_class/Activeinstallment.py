@@ -1,43 +1,16 @@
 from pathlib import Path
-
-import mysql.connector
-from PyQt5 import QtWidgets
-from PyQt5.uic import loadUi
-
-from access.authorization_class.user_module import CL_userModule
-from data_connection.h1pos import db1
-import sys
-
-from pathlib import Path
-from random import randint
-
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtCore import QDate ,QTime
 from PyQt5.uic import loadUi
-
-from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
-
-from access.Checkable import CheckableComboBox
-
-#from access.promotion_class.Promotion_Add import CheckableComboBox
-
+import mysql.connector
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
-
 from datetime import datetime
-from Validation.Validation import CL_validation
 
-import xlrd
-from datetime import datetime
-import xlwt.Workbook
-
-import webbrowser
-
-class CL_installmentModify(QtWidgets.QDialog):
+class CL_installment_Activation(QtWidgets.QDialog):
     dirname = ''
     parent = ''
     def __init__(self,parentInit):
-        super(CL_installmentModify, self).__init__()
+        super(CL_installment_Activation, self).__init__()
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/installment_ui'
@@ -45,75 +18,15 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.parent = parentInit
 
 
-    def FN_LOAD_Modify(self):
-        filename = self.dirname + '/Installment_modify.ui'
+    def FN_LOAD_Activation(self):
+        filename = self.dirname + '/Activate_InstallmentProgram.ui'
         loadUi(filename, self)
-
-
-        #drob down list with multiselection for company
-        self.Qcombo_company = CheckableComboBox(self)
-        self.Qcombo_company.setGeometry(570,120,179,20)
-        self.Qcombo_company.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
-
-
-        #drob down list with multiselection for bracnch
-        self.Qcombo_branch = CheckableComboBox(self)
-        self.Qcombo_branch.setGeometry(570,160,179,20)
-        self.Qcombo_branch.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
-
-        #validation for not pick date before today
-        datefrom = str(datetime.today().strftime('%Y-%m-%d'))
-        xfrom = datefrom.split("-")
-        d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
-        self.Qdate_from.setMinimumDate(d)
-        self.Qdate_to.setMinimumDate(d)
-
-        # Get customer Groupe
-        self.Qcombo_customerGroupe = CheckableComboBox(self)
-        self.Qcombo_customerGroupe.setGeometry(570, 200, 179, 20)
-        self.Qcombo_customerGroupe.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.Qcombo_customerGroupe.setEnabled(False)
-        self.Qcombo_customerGroupe.setStyleSheet("background-color: rgb(198, 207, 199)")
-
-        #Multi selection for department
-        self.Qcombo_department = CheckableComboBox(self)
-        self.Qcombo_department.setGeometry(570, 250, 171, 22)
-        self.Qcombo_department.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.Qcombo_department.setEnabled(False)
-        self.Qcombo_department.setStyleSheet("background-color: rgb(198, 207, 199)")
-
-        # Multi selection for sections
-        self.Qcombo_section = CheckableComboBox(self)
-        self.Qcombo_section.setGeometry(570, 275, 171, 22)
-        self.Qcombo_section.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.Qcombo_section.setEnabled(False)
-        self.Qcombo_section.setStyleSheet("background-color: rgb(198, 207, 199)")
-
-
-        # Multi selection for BMCLevel
-        self.Qcombo_BMCLevel = CheckableComboBox(self)
-        self.Qcombo_BMCLevel.setGeometry(570, 300, 171, 22)
-        self.Qcombo_BMCLevel.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.Qcombo_BMCLevel.setEnabled(False)
-        self.Qcombo_BMCLevel.setStyleSheet("background-color: rgb(198, 207, 199)")
-
-        #set minimum time
-        # this_moment PyQt5.QtCore.QTime(10, 43, 1, 872)
-        this_moment = QtCore.QTime.currentTime()
-        #this_moment = this_moment.toString('hh:mm ap')
-        print("this_moment",this_moment)
-        self.Qtime_to.setTime(this_moment)
-        self.Qtime_from.setTime(this_moment)
-        self.Qtime_to.setMinimumTime(this_moment)
 
         # Search for installment program
         self.Qbtn_searchInstallment.clicked.connect(self.FN_SearchForInstallmentProgram)
 
         #save installment program
-        self.Qbtn_modifyInstallment.clicked.connect(self.FN_UpdateInstallemtProgram)
-
+        self.BTN_updateInstallmentProgram.clicked.connect(self.FN_UpdateInstallemtProgram)
 
     #Get data for installment program
     def FN_SearchForInstallmentProgram(self):
@@ -163,6 +76,14 @@ class CL_installmentModify(QtWidgets.QDialog):
                 # # lock table for new record:
                 sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE "
                 mycursor.execute(sql0)
+
+                #Check if this program create before or not
+                #Validation_For_installmentProgramm = 1
+                #Validation_For_installmentProgramm = self.FN_ValidateInstallemtProgram(mycursor)
+                #print("Validation_For_installmentProgramm",Validation_For_installmentProgramm)
+                #self.FN_ValidateInstallemtProgram(mycursor )
+
+                #get values for insert in INSTALLMENT_PROGRAM table
 
                 ModifingDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 

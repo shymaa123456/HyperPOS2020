@@ -1,8 +1,6 @@
 from pathlib import Path
-
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.uic import loadUi
-
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 import sys
@@ -14,7 +12,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate ,QTime
 from PyQt5.uic import loadUi
 
-from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem, QAbstractItemView
 
 from access.Checkable import CheckableComboBox
 import mysql.connector
@@ -62,6 +60,9 @@ class CL_installment(QtWidgets.QDialog):
         self.Qcombo_company.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_Company()
+
+        # TODO Click listner for changing list of company
+        self.Qcombo_company.model().dataChanged.connect(self.FN_GET_Branch)
 
         #drob down list with multiselection for bracnch
         self.Qcombo_branch = CheckableComboBox(self)
@@ -159,7 +160,6 @@ class CL_installment(QtWidgets.QDialog):
         # if readio button clicked hyperone
         self.RBTN_hyperone.clicked.connect(self.FN_InstallMent_Checked)
 
-
         #click button for upload accepted items                      Qtable_acceptedItems
         self.Qbtn_loadItems.clicked.connect(self.FN_UploadAcceptedItems(self.Qtable_acceptedItems))
 
@@ -172,13 +172,19 @@ class CL_installment(QtWidgets.QDialog):
         # click button for remove selected item from rejected Qtable
         self.Qbtn_deleteRejectItem.clicked.connect(self.FN_remove_selected(self.Qtable_rejectedItems))
 
+        #clicke in search button for Qtable_acceptedItems
+        self.Qbtn_findItem_acceptedItem.clicked.connect(self.FN_Search_ByBarcode(self.Qtable_acceptedItems ,self.QLE_SearchAcceptedBarcode))
+
+        # clicke in search button for Qtable_rejectedItems
+        self.Qbtn_findItem_rejected.clicked.connect(self.FN_Search_ByBarcode(self.Qtable_rejectedItems,self.QLE_SearchRejectedBarcode))
+
+        # Total interest rate
+        self.QDubleSpiner_customerRate.valueChanged.connect(self.FN_PutInterestRate)
+        self.QDubleSpiner_vendorRate.valueChanged.connect(self.FN_PutInterestRate)
+        self.QDubleSpiner_hperoneRate.valueChanged.connect(self.FN_PutInterestRate)
+
         #Save installment
         self.Qbtn_saveInstallment.clicked.connect(self.FN_SaveInstallemt)
-
-        #Total interest rate
-        self.QDubleSpiner_customerRate.valueChanged.connect(self.PutInterestRate)
-        self.QDubleSpiner_vendorRate.valueChanged.connect(self.PutInterestRate)
-        self.QDubleSpiner_hperoneRate.valueChanged.connect(self.PutInterestRate)
 
         # this function for what enabled or not when start
         self.EnabledWhenOpen()
@@ -222,12 +228,28 @@ class CL_installment(QtWidgets.QDialog):
 
     #get branches list
     def FN_GET_Branch(self):
+         self.Qcombo_branch.clear()
          i=0
          try:
             # Todo: method for fills the Branch combobox
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH")
+
+            val3 = ""
+            for a in range(len(self.Qcombo_company.currentData())):
+                if a < len(self.Qcombo_company.currentData()) - 1:
+                    val3 = val3 + "'" + self.Qcombo_company.currentData()[a] + "',"
+                else:
+                    val3 = val3 + "'" + self.Qcombo_company.currentData()[a] + "'"
+
+            print("companies", val3)
+
+            sqlite3="SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH WHERE COMPANY_ID in (" + val3 + ")"
+
+            print("Branches_sqlite3", sqlite3)
+
+            mycursor.execute(sqlite3)
+
             records = mycursor.fetchall()
             for row, val in records:
                 for bra in CL_userModule.branch :
@@ -235,6 +257,7 @@ class CL_installment(QtWidgets.QDialog):
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
             mycursor.close()
+            self.Qcombo_branch.setCurrentIndex(-1)
          except:
              print(sys.exc_info())
 
@@ -315,7 +338,6 @@ class CL_installment(QtWidgets.QDialog):
             self.Qcombo_section.setCurrentIndex(-1)
             #self.Qcombo_section.unChecked()
 
-
     #get sections list
     def FN_GET_sections(self):
         self.Qcombo_section.clear()
@@ -350,12 +372,12 @@ class CL_installment(QtWidgets.QDialog):
             self.FN_GET_BMC_Level()
             self.Qcombo_BMCLevel.setEnabled(True)
             self.Qcombo_BMCLevel.setCurrentIndex(-1)
+            #self.FN_
         else:
             self.Qcombo_BMCLevel.unCheckedList()
             self.checkBox_BMCLevel.setChecked(False)
             self.Qcombo_BMCLevel.setEnabled(False)
             self.Qcombo_BMCLevel.setCurrentIndex(-1)
-
 
     #get BMC LEVEL4 list
     def FN_GET_BMC_Level(self):
@@ -437,7 +459,6 @@ class CL_installment(QtWidgets.QDialog):
             self.Qcombo_vendor.clear()
             self.QTEdit_sponsorReason.setEnabled(False)
 
-
     #get Vendor list
     def FN_GET_Vendor(self):
         self.Qcombo_vendor.clear()
@@ -506,6 +527,10 @@ class CL_installment(QtWidgets.QDialog):
                         #Validate if barcode inserted in Qtable before insert it
                         elif self.FN_ValidateIfBarcodeInsertedInQtable(sheet.cell_value(i,0),QTableWidgit) ==1:
                             QtWidgets.QMessageBox.warning(self, "Error", "Barcode Repeated")
+
+                        #validate for check if barcode belong to selected BMC
+                        elif self.FN_ValidateIfRelateToBMC(str(sheet.cell_value(i,0))) == False:
+                            QtWidgets.QMessageBox.warning(self, "Error", "Barcode doesn't belong to same BMC"+str(sheet.cell_value(i,0)))
                         else:
                             #for row_number, row_data in enumerate(records):
                             QTableWidgit.insertRow(i)
@@ -574,6 +599,82 @@ class CL_installment(QtWidgets.QDialog):
 
         return  BarcodeFound
 
+    # Validate if barcode belong to selected BMC
+    def FN_ValidateIfRelateToDepartmentSectionBMC(self,ValidateBarcode ):
+        if self.checkBox_BMCLevel.isChecked() and len(self.Qcombo_BMCLevel.currentData()) > 0:
+            for k in range(len(self.Qcombo_BMCLevel.currentData())):
+                self.conn = db1.connect()
+                mycursor = self.conn.cursor()
+                #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
+                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"'"
+
+                mycursor.execute(sql)
+                myresult = mycursor.fetchall()
+                print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
+                if len(myresult) == 0:
+                    if k == len(self.Qcombo_BMCLevel.currentData()) :
+                        return False
+                else:
+                    return True
+
+        elif self.checkBox_section.isChecked() and len(self.Qcombo_section.currentData()) > 0 and not self.checkBox_BMCLevel.isChecked():
+            for k in range(len(self.Qcombo_section.currentData())):
+                self.conn = db1.connect()
+                mycursor = self.conn.cursor()
+                #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
+                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND a.SECTION_ID ='"+self.Qcombo_section.currentData()[k]+"'"
+
+                mycursor.execute(sql)
+                myresult = mycursor.fetchall()
+                print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
+                if len(myresult) == 0:
+                    if k == len(self.Qcombo_section.currentData()) :
+                        return False
+                else:
+                    return True
+
+        elif self.checkBox_department.isChecked() and len(self.Qcombo_department.currentData()) > 0 and not self.Qcombo_section.isChecked() and not self.checkBox_BMCLevel.isChecked():
+            for k in range(len(self.Qcombo_department.currentData())):
+                self.conn = db1.connect()
+                mycursor = self.conn.cursor()
+                #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
+                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND a.DEPARTMENT_ID ='"+self.Qcombo_department.currentData()[k]+"'"
+
+                mycursor.execute(sql)
+                myresult = mycursor.fetchall()
+                print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
+                if len(myresult) == 0:
+                    if k == len(self.Qcombo_BMCLevel.currentData()) :
+                        return False
+                else:
+                    return True
+
+    # Validate if barcode belong to selected BMC when select it
+    def FN_ValidateWhenSelectBMC(self,QTableWidgit ):
+        for i in range(QTableWidgit.rowCount()):
+            barcode = QTableWidgit.item(i, 0).text()
+            if self.FN_ValidateIfRelateToDepartmentSectionBMC(barcode) == False:
+                QtWidgets.QMessageBox.warning(self, "Error",
+                                              "Barcode doesn't belong to same BMC" + str(barcode))
+
+    # search in Qtable csv
+    def FN_Search_ByBarcode(self, QTableWidgit , QlabelEdit):
+        def FN_Search_ByBarcode_internal():
+                #remove selection in qtable
+                for i in range(QTableWidgit.rowCount()):
+                        # 198, 207, 199
+                    QTableWidgit.item(i, 0).setBackground(QtGui.QColor(198, 207, 199))
+
+                SearchedBarcode=QlabelEdit.text()
+                print("SearchedBarcode",SearchedBarcode)
+                for i in range(QTableWidgit.rowCount()):
+                    barcode = QTableWidgit.item(i, 0).text()
+                    if barcode in SearchedBarcode:
+                        # 198, 207, 199
+                        QTableWidgit.item(i, 0).setBackground(QtGui.QColor(100,100,150))
+                        print("search_in")
+        return FN_Search_ByBarcode_internal
+
     #SAve Tem of csv that you use it for upload
     def FN_DISPLAY_TEMP(self):
          try:
@@ -613,7 +714,7 @@ class CL_installment(QtWidgets.QDialog):
         return FN_remove_selected_internal
 
     #put interest rate
-    def PutInterestRate(self):
+    def FN_PutInterestRate(self):
         if (self.QDubleSpiner_customerRate.value()
             +self.QDubleSpiner_vendorRate.value()
             +self.QDubleSpiner_hperoneRate.value()) <= 100 :
@@ -694,11 +795,11 @@ class CL_installment(QtWidgets.QDialog):
                     creationDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
                     #insert to INSTALLMENT_PROGRAM
-                    sql2 = "INSERT INTO INSTALLMENT_PROGRAM (INST_DESC, INSTR_RULEID, INST_CREATED_ON ,  INST_CREATED_BY, INST_VALID_FROM ,INST_VALID_TO ,INST_ADMIN_EXPENSES ,INST_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+                    sql2 = "INSERT INTO INSTALLMENT_PROGRAM (INST_DESC, INSTR_RULEID, INST_CREATED_ON ,  INST_CREATED_BY, INST_VALID_FROM ,INST_VALID_TO ,INST_ADMIN_EXPENSES , INST_ADMIN_EXPENSES_MIN , INST_ADMIN_EXPENSES_MAX ,INST_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                     val2 = (
                          self.QTEdit_descInstallment.toPlainText(), self.id_INSTR_RULEID ,creationDateTime,
                         CL_userModule.user_name, FromDateTime,ToDateTime   ,self.QDSpinBox_adminExpendses.value(),
-                        '0')
+                        self.QDSpinBox_Min_adminExpendses.value(),self.QDSpinBox_Max_adminExpendses.value(),'0')
                     mycursor.execute(sql2, val2)
 
                     # Get max index Installment_programm -- index of inserted
@@ -757,10 +858,11 @@ class CL_installment(QtWidgets.QDialog):
                     if self.RBTN_bank.isChecked() or self.RBTN_vendor.isChecked() or self.RBTN_hyperone.isChecked():
                         self.FN_Insert_If_Bank_Vendor_hyperone_Checked(self.id_INSTR_RULEID , mycursor)
 
-                    QtWidgets.QMessageBox.information(self, "Success", "this installment program has been Saved"+str(self.inst_Program_ID))
+                    QtWidgets.QMessageBox.information(self, "Success", "Installment Program Has Been Saved No: "+str(self.inst_Program_ID))
                     self.QL_lastInstallmentNO.setText(str(self.inst_Program_ID))
                 else:
-                    QtWidgets.QMessageBox.warning(self, "Error", "this installment program has been created")
+                    QtWidgets.QMessageBox.warning(self, "Error", "This Installment Program Has Been Created Before")
+
                 # # unlock table :
                 sql00 = "  UNLOCK   tables    "
                 mycursor.execute(sql00)
@@ -838,7 +940,6 @@ class CL_installment(QtWidgets.QDialog):
 
 
     # TODO Validat before save program
-
     # to save installment
     def FN_ValidateInstallemt(self):
         print(self.Qcombo_installmentType.currentText())
@@ -889,7 +990,6 @@ class CL_installment(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار القسم الفرعى")
             error = 0
             """
-
         elif self.RBTN_bank.isChecked() and self.Qcombo_bank.currentText() == '' :
             QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار البنك")
             error = 0
@@ -906,6 +1006,7 @@ class CL_installment(QtWidgets.QDialog):
 
         else:
             error = 1
+
         return error
 
     #validate if installment program created before or not
@@ -916,36 +1017,40 @@ class CL_installment(QtWidgets.QDialog):
         Index_installmentType = self.Qcombo_installmentType.currentData()  # installment type id
         print("Validate_Index_installmentType", Index_installmentType)
 
-        # VALIDATE INSTT_TYPE_ID in INSTALLMENT_RULE Table ,INSTR_DESC
+        # VALIDATE INSTT_TYPE_ID in INSTALLMENT_RULE Table
         sql1 = "SELECT INSTR_RULEID FROM INSTALLMENT_RULE WHERE INSTT_TYPE_ID = "+str(Index_installmentType)
         mycursor.execute(sql1)
         print("VALIDATEsql1",sql1)
         myresult = mycursor.fetchall()
         print("len(myresult)",len(myresult))
 
-        for row_number, row_data in enumerate(myresult):
-            for column_number, INSTR_RULEID_ID in enumerate(row_data):
-                print("column_number ",column_number, " INSTR_RULEID_ID ",INSTR_RULEID_ID)
+        if len(myresult) == 0 :
+            Return_FN_ValidateInstallemtProgram = False
+            return Return_FN_ValidateInstallemtProgram
+        else:
+            for row_number, row_data in enumerate(myresult):
+                for column_number, INSTR_RULEID_ID in enumerate(row_data):
+                    print("column_number ",column_number, " INSTR_RULEID_ID ",INSTR_RULEID_ID)
 
-                #Validate installmentRuleWithBankAndVendorAndHyper
-                Validate_installmentRuleWithBankAndVendorAndHyper = self.FN_ValidateInstallmentRuleWithBankORVendorORHyper(INSTR_RULEID_ID,mycursor)
+                    #Validate installmentRuleWithBankAndVendorAndHyper
+                    Validate_installmentRuleWithBankAndVendorAndHyper = self.FN_ValidateInstallmentRuleWithBankORVendorORHyper(INSTR_RULEID_ID,mycursor)
 
-                #Validate AcceptedItems OR deparments and sections and BMC
-                Validate_AcceptedItems_deparments_sections_BMC =self.FN_ValidateIfAcceptedItems_OR_DepartmentAndSectionsBC(INSTR_RULEID_ID,mycursor)
+                    #Validate AcceptedItems OR deparments and sections and BMC
+                    Validate_AcceptedItems_deparments_sections_BMC =self.FN_ValidateIfAcceptedItems_OR_DepartmentAndSectionsBC(INSTR_RULEID_ID,mycursor)
 
-                print("Validate_installmentRuleWithBankAndVendorAndHyper",Validate_installmentRuleWithBankAndVendorAndHyper)
-                print("Validate_AcceptedItems_deparments_sections_BMC",Validate_AcceptedItems_deparments_sections_BMC)
+                    print("Validate_installmentRuleWithBankAndVendorAndHyper",Validate_installmentRuleWithBankAndVendorAndHyper)
+                    print("Validate_AcceptedItems_deparments_sections_BMC",Validate_AcceptedItems_deparments_sections_BMC)
 
-                if Validate_installmentRuleWithBankAndVendorAndHyper == False \
-                        and Validate_AcceptedItems_deparments_sections_BMC ==False :
-                    print("Validate_if","False")
-                    Return_FN_ValidateInstallemtProgram = False
-                elif Validate_installmentRuleWithBankAndVendorAndHyper == True \
-                        and Validate_AcceptedItems_deparments_sections_BMC ==True:
-                    Return_FN_ValidateInstallemtProgram =  True
-                    return  Return_FN_ValidateInstallemtProgram
+                    if Validate_installmentRuleWithBankAndVendorAndHyper == False \
+                            and Validate_AcceptedItems_deparments_sections_BMC ==False :
+                        print("Validate_if","False")
+                        Return_FN_ValidateInstallemtProgram = False
+                    elif Validate_installmentRuleWithBankAndVendorAndHyper == True \
+                            and Validate_AcceptedItems_deparments_sections_BMC ==True:
+                        Return_FN_ValidateInstallemtProgram =  True
+                        return  Return_FN_ValidateInstallemtProgram
 
-        return  Return_FN_ValidateInstallemtProgram
+            return  Return_FN_ValidateInstallemtProgram
 
         """
                 for installmentType

@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QDate
 from PyQt5.uic import loadUi
 
-from access.coupon_class.Special_StyleSheet import label_num, desc_5
+from presentation.Themes.Special_StyleSheet import label_num, desc_5
 from access.promotion_class.Promotion_Add import CheckableComboBox
 from data_connection.h1pos import db1
 from access.authorization_class.user_module import CL_userModule
@@ -60,7 +60,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         # Apply Style For Design
         self.label_num.setStyleSheet(label_num)
         self.desc_5.setStyleSheet(desc_5)
-        path = css_path.__str__() + '/access/coupon_class/Style.css'
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
         self.setStyleSheet(open(path).read())
 
     # Todo: method to make coupon multi use

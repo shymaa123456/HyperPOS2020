@@ -109,8 +109,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-                                    </string>
+    <string notr="true"/>
    </property>
    <property name="maxLength">
     <number>50</number>
@@ -173,8 +172,8 @@
   <widget class="QLabel" name="label_num">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>410</y>
+     <x>10</x>
+     <y>470</y>
      <width>47</width>
      <height>21</height>
     </rect>
@@ -189,8 +188,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>410</y>
+     <x>60</x>
+     <y>470</y>
      <width>111</width>
      <height>21</height>
     </rect>
@@ -247,6 +246,7 @@
     </property>
     <property name="font">
      <font>
+      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -349,6 +349,7 @@
     </property>
     <property name="font">
      <font>
+      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -469,6 +470,7 @@
     </property>
     <property name="font">
      <font>
+      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -487,7 +489,7 @@
    <widget class="QRadioButton" name="radioButton_Percentage">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>440</x>
       <y>90</y>
       <width>111</width>
       <height>20</height>
@@ -508,7 +510,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>خصم نسبة</string>
+     <string>نسبة الخصم</string>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="LE_desc_2">
@@ -522,6 +524,7 @@
     </property>
     <property name="font">
      <font>
+      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -543,7 +546,7 @@
    <widget class="QRadioButton" name="radioButton_Value">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>440</x>
       <y>40</y>
       <width>111</width>
       <height>21</height>
@@ -567,7 +570,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>خصم قيمة</string>
+     <string>قيمة الخصم</string>
     </property>
     <property name="checked">
      <bool>true</bool>
@@ -641,6 +644,7 @@
     </property>
     <property name="font">
      <font>
+      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -667,6 +671,7 @@
     </property>
     <property name="font">
      <font>
+      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -693,6 +698,7 @@
     </property>
     <property name="font">
      <font>
+      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -736,6 +742,19 @@
     <string>البيانات الأساسية</string>
    </property>
   </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>460</y>
+     <width>771</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
   <zorder>groupBox_3</zorder>
   <zorder>desc</zorder>
   <zorder>BTN_createCoupon</zorder>
@@ -746,6 +765,7 @@
   <zorder>label_2</zorder>
   <zorder>groupBox</zorder>
   <zorder>groupBox_2</zorder>
+  <zorder>line</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -54,6 +54,15 @@ QCheckBox {
     border-radius: 0px;
 } 
 
+QComboBox { 
+    border-style: outset; 
+    border-width: 1px; 
+    border-radius: 5px; 
+    border-color:black; 
+    background-color: rgb(198, 207, 199); 
+    color: #28345A;
+} 
+
 QDoubleSpinBox {
     border-style: outset; 
     border-width: 1px; 

@@ -13,6 +13,7 @@ from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.customer_service_class.customer_complain import CL_CustService
 from access.loyalty_class.CL_loyPoint import CL_loyPoint
+from access.loyalty_class.customerCard import CL_customerCard
 from access.loyalty_class.loyalityProg import CL_loyProg
 from access.loyalty_class.redeemGift import CL_redGift
 from access.loyalty_class.redeemItem import CL_redItem
@@ -139,6 +140,9 @@ class CL_main(QtWidgets.QMainWindow):
 
             self.QAct_Customer_Service.triggered.connect(self.FN_Customer_Service)
 
+            #customer card
+            self.QAct_Cust_Card_Add.triggered.connect(self.FN_Cust_Card_Add)
+            self.QAct_Cust_Card_Edit.triggered.connect(self.FN_Cust_Card_Edit)
             # for installment
             self.QAct_Create_Bank.triggered.connect(self.FN_CREATE_Bank)
             self.QAct_Modify_Bank.triggered.connect(self.FN_Modify_Bank)
@@ -153,6 +157,15 @@ class CL_main(QtWidgets.QMainWindow):
 
         except Exception as err:
             print(err)
+    def FN_Cust_Card_Add(self):
+        self.window_two = CL_customerCard()
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
+
+    def FN_Cust_Card_Edit(self):
+        self.window_two = CL_customerCard()
+        self.window_two.FN_LOAD_MODIFY()
+        self.window_two.show()
 
     def FN_UP_CUST_PT(self):
 

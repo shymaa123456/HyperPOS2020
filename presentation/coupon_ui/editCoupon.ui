@@ -29,27 +29,30 @@
    <string>تعديل الكوبون</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ffffff, stop:1 #8c8eff);</string>
+   <string notr="true"/>
   </property>
   <widget class="QLabel" name="desc">
    <property name="geometry">
     <rect>
      <x>670</x>
-     <y>20</y>
+     <y>30</y>
      <width>101</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>وصف الكوبون</string>
@@ -61,25 +64,28 @@ border-color:black;</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>430</y>
+     <x>240</x>
+     <y>350</y>
      <width>101</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
-    <string>الحاله</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -88,11 +94,19 @@ border-color:black;</string>
   <widget class="QComboBox" name="CMB_CouponStatus">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>430</y>
-     <width>86</width>
+     <x>230</x>
+     <y>350</y>
+     <width>131</width>
      <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -102,37 +116,24 @@ border-color:black;</string>
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>430</y>
-     <width>141</width>
-     <height>31</height>
+     <y>410</y>
+     <width>161</width>
+     <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: #5356ff;
-                                        border-style: outset;
-                                        border-width: 4px;
-                                        border-radius: 10px;
-                                        border-color: darkblue;
-                    color:white;
-	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
-	                                    }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #3a0dab, stop: 1 #a5a5ff
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #a5a5ff, stop: 1 #3a0dab
-                                        );
-                                        }</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>تعديل الكوبون</string>
@@ -141,11 +142,19 @@ border-color:black;</string>
   <widget class="QRadioButton" name="radioButton_Value">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>190</y>
+     <x>660</x>
+     <y>240</y>
      <width>101</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
@@ -154,12 +163,7 @@ border-color:black;</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>قيمه الخصم</string>
@@ -171,22 +175,25 @@ border-color:black;</string>
   <widget class="QRadioButton" name="radioButton_Percentage">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>230</y>
+     <x>660</x>
+     <y>280</y>
      <width>101</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>نسبه الخصم</string>
@@ -195,22 +202,25 @@ border-color:black;</string>
   <widget class="QCheckBox" name="checkBox_Multi">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>310</y>
-     <width>101</width>
+     <x>310</x>
+     <y>280</y>
+     <width>141</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>متعدد الاستخدام</string>
@@ -219,22 +229,25 @@ border-color:black;</string>
   <widget class="QLabel" name="desc_2">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>270</y>
+     <x>350</x>
+     <y>240</y>
      <width>101</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>عدد الكوبونات</string>
@@ -246,22 +259,25 @@ border-color:black;</string>
   <widget class="QLabel" name="desc_3">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>360</y>
+     <x>640</x>
+     <y>350</y>
      <width>101</width>
      <height>21</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
-    <string>صالح من تاريخ</string>
+    <string>من</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -270,25 +286,28 @@ border-color:black;</string>
   <widget class="QLabel" name="desc_4">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>390</y>
+     <x>640</x>
+     <y>400</y>
      <width>101</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
-    <string>صالح الي تاريخ</string>
+    <string>الي</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -297,23 +316,25 @@ border-color:black;</string>
   <widget class="QDateTimeEdit" name="Qdate_to">
    <property name="geometry">
     <rect>
-     <x>508</x>
-     <y>390</y>
-     <width>111</width>
+     <x>470</x>
+     <y>400</y>
+     <width>161</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:darkblue;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;
-background-color: #9c9eff;</string>
+    <string notr="true"/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -338,23 +359,25 @@ background-color: #9c9eff;</string>
   <widget class="QDateTimeEdit" name="Qdate_from">
    <property name="geometry">
     <rect>
-     <x>508</x>
-     <y>360</y>
-     <width>111</width>
+     <x>470</x>
+     <y>350</y>
+     <width>161</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:darkblue;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;
-background-color: #9c9eff;</string>
+    <string notr="true"/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -379,11 +402,19 @@ background-color: #9c9eff;</string>
   <widget class="QComboBox" name="CMB_CouponDes">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>20</y>
-     <width>211</width>
+     <x>240</x>
+     <y>30</y>
+     <width>291</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -398,56 +429,49 @@ background-color: #9c9eff;</string>
    </property>
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>60</y>
-     <width>271</width>
+     <x>240</x>
+     <y>70</y>
+     <width>381</width>
      <height>25</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="maxLength">
+    <number>50</number>
    </property>
   </widget>
   <widget class="QLabel" name="desc_5">
    <property name="geometry">
     <rect>
      <x>670</x>
-     <y>60</y>
+     <y>70</y>
      <width>101</width>
      <height>21</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>الوصف الجديد</string>
@@ -459,18 +483,22 @@ border-color:black;</string>
   <widget class="QDoubleSpinBox" name="LE_desc_3">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>230</y>
-     <width>131</width>
+     <x>550</x>
+     <y>280</y>
+     <width>71</width>
      <height>22</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -482,24 +510,31 @@ border-color:black;</string>
   <widget class="QDoubleSpinBox" name="LE_desc_2">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>190</y>
-     <width>131</width>
+     <x>500</x>
+     <y>240</y>
+     <width>121</width>
      <height>22</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="minimum">
     <double>0.500000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>99999.000000000000000</double>
    </property>
   </widget>
   <widget class="QLabel" name="labe_id">
@@ -509,13 +544,15 @@ border-color:black;</string>
    <property name="geometry">
     <rect>
      <x>570</x>
-     <y>20</y>
+     <y>30</y>
      <width>51</width>
      <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -524,24 +561,28 @@ border-color:black;</string>
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QSpinBox" name="LE_desc_4">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>270</y>
-     <width>131</width>
+     <x>230</x>
+     <y>240</y>
+     <width>71</width>
      <height>22</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -553,18 +594,22 @@ border-color:black;</string>
   <widget class="QSpinBox" name="LE_desc_5">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>310</y>
-     <width>131</width>
+     <x>230</x>
+     <y>280</y>
+     <width>71</width>
      <height>22</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -577,21 +622,24 @@ border-color:black;</string>
    <property name="geometry">
     <rect>
      <x>670</x>
-     <y>100</y>
+     <y>130</y>
      <width>101</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>الشركة</string>
@@ -604,21 +652,24 @@ border-color:black;</string>
    <property name="geometry">
     <rect>
      <x>670</x>
-     <y>140</y>
+     <y>160</y>
      <width>101</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>الفرع</string>
@@ -627,6 +678,228 @@ border-color:black;</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>10</y>
+     <width>571</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>الوصف</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>110</y>
+     <width>571</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>البيانات الاساسية</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>210</y>
+     <width>571</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>نوع الخصم</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>320</y>
+     <width>381</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>الصلاحية</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>340</y>
+     <width>301</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_6">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>390</y>
+     <width>301</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_7">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>320</y>
+     <width>171</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>الحالة</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>280</y>
+     <width>31</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>%</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <zorder>groupBox_7</zorder>
+  <zorder>groupBox_6</zorder>
+  <zorder>groupBox_5</zorder>
+  <zorder>groupBox_4</zorder>
+  <zorder>groupBox_3</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>groupBox_2</zorder>
+  <zorder>desc</zorder>
+  <zorder>label_2</zorder>
+  <zorder>CMB_CouponStatus</zorder>
+  <zorder>BTN_editCoupon</zorder>
+  <zorder>radioButton_Value</zorder>
+  <zorder>radioButton_Percentage</zorder>
+  <zorder>checkBox_Multi</zorder>
+  <zorder>desc_2</zorder>
+  <zorder>desc_3</zorder>
+  <zorder>desc_4</zorder>
+  <zorder>Qdate_to</zorder>
+  <zorder>Qdate_from</zorder>
+  <zorder>CMB_CouponDes</zorder>
+  <zorder>LE_desc_1</zorder>
+  <zorder>desc_5</zorder>
+  <zorder>LE_desc_3</zorder>
+  <zorder>LE_desc_2</zorder>
+  <zorder>labe_id</zorder>
+  <zorder>LE_desc_4</zorder>
+  <zorder>LE_desc_5</zorder>
+  <zorder>desc_6</zorder>
+  <zorder>desc_7</zorder>
+  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -141,7 +141,7 @@ class CL_redGift(QtWidgets.QDialog):
                   "                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
             val = (
-                customer, 1, '1', 'H010', CL_userModule.user_name, creationDate, actualPoints, result[1], pts,
+                customer,4, '1', 'H010', CL_userModule.user_name, creationDate, actualPoints, result[1], pts,
                 float(result[1]) * pts, 'Gift redeem', remainingPoints,
                 '2',self.CMB_redeemItem.currentData())
             mycursor.execute(sql, val)
@@ -187,11 +187,20 @@ class CL_redGift(QtWidgets.QDialog):
     def FN_LOAD_REDEEM_ITEMS(self):
         conn = db1.connect()
         mycursor = conn.cursor()
-        sql = "select POS_GTIN_DESC_A ,REDEEM_ITEM.POS_GTIN from Hyper1_Retail.REDEEM_ITEM Inner join POS_ITEM on REDEEM_ITEM.POS_GTIN= POS_ITEM.POS_GTIN  where REDEEM_VALID_FROM <= %s and REDEEM_VALID_TO >= %s and REDEEM_STATUS = '1'"
+        self.CMB_redeemItem.clear()
+        branch = []
+        for id,name in CL_userModule.branch:
+            branch.append(id)
+        branch_list_tuple = tuple(branch)
+        sql = "select POS_GTIN_DESC_A ,REDEEM_ITEM.POS_GTIN from Hyper1_Retail.REDEEM_ITEM Inner join " \
+              "POS_ITEM on REDEEM_ITEM.POS_GTIN= POS_ITEM.POS_GTIN  where" \
+              " REDEEM_VALID_FROM <= %s and REDEEM_VALID_TO >= %s and REDEEM_STATUS = '1' and BRANCH_NO in {}".format(branch_list_tuple)
+        print(sql)
         currentDate = str(datetime.today().strftime('%Y-%m-%d'))
-        x = (currentDate, currentDate,)
+        x = (currentDate, currentDate)
         mycursor.execute(sql, x)
         myresult = mycursor.fetchall()
+        myresult = list(dict.fromkeys(myresult))
         for row, val in myresult:
             self.CMB_redeemItem.addItem(row, val)
         mycursor.close()

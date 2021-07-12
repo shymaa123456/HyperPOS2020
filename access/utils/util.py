@@ -50,8 +50,23 @@ class util():
         mycursor.execute(sql,val)
         myresult = mycursor.fetchone()
         mycursor.close()
+
         return myresult[0]
 
+    @staticmethod
+    def FN_VALIDATE_CUST(id ):
+
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
+            sql = "SELECT * FROM Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = '" + str(id) + "'"
+            #print(sql)
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            mycursor11.close()
+            if mycursor11.rowcount > 0:
+                return True
+            else:
+                return False
     @staticmethod
     def FN_GET_DISTRICT_DESC(id):
         conn = db1.connect()
@@ -137,6 +152,24 @@ class util():
         return myresult[0]
 
     @staticmethod
+    def FN_GET_DEPT_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT DEPARTMENT_DESC FROM Hyper1_Retail.DEPARTMENT where DEPARTMENT_ID = '" + id + "'")
+        myresult = mycursor.fetchone()
+        mycursor.close()
+        return myresult[0]
+
+    @staticmethod
+    def FN_GET_SEC_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT SECTION_DESC FROM Hyper1_Retail.SECTION where SECTION_ID = '" + id + "'")
+        myresult = mycursor.fetchone()
+        mycursor.close()
+        return myresult[0]
+
+    @staticmethod
     def FN_GET_COMP_ID(desc):
         conn = db1.connect()
         mycursor = conn.cursor()
@@ -154,3 +187,62 @@ class util():
         mycursor.close()
         return myresult[0]
 
+    @staticmethod
+    def FN_GET_BRANCHES(company):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+
+        sql_select_query = "SELECT BRANCH_DESC_A ,`BRANCH_NO`  FROM Hyper1_Retail.BRANCH where BRANCH_STATUS   = 1 and COMPANY_ID = '"+company+"'"
+        mycursor.execute( sql_select_query )
+        records = mycursor.fetchall()
+        mycursor
+        return records
+
+    @staticmethod
+    def FN_GET_COMPANIES():
+        conn = db1.connect()
+        mycursor = conn.cursor()
+
+        sql_select_query = "SELECT COMPANY_DESC ,COMPANY_ID FROM Hyper1_Retail.COMPANY where COMPANY_STATUS   = 1 "
+        mycursor.execute( sql_select_query )
+        records = mycursor.fetchall()
+        mycursor.close()
+        return records
+
+    @staticmethod
+    def FN_GET_DEPARTMENTS():
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        sql_select_query = "SELECT DEPARTMENT_DESC ,DEPARTMENT_ID FROM Hyper1_Retail.DEPARTMENT where DEPARTMENT_STATUS   = 1 "
+        mycursor.execute( sql_select_query )
+        records = mycursor.fetchall()
+        mycursor.close()
+        return records
+
+    @staticmethod
+    def FN_GET_SECTIONS(dept):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+
+        sql_select_query = "SELECT SECTION_DESC ,SECTION_ID  FROM Hyper1_Retail.SECTION where SECTION_STATUS   = 1 and `DEPARTMENT_ID`= '"+dept+"'"
+        mycursor.execute( sql_select_query )
+        records = mycursor.fetchall()
+        mycursor.close()
+        return records
+
+    def FN_GET_COMPLAIN_TYPE_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT CCT_DESC FROM Hyper1_Retail.CUSTOMER_COMPLAINT_TYPE where CCT_TYPE_ID = '" + id + "'")
+        myresult = mycursor.fetchone()
+        mycursor.close()
+        return myresult[0]
+
+    def FN_GET_COMPAIN_STATUS_DESC(id):
+        if id == "0":
+            status='Created'
+        elif id == "1":
+            status='Finished'
+        elif id == "2":
+            status = 'Inprogress'
+        return status

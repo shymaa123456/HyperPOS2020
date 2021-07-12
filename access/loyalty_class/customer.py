@@ -375,7 +375,7 @@ class CL_customer_create(QtWidgets.QDialog):
             self.parent.Qtable_customer.insertRow(0)
             self.name = self.LE_name.text().strip()
             self.custGroup = self.CMB_custGroup.currentData()
-            self.loyalityType =self.CMB_loyalityType.currentData()
+            self.loyalityType =self.CMB_loyalityTypecurrentData()
             self.phone = self.lE_phone .text().strip()
             self.mobile = self.lE_mobile.text().strip()
             self.job = self.LE_job.text().strip()
@@ -921,11 +921,15 @@ class CL_customer(QtWidgets.QDialog):
         self.window_two = CL_customer_modify(self)
         #get first selected row
         try:
-            rowNo=self.Qtable_customer.selectedItems()[0].row()
-            #if rowNo >0 :
-            id =self.Qtable_customer.item(rowNo, 0).text()
-            self.window_two.FN_LOAD_MODIFY(id)
-            self.window_two.show()
+            if len(self.Qtable_customer.selectedIndexes()) > 0:
+                rowNo=self.Qtable_customer.selectedItems()[0].row()
+                #if rowNo >0 :
+                id =self.Qtable_customer.item(rowNo, 0).text()
+                self.window_two.FN_LOAD_MODIFY(id)
+                self.window_two.show()
+            else:
+                 QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
+
         except Exception as err:
             print(err)
             #QtWidgets.QMessageBox.warning(self, "خطأ", "Please select the row you want to modify ")

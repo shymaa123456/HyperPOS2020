@@ -653,7 +653,9 @@ class CL_customer(QtWidgets.QDialog):
         records = mycursor.fetchall()
         self.CMB_branch.addItem('أختر الفرع', "")
         for row , val in records:
-            self.CMB_branch.addItem(row,val)
+            for br in CL_userModule.branch :
+                if str(val) in  br:
+                    self.CMB_branch.addItem(row,val)
         mycursor.close
 
     def FN_GET_REDEEMTPS(self):

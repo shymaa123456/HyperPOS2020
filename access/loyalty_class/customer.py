@@ -641,8 +641,35 @@ class CL_customer(QtWidgets.QDialog):
         self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD1)
         self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP1)
         self.fileName = ''
+        self.FN_GET_BRANCHES()
+        self.FN_GET_REDEEMTPS()
         self.setFixedWidth(576)
         self.setFixedHeight(178)
+    def FN_GET_BRANCHES(self):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        sql_select_query = "SELECT BRANCH_DESC_A ,`BRANCH_NO`  FROM Hyper1_Retail.BRANCH where BRANCH_STATUS   = 1 "
+        mycursor.execute( sql_select_query )
+        records = mycursor.fetchall()
+        self.CMB_branch.addItem('أختر الفرع', "")
+        for row , val in records:
+            for br in CL_userModule.branch :
+                if str(val) in  br:
+                    self.CMB_branch.addItem(row,val)
+        mycursor.close
+
+    def FN_GET_REDEEMTPS(self):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        self.CMB_redeemType.addItem('أختر النوع', "")
+        sql_select_query =    "SELECT REDEEMT_DESC,REDEEMT_TYPE_ID FROM Hyper1_Retail.REDEEM_TYPE where REDEEMT_STATUS = '1' order by REDEEMT_TYPE_ID*1   asc"
+        mycursor.execute(sql_select_query)
+        records = mycursor.fetchall()
+        for row , val in records:
+            self.CMB_redeemType.addItem(row,val)
+        mycursor.close
+        return records
+
     def FN_DISPLAY_TEMP(self):
          try:
              filename = QFileDialog.getSaveFileName(self, "Template File", '', "(*.xls)")
@@ -827,15 +854,18 @@ class CL_customer(QtWidgets.QDialog):
             #print(sql)
             mycursor11.execute(sql)
             myresult = mycursor11.fetchone()
-            mycursor11.close()
+
             if mycursor11.rowcount > 0:
+                mycursor11.close()
                 return True
             else:
+                mycursor11.close()
                 return False
 
     def FN_SAVE_UPLOAD1(self):
-
-        if self.fileName !='':
+        if len (self.CMB_branch.currentData())<=0 or len (self.CMB_redeemType.currentData()) <= 0:
+            QtWidgets.QMessageBox.warning(self, "خطأ", "يجب إختيار الفرع و نوع الإسترجاع ")
+        elif self.fileName !='':
             self.LE_fileName.setText(self.fileName)
             wb = xlrd.open_workbook( self.fileName )
             sheet = wb.sheet_by_index( 0 )
@@ -887,9 +917,9 @@ class CL_customer(QtWidgets.QDialog):
                              "`TRANS_CREATED_ON`,`POSC_POINTS_BEFORE`,`VALUE_OF_POINTS`,`TRANS_POINTS_QTY`,`TRANS_POINTS_VALUE`,`TRANS_REASON`,`POSC_POINTS_AFTER`,`TRANS_STATUS`)" \
                              "                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
-                        val=(cust,1,'1','H010',CL_userModule.user_name,creationDate,before_points,1,pts,1,reason,after_points,'2')
+                        val=(cust,self.CMB_redeemType.currentData(),'1',self.CMB_branch.currentData(),CL_userModule.user_name,creationDate,before_points,1,pts,1,reason,after_points,'2')
                         mycursor.execute(sql, val)
-
+                        db1.connectionCommit(conn)
                         mycursor.execute("SELECT max(cast(`MEMBERSHIP_POINTS_TRANS`  AS UNSIGNED)) FROM LOYALITY_POINTS_TRANSACTION_LOG")
                         myresult = mycursor.fetchone()
                         MEMBERSHIP_POINTS_TRANS = myresult[0]
@@ -904,7 +934,7 @@ class CL_customer(QtWidgets.QDialog):
                 sql00 = "  UNLOCK   tables    "
                 mycursor.execute(sql00)
                 db1.connectionCommit(conn)
-                QtWidgets.QMessageBox.warning(self, "تم", "تم رفع نقاط العملاء")
+                QtWidgets.QMessageBox.information(self, "تم", "تم رفع نقاط العملاء")
             elif error == 1:
                 QtWidgets.QMessageBox.warning(self, "خطأ", "الملف يحتوي على بعض الخانات الفارغه")
             elif error1 == 1:

@@ -195,7 +195,7 @@ class util():
         sql_select_query = "SELECT BRANCH_DESC_A ,`BRANCH_NO`  FROM Hyper1_Retail.BRANCH where BRANCH_STATUS   = 1 and COMPANY_ID = '"+company+"'"
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
-        mycursor
+        mycursor.close()
         return records
 
     @staticmethod

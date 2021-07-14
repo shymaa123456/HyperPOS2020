@@ -22,7 +22,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>110</y>
+     <y>82</y>
      <width>186</width>
      <height>31</height>
     </rect>
@@ -61,7 +61,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>50</y>
+     <y>22</y>
      <width>186</width>
      <height>31</height>
     </rect>
@@ -103,7 +103,7 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>50</y>
+     <y>22</y>
      <width>311</width>
      <height>25</height>
     </rect>
@@ -137,7 +137,7 @@
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>120</y>
+     <y>133</y>
      <width>321</width>
      <height>31</height>
     </rect>
@@ -159,6 +159,64 @@
    </property>
    <property name="flat">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="CMB_branch">
+   <property name="geometry">
+    <rect>
+     <x>338</x>
+     <y>62</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>473</x>
+     <y>62</y>
+     <width>41</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text">
+    <string>الفرع</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="CMB_redeemType">
+   <property name="geometry">
+    <rect>
+     <x>299</x>
+     <y>100</y>
+     <width>131</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>447</x>
+     <y>100</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text">
+    <string>نوع الإسترجاع</string>
    </property>
   </widget>
  </widget>

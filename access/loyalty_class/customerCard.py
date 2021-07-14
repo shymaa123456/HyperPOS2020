@@ -33,14 +33,52 @@ class CL_customerCard(QtWidgets.QDialog):
             self.CMB_status.addItem( "Active", '1')
             self.CMB_status.addItem("Inactive", '0')
             self.Qbtn_create.clicked.connect(self.FN_CREATE_CUSTCD)
-            self.LE_custNo.textChanged.connect(self.FN_GET_CUST)
+            self.LE_custNo.textChanged.connect(self.FN_GET_CUST_NAME)
             today_date = str(datetime.today().strftime('%Y-%m-%d'))
             today_date = today_date.split("-")
             d = QDate(int(today_date[0]), int(today_date[1]), int(today_date[2]))
             self.expire_date.setMinimumDate(d)
         except Exception as err:
             print(err)
-    def FN_GET_CUST (self):
+
+    def FN_LOAD_MODIFY(self):
+        filename = self.dirname + '/modifyCustomerCard.ui'
+        loadUi(filename, self)
+
+        try:
+
+            self.CMB_status.addItem("Inactive", '0')
+            self.Qbtn_modify.clicked.connect(self.FN_MODIFY_CUSTCD)
+            self.LE_custNo.textChanged.connect(self.FN_GET_CARD_DETAILS)
+            # today_date = str(datetime.today().strftime('%Y-%m-%d'))
+            # today_date = today_date.split("-")
+            # d = QDate(int(today_date[0]), int(today_date[1]), int(today_date[2]))
+            # self.expire_date.setMinimumDate(d)
+        except Exception as err:
+            print(err)
+    def FN_GET_CARD_DETAILS(self):
+        self.FN_GET_CUST_NAME ()
+
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        no = self.LE_custNo.text().strip()
+        sql = "SELECT `EXPIRY_DATE`,CARD_SERIAL FROM Hyper1_Retail.POS_CUSTOMER_CARD where POS_CUST_ID = '" + str(
+                no) + "' and CARD_STATUS = '1'"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchone()
+
+        if mycursor.rowcount > 0:
+            xto = myresult[0].split("-")
+
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+            self.expire_date.setDate(d)
+            self.card_serial = myresult[1]
+            #set the date
+            print("found")
+        else:
+            print("no data")
+
+    def FN_GET_CUST_NAME (self):
         conn = db1.connect()
         mycursor = conn.cursor()
         no = self.LE_custNo.text().strip()
@@ -54,7 +92,9 @@ class CL_customerCard(QtWidgets.QDialog):
 
         if mycursor.rowcount >0:
             self.LE_custName.setText(myresult[0])
+            print(myresult[0])
         mycursor.close()
+        return  self.LE_custName.text()
     def FN_VALIDATE_CUST(self,id ):
 
             conn = db1.connect()
@@ -65,9 +105,18 @@ class CL_customerCard(QtWidgets.QDialog):
             myresult = mycursor11.fetchone()
 
             if mycursor11.rowcount > 0:
-                mycursor11.close()
-                return True
+                sql = "SELECT * FROM Hyper1_Retail.POS_CUSTOMER_CARD where POS_CUST_ID = '" + str(id) + "' and CARD_STATUS = '1'"
+                mycursor11.execute(sql)
+                myresult = mycursor11.fetchone()
+                if mycursor11.rowcount > 0:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "العميل لديه كارت فعال ")
+                    mycursor11.close()
+                    return False
+                else:
+                    mycursor11.close()
+                    return True
             else:
+                QtWidgets.QMessageBox.warning(self, "خطأ", "العميل غير موجود ")
                 mycursor11.close()
                 return False
     def FN_GET_MASKED_CARD_SERIAL(self,id):
@@ -106,54 +155,28 @@ class CL_customerCard(QtWidgets.QDialog):
                         mycursor.close()
                         QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                         db1.connectionCommit(self.conn)
-                else:
-                    QtWidgets.QMessageBox.warning(self, "خطأ", "العميل غير موجود ")
+
+
         except Exception as err:
             print(err)
             # insert in  to db
-    def FN_LOAD_MODIFY(self):
-        print("here")
-    def FN_MODIFY_CUSTGP(self):
-        self.conn1 = db1.connect()
-        if len(self.Qtable_custGP.selectedIndexes()) >0 :
-            rowNo = self.Qtable_custGP.selectedItems()[0].row()
-            id = self.LB_custGpId.text().strip()
-            desc_old = self.Qtable_custGP.item(rowNo, 1).text()
-            desc = self.LE_desc.text().strip()
-            custGroup = self.CMB_custGroup.currentText()
-            if custGroup == 'Active':
-                status = 1
-            else:
-                status = 0
-            #
-            error = 0
-            if self.desc == '':
-                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
 
-            else:
-                if desc != desc_old:
-                    if self.FN_CHECK_DUP_NAME(desc,id) != False:
-                        QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
-                        error=1
-
-                if error!=1:
-                    mycursor = self.conn1.cursor()
-                    changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                    sql = "update  Hyper1_Retail.CUSTOMER_GROUP  set CG_Status= %s ,CG_DESC = %s ,CG_CHANGED_ON=%s , 	CG_CHANGED_BY =%s  where CG_GROUP_ID = %s"
-                    val = (status,desc, changeDate,CL_userModule.user_name,id)
-                    mycursor.execute(sql, val)
-                    #mycursor.close()
-                    #
-                    print(mycursor.rowcount, "record updated.")
-                    QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل")
-                    db1.connectionCommit(self.conn1)
-                    self.FN_GET_CUSTGPS()
-                    self.FN_CLEAR_FEILDS ()
+    def FN_MODIFY_CUSTCD(self):
+        self.conn = db1.connect()
+        mycursor = self.conn.cursor()
+        no = self.LE_custNo.text().strip()
+        name = self.LE_custName.text().strip()
+        if len(name) >0:
+            print(len (no))
+            sql = "update `Hyper1_Retail`.`POS_CUSTOMER_CARD` set CARD_STATUS = '0'  where CARD_SERIAL = %s "
+            val = (self.card_serial,)
+            mycursor.execute(sql, val)
+            mycursor.close()
+            QtWidgets.QMessageBox.information(self, "تم", "تم  التعديل")
+            db1.connectionCommit(self.conn)
         else:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
+            if len(no) > 0:
+                QtWidgets.QMessageBox.warning(self, "خطأ", " رقم العميل غير موجود")
+            else:
+                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال رقم العميل")
 
-    def FN_CLEAR_FEILDS (self):
-        self.LB_custGpId.clear()
-        self.LE_desc.clear()
-        self.CMB_custGroup.setCurrentText('Active')
-        self.LB_status.setText('1')

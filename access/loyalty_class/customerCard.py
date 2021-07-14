@@ -10,7 +10,7 @@ from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
 from access.utils.util import *
 from datetime import datetime
-from cryptography.fernet import Fernet
+#from cryptography.fernet import Fernet
 
 
 class CL_customerCard(QtWidgets.QDialog):
@@ -71,13 +71,14 @@ class CL_customerCard(QtWidgets.QDialog):
                 mycursor11.close()
                 return False
     def FN_GET_MASKED_CARD_SERIAL(self,id):
-        key = Fernet.generate_key()
-        print(key)
-        id = 'b'+ id
-        cipher_suite = Fernet(key)
-        ciphered_text = cipher_suite.encrypt(b'id')
-        print(ciphered_text)
-        return ciphered_text
+        print("here")
+        # key = Fernet.generate_key()
+        # print(key)
+        # id = 'b'+ id
+        # cipher_suite = Fernet(key)
+        # ciphered_text = cipher_suite.encrypt(b'id')
+        # print(ciphered_text)
+        # return ciphered_text
     def FN_CREATE_CUSTCD(self):
         try:
             self.conn = db1.connect()

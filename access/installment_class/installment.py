@@ -161,10 +161,13 @@ class CL_installment(QtWidgets.QDialog):
         self.RBTN_hyperone.clicked.connect(self.FN_InstallMent_Checked)
 
         #click button for upload accepted items                      Qtable_acceptedItems
-        self.Qbtn_loadItems.clicked.connect(self.FN_UploadAcceptedItems(self.Qtable_acceptedItems))
+        self.Qbtn_loadItems.clicked.connect(self.FN_UploadAcceptedItems(
+            self.Qtable_acceptedItems , self.checkBox_department ,self.Qcombo_department,
+            self.checkBox_section,self.Qcombo_section,self.checkBox_BMCLevel,self.Qcombo_BMCLevel))
 
         #click button for upload rejected items
-        self.Qbtn_loadRejectItem.clicked.connect(self.FN_UploadAcceptedItems(self.Qtable_rejectedItems))
+        self.Qbtn_loadRejectItem.clicked.connect(self.FN_UploadAcceptedItems(self.Qtable_rejectedItems ,self.checkBox_department ,self.Qcombo_department,
+            self.checkBox_section,self.Qcombo_section,self.checkBox_BMCLevel,self.Qcombo_BMCLevel))
 
         # click button for remove selected item from accepted Qtable
         self.Qbtn_deleteItem.clicked.connect(self.FN_remove_selected(self.Qtable_acceptedItems))
@@ -471,21 +474,21 @@ class CL_installment(QtWidgets.QDialog):
             self.Qcombo_vendor.addItem(row, val)
 
     #When click upload button to sellect csv file
-    def FN_UploadAcceptedItems(self,QTableWidgit):
+    def FN_UploadAcceptedItems(self,QTableWidgit ,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel):
         def FN_UploadAcceptedItems_internal():
             self.window_upload = CL_installment(self)
-            self.window_upload.FN_LOAD_UPLOAD(QTableWidgit)
+            self.window_upload.FN_LOAD_UPLOAD(QTableWidgit,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel)
             self.window_upload.show()
         return FN_UploadAcceptedItems_internal
 
     #Create Ui for upload screen
-    def FN_LOAD_UPLOAD(self,QTableWidgit):
+    def FN_LOAD_UPLOAD(self,QTableWidgit,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel):
             filename = self.dirname + '/uploadBarcodes.ui'
             loadUi(filename, self)
             self.fileName = ''
             print("QTableWidgit1", QTableWidgit)
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
-            self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD(QTableWidgit))
+            self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD(QTableWidgit,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel))
             self.BTN_saveTemp.clicked.connect(self.FN_DISPLAY_TEMP)
 
     #get sellected file name
@@ -497,7 +500,7 @@ class CL_installment(QtWidgets.QDialog):
         self.LE_fileName.setText(self.fileName)
 
     #Save Uploaded csv
-    def FN_SAVE_UPLOAD(self,QTableWidgit):
+    def FN_SAVE_UPLOAD(self,QTableWidgit,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel):
         def FN_SAVE_UPLOAD_internal():
             if self.fileName !='':
                 self.LE_fileName.setText(self.fileName)
@@ -529,7 +532,7 @@ class CL_installment(QtWidgets.QDialog):
                             QtWidgets.QMessageBox.warning(self, "Error", "Barcode Repeated")
 
                         #validate for check if barcode belong to selected BMC
-                        elif self.FN_ValidateIfRelateToBMC(str(sheet.cell_value(i,0))) == False:
+                        elif self.FN_ValidateIfRelateToDepartmentSectionBMC(str(sheet.cell_value(i,0)),checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel) == False:
                             QtWidgets.QMessageBox.warning(self, "Error", "Barcode doesn't belong to same BMC"+str(sheet.cell_value(i,0)))
                         else:
                             #for row_number, row_data in enumerate(records):
@@ -599,63 +602,71 @@ class CL_installment(QtWidgets.QDialog):
 
         return  BarcodeFound
 
-    # Validate if barcode belong to selected BMC
-    def FN_ValidateIfRelateToDepartmentSectionBMC(self,ValidateBarcode ):
-        if self.checkBox_BMCLevel.isChecked() and len(self.Qcombo_BMCLevel.currentData()) > 0:
-            for k in range(len(self.Qcombo_BMCLevel.currentData())):
+    # TODO Validate if barcode belong to selected BMC
+    def FN_ValidateIfRelateToDepartmentSectionBMC(self,ValidateBarcode,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel ):
+        if checkBox_BMCLevel.isChecked() and len(Qcombo_BMCLevel.currentData()) > 0:
+            for k in range(len(Qcombo_BMCLevel.currentData())):
                 self.conn = db1.connect()
                 mycursor = self.conn.cursor()
                 #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
-                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"'"
+                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND B.BMC_ID ='"+Qcombo_BMCLevel.currentData()[k]+"'"
 
                 mycursor.execute(sql)
                 myresult = mycursor.fetchall()
                 print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
                 if len(myresult) == 0:
-                    if k == len(self.Qcombo_BMCLevel.currentData()) :
+                    if k == len(Qcombo_BMCLevel.currentData()) :
                         return False
                 else:
                     return True
 
-        elif self.checkBox_section.isChecked() and len(self.Qcombo_section.currentData()) > 0 and not self.checkBox_BMCLevel.isChecked():
-            for k in range(len(self.Qcombo_section.currentData())):
+        elif checkBox_section.isChecked() and len(Qcombo_section.currentData()) > 0 and not checkBox_BMCLevel.isChecked():
+            for k in range(len(Qcombo_section.currentData())):
                 self.conn = db1.connect()
                 mycursor = self.conn.cursor()
                 #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
-                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND a.SECTION_ID ='"+self.Qcombo_section.currentData()[k]+"'"
+                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND B.SECTION_ID ='"+Qcombo_section.currentData()[k]+"'"
 
                 mycursor.execute(sql)
                 myresult = mycursor.fetchall()
                 print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
                 if len(myresult) == 0:
-                    if k == len(self.Qcombo_section.currentData()) :
+                    if k == len(Qcombo_section.currentData()) :
                         return False
                 else:
                     return True
 
-        elif self.checkBox_department.isChecked() and len(self.Qcombo_department.currentData()) > 0 and not self.Qcombo_section.isChecked() and not self.checkBox_BMCLevel.isChecked():
-            for k in range(len(self.Qcombo_department.currentData())):
+        elif checkBox_department.isChecked() and len(Qcombo_department.currentData()) > 0 and not checkBox_section.isChecked() and not checkBox_BMCLevel.isChecked():
+            for k in range(len(Qcombo_department.currentData())):
                 self.conn = db1.connect()
                 mycursor = self.conn.cursor()
                 #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
-                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND a.DEPARTMENT_ID ='"+self.Qcombo_department.currentData()[k]+"'"
+                sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND B.DEPARTMENT_ID ='"+Qcombo_department.currentData()[k]+"'"
 
                 mycursor.execute(sql)
                 myresult = mycursor.fetchall()
                 print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
                 if len(myresult) == 0:
-                    if k == len(self.Qcombo_BMCLevel.currentData()) :
+                    if k == len(Qcombo_BMCLevel.currentData()) :
                         return False
                 else:
                     return True
 
-    # Validate if barcode belong to selected BMC when select it
-    def FN_ValidateWhenSelectBMC(self,QTableWidgit ):
+    # TODO Validate if barcode belong to selected Department or sections or BMC
+    def FN_ValidateRejectedBarcodeWhenSelectDapartmentOrSectionsOrBMC(self,QTableWidgit ,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel):
+        print("FN_ValidateRejectedBarcodeWhenSelectDapartmentOrSectionsOrBMC")
         for i in range(QTableWidgit.rowCount()):
             barcode = QTableWidgit.item(i, 0).text()
-            if self.FN_ValidateIfRelateToDepartmentSectionBMC(barcode) == False:
-                QtWidgets.QMessageBox.warning(self, "Error",
-                                              "Barcode doesn't belong to same BMC" + str(barcode))
+            if self.FN_ValidateIfRelateToDepartmentSectionBMC(barcode,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel) == False:
+                #QtWidgets.QMessageBox.warning(self, "Error","Barcode doesn't belong to same BMC" + str(barcode))
+                QTableWidgit.item(i, 0).setBackground(QtGui.QColor(100, 100, 150))
+
+                return False #this barcode desn't belong to any selected department or selection ot BMC
+            elif self.FN_ValidateIfRelateToDepartmentSectionBMC(barcode,checkBox_department,
+                                                                Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel) == True:
+                if i ==QTableWidgit.rowCount():
+                    return True #this barcode belong to any selected department or selection ot BMC
+
 
     # search in Qtable csv
     def FN_Search_ByBarcode(self, QTableWidgit , QlabelEdit):
@@ -673,6 +684,10 @@ class CL_installment(QtWidgets.QDialog):
                         # 198, 207, 199
                         QTableWidgit.item(i, 0).setBackground(QtGui.QColor(100,100,150))
                         print("search_in")
+                    elif not barcode in SearchedBarcode:
+                        # 198, 207, 199
+                        QtWidgets.QMessageBox.warning(self, "Error", " الباركود غير موجود")
+                        print("search_Not_in")
         return FN_Search_ByBarcode_internal
 
     #SAve Tem of csv that you use it for upload
@@ -1002,6 +1017,10 @@ class CL_installment(QtWidgets.QDialog):
                 and self.QDubleSpiner_vendorRate.value() == 0 \
                 and self.QDubleSpiner_hperoneRate.value() == 0:
             QtWidgets.QMessageBox.warning(self, "Error", "يرجى أدخال نسبه الفائده للعميل او للممول او للهايبر")
+            error = 0
+        elif self.FN_ValidateRejectedBarcodeWhenSelectDapartmentOrSectionsOrBMC(self.Qtable_rejectedItems ,self.checkBox_department ,self.Qcombo_department,
+            self.checkBox_section,self.Qcombo_section,self.checkBox_BMCLevel,self.Qcombo_BMCLevel) == False:
+            QtWidgets.QMessageBox.warning(self, "Error", " يوجد باركودات مرفوضه ولا تنتمى لنفس القسم ")
             error = 0
 
         else:

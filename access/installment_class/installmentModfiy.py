@@ -115,6 +115,9 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.Qbtn_modifyInstallment.clicked.connect(self.FN_UpdateInstallemtProgram)
 
 
+    #Who active if installment is active
+
+
     #Get data for installment program
     def FN_SearchForInstallmentProgram(self):
         self.conn = db1.connect()
@@ -145,14 +148,30 @@ class CL_installmentModify(QtWidgets.QDialog):
         mycursor.close()
 
 
-    #save Installment program
+    #Validate installment program
+    def FN_ValidateInstallemt(self):
+        error=0
+        if len(self.LE_installmentTypeDesc.text()) == 0:
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى البحث اولا")
+            error = 0
+
+        elif not self.QRBTN_active.isChecked() and not self.QRBTN_inactive.isChecked():
+            QtWidgets.QMessageBox.warning(self, "Error", " يرجى البحث اولا")
+            error = 0
+        else:
+            error = 1
+
+        return error
+
+
+    # save Installment program
     def FN_UpdateInstallemtProgram(self):
         error = 0
-        Validation_For_installmentProgramm=0
+        Validation_For_installmentProgramm = 0
 
         error = self.FN_ValidateInstallemt()
         print(error)
-        if error !=0:
+        if error != 0:
 
             try:
                 self.conn = db1.connect()
@@ -168,11 +187,11 @@ class CL_installmentModify(QtWidgets.QDialog):
 
                 # insert to INSTALLMENT_PROGRAM
                 if self.QRBTN_active.isChecked():
-                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=1 , INST_CHANGED_ON = '"+ ModifingDateTime +"' , INST_CHANGED_BY = "+ CL_userModule.user_name +" , INST_ACTIVATED_BY = "+ CL_userModule.user_name +" where INST_PROGRAM_ID='"+self.QL_installmentNo.text()+"'"
+                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=1 , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " , INST_ACTIVATED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.QL_installmentNo.text() + "'"
                 elif self.QRBTN_inactive.isChecked():
-                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=0 , INST_CHANGED_ON = '"+ ModifingDateTime +"' , INST_CHANGED_BY = "+ CL_userModule.user_name +" , INST_DEACTIVATED_BY = "+ CL_userModule.user_name +" where INST_PROGRAM_ID='"+self.QL_installmentNo.text()+"'"
+                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=0 , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " , INST_DEACTIVATED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.QL_installmentNo.text() + "'"
 
-                print("sql2",sql2)
+                print("sql2", sql2)
                 mycursor.execute(sql2)
 
                 # # unlock table :
@@ -190,17 +209,3 @@ class CL_installmentModify(QtWidgets.QDialog):
                     mycursor.close()
                     self.conn.close()
                     print("connection is closed")
-
-    def FN_ValidateInstallemt(self):
-        error=0
-        if len(self.LE_installmentTypeDesc.text()) == 0:
-            QtWidgets.QMessageBox.warning(self, "Error", " يرجى البحث اولا")
-            error = 0
-
-        elif not self.QRBTN_active.isChecked() and not self.QRBTN_inactive.isChecked():
-            QtWidgets.QMessageBox.warning(self, "Error", " يرجى البحث اولا")
-            error = 0
-        else:
-            error = 1
-
-        return error

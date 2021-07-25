@@ -123,7 +123,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
             elif self.Qdate_from.date ()==self.Qdate_to.date ():
                 print(int(self.Qtime_from.dateTime().toString('hh')))
-                if  int(self.Qtime_from.dateTime().toString('hh'))> int(self.Qtime_to.dateTime().toString('hh')):
+                if  int(self.Qtime_from.dateTime().toString('hh'))+int(self.Qtime_from.dateTime().toString('mm'))> int(self.Qtime_to.dateTime().toString('hh'))+int(self.Qtime_to.dateTime().toString('mm')):
                     QtWidgets.QMessageBox.warning(self, "خطا", "قت الانتهاء يجب ان يكون اكبر من او يساوي وقت الانشاء")
                 else:
                     if self.checkBox_Multi.isChecked():

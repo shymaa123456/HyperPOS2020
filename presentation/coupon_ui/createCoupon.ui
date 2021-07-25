@@ -172,8 +172,8 @@
   <widget class="QLabel" name="label_num">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>470</y>
+     <x>190</x>
+     <y>410</y>
      <width>47</width>
      <height>21</height>
     </rect>
@@ -188,8 +188,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>470</y>
+     <x>240</x>
+     <y>410</y>
      <width>111</width>
      <height>21</height>
     </rect>
@@ -235,53 +235,10 @@
    <property name="title">
     <string>الصلاحية</string>
    </property>
-   <widget class="QDateTimeEdit" name="Qdate_from">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>41</y>
-      <width>161</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>29LT Bukra Regular</family>
-      <pointsize>9</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="minimumDateTime">
-     <datetime>
-      <hour>0</hour>
-      <minute>0</minute>
-      <second>0</second>
-      <year>2020</year>
-      <month>1</month>
-      <day>1</day>
-     </datetime>
-    </property>
-    <property name="displayFormat">
-     <string>yyyy-MM-dd</string>
-    </property>
-    <property name="calendarPopup">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QLabel" name="desc_3">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>290</x>
       <y>40</y>
       <width>51</width>
       <height>20</height>
@@ -311,7 +268,7 @@
    <widget class="QLabel" name="desc_4">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>290</x>
       <y>90</y>
       <width>51</width>
       <height>20</height>
@@ -341,7 +298,7 @@
    <widget class="QDateTimeEdit" name="Qdate_to">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>130</x>
       <y>90</y>
       <width>161</width>
       <height>21</height>
@@ -349,7 +306,6 @@
     </property>
     <property name="font">
      <font>
-      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -384,9 +340,9 @@
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>30</x>
       <y>30</y>
-      <width>281</width>
+      <width>311</width>
       <height>41</height>
      </rect>
     </property>
@@ -404,13 +360,68 @@
     <property name="title">
      <string/>
     </property>
+    <widget class="QDateTimeEdit" name="Qdate_from">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>10</y>
+       <width>161</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="minimumDateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>2020</year>
+       <month>1</month>
+       <day>1</day>
+      </datetime>
+     </property>
+     <property name="displayFormat">
+      <string>yyyy-MM-dd</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTimeEdit" name="Qtime_from">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>81</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="displayFormat">
+      <string>mm:hh AP</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>30</x>
       <y>80</y>
-      <width>281</width>
+      <width>311</width>
       <height>41</height>
      </rect>
     </property>
@@ -428,10 +439,22 @@
     <property name="title">
      <string/>
     </property>
+    <widget class="QTimeEdit" name="Qtime_to">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>81</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="displayFormat">
+      <string>mm:hh AP</string>
+     </property>
+    </widget>
    </widget>
    <zorder>groupBox_5</zorder>
    <zorder>groupBox_4</zorder>
-   <zorder>Qdate_from</zorder>
    <zorder>desc_3</zorder>
    <zorder>desc_4</zorder>
    <zorder>Qdate_to</zorder>
@@ -470,7 +493,6 @@
     </property>
     <property name="font">
      <font>
-      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -489,7 +511,7 @@
    <widget class="QRadioButton" name="radioButton_Percentage">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>430</x>
       <y>90</y>
       <width>111</width>
       <height>20</height>
@@ -510,7 +532,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>نسبة الخصم</string>
+     <string>خصم نسبة</string>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="LE_desc_2">
@@ -524,7 +546,6 @@
     </property>
     <property name="font">
      <font>
-      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -546,7 +567,7 @@
    <widget class="QRadioButton" name="radioButton_Value">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>430</x>
       <y>40</y>
       <width>111</width>
       <height>21</height>
@@ -570,7 +591,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>قيمة الخصم</string>
+     <string>خصم قيمة</string>
     </property>
     <property name="checked">
      <bool>true</bool>
@@ -644,7 +665,6 @@
     </property>
     <property name="font">
      <font>
-      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -671,7 +691,6 @@
     </property>
     <property name="font">
      <font>
-      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -698,7 +717,6 @@
     </property>
     <property name="font">
      <font>
-      <family>29LT Bukra Regular</family>
       <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -742,19 +760,6 @@
     <string>البيانات الأساسية</string>
    </property>
   </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>460</y>
-     <width>771</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <zorder>groupBox_3</zorder>
   <zorder>desc</zorder>
   <zorder>BTN_createCoupon</zorder>
@@ -765,7 +770,6 @@
   <zorder>label_2</zorder>
   <zorder>groupBox</zorder>
   <zorder>groupBox_2</zorder>
-  <zorder>line</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -144,7 +144,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.valueType = "COP_DISCOUNT_PERCENT"
                 self.valueData = self.LE_desc_3.text()
                 self.Othertype="COP_DISCOUNT_VAL"
-            dateto = record[12]
+            dateto = record[13]
             xto = dateto.split("-")
             d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)
@@ -166,8 +166,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.checkBox_Multi.setChecked(False)
                 self.LE_desc_5.setEnabled(False)
                 self.LE_desc_4.setEnabled(True)
-            self.CMB_CouponStatus.setCurrentIndex(int(record[13]))
-            self.oldstatus =str(record[13])
+            self.CMB_CouponStatus.setCurrentIndex(int(record[15]))
+            self.oldstatus =str(record[15])
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
             sql_select_Query = " select * FROM COUPON_SERIAL_PRINT_LOG  where COUPON_SERIAL_ID IN(SELECT COPS_SERIAL_ID FROM COUPON_SERIAL , COUPON WHERE COUPON_ID = COP_ID AND COP_ID =  %s) "

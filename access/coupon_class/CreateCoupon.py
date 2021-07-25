@@ -62,6 +62,8 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         self.desc_5.setStyleSheet(desc_5)
         path = css_path.__str__() + '/presentation/Themes/Style.css'
         self.setStyleSheet(open(path).read())
+        this_moment = QtCore.QTime.currentTime()
+        self.Qtime_from.setMinimumTime(this_moment)
 
     # Todo: method to make coupon multi use
     def FN_endableMultiUser(self):
@@ -112,10 +114,28 @@ class CL_CreateCoupon(QtWidgets.QDialog):
             self.conn.autocommit = False
             mycursor = self.conn.cursor()
             self.conn.start_transaction()
+
+            print(int(self.Qtime_from.dateTime().toString('hh')))
+
             if len(self.Qcombo_company.currentData())==0 or len(self.Qcombo_branch.currentData())==0 or len(self.LE_desc.text().strip())==0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
                 QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+            elif self.Qdate_from.date ()==self.Qdate_to.date ():
+                print(int(self.Qtime_from.dateTime().toString('hh')))
+                if  int(self.Qtime_from.dateTime().toString('hh'))> int(self.Qtime_to.dateTime().toString('hh')):
+                    QtWidgets.QMessageBox.warning(self, "خطا", "قت الانتهاء يجب ان يكون اكبر من او يساوي وقت الانشاء")
+                else:
+                    if self.checkBox_Multi.isChecked():
+                        self.serialCount = "1"
+                        self.MultiCount = self.LE_desc_5.text()
+                        self.MultiUse = "1"
+                        self.serialType = 1
+                    else:
+                        self.serialCount = self.LE_desc_4.text()
+                        self.MultiCount = "0"
+                        self.MultiUse = "0"
+                        self.serialType = 0
             else:
                 if self.checkBox_Multi.isChecked():
                     self.serialCount = "1"
@@ -151,13 +171,21 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                        "    Hyper1_Retail.COUPON_BRANCH   WRITE  "
                 mycursor.execute(sql0)
                 id = 0
-                sql = "INSERT INTO COUPON (COP_DESC, " + self.valueType + ", COP_SERIAL_COUNT,COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_VALID_FROM, COP_VALID_TO, COP_STATUS)" \
-                                                                          " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s) "
+                print("srial"+self.serialCount)
+                sql = "INSERT INTO COUPON (COP_DESC, " + self.valueType + ", COP_SERIAL_COUNT,COP_MULTI_USE, COP_MULTI_USE_COUNT, COP_CREATED_BY, COP_CREAED_ON, COP_VALID_FROM, COP_TIME_FROM, COP_VALID_TO, COP_TIME_TO, COP_STATUS)" \
+                                                                          " VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s , %s , %s, %s) "
                 print(self.Qdate_from.dateTime().toString('yyyy-MM-dd'))
-                val = (self.LE_desc.text(), self.valueData, self.serialCount, self.MultiUse,
-                       self.MultiCount, CL_userModule.user_name, creationDate,
+                val = (self.LE_desc.text(),
+                       self.valueData,
+                       self.serialCount,
+                       self.MultiUse,
+                       self.MultiCount,
+                       CL_userModule.user_name,
+                       creationDate,
                        self.Qdate_from.dateTime().toString('yyyy-MM-dd'),
+                       str(self.Qtime_from.dateTime().toString('hh:mm')),
                        self.Qdate_to.dateTime().toString('yyyy-MM-dd'),
+                       str(self.Qtime_to.dateTime().toString('hh:mm')),
                        '0')
                 mycursor.execute(sql, val)
                 indx = self.LE_desc.text()

@@ -43,6 +43,7 @@ from access.voucher_class.CreateVoucher import   CL_CreateVoucher
 from access.installment_class.Bank import CL_CreateBank
 from access.installment_class.installment import CL_installment
 from access.installment_class.installmentModfiy import CL_installmentModify
+from access.installment_class.Activeinstallment import CL_installment_Activation
 
 from access.voucher_class.CreateVoucher import CL_CreateVoucher
 from access.voucher_class.EditVoucher import CL_EditVoucher
@@ -148,6 +149,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Modify_Bank.triggered.connect(self.FN_Modify_Bank)
             self.QAct_Install_Add.triggered.connect(self.FN_CREATE_installment)
             self.QAct_Install_Edit.triggered.connect(self.FN_Modify_installment)
+            self.QAct_Install_Activate_Deactivate.triggered.connect(self.FN_Active_installment)
 
             # Parameter Form
             self.QAct_Parameter.triggered.connect(self.FN_Parameters)
@@ -471,4 +473,10 @@ class CL_main(QtWidgets.QMainWindow):
     def FN_Modify_installment(self):
         self.window_two = CL_installmentModify(self)
         self.window_two.FN_LOAD_Modify()
+        self.window_two.show()
+
+    #Active installment program
+    def FN_Active_installment(self):
+        self.window_two = CL_installment_Activation(self)
+        self.window_two.FN_LOAD_Activation()
         self.window_two.show()

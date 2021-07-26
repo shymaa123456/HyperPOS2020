@@ -168,6 +168,18 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.LE_desc_4.setEnabled(True)
             self.CMB_CouponStatus.setCurrentIndex(int(record[15]))
             self.oldstatus =str(record[15])
+
+
+            timefrom = record[12]
+            tfrom = timefrom.split(":")
+            some_time = QtCore.QTime(int(tfrom[0]), int(tfrom[1]), 00)
+            self.Qtime_from.setTime(some_time)
+
+            timeto = record[14]
+            tto = timeto.split(":")
+            some_time = QtCore.QTime(int(tto[0]), int(tto[1]), 00)
+            self.Qtime_to.setTime(some_time)
+
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
             sql_select_Query = " select * FROM COUPON_SERIAL_PRINT_LOG  where COUPON_SERIAL_ID IN(SELECT COPS_SERIAL_ID FROM COUPON_SERIAL , COUPON WHERE COUPON_ID = COP_ID AND COP_ID =  %s) "
@@ -247,6 +259,12 @@ class CL_EditCoupon(QtWidgets.QDialog):
                     QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
                 elif self.Qdate_from.dateTime()<self.dfrom:
                     QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانشاء الجديد يجب ان يكون اكبر او يساوي تاريخ الانشاء قبل التعديل")
+                elif (self.Qdate_from.date() == self.Qdate_to.date()) and int(self.Qtime_from.dateTime().toString('hh')) + int(
+                            self.Qtime_from.dateTime().toString('mm')) > int(
+                            self.Qtime_to.dateTime().toString('hh')) + int(self.Qtime_to.dateTime().toString('mm')):
+                            QtWidgets.QMessageBox.warning(self, "خطا",
+                            "وقت الانتهاء يجب ان يكون اكبر من او يساوي وقت الانشاء")
+
                 else:
                     mycursor = self.conn.cursor()
                     creationDate = str(datetime.today().strftime('%Y-%m-%d'))
@@ -287,7 +305,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                         sql = "update COUPON set COP_DESC='" + self.LE_desc_1.text().strip() + "'," + self.valueType + "=" + self.valueData +","+self.Othertype+"="+"null"+",COP_SERIAL_COUNT=" + self.serialCount + ",COP_MULTI_USE=" + self.MultiUse + ",COP_MULTI_USE_COUNT=" + self.MultiCount + ",COP_CHANGED_BY='" + CL_userModule.user_name + "',COP_CHANGED_ON='" + creationDate + "',COP_VALID_FROM='" + self.Qdate_from.dateTime().toString(
                             'dd-MM-yyyy') + "',COP_VALID_TO='" + self.Qdate_to.dateTime().toString(
                             'dd-MM-yyyy') + "',COP_STATUS='" + str(
-                            self.CMB_CouponStatus.currentIndex()) + "' where COP_ID='" + str(
+                            self.CMB_CouponStatus.currentIndex()) + "',COP_TIME_FROM='"+str(self.Qtime_from.dateTime().toString('hh:mm'))+"',COP_TIME_TO='"+str(self.Qtime_to.dateTime().toString('hh:mm'))+"' where COP_ID='" + str(
                             self.CMB_CouponDes.currentData()) + "'"
                         print(sql)
                         mycursor.execute(sql)

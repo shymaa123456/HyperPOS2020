@@ -259,9 +259,9 @@
   <widget class="QLabel" name="desc_3">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>700</x>
      <y>350</y>
-     <width>101</width>
+     <width>41</width>
      <height>21</height>
     </rect>
    </property>
@@ -286,9 +286,9 @@
   <widget class="QLabel" name="desc_4">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>700</x>
      <y>400</y>
-     <width>101</width>
+     <width>41</width>
      <height>21</height>
     </rect>
    </property>
@@ -316,7 +316,7 @@
   <widget class="QDateTimeEdit" name="Qdate_to">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>540</x>
      <y>400</y>
      <width>161</width>
      <height>20</height>
@@ -359,7 +359,7 @@
   <widget class="QDateTimeEdit" name="Qdate_from">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>540</x>
      <y>350</y>
      <width>161</width>
      <height>20</height>
@@ -773,6 +773,32 @@
    <property name="title">
     <string>الصلاحية</string>
    </property>
+   <widget class="QTimeEdit" name="Qtime_from">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>30</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="displayFormat">
+     <string>mm:hh AP</string>
+    </property>
+   </widget>
+   <widget class="QTimeEdit" name="Qtime_to">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>80</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="displayFormat">
+     <string>mm:hh AP</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_5">
    <property name="geometry">

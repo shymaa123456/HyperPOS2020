@@ -121,21 +121,9 @@ class CL_CreateCoupon(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
                 QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
-            elif self.Qdate_from.date ()==self.Qdate_to.date ():
-                print(int(self.Qtime_from.dateTime().toString('hh')))
-                if  int(self.Qtime_from.dateTime().toString('hh'))+int(self.Qtime_from.dateTime().toString('mm'))> int(self.Qtime_to.dateTime().toString('hh'))+int(self.Qtime_to.dateTime().toString('mm')):
-                    QtWidgets.QMessageBox.warning(self, "خطا", "قت الانتهاء يجب ان يكون اكبر من او يساوي وقت الانشاء")
-                else:
-                    if self.checkBox_Multi.isChecked():
-                        self.serialCount = "1"
-                        self.MultiCount = self.LE_desc_5.text()
-                        self.MultiUse = "1"
-                        self.serialType = 1
-                    else:
-                        self.serialCount = self.LE_desc_4.text()
-                        self.MultiCount = "0"
-                        self.MultiUse = "0"
-                        self.serialType = 0
+            elif (self.Qdate_from.date ()==self.Qdate_to.date ()) and int(self.Qtime_from.dateTime().toString('hh'))+int(self.Qtime_from.dateTime().toString('mm'))> int(self.Qtime_to.dateTime().toString('hh'))+int(self.Qtime_to.dateTime().toString('mm')):
+                    QtWidgets.QMessageBox.warning(self, "خطا", "وقت الانتهاء يجب ان يكون اكبر من او يساوي وقت الانشاء")
+
             else:
                 if self.checkBox_Multi.isChecked():
                     self.serialCount = "1"

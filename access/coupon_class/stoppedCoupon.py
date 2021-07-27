@@ -56,7 +56,9 @@ class CL_modifyCoupon(QtWidgets.QDialog):
             mycursor = self.conn.cursor()
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
-            if (record[2]!=None and len(record[2]) > 0):
+            self.COPDISCOUNToldVAL=str(record[2])
+
+            if (record[2]!=None and len(self.COPDISCOUNToldVAL) > 0):
                 self.radioButton_Value.setChecked(True)
                 self.LE_desc_2.setValue(float(record[2]))
                 self.LE_desc_3.clear()
@@ -68,7 +70,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
                 self.LE_desc_2.clear()
                 self.valueType = "COP_DISCOUNT_PERCENT"
                 self.valueData = self.LE_desc_3.text()
-            dateto = record[12]
+            dateto = record[13]
             xto = dateto.split("-")
             d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)

@@ -287,6 +287,7 @@ class CL_installment(QtWidgets.QDialog):
             self.Qbtn_deleteItem.setEnabled(False)
             self.Qcombo_department.setCurrentIndex(-1)
 
+
         else:
             self.Qcombo_department.unCheckedList()
             self.Qcombo_department.setEnabled(False)
@@ -301,6 +302,7 @@ class CL_installment(QtWidgets.QDialog):
 
     #get Department list
     def FN_GET_Department(self):
+        self.Qcombo_department.clear()
         i = 0
         try:
         # Todo: method for fills the section combobox
@@ -318,7 +320,7 @@ class CL_installment(QtWidgets.QDialog):
                     i += 1
             mycursor.close()
             """
-            print(CL_userModule.section)
+            print("FN_GET_Department",CL_userModule.section)
 
             for row,val,row1,val1 in CL_userModule.section:
                     self.Qcombo_department.addItem( val1 , row1)
@@ -655,18 +657,20 @@ class CL_installment(QtWidgets.QDialog):
     # TODO Validate if barcode belong to selected Department or sections or BMC
     def FN_ValidateRejectedBarcodeWhenSelectDapartmentOrSectionsOrBMC(self,QTableWidgit ,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel):
         print("FN_ValidateRejectedBarcodeWhenSelectDapartmentOrSectionsOrBMC")
-        for i in range(QTableWidgit.rowCount()):
-            barcode = QTableWidgit.item(i, 0).text()
-            if self.FN_ValidateIfRelateToDepartmentSectionBMC(barcode,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel) == False:
-                #QtWidgets.QMessageBox.warning(self, "Error","Barcode doesn't belong to same BMC" + str(barcode))
-                QTableWidgit.item(i, 0).setBackground(QtGui.QColor(100, 100, 150))
+        if QTableWidgit.rowCount() >0 :
+            for i in range(QTableWidgit.rowCount()):
+                barcode = QTableWidgit.item(i, 0).text()
+                if self.FN_ValidateIfRelateToDepartmentSectionBMC(barcode,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel) == False:
+                    #QtWidgets.QMessageBox.warning(self, "Error","Barcode doesn't belong to same BMC" + str(barcode))
+                    QTableWidgit.item(i, 0).setBackground(QtGui.QColor(100, 100, 150))
 
-                return False #this barcode desn't belong to any selected department or selection ot BMC
-            elif self.FN_ValidateIfRelateToDepartmentSectionBMC(barcode,checkBox_department,
-                                                                Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel) == True:
-                if i ==QTableWidgit.rowCount():
-                    return True #this barcode belong to any selected department or selection ot BMC
-
+                    return False #this barcode desn't belong to any selected department or selection ot BMC
+                elif self.FN_ValidateIfRelateToDepartmentSectionBMC(barcode,checkBox_department,
+                                                                    Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel) == True:
+                    if i ==QTableWidgit.rowCount():
+                        return True #this barcode belong to any selected department or selection ot BMC
+        else:
+            return True
 
     # search in Qtable csv
     def FN_Search_ByBarcode(self, QTableWidgit , QlabelEdit):
@@ -810,7 +814,7 @@ class CL_installment(QtWidgets.QDialog):
                     creationDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
                     #insert to INSTALLMENT_PROGRAM
-                    sql2 = "INSERT INTO INSTALLMENT_PROGRAM (INST_DESC, INSTR_RULEID, INST_CREATED_ON ,  INST_CREATED_BY, INST_VALID_FROM ,INST_VALID_TO ,INST_ADMIN_EXPENSES , INST_ADMIN_EXPENSES_MIN , INST_ADMIN_EXPENSES_MAX ,INST_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                    sql2 = "INSERT INTO INSTALLMENT_PROGRAM (INST_DESC, INSTR_RULEID, INST_CREATED_ON ,  INST_CREATED_BY, INST_VALID_FROM ,INST_VALID_TO ,INST_ADMIN_EXPENSES_PERC , INST_ADMIN_EXPENSES_MIN , INST_ADMIN_EXPENSES_MAX ,INST_STATUS) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                     val2 = (
                          self.QTEdit_descInstallment.toPlainText(), self.id_INSTR_RULEID ,creationDateTime,
                         CL_userModule.user_name, FromDateTime,ToDateTime   ,self.QDSpinBox_adminExpendses.value(),
@@ -957,7 +961,7 @@ class CL_installment(QtWidgets.QDialog):
     # TODO Validat before save program
     # to save installment
     def FN_ValidateInstallemt(self):
-        print(self.Qcombo_installmentType.currentText())
+        print("FN_ValidateInstallemt",self.Qcombo_installmentType.currentText())
         error = 0
 
         if self.Qcombo_installmentType.currentText() == '':

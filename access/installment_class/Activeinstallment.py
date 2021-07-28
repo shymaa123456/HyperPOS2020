@@ -9,6 +9,8 @@ from datetime import datetime
 class CL_installment_Activation(QtWidgets.QDialog):
     dirname = ''
     parent = ''
+    oldstatus=""
+    InstallmentNo=""
     def __init__(self,parentInit):
         super(CL_installment_Activation, self).__init__()
         cwd = Path.cwd()
@@ -30,11 +32,12 @@ class CL_installment_Activation(QtWidgets.QDialog):
 
     #Get data for installment program
     def FN_SearchForInstallmentProgram(self):
+        self.InstallmentNo=self.QL_installmentNo.text()
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
 
         # insert to INSTALLMENT_PROGRAM
-        sql2 = "SELECT INST_DESC,INST_STATUS FROM INSTALLMENT_PROGRAM WHERE INST_PROGRAM_ID='"+self.QL_installmentNo.text()+"'"
+        sql2 = "SELECT INST_DESC,INST_STATUS FROM INSTALLMENT_PROGRAM WHERE INST_PROGRAM_ID='"+self.InstallmentNo+"'"
 
         mycursor.execute(sql2)
         records = mycursor.fetchall()
@@ -47,8 +50,10 @@ class CL_installment_Activation(QtWidgets.QDialog):
 
                 if INST_STATUS == str(0):
                     self.QRBTN_inactive.setChecked(True)
+                    self.oldstatus=str(0)
                 elif INST_STATUS ==str(1):
                     self.QRBTN_active.setChecked(True)
+                    self.oldstatus=str(1)
 
         else:
             print("Program doesn't exist")
@@ -74,7 +79,7 @@ class CL_installment_Activation(QtWidgets.QDialog):
                 self.conn.start_transaction()
 
                 # # lock table for new record:
-                sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE "
+                sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE , Hyper1_Retail.SYS_CHANGE_LOG  WRITE"
                 mycursor.execute(sql0)
 
                 #Check if this program create before or not
@@ -86,15 +91,29 @@ class CL_installment_Activation(QtWidgets.QDialog):
                 #get values for insert in INSTALLMENT_PROGRAM table
 
                 ModifingDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                creationDate = str(datetime.today().strftime('%Y-%m-%d'))
 
                 # insert to INSTALLMENT_PROGRAM
                 if self.QRBTN_active.isChecked():
-                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=1 , INST_CHANGED_ON = '"+ ModifingDateTime +"' , INST_CHANGED_BY = "+ CL_userModule.user_name +" , INST_ACTIVATED_BY = "+ CL_userModule.user_name +" where INST_PROGRAM_ID='"+self.QL_installmentNo.text()+"'"
+                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=1 , INST_CHANGED_ON = '"+ ModifingDateTime +"' , INST_CHANGED_BY = "+ CL_userModule.user_name +" , INST_ACTIVATED_BY = "+ CL_userModule.user_name +" where INST_PROGRAM_ID='"+self.InstallmentNo+"'"
+                    val8 = (self.InstallmentNo, 'INSTALLMENT_PROGRAM', 'INST_STATUS', self.oldstatus,
+                            str(1),
+                            creationDate,
+                            CL_userModule.user_name)
                 elif self.QRBTN_inactive.isChecked():
-                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=0 , INST_CHANGED_ON = '"+ ModifingDateTime +"' , INST_CHANGED_BY = "+ CL_userModule.user_name +" , INST_DEACTIVATED_BY = "+ CL_userModule.user_name +" where INST_PROGRAM_ID='"+self.QL_installmentNo.text()+"'"
+                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=0 , INST_CHANGED_ON = '"+ ModifingDateTime +"' , INST_CHANGED_BY = "+ CL_userModule.user_name +" , INST_DEACTIVATED_BY = "+ CL_userModule.user_name +" where INST_PROGRAM_ID='"+self.InstallmentNo+"'"
+                    val8 = (self.InstallmentNo, 'INSTALLMENT_PROGRAM', 'INST_STATUS', self.oldstatus,
+                        str(0),
+                        creationDate,
+                        CL_userModule.user_name)
 
                 print("sql2",sql2)
                 mycursor.execute(sql2)
+
+                #Insert in log table
+                sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+
+                mycursor.execute(sql8, val8)
 
                 # # unlock table :
                 sql00 = "  UNLOCK   tables    "

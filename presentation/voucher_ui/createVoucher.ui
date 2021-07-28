@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>407</width>
-    <height>487</height>
+    <height>542</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>14</x>
-     <y>450</y>
+     <y>500</y>
      <width>131</width>
      <height>25</height>
     </rect>
@@ -138,8 +138,8 @@
   <widget class="QLabel" name="desc_4">
    <property name="geometry">
     <rect>
-     <x>104</x>
-     <y>410</y>
+     <x>330</x>
+     <y>450</y>
      <width>67</width>
      <height>17</height>
     </rect>
@@ -154,10 +154,10 @@
   <widget class="QDateTimeEdit" name="Qdate_to">
    <property name="geometry">
     <rect>
-     <x>14</x>
-     <y>410</y>
-     <width>79</width>
-     <height>18</height>
+     <x>200</x>
+     <y>450</y>
+     <width>121</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="layoutDirection">
@@ -183,10 +183,10 @@
   <widget class="QDateTimeEdit" name="Qdate_from">
    <property name="geometry">
     <rect>
-     <x>234</x>
+     <x>200</x>
      <y>410</y>
-     <width>79</width>
-     <height>18</height>
+     <width>121</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="layoutDirection">
@@ -270,7 +270,7 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>450</y>
+     <y>500</y>
      <width>47</width>
      <height>21</height>
     </rect>
@@ -283,7 +283,7 @@
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>450</y>
+     <y>500</y>
      <width>71</width>
      <height>20</height>
     </rect>
@@ -576,6 +576,32 @@
    </property>
    <property name="text">
     <string>PREPAID (Visa,Cash)</string>
+   </property>
+  </widget>
+  <widget class="QTimeEdit" name="Qtime_from">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>410</y>
+     <width>81</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="displayFormat">
+    <string>mm:hh AP</string>
+   </property>
+  </widget>
+  <widget class="QTimeEdit" name="Qtime_to">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>450</y>
+     <width>81</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="displayFormat">
+    <string>mm:hh AP</string>
    </property>
   </widget>
  </widget>

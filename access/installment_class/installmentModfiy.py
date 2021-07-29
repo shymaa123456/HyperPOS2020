@@ -80,7 +80,6 @@ class CL_installmentModify(QtWidgets.QDialog):
         datefrom = str(datetime.today().strftime('%Y-%m-%d'))
         xfrom = datefrom.split("-")
         d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
-        self.Qdate_from.setMinimumDate(d)
         self.Qdate_to.setMinimumDate(d)
 
         # Get customer Groupe
@@ -520,34 +519,39 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.QTEdit_descInstallment.setText(INST_DESC)
 
         self.oldstatusDateTo=INST_VALID_TO
-        """
-        print("INST_VALID_TO",INST_VALID_TO)
-        dateto = str(INST_VALID_TO)
-        #rx = QRegExp("(\\ |\\,|\\.|\\:|\\t)") # RegEx for ' ' or ',' or '.' or ':' or '\t'
-        #query = sometext.split(rx)
-        xfromt = dateto.split("\\ |\\,|\\.|\\:|\\t")
-        xfromtTimeH =xfromt[3] #dateto.split(" ",":")
-        xfromtTimeM = xfromt[4] #dateto.split(":")
-        print("xfromtTimeH",xfromtTimeH)
-        print("xfromtTimeM",xfromtTimeM)
 
-        dt = QDate(int(xfromt[0]), int(xfromt[1]), int(xfromt[2]))
-        self.Qdate_from.setDate(dt)
+        #convert datatime as varchar to date and time
+        #todo INST_VALID_TO
+        dateto = INST_VALID_TO
+        print("dateto",dateto)
+        dto = dateto.split("-")
+        dtotdd=dto[2].split(" ")                               #'15 13:36'
+        print("dtotdd",dtotdd[0])
+        print("dtotdd",dtotdd)
+        dtotm=dtotdd[1].split(":")
+        print("dtotm",dtotm[0])
+        print("dtotm", dtotm[1])
+        some_dateTo = QtCore.QDate(int(dto[0]), int(dto[1]), int(dtotdd[0]))
+        print("some_dateTo",some_dateTo)
+        self.Qdate_to.setDate(some_dateTo)
+        some_timeTo = QtCore.QTime(int(dtotm[0]), int(dtotm[1]))
+        self.Qtime_to.setTime(some_timeTo)
+        #Todo INST_VALID_FROM
+        dateto = INST_VALID_FROM
+        print("dateto", dateto)
+        dto = dateto.split("-")
+        dtotdd = dto[2].split(" ")  # '15 13:36'
+        print("dtotdd", dtotdd[0])
+        print("dtotdd", dtotdd)
+        dtotm = dtotdd[1].split(":")
+        print("dtotm", dtotm[0])
+        print("dtotm", dtotm[1])
+        some_datefrom = QtCore.QDate(int(dto[0]), int(dto[1]), int(dtotdd[0]))
+        print("some_dateTo", some_datefrom)
+        self.Qdate_from.setDate(some_datefrom)
+        some_timeTo = QtCore.QTime(int(dtotm[0]), int(dtotm[1]))
+        self.Qtime_from.setTime(some_timeTo)
 
-        print("INST_VALID_FROM", INST_VALID_FROM)
-        datefrom = str(INST_VALID_FROM)
-        xfrom = datefrom.split("-")
-
-        d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
-        self.Qdate_from.setDate(d)
-
-
-        datefrom = str(datetime.today().strftime('%Y-%m-%d'))
-        xfrom = datefrom.split("-")
-        d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
-        self.Qdate_from.setMinimumDate(d)
-        self.Qdate_to.setMinimumDate(d)
-        """
         # Get selected Data For company and branch
         self.FN_GetSlectedCompanyAndBranchForThisProgram(mycursor)
 
@@ -807,22 +811,27 @@ class CL_installmentModify(QtWidgets.QDialog):
                 ModifingDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                 creationDate = str(datetime.today().strftime('%Y-%m-%d'))
 
+                ToDateTime = self.Qdate_to.dateTime().toString('yyyy-MM-dd') + " " + str(self.Qtime_to.dateTime().toString('hh:mm'))
+
                 # insert to INSTALLMENT_PROGRAM
-                if self.QRBTN_active.isChecked():
-                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=1 , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " , INST_ACTIVATED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
-                elif self.QRBTN_inactive.isChecked():
-                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_STATUS=0 , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " , INST_DEACTIVATED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
+                if ToDateTime != self.oldstatusDateTo :
+                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_VALID_TO='"+ToDateTime+"' , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " , INST_ACTIVATED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
+                    print("sql2", sql2)
+                    mycursor.execute(sql2)
 
-                print("sql2", sql2)
-                mycursor.execute(sql2)
+                    # TODO Insert in log table
+                    sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
 
-                # TODO Insert in log table
-                sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                    val8 = (self.InstallmentNo, 'INSTALLMENT_PROGRAM', 'INST_VALID_TO', self.oldstatusDateTo,
+                            ToDateTime,
+                            creationDate,
+                            CL_userModule.user_name)
+                    print("sql8", sql8)
+                    mycursor.execute(sql8,val8)
 
-                val8 = (self.InstallmentNo, 'INSTALLMENT_PROGRAM', 'INST_VALID_TO', self.oldstatusDateTo,
-                        str(0),
-                        creationDate,
-                        CL_userModule.user_name)
+                elif ToDateTime == self.oldstatusDateTo:
+                    QtWidgets.QMessageBox.warning(self, "Error", "Data doesn't change")
+
 
                 # # unlock table :
                 sql00 = "  UNLOCK   tables    "

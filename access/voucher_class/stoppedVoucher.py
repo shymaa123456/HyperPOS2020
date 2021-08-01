@@ -31,6 +31,13 @@ class CL_modifyVoucher(QtWidgets.QDialog):
             self.FN_getStatus()
             self.BTN_modifyCoupon.clicked.connect(self.FN_UpdateStatus)
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+
+            # Set Style
+            # self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except:
             print(sys.exc_info())
 

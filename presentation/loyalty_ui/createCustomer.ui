@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1015</width>
-    <height>546</height>
+    <width>1000</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -16,44 +16,43 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>550</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000</width>
+    <height>550</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>إنشاء عميل</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(198, 207, 199);</string>
+   <string notr="true"/>
   </property>
   <widget class="QPushButton" name="BTN_createCustomer">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>500</y>
-     <width>191</width>
-     <height>31</height>
+     <y>460</y>
+     <width>241</width>
+     <height>71</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>إنشاء عميل عضويه</string>
@@ -62,11 +61,19 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>473</x>
+     <x>463</x>
      <y>122</y>
      <width>531</width>
      <height>121</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
@@ -79,13 +86,29 @@
      <rect>
       <x>432</x>
       <y>20</y>
-      <width>91</width>
+      <width>93</width>
       <height>91</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
      <item>
       <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>رقم الهاتف  *</string>
        </property>
@@ -93,6 +116,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>رقم الموبايل *</string>
        </property>
@@ -100,6 +131,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_10">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>اﻹيميل *</string>
        </property>
@@ -107,6 +146,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_16">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>البطاقه *</string>
        </property>
@@ -120,12 +167,28 @@
       <x>70</x>
       <y>10</y>
       <width>281</width>
-      <height>100</height>
+      <height>104</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_6">
      <item>
       <widget class="QLineEdit" name="lE_phone">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -158,6 +221,14 @@
      </item>
      <item>
       <widget class="QLineEdit" name="lE_mobile">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -190,6 +261,14 @@
      </item>
      <item>
       <widget class="QLineEdit" name="LE_email">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -221,6 +300,14 @@
      </item>
      <item>
       <widget class="QLineEdit" name="LE_nationalID">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -256,11 +343,19 @@
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>473</x>
+     <x>463</x>
      <y>248</y>
      <width>531</width>
      <height>131</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
@@ -277,9 +372,25 @@
       <height>91</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <layout class="QVBoxLayout" name="verticalLayout_7">
      <item>
       <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>الوظيفه *</string>
        </property>
@@ -287,6 +398,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_11">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>الشركه</string>
        </property>
@@ -294,6 +413,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_13">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>تليفون العمل</string>
        </property>
@@ -301,6 +428,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_12">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>عنوان العمل</string>
        </property>
@@ -317,9 +452,25 @@
       <height>119</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <layout class="QVBoxLayout" name="verticalLayout_8">
      <item>
       <widget class="QLineEdit" name="LE_job">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -354,6 +505,14 @@
      </item>
      <item>
       <widget class="QLineEdit" name="LE_company">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -389,6 +548,14 @@
      </item>
      <item>
       <widget class="QLineEdit" name="LE_workPhone">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -421,6 +588,14 @@
      </item>
      <item>
       <widget class="QLineEdit" name="LE_workAddress">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -466,6 +641,14 @@
      <height>211</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
@@ -477,13 +660,29 @@
      <rect>
       <x>359</x>
       <y>20</y>
-      <width>71</width>
+      <width>79</width>
       <height>171</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_9">
      <item>
       <widget class="QLabel" name="label_5">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>المدينه</string>
        </property>
@@ -491,6 +690,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_8">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>المنطقه</string>
        </property>
@@ -498,6 +705,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_7">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>رقم العماره</string>
        </property>
@@ -505,6 +720,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_9">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>الطابق</string>
        </property>
@@ -512,6 +735,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_6">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>العنوان *</string>
        </property>
@@ -528,9 +759,25 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <layout class="QVBoxLayout" name="verticalLayout_10">
      <item>
       <widget class="QComboBox" name="CMB_city">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="duplicatesEnabled">
         <bool>true</bool>
        </property>
@@ -538,6 +785,14 @@
      </item>
      <item>
       <widget class="QComboBox" name="CMB_district">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="duplicatesEnabled">
         <bool>true</bool>
        </property>
@@ -554,9 +809,25 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <layout class="QVBoxLayout" name="verticalLayout_11">
      <item>
       <widget class="QSpinBox" name="LE_floor">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="maximum">
         <number>999</number>
        </property>
@@ -564,6 +835,14 @@
      </item>
      <item>
       <widget class="QSpinBox" name="LE_building">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="maximum">
         <number>99999</number>
        </property>
@@ -579,6 +858,14 @@
       <width>279</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">QLineEdit{
@@ -616,11 +903,19 @@
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>460</x>
      <y>386</y>
      <width>531</width>
      <height>141</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
@@ -637,16 +932,32 @@
       <height>111</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_5">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>460</x>
      <y>10</y>
      <width>531</width>
      <height>111</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
@@ -663,9 +974,25 @@
       <height>80</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
       <widget class="QLineEdit" name="LE_name">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -699,25 +1026,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="CMB_custGroup"/>
+      <widget class="QComboBox" name="CMB_custGroup">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="CMB_loyalityType"/>
+      <widget class="QComboBox" name="CMB_loyalityType">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>442</x>
+      <x>420</x>
       <y>21</y>
-      <width>81</width>
+      <width>103</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
       <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>اسم العميل *</string>
        </property>
@@ -725,6 +1086,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_17">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>مجموعه العملاء</string>
        </property>
@@ -732,6 +1101,14 @@
      </item>
      <item>
       <widget class="QLabel" name="label_14">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>نوع العضويه</string>
        </property>
@@ -749,6 +1126,14 @@
      <height>80</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
@@ -764,6 +1149,14 @@
       <height>52</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="text">
      <string>حاله العميل</string>
     </property>
@@ -776,6 +1169,14 @@
       <width>109</width>
       <height>18</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
    </widget>
   </widget>

@@ -1,0 +1,1594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>727</width>
+    <height>406</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::RightToLeft</enum>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="QMenubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>727</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <widget class="QMenu" name="QM_System">
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="title">
+     <string>ادارة النظام</string>
+    </property>
+    <widget class="QMenu" name="QM_Master_Data">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="title">
+      <string>البيانات الاساسية</string>
+     </property>
+     <addaction name="action_28"/>
+     <addaction name="action_26"/>
+     <addaction name="action_24"/>
+     <addaction name="action_25"/>
+     <addaction name="action_27"/>
+     <addaction name="action_30"/>
+     <addaction name="action_35"/>
+     <addaction name="action_129"/>
+     <addaction name="action_4"/>
+     <addaction name="action_BMC_2"/>
+     <addaction name="action_140"/>
+    </widget>
+    <widget class="QMenu" name="QM_Authorization">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="title">
+      <string>ادارة المستخدمين</string>
+     </property>
+     <widget class="QMenu" name="QM_User">
+      <property name="title">
+       <string>Users</string>
+      </property>
+      <addaction name="QAct_Create_User"/>
+      <addaction name="QAct_Modify_User"/>
+      <addaction name="QAct_Copy_User"/>
+      <addaction name="QAct_Reset_User_Password"/>
+      <addaction name="QAct_Assign_User_to_Roles"/>
+      <addaction name="QAct_Create_User_Card"/>
+      <addaction name="QAct_Modify_User_Card"/>
+     </widget>
+     <widget class="QMenu" name="QM_Form">
+      <property name="title">
+       <string>Forms</string>
+      </property>
+      <addaction name="QAct_Create_Form"/>
+      <addaction name="QAct_Modify_Form"/>
+      <addaction name="QAct_Create_Form_Item"/>
+      <addaction name="QAct_Modify_Form_Item"/>
+     </widget>
+     <widget class="QMenu" name="QM_Privilage">
+      <property name="title">
+       <string>Privilages</string>
+      </property>
+      <addaction name="QAct_Create_Privilage"/>
+     </widget>
+     <widget class="QMenu" name="QM_Role">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="title">
+       <string>Roles</string>
+      </property>
+      <addaction name="QAct_Create_Role"/>
+      <addaction name="QAct_Modify_Role"/>
+      <addaction name="QAct_Modify_Roles_Privilages"/>
+      <addaction name="QAct_Copy_Role"/>
+     </widget>
+     <widget class="QMenu" name="QM_Function_Key">
+      <property name="title">
+       <string>Function Keys</string>
+      </property>
+      <addaction name="QAct_Create_Function_Keys"/>
+      <addaction name="QAct_Modify_Function_Keys"/>
+     </widget>
+     <addaction name="QM_User"/>
+     <addaction name="QM_Role"/>
+     <addaction name="QM_Privilage"/>
+     <addaction name="QM_Form"/>
+     <addaction name="QM_Function_Key"/>
+    </widget>
+    <widget class="QMenu" name="QM_Configurations">
+     <property name="title">
+      <string>Configurations</string>
+     </property>
+     <addaction name="QAct_Parameter"/>
+    </widget>
+    <addaction name="QM_Master_Data"/>
+    <addaction name="QM_Authorization"/>
+    <addaction name="QM_Configurations"/>
+   </widget>
+   <widget class="QMenu" name="QM_Promotion">
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="title">
+     <string>العروض والخصومات</string>
+    </property>
+    <widget class="QMenu" name="QM_Promotion_Prom">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>العروض</string>
+     </property>
+     <addaction name="QAct_Prom_Add"/>
+     <addaction name="QAct_Prom_Edit"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Prom_Activate"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Prom_Deactivate"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Prom_Date_Increase"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Prom_Copy"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Prom_Upload"/>
+     <addaction name="separator"/>
+    </widget>
+    <widget class="QMenu" name="QM_Promotion_Voucher">
+     <property name="title">
+      <string>قسيمة مشتريات</string>
+     </property>
+     <addaction name="QAct_Voucher_Add"/>
+     <addaction name="QAct_Voucher_Edit"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Voucher_Activate"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Voucher_Deactivate"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Voucher_Print"/>
+    </widget>
+    <widget class="QMenu" name="QM_Promotion_Magazine">
+     <property name="title">
+      <string>المجلة</string>
+     </property>
+     <addaction name="QAct_Magazine_Add"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Magazine_Edit"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Magazine_Actiavte"/>
+     <addaction name="QAct_Magazine_Deactivate"/>
+    </widget>
+    <widget class="QMenu" name="QM_Promotion_Coupon">
+     <property name="title">
+      <string>كوبونات الخصم</string>
+     </property>
+     <addaction name="QAct_Coupon_Add"/>
+     <addaction name="QAct_Coupon_Edit"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Coupon_Activate"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Coupon_Deactivate"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Coupon_Print"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Coupon_barcode"/>
+    </widget>
+    <widget class="QMenu" name="QM_Prom_Voucher">
+     <property name="title">
+      <string>قسيمه مشتريات عروض</string>
+     </property>
+     <addaction name="QAct_Prom_Voucher_Add"/>
+     <addaction name="QAct_Prom_Voucher_Edit"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Prom_Voucher_Act"/>
+     <addaction name="QAct_Prom_Voucher_Deact"/>
+     <addaction name="separator"/>
+     <addaction name="separator"/>
+    </widget>
+    <addaction name="QM_Promotion_Prom"/>
+    <addaction name="separator"/>
+    <addaction name="QM_Promotion_Coupon"/>
+    <addaction name="separator"/>
+    <addaction name="QM_Promotion_Voucher"/>
+    <addaction name="separator"/>
+    <addaction name="QM_Prom_Voucher"/>
+    <addaction name="separator"/>
+    <addaction name="QM_Promotion_Magazine"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="QM_Installment">
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="title">
+     <string>برامج التقسيط</string>
+    </property>
+    <widget class="QMenu" name="QM_Installment_System">
+     <property name="title">
+      <string>نظام التقسيط</string>
+     </property>
+     <addaction name="QAct_Install_Add"/>
+     <addaction name="QAct_Install_Edit"/>
+     <addaction name="QAct_Install_Activate_Deactivate"/>
+    </widget>
+    <widget class="QMenu" name="QM_Installment_Item">
+     <property name="title">
+      <string>اصناف التقسيط</string>
+     </property>
+     <addaction name="QAct_Install_Item_Upload"/>
+     <addaction name="QAct_Install_Item_Upload_Reject"/>
+    </widget>
+    <addaction name="QM_Installment_System"/>
+    <addaction name="QM_Installment_Item"/>
+   </widget>
+   <widget class="QMenu" name="QM_Customer">
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="title">
+     <string>العملاء</string>
+    </property>
+    <widget class="QMenu" name="QM_Customer_Data">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="title">
+      <string>بيانات العملاء</string>
+     </property>
+     <addaction name="QAct_Display_Customer"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Cust_Card_Add"/>
+     <addaction name="QAct_Cust_Card_Edit"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Cust_Points_Upload"/>
+    </widget>
+    <widget class="QMenu" name="QM_Customer_Group">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="title">
+      <string>مجموعات العملاء</string>
+     </property>
+     <addaction name="QAct_Display_CustGp"/>
+     <addaction name="separator"/>
+    </widget>
+    <widget class="QMenu" name="QM_Customer_Level">
+     <property name="title">
+      <string>مستويات العملاء</string>
+     </property>
+     <addaction name="QAct_Display_CustTp"/>
+    </widget>
+    <widget class="QMenu" name="QM_Customer_Points">
+     <property name="title">
+      <string>الهدايا والنقاط المكتسبة</string>
+     </property>
+     <addaction name="QAct_Redeem_Item"/>
+     <addaction name="QAct_Loyality_Point"/>
+     <addaction name="separator"/>
+     <addaction name="separator"/>
+    </widget>
+    <widget class="QMenu" name="QM_Customer_Redeem">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>منح الهدايا واستبدال النقاط</string>
+     </property>
+     <addaction name="QAct_Redeem_Voucher"/>
+     <addaction name="QAct_Redeem_Gift"/>
+     <addaction name="QAct_Cust_Gift_make"/>
+     <addaction name="QAct_Cust_Redeem_Voucher_Print"/>
+    </widget>
+    <widget class="QMenu" name="menu">
+     <property name="title">
+      <string>برامج العضويه</string>
+     </property>
+     <addaction name="QAct_Display_Loyality"/>
+    </widget>
+    <addaction name="QM_Customer_Group"/>
+    <addaction name="QM_Customer_Level"/>
+    <addaction name="separator"/>
+    <addaction name="QM_Customer_Data"/>
+    <addaction name="separator"/>
+    <addaction name="menu"/>
+    <addaction name="QM_Customer_Points"/>
+    <addaction name="QM_Customer_Redeem"/>
+    <addaction name="QAct_Customer_Service"/>
+    <addaction name="QAct_Redeem_Type"/>
+   </widget>
+   <widget class="QMenu" name="QM_Report">
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="title">
+     <string>التقارير</string>
+    </property>
+    <widget class="QMenu" name="QM_Report_Master_Data">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="title">
+      <string>تقارير البيانات الاساسية</string>
+     </property>
+     <addaction name="QAct_Report_Master_Data_1"/>
+     <addaction name="QAct_Report_Master_Data_2"/>
+     <addaction name="QAct_Report_Master_Data_3"/>
+     <addaction name="QAct_Report_Master_Data_4"/>
+     <addaction name="QAct_Report_Master_Data_5"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_Sale">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="title">
+      <string>تقارير المبيعات</string>
+     </property>
+     <addaction name="QAct_Report_Sale_1"/>
+     <addaction name="QAct_Report_Sale_2"/>
+     <addaction name="QAct_Report_Sale_3"/>
+     <addaction name="QAct_Report_Sale_4"/>
+     <addaction name="QAct_Report_Sale_5"/>
+     <addaction name="QAct_Report_Sale_6"/>
+     <addaction name="QAct_Report_Sale_7"/>
+     <addaction name="QAct_Report_Sale_8"/>
+     <addaction name="QAct_Report_Sale_9"/>
+     <addaction name="QAct_Report_Sale_10"/>
+     <addaction name="QAct_Report_Sale_11"/>
+     <addaction name="QAct_Report_Sale_12"/>
+     <addaction name="QAct_Report_Sale_13"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_Main_Safe">
+     <property name="title">
+      <string>تقارير الخزينة المركزية</string>
+     </property>
+     <addaction name="QAct_Report_Main_Safe_1"/>
+     <addaction name="QAct_Report_Main_Safe_2"/>
+     <addaction name="QAct_Report_Main_Safe_3"/>
+     <addaction name="QAct_Report_Main_Safe_4"/>
+     <addaction name="QAct_Report_Main_Safe_5"/>
+     <addaction name="QAct_Report_Main_Safe_6"/>
+     <addaction name="QAct_Report_Main_Safe_7"/>
+     <addaction name="QAct_Report_Main_Safe_8"/>
+     <addaction name="QAct_Report_Main_Safe_9"/>
+     <addaction name="QAct_Report_Main_Safe_10"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_Return">
+     <property name="title">
+      <string>تقارير الارتجاع</string>
+     </property>
+     <addaction name="QAct_Report_Return_1"/>
+     <addaction name="QAct_Report_Return_2"/>
+     <addaction name="QAct_Report_Return_3"/>
+     <addaction name="QAct_Report_Return_4"/>
+     <addaction name="QAct_Report_Return_5"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_KPI">
+     <property name="title">
+      <string>تقارير احصائية عملاء التجزئة</string>
+     </property>
+     <addaction name="QAct_Report_KPI_1"/>
+     <addaction name="QAct_Report_KPI_2"/>
+     <addaction name="QAct_Report_KPI_3"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_Checking">
+     <property name="title">
+      <string>تقارير رقابية</string>
+     </property>
+     <addaction name="action_119"/>
+     <addaction name="action_120"/>
+     <addaction name="action_121"/>
+     <addaction name="action_122"/>
+     <addaction name="action_123"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_Promotion">
+     <property name="title">
+      <string>تقارير العروض والخصومات</string>
+     </property>
+     <addaction name="QAct_Report_Promotion_1"/>
+     <addaction name="QAct_Report_Promotion_2"/>
+     <addaction name="QAct_Report_Promotion_3"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_Bank">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="title">
+      <string>تقارير البنوك</string>
+     </property>
+     <widget class="QMenu" name="menu_25">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="title">
+       <string>كروت الإئتمان</string>
+      </property>
+      <addaction name="action_104"/>
+      <addaction name="action_103"/>
+      <addaction name="action_105"/>
+      <addaction name="action_9"/>
+     </widget>
+     <addaction name="action_3"/>
+     <addaction name="menu_25"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_Installment">
+     <property name="title">
+      <string>تقارير انظمة التقسيط</string>
+     </property>
+     <addaction name="action_22"/>
+     <addaction name="action_46"/>
+     <addaction name="action_23"/>
+     <addaction name="action_29"/>
+     <addaction name="action_36"/>
+     <addaction name="action_39"/>
+    </widget>
+    <widget class="QMenu" name="QM_Report_Cust">
+     <property name="title">
+      <string>تقارير العملاء</string>
+     </property>
+     <addaction name="QAct_Report_Cust_1"/>
+     <addaction name="QAct_Report_Cust_2"/>
+     <addaction name="QAct_Report_Cust_3"/>
+     <addaction name="QAct_Report_Cust_4"/>
+     <addaction name="QAct_Report_Cust_5"/>
+     <addaction name="QAct_Report_Cust_6"/>
+     <addaction name="QAct_Report_Cust_7"/>
+     <addaction name="QAct_Report_Cust_8"/>
+     <addaction name="QAct_Report_Cust_9"/>
+     <addaction name="QAct_Report_Cust_10"/>
+     <addaction name="QAct_Report_Cust_11"/>
+     <addaction name="QAct_Report_Cust_12"/>
+     <addaction name="QAct_Report_Cust_13"/>
+     <addaction name="QAct_Report_Cust_14"/>
+     <addaction name="QAct_Report_Cust_15"/>
+     <addaction name="QAct_Report_Cust_16"/>
+     <addaction name="QAct_Report_Cust_17"/>
+     <addaction name="separator"/>
+     <addaction name="QAct_Report_Cust_18"/>
+     <addaction name="QAct_Report_Cust_19"/>
+     <addaction name="QAct_Report_Cust_20"/>
+     <addaction name="QAct_Report_Cust_21"/>
+     <addaction name="QAct_Report_Cust_22"/>
+     <addaction name="QAct_Report_Cust_23"/>
+    </widget>
+    <addaction name="QM_Report_Cust"/>
+    <addaction name="QM_Report_Sale"/>
+    <addaction name="QM_Report_Return"/>
+    <addaction name="QM_Report_Main_Safe"/>
+    <addaction name="QM_Report_KPI"/>
+    <addaction name="QM_Report_Master_Data"/>
+    <addaction name="QM_Report_Promotion"/>
+    <addaction name="QM_Report_Bank"/>
+    <addaction name="QM_Report_Installment"/>
+    <addaction name="QAct_Report_Invoice"/>
+    <addaction name="QAct_Report_Vendor"/>
+    <addaction name="QM_Report_Checking"/>
+   </widget>
+   <widget class="QMenu" name="QM_Exit">
+    <property name="title">
+     <string>خروج</string>
+    </property>
+    <addaction name="QAct_Exit"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>البنوك</string>
+    </property>
+    <addaction name="QAct_Create_Bank"/>
+    <addaction name="QAct_Modify_Bank"/>
+   </widget>
+   <addaction name="QM_Promotion"/>
+   <addaction name="QM_Installment"/>
+   <addaction name="QM_Customer"/>
+   <addaction name="menu_2"/>
+   <addaction name="QM_Report"/>
+   <addaction name="QM_System"/>
+   <addaction name="QM_Exit"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_6">
+   <property name="text">
+    <string>تفعيل العروض</string>
+   </property>
+  </action>
+  <action name="action_7">
+   <property name="text">
+    <string>مد سريان العروض</string>
+   </property>
+  </action>
+  <action name="action_8">
+   <property name="text">
+    <string>ايقاف العروض</string>
+   </property>
+  </action>
+  <action name="action_11">
+   <property name="text">
+    <string>انشاء عرض من اخر منتهى</string>
+   </property>
+  </action>
+  <action name="QAct_Create_Customer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>انشاء عميل</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Customer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>تعديل بيانات عميل</string>
+   </property>
+  </action>
+  <action name="QAct_Deactivate_Customer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>ايقاف عميل</string>
+   </property>
+  </action>
+  <action name="QAct_Display_CustGp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>مجموعة عملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_CustGp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>تعديل مجموعة عملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Deactivate_CustGp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>ايقاف مجموعة عملاء</string>
+   </property>
+  </action>
+  <action name="action_24">
+   <property name="text">
+    <string>طرق الدفع</string>
+   </property>
+  </action>
+  <action name="action_25">
+   <property name="text">
+    <string>البنوك</string>
+   </property>
+  </action>
+  <action name="action_26">
+   <property name="text">
+    <string>الفروع</string>
+   </property>
+  </action>
+  <action name="action_27">
+   <property name="text">
+    <string>انواع العروض</string>
+   </property>
+  </action>
+  <action name="action_28">
+   <property name="text">
+    <string>الشركات</string>
+   </property>
+  </action>
+  <action name="action_30">
+   <property name="text">
+    <string>انواع التقسيط</string>
+   </property>
+  </action>
+  <action name="QAct_Install_Add">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>انشاء نظام التقسيط</string>
+   </property>
+  </action>
+  <action name="QAct_Install_Edit">
+   <property name="text">
+    <string>تعديل نظام التقسيط</string>
+   </property>
+  </action>
+  <action name="QAct_Install_Activate_Deactivate">
+   <property name="text">
+    <string>تفعيل/ايقاف نظام التقسيط</string>
+   </property>
+  </action>
+  <action name="QAct_Install_Deactivate">
+   <property name="text">
+    <string>ايقاف نظام التقسيط</string>
+   </property>
+  </action>
+  <action name="action_35">
+   <property name="text">
+    <string>انواع الموردين</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Master_Data_1">
+   <property name="text">
+    <string>استعلام عن بيانات صنف</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Master_Data_2">
+   <property name="text">
+    <string>استعلام عن بيانات مورد</string>
+   </property>
+  </action>
+  <action name="action_42">
+   <property name="text">
+    <string>تقارير مبيعات بالصنف</string>
+   </property>
+  </action>
+  <action name="action_43">
+   <property name="text">
+    <string>تقارير مبيعات بالقسم</string>
+   </property>
+  </action>
+  <action name="action_44">
+   <property name="text">
+    <string>تقارير مبيعات بالادارة</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Add">
+   <property name="text">
+    <string>انشاء العروض</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Activate">
+   <property name="text">
+    <string>تنشيط العروض</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Deactivate">
+   <property name="text">
+    <string>ايقاف العروض</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Date_Increase">
+   <property name="text">
+    <string>مد سريان العروض</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Copy">
+   <property name="text">
+    <string>انشاء عرض من اخر منتهى</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Upload">
+   <property name="text">
+    <string>تحميل اصناف العروض</string>
+   </property>
+  </action>
+  <action name="QAct_Coupon_Add">
+   <property name="text">
+    <string>انشاء كوبون الخصم</string>
+   </property>
+  </action>
+  <action name="QAct_Coupon_Activate">
+   <property name="text">
+    <string>تنشيط كوبون الخصم</string>
+   </property>
+  </action>
+  <action name="QAct_Coupon_Edit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>تعديل كوبون الخصم</string>
+   </property>
+  </action>
+  <action name="QAct_Coupon_Print">
+   <property name="text">
+    <string>طباعة كوبون الخصم</string>
+   </property>
+  </action>
+  <action name="QAct_Coupon_Deactivate">
+   <property name="text">
+    <string>ايقاف كوبون الخصم</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Edit">
+   <property name="text">
+    <string>تعديل العروض</string>
+   </property>
+  </action>
+  <action name="QAct_Voucher_Add">
+   <property name="text">
+    <string>انشاء قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Voucher_Edit">
+   <property name="text">
+    <string>تعديل قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Voucher_Deactivate">
+   <property name="text">
+    <string>ايقاف قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Voucher_Activate">
+   <property name="text">
+    <string>تنشيط قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Voucher_Print">
+   <property name="text">
+    <string>طباعة قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Magazine_Add">
+   <property name="text">
+    <string>انشاء مجلة</string>
+   </property>
+  </action>
+  <action name="QAct_Magazine_Edit">
+   <property name="text">
+    <string>تعديل مجلة</string>
+   </property>
+  </action>
+  <action name="action_71">
+   <property name="text">
+    <string>الاستعلام عن العروض</string>
+   </property>
+  </action>
+  <action name="action_72">
+   <property name="text">
+    <string>الاستعلام عن كوبونات الخصم</string>
+   </property>
+  </action>
+  <action name="action_73">
+   <property name="text">
+    <string>الاستعلام عن قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Magazine_Actiavte">
+   <property name="text">
+    <string>تنشيط مجلة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Master_Data_3">
+   <property name="text">
+    <string>استعلام عن الاصناف طبقا للتقسيم السلعى BMC</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Master_Data_4">
+   <property name="text">
+    <string>استعلام عن الاصناف على نقاط البيع</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Return_1">
+   <property name="text">
+    <string>تقارير اسباب الارتجاع</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Master_Data_5">
+   <property name="text">
+    <string>استعلام عن اجمالى عدد الاصناف حسب كل قسم</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_6">
+   <property name="text">
+    <string>مبيعات الاصناف بالساعة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_7">
+   <property name="text">
+    <string>مبيعات المجموعات الفرعية بالساعة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_4">
+   <property name="text">
+    <string>تقرير مبيعات الاصناف حسب الايام</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_5">
+   <property name="text">
+    <string>تقرير مبيعات المجموعات الفرعية حسب الايام</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Invoice">
+   <property name="text">
+    <string>الاستعلام عن الفواتير</string>
+   </property>
+  </action>
+  <action name="action_86">
+   <property name="text">
+    <string>تقارير المدفوعات</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_2">
+   <property name="text">
+    <string>تقرير مبيعات الصنف على مستوى القسم</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_1">
+   <property name="text">
+    <string>تقرير مبيعات الصنف على مستوى الادارة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_3">
+   <property name="text">
+    <string>تقرير مبيعات الفرع على مستوى نقاط البيع</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_8">
+   <property name="text">
+    <string>تقرير مبيعات الاصناف حسب فئات الضريبة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_9">
+   <property name="text">
+    <string>تقرير مبيعات الاصناف على مستوى الصراف</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Return_5">
+   <property name="text">
+    <string>تقرير بالاصناف الملغاة فترة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_10">
+   <property name="text">
+    <string>تقرير مبيعات اصناف العروض والخصومات</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Return_2">
+   <property name="text">
+    <string>تقرير اجمالى المرتجعات حسب اسباب الارتجاع</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Return_3">
+   <property name="text">
+    <string>تقرير تفصيلى بالمرتجعات</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Return_4">
+   <property name="text">
+    <string>تقرير باكثر اصناف الارتجاع</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_11">
+   <property name="text">
+    <string>تقرير اكثر الاصناف مبيعا</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_12">
+   <property name="text">
+    <string>مبيعات الاصناف حسب نوع الصنف</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_1">
+   <property name="text">
+    <string>تقرير جرد خزينة الصراف</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_2">
+   <property name="text">
+    <string>اجمالى حركة صراف</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_3">
+   <property name="text">
+    <string>اجمالى حركة نقاط البيع</string>
+   </property>
+  </action>
+  <action name="action_103">
+   <property name="text">
+    <string>تقرير حركة كروت الإئتمان</string>
+   </property>
+  </action>
+  <action name="action_104">
+   <property name="text">
+    <string>تقرير بالكروت المرتجعة</string>
+   </property>
+  </action>
+  <action name="action_105">
+   <property name="text">
+    <string>تقرير طرق استخدام كروت الإئتمان حسب نقاط البيع</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_4">
+   <property name="text">
+    <string>تقرير تدفق النقدية حسب كل كاشير</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Sale_13">
+   <property name="text">
+    <string>مبيعات الفرع موزع حسب طريقة السداد</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_5">
+   <property name="text">
+    <string>تقرير تدفق النقدية حسب الايام</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_6">
+   <property name="text">
+    <string>تقرير تدفق النقدية حسب نقاط البيع</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_7">
+   <property name="text">
+    <string>تقرير قيمة فروق التقريب</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_8">
+   <property name="text">
+    <string>تقرير عجز وزيادة الصرافين تفصيلى</string>
+   </property>
+  </action>
+  <action name="action_112">
+   <property name="text">
+    <string>تقرير اجمالى عجز وزيادة الصرافين تفصيلى</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_9">
+   <property name="text">
+    <string>تقرير الفواتير المباعة ائتمان وتم الارتجاع نقدى</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Main_Safe_10">
+   <property name="text">
+    <string>تقرير حسب طريقة السداد</string>
+   </property>
+  </action>
+  <action name="QAct_Report_KPI_1">
+   <property name="text">
+    <string>تقارير بعدد العملاء ومتوسط الشراء</string>
+   </property>
+  </action>
+  <action name="QAct_Report_KPI_2">
+   <property name="text">
+    <string>تقارير بعدد العملاء طبقا لقيمة المشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Report_KPI_3">
+   <property name="text">
+    <string>تقارير بعدد العملاء طبقا لقيمة لعدد الساعات</string>
+   </property>
+  </action>
+  <action name="action_119">
+   <property name="text">
+    <string>تقرير مراقبة انشطة الصراف</string>
+   </property>
+  </action>
+  <action name="action_120">
+   <property name="text">
+    <string>عدد الفواتير لكل صراف</string>
+   </property>
+  </action>
+  <action name="action_121">
+   <property name="text">
+    <string>تقرير بتوقيت فواتير الكاشير</string>
+   </property>
+  </action>
+  <action name="action_122">
+   <property name="text">
+    <string>تقرير متابعة وصول المبيعات من نقاط البيع بالايام</string>
+   </property>
+  </action>
+  <action name="action_123">
+   <property name="text">
+    <string>تقرير متابعة وصول المبيعات من نقاط البيع بالنقاط</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Promotion_1">
+   <property name="text">
+    <string>الاستعلام عن العروض</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Promotion_2">
+   <property name="text">
+    <string>الاستعلام عن كوبونات الخصم</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Promotion_3">
+   <property name="text">
+    <string>الاستعلام عن قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Create_User">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create User</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_User">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Modify User</string>
+   </property>
+  </action>
+  <action name="QAct_Copy_User">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Copy User</string>
+   </property>
+  </action>
+  <action name="QAct_Reset_User_Password">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Reset User Password</string>
+   </property>
+  </action>
+  <action name="QAct_Create_Role">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create Role</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Role">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Modify Role</string>
+   </property>
+  </action>
+  <action name="QAct_Assign_User_to_Roles">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Assign User to Roles</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Roles_Privilages">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Modify Roles Privilages and Function Keys</string>
+   </property>
+  </action>
+  <action name="QAct_Create_Form">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create Form</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Form">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Modify Form</string>
+   </property>
+  </action>
+  <action name="QAct_Create_Form_Item">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create Form Item</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Form_Item">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Modify Form Item</string>
+   </property>
+  </action>
+  <action name="QAct_Copy_Role">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Copy Role</string>
+   </property>
+  </action>
+  <action name="QAct_Create_Privilage">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create Privilage</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Privilage">
+   <property name="text">
+    <string>Modify Privilage</string>
+   </property>
+  </action>
+  <action name="QAct_Create_Function_Keys">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create Function Keys</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Function_Keys">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Modify Function Keys</string>
+   </property>
+  </action>
+  <action name="actionAssign_Function_Keys_to_Roles">
+   <property name="text">
+    <string>Assign Function Keys to Roles</string>
+   </property>
+  </action>
+  <action name="actionAssign_Function_Keys_to_Roles_2">
+   <property name="text">
+    <string>Assign Function Keys to Roles</string>
+   </property>
+  </action>
+  <action name="QAct_Create_User_Card">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Create User Card</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_User_Card">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Modify User Card</string>
+   </property>
+  </action>
+  <action name="action_129">
+   <property name="text">
+    <string>انواع المستخدمين</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Vendor">
+   <property name="text">
+    <string>الاستعلام عن الموردين</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>الاستعلام عن البنوك</string>
+   </property>
+  </action>
+  <action name="action_BMC_2">
+   <property name="text">
+    <string>شجرة الاصناف BMC</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>تحديث الموردين</string>
+   </property>
+  </action>
+  <action name="action_9">
+   <property name="text">
+    <string>تقرير حركة كروت الائتمان تقسيط</string>
+   </property>
+  </action>
+  <action name="action_22">
+   <property name="text">
+    <string>تقرير قواعد التقسيط</string>
+   </property>
+  </action>
+  <action name="action_23">
+   <property name="text">
+    <string>تقرير فواتير البيع تقسيط</string>
+   </property>
+  </action>
+  <action name="action_29">
+   <property name="text">
+    <string>تقرير اجمالى مبيعات التقسيط فترة</string>
+   </property>
+  </action>
+  <action name="action_36">
+   <property name="text">
+    <string>تقرير الاصناف الممنوعة من التقسيط</string>
+   </property>
+  </action>
+  <action name="action_39">
+   <property name="text">
+    <string>تقرير مجموعات الاصناف حسب نظام التقسيط</string>
+   </property>
+  </action>
+  <action name="QAct_Install_Item_Upload">
+   <property name="text">
+    <string>تحميل اصناف نظام التقسيط</string>
+   </property>
+  </action>
+  <action name="QAct_Install_Item_Upload_Reject">
+   <property name="text">
+    <string>تحميل اصناف ممنوعة لنظام التقسيط</string>
+   </property>
+  </action>
+  <action name="action_46">
+   <property name="text">
+    <string>تقرير انظمة التقسيط</string>
+   </property>
+  </action>
+  <action name="action_55">
+   <property name="text">
+    <string>انشاء مستوى عملاء</string>
+   </property>
+  </action>
+  <action name="action_56">
+   <property name="text">
+    <string>تعديل مستوى عملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Display_CustTp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>انشاء مستوى عملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_CustTp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>تعديل مستوى عملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Lvl_Promote">
+   <property name="text">
+    <string>شروط ترقية مستوى عملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Upload_Data">
+   <property name="text">
+    <string>تحميل ملف بيانات عملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Redeem_Item">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>تعريف اصناف الهدايا</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Points_By_Section">
+   <property name="text">
+    <string>إنشاء برنامج عضويه</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Points_By_Item">
+   <property name="text">
+    <string>تسجيل عدد وقيمة النقاط على مستوى الاصناف</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Points_Data_Upload">
+   <property name="text">
+    <string>تحميل ملف عدد وقيمة النقاط</string>
+   </property>
+  </action>
+  <action name="QAct_Loyality_Point">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>تعريف قيمة استبدال النقاط</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Card_Add">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string> إنشاء كارت عميل</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Points_Upload">
+   <property name="text">
+    <string>تحميل نقاط عملاء من خارج النظام</string>
+   </property>
+  </action>
+  <action name="QAct_Redeem_Voucher">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>استبدال النقاط بقسيمة شراء</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Gift_make">
+   <property name="text">
+    <string>منح هدايا للعملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Redeem_Gift">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>استبدال النقاط بالهدايا</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Redeem_Voucher_Print">
+   <property name="text">
+    <string>اعادة طباعة قسيمة استبدال النقاط</string>
+   </property>
+  </action>
+  <action name="action_140">
+   <property name="text">
+    <string>اكواد المحافظات والمدن والاحياء</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_1">
+   <property name="text">
+    <string>تقرير اجمالى مشتريات عميل وعدد زياراته</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_2">
+   <property name="text">
+    <string>تقرير العملاء ذو اعلى او اقل قيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_3">
+   <property name="text">
+    <string>تقرير العملاء الذين لم يشتروا خلال فترة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_4">
+   <property name="text">
+    <string>تقرير بالمبالغ المستحقة للعملاء خلال فترة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_5">
+   <property name="text">
+    <string>كشف حساب عميل تفصيلى خلال فترة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_6">
+   <property name="text">
+    <string>تقرير مشتريات عميل من الاصناف</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_7">
+   <property name="text">
+    <string>تقرير مشتريات عميل من الاقسام السلعية</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_8">
+   <property name="text">
+    <string>تقرير مشتريات عميل من الاقسام الخاضعة وغير الخاضعة للعضوية</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_9">
+   <property name="text">
+    <string>تقرير اعلى واقل اصناف للعملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_10">
+   <property name="text">
+    <string>تقرير ارصدة ايصالات استبدال النقاط</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_11">
+   <property name="text">
+    <string>تقرير تفصيلى حركات عميل</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_12">
+   <property name="text">
+    <string>تقرير بالقسائم التى انتهى تاريخ صلاحيتها ولم تستخدم</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_13">
+   <property name="text">
+    <string>تقرير تفصيلى يوضح طرق استبدال النقاط</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_14">
+   <property name="text">
+    <string>تقرير تفصيلى يوضح اعداد وقيم طرق استبدال النقاط</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_15">
+   <property name="text">
+    <string>تقرير زيارة العميل للاقسام وقيمة مشترياته</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_16">
+   <property name="text">
+    <string>تقرير حركات قسائم الشراء الخاصة بالعضوية</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_17">
+   <property name="text">
+    <string>تقرير بنقاط العملاء حسب مصدر النقاط</string>
+   </property>
+  </action>
+  <action name="action_158">
+   <property name="text">
+    <string>تقرير مجمع بنقاط العملاء وحسب العميل</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_18">
+   <property name="text">
+    <string>تقرير بتواريخ ميلاد العملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_19">
+   <property name="text">
+    <string>تقرير قيم مشتريات العملاء خلال فترة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_20">
+   <property name="text">
+    <string>تقرير بارصدة العملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_21">
+   <property name="text">
+    <string>تقرير بالاصناف المستبدلة للعملاء خلال فترة</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_22">
+   <property name="text">
+    <string>تقرير بالهدايا الممنوحة للعملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Report_Cust_23">
+   <property name="text">
+    <string>تقرير لاجراء السحب للعملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Magazine_Deactivate">
+   <property name="text">
+    <string>أيقاف مجلة</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>ترقية مستوى العملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Promote_Manual">
+   <property name="text">
+    <string>ترقية مستوى عملاء-يدوى</string>
+   </property>
+  </action>
+  <action name="QAct_Customer_Service">
+   <property name="text">
+    <string>خدمة العملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Exit">
+   <property name="text">
+    <string>خروج</string>
+   </property>
+  </action>
+  <action name="QAct_Display_Customer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>العملاء</string>
+   </property>
+  </action>
+  <action name="QAct_Display_Loyality">
+   <property name="text">
+    <string>إنشاء برنامج عضويه</string>
+   </property>
+  </action>
+  <action name="QAct_Parameter">
+   <property name="text">
+    <string>Parameter</string>
+   </property>
+  </action>
+  <action name="QAct_Create_Bank">
+   <property name="text">
+    <string>أنشاء بنك</string>
+   </property>
+  </action>
+  <action name="QAct_Modify_Bank">
+   <property name="text">
+    <string>تعديل بنك</string>
+   </property>
+  </action>
+  <action name="QAct_Coupon_barcode">
+   <property name="text">
+    <string>تفعيل و ايقاف و استبدال باركود</string>
+   </property>
+  </action>
+  <action name="action_12">
+   <property name="text">
+    <string>انشاء قسيمة مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Add">
+   <property name="text">
+    <string>إنشاء قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Edit">
+   <property name="text">
+    <string>تعديل قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Act">
+   <property name="text">
+    <string>تنشيط قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Deact">
+   <property name="text">
+    <string>إيقاف قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Prom_Voucher_Print">
+   <property name="text">
+    <string>طباعه قسيمه مشتريات</string>
+   </property>
+  </action>
+  <action name="QAct_Redeem_Type">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>ٌRedeem type</string>
+   </property>
+  </action>
+  <action name="QAct_Cust_Card_Edit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>تعديل كارت عميل</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

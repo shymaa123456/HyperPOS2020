@@ -40,6 +40,12 @@
      <height>2</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
    <layout class="QGridLayout" name="gridLayout_2"/>
   </widget>
   <widget class="QGroupBox" name="groupBox">
@@ -53,7 +59,8 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
      <weight>50</weight>
      <bold>false</bold>
     </font>
@@ -62,9 +69,7 @@
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-                    background-color: rgb(198, 207, 199);
-                </string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string/>
@@ -78,6 +83,14 @@
       <height>191</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="title">
      <string/>
     </property>
@@ -87,12 +100,28 @@
        <x>10</x>
        <y>10</y>
        <width>181</width>
-       <height>92</height>
+       <height>91</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QComboBox" name="Qcombo_company">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="layoutDirection">
          <enum>Qt::RightToLeft</enum>
         </property>
@@ -100,6 +129,14 @@
       </item>
       <item>
        <widget class="QComboBox" name="Qcombo_branch">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="frame">
          <bool>false</bool>
         </property>
@@ -107,6 +144,14 @@
       </item>
       <item>
        <widget class="QComboBox" name="Qcombo_cust_group">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="frame">
          <bool>false</bool>
         </property>
@@ -114,6 +159,14 @@
       </item>
       <item>
        <widget class="QComboBox" name="Qcombo_sponsor">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="frame">
          <bool>false</bool>
         </property>
@@ -124,15 +177,31 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>190</x>
        <y>10</y>
-       <width>76</width>
+       <width>99</width>
        <height>91</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>الشركة</string>
         </property>
@@ -140,6 +209,14 @@
       </item>
       <item>
        <widget class="QLabel" name="label_11">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>الفرع</string>
         </property>
@@ -147,6 +224,14 @@
       </item>
       <item>
        <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>مجموعة العملاء</string>
         </property>
@@ -154,6 +239,14 @@
       </item>
       <item>
        <widget class="QLabel" name="label_6">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>ممول العرض</string>
         </property>
@@ -169,6 +262,14 @@
        <width>81</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
@@ -186,15 +287,31 @@
        <height>17</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
     </widget>
     <widget class="QCheckBox" name="QcheckBox_magazine_3">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>160</x>
        <y>140</y>
-       <width>101</width>
+       <width>121</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
@@ -208,9 +325,17 @@
       <rect>
        <x>10</x>
        <y>140</y>
-       <width>161</width>
+       <width>141</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
     </widget>
     <widget class="QCheckBox" name="QcheckBox_magazine_4">
@@ -221,6 +346,14 @@
        <width>81</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
@@ -234,9 +367,17 @@
       <rect>
        <x>10</x>
        <y>170</y>
-       <width>161</width>
+       <width>141</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
     </widget>
    </widget>
@@ -248,6 +389,14 @@
       <width>301</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
@@ -264,6 +413,14 @@
        <height>18</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="text">
       <string>نوع العرض</string>
      </property>
@@ -276,6 +433,14 @@
        <width>201</width>
        <height>18</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
@@ -294,6 +459,14 @@
       <height>101</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
     </property>
@@ -305,20 +478,44 @@
       <rect>
        <x>130</x>
        <y>30</y>
-       <width>121</width>
-       <height>22</height>
+       <width>135</width>
+       <height>24</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
-         <string>التاريخ</string>
+         <string>من</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QDateTimeEdit" name="Qdate_from">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="layoutDirection">
          <enum>Qt::RightToLeft</enum>
         </property>
@@ -342,51 +539,49 @@
       </item>
      </layout>
     </widget>
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>30</y>
-       <width>26</width>
-       <height>19</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>من</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>60</y>
-       <width>26</width>
-       <height>19</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>الى</string>
-     </property>
-    </widget>
     <widget class="QWidget" name="layoutWidget_2">
      <property name="geometry">
       <rect>
        <x>132</x>
        <y>60</y>
-       <width>121</width>
-       <height>22</height>
+       <width>135</width>
+       <height>24</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QLabel" name="label_8">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
-         <string>التاريخ</string>
+         <string>الي</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QDateTimeEdit" name="Qdate_to">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="minimumDateTime">
          <datetime>
           <hour>0</hour>
@@ -416,6 +611,14 @@
        <height>18</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="tabletTracking">
       <bool>true</bool>
      </property>
@@ -435,11 +638,19 @@
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>90</x>
+       <x>75</x>
        <y>60</y>
-       <width>26</width>
+       <width>41</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>الوقت</string>
@@ -448,11 +659,19 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>90</x>
+       <x>78</x>
        <y>30</y>
-       <width>29</width>
+       <width>41</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>الوقت</string>
@@ -466,6 +685,14 @@
        <width>67</width>
        <height>18</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
@@ -490,6 +717,14 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
     </property>
@@ -502,12 +737,28 @@
        <x>0</x>
        <y>0</y>
        <width>141</width>
-       <height>22</height>
+       <height>24</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item alignment="Qt::AlignVCenter">
        <widget class="QLabel" name="label_12">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>رقم العرض</string>
         </property>
@@ -517,6 +768,14 @@
        <widget class="QLineEdit" name="Qline_promotion">
         <property name="enabled">
          <bool>false</bool>
+        </property>
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
         </property>
        </widget>
       </item>
@@ -532,6 +791,14 @@
       <height>111</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="title">
      <string/>
     </property>
@@ -544,6 +811,14 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
     </widget>
     <widget class="QLabel" name="label_13">
      <property name="geometry">
@@ -553,6 +828,14 @@
        <width>41</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>الادارة</string>
@@ -567,6 +850,14 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="text">
       <string>القسم</string>
      </property>
@@ -580,6 +871,14 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
     </widget>
     <widget class="QComboBox" name="Qcombo_classification">
      <property name="geometry">
@@ -590,15 +889,31 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
     </widget>
     <widget class="QLabel" name="label_15">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>190</x>
        <y>70</y>
-       <width>71</width>
+       <width>91</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>القسم الفرعى</string>
@@ -614,6 +929,14 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="title">
      <string/>
     </property>
@@ -628,6 +951,14 @@
        <width>161</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string/>
@@ -648,6 +979,14 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
      </property>
@@ -664,6 +1003,14 @@
       <width>461</width>
       <height>231</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="sizeAdjustPolicy">
      <enum>QAbstractScrollArea::AdjustToContents</enum>
@@ -693,6 +1040,14 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="text">
      <string>بحث</string>
     </property>
@@ -705,6 +1060,14 @@
       <width>127</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="text">
      <string>اضافة</string>
@@ -719,6 +1082,14 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="text">
      <string>تحميل اصناف</string>
     </property>
@@ -731,6 +1102,14 @@
       <width>131</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="text">
      <string>حفظ بيانات العرض</string>
@@ -745,6 +1124,14 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="text">
      <string>خروج</string>
     </property>
@@ -758,9 +1145,25 @@
       <height>271</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <layout class="QGridLayout" name="gridLayout_7">
      <item row="0" column="0">
       <widget class="QTableWidget" name="Qtable_promotion">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="sizeAdjustPolicy">
         <enum>QAbstractScrollArea::AdjustToContents</enum>
        </property>
@@ -780,11 +1183,19 @@
    <widget class="QGroupBox" name="groupBox_8">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>130</x>
       <y>250</y>
-      <width>121</width>
+      <width>151</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
@@ -797,22 +1208,19 @@
       <rect>
        <x>50</x>
        <y>0</y>
-       <width>71</width>
+       <width>88</width>
        <height>21</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLabel" name="label_16">
-        <property name="text">
-         <string>رقم المجموعة</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
     </widget>
     <widget class="QComboBox" name="Qcombo_magazine_4">
      <property name="geometry">
@@ -822,6 +1230,14 @@
        <width>41</width>
        <height>18</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <item>
       <property name="text">
@@ -849,6 +1265,30 @@
       </property>
      </item>
     </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>0</y>
+       <width>86</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>رقم المجموعة</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="Qbtn_remove">
     <property name="geometry">
@@ -858,6 +1298,14 @@
       <width>127</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="text">
      <string>ازالة</string>
@@ -872,6 +1320,14 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
     </property>
@@ -883,13 +1339,29 @@
       <rect>
        <x>80</x>
        <y>0</y>
-       <width>71</width>
+       <width>77</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
        <widget class="QLabel" name="label_17">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>نسبة الخصم</string>
         </property>
@@ -912,6 +1384,14 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
@@ -925,6 +1405,14 @@
        <height>19</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="text">
       <string>%</string>
      </property>
@@ -936,11 +1424,19 @@
    <widget class="QGroupBox" name="groupBox_10">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>290</x>
       <y>250</y>
       <width>141</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
@@ -953,13 +1449,29 @@
       <rect>
        <x>60</x>
        <y>0</y>
-       <width>71</width>
+       <width>76</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
        <widget class="QLabel" name="label_19">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>كمية العرض</string>
         </property>
@@ -982,6 +1494,14 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
@@ -995,6 +1515,14 @@
       <width>61</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
@@ -1014,6 +1542,14 @@
       <width>411</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

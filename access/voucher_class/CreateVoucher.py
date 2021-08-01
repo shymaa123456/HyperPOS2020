@@ -12,6 +12,8 @@ from access.authorization_class.user_module import CL_userModule
 
 from datetime import datetime
 
+from presentation.Themes.Special_StyleSheet import label_num, desc_5
+
 
 class CL_CreateVoucher(QtWidgets.QDialog):
     GV_REFUNDABLE=0
@@ -33,15 +35,15 @@ class CL_CreateVoucher(QtWidgets.QDialog):
             filename = self.dirname + '/createVoucher.ui'
             loadUi(filename, self)
             self.Qcombo_company = CheckableComboBox(self)
-            self.Qcombo_company.setGeometry(20, 15, 271, 25)
+            self.Qcombo_company.setGeometry(320, 35, 271, 15)
             self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
             self.Qcombo_branch = CheckableComboBox(self)
-            self.Qcombo_branch.setGeometry(20, 55, 271, 25)
+            self.Qcombo_branch.setGeometry(320, 60, 271, 15)
             self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
             self.Qcombo_section = CheckableComboBox(self)
-            self.Qcombo_section.setGeometry(20, 90, 271, 25)
+            self.Qcombo_section.setGeometry(320, 85, 271, 15)
             self.Qcombo_section.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_section.setStyleSheet("background-color: rgb(198, 207, 199)")
             self.FN_GET_Company()
@@ -61,6 +63,12 @@ class CL_CreateVoucher(QtWidgets.QDialog):
             self.LE_desc_5.textChanged.connect(self.FN_search)
             self.radioButton.clicked.connect(self.FN_SelectSponser)
             self.radioButton_2.clicked.connect(self.FN_Selectprepaid)
+            # Set Style
+            self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except:
             print(sys.exc_info())
 

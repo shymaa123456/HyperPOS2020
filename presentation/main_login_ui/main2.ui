@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>786</width>
+    <height>598</height>
+   </rect>
+  </property>
+  <property name="tabletTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QToolBox" name="toolBox">
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="currentIndex">
+       <number>5</number>
+      </property>
+      <widget class="QWidget" name="QM_Promotion">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>200</width>
+         <height>377</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>العروض و الخصومات</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QToolBox" name="toolBox_2">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="currentIndex">
+           <number>4</number>
+          </property>
+          <widget class="QWidget" name="QM_Promotion_Prom">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>182</width>
+             <height>224</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>العروض</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="0" column="0">
+             <widget class="QPushButton" name="QAct_Prom_Add">
+              <property name="text">
+               <string>انشاء العروض</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QPushButton" name="QAct_Prom_Upload">
+              <property name="text">
+               <string>تحميل اصناف العروض</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="QAct_Prom_Activate">
+              <property name="text">
+               <string>تنشيط العروض</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="QAct_Prom_Deactivate">
+              <property name="text">
+               <string>ايقاف العروض</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="QAct_Prom_Edit">
+              <property name="text">
+               <string>تعديل العروض</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="QAct_Prom_Date_Increase">
+              <property name="text">
+               <string>مد سريان العروض</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QPushButton" name="QAct_Prom_Copy">
+              <property name="text">
+               <string>انشاء عرض من اخر منتهي</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="QM_Promotion_Coupon">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>182</width>
+             <height>224</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>كوبونات الخضم</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QPushButton" name="QAct_Coupon_Add">
+              <property name="text">
+               <string>انشاء كوبون الخصم</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="QAct_Coupon_Edit">
+              <property name="text">
+               <string>تعديل كوبون الخصم</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="QAct_Coupon_Activate">
+              <property name="text">
+               <string>تنشيط كوبون الخصم</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="QAct_Coupon_Deactivate">
+              <property name="text">
+               <string>ايقاف كوبون الخصم</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="QAct_Coupon_Print">
+              <property name="text">
+               <string>طباعة كوبون الخصم</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QPushButton" name="QAct_Coupon_barcode">
+              <property name="text">
+               <string>تفعيل وايقاف واستبدال كوبون</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>29</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="QM_Promotion_Voucher">
+           <attribute name="label">
+            <string>قسيمة مشتريات</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="QM_Prom_Voucher">
+           <attribute name="label">
+            <string>قسيمة مشتريات عروض</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="QM_Promotion_Magazine">
+           <attribute name="label">
+            <string>المجلة</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="QM_Installment">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>200</width>
+         <height>377</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>برامج التقسيط</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="QM_Customer">
+       <attribute name="label">
+        <string>العملاء</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="menu_2">
+       <attribute name="label">
+        <string>البنوك</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="QM_Report">
+       <attribute name="label">
+        <string>التقارير</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="QM_System">
+       <attribute name="label">
+        <string>ادارة النظام</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>786</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

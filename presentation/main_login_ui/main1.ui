@@ -1,0 +1,2465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>717</height>
+   </rect>
+  </property>
+  <property name="tabletTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::RightToLeft</enum>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton{
+                                        background-color: #A62C2B;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: #BC2120;
+                    color:#ffffff;
+	font: 12pt &quot;29LT Bukra Regular&quot;;
+	                                    }
+                                        QPushButton:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #A62C2B, stop: 1 #E90B0B
+                                        );
+                                        }
+                                        QPushButton:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #E90B0B, stop: 1 #A62C2B
+                                        );
+                                        }
+
+QMainWindow{background-color:#BFD0DA;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4F74BE, stop:1 #BFD0DA);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_45">
+    <item row="0" column="0" rowspan="2">
+     <widget class="QWidget" name="widget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>600</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_44">
+       <item row="0" column="0">
+        <widget class="QToolBox" name="toolBox">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>600</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>29LT Bukra Regular</family>
+           <pointsize>9</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QToolBox{
+background-color: rgba(0,0,0,0%);
+border: 2px solid gray;
+border-radius: 5px;
+}
+QToolBox QScrollArea
+{
+background-color: rgba(0,0,0,0%);
+}
+QToolBox QScrollArea&gt;QWidget&gt;QWidget
+{
+background-color: rgba(0,0,0,0%);
+border: 2px solid gray;
+border-radius: 20px;
+}
+
+QToolBox::tab {
+
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0.33, y2: 0, 
+            stop: 0 #1f2837, stop: 1 #1e4562);
+
+    border-radius: 10px;
+	color: #ffffff;
+}
+
+QToolBox::tab {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+    border-radius: 5px;
+    color: #28345A;
+}
+
+QToolBox::tab:selected { /* italicize selected tabs */
+    color: #DA1F05;
+}</string>
+         </property>
+         <property name="currentIndex">
+          <number>6</number>
+         </property>
+         <widget class="QWidget" name="QM_Promotion">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>306</width>
+            <height>433</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>العروض و الخصومات</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="0">
+            <widget class="QToolBox" name="toolBox_2">
+             <property name="font">
+              <font>
+               <family>29LT Bukra Regular</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="currentIndex">
+              <number>4</number>
+             </property>
+             <widget class="QWidget" name="QM_Promotion_Prom">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>271</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>العروض</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Add">
+                 <property name="text">
+                  <string>انشاء العروض</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Upload">
+                 <property name="text">
+                  <string>تحميل اصناف العروض</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Activate">
+                 <property name="text">
+                  <string>تنشيط العروض</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Deactivate">
+                 <property name="text">
+                  <string>ايقاف العروض</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Edit">
+                 <property name="text">
+                  <string>تعديل العروض</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Date_Increase">
+                 <property name="text">
+                  <string>مد سريان العروض</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Copy">
+                 <property name="text">
+                  <string>انشاء عرض من اخر منتهي</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="0">
+                <spacer name="verticalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="QM_Promotion_Coupon">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>271</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>كوبونات الخضم</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Coupon_Add">
+                 <property name="text">
+                  <string>انشاء كوبون الخصم</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Coupon_Edit">
+                 <property name="text">
+                  <string>تعديل كوبون الخصم</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="QAct_Coupon_Activate">
+                 <property name="text">
+                  <string>تنشيط كوبون الخصم</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="QAct_Coupon_Deactivate">
+                 <property name="text">
+                  <string>ايقاف كوبون الخصم</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QPushButton" name="QAct_Coupon_Print">
+                 <property name="text">
+                  <string>طباعة كوبون الخصم</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QPushButton" name="QAct_Coupon_barcode">
+                 <property name="text">
+                  <string>تفعيل وايقاف واستبدال كوبون</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <spacer name="verticalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>29</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="QM_Promotion_Voucher">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>271</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>قسيمة مشتريات</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Voucher_Add">
+                 <property name="text">
+                  <string>انشاء قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Voucher_Edit">
+                 <property name="text">
+                  <string>تعديل قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="QAct_Voucher_Activate">
+                 <property name="text">
+                  <string>تنشيط قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="QAct_Voucher_Deactivate">
+                 <property name="text">
+                  <string>ايقاف قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QPushButton" name="QAct_Voucher_Print">
+                 <property name="text">
+                  <string>طباعة قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <spacer name="verticalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>58</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="QM_Prom_Voucher">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>271</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>قسيمة مشتريات عروض</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_6">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Voucher_Add">
+                 <property name="text">
+                  <string>انشاء قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Voucher_Edit">
+                 <property name="text">
+                  <string>تعديل قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Voucher_Act">
+                 <property name="text">
+                  <string>تنشبط قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="QAct_Prom_Voucher_Deact">
+                 <property name="text">
+                  <string>ايقاف قسيمة مشتريات</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <spacer name="verticalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>87</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="QM_Promotion_Magazine">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>271</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>المجلة</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_7">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Magazine_Add">
+                 <property name="text">
+                  <string>انشاء مجلة</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Magazine_Edit">
+                 <property name="text">
+                  <string>تعديل مجلة</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="QAct_Magazine_Actiavte">
+                 <property name="text">
+                  <string>تنشيط مجلة</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="QAct_Magazine_Deactivate">
+                 <property name="text">
+                  <string>ايقاف مجلة</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <spacer name="verticalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>60</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="QM_Installment">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>306</width>
+            <height>433</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>برامج التقسيط</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="0" column="0">
+            <widget class="QToolBox" name="toolBox_3">
+             <property name="font">
+              <font>
+               <family>29LT Bukra Regular</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="currentIndex">
+              <number>1</number>
+             </property>
+             <widget class="QWidget" name="page">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>355</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>نظام التقسيط</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Install_Add">
+                 <property name="text">
+                  <string>انشاء نظام التقسيط</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Install_Edit">
+                 <property name="text">
+                  <string>تعديل نظام التقسيط</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="QAct_Install_Activate_Deactivate">
+                 <property name="text">
+                  <string>تفعيل  ايقاف نظام التقسيط</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <spacer name="verticalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>197</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_2">
+              <property name="geometry">
+               <rect>
+                <x>-14</x>
+                <y>0</y>
+                <width>298</width>
+                <height>338</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>اصناف التقسيط</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_10">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Install_Item_Upload">
+                 <property name="text">
+                  <string>تحميل اصناف نظام التقسيط</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Install_Item_Upload_Reject">
+                 <property name="text">
+                  <string>تحميل اصناف ممنوعة لنظام التقسيط</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <spacer name="verticalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>199</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="QM_Customer">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>306</width>
+            <height>433</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>العملاء</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_14">
+           <item row="1" column="0">
+            <widget class="QPushButton" name="QAct_Customer_Service">
+             <property name="text">
+              <string>خدمة العملاء</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="QAct_Redeem_Type">
+             <property name="text">
+              <string>Redeem Type</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QToolBox" name="toolBox_4">
+             <property name="font">
+              <font>
+               <family>29LT Bukra Regular</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="currentIndex">
+              <number>5</number>
+             </property>
+             <widget class="QWidget" name="page_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>185</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>مجموعات العملاء</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_12">
+               <item row="0" column="0" rowspan="2" colspan="2">
+                <widget class="QPushButton" name="QAct_Display_CustGp">
+                 <property name="text">
+                  <string>مجموعة عملاء</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <spacer name="verticalSpacer_9">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>42</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_4">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>185</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>مستويات العملاء</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_13">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Display_CustTp">
+                 <property name="text">
+                  <string>انشاء مستويات عملاء</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <spacer name="verticalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>89</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_5">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>185</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>بيانات العملاء</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_11">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Display_Customer">
+                 <property name="text">
+                  <string>العملاء</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Cust_Card_Add">
+                 <property name="text">
+                  <string>انشاء كارت عميل</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="QAct_Cust_Card_Edit">
+                 <property name="text">
+                  <string>تعديل كارت عميل</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="QAct_Cust_Points_Upload">
+                 <property name="text">
+                  <string>تحميل نقاط عملاء من خارج النظام</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_6">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>185</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>برامج العضوية</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_15">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Display_Loyality">
+                 <property name="text">
+                  <string>انشاء برنامج عضوية</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <spacer name="verticalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>89</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_7">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>185</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>الهدايا والنقاط المكتسبة</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_16">
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Loyality_Point">
+                 <property name="text">
+                  <string>تعريف قيمة استبدال النقاط</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Redeem_Item">
+                 <property name="text">
+                  <string>تعريف اصناف الهدايا</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <spacer name="verticalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_8">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>181</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>منح الهدايا واستبدال النقاط</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_17">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Redeem_Voucher">
+                 <property name="text">
+                  <string>استبدال النقاط بقسيمة شراء</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="QAct_Redeem_Gift">
+                 <property name="text">
+                  <string>استبدال النقاط بالهدايا</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="QAct_Cust_Gift_make">
+                 <property name="text">
+                  <string>منح هدايا للعملاء</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="QAct_Cust_Redeem_Voucher_Print">
+                 <property name="text">
+                  <string>اعادة طباعة قسيمة استبدال النقاط</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <spacer name="verticalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>2</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="menu_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>306</width>
+            <height>433</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>البنوك</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_18">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="QAct_Create_Bank">
+             <property name="text">
+              <string>أنشاء بنك</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="QAct_Modify_Bank">
+             <property name="text">
+              <string>تعديل بنك</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <spacer name="verticalSpacer_13">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>271</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="QM_Report">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>306</width>
+            <height>433</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>التقارير</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_19">
+           <item row="2" column="0">
+            <widget class="QPushButton" name="QAct_Report_Vendor">
+             <property name="text">
+              <string>الاستعلام عن الموردين</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="QAct_Report_Invoice">
+             <property name="text">
+              <string>الاستعلام عن الفواتير</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QToolBox" name="toolBox_5">
+             <property name="font">
+              <font>
+               <family>29LT Bukra Regular</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="currentIndex">
+              <number>9</number>
+             </property>
+             <widget class="QWidget" name="page_9">
+              <property name="geometry">
+               <rect>
+                <x>-231</x>
+                <y>0</y>
+                <width>498</width>
+                <height>727</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير العملاء</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_20">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout">
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_1">
+                   <property name="text">
+                    <string>تقرير اجمالى مشتريات عميل وعدد زياراته</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_2">
+                   <property name="text">
+                    <string>تقرير العملاء ذو اعلى او اقل قيمة مشتريات</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_3">
+                   <property name="text">
+                    <string>تقرير العملاء الذين لم يشتروا خلال فترة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_4">
+                   <property name="text">
+                    <string>تقرير بالمبالغ المستحقة للعملاء خلال فترة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_5">
+                   <property name="text">
+                    <string>كشف حساب عميل تفصيلى خلال فترة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_6">
+                   <property name="text">
+                    <string>تقرير مشتريات عميل من الاصناف</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_7">
+                   <property name="text">
+                    <string>تقرير مشتريات عميل من الاقسام السلعية</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_8">
+                   <property name="text">
+                    <string>تقرير مشتريات عميل من الاقسام الخاضعة وغير الخاضعة للعضوية</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_9">
+                   <property name="text">
+                    <string>تقرير اعلى واقل اصناف للعملاء</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_10">
+                   <property name="text">
+                    <string>تقرير ارصدة ايصالات استبدال النقاط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_11">
+                   <property name="text">
+                    <string>تقرير تفصيلى حركات عميل</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_12">
+                   <property name="text">
+                    <string>تقرير بالقسائم التى انتهى تاريخ صلاحيتها ولم تستخدم</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_13">
+                   <property name="text">
+                    <string>تقرير تفصيلى يوضح طرق استبدال النقاط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_14">
+                   <property name="text">
+                    <string>تقرير تفصيلى يوضح اعداد وقيم طرق استبدال النقاط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_15">
+                   <property name="text">
+                    <string>تقرير زيارة العميل للاقسام وقيمة مشترياته</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_16">
+                   <property name="text">
+                    <string>تقرير حركات قسائم الشراء الخاصة بالعضوية</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_17">
+                   <property name="text">
+                    <string>تقرير بنقاط العملاء حسب مصدر النقاط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_18">
+                   <property name="text">
+                    <string>تقرير بتواريخ ميلاد العملاء</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_19">
+                   <property name="text">
+                    <string>تقرير قيم مشتريات العملاء خلال فترة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_20">
+                   <property name="text">
+                    <string>تقرير بارصدة العملاء</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_21">
+                   <property name="text">
+                    <string>تقرير بالاصناف المستبدلة للعملاء خلال فترة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_22">
+                   <property name="text">
+                    <string>تقرير بالهدايا الممنوحة للعملاء</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Cust_23">
+                   <property name="text">
+                    <string>تقرير لاجراء السحب للعملاء</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_10">
+              <property name="geometry">
+               <rect>
+                <x>-82</x>
+                <y>0</y>
+                <width>349</width>
+                <height>417</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير المبيعات</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_21">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_2">
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_1">
+                   <property name="text">
+                    <string>تقرير مبيعات الصنف على مستوى الادارة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_2">
+                   <property name="text">
+                    <string>تقرير مبيعات الصنف على مستوى القسم</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_3">
+                   <property name="text">
+                    <string>تقرير مبيعات الفرع على مستوى نقاط البيع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_4">
+                   <property name="text">
+                    <string>تقرير مبيعات الاصناف حسب الايام</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_5">
+                   <property name="text">
+                    <string>تقرير مبيعات المجموعات الفرعية حسب الايام</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_6">
+                   <property name="text">
+                    <string>مبيعات الاصناف بالساعة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_7">
+                   <property name="text">
+                    <string>مبيعات المجموعات الفرعية بالساعة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_8">
+                   <property name="text">
+                    <string>تقرير مبيعات الاصناف حسب فئات الضريبة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_9">
+                   <property name="text">
+                    <string>تقرير مبيعات الاصناف على مستوى الصراف</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_10">
+                   <property name="text">
+                    <string>تقرير مبيعات اصناف العروض والخصومات</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_11">
+                   <property name="text">
+                    <string>تقرير اكثر الاصناف مبيعا</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_12">
+                   <property name="text">
+                    <string>مبيعات الاصناف حسب نوع الصنف</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Sale_13">
+                   <property name="text">
+                    <string>مبيعات الفرع موزع حسب طريقة السداد</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_11">
+              <property name="geometry">
+               <rect>
+                <x>-75</x>
+                <y>0</y>
+                <width>342</width>
+                <height>175</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير الارتجاع</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_22">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Return_1">
+                   <property name="text">
+                    <string>تقارير اسباب الارتجاع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Return_2">
+                   <property name="text">
+                    <string>تقرير اجمالى المرتجعات حسب اسباب الارتجاع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Return_3">
+                   <property name="text">
+                    <string>تقرير تفصيلى بالمرتجعات</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Return_4">
+                   <property name="text">
+                    <string>تقرير باكثر اصناف الارتجاع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Return_5">
+                   <property name="text">
+                    <string>تقرير بالاصناف الملغاة فترة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_15">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_12">
+              <property name="geometry">
+               <rect>
+                <x>-87</x>
+                <y>0</y>
+                <width>354</width>
+                <height>324</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير الخزينة المركزية</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_23">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_4">
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_1">
+                   <property name="text">
+                    <string>تقرير جرد خزينة الصراف</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_2">
+                   <property name="text">
+                    <string>اجمالى حركة صراف</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_3">
+                   <property name="text">
+                    <string>اجمالى حركة نقاط البيع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_4">
+                   <property name="text">
+                    <string>تقرير تدفق النقدية حسب كل كاشير</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_5">
+                   <property name="text">
+                    <string>تقرير تدفق النقدية حسب الايام</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_6">
+                   <property name="text">
+                    <string>تقرير تدفق النقدية حسب نقاط البيع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_7">
+                   <property name="text">
+                    <string>تقرير قيمة فروق التقريب</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_8">
+                   <property name="text">
+                    <string>تقرير عجز وزيادة الصرافين تفصيلى</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_9">
+                   <property name="text">
+                    <string>تقرير الفواتير المباعة ائتمان وتم الارتجاع نقدى</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Main_Safe_10">
+                   <property name="text">
+                    <string>تقرير حسب طريقة السداد</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_13">
+              <property name="geometry">
+               <rect>
+                <x>-84</x>
+                <y>0</y>
+                <width>351</width>
+                <height>113</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير احصائية عملاء التجزئة</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_24">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_5">
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_KPI_1">
+                   <property name="text">
+                    <string>تقارير بعدد العملاء ومتوسط الشراء</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_KPI_2">
+                   <property name="text">
+                    <string>تقارير بعدد العملاء طبقا لقيمة المشتريات</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_KPI_3">
+                   <property name="text">
+                    <string>تقارير بعدد العملاء طبقا لقيمة لعدد الساعات</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_14">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_14">
+              <property name="geometry">
+               <rect>
+                <x>-132</x>
+                <y>0</y>
+                <width>399</width>
+                <height>175</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير البيانات الاساسية</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_25">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_6">
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Master_Data_1">
+                   <property name="text">
+                    <string>استعلام عن بيانات صنف</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Master_Data_2">
+                   <property name="text">
+                    <string>استعلام عن بيانات مورد</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Master_Data_3">
+                   <property name="text">
+                    <string>استعلام عن الاصناف طبقا للتقسيم السلعى BMC</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Master_Data_4">
+                   <property name="text">
+                    <string>استعلام عن الاصناف على نقاط البيع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Master_Data_5">
+                   <property name="text">
+                    <string>استعلام عن اجمالى عدد الاصناف حسب كل قسم</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_16">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_15">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>267</width>
+                <height>113</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير العروض والخصومات</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_26">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Promotion_1">
+                   <property name="text">
+                    <string>الاستعلام عن العروض</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Promotion_2">
+                   <property name="text">
+                    <string>الاستعلام عن كوبونات الخصم</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_Report_Promotion_3">
+                   <property name="text">
+                    <string>الاستعلام عن قسيمة مشتريات</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_17">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_16">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>267</width>
+                <height>149</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير البنوك</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_28">
+               <item row="1" column="0">
+                <widget class="QToolBox" name="toolBox_6">
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
+                 <widget class="QWidget" name="page_29">
+                  <property name="geometry">
+                   <rect>
+                    <x>-162</x>
+                    <y>0</y>
+                    <width>390</width>
+                    <height>142</height>
+                   </rect>
+                  </property>
+                  <attribute name="label">
+                   <string>كروت الإئتمان</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_27">
+                   <item row="0" column="0">
+                    <widget class="QPushButton" name="action_104">
+                     <property name="text">
+                      <string>تقرير بالكروت المرتجعة</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QPushButton" name="action_103">
+                     <property name="text">
+                      <string>تقرير حركة كروت الإئتمان</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QPushButton" name="action_105">
+                     <property name="text">
+                      <string>تقرير طرق استخدام كروت الإئتمان حسب نقاط البيع</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QPushButton" name="action_9">
+                     <property name="text">
+                      <string>تقرير حركة كروت الائتمان تقسيط</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0">
+                    <spacer name="verticalSpacer_18">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>358</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QPushButton" name="action_3">
+                 <property name="text">
+                  <string>الاستعلام عن البنوك</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_17">
+              <property name="geometry">
+               <rect>
+                <x>-87</x>
+                <y>0</y>
+                <width>354</width>
+                <height>206</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير انظمة التقسيط</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_29">
+               <item row="1" column="0">
+                <spacer name="verticalSpacer_19">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>48</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_8">
+                 <item>
+                  <widget class="QPushButton" name="action_22">
+                   <property name="text">
+                    <string>تقرير قواعد التقسيط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_46">
+                   <property name="text">
+                    <string>تقرير انظمة التقسيط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_23">
+                   <property name="text">
+                    <string>تقرير فواتير البيع تقسيط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_29">
+                   <property name="text">
+                    <string>تقرير اجمالى مبيعات التقسيط فترة</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_36">
+                   <property name="text">
+                    <string>تقرير الاصناف الممنوعة من التقسيط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_39">
+                   <property name="text">
+                    <string>تقرير مجموعات الاصناف حسب نظام التقسيط</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_20">
+              <property name="geometry">
+               <rect>
+                <x>-116</x>
+                <y>0</y>
+                <width>383</width>
+                <height>175</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>تقارير رقابية</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_30">
+               <item row="1" column="0">
+                <spacer name="verticalSpacer_20">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>48</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_9">
+                 <item>
+                  <widget class="QPushButton" name="action_119">
+                   <property name="text">
+                    <string>تقرير مراقبة انشطة الصراف</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_120">
+                   <property name="text">
+                    <string>عدد الفواتير لكل صراف</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_121">
+                   <property name="text">
+                    <string>تقرير بتوقيت فواتير الكاشير</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_122">
+                   <property name="text">
+                    <string>تقرير متابعة وصول المبيعات من نقاط البيع بالايام</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_123">
+                   <property name="text">
+                    <string>تقرير متابعة وصول المبيعات من نقاط البيع بالنقاط</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="QM_System">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>306</width>
+            <height>433</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>ادارة النظام</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_39">
+           <item row="0" column="0">
+            <widget class="QToolBox" name="toolBox_7">
+             <property name="font">
+              <font>
+               <family>29LT Bukra Regular</family>
+               <pointsize>9</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="currentIndex">
+              <number>2</number>
+             </property>
+             <widget class="QWidget" name="page_30">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>267</width>
+                <height>361</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>البيانات الاساسية</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_31">
+               <item row="1" column="0">
+                <spacer name="verticalSpacer_21">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>199</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_10">
+                 <item>
+                  <widget class="QPushButton" name="action_28">
+                   <property name="text">
+                    <string>الشركات</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_26">
+                   <property name="text">
+                    <string>الفروع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_24">
+                   <property name="text">
+                    <string>طرق الدفع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_25">
+                   <property name="text">
+                    <string>البنوك</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_27">
+                   <property name="text">
+                    <string>انواع العروض</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_30">
+                   <property name="text">
+                    <string>انواع التقسيط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_35">
+                   <property name="text">
+                    <string>انواع الموردين</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_129">
+                   <property name="text">
+                    <string>انواع المستخدمين</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_4">
+                   <property name="text">
+                    <string>تحديث الموردين</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_BMC_2">
+                   <property name="text">
+                    <string>شجرة الاصناف BMC</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_140">
+                   <property name="text">
+                    <string>اكواد المحافظات والمدن والاحياء</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_31">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>324</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>ادارة المستخدمين</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_32">
+               <item row="0" column="1">
+                <widget class="QToolBox" name="toolBox_8">
+                 <property name="font">
+                  <font>
+                   <family>29LT Bukra Regular</family>
+                   <pointsize>8</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="currentIndex">
+                  <number>4</number>
+                 </property>
+                 <widget class="QWidget" name="page_33">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>245</width>
+                    <height>237</height>
+                   </rect>
+                  </property>
+                  <attribute name="label">
+                   <string>Users</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_33">
+                   <item row="1" column="0">
+                    <spacer name="verticalSpacer_22">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>116</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="0" column="0">
+                    <layout class="QVBoxLayout" name="verticalLayout_11">
+                     <item>
+                      <widget class="QPushButton" name="QAct_Create_User">
+                       <property name="text">
+                        <string>Create User</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="QAct_Modify_User">
+                       <property name="text">
+                        <string>Modify User</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="QAct_Copy_User">
+                       <property name="text">
+                        <string>Copy User</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="QAct_Reset_User_Password">
+                       <property name="text">
+                        <string>Reset User Password</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="QAct_Assign_User_to_Roles">
+                       <property name="text">
+                        <string>Assign User to Roles</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="QAct_Create_User_Card">
+                       <property name="text">
+                        <string>Create User Card</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="QAct_Modify_User_Card">
+                       <property name="text">
+                        <string>Modify User Card</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_34">
+                  <property name="geometry">
+                   <rect>
+                    <x>-106</x>
+                    <y>0</y>
+                    <width>368</width>
+                    <height>145</height>
+                   </rect>
+                  </property>
+                  <attribute name="label">
+                   <string>Roles</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_34">
+                   <item row="4" column="0">
+                    <widget class="QPushButton" name="QAct_Modify_Role">
+                     <property name="text">
+                      <string>Modify Role</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="0">
+                    <widget class="QPushButton" name="QAct_Modify_Roles_Privilages">
+                     <property name="text">
+                      <string>Modify Roles Privilages and Function Keys</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="0">
+                    <widget class="QPushButton" name="QAct_Copy_Role">
+                     <property name="text">
+                      <string>Copy Role</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QPushButton" name="QAct_Create_Role">
+                     <property name="text">
+                      <string>Create Role</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="7" column="0">
+                    <spacer name="verticalSpacer_23">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>71</width>
+                       <height>29</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_35">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>262</width>
+                    <height>162</height>
+                   </rect>
+                  </property>
+                  <attribute name="label">
+                   <string>Privilages</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_35">
+                   <item row="0" column="0">
+                    <widget class="QPushButton" name="QAct_Create_Privilage">
+                     <property name="text">
+                      <string>Create Privilage</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <spacer name="verticalSpacer_24">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>87</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_36">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>262</width>
+                    <height>162</height>
+                   </rect>
+                  </property>
+                  <attribute name="label">
+                   <string>Forms</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_36">
+                   <item row="3" column="0">
+                    <widget class="QPushButton" name="QAct_Modify_Form">
+                     <property name="text">
+                      <string>Modify Form</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QPushButton" name="QAct_Create_Form">
+                     <property name="text">
+                      <string>Create Form</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0">
+                    <widget class="QPushButton" name="QAct_Create_Form_Item">
+                     <property name="text">
+                      <string>Create Form Item</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="0">
+                    <widget class="QPushButton" name="QAct_Modify_Form_Item">
+                     <property name="text">
+                      <string>Modify Form Item</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="0">
+                    <spacer name="verticalSpacer_25">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>101</width>
+                       <height>29</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_37">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>262</width>
+                    <height>162</height>
+                   </rect>
+                  </property>
+                  <attribute name="label">
+                   <string>Function Keys</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_37">
+                   <item row="0" column="0">
+                    <widget class="QPushButton" name="QAct_Create_Function_Keys">
+                     <property name="text">
+                      <string>Create Function Keys</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QPushButton" name="QAct_Modify_Function_Keys">
+                     <property name="text">
+                      <string>Modify Function Keys</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <spacer name="verticalSpacer_26">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>58</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_32">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>284</width>
+                <height>324</height>
+               </rect>
+              </property>
+              <attribute name="label">
+               <string>Configurations</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_38">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="QAct_Parameter">
+                 <property name="text">
+                  <string>Parameter</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <spacer name="verticalSpacer_27">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>201</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_38">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>306</width>
+            <height>433</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>خروج</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_40">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="QAct_Exit">
+             <property name="text">
+              <string>خروج</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <spacer name="verticalSpacer_28">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>300</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="1">
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="minimumSize">
+         <size>
+          <width>800</width>
+          <height>650</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTabWidget::pane {
+  border: 1px solid lightgray;
+} 
+
+QTabBar::tab {
+  border: 1px solid lightgray;
+  background-color: #ffffff;
+  padding: 0px 5px 2px 7px;
+} 
+
+QTabBar::tab:selected {
+  background-color: lightgray;
+}
+QTabWidget&gt;QWidget&gt;QWidget{background: #ffffff;}
+QTabWidget&gt;QWidget{background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4F74BE, stop:1 #BFD0DA);border-style: outset;
+border-width: 1px;
+border-radius: 0px;
+border-color:steelblue;}</string>
+        </property>
+        <property name="tabPosition">
+         <enum>QTabWidget::North</enum>
+        </property>
+        <property name="tabShape">
+         <enum>QTabWidget::Triangular</enum>
+        </property>
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+        <property name="tabsClosable">
+         <bool>true</bool>
+        </property>
+        <property name="movable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <spacer name="verticalSpacer_29">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1200</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="actionMain_Menu"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string> </string>
+    </property>
+   </widget>
+   <addaction name="menuMenu"/>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionMain_Menu">
+   <property name="text">
+    <string>Main Menu</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -328,6 +328,13 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.Qcombo_sponsor2.setStyleSheet("background-color: rgb(198, 207, 199)")
         # self.Qcombo_sponsor.hide()
 
+        # Set Style
+        # self.label_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
         try:
 
             self.FN_GET_Company()

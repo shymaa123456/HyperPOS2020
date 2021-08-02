@@ -5,6 +5,8 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.configuration_class.Check_List import CL_HW_Parameter
+from access.configuration_class.List import CL_List
 from access.configuration_class.Parameters import CL_Parameters
 from access.coupon_class.CreateCoupon import CL_CreateCoupon
 from access.coupon_class.EditCoupon import CL_EditCoupon
@@ -49,6 +51,7 @@ from access.voucher_class.CreateVoucher import CL_CreateVoucher
 from access.voucher_class.EditVoucher import CL_EditVoucher
 from access.voucher_class.stoppedVoucher import CL_modifyVoucher
 from access.promotion_voucher_class.PromotionVoucher import CL_PromVoucher
+from access.configuration_class.List_POS import CL_List_POS
 
 
 class CL_main(QtWidgets.QMainWindow):
@@ -153,6 +156,12 @@ class CL_main(QtWidgets.QMainWindow):
 
             # Parameter Form
             self.QAct_Parameter.triggered.connect(self.FN_Parameters)
+            self.QHardware_Parameter.triggered.connect(self.FN_HW_Parameters)
+            self.QList.triggered.connect(self.FN_List)
+            self.QList_POS.triggered.connect(self.FN_List_POS)
+
+
+
 
             self.QAct_Exit.triggered.connect(self.FN_exit)
             self.setWindowTitle('HyperPOS Main Page')
@@ -436,6 +445,25 @@ class CL_main(QtWidgets.QMainWindow):
     # Configuration Parametrs
     def FN_Parameters(self):
         self.window_two =CL_Parameters()
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
+
+        # Hardware Parametrs
+    def FN_HW_Parameters(self):
+            self.window_two = CL_HW_Parameter()
+            self.window_two.FN_LOAD_CREATE()
+            self.window_two.show()
+
+            # Hardware Parametrs
+
+    def FN_List(self):
+        self.window_two = CL_List()
+        self.window_two.FN_LOAD_CREATE()
+        self.window_two.show()
+
+
+    def FN_List_POS(self):
+        self.window_two = CL_List_POS()
         self.window_two.FN_LOAD_CREATE()
         self.window_two.show()
 

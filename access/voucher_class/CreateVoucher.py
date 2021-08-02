@@ -162,6 +162,11 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                     self.LE_desc.text().strip()) == 0 or len(self.LE_desc_3.text().strip()) == 0 or len(
                     self.LE_desc_2.text().strip()) == 0 :
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
+            elif (self.Qdate_from.date() == self.Qdate_to.date()) and int(
+                    self.Qtime_from.dateTime().toString('hh')) + int(self.Qtime_from.dateTime().toString('mm')) > int(
+                    self.Qtime_to.dateTime().toString('hh')) + int(self.Qtime_to.dateTime().toString('mm')):
+                QtWidgets.QMessageBox.warning(self, "خطا", "وقت الانتهاء يجب ان يكون اكبر من او يساوي وقت الانشاء")
+
             else:
                 indx = self.LE_desc.text().strip()
                 sql_select_Query = "select * from VOUCHER where GV_DESC = %s"
@@ -176,8 +181,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                 elif self.searchpos == False:
                         QtWidgets.QMessageBox.warning(self, "Done",
                                                       "العميل غير موجود")
-                elif self.VGType=="2":
-                    if float(self.LE_desc_3.text())+float(self.LE_desc_6.text())!=100:
+                elif self.VGType=="2" and float(self.LE_desc_3.text())+float(self.LE_desc_6.text())!=100:
                        QtWidgets.QMessageBox.warning(self, "Done",
                                                   "يرجى مراجعة نسبة الدعم")
                 else:
@@ -187,8 +191,8 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                            "    Hyper1_Retail.VOUCHER_SECTION   WRITE  "
                     mycursor.execute(sql0)
                     value = randint(0, 1000000000000)
-                    sql = "INSERT INTO VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_VALID_TO, GV_REFUNDABLE, GV_RECHARGABLE,GV_MULTIUSE, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s, %s, %s , %s, %s, %s, %s, %s, %s, %s) "
-                    val = (self.LE_desc.text().strip(),self.VGType,"HVOU"+bin(value),self.LE_desc_2.text().strip(),self.LE_desc_2.text().strip(),CL_userModule.user_name,creationDate,self.Qdate_from.dateTime().toString('yyyy-MM-dd'),self.Qdate_to.dateTime().toString('yyyy-MM-dd'),self.GV_REFUNDABLE,self.GV_RECHARGABLE,self.GV_REFUNDABLE,self.LE_desc_5.text().strip(),'0','0')
+                    sql = "INSERT INTO VOUCHER (GV_DESC, GVT_ID, GV_BARCODE, GV_VALUE, GV_NET_VALUE, GV_CREATED_BY, GV_CREATED_ON, GV_VALID_FROM, GV_TIME_FROM, GV_VALID_TO, GV_TIME_TO,GV_REFUNDABLE, GV_RECHARGABLE,GV_MULTIUSE, POSC_CUST_ID, GV_PRINTRED,GV_STATUS) VALUES (%s, %s,%s, %s, %s, %s, %s, %s , %s, %s, %s, %s, %s, %s, %s, %s, %s) "
+                    val = (self.LE_desc.text().strip(),self.VGType,"HVOU"+bin(value),self.LE_desc_2.text().strip(),self.LE_desc_2.text().strip(),CL_userModule.user_name,creationDate,self.Qdate_from.dateTime().toString('yyyy-MM-dd'),str(self.Qtime_from.dateTime().toString('hh:mm')),self.Qdate_to.dateTime().toString('yyyy-MM-dd'),str(self.Qtime_to.dateTime().toString('hh:mm')),self.GV_REFUNDABLE,self.GV_RECHARGABLE,self.GV_REFUNDABLE,self.LE_desc_5.text().strip(),'0','0')
                     mycursor.execute(sql, val)
                     indx = self.LE_desc.text()
                     mycursor.execute("SELECT * FROM VOUCHER Where GV_DESC = '" + indx + "'")

@@ -252,37 +252,46 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.LE_desc_1.setText(str(record[1]))
             self.LE_desc_2.setValue(float(record[4]))
             self.CMB_CouponStatus.setCurrentIndex(int(record[20]))
-            self.LE_desc_5.setText(str(record[17]))
+            self.LE_desc_5.setText(str(record[19]))
             self.FN_search()
+
+            timefrom = record[13]
+            tfrom = timefrom.split(":")
+            some_time = QtCore.QTime(int(tfrom[0]), int(tfrom[1]), 00)
+            self.Qtime_from.setTime(some_time)
+
+            timeto = record[15]
+            tto = timeto.split(":")
+            some_time = QtCore.QTime(int(tto[0]), int(tto[1]), 00)
+            self.Qtime_to.setTime(some_time)
+
             self.oldValue=record[1]
             datefrom = record[12]
             xfrom = datefrom.split("-")
             self.dfrom = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setDate(self.dfrom)
             self.dfrom = QDateTime(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]), 00, 00, 00, 00)
-            dateto = record[13]
+            dateto = record[14]
             xto = dateto.split("-")
             d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)
-            print("record"+record[15])
-            if int(record[14]) == 1:
+            if int(record[16]) == 1:
                 self.checkBox_refundable.setChecked(True)
             else:
                 self.checkBox_refundable.setChecked(False)
-            if int(record[15]) == 1:
+            if int(record[17]) == 1:
                 self.checkBox_rechange.setChecked(True)
                 self.LE_desc_3.setEnabled(True)
             else:
                 self.checkBox_rechange.setChecked(False)
                 self.LE_desc_3.setEnabled(False)
-            if int(record[16]) == 1:
+            if int(record[18]) == 1:
                 self.checkBox_Multi.setChecked(True)
             else:
                 self.checkBox_Multi.setChecked(False)
             self.FN_check_section(indx)
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
-            print(record[18])
             sql_select = "select * from SPONSER where SPONSER_ID=( SELECT SPONSER_ID FROM VOUCHER_SPONSOR where GV_ID = %s)"
             x = (indx,)
             mycursor.execute(sql_select, x)
@@ -332,6 +341,10 @@ class CL_EditVoucher(QtWidgets.QDialog):
                     self.LE_desc_1.text().strip()) == 0 or len(self.Qcombo_section.currentData()) == 0 or len(
                     self.LE_desc_5.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
+            elif (self.Qdate_from.date() == self.Qdate_to.date()) and int(
+                    self.Qtime_from.dateTime().toString('hh')) + int(self.Qtime_from.dateTime().toString('mm')) > int(
+                    self.Qtime_to.dateTime().toString('hh')) + int(self.Qtime_to.dateTime().toString('mm')):
+                QtWidgets.QMessageBox.warning(self, "خطا", "وقت الانتهاء يجب ان يكون اكبر من او يساوي وقت الانشاء")
             else:
                 if self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
                     QtWidgets.QMessageBox.warning(self, "Done",
@@ -350,7 +363,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
                         self.GV_MULTIUSE) + " ,GV_CHANGED_BY='" + CL_userModule.user_name + "',GV_CHANGE_ON='" + creationDate + "',GV_VALID_FROM='" + self.Qdate_from.dateTime().toString(
                         'yyyy-MM-dd') + "',GV_VALID_TO='" + self.Qdate_to.dateTime().toString(
                         'yyyy-MM-dd') + "',GV_STATUS='" + str(
-                        self.CMB_CouponStatus.currentIndex()) + "',POSC_CUST_ID='"+self.LE_desc_5.text().strip()+"' where GV_ID='" + str(
+                        self.CMB_CouponStatus.currentIndex()) + "',POSC_CUST_ID='"+self.LE_desc_5.text().strip()+"' ,GV_TIME_FROM='"+str(self.Qtime_from.dateTime().toString('hh:mm'))+"',GV_TIME_TO='"+str(self.Qtime_to.dateTime().toString('hh:mm'))+"' where GV_ID='" + str(
                         self.CMB_CouponDes.currentData()) + "'"
                     print(sql)
                     mycursor.execute(sql)

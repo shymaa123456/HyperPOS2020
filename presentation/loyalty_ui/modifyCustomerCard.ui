@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>إنشاء كارت عميل</string>
+   <string>تعديل كارت عميل</string>
   </property>
   <widget class="QPushButton" name="Qbtn_modify">
    <property name="enabled">

@@ -41,8 +41,15 @@ class CL_customerTP(QtWidgets.QDialog):
             self.FN_GET_ID()
             self.FN_GET_ID_STS()
             self.Qtable_custTP.setColumnHidden(0, True)
-            self.setFixedWidth(520)
-            self.setFixedHeight(415)
+            # self.setFixedWidth(520)
+            # self.setFixedHeight(415)
+
+            # Set Style
+            # self.voucher_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except Exception as err:
             print(err)
 

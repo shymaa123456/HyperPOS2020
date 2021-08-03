@@ -7,7 +7,7 @@ from PyQt5.uic import loadUi
 from data_connection.h1pos import db1
 from PyQt5.QtCore import QDate
 
-
+from presentation.Themes.Special_StyleSheet import desc_5
 
 
 class CL_modifyCoupon(QtWidgets.QDialog):
@@ -31,6 +31,13 @@ class CL_modifyCoupon(QtWidgets.QDialog):
             self.FN_getStatus()
             self.BTN_modifyCoupon.clicked.connect(self.FN_UpdateStatus)
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+
+            # Set Style
+            # self.label.setStyleSheet(label_num)
+            self.label.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except:
             print(sys.exc_info())
 

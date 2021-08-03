@@ -41,8 +41,16 @@ class CL_redeemType(QtWidgets.QDialog):
             self.Qtable_redeemTp.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_searchRedeemTp.clicked.connect(self.FN_SEARCH_REDEEMTP)
             self.BTN_searchRedeemTp_all.clicked.connect(self.FN_GET_REDEEMTPS)
-            self.setFixedWidth(380)
-            self.setFixedHeight(448)
+            # self.setFixedWidth(380)
+            # self.setFixedHeight(448)
+
+            # Set Style
+            # self.voucher_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
+
             self.Qtable_redeemTp.setColumnHidden(0, True)
             self.Qtable_redeemTp.doubleClicked.connect(self.FN_GET_REDEEMTYPE)
             for row_number, row_data in enumerate(CL_userModule.myList):

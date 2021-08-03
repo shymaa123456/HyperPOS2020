@@ -63,26 +63,26 @@ class CL_loyProg(QtWidgets.QDialog):
         self.Qradio_active.setChecked(True)
 
         self.Qcombo_group2 = CheckableComboBox(self)
-        self.Qcombo_group2.setGeometry(385, 64, 179, 18)
+        self.Qcombo_group2.setGeometry(330, 70, 179, 18)
         self.Qcombo_group2.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.Qcombo_group3 = CheckableComboBox(self)
-        self.Qcombo_group3.setGeometry(385, 25, 179, 18)
+        self.Qcombo_group3.setGeometry(330, 20, 179, 18)
         self.Qcombo_group3.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.Qcombo_group4 = CheckableComboBox(self)
-        self.Qcombo_group4.setGeometry(385, 45, 179, 18)
+        self.Qcombo_group4.setGeometry(330, 45, 179, 18)
         self.Qcombo_group4.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.Qcombo_group5 = CheckableComboBox(self)
-        self.Qcombo_group5.setGeometry(385, 85, 179, 18)
+        self.Qcombo_group5.setGeometry(330, 95, 179, 18)
         self.Qcombo_group5.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.Qcombo_group6 = CheckableComboBox(self)
-        self.Qcombo_group6.setGeometry(205, 152, 120, 18)
+        self.Qcombo_group6.setGeometry(205, 190, 80, 18)
         self.Qcombo_group6.setStyleSheet("background-color: rgb(198, 207, 199)")
-        self.setFixedWidth(1028)
-        self.setFixedHeight(560)
+        # self.setFixedWidth(1028)
+        # self.setFixedHeight(560)
         self.CMB_custGroup.hide()
         self.CMB_branch.hide()
         self.CMB_company.hide()
@@ -107,6 +107,13 @@ class CL_loyProg(QtWidgets.QDialog):
 
         self.Qbtn_search.clicked.connect(self.FN_SEARCH_LOYPROG)
         self.Qbtn_exit.clicked.connect(self.FN_exit)
+
+        # Set Style
+        # self.voucher_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
     # #     #check authorization
         #print(CL_userModule.myList)
         for row_number, row_data in enumerate( CL_userModule.myList ):

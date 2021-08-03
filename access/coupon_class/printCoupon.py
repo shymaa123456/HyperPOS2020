@@ -22,6 +22,13 @@ class CL_printCoupon(QtWidgets.QDialog):
         loadUi(filename, self)
         self.FN_getData()
 
+        # Set Style
+        # self.labe_id.setStyleSheet(label_num)
+        # self.label.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
     # Todo: method to get all coupons
     def FN_getData(self):
         try:

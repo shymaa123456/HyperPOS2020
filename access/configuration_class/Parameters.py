@@ -17,7 +17,6 @@ class CL_Parameters(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/configuration_ui'
         self.conn = db1.connect()
 
-        # Todo: method to Load data and declare Buttons
     def FN_LOAD_CREATE(self):
         filename = self.dirname + '/Create_Parameter.ui'
         loadUi(filename, self)
@@ -26,9 +25,16 @@ class CL_Parameters(QtWidgets.QDialog):
         self.BTN_ModifyParameter.clicked.connect(self.FN_Update_Parameters)
         self.CMB_Status.addItems(["Active", "Inactive"])
         self.FN_DISPLAY_PRIVILAGE()
-        # Todo: method to Create Parameter if not Exist
+
+        # Set Style
+        # self.voucher_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
     def FN_CREATE_Parameters(self):
-        sql_select_Query = "SELECT * FROM Hyper1_Retail.SYS_CONFIG_PARAMETERS where PARAMETER_DESC = '"+self.LE_name.text().strip()+"' and STATUS = 1"
+        sql_select_Query = "SELECT * FROM Hyper1_Retail.SYS_CONFIG_PARAMETERS where PARAMETER_DESC = '"+self.LE_name.text()+"' and STATUS = 1"
         print(sql_select_Query)
         mycursor = self.conn.cursor()
         mycursor.execute(sql_select_Query)
@@ -74,7 +80,6 @@ class CL_Parameters(QtWidgets.QDialog):
                     db1.connectionCommit(self.conn)
                     db1.connectionClose(self.conn)
             self.FN_DISPLAY_PRIVILAGE()
-        # Todo: method to display data in GridView
     def FN_DISPLAY_PRIVILAGE(self):
             self.conn = db1.connect()
             self.w1.clear()
@@ -94,7 +99,6 @@ class CL_Parameters(QtWidgets.QDialog):
             header_labels = ['Parameter ID', 'Name', 'Value', 'Default Value', 'Notes', 'Created Date', 'Created By', 'Status']
             self.w1.setHorizontalHeaderLabels(header_labels)
             self.w1.doubleClicked.connect(self.Fn_Get_selected_row)
-            # Todo: method to Get Selected row data and fill it on Textbox
     def Fn_Get_selected_row(self):
         try:
             if len(self.w1.selectedIndexes()) > 0:
@@ -105,10 +109,6 @@ class CL_Parameters(QtWidgets.QDialog):
                 D_value = self.w1.item(rowNo, 3).text()
                 Notes = self.w1.item(rowNo, 4).text()
                 status = self.w1.item(rowNo, 7).text()
-                if status == '0':
-                    status = 'Inactive'
-                else:
-                    status = 'Active'
                 self.LE_name.setText(desc)
                 self.LE_Value.setText(Value)
                 self.LE_D_Value.setText(D_value)
@@ -116,7 +116,6 @@ class CL_Parameters(QtWidgets.QDialog):
                 self.CMB_Status.setCurrentText(status)
         except Exception as err:
             print(err)
-        # Todo: method Update Parameters
     def FN_Update_Parameters(self):
             self.name = self.LE_name.text().strip()
             self.Value = self.LE_Value.text().strip()
@@ -138,7 +137,7 @@ class CL_Parameters(QtWidgets.QDialog):
             else:
               try:
                 rowNo = self.w1.selectedItems()[0].row()
-                desc = self.w1.item(rowNo, 1).text().strip()
+                desc = self.w1.item(rowNo, 1).text()
                 if self.LE_name.text().strip() != desc:
                     QtWidgets.QMessageBox.warning(self, "Error", "Parameter Name Can't be change")
                     return
@@ -160,3 +159,5 @@ class CL_Parameters(QtWidgets.QDialog):
               except Exception as err:
                 print(err)
             self.FN_DISPLAY_PRIVILAGE()
+
+

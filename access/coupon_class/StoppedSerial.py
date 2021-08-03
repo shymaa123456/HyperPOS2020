@@ -9,7 +9,7 @@ from PyQt5.uic import loadUi
 
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
-
+from presentation.Themes.Special_StyleSheet import desc_5
 
 
 class CL_StoppedSerial(QtWidgets.QDialog):
@@ -32,6 +32,13 @@ class CL_StoppedSerial(QtWidgets.QDialog):
         self.CMB_CouponStatus.addItems(["Active"])
         self.BTN_stopCoupon.clicked.connect(self.FN_Stop)
         self.BTN_recreateCoupon.clicked.connect(self.FN_Recreate)
+
+        # Set Style
+        # self.label_4.setStyleSheet(label_num)
+        self.label_4.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
 
     # Todo: method to search about coupon by barcode
     def FN_Search(self):

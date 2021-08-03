@@ -35,11 +35,18 @@ class CL_loyPoint(QtWidgets.QDialog):
             self.BTN_searchLoyPoint.clicked.connect(self.FN_SEARCH_LOYPOINT)
             self.BTN_searchLoyPoint_all.clicked.connect(self.FN_GET_POINTS)
 
-            self.setFixedWidth(511)
-            self.setFixedHeight(450)
+            # self.setFixedWidth(511)
+            # self.setFixedHeight(450)
             self.Qtable_point.setColumnHidden(0, True)
             self.Qtable_point.doubleClicked.connect(self.FN_GET_LOYPOINT)
             self.Qtable_point.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
+            # Set Style
+            # self.voucher_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
 
             for row_number, row_data in enumerate(CL_userModule.myList):
 

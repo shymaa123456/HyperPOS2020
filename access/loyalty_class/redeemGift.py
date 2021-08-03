@@ -75,8 +75,15 @@ class CL_redGift(QtWidgets.QDialog):
 
             self.Qline_replace.textChanged.connect(self.textchanged)
             self.Qline_cust.textChanged.connect(self.FN_CLEAR_FEILDS)
-            self.setFixedWidth(513)
-            self.setFixedHeight(330)
+            # self.setFixedWidth(513)
+            # self.setFixedHeight(330)
+
+            # Set Style
+            # self.voucher_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
             for row_number, row_data in enumerate(CL_userModule.myList):
                 if row_data[1] == 'Redeem_Gift':
                     if row_data[4] == 'None':

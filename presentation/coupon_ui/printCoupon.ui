@@ -25,79 +25,94 @@
   <property name="windowTitle">
    <string>طباعه الكوبون</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ffffff, stop:1 #8c8eff);</string>
+   <string notr="true"/>
   </property>
   <widget class="QPushButton" name="BTN_PrintCoupon">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>140</y>
-     <width>121</width>
-     <height>31</height>
+     <y>120</y>
+     <width>161</width>
+     <height>55</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: #5356ff;
-                                        border-style: outset;
-                                        border-width: 4px;
-                                        border-radius: 10px;
-                                        border-color: darkblue;
-                    color:white;
-	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
-	                                    }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #3a0dab, stop: 1 #a5a5ff
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #a5a5ff, stop: 1 #3a0dab
-                                        );
-                                        }</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>طباعه الكوبون</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="CMB_CouponDes">
+  <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>50</y>
-     <width>241</width>
-     <height>31</height>
+     <x>20</x>
+     <y>10</y>
+     <width>361</width>
+     <height>91</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>50</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
    </property>
-   <property name="styleSheet">
-    <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+   <property name="title">
+    <string>الوصف</string>
    </property>
-   <property name="text">
-    <string>وصف الكوبون</string>
-   </property>
+   <widget class="QComboBox" name="CMB_CouponDes">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>30</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>وصف الكوبون</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

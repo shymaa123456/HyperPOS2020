@@ -460,8 +460,15 @@ class CL_CustService(QtWidgets.QDialog):
         self.chk_search_status.stateChanged.connect(self.onClickedCheckBox1)
 
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
-        self.setFixedWidth(1028)
-        self.setFixedHeight(560)
+        # self.setFixedWidth(1028)
+        # self.setFixedHeight(560)
+
+        # Set Style
+        # self.voucher_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
         #check authorization
         for row_number, row_data in enumerate( CL_userModule.myList ):
            if  row_data[1] =='Customer_Service':

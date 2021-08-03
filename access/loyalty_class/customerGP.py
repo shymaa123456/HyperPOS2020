@@ -41,10 +41,17 @@ class CL_customerGP(QtWidgets.QDialog):
             #self.Qtable_custGP.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_searchCustGp.clicked.connect(self.FN_SEARCH_CUSTGP)
             self.BTN_searchCustGp_all.clicked.connect(self.FN_GET_CUSTGPS)
-            self.setFixedWidth(368)
-            self.setFixedHeight(430)
+            # self.setFixedWidth(368)
+            # self.setFixedHeight(430)
             self.Qtable_custGP.setColumnHidden(0, True)
             self.Qtable_custGP.doubleClicked.connect(self.FN_GET_CUSTGP)
+
+            # Set Style
+            # self.voucher_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except Exception as err:
             print(err)
 

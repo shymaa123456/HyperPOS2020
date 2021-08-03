@@ -38,6 +38,13 @@ class CL_customerCard(QtWidgets.QDialog):
             today_date = today_date.split("-")
             d = QDate(int(today_date[0]), int(today_date[1]), int(today_date[2]))
             self.expire_date.setMinimumDate(d)
+
+            # Set Style
+            # self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except Exception as err:
             print(err)
 
@@ -54,6 +61,13 @@ class CL_customerCard(QtWidgets.QDialog):
             # today_date = today_date.split("-")
             # d = QDate(int(today_date[0]), int(today_date[1]), int(today_date[2]))
             # self.expire_date.setMinimumDate(d)
+
+            # Set Style
+            # self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except Exception as err:
             print(err)
     def FN_GET_CARD_DETAILS(self):

@@ -26,6 +26,13 @@ class CL_CreateBank(QtWidgets.QDialog):
 
         self.CMB_bankStatus.addItems(["0","1"])
 
+        # Set Style
+        # self.voucher_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
     def FN_VALIDATE_BANK(self):
         if len(self.LE_bankDesc.text()) > 0 and len(self.LE_bankAddress.text()) > 0 and len(self.LE_accountNumber.text()) > 0:
             print("Login!")
@@ -97,6 +104,13 @@ class CL_CreateBank(QtWidgets.QDialog):
         self.BTN_modifyUser.clicked.connect(self.FN_MODIFY_BANK(self.user1))
 
         self.CMB_userStatus.addItems(["0", "1"])
+
+        # Set Style
+        # self.voucher_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
 
 
 

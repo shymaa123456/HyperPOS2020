@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>790</width>
-    <height>571</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>أصناف الهدايا</string>
@@ -21,6 +33,14 @@
      <width>761</width>
      <height>271</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
@@ -72,17 +92,17 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
-     <weight>50</weight>
-     <bold>false</bold>
+     <family>29LT Bukra Regular</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-background-color: rgb(198, 207, 199);</string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string/>
@@ -96,6 +116,14 @@ background-color: rgb(198, 207, 199);</string>
       <height>111</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string/>
     </property>
@@ -108,12 +136,38 @@ background-color: rgb(198, 207, 199);</string>
        <height>92</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QComboBox" name="CMB_company"/>
+       <widget class="QComboBox" name="CMB_company">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+       </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="CMB_branch"/>
+       <widget class="QComboBox" name="CMB_branch">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -126,9 +180,25 @@ background-color: rgb(198, 207, 199);</string>
        <height>91</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string>الشركة</string>
         </property>
@@ -136,6 +206,14 @@ background-color: rgb(198, 207, 199);</string>
       </item>
       <item>
        <widget class="QLabel" name="label_11">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string>الفرع</string>
         </property>
@@ -153,6 +231,14 @@ background-color: rgb(198, 207, 199);</string>
       <height>111</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
     </property>
@@ -162,11 +248,19 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLabel" name="label_14">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>210</x>
        <y>40</y>
-       <width>41</width>
+       <width>71</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>الباركود</string>
@@ -180,6 +274,14 @@ background-color: rgb(198, 207, 199);</string>
        <width>181</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QLineEdit{
@@ -214,10 +316,18 @@ background-color: rgb(198, 207, 199);</string>
     <property name="geometry">
      <rect>
       <x>450</x>
-      <y>120</y>
+      <y>130</y>
       <width>311</width>
-      <height>91</height>
+      <height>121</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
@@ -225,118 +335,176 @@ background-color: rgb(198, 207, 199);</string>
     <property name="title">
      <string>فترة البرنامج</string>
     </property>
-    <widget class="QWidget" name="layoutWidget_3">
+    <widget class="QGroupBox" name="groupBox_9">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>121</width>
-       <height>22</height>
+       <x>50</x>
+       <y>20</y>
+       <width>211</width>
+       <height>41</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QDateEdit" name="Qdate_from">
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="displayFormat">
-         <string>dd-MM-yyyy</string>
-        </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
-        </property>
-        <property name="date">
-         <date>
-          <year>2020</year>
-          <month>1</month>
-          <day>3</day>
-         </date>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QDateEdit" name="Qdate_from">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>29LT Bukra Regular</family>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="displayFormat">
+       <string>dd-MM-yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="date">
+       <date>
+        <year>2020</year>
+        <month>1</month>
+        <day>3</day>
+       </date>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>124</x>
+        <y>10</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>29LT Bukra Regular</family>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>من</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QLabel" name="label_9">
+    <widget class="QGroupBox" name="groupBox_7">
      <property name="geometry">
       <rect>
-       <x>205</x>
-       <y>30</y>
-       <width>81</width>
-       <height>20</height>
+       <x>50</x>
+       <y>70</y>
+       <width>211</width>
+       <height>41</height>
       </rect>
      </property>
-     <property name="text">
-      <string>من تاريخ</string>
+     <property name="title">
+      <string/>
      </property>
+     <widget class="QDateEdit" name="Qdate_to">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>11</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>29LT Bukra Regular</family>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="dateTime">
+       <datetime>
+        <hour>0</hour>
+        <minute>0</minute>
+        <second>0</second>
+        <year>2021</year>
+        <month>12</month>
+        <day>31</day>
+       </datetime>
+      </property>
+      <property name="displayFormat">
+       <string>dd-MM-yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="date">
+       <date>
+        <year>2021</year>
+        <month>12</month>
+        <day>31</day>
+       </date>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>134</x>
+        <y>10</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>29LT Bukra Regular</family>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>الي</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>215</x>
-       <y>60</y>
-       <width>71</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>الى تاريخ</string>
-     </property>
-    </widget>
-    <widget class="QWidget" name="layoutWidget_4">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>121</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QDateEdit" name="Qdate_to">
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="dateTime">
-         <datetime>
-          <hour>0</hour>
-          <minute>0</minute>
-          <second>0</second>
-          <year>2021</year>
-          <month>12</month>
-          <day>31</day>
-         </datetime>
-        </property>
-        <property name="displayFormat">
-         <string>dd-MM-yyyy</string>
-        </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
-        </property>
-        <property name="date">
-         <date>
-          <year>2021</year>
-          <month>12</month>
-          <day>31</day>
-         </date>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+    <zorder>groupBox_7</zorder>
+    <zorder>groupBox_9</zorder>
+    <zorder>layoutWidget_3</zorder>
+    <zorder>layoutWidget_4</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_8">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>111</width>
-      <height>211</height>
+      <width>121</width>
+      <height>231</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="title">
      <string/>
@@ -346,9 +514,17 @@ background-color: rgb(198, 207, 199);</string>
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>91</width>
-       <height>191</height>
+       <width>101</width>
+       <height>211</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -356,30 +532,16 @@ background-color: rgb(198, 207, 199);</string>
         <property name="enabled">
          <bool>true</bool>
         </property>
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width:6em;
-                                       }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>بحث</string>
@@ -391,30 +553,16 @@ background-color: rgb(198, 207, 199);</string>
         <property name="enabled">
          <bool>true</bool>
         </property>
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width:6em;
-                                       }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>عرض الكل</string>
@@ -426,30 +574,16 @@ background-color: rgb(198, 207, 199);</string>
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width:6em;
-                                       }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>إنشاء </string>
@@ -461,30 +595,16 @@ background-color: rgb(198, 207, 199);</string>
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width:6em;
-                                       }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>تعديل </string>
@@ -496,30 +616,16 @@ background-color: rgb(198, 207, 199);</string>
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width:6em;
-                                       }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>تحميل البيانات</string>
@@ -528,30 +634,16 @@ background-color: rgb(198, 207, 199);</string>
       </item>
       <item>
        <widget class="QPushButton" name="Qbtn_exit">
+        <property name="font">
+         <font>
+          <family>29LT Bukra Regular</family>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width:6em;
-                                       }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>خروج</string>
@@ -564,11 +656,19 @@ background-color: rgb(198, 207, 199);</string>
    <widget class="QGroupBox" name="groupBox_6">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>180</x>
       <y>220</y>
       <width>221</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::RightToLeft</enum>
@@ -579,11 +679,19 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QRadioButton" name="Qradio_active">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>100</x>
        <y>10</y>
-       <width>41</width>
+       <width>61</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
@@ -601,6 +709,14 @@ background-color: rgb(198, 207, 199);</string>
        <height>20</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
      </property>
@@ -613,10 +729,18 @@ background-color: rgb(198, 207, 199);</string>
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>130</y>
+      <y>140</y>
       <width>301</width>
       <height>71</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="title">
      <string/>
@@ -624,11 +748,19 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>180</x>
        <y>20</y>
-       <width>81</width>
+       <width>111</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>النقاط المستحقه</string>
@@ -637,11 +769,19 @@ background-color: rgb(198, 207, 199);</string>
     <widget class="QLineEdit" name="Qline_points">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>10</x>
        <y>20</y>
        <width>171</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>29LT Bukra Regular</family>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QLineEdit{

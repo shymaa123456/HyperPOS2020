@@ -113,6 +113,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Create_Form_Item.clicked.connect(self.FN_create_form_item)
             self.QAct_Modify_Form_Item.clicked.connect(self.FN_modify_form_item)
 
+
             """ Promotion """
             self.QAct_Prom_Add.clicked.connect(self.FN_search_promotion)
             self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)

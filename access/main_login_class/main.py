@@ -115,6 +115,7 @@ class CL_main(QtWidgets.QMainWindow):
 
 
 
+
             """ Promotion """
             self.QAct_Prom_Add.clicked.connect(self.FN_search_promotion)
             self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)

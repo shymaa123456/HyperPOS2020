@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>727</width>
-    <height>406</height>
+    <height>445</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -125,6 +125,9 @@
       <string>Configurations</string>
      </property>
      <addaction name="QAct_Parameter"/>
+     <addaction name="QHardware_Parameter"/>
+     <addaction name="QList"/>
+     <addaction name="QList_POS"/>
     </widget>
     <addaction name="QM_Master_Data"/>
     <addaction name="QM_Authorization"/>
@@ -1542,6 +1545,11 @@
     <string>تفعيل و ايقاف و استبدال باركود</string>
    </property>
   </action>
+  <action name="QHardware_Parameter">
+   <property name="text">
+    <string>Hardware Parameter</string>
+   </property>
+  </action>
   <action name="action_12">
    <property name="text">
     <string>انشاء قسيمة مشتريات</string>
@@ -1572,6 +1580,11 @@
     <string>طباعه قسيمه مشتريات</string>
    </property>
   </action>
+  <action name="QList">
+   <property name="text">
+    <string>Ceate List</string>
+   </property>
+  </action>
   <action name="QAct_Redeem_Type">
    <property name="enabled">
     <bool>false</bool>
@@ -1586,6 +1599,11 @@
    </property>
    <property name="text">
     <string>تعديل كارت عميل</string>
+   </property>
+  </action>
+  <action name="QList_POS">
+   <property name="text">
+    <string>POS List</string>
    </property>
   </action>
  </widget>

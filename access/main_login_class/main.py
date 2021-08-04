@@ -13,12 +13,15 @@ from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
 from access.customer_service_class.customer_complain import CL_CustService
 from access.loyalty_class.CL_loyPoint import CL_loyPoint
+from access.loyalty_class.createCustomer import CL_customer_create
 from access.loyalty_class.customerCard import CL_customerCard
 from access.loyalty_class.loyalityProg import CL_loyProg
+from access.loyalty_class.modifyCustomer import CL_customer_modify
 from access.loyalty_class.redeemGift import CL_redGift
 from access.loyalty_class.redeemItem import CL_redItem
 from access.loyalty_class.redeemType import CL_redeemType
 from access.loyalty_class.redeemVoucher import CL_redVouch
+from access.loyalty_class.uploadCustomer import CL_customer
 from access.reports_class.reporting import CL_report
 from access.reports_class.reporting1 import CL_report1
 
@@ -30,7 +33,7 @@ from access.authorization_class.privilage import CL_privilage
 from access.authorization_class.user import CL_user
 from access.authorization_class.user_module import CL_userModule
 # from access.main_login_class.login import  CL_login
-from access.loyalty_class.customer import CL_customer
+
 from access.loyalty_class.customerGP import CL_customerGP
 from access.loyalty_class.customerType import CL_customerTP
 
@@ -89,7 +92,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Modify_Role.clicked.connect(self.FN_MODIFY_ROLE)
             self.QAct_Copy_Role.clicked.connect(self.FN_COPY_ROLE)
 
-            self.QAct_Display_Customer.clicked.connect(self.FN_DISPLAY_CUST)
+            self.QAct_Create_Customer.clicked.connect(self.FN_CREATE_CUST)
+            self.QAct_Modify_Customer.clicked.connect(self.FN_MODIFY_CUST)
+            self.QAct_Upload_Customer.clicked.connect(self.FN_UPLOAD_CUSTOMER)
             self.QAct_Cust_Points_Upload.clicked.connect(self.FN_UP_CUST_PT)
 
             self.QAct_Display_Loyality.clicked.connect(self.FN_CREATE_LOYPROG)
@@ -204,7 +209,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_DISPLAY_CUSTTP = 0
             self.window_DISPLAY_CUSTGP = 0
             self.window_UPLOAD_CUST = 0
-            self.window_DISPLAY_CUST = 0
+            self.window_CREATE_CUST = 0
+            self.window_MODIFY_CUST = 0
+            self.window_UPLOAD_CUSTOMER = 0
             self.window_CREATE_LOYPROG = 0
             self.window_UP_CUST_PT = 0
             self.window_Cust_Card_Edit = 0
@@ -291,35 +298,51 @@ class CL_main(QtWidgets.QMainWindow):
 
 
 
-    def  FN_DISPLAY_CUST(self):
+    def  FN_CREATE_CUST(self):
         # self.onTabCloseRequested_DISPLAY_CUST()
-        if self.window_DISPLAY_CUST == 0:
-            self.window_DISPLAY_CUST = CL_customer()
-            self.window_DISPLAY_CUST.FN_LOAD_DISPLAY()
-            self.ui.tabWidget.addTab(self.window_DISPLAY_CUST, 'العملاء')
-            self.ui.tabWidget.setFixedWidth(self.window_DISPLAY_CUST.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_DISPLAY_CUST.frameGeometry().height())
+        if self.window_CREATE_CUST == 0:
+            self.window_CREATE_CUST = CL_customer_create()
+            self.window_CREATE_CUST.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_CREATE_CUST, 'العملاء')
+            self.ui.tabWidget.setFixedWidth(self.window_CREATE_CUST.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_CREATE_CUST.frameGeometry().height())
             # self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested_DISPLAY_CUST)
-            self.ui.tabWidget.setCurrentWidget(self.window_DISPLAY_CUST)
+            self.ui.tabWidget.setCurrentWidget(self.window_CREATE_CUST)
         else:
-            self.ui.tabWidget.setFixedWidth(self.window_DISPLAY_CUST.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_DISPLAY_CUST.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_DISPLAY_CUST)
+            self.ui.tabWidget.setFixedWidth(self.window_CREATE_CUST.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_CREATE_CUST.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_CREATE_CUST)
 
-
-
-    def FN_UPLOAD_CUST(self):
-        if self.window_UPLOAD_CUST == 0:
-            self.window_UPLOAD_CUST = CL_customer()
-            self.window_UPLOAD_CUST.FN_LOAD_UPLOAD()
-            self.ui.tabWidget.addTab(self.window_UPLOAD_CUST, 'طباعة كوبون')
-            self.ui.tabWidget.setFixedWidth(self.window_UPLOAD_CUST.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_UPLOAD_CUST.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_UPLOAD_CUST)
+    def FN_MODIFY_CUST(self):
+    # self.onTabCloseRequested_DISPLAY_CUST()
+        if self.window_MODIFY_CUST == 0:
+            self.window_MODIFY_CUST = CL_customer_modify()
+            self.window_MODIFY_CUST.FN_LOAD_MODIFY()
+            self.ui.tabWidget.addTab(self.window_MODIFY_CUST, 'العملاء')
+            self.ui.tabWidget.setFixedWidth(self.window_MODIFY_CUST.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_MODIFY_CUST.frameGeometry().height())
+            # self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested_DISPLAY_CUST)
+            self.ui.tabWidget.setCurrentWidget(self.window_MODIFY_CUST)
         else:
-            self.ui.tabWidget.setFixedWidth(self.window_UPLOAD_CUST.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_UPLOAD_CUST.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_UPLOAD_CUST)
+            self.ui.tabWidget.setFixedWidth(self.window_MODIFY_CUST.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_MODIFY_CUST.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_MODIFY_CUST)
+
+    def  FN_UPLOAD_CUSTOMER(self):
+        # self.onTabCloseRequested_DISPLAY_CUST()
+        if self.window_UPLOAD_CUSTOMER == 0:
+            self.window_UPLOAD_CUSTOMER = CL_customer()
+            self.window_UPLOAD_CUSTOMER.FN_LOAD_UPLOAD()
+            self.ui.tabWidget.addTab(self.window_UPLOAD_CUSTOMER, 'العملاء')
+            self.ui.tabWidget.setFixedWidth(self.window_UPLOAD_CUSTOMER.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_UPLOAD_CUSTOMER.frameGeometry().height())
+            # self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested_DISPLAY_CUST)
+            self.ui.tabWidget.setCurrentWidget(self.window_UPLOAD_CUSTOMER)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_UPLOAD_CUSTOMER.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_UPLOAD_CUSTOMER.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_UPLOAD_CUSTOMER)
+
 
 
     def FN_DISPLAY_CUSTGP(self):
@@ -350,7 +373,7 @@ class CL_main(QtWidgets.QMainWindow):
                 self.ui.tabWidget.setFixedHeight(self.window_DISPLAY_CUSTTP.frameGeometry().height())
                 self.ui.tabWidget.setCurrentWidget(self.window_DISPLAY_CUSTTP)
         except Exception as err:
-            print(err)
+          print(err)
 
 
 
@@ -1148,9 +1171,18 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_UPLOAD_CUST:
             self.ui.tabWidget.setFixedWidth(self.window_UPLOAD_CUST.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_UPLOAD_CUST.frameGeometry().height())
-        elif self.ui.tabWidget.currentWidget() == self.window_DISPLAY_CUST:
-            self.ui.tabWidget.setFixedWidth(self.window_DISPLAY_CUST.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_DISPLAY_CUST.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_CREATE_CUST:
+            self.ui.tabWidget.setFixedWidth(self.window_CREATE_CUST.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_CREATE_CUST.frameGeometry().height())
+
+        elif self.ui.tabWidget.currentWidget() == self.window_MODIFY_CUST:
+            self.ui.tabWidget.setFixedWidth(self.window_MODIFY_CUST.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_MODIFY_CUST.frameGeometry().height())
+
+        elif self.ui.tabWidget.currentWidget() == self.window_UPLOAD_CUSTOMER:
+            self.ui.tabWidget.setFixedWidth(self.window_UPLOAD_CUSTOMER.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_UPLOAD_CUSTOMER.frameGeometry().height())
+
         elif self.ui.tabWidget.currentWidget() == self.window_CREATE_LOYPROG:
             self.ui.tabWidget.setFixedWidth(self.window_CREATE_LOYPROG.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_CREATE_LOYPROG.frameGeometry().height())
@@ -1261,8 +1293,12 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_DISPLAY_CUSTGP = 0
         if self.window_UPLOAD_CUST not in li:
             self.window_UPLOAD_CUST = 0
-        if self.window_DISPLAY_CUST not in li:
-            self.window_DISPLAY_CUST = 0
+        if self.window_CREATE_CUST not in li:
+            self.window_CREATE_CUST = 0
+        if self.window_MODIFY_CUST not in li:
+            self.window_MODIFY_CUST = 0
+        if self.window_UPLOAD_CUSTOMER not in li:
+            self.window_UPLOAD_CUSTOMER = 0
         if self.window_CREATE_LOYPROG not in li:
             self.window_CREATE_LOYPROG = 0
         if self.window_UP_CUST_PT not in li:

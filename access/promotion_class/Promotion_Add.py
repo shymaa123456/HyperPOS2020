@@ -307,7 +307,7 @@ class CL_create_promotion(QtWidgets.QDialog):
 
         """ checked combobox sample >>> Branch"""
         self.Qcombo_branch2 = CheckableComboBox(self)
-        self.Qcombo_branch2.setGeometry(801, 94, 179, 18)
+        self.Qcombo_branch2.setGeometry(801, 99, 179, 18)
         self.Qcombo_branch2.setLayoutDirection(Qt.RightToLeft)
         self.Qcombo_branch2.setStyleSheet("background-color: rgb(198, 207, 199)")
         # self.Qcombo_branch.hide()
@@ -315,7 +315,7 @@ class CL_create_promotion(QtWidgets.QDialog):
 
         """ checked combobox sample " CUSTOMER GROUP """
         self.Qcombo_cust_group2 = CheckableComboBox(self)
-        self.Qcombo_cust_group2.setGeometry(801, 118, 179, 18)
+        self.Qcombo_cust_group2.setGeometry(801, 124, 179, 18)
         self.Qcombo_cust_group2.setLayoutDirection(Qt.RightToLeft)  # RightToLeft)
         # self.Qcombo_cust_group2.lineEdit().setAlignment(Qt.AlignRight)
         self.Qcombo_cust_group2.setStyleSheet("background-color: rgb(198, 207, 199)")
@@ -323,7 +323,7 @@ class CL_create_promotion(QtWidgets.QDialog):
 
         """ checked combobox sample >>> sponsor"""
         self.Qcombo_sponsor2 = CheckableComboBox(self)
-        self.Qcombo_sponsor2.setGeometry(801, 142, 179, 18)
+        self.Qcombo_sponsor2.setGeometry(801, 150, 179, 18)
         self.Qcombo_sponsor2.setLayoutDirection(Qt.RightToLeft)
         self.Qcombo_sponsor2.setStyleSheet("background-color: rgb(198, 207, 199)")
         # self.Qcombo_sponsor.hide()

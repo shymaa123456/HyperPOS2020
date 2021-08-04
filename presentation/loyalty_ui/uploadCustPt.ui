@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>220</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
-    <height>220</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
-    <height>220</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
   <widget class="QPushButton" name="BTN_load">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>520</x>
      <y>100</y>
      <width>186</width>
      <height>31</height>
@@ -55,7 +55,7 @@
   <widget class="QPushButton" name="BTN_browse">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>520</x>
      <y>40</y>
      <width>186</width>
      <height>31</height>
@@ -79,7 +79,7 @@
   <widget class="QPushButton" name="BTN_uploadTemp">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>600</x>
      <y>150</y>
      <width>471</width>
      <height>41</height>
@@ -110,7 +110,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>710</x>
      <y>10</y>
      <width>361</width>
      <height>131</height>

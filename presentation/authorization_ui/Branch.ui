@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>779</width>
-    <height>769</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Branch</string>
@@ -121,7 +133,6 @@
    <property name="font">
     <font>
      <family>29LT Bukra Regular</family>
-     <pointsize>-1</pointsize>
      <weight>75</weight>
      <italic>false</italic>
      <bold>true</bold>

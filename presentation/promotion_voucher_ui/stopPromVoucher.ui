@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>300</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
-    <height>300</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
-    <height>300</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>720</x>
      <y>140</y>
      <width>41</width>
      <height>20</height>
@@ -55,7 +55,7 @@
   <widget class="QPushButton" name="BTN_changeStatus">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>580</x>
      <y>190</y>
      <width>200</width>
      <height>60</height>
@@ -85,7 +85,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>610</x>
      <y>140</y>
      <width>82</width>
      <height>21</height>
@@ -127,7 +127,7 @@
   <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>820</x>
      <y>120</y>
      <width>261</width>
      <height>141</height>
@@ -318,7 +318,7 @@
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>520</x>
      <y>10</y>
      <width>561</width>
      <height>101</height>

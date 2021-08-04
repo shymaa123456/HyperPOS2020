@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>460</width>
-    <height>400</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>460</width>
-    <height>400</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>460</width>
-    <height>400</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
   <widget class="QPushButton" name="BTN_createBank">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>660</x>
      <y>244</y>
      <width>131</width>
      <height>51</height>
@@ -52,7 +52,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>810</x>
      <y>180</y>
      <width>271</width>
      <height>71</height>
@@ -104,7 +104,7 @@
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>750</x>
      <y>10</y>
      <width>331</width>
      <height>161</height>

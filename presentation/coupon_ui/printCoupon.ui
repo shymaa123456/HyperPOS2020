@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>200</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>400</width>
-    <height>200</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>400</width>
-    <height>200</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -34,7 +34,7 @@
   <widget class="QPushButton" name="BTN_PrintCoupon">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>720</x>
      <y>120</y>
      <width>161</width>
      <height>55</height>
@@ -57,7 +57,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>720</x>
      <y>10</y>
      <width>361</width>
      <height>91</height>

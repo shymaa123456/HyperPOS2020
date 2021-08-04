@@ -62,9 +62,7 @@
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-                    background-color: rgb(198, 207, 199);
-                </string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string/>
@@ -87,7 +85,7 @@
        <x>10</x>
        <y>10</y>
        <width>181</width>
-       <height>92</height>
+       <height>100</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">

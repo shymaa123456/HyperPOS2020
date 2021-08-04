@@ -19,13 +19,13 @@ class CL_customer_modify(QtWidgets.QDialog):
     oldmobile=''
     oldstatus=''
     oldemail=''
-    def __init__(self,pp):
+    def __init__(self):
         super(CL_customer_modify, self).__init__()
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         conn = db1.connect()
-        self.parent = pp
+
     def FN_LOAD_MODIFY(self,id):
         try:
             print("id is ", id)

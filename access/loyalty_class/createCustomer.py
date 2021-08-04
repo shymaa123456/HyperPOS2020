@@ -17,13 +17,13 @@ class CL_customer_create(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
     parent =''
-    def __init__(self,pp):
+    def __init__(self):
         super(CL_customer_create, self).__init__()
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         conn = db1.connect()
-        self.parent = pp
+
     def FN_LOAD_CREATE(self):
         try:
             filename = self.dirname + '/createCustomer.ui'

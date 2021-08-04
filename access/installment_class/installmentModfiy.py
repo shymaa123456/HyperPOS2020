@@ -37,7 +37,12 @@ class CL_installmentModify(QtWidgets.QDialog):
     dirname = ''
     parent = ''
     InstallmentNo=""
+    InstallmentRule=""
+
     oldstatusDateTo=""
+    oldstatusOfstatus=""
+    oldINST_ADMIN_EXPENSES_PERC=""
+    oldINSTR_INTEREST_RATE=""
     def __init__(self,parentInit):
         super(CL_installmentModify, self).__init__()
         cwd = Path.cwd()
@@ -152,7 +157,10 @@ class CL_installmentModify(QtWidgets.QDialog):
         #save installment program
         self.Qbtn_modifyInstallment.clicked.connect(self.FN_UpdateInstallemtProgram)
 
-
+        # Total interest rate
+        self.QDubleSpiner_customerRate.valueChanged.connect(self.FN_PutInterestRate)
+        self.QDubleSpiner_vendorRate.valueChanged.connect(self.FN_PutInterestRate)
+        self.QDubleSpiner_hperoneRate.valueChanged.connect(self.FN_PutInterestRate)
 
     #TODO Get basic data
     # get installments period list
@@ -451,55 +459,96 @@ class CL_installmentModify(QtWidgets.QDialog):
 
     #Insert in Qtable
     def FN_InsertInQtable(self,records , QTableWidgit):
-        def FN_InsertInQtable_internal():
+        print("FN_InsertInQtable_internal")
+        i = 0
+        error_message = ''
+        print("FN_InsertInQtable_records", len(records))
+        for row_number, row_data in enumerate(records):
+            QTableWidgit.insertRow(row_number)
+            print("FN_InsertInQtable", row_number)
 
-                i=0
-                error_message = ''
-                for POS_GTIN, POS_GTIN_DESC_A in records:
-                    #for row_number, row_data in enumerate(records):
-                    QTableWidgit.insertRow(i)
-                    QTableWidgit.setItem(i, 0, QTableWidgetItem(POS_GTIN))
-                    QTableWidgit.setItem(i, 1, QTableWidgetItem(POS_GTIN_DESC_A))
+            for column_number, data in enumerate(row_data):
+                QTableWidgit.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+                print("FN_InsertInQtable_column_number", column_number, "data", str(data))
 
-                    #to make rows of table not editable
-                    QTableWidgit.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-                    i=i+1
+        QTableWidgit.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
-        return FN_InsertInQtable_internal
+    # Empty element before search
+    def FN_EmptyElement(self):
+        self.Qcombo_installmentType.setCurrentIndex(-1)
+        self.Qcombo_company.unCheckedList()
+        self.Qcombo_branch.unCheckedList()
+        self.Qcombo_customerGroupe.unCheckedList()
+        self.Qcombo_department.unCheckedList()
+        self.Qcombo_section.unCheckedList()
+        self.Qcombo_BMCLevel.unCheckedList()
+
+        self.Qcombo_bank.setCurrentIndex(-1)
+        self.Qcombo_vendor.setCurrentIndex(-1)
+        self.QTEdit_sponsorReason.setText("")
+
+        self.QDSpinBox_adminExpendses.setValue(0)
+        self.QDSpinBox_Max_adminExpendses.setValue(0)
+        self.QDSpinBox_Min_adminExpendses.setValue(0)
+
+        self.QDubleSpiner_customerRate.setValue(0)
+        self.QDubleSpiner_vendorRate.setValue(0)
+        self.QDubleSpiner_hperoneRate.setValue(0)
+
+        self.FN_ClearAcepptedQTableData()
+        self.FN_ClearQtable_rejectedItemsData()
 
     #Get data for installment program
     def FN_SearchForInstallmentProgram(self):
         self.InstallmentNo=self.QL_installmentNo.text()
-
+        #Empty element before search
+        self.FN_EmptyElement()
         try:
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
 
             # Select INSTALLMENT_PROGRAM
-            sql1 = "SELECT INSTR_RULEID ,INST_DESC,INST_VALID_FROM ,INST_VALID_TO , INST_ADMIN_EXPENSES_PERC ,INST_ADMIN_EXPENSES_MAX , INST_ADMIN_EXPENSES_MIN  , INST_STATUS FROM INSTALLMENT_PROGRAM WHERE INST_PROGRAM_ID='"+self.InstallmentNo+"'"
+            sql1 = "SELECT INSTR_RULEID ,INST_DESC,INST_VALID_FROM ,INST_VALID_TO , INST_ADMIN_EXPENSES_PERC ,INST_ADMIN_EXPENSES_MAX , INST_ADMIN_EXPENSES_MIN  , INST_STATUS ,INST_DEACTIVATED_BY FROM INSTALLMENT_PROGRAM WHERE INST_PROGRAM_ID='"+self.InstallmentNo+"'"
 
             mycursor.execute(sql1)
             records = mycursor.fetchall()
             if len(records) >0 :
 
-                for INSTR_RULEID , INST_DESC, INST_VALID_FROM , INST_VALID_TO ,INST_ADMIN_EXPENSES_PERC , INST_ADMIN_EXPENSES_MAX ,INST_ADMIN_EXPENSES_MIN ,INST_STATUS in records:
+                for INSTR_RULEID , INST_DESC, INST_VALID_FROM , INST_VALID_TO ,INST_ADMIN_EXPENSES_PERC , INST_ADMIN_EXPENSES_MAX ,INST_ADMIN_EXPENSES_MIN ,INST_STATUS ,INST_DEACTIVATED_BY in records:
                     print("INST_DESC", INST_DESC)
                     print("INST_STATUS", INST_STATUS)
                     print("INSTR_RULEID", INSTR_RULEID)
+                    self.InstallmentRule = INSTR_RULEID
 
                     if INST_STATUS == str(0):
                         self.QL_hint_youcanonlychange_period.setVisible(True)
-                        self.QL_hint_youcanonlychange_period.setText("لم يتم تفعيل البرنامج من قبل مسموح بتعديل الفتره فقط")
+                        if INST_DEACTIVATED_BY == None:
+                            self.oldstatusOfstatus="0None"
+                            self.QL_hint_youcanonlychange_period.setText( "لم يتم تفعيل البرنامج من قبل مسموح بتعديل المصاريف\n الاداريه واقل واقصى  والوقت والنسبه والباركودات والاقسام ")
+                            self.FN_EnabelWhenNotActiveAndNotDeactivate()
+                            self.LoadingDataofProgram(INST_VALID_FROM, INST_VALID_TO, INST_ADMIN_EXPENSES_PERC,
+                                                      INST_ADMIN_EXPENSES_MAX, INST_ADMIN_EXPENSES_MIN, INST_DESC,
+                                                      mycursor, INSTR_RULEID)
+
+
+                        else:
+                            self.oldstatusOfstatus = "0Yes"
+                            self.FN_EnabelWhenNotActiveAndDeactivate()
+                            self.QL_hint_youcanonlychange_period.setText( "تم الغاء تفعيل البرنامج من قبل  غير مسموح بتعديل البرنامج")
+                            self.LoadingDataofProgram(INST_VALID_FROM, INST_VALID_TO, INST_ADMIN_EXPENSES_PERC,
+                                                      INST_ADMIN_EXPENSES_MAX, INST_ADMIN_EXPENSES_MIN, INST_DESC,
+                                                      mycursor, INSTR_RULEID)
+
+
 
                     elif INST_STATUS == str(1):
+                        self.oldstatusOfstatus = "1"
                         self.QL_hint_youcanonlychange_period.setVisible(True)
-                        self.QL_hint_youcanonlychange_period.setText("تم تفعيل البرنامج من قبل مسموح بتعديل الفتره فقط")
+                        self.QL_hint_youcanonlychange_period.setText("البرنامج مفعل مسموح بتعديل الفتره فقط")
+                        self.LoadingDataofProgram(INST_VALID_FROM , INST_VALID_TO,INST_ADMIN_EXPENSES_PERC,INST_ADMIN_EXPENSES_MAX ,
+                                                  INST_ADMIN_EXPENSES_MIN,INST_DESC , mycursor,INSTR_RULEID)
+                        self.FN_EnabelWhenNotActive()
 
-                        self.LoadingDataofProgram(INST_VALID_FROM , INST_VALID_TO,INST_ADMIN_EXPENSES_PERC,INST_ADMIN_EXPENSES_MAX ,INST_ADMIN_EXPENSES_MIN,INST_DESC , mycursor,INSTR_RULEID)
-                    else:
-                        self.QL_hint_youcanonlychange_period.setVisible(False)
-                        print("Program is not active")
-                        QtWidgets.QMessageBox.information(self, "INFO", " Program is not active")
 
             else:
                 self.QL_hint_youcanonlychange_period.setVisible(False)
@@ -510,7 +559,132 @@ class CL_installmentModify(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
-    #
+    #enable date to and time to if prgram is is active and not deativate
+    def FN_EnabelWhenNotActiveAndNotDeactivate(self):
+        print("FN_EnabelWhenNotActiveAndNotDeactivate")
+        self.Qcombo_installmentType.setEnabled(False)
+        self.QTEdit_descInstallment.setEnabled(False)
+        self.Qdate_from.setEnabled(False)
+        self.Qtime_from.setEnabled(False)
+        self.Qdate_to.setEnabled(True)
+        self.Qtime_to.setEnabled(True)
+        self.Qcombo_company.setEnabled(False)
+        self.Qcombo_branch.setEnabled(False)
+        self.Qcombo_customerGroupe.setEnabled(False)
+
+        self.Qcombo_department.setEnabled(True)
+        self.Qcombo_section.setEnabled(True)
+        self.Qcombo_BMCLevel.setEnabled(True)
+
+        self.checkBox_department.setEnabled(True)
+        self.checkBox_section.setEnabled(True)
+        self.checkBox_BMCLevel.setEnabled(True)
+
+        self.RBTN_bank.setEnabled(False)
+        self.Qcombo_bank.setEnabled(False)
+        self.RBTN_vendor.setEnabled(False)
+        self.Qcombo_vendor.setEnabled(False)
+        self.QTEdit_sponsorReason.setEnabled(False)
+        self.RBTN_hyperone.setEnabled(False)
+
+        self.QDSpinBox_adminExpendses.setEnabled(True)
+        self.QDSpinBox_Max_adminExpendses.setEnabled(True)
+        self.QDSpinBox_Min_adminExpendses.setEnabled(True)
+        self.QDubleSpiner_interestRate.setEnabled(False)
+        self.QDubleSpiner_customerRate.setEnabled(True)
+        self.QDubleSpiner_vendorRate.setEnabled(True)
+        self.QDubleSpiner_hperoneRate.setEnabled(True)
+
+        self.Qtable_acceptedItems.setEnabled(True)
+        self.Qbtn_loadItems.setEnabled(True)
+        self.Qbtn_deleteItem.setEnabled(True)
+        self.Qtable_rejectedItems.setEnabled(True)
+        self.Qbtn_loadRejectItem.setEnabled(True)
+        self.Qbtn_deleteRejectItem.setEnabled(True)
+
+    #enable date to and time to if prgram is is active and deativate
+    def FN_EnabelWhenNotActiveAndDeactivate(self):
+        self.Qcombo_installmentType.setEnabled(False)
+        self.QTEdit_descInstallment.setEnabled(False)
+        self.Qdate_from.setEnabled(False)
+        self.Qtime_from.setEnabled(False)
+        self.Qdate_to.setEnabled(False)
+        self.Qtime_to.setEnabled(False)
+        self.Qcombo_company.setEnabled(False)
+        self.Qcombo_branch.setEnabled(False)
+        self.Qcombo_customerGroupe.setEnabled(False)
+        self.Qcombo_department.setEnabled(False)
+        self.Qcombo_section.setEnabled(False)
+        self.Qcombo_BMCLevel.setEnabled(False)
+
+        self.checkBox_department.setEnabled(False)
+        self.checkBox_section.setEnabled(False)
+        self.checkBox_BMCLevel.setEnabled(False)
+
+        self.RBTN_bank.setEnabled(False)
+        self.Qcombo_bank.setEnabled(False)
+        self.RBTN_vendor.setEnabled(False)
+        self.Qcombo_vendor.setEnabled(False)
+        self.QTEdit_sponsorReason.setEnabled(False)
+        self.RBTN_hyperone.setEnabled(False)
+
+        self.QDSpinBox_adminExpendses.setEnabled(False)
+        self.QDSpinBox_Max_adminExpendses.setEnabled(False)
+        self.QDSpinBox_Min_adminExpendses.setEnabled(False)
+        self.QDubleSpiner_interestRate.setEnabled(False)
+        self.QDubleSpiner_customerRate.setEnabled(False)
+        self.QDubleSpiner_vendorRate.setEnabled(False)
+        self.QDubleSpiner_hperoneRate.setEnabled(False)
+
+        self.Qtable_acceptedItems.setEnabled(False)
+        self.Qbtn_loadItems.setEnabled(False)
+        self.Qbtn_deleteItem.setEnabled(False)
+        self.Qtable_rejectedItems.setEnabled(False)
+        self.Qbtn_loadRejectItem.setEnabled(False)
+        self.Qbtn_deleteRejectItem.setEnabled(False)
+
+    # enable date to and time to if prgram is is active
+    def FN_EnabelWhenNotActive(self):
+            self.Qcombo_installmentType.setEnabled(False)
+            self.QTEdit_descInstallment.setEnabled(False)
+            self.Qdate_from.setEnabled(False)
+            self.Qtime_from.setEnabled(False)
+            self.Qdate_to.setEnabled(True)
+            self.Qtime_to.setEnabled(True)
+            self.Qcombo_company.setEnabled(False)
+            self.Qcombo_branch.setEnabled(False)
+            self.Qcombo_customerGroupe.setEnabled(False)
+            self.Qcombo_department.setEnabled(False)
+            self.Qcombo_section.setEnabled(False)
+            self.Qcombo_BMCLevel.setEnabled(False)
+
+            self.checkBox_department.setEnabled(False)
+            self.checkBox_section.setEnabled(False)
+            self.checkBox_BMCLevel.setEnabled(False)
+
+            self.RBTN_bank.setEnabled(False)
+            self.Qcombo_bank.setEnabled(False)
+            self.RBTN_vendor.setEnabled(False)
+            self.Qcombo_vendor.setEnabled(False)
+            self.QTEdit_sponsorReason.setEnabled(False)
+            self.RBTN_hyperone.setEnabled(False)
+
+            self.QDSpinBox_adminExpendses.setEnabled(False)
+            self.QDSpinBox_Max_adminExpendses.setEnabled(False)
+            self.QDSpinBox_Min_adminExpendses.setEnabled(False)
+            self.QDubleSpiner_interestRate.setEnabled(False)
+            self.QDubleSpiner_customerRate.setEnabled(False)
+            self.QDubleSpiner_vendorRate.setEnabled(False)
+            self.QDubleSpiner_hperoneRate.setEnabled(False)
+
+            self.Qtable_acceptedItems.setEnabled(False)
+            self.Qbtn_loadItems.setEnabled(False)
+            self.Qbtn_deleteItem.setEnabled(False)
+            self.Qtable_rejectedItems.setEnabled(False)
+            self.Qbtn_loadRejectItem.setEnabled(False)
+            self.Qbtn_deleteRejectItem.setEnabled(False)
+
+    #load program date
     def LoadingDataofProgram(self,INST_VALID_FROM , INST_VALID_TO ,INST_ADMIN_EXPENSES_PERC,INST_ADMIN_EXPENSES_MAX ,INST_ADMIN_EXPENSES_MIN,INST_DESC , mycursor,INSTR_RULEID):
         self.QDSpinBox_adminExpendses.setValue(INST_ADMIN_EXPENSES_PERC)
         self.QDSpinBox_Max_adminExpendses.setValue(INST_ADMIN_EXPENSES_MAX)
@@ -519,38 +693,10 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.QTEdit_descInstallment.setText(INST_DESC)
 
         self.oldstatusDateTo=INST_VALID_TO
+        self.oldINST_ADMIN_EXPENSES_PERC=INST_ADMIN_EXPENSES_PERC
 
         #convert datatime as varchar to date and time
-        #todo INST_VALID_TO
-        dateto = INST_VALID_TO
-        print("dateto",dateto)
-        dto = dateto.split("-")
-        dtotdd=dto[2].split(" ")                               #'15 13:36'
-        print("dtotdd",dtotdd[0])
-        print("dtotdd",dtotdd)
-        dtotm=dtotdd[1].split(":")
-        print("dtotm",dtotm[0])
-        print("dtotm", dtotm[1])
-        some_dateTo = QtCore.QDate(int(dto[0]), int(dto[1]), int(dtotdd[0]))
-        print("some_dateTo",some_dateTo)
-        self.Qdate_to.setDate(some_dateTo)
-        some_timeTo = QtCore.QTime(int(dtotm[0]), int(dtotm[1]))
-        self.Qtime_to.setTime(some_timeTo)
-        #Todo INST_VALID_FROM
-        dateto = INST_VALID_FROM
-        print("dateto", dateto)
-        dto = dateto.split("-")
-        dtotdd = dto[2].split(" ")  # '15 13:36'
-        print("dtotdd", dtotdd[0])
-        print("dtotdd", dtotdd)
-        dtotm = dtotdd[1].split(":")
-        print("dtotm", dtotm[0])
-        print("dtotm", dtotm[1])
-        some_datefrom = QtCore.QDate(int(dto[0]), int(dto[1]), int(dtotdd[0]))
-        print("some_dateTo", some_datefrom)
-        self.Qdate_from.setDate(some_datefrom)
-        some_timeTo = QtCore.QTime(int(dtotm[0]), int(dtotm[1]))
-        self.Qtime_from.setTime(some_timeTo)
+        self.FN_ConvertDateAndTimeAndPutItInItsObject(INST_VALID_FROM , INST_VALID_TO)
 
         # Get selected Data For company and branch
         self.FN_GetSlectedCompanyAndBranchForThisProgram(mycursor)
@@ -570,6 +716,7 @@ class CL_installmentModify(QtWidgets.QDialog):
         mycursor.execute(sql2)
         records2 = mycursor.fetchall()
         for INSTT_TYPE_ID, INSTR_DESC, INSTR_INTEREST_RATE, INSTR_SPONSOR_RATE, INSTR_HYPER_RATE, INSTR_CUSTOMER_RATE in records2:
+            self.oldINSTR_INTEREST_RATE = INSTR_INTEREST_RATE
             print("Index_installmentType", INSTT_TYPE_ID)
             self.Qcombo_installmentType.setCurrentIndex(INSTT_TYPE_ID - 1)  # installment type id
             self.QDubleSpiner_customerRate.setValue(INSTR_CUSTOMER_RATE)
@@ -586,6 +733,7 @@ class CL_installmentModify(QtWidgets.QDialog):
         print(sql3)
         mycursor.execute(sql3)
         records3 = mycursor.fetchall()
+        print("INSTALLMENT_REJECTED_ITEM_len(records3)",len(records3))
         self.FN_InsertInQtable(records3, self.Qtable_rejectedItems)
 
         # Get Data From INSTALLMENT_ITEM
@@ -594,7 +742,42 @@ class CL_installmentModify(QtWidgets.QDialog):
         print(sql4)
         mycursor.execute(sql4)
         records4 = mycursor.fetchall()
+        print("INSTALLMENT_ITEM_len(records3)",len(records4))
+
         self.FN_InsertInQtable(records4, self.Qtable_acceptedItems)
+
+    # convert datatime as varchar to date and time
+    def FN_ConvertDateAndTimeAndPutItInItsObject(self,INST_VALID_FROM,INST_VALID_TO):
+        # todo INST_VALID_TO
+        dateto = INST_VALID_TO
+        print("dateto", dateto)
+        dto = dateto.split("-")
+        dtotdd = dto[2].split(" ")  # '15 13:36'
+        print("dtotdd", dtotdd[0])
+        print("dtotdd", dtotdd)
+        dtotm = dtotdd[1].split(":")
+        print("dtotm", dtotm[0])
+        print("dtotm", dtotm[1])
+        some_dateTo = QtCore.QDate(int(dto[0]), int(dto[1]), int(dtotdd[0]))
+        print("some_dateTo", some_dateTo)
+        self.Qdate_to.setDate(some_dateTo)
+        some_timeTo = QtCore.QTime(int(dtotm[0]), int(dtotm[1]))
+        self.Qtime_to.setTime(some_timeTo)
+        # Todo INST_VALID_FROM
+        dateto = INST_VALID_FROM
+        print("dateto", dateto)
+        dto = dateto.split("-")
+        dtotdd = dto[2].split(" ")  # '15 13:36'
+        print("dtotdd", dtotdd[0])
+        print("dtotdd", dtotdd)
+        dtotm = dtotdd[1].split(":")
+        print("dtotm", dtotm[0])
+        print("dtotm", dtotm[1])
+        some_datefrom = QtCore.QDate(int(dto[0]), int(dto[1]), int(dtotdd[0]))
+        print("some_dateTo", some_datefrom)
+        self.Qdate_from.setDate(some_datefrom)
+        some_timeTo = QtCore.QTime(int(dtotm[0]), int(dtotm[1]))
+        self.Qtime_from.setTime(some_timeTo)
 
     # Get selected Data For company and branch
     def FN_GetSlectedCompanyAndBranchForThisProgram(self,mycursor):
@@ -767,6 +950,23 @@ class CL_installmentModify(QtWidgets.QDialog):
         except:
             print(sys.exc_info())
 
+    # put interest rate
+    def FN_PutInterestRate(self):
+            if (self.QDubleSpiner_customerRate.value()
+                + self.QDubleSpiner_vendorRate.value()
+                + self.QDubleSpiner_hperoneRate.value()) <= 100:
+
+                self.QDubleSpiner_interestRate.setValue(
+                    self.QDubleSpiner_customerRate.value()
+                    + self.QDubleSpiner_vendorRate.value()
+                    + self.QDubleSpiner_hperoneRate.value()
+                )
+            else:
+                QtWidgets.QMessageBox.warning(self, "Error", "summation of rate  is more than 100")
+                self.QDubleSpiner_customerRate.setValue(0)
+                self.QDubleSpiner_vendorRate.setValue(0)
+                self.QDubleSpiner_hperoneRate.setValue(0)
+
     #Validate installment program
     def FN_ValidateInstallemt(self):
         error=0
@@ -784,13 +984,26 @@ class CL_installmentModify(QtWidgets.QDialog):
 
         return error
 
-    # TO clear Data From QTable
+    # TO clear Data From Qtable_acceptedItems
     def FN_ClearAcepptedQTableData(self):
         for i in reversed(range(self.Qtable_acceptedItems.rowCount())):
             self.Qtable_acceptedItems.removeRow(i)
 
+    # TO clear Data From Qtable_rejectedItems
+    def FN_ClearQtable_rejectedItemsData(self):
+        for i in reversed(range(self.Qtable_rejectedItems.rowCount())):
+            self.Qtable_rejectedItems.removeRow(i)
+
     # save Installment program
     def FN_UpdateInstallemtProgram(self):
+
+        if self.oldstatusOfstatus=="1":
+            self.FN_updateActiveProgram()
+        elif self.oldstatusOfstatus=="0None":
+            self.FN_updateNotActivebeforeProgram()
+
+    #update programm if programm is active
+    def FN_updateActiveProgram(self):
         error = 0
         Validation_For_installmentProgramm = 0
 
@@ -811,27 +1024,114 @@ class CL_installmentModify(QtWidgets.QDialog):
                 ModifingDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                 creationDate = str(datetime.today().strftime('%Y-%m-%d'))
 
-                ToDateTime = self.Qdate_to.dateTime().toString('yyyy-MM-dd') + " " + str(self.Qtime_to.dateTime().toString('hh:mm'))
+                ToDateTime = self.Qdate_to.dateTime().toString('yyyy-MM-dd') + " " + str(
+                    self.Qtime_to.dateTime().toString('hh:mm'))
 
                 # insert to INSTALLMENT_PROGRAM
-                if ToDateTime != self.oldstatusDateTo :
-                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_VALID_TO='"+ToDateTime+"' , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " , INST_ACTIVATED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
+                if ToDateTime != self.oldstatusDateTo:
+                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_VALID_TO='" + ToDateTime + "' , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
                     print("sql2", sql2)
                     mycursor.execute(sql2)
 
                     # TODO Insert in log table
                     sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-
                     val8 = (self.InstallmentNo, 'INSTALLMENT_PROGRAM', 'INST_VALID_TO', self.oldstatusDateTo,
                             ToDateTime,
                             creationDate,
                             CL_userModule.user_name)
                     print("sql8", sql8)
-                    mycursor.execute(sql8,val8)
+                    mycursor.execute(sql8, val8)
 
                 elif ToDateTime == self.oldstatusDateTo:
                     QtWidgets.QMessageBox.warning(self, "Error", "Data doesn't change")
 
+                # # unlock table :
+                sql00 = "  UNLOCK   tables    "
+                mycursor.execute(sql00)
+                self.conn.commit()
+
+            except mysql.connector.Error as error:
+                print("Failed to update record to database rollback: {}".format(error))
+                # reverting changes because of exception
+                self.conn.rollback()
+            finally:
+                # closing database connection.
+                if self.conn.is_connected():
+                    mycursor.close()
+                    self.conn.close()
+                    print("connection is closed")
+
+    #update programm if programm isn't active before
+    def FN_updateNotActivebeforeProgram(self):
+        error = 0
+        Validation_For_installmentProgramm = 0
+
+        error = self.FN_ValidateInstallemt()
+        print(error)
+        if error != 0:
+
+            try:
+                self.conn = db1.connect()
+                self.conn.autocommit = False
+                mycursor = self.conn.cursor()
+                self.conn.start_transaction()
+
+                # # lock table for new record:
+                sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE , Hyper1_Retail.SYS_CHANGE_LOG  WRITE , Hyper1_Retail.INSTALLMENT_RULE  WRITE"
+                mycursor.execute(sql0)
+
+                ModifingDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                creationDate = str(datetime.today().strftime('%Y-%m-%d'))
+
+                ToDateTime = self.Qdate_to.dateTime().toString('yyyy-MM-dd') + " " + str(
+                    self.Qtime_to.dateTime().toString('hh:mm'))
+
+                # update to INSTALLMENT_PROGRAM INST_VALID_TO,INST_ADMIN_EXPENSES_PERC,INST_ADMIN_EXPENSES_MIN,INST_ADMIN_EXPENSES_MAX
+                if ToDateTime != self.oldstatusDateTo:
+                    sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_VALID_TO='" + ToDateTime + "', INST_ADMIN_EXPENSES_PERC ='"+self.QDSpinBox_adminExpendses.value()+\
+                        "', INST_ADMIN_EXPENSES_MIN ='"+self.QDSpinBox_Min_adminExpendses.value() +"', INST_ADMIN_EXPENSES_MAX='"+self.QDSpinBox_Min_adminExpendses.value()+\
+                        "' , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
+                    print("sql2", sql2)
+                    mycursor.execute(sql2)
+
+                    #update INSTALLMENT_RULE INSTR_INTEREST_RATE,INSTR_SPONSOR_RATE , INSTR_HYPER_RATE  ,INSTR_CUSTOMER_RATE
+                    sql3 = "update Hyper1_Retail.INSTALLMENT_RULE set INSTR_INTEREST_RATE='" + str(self.QDubleSpiner_interestRate.value()) + "', INSTR_SPONSOR_RATE ='" + \
+                           str(self.QDubleSpiner_vendorRate.value()) + "' , INSTR_HYPER_RATE='"+ str(self.QDubleSpiner_hperoneRate.value())+\
+                           "' , INSTR_CUSTOMER_RATE='"+ str(self.QDubleSpiner_customerRate.value())+ " where INSTR_RULEID='" + self.InstallmentRule + "'"
+                    print("sql3", sql3)
+                    mycursor.execute(sql3)
+
+                    # TODO Insert in log table date to
+                    sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                    val8 = (self.InstallmentNo, 'INSTALLMENT_PROGRAM', 'INST_VALID_TO', self.oldstatusDateTo,
+                            ToDateTime,
+                            creationDate,
+                            CL_userModule.user_name)
+                    print("sql8", sql8)
+                    mycursor.execute(sql8, val8)
+
+                    # TODO Insert in log table INST_ADMIN_EXPENSES_PERC
+                    sql9 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+
+                    val9 = (self.InstallmentNo, 'INSTALLMENT_PROGRAM', 'INST_ADMIN_EXPENSES_PERC', self.oldINST_ADMIN_EXPENSES_PERC,
+                            self.QDSpinBox_adminExpendses.value() ,
+                            creationDate,
+                            CL_userModule.user_name)
+                    print("sql9", sql9)
+                    mycursor.execute(sql9, val9)
+
+                    # TODO Insert in log table INSTR_INTEREST_RATE
+                    sql10 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,ROW_KEY_ID2,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                    val10 = (self.InstallmentNo, self.InstallmentRule, 'INSTALLMENT_RULE', 'INSTR_INTEREST_RATE',
+                             self.oldINSTR_INTEREST_RATE,
+                             str(self.QDubleSpiner_interestRate.value()),
+                             creationDate,
+                             CL_userModule.user_name)
+                    print("sql10", sql10)
+                    mycursor.execute(sql10, val10)
+
+                elif ToDateTime == self.oldstatusDateTo:
+                    QtWidgets.QMessageBox.warning(self, "Error", "Data doesn't change")
 
                 # # unlock table :
                 sql00 = "  UNLOCK   tables    "

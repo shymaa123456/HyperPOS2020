@@ -48,6 +48,13 @@ class CL_installment(QtWidgets.QDialog):
         filename = self.dirname + '/Installment_create.ui'
         loadUi(filename, self)
 
+        # Apply Style For Design
+        css_path = Path(__file__).parent.parent.parent
+        # self.label_num.setStyleSheet()
+        # self.desc_5.setStyleSheet()
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
         #Get installment type
         self.FN_GET_installment_types_period()
 

@@ -14,6 +14,10 @@ class CL_privilage( QtWidgets.QDialog ):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
+        css_path = Path(__file__).parent.parent.parent
+
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
 
     #Todo: method to load ui of create privilage
     def FN_LOAD_CREATE(self):

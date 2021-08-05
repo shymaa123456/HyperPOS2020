@@ -62,9 +62,7 @@
     <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-                    background-color: rgb(198, 207, 199);
-                </string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string/>
@@ -402,7 +400,7 @@
         <rect>
          <x>160</x>
          <y>20</y>
-         <width>115</width>
+         <width>117</width>
          <height>22</height>
         </rect>
        </property>
@@ -470,7 +468,7 @@
         <rect>
          <x>10</x>
          <y>20</y>
-         <width>115</width>
+         <width>117</width>
          <height>22</height>
         </rect>
        </property>
@@ -715,28 +713,8 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{background-color: green;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: beige;
-                                        font: bold 14px;
-                                        min-width: 10em;
-                                        padding: 6px;}
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+         <string notr="true">
+</string>
         </property>
         <property name="text">
          <string>بحث</string>
@@ -752,28 +730,7 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{background-color: green;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: beige;
-                                        font: bold 14px;
-                                        min-width: 10em;
-                                        padding: 6px;}
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>طباعة</string>
@@ -790,35 +747,13 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
           <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{background-color: green;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: beige;
-                                        font: bold 14px;
-                                        min-width: 10em;
-                                        padding: 6px;}
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>تصدير</string>
@@ -835,35 +770,13 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>-1</pointsize>
           <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{background-color: red;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: beige;
-                                        font: bold 14px;
-                                        min-width: 10em;
-                                        padding: 6px;}
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>خروج</string>

@@ -22,8 +22,7 @@ class CL_customerCard(QtWidgets.QDialog):
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.conn = db1.connect()
-        self.card_serial =''
-        self.status = ''
+
     ###
 
     def FN_LOAD_CREATE(self):
@@ -39,6 +38,13 @@ class CL_customerCard(QtWidgets.QDialog):
             today_date = today_date.split("-")
             d = QDate(int(today_date[0]), int(today_date[1]), int(today_date[2]))
             self.expire_date.setMinimumDate(d)
+
+            # Set Style
+            # self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except Exception as err:
             print(err)
 
@@ -53,17 +59,25 @@ class CL_customerCard(QtWidgets.QDialog):
             self.LE_custNo.textChanged.connect(self.FN_GET_CARD_DETAILS)
             # today_date = str(datetime.today().strftime('%Y-%m-%d'))
             # today_date = today_date.split("-")
-            # d= QDate(int(today_date[0]), int(today_date[1]), int(today_date[2]))
-            #self.expire_date.setMinimumDate(d)
+            # d = QDate(int(today_date[0]), int(today_date[1]), int(today_date[2]))
+            # self.expire_date.setMinimumDate(d)
+
+            # Set Style
+            # self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except Exception as err:
             print(err)
     def FN_GET_CARD_DETAILS(self):
         self.FN_GET_CUST_NAME ()
-        self.card_serial = ''
+
         conn = db1.connect()
         mycursor = conn.cursor()
         no = self.LE_custNo.text().strip()
-        sql = "SELECT `EXPIRY_DATE`,CARD_SERIAL ,CARD_STATUS FROM Hyper1_Retail.POS_CUSTOMER_CARD where POS_CUST_ID = '" + str(no) + "'"
+        sql = "SELECT `EXPIRY_DATE`,CARD_SERIAL FROM Hyper1_Retail.POS_CUSTOMER_CARD where POS_CUST_ID = '" + str(
+                no) + "' and CARD_STATUS = '1'"
         mycursor.execute(sql)
         myresult = mycursor.fetchone()
 
@@ -73,11 +87,10 @@ class CL_customerCard(QtWidgets.QDialog):
             d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.expire_date.setDate(d)
             self.card_serial = myresult[1]
-            self.status = myresult[2]
             #set the date
             print("found")
-        #else:
-            #QtWidgets.QMessageBox.warning(self, "خطأ", "العميل ليس لديه كارت منشأ ")
+        else:
+            print("no data")
 
     def FN_GET_CUST_NAME (self):
         conn = db1.connect()
@@ -167,21 +180,17 @@ class CL_customerCard(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
         no = self.LE_custNo.text().strip()
         name = self.LE_custName.text().strip()
-        print(self.card_serial)
-        if len(name) >0 and self.card_serial != ''   :
-            #print(len (no))
+        if len(name) >0:
+            print(len (no))
             sql = "update `Hyper1_Retail`.`POS_CUSTOMER_CARD` set CARD_STATUS = '0'  where CARD_SERIAL = %s "
-            val = (int(self.card_serial),)
+            val = (self.card_serial,)
             mycursor.execute(sql, val)
-
+            mycursor.close()
             QtWidgets.QMessageBox.information(self, "تم", "تم  التعديل")
             db1.connectionCommit(self.conn)
-            mycursor.close()
-            util.FN_INSERT_IN_LOG("POS_CUSTOMER_CARD", "status", '0', self.status, self.card_serial)
-        elif len(name) == 0 :
-            if  len(no) > 0:
+        else:
+            if len(no) > 0:
                 QtWidgets.QMessageBox.warning(self, "خطأ", " رقم العميل غير موجود")
             else:
                 QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال رقم العميل")
-        elif self.card_serial == '' :
-            QtWidgets.QMessageBox.warning(self, "خطأ", "العميل ليس لديه كارت منشأ ")
+

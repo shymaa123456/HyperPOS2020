@@ -53,7 +53,7 @@ class CL_redItem(QtWidgets.QDialog):
         self.Qcombo_group3.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.Qcombo_group4 = CheckableComboBox(self)
-        self.Qcombo_group4.setGeometry(190, 100, 179, 18)
+        self.Qcombo_group4.setGeometry(190, 90, 179, 18)
         self.Qcombo_group4.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.CMB_branch.hide()
@@ -61,8 +61,15 @@ class CL_redItem(QtWidgets.QDialog):
 
         self.FN_GET_COMPANIES()
         self.FN_GET_BRANCHES()
-        self.setFixedWidth(789)
-        self.setFixedHeight(571)
+        # self.setFixedWidth(789)
+        # self.setFixedHeight(571)
+
+        # Set Style
+        # self.voucher_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
         for row_number, row_data in enumerate(CL_userModule.myList):
             if row_data[1] == 'Redeem_Item':
                 if row_data[4] == 'None':

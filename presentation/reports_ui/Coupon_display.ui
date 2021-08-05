@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>560</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1200</width>
-    <height>560</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1200</width>
-    <height>560</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    <enum>Qt::RightToLeft</enum>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ffffff, stop:1 #8c8eff);</string>
+   <string notr="true"/>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -54,7 +54,7 @@
     <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ffffff, stop:1 #8c8eff);</string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string/>
@@ -65,14 +65,14 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>200</x>
       <y>10</y>
       <width>361</width>
       <height>201</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ccccff, stop:1 #8c8eff);</string>
+     <string notr="true"/>
     </property>
     <property name="title">
      <string/>
@@ -100,12 +100,7 @@
       <enum>Qt::RightToLeft</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 5px;
-border-color:black;</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>متعدد الاستخدام</string>
@@ -121,12 +116,7 @@ border-color:black;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>الشركة</string>
@@ -145,12 +135,7 @@ border-color:black;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>الفرع</string>
@@ -163,7 +148,7 @@ border-color:black;</string>
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>770</x>
+      <x>670</x>
       <y>10</y>
       <width>421</width>
       <height>201</height>
@@ -173,7 +158,7 @@ border-color:black;</string>
      <enum>Qt::RightToLeft</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #bbbbff, stop:1 #8c8eff);</string>
+     <string notr="true"/>
     </property>
     <property name="title">
      <string/>
@@ -243,12 +228,7 @@ border-color:black;</string>
        <enum>Qt::RightToLeft</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-width: 2px;
-border-radius: 10px;
-border-color:black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ccccff, stop:1 #8c8eff);</string>
+       <string notr="true"/>
       </property>
       <property name="title">
        <string>فترة الكوبون</string>
@@ -263,13 +243,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #cc
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:darkblue;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;
-background-color: #9c9eff;</string>
+        <string notr="true"/>
        </property>
        <property name="minimumDateTime">
         <datetime>
@@ -298,12 +272,7 @@ background-color: #9c9eff;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>الي التاريخ</string>
@@ -322,13 +291,7 @@ border-color:black;</string>
         <enum>Qt::RightToLeft</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:darkblue;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;
-background-color: #9c9eff;</string>
+        <string notr="true"/>
        </property>
        <property name="minimumDateTime">
         <datetime>
@@ -357,12 +320,7 @@ background-color: #9c9eff;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>من التاريخ</string>
@@ -382,12 +340,7 @@ border-color:black;</string>
        <enum>Qt::RightToLeft</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-width: 2px;
-border-radius: 10px;
-border-color:black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ccccff, stop:1 #8c8eff);</string>
+       <string notr="true"/>
       </property>
       <property name="title">
        <string>الحالة</string>
@@ -402,12 +355,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #cc
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>فعال</string>
@@ -423,12 +371,7 @@ border-color:black;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>منتهي</string>
@@ -447,12 +390,7 @@ border-color:black;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>الكل</string>
@@ -473,12 +411,7 @@ border-color:black;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:Black;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #d8d5ff, stop:1 #a9a6ff);
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color:black;</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>رقم الكوبون</string>
@@ -495,7 +428,7 @@ border-color:black;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #eeeeff, stop:1 #eeeeff);</string>
+     <string notr="true"/>
     </property>
     <property name="title">
      <string/>
@@ -522,28 +455,7 @@ border-color:black;</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: #5356ff;
-                                        border-style: outset;
-                                        border-width: 4px;
-                                        border-radius: 10px;
-                                        border-color: darkblue;
-                    color:white;
-	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
-	                                    }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #3a0dab, stop: 1 #a5a5ff
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #a5a5ff, stop: 1 #3a0dab
-                                        );
-                                        }</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>بحث</string>
@@ -559,28 +471,7 @@ border-color:black;</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: #5356ff;
-                                        border-style: outset;
-                                        border-width: 4px;
-                                        border-radius: 10px;
-                                        border-color: darkblue;
-                    color:white;
-	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
-	                                    }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #3a0dab, stop: 1 #a5a5ff
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #a5a5ff, stop: 1 #3a0dab
-                                        );
-                                        }</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>طباعة</string>
@@ -599,34 +490,13 @@ border-color:black;</string>
          <font>
           <family>MS Shell Dlg 2</family>
           <pointsize>14</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: #5356ff;
-                                        border-style: outset;
-                                        border-width: 4px;
-                                        border-radius: 10px;
-                                        border-color: darkblue;
-                    color:white;
-	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
-	                                    }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #3a0dab, stop: 1 #a5a5ff
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #a5a5ff, stop: 1 #3a0dab
-                                        );
-                                        }</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>تصدير</string>
@@ -645,34 +515,13 @@ border-color:black;</string>
          <font>
           <family>MS Shell Dlg 2</family>
           <pointsize>14</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton{
-                                        background-color: red;
-                                        border-style: outset;
-                                        border-width: 4px;
-                                        border-radius: 10px;
-                                        border-color: whitered;
-                    color:white;
-	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
-	                                    }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #ff0000, stop: 1 #ff8888
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #ff8888, stop: 1 #ff0000
-                                        );
-                                        }</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>خروج</string>
@@ -690,9 +539,9 @@ border-color:black;</string>
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>220</y>
-     <width>1181</width>
-     <height>321</height>
+     <y>230</y>
+     <width>1081</width>
+     <height>391</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_7">

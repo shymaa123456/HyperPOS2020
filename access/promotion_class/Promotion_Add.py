@@ -270,28 +270,28 @@ class CL_create_promotion(QtWidgets.QDialog):
 
         self.Qbtn_search = anim_but(self)
         self.Qbtn_search.setMinimumSize(60, 5)
-        self.Qbtn_search.setGeometry(10, 30, 127, 23)
+        self.Qbtn_search.setGeometry(340, 10, 127, 23)
         self.Qbtn_search.setText('بحث')
         self.Qbtn_search.setShortcut('Ctrl+D')  # shortcut key
         # self.Qbtn_search.setToolTip("search")  # Tool tip
 
+        self.Qbtn_add_list = anim_but(self)
+        self.Qbtn_add_list.setMinimumSize(60, 5)
+        self.Qbtn_add_list.setGeometry(190, 10, 127, 23)
+        self.Qbtn_add_list.setText('تحميل اصناف')
+
         self.Qbtn_add = anim_but(self)
         self.Qbtn_add.setMinimumSize(60, 5)
-        self.Qbtn_add.setGeometry(10, 180, 127, 23)
+        self.Qbtn_add.setGeometry(150, 230, 127, 23)
         self.Qbtn_add.setText('اضافة')
 
 
         self.Qbtn_remove = anim_but(self)
         self.Qbtn_remove.setMinimumSize(60, 5)
-        self.Qbtn_remove.setGeometry(10, 220, 127, 23)
+        self.Qbtn_remove.setGeometry(10, 230, 127, 23)
         self.Qbtn_remove.setText('ازالة')
 
 
-
-        self.Qbtn_add_list = anim_but(self)
-        self.Qbtn_add_list.setMinimumSize(60, 5)
-        self.Qbtn_add_list.setGeometry(10, 70, 127, 23)
-        self.Qbtn_add_list.setText('تحميل اصناف')
 
         self.Qbtn_exit = anim_but(self)
         self.Qbtn_exit.setMinimumSize(60, 5)
@@ -300,22 +300,22 @@ class CL_create_promotion(QtWidgets.QDialog):
 
         self.Qbtn_save = anim_but(self)
         self.Qbtn_save.setMinimumSize(60, 5)
-        self.Qbtn_save.setGeometry(190, 560, 131, 23)
+        self.Qbtn_save.setGeometry(170, 560, 131, 23)
         self.Qbtn_save.setText('حفظ بيانات العرض')
 
         ###############################################################################
 
         """ checked combobox sample >>> Branch"""
         self.Qcombo_branch2 = CheckableComboBox(self)
-        self.Qcombo_branch2.setGeometry(621, 44, 179, 18)
+        self.Qcombo_branch2.setGeometry(801, 99, 179, 18)
         self.Qcombo_branch2.setLayoutDirection(Qt.RightToLeft)
         self.Qcombo_branch2.setStyleSheet("background-color: rgb(198, 207, 199)")
         # self.Qcombo_branch.hide()
 
 
-        """ checked combobox sample """
+        """ checked combobox sample " CUSTOMER GROUP """
         self.Qcombo_cust_group2 = CheckableComboBox(self)
-        self.Qcombo_cust_group2.setGeometry(621, 68, 179, 18)
+        self.Qcombo_cust_group2.setGeometry(801, 124, 179, 18)
         self.Qcombo_cust_group2.setLayoutDirection(Qt.RightToLeft)  # RightToLeft)
         # self.Qcombo_cust_group2.lineEdit().setAlignment(Qt.AlignRight)
         self.Qcombo_cust_group2.setStyleSheet("background-color: rgb(198, 207, 199)")
@@ -323,10 +323,17 @@ class CL_create_promotion(QtWidgets.QDialog):
 
         """ checked combobox sample >>> sponsor"""
         self.Qcombo_sponsor2 = CheckableComboBox(self)
-        self.Qcombo_sponsor2.setGeometry(621, 92, 179, 18)
+        self.Qcombo_sponsor2.setGeometry(801, 150, 179, 18)
         self.Qcombo_sponsor2.setLayoutDirection(Qt.RightToLeft)
         self.Qcombo_sponsor2.setStyleSheet("background-color: rgb(198, 207, 199)")
         # self.Qcombo_sponsor.hide()
+
+        # Set Style
+        # self.label_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
 
         try:
 
@@ -484,7 +491,7 @@ class CL_create_promotion(QtWidgets.QDialog):
                        self.Qdate_from.dateTime().toString('yyyy-MM-dd'),
                        self.Qdate_to.dateTime().toString('yyyy-MM-dd'), "0",
                         CL_userModule.user_name, creationDate , "egp" , PROM_ITEM_DISCOUNT , "1" , PROM_ITEM_PRICE
-                        )
+                         )
                 mycursor.execute(sql2, val2)
             # self.Qdate_from.dateTime().toString('dd-MM-yyyy'),
             # self.Qdate_to.dateTime().toString('dd-MM-yyyy'), "0",

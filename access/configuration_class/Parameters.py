@@ -26,6 +26,13 @@ class CL_Parameters(QtWidgets.QDialog):
         self.CMB_Status.addItems(["Active", "Inactive"])
         self.FN_DISPLAY_PRIVILAGE()
 
+        # Set Style
+        # self.voucher_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
     def FN_CREATE_Parameters(self):
         sql_select_Query = "SELECT * FROM Hyper1_Retail.SYS_CONFIG_PARAMETERS where PARAMETER_DESC = '"+self.LE_name.text()+"' and STATUS = 1"
         print(sql_select_Query)

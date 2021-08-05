@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>QForm_prom_edit</class>
+    <widget class="QWidget" name="QForm_prom_edit">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>1028</width>
+                <height>560</height>
+            </rect>
+        </property>
+        <property name="minimumSize">
+            <size>
+                <width>1028</width>
+                <height>560</height>
+            </size>
+        </property>
+        <property name="maximumSize">
+            <size>
+                <width>1028</width>
+                <height>560</height>
+            </size>
+        </property>
+        <property name="windowTitle">
+            <string>تعديل العروض</string>
+        </property>
+        <property name="toolTip">
+            <string/>
+        </property>
+        <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+        </property>
+        <widget class="QWidget" name="gridLayoutWidget">
+            <property name="geometry">
+                <rect>
+                    <x>190</x>
+                    <y>70</y>
+                    <width>2</width>
+                    <height>2</height>
+                </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_2"/>
+        </widget>
+        <widget class="QGroupBox" name="groupBox">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>1001</width>
+                    <height>221</height>
+                </rect>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                </font>
+            </property>
+            <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">
+                    background-color: rgb(198, 207, 199);
+                </string>
+            </property>
+            <property name="title">
+                <string/>
+            </property>
+            <widget class="QGroupBox" name="QgroupBox_det">
+                <property name="geometry">
+                    <rect>
+                        <x>300</x>
+                        <y>10</y>
+                        <width>281</width>
+                        <height>201</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string/>
+                </property>
+                <widget class="QWidget" name="layoutWidget">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>181</width>
+                            <height>92</height>
+                        </rect>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_3">
+                        <item>
+                            <widget class="QComboBox" name="Qcombo_company"/>
+                        </item>
+                        <item>
+                            <widget class="QComboBox" name="Qcombo_branch"/>
+                        </item>
+                        <item>
+                            <widget class="QComboBox" name="Qcombo_cust_group"/>
+                        </item>
+                        <item>
+                            <widget class="QComboBox" name="Qcombo_sponsor"/>
+                        </item>
+                    </layout>
+                </widget>
+                <widget class="QWidget" name="layoutWidget">
+                    <property name="geometry">
+                        <rect>
+                            <x>200</x>
+                            <y>10</y>
+                            <width>76</width>
+                            <height>91</height>
+                        </rect>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_2">
+                        <item>
+                            <widget class="QLabel" name="label_4">
+                                <property name="text">
+                                    <string>الشركة</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QLabel" name="label_11">
+                                <property name="text">
+                                    <string>الفرع</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QLabel" name="label_5">
+                                <property name="text">
+                                    <string>مجموعة العملاء</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QLabel" name="label_6">
+                                <property name="text">
+                                    <string>ممول العرض</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </widget>
+                <widget class="QCheckBox" name="QcheckBox_magazine">
+                    <property name="geometry">
+                        <rect>
+                            <x>200</x>
+                            <y>110</y>
+                            <width>70</width>
+                            <height>17</height>
+                        </rect>
+                    </property>
+                    <property name="layoutDirection">
+                        <enum>Qt::RightToLeft</enum>
+                    </property>
+                    <property name="text">
+                        <string>عرض مجلة</string>
+                    </property>
+                </widget>
+                <widget class="QComboBox" name="Qcombo_magazine">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>110</y>
+                            <width>181</width>
+                            <height>17</height>
+                        </rect>
+                    </property>
+                </widget>
+                <widget class="QGroupBox" name="groupBox_6">
+                    <property name="geometry">
+                        <rect>
+                            <x>80</x>
+                            <y>150</y>
+                            <width>191</width>
+                            <height>41</height>
+                        </rect>
+                    </property>
+                    <property name="layoutDirection">
+                        <enum>Qt::RightToLeft</enum>
+                    </property>
+                    <property name="title">
+                        <string>الحالة</string>
+                    </property>
+                    <widget class="QRadioButton" name="Qradio_active">
+                        <property name="geometry">
+                            <rect>
+                                <x>120</x>
+                                <y>10</y>
+                                <width>41</width>
+                                <height>20</height>
+                            </rect>
+                        </property>
+                        <property name="layoutDirection">
+                            <enum>Qt::RightToLeft</enum>
+                        </property>
+                        <property name="text">
+                            <string>فعال</string>
+                        </property>
+                    </widget>
+                    <widget class="QRadioButton" name="Qradio_inactive">
+                        <property name="geometry">
+                            <rect>
+                                <x>10</x>
+                                <y>10</y>
+                                <width>71</width>
+                                <height>20</height>
+                            </rect>
+                        </property>
+                        <property name="layoutDirection">
+                            <enum>Qt::RightToLeft</enum>
+                        </property>
+                        <property name="text">
+                            <string>موقوف</string>
+                        </property>
+                    </widget>
+                </widget>
+            </widget>
+            <widget class="QGroupBox" name="groupBox_5">
+                <property name="geometry">
+                    <rect>
+                        <x>600</x>
+                        <y>10</y>
+                        <width>381</width>
+                        <height>41</height>
+                    </rect>
+                </property>
+                <property name="layoutDirection">
+                    <enum>Qt::RightToLeft</enum>
+                </property>
+                <property name="title">
+                    <string/>
+                </property>
+                <widget class="QLabel" name="label_12">
+                    <property name="geometry">
+                        <rect>
+                            <x>310</x>
+                            <y>10</y>
+                            <width>51</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>رقم العرض</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit" name="Qline_promotion">
+                    <property name="geometry">
+                        <rect>
+                            <x>100</x>
+                            <y>10</y>
+                            <width>191</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                </widget>
+                <widget class="QPushButton" name="Qbtn_search">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>81</width>
+                            <height>23</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>بحث</string>
+                    </property>
+                </widget>
+            </widget>
+            <widget class="QGroupBox" name="QgroupBox_prom">
+                <property name="geometry">
+                    <rect>
+                        <x>660</x>
+                        <y>60</y>
+                        <width>321</width>
+                        <height>151</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string/>
+                </property>
+                <widget class="QGroupBox" name="groupBox_2">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>50</y>
+                            <width>301</width>
+                            <height>91</height>
+                        </rect>
+                    </property>
+                    <property name="layoutDirection">
+                        <enum>Qt::RightToLeft</enum>
+                    </property>
+                    <property name="title">
+                        <string>فترة العرض</string>
+                    </property>
+                    <widget class="QWidget" name="layoutWidget">
+                        <property name="geometry">
+                            <rect>
+                                <x>10</x>
+                                <y>20</y>
+                                <width>241</width>
+                                <height>22</height>
+                            </rect>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout">
+                            <item>
+                                <widget class="QLabel" name="label_3">
+                                    <property name="text">
+                                        <string>التاريخ</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item>
+                                <widget class="QDateTimeEdit" name="Qdate_from">
+                                    <property name="layoutDirection">
+                                        <enum>Qt::RightToLeft</enum>
+                                    </property>
+                                    <property name="minimumDateTime">
+                                        <datetime>
+                                            <hour>0</hour>
+                                            <minute>0</minute>
+                                            <second>0</second>
+                                            <year>2020</year>
+                                            <month>1</month>
+                                            <day>1</day>
+                                        </datetime>
+                                    </property>
+                                    <property name="displayFormat">
+                                        <string>d/M/yyyy</string>
+                                    </property>
+                                    <property name="calendarPopup">
+                                        <bool>true</bool>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item>
+                                <widget class="QLabel" name="label_2">
+                                    <property name="text">
+                                        <string>الوقت</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item>
+                                <widget class="QDateTimeEdit" name="Qtime_from">
+                                    <property name="displayFormat">
+                                        <string>h:mm AP</string>
+                                    </property>
+                                    <property name="calendarPopup">
+                                        <bool>false</bool>
+                                    </property>
+                                </widget>
+                            </item>
+                        </layout>
+                    </widget>
+                    <widget class="QLabel" name="label_9">
+                        <property name="geometry">
+                            <rect>
+                                <x>260</x>
+                                <y>20</y>
+                                <width>26</width>
+                                <height>19</height>
+                            </rect>
+                        </property>
+                        <property name="text">
+                            <string>من</string>
+                        </property>
+                    </widget>
+                    <widget class="QLabel" name="label_10">
+                        <property name="geometry">
+                            <rect>
+                                <x>260</x>
+                                <y>50</y>
+                                <width>26</width>
+                                <height>19</height>
+                            </rect>
+                        </property>
+                        <property name="text">
+                            <string>الى</string>
+                        </property>
+                    </widget>
+                    <widget class="QWidget" name="layoutWidget_2">
+                        <property name="geometry">
+                            <rect>
+                                <x>10</x>
+                                <y>50</y>
+                                <width>241</width>
+                                <height>22</height>
+                            </rect>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_2">
+                            <item>
+                                <widget class="QLabel" name="label_8">
+                                    <property name="text">
+                                        <string>التاريخ</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item>
+                                <widget class="QDateTimeEdit" name="Qdate_to">
+                                    <property name="minimumDateTime">
+                                        <datetime>
+                                            <hour>0</hour>
+                                            <minute>0</minute>
+                                            <second>0</second>
+                                            <year>2020</year>
+                                            <month>1</month>
+                                            <day>1</day>
+                                        </datetime>
+                                    </property>
+                                    <property name="displayFormat">
+                                        <string>d/M/yyyy</string>
+                                    </property>
+                                    <property name="calendarPopup">
+                                        <bool>true</bool>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item>
+                                <widget class="QLabel" name="label_7">
+                                    <property name="text">
+                                        <string>الوقت</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item>
+                                <widget class="QDateTimeEdit" name="Qtime_to">
+                                    <property name="displayFormat">
+                                        <string>h:mm AP</string>
+                                    </property>
+                                    <property name="calendarPopup">
+                                        <bool>false</bool>
+                                    </property>
+                                </widget>
+                            </item>
+                        </layout>
+                    </widget>
+                </widget>
+                <widget class="QGroupBox" name="groupBox_4">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>301</width>
+                            <height>41</height>
+                        </rect>
+                    </property>
+                    <property name="layoutDirection">
+                        <enum>Qt::RightToLeft</enum>
+                    </property>
+                    <property name="title">
+                        <string/>
+                    </property>
+                    <widget class="QLabel" name="label">
+                        <property name="geometry">
+                            <rect>
+                                <x>180</x>
+                                <y>10</y>
+                                <width>112</width>
+                                <height>18</height>
+                            </rect>
+                        </property>
+                        <property name="text">
+                            <string>نوع العرض</string>
+                        </property>
+                    </widget>
+                    <widget class="QComboBox" name="Qcombo_promotion">
+                        <property name="geometry">
+                            <rect>
+                                <x>10</x>
+                                <y>10</y>
+                                <width>229</width>
+                                <height>18</height>
+                            </rect>
+                        </property>
+                        <property name="layoutDirection">
+                            <enum>Qt::LeftToRight</enum>
+                        </property>
+                        <property name="modelColumn">
+                            <number>0</number>
+                        </property>
+                    </widget>
+                </widget>
+            </widget>
+            <widget class="QGroupBox" name="groupBox_8">
+                <property name="geometry">
+                    <rect>
+                        <x>30</x>
+                        <y>10</y>
+                        <width>171</width>
+                        <height>141</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string/>
+                </property>
+                <widget class="QWidget" name="layoutWidget">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>151</width>
+                            <height>121</height>
+                        </rect>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout">
+                        <item>
+                            <widget class="QPushButton" name="Qbtn_save">
+                                <property name="text">
+                                    <string>حفظ بيانات العرض</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QPushButton" name="Qbtn_print">
+                                <property name="text">
+                                    <string>طباعة</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QPushButton" name="Qbtn_exit">
+                                <property name="text">
+                                    <string>خروج</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </widget>
+            </widget>
+        </widget>
+        <widget class="QWidget" name="gridLayoutWidget_4">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>240</y>
+                    <width>1001</width>
+                    <height>301</height>
+                </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_7">
+                <item row="0" column="0">
+                    <widget class="QTableWidget" name="Qtable_promotion"/>
+                </item>
+            </layout>
+        </widget>
+    </widget>
+    <resources/>
+    <connections/>
+</ui>

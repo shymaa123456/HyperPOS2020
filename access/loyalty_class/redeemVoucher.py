@@ -76,8 +76,15 @@ class CL_redVouch(QtWidgets.QDialog):
             #self.Qbtn_exit.clicked.connect(self.FN_exit)
             self.Qline_replace.textChanged.connect(self.textchanged)
             self.Qline_cust.textChanged.connect(self.FN_CLEAR_FEILDS)
-            self.setFixedWidth(497)
-            self.setFixedHeight(281)
+            # self.setFixedWidth(497)
+            # self.setFixedHeight(281)
+
+            # Set Style
+            # self.voucher_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
             for row_number, row_data in enumerate(CL_userModule.myList):
                 if row_data[1] == 'Redeem_Voucher':
                     if row_data[4] == 'None':

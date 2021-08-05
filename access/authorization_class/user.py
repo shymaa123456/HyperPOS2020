@@ -20,13 +20,16 @@ class CL_user(QtWidgets.QDialog):
     new_branch_list = []
     section_list = []
     new_section_list = []
-
+    sections=[]
 
     def __init__(self):
         super(CL_user, self).__init__()
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
         self.conn = db1.connect()
 
     #Todo: method for load ui of modify user
@@ -102,6 +105,7 @@ class CL_user(QtWidgets.QDialog):
         sql_select_query = "SELECT SECTION_DESC ,SECTION_ID FROM SECTION "
         mycursor.execute(sql_select_query)
         records = mycursor.fetchall()
+        self.sections=records
         for row,val in records:
             self.CMB_section.addItem(row,val)
         mycursor.close()
@@ -372,6 +376,12 @@ class CL_user(QtWidgets.QDialog):
                                 sql = "INSERT INTO SYS_USER_SECTION (USER_ID, SECTION_ID, STATUS) VALUES (%s, %s, %s)"
                                 val = (self.id, self.CMB_section.currentData()[i], '1')
                                 mycursor.execute(sql, val)
+                        else:
+                            for i in range(len(self.sections)):
+                                sql = "INSERT INTO SYS_USER_SECTION (USER_ID, SECTION_ID, STATUS) VALUES (%s, %s, %s)"
+                                val = (self.id, self.sections[i], '1')
+                                mycursor.execute(sql, val)
+
                         mycursor.close()
                         print(mycursor.rowcount, "record inserted.")
                         QtWidgets.QMessageBox.information(self, "Success", "User is created successfully")

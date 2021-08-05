@@ -13,6 +13,9 @@ from access.authorization_class.user_module import CL_userModule
 from datetime import datetime
 
 from access.utils.util import *
+from presentation.Themes.Special_StyleSheet import label_num
+
+
 class CL_PromVoucher(QtWidgets.QDialog):
     status = ''
 
@@ -36,8 +39,15 @@ class CL_PromVoucher(QtWidgets.QDialog):
 
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_createVoucher.clicked.connect(self.FN_CREATE_VOUCHER)
-            self.setFixedWidth(418)
-            self.setFixedHeight(223)
+            # self.setFixedWidth(418)
+            # self.setFixedHeight(223)
+
+            # Set Style
+            self.voucher_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except:
             print(sys.exc_info())
     def FN_LOAD_MODIFY(self):
@@ -50,8 +60,15 @@ class CL_PromVoucher(QtWidgets.QDialog):
             self.FN_GET_VOUCHERS()
             self.FN_GET_VOUCHER()
             self.CMB_PromVoucher.currentIndexChanged.connect(self.FN_GET_VOUCHER)
-            self.setFixedWidth(436)
-            self.setFixedHeight(268)
+            # رself.setFixedWidth(436)
+            # self.setFixedHeight(268)
+
+            # Set Style
+            # self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
 
         except:
             print(sys.exc_info())
@@ -152,10 +169,17 @@ class CL_PromVoucher(QtWidgets.QDialog):
             self.FN_GET_VOUCHERS()
             self.FN_GET_VOUCHER()
             self.CMB_PromVoucher.currentIndexChanged.connect(self.FN_GET_VOUCHER)
-            self.setFixedWidth(443)
-            self.setFixedHeight(236)
+            # self.setFixedWidth(443)
+            # self.setFixedHeight(236)
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_changeStatus.clicked.connect(self.FN_CHANGE_STATUS)
+
+            # Set Style
+            # self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except Exception as err:
             print(err)
 
@@ -167,10 +191,17 @@ class CL_PromVoucher(QtWidgets.QDialog):
             self.FN_GET_VOUCHERS()
             self.FN_GET_VOUCHER()
             self.CMB_PromVoucher.currentIndexChanged.connect(self.FN_GET_VOUCHER)
-            self.setFixedWidth(443)
-            self.setFixedHeight(236)
+            # self.setFixedWidth(443)
+            # self.setFixedHeight(236)
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_changeStatus.clicked.connect(self.FN_CHANGE_STATUS)
+
+            # Set Style
+            # self.label_num.setStyleSheet(label_num)
+            # self.label_2.setStyleSheet(desc_5)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
         except Exception as err:
             print(err)
 

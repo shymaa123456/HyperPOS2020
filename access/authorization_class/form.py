@@ -15,6 +15,9 @@ class CL_form(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/authorization_ui'
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
         self.conn = db1.connect()
 
     #Todo: method to load create form ui

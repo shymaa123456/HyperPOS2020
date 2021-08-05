@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1100</width>
-    <height>717</height>
+    <width>1260</width>
+    <height>797</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1100</width>
-    <height>717</height>
+    <width>1260</width>
+    <height>559</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1100</width>
-    <height>717</height>
+    <width>1360</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -47,12 +47,15 @@
    <bool>true</bool>
   </property>
   <widget class="QGroupBox" name="groupBox">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>-110</x>
+     <x>-100</x>
      <y>0</y>
      <width>1371</width>
-     <height>841</height>
+     <height>921</height>
     </rect>
    </property>
    <property name="font">
@@ -66,7 +69,8 @@
     <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">
+background-color: rgb(198, 207, 199);</string>
    </property>
    <property name="title">
     <string/>
@@ -74,9 +78,9 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>950</x>
-      <y>110</y>
-      <width>241</width>
+      <x>990</x>
+      <y>210</y>
+      <width>361</width>
       <height>91</height>
      </rect>
     </property>
@@ -91,7 +95,7 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>221</width>
+       <width>296</width>
        <height>27</height>
       </rect>
      </property>
@@ -111,6 +115,9 @@
       </item>
       <item>
        <widget class="QDateTimeEdit" name="Qdate_from">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="maximumSize">
          <size>
           <width>590</width>
@@ -149,7 +156,23 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_2">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>الوقت</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QDateTimeEdit" name="Qtime_from">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -174,7 +197,7 @@
       <rect>
        <x>10</x>
        <y>60</y>
-       <width>221</width>
+       <width>296</width>
        <height>27</height>
       </rect>
      </property>
@@ -194,6 +217,9 @@
       </item>
       <item>
        <widget class="QDateTimeEdit" name="Qdate_to">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumDateTime">
          <datetime>
           <hour>0</hour>
@@ -213,12 +239,31 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_7">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>الوقت</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QDateTimeEdit" name="Qtime_to">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
         </property>
         <property name="displayFormat">
          <string>h:mm AP</string>
@@ -234,81 +279,40 @@
    <widget class="QGroupBox" name="groupBox_8">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>550</y>
-      <width>151</width>
-      <height>61</height>
+      <x>590</x>
+      <y>730</y>
+      <width>311</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="title">
      <string/>
     </property>
-    <widget class="QPushButton" name="Qbtn_saveInstallment">
+    <widget class="QWidget" name="layoutWidget_3">
      <property name="geometry">
       <rect>
-       <x>11</x>
-       <y>6</y>
-       <width>131</width>
-       <height>41</height>
+       <x>10</x>
+       <y>10</y>
+       <width>291</width>
+       <height>51</height>
       </rect>
      </property>
-     <property name="text">
-      <string>حفظ البرنامج</string>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="Qbtn_modifyInstallment">
+        <property name="text">
+         <string>تعديل البرنامج</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>950</x>
-      <y>60</y>
-      <width>241</width>
-      <height>42</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QTextEdit" name="QTEdit_descInstallment">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="maximumSize">
-        <size>
-         <width>9000</width>
-         <height>167</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ef2929;&quot;&gt;*&lt;/span&gt;وصف البرنامج &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <property name="indent">
-        <number>-1</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget_6">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>100</y>
+      <x>140</x>
+      <y>200</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -341,6 +345,9 @@
      </item>
      <item>
       <widget class="QDoubleSpinBox" name="QDubleSpiner_vendorRate">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="maximumSize">
         <size>
          <width>55</width>
@@ -394,8 +401,8 @@
    <widget class="QWidget" name="horizontalLayoutWidget_7">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>140</y>
+      <x>140</x>
+      <y>240</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -428,6 +435,9 @@
      </item>
      <item>
       <widget class="QDoubleSpinBox" name="QDubleSpiner_hperoneRate">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -487,8 +497,8 @@
    <widget class="QWidget" name="horizontalLayoutWidget_8">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>20</y>
+      <x>140</x>
+      <y>120</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -522,7 +532,7 @@
      <item>
       <widget class="QDoubleSpinBox" name="QDubleSpiner_interestRate">
        <property name="enabled">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="maximumSize">
         <size>
@@ -535,9 +545,6 @@
        </property>
        <property name="styleSheet">
         <string notr="true"/>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
        </property>
        <property name="minimum">
         <double>0.000000000000000</double>
@@ -580,8 +587,8 @@
    <widget class="QWidget" name="horizontalLayoutWidget_9">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>60</y>
+      <x>140</x>
+      <y>160</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -615,7 +622,7 @@
      <item>
       <widget class="QDoubleSpinBox" name="QDubleSpiner_customerRate">
        <property name="enabled">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="maximumSize">
         <size>
@@ -670,15 +677,18 @@
    <widget class="QWidget" name="horizontalLayoutWidget_11">
     <property name="geometry">
      <rect>
-      <x>950</x>
-      <y>10</y>
-      <width>241</width>
+      <x>990</x>
+      <y>110</y>
+      <width>361</width>
       <height>41</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_14">
      <item>
       <widget class="QComboBox" name="Qcombo_installmentType">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
        </property>
@@ -693,110 +703,20 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>160</y>
-      <width>321</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>%</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <property name="indent">
-        <number>-1</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDoubleSpinBox" name="QDSpinBox_adminExpendses">
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="minimum">
-        <double>0.000000000000000</double>
-       </property>
-       <property name="value">
-        <double>0.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_6">
-       <property name="maximumSize">
-        <size>
-         <width>170</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="text">
-        <string>المصاريف الأداريه</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <property name="indent">
-        <number>-1</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QWidget" name="gridLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>310</y>
-      <width>491</width>
-      <height>171</height>
+      <x>740</x>
+      <y>370</y>
+      <width>621</width>
+      <height>271</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_7">
      <item row="0" column="0">
       <widget class="QTableWidget" name="Qtable_acceptedItems">
        <property name="enabled">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
@@ -903,12 +823,15 @@
     </layout>
    </widget>
    <widget class="QPushButton" name="Qbtn_deleteItem">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>490</y>
-      <width>101</width>
-      <height>31</height>
+      <x>760</x>
+      <y>650</y>
+      <width>291</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -928,12 +851,15 @@
     </property>
    </widget>
    <widget class="QPushButton" name="Qbtn_loadItems">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>490</y>
-      <width>131</width>
-      <height>31</height>
+      <x>1080</x>
+      <y>650</y>
+      <width>271</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -953,12 +879,15 @@
     </property>
    </widget>
    <widget class="QPushButton" name="Qbtn_loadRejectItem">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>490</y>
-      <width>191</width>
-      <height>31</height>
+      <x>450</x>
+      <y>650</y>
+      <width>251</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -978,12 +907,15 @@
     </property>
    </widget>
    <widget class="QPushButton" name="Qbtn_deleteRejectItem">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>490</y>
-      <width>121</width>
-      <height>31</height>
+      <x>150</x>
+      <y>650</y>
+      <width>271</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -993,9 +925,9 @@
    <widget class="QWidget" name="layoutWidget_5">
     <property name="geometry">
      <rect>
-      <x>860</x>
-      <y>10</y>
-      <width>81</width>
+      <x>870</x>
+      <y>110</y>
+      <width>98</width>
       <height>111</height>
      </rect>
     </property>
@@ -1032,15 +964,18 @@
    <widget class="QWidget" name="gridLayoutWidget_5">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>310</y>
-      <width>501</width>
-      <height>171</height>
+      <x>120</x>
+      <y>370</y>
+      <width>601</width>
+      <height>271</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_8">
      <item row="0" column="0">
       <widget class="QTableWidget" name="Qtable_rejectedItems">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
        </property>
@@ -1148,11 +1083,14 @@
     </layout>
    </widget>
    <widget class="QCheckBox" name="checkBox_department">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>850</x>
-      <y>150</y>
-      <width>91</width>
+      <x>860</x>
+      <y>250</y>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -1164,11 +1102,14 @@
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox_section">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>860</x>
-      <y>170</y>
-      <width>81</width>
+      <y>280</y>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -1180,11 +1121,14 @@
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox_BMCLevel">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>850</x>
-      <y>200</y>
-      <width>91</width>
+      <x>860</x>
+      <y>310</y>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -1195,14 +1139,407 @@
      <string>القسم الفرعى</string>
     </property>
    </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>40</y>
+      <width>411</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLineEdit" name="QL_installmentNo">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>رقم البرنامج   </string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_9">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>20</y>
+      <width>181</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QWidget" name="layoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QPushButton" name="Qbtn_searchInstallment">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>بحث</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>160</y>
+      <width>361</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QTextEdit" name="QTEdit_descInstallment">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="maximumSize">
+        <size>
+         <width>9000</width>
+         <height>167</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ef2929;&quot;&gt;*&lt;/span&gt;وصف البرنامج &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>-1</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>300</y>
+      <width>321</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_21">
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>جنيه</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>-1</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="QDSpinBox_Max_adminExpendses">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <double>0.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_23">
+       <property name="maximumSize">
+        <size>
+         <width>170</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>أقصى حد للمصاريف الأداريه </string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>-1</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_10">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>330</y>
+      <width>321</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLabel" name="label_25">
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>جنيه</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>-1</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="QDSpinBox_Min_adminExpendses">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <double>0.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_26">
+       <property name="maximumSize">
+        <size>
+         <width>170</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>أقل حد للمصاريف الأداريه </string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>-1</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>260</y>
+      <width>321</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>%</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>-1</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="QDSpinBox_adminExpendses">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <double>0.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="maximumSize">
+        <size>
+         <width>170</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>المصاريف الأداريه</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>-1</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="enabled">
      <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>10</y>
+      <x>320</x>
+      <y>110</y>
       <width>331</width>
       <height>141</height>
      </rect>
@@ -1214,6 +1551,9 @@
      <string/>
     </property>
     <widget class="QRadioButton" name="RBTN_hyperone">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -1308,6 +1648,9 @@
      </layout>
     </widget>
     <widget class="QRadioButton" name="RBTN_vendor">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -1340,6 +1683,9 @@
      </property>
     </widget>
     <widget class="QRadioButton" name="RBTN_bank">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -1359,295 +1705,20 @@
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="label_10">
+   <widget class="QLabel" name="QL_hint_youcanonlychange_period">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>1000</x>
-      <y>580</y>
-      <width>71</width>
-      <height>29</height>
+      <x>175</x>
+      <y>30</y>
+      <width>331</width>
+      <height>41</height>
      </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>10000</width>
-      <height>16777215</height>
-     </size>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
-    </property>
-    <property name="text">
-     <string>رقم البرنامج</string>
-    </property>
-    <property name="scaledContents">
-     <bool>false</bool>
-    </property>
-    <property name="margin">
-     <number>0</number>
-    </property>
-    <property name="indent">
-     <number>-1</number>
-    </property>
-   </widget>
-   <widget class="QLabel" name="QL_lastInstallmentNO">
-    <property name="geometry">
-     <rect>
-      <x>920</x>
-      <y>580</y>
-      <width>71</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string/>
-    </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_4">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>190</y>
-      <width>321</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_6">
-     <item>
-      <widget class="QLabel" name="label_13">
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="text">
-        <string>جنيه</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <property name="indent">
-        <number>-1</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDoubleSpinBox" name="QDSpinBox_Max_adminExpendses">
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="minimum">
-        <double>0.000000000000000</double>
-       </property>
-       <property name="value">
-        <double>0.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_21">
-       <property name="maximumSize">
-        <size>
-         <width>170</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="text">
-        <string>أقصى حد للمصاريف الأداريه </string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <property name="indent">
-        <number>-1</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_5">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>220</y>
-      <width>321</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_7">
-     <item>
-      <widget class="QLabel" name="label_23">
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="text">
-        <string>جنيه</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <property name="indent">
-        <number>-1</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDoubleSpinBox" name="QDSpinBox_Min_adminExpendses">
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="minimum">
-        <double>0.000000000000000</double>
-       </property>
-       <property name="value">
-        <double>0.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_25">
-       <property name="maximumSize">
-        <size>
-         <width>170</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="text">
-        <string>أقل حد للمصاريف الأداريه </string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <property name="indent">
-        <number>-1</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QLineEdit" name="QLE_SearchRejectedBarcode">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>270</y>
-      <width>201</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Qbtn_findItem_rejected">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>270</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>بحث</string>
-    </property>
-    <property name="autoRepeat">
-     <bool>false</bool>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Qbtn_findItem_acceptedItem">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>270</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>بحث</string>
-    </property>
-    <property name="autoRepeat">
-     <bool>false</bool>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="QLE_SearchAcceptedBarcode">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>270</y>
-      <width>201</width>
-      <height>31</height>
-     </rect>
     </property>
    </widget>
   </widget>

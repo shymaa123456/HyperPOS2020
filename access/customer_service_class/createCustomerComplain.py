@@ -150,35 +150,7 @@ class CL_CustService_create(QtWidgets.QDialog):
         except Exception as err:
             print(err)
 
-    def FN_REFRESH_GRID(self,id):
-        for i in reversed(range(self.parent.Qtable_custComplains.rowCount())):
-            self.parent .Qtable_custComplains.removeRow(i)
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        sql_select_query = "select    `CC_COMPLAINT_ID`,`CCT_TYPE_ID`,`POSC_CUST_ID`,`CC_CUSTOMER_NAME`,`CC_CUSTOMER_PHONE`,`COMPANY_ID`,`BRANCH_NO`,`CC_DEPARTMENT`,`CC_SECTION`,`CC_POS`,`CC_INVOICE_DATE`,`CC_RESPONSIBLE`,`CC_STATUS`" \
-                               "from Hyper1_Retail.CUSTOMER_COMPLAINT where `CC_COMPLAINT_ID` = %s "
-        val = (id,)
-        mycursor.execute(sql_select_query,val)
-        records = mycursor.fetchall()
-        for row_number, row_data in enumerate(records):
-            self.parent.Qtable_custComplains.insertRow(row_number)
-            for column_number, data in enumerate(row_data):
-                if column_number == 1:
-                    data = util.FN_GET_COMPLAIN_TYPE_DESC(str(data))
-                elif column_number == 5:
-                    data = util.FN_GET_COMP_DESC(str(data))
-                elif column_number == 6:
-                    data = util.FN_GET_BRANCH_DESC(str(data))
-                elif column_number == 7:
-                    data = util.FN_GET_DEPT_DESC(str(data))
-                elif column_number == 8:
-                    data = util.FN_GET_SEC_DESC(str(data))
 
-                elif column_number == 12:
-                    data = util.FN_GET_COMPAIN_STATUS_DESC(str(data))
-                self.parent .Qtable_custComplains.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-        self.parent .Qtable_custComplains.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-        mycursor.close()
     def FN_VALIDATE_FIELDS(self):
         no = self.LE_custNo.text().strip()
         name = self.LE_custName.text().strip()

@@ -26,32 +26,70 @@ class CL_customer_modify(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         conn = db1.connect()
 
-    def FN_LOAD_MODIFY(self,id):
+    def FN_LOAD_MODIFY(self):
         try:
-            print("id is ", id)
+
             filename = self.dirname + '/modifyCustomer.ui'
             loadUi(filename, self)
             records = util.FN_GET_CUSTTP()
-            for row,val in records:
-                self.CMB_loyalityType.addItem(row,val)
+            for row, val in records:
+                self.CMB_loyalityType.addItem(row, val)
 
             records = util.FN_GET_CUSTGP()
 
             for row, val in records:
                 self.CMB_custGroup.addItem(row, val)
-
             self.CMB_status.addItems(["Active", "Inactive"])
-            self.FN_GET_CUST(id)
-
+            #self.FN_GET_CUST(id)
+            self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST)
+            self.Rbtn_custNo.clicked.connect(self.onClicked)
+            self.Rbtn_custName.clicked.connect(self.onClicked)
 
             self.CMB_city.currentIndexChanged.connect(self.FN_GET_DISTRICT)
             self.BTN_modifyCustomer.clicked.connect(self.FN_MODIFY_CUST)
 
-            self.setFixedWidth(1056)
-            self.setFixedHeight(540)
+            #self.setFixedWidth(1056)
+            #self.setFixedHeight(540)
 
         except Exception as err:
             print(err)
+    def onClicked(self):
+        if self.Rbtn_custNo.isChecked():
+            self.LE_custNo.setEnabled(True)
+            self.LE_custName.setEnabled(False)
+            self.LE_custName.setText('')
+        elif self.Rbtn_custName.isChecked():
+
+            self.LE_custNo.setEnabled(False)
+            self.LE_custName.setEnabled(True)
+            self.LE_custNo.setText('')
+
+        # search for a customer
+    def FN_SEARCH_CUST(self):
+
+            whereClause = " POSC_NAME not like '%cust%' "
+
+            if self.Rbtn_custNo.isChecked():
+                id = self.LE_custNo.text()
+                whereClause = whereClause + " and POSC_CUST_ID = '" + id + "'  "
+
+            if self.Rbtn_custName.isChecked():
+                name = self.LE_custName.text()
+                whereClause = whereClause + " and POSC_NAME = '" + name + "'  "
+
+            if self.Rbtn_custNo.isChecked() == False and self.Rbtn_custName.isChecked() == False:
+                QtWidgets.QMessageBox.warning(self, "خطأ", "أختر أي من محدادات  البحث")
+            else:
+                conn = db1.connect()
+                mycursor = conn.cursor()
+                sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where " + whereClause
+
+                mycursor.execute(sql_select_query)
+                records = mycursor.fetchone()
+                self.FN_GET_CUST(records[0])
+
+                mycursor.close()
+            # self.Qbtn_search.setEnabled(True)
 
     def FN_GET_DISTRICT(self):
         self.CMB_district.clear()
@@ -125,7 +163,7 @@ class CL_customer_modify(QtWidgets.QDialog):
                 # db1.connectionClose( self.conn )
                 # self.FN_INSERT_IN_LOG(tableName,)
                 self.close()
-                self.FN_REFRESH_GRID(self.id)
+                #self.FN_REFRESH_GRID(self.id)
                 if self.mobile != self.oldmobile:
                     util.FN_INSERT_IN_LOG("POS_CUSTOMER","mobile",self.mobile,self.oldmobile,self.id)
                 if self.email != self.oldemail:
@@ -141,7 +179,7 @@ class CL_customer_modify(QtWidgets.QDialog):
         try:
         #self.FN_GET_CustID()
         #self.id = self.LB_custID.text()
-            self.LB_custID.setText(id)
+            self.LB_custID.setText(str(id))
             conn = db1.connect()
             mycursor = conn.cursor()
             sql_select_query = "select POSC_NAME,`POSC_PHONE`,`POSC_MOBILE`,`POSC_JOB`,`POSC_ADDRESS`,`POSC_BUILDING`,`POSC_FLOOR`,`POSC_EMAIL`,`POSC_COMPANY`,`POSC_WORK_PHONE`,`POSC_WORK_ADDRESS` ,`POSC_NOTES`,`POSC_NATIONAL_ID` " \
@@ -188,31 +226,7 @@ class CL_customer_modify(QtWidgets.QDialog):
         except Exception as err:
             print(err)
 
-    def FN_REFRESH_GRID(self,id):
-        for i in reversed(range(self.parent.Qtable_customer.rowCount())):
-            self.parent .Qtable_customer.removeRow(i)
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where POSC_CUST_ID = %s"
-        #print(sql_select_query)
-        val = (str(id),)
-        mycursor.execute(sql_select_query,val)
-        records = mycursor.fetchall()
-        for row_number, row_data in enumerate(records):
-            self.parent.Qtable_customer.insertRow(row_number)
-            for column_number, data in enumerate(row_data):
-                if column_number == 12:
-                    data = util.FN_GET_STATUS_DESC(str(data))
-                elif column_number == 2:
-                    data = util.FN_GET_CUSTTP_DESC(str(data))
-                elif column_number == 7:
-                    data = util.FN_GET_CITY_DESC(str(data))
 
-                elif column_number == 8:
-                    data = util.FN_GET_DISTRICT_DESC(str(data))
-                self.parent .Qtable_customer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-        self.parent .Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-        mycursor.close()
     def FN_VALIDATE_FIELDS(self):
         id = self.LB_custID.text().strip()
         self.name = self.LE_name.text().strip()

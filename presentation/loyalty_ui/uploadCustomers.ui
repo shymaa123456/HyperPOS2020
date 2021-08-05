@@ -6,15 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
-    <height>178</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>تحميل مجموعه عملاء</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(198, 207, 199);
+   <string notr="true">
 
             </string>
   </property>
@@ -28,30 +40,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        font: bold 14px;
-                                        min-width:6em;
- padding: 6px;
-                                       }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>تحميل ملف عملاء</string>
@@ -67,30 +56,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        font: bold 14px;
-                                        min-width:6em;
- padding: 6px;
-                                       }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>اختر ملف عملاء</string>
@@ -109,28 +75,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+    <string notr="true"/>
    </property>
   </widget>
   <widget class="QPushButton" name="BTN_uploadTemp">

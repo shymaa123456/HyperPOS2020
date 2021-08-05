@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1056</width>
-    <height>540</height>
+    <width>1115</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,6 +15,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>تعديل عميل</string>
@@ -25,35 +31,14 @@
   <widget class="QPushButton" name="BTN_modifyCustomer">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>490</y>
+     <x>30</x>
+     <y>500</y>
      <width>191</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>تعديل عميل عضويه</string>
@@ -62,8 +47,8 @@
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>506</x>
-     <y>251</y>
+     <x>577</x>
+     <y>374</y>
      <width>531</width>
      <height>131</height>
     </rect>
@@ -266,7 +251,7 @@
   <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
     <rect>
-     <x>7</x>
+     <x>78</x>
      <y>110</y>
      <width>441</width>
      <height>211</height>
@@ -425,8 +410,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>459</x>
-     <y>10</y>
+     <x>530</x>
+     <y>133</y>
      <width>41</width>
      <height>31</height>
     </rect>
@@ -438,9 +423,9 @@
   <widget class="QGroupBox" name="groupBox_5">
    <property name="geometry">
     <rect>
-     <x>499</x>
-     <y>0</y>
-     <width>531</width>
+     <x>580</x>
+     <y>123</y>
+     <width>521</width>
      <height>111</height>
     </rect>
    </property>
@@ -453,10 +438,10 @@
    <widget class="QWidget" name="verticalLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>8</x>
+      <x>14</x>
       <y>18</y>
       <width>341</width>
-      <height>80</height>
+      <height>91</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -505,7 +490,7 @@
    <widget class="QWidget" name="verticalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>442</x>
+      <x>434</x>
       <y>21</y>
       <width>81</width>
       <height>81</height>
@@ -539,7 +524,7 @@
   <widget class="QGroupBox" name="groupBox_6">
    <property name="geometry">
     <rect>
-     <x>143</x>
+     <x>214</x>
      <y>10</y>
      <width>301</width>
      <height>80</height>
@@ -578,9 +563,9 @@
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
-     <x>508</x>
-     <y>384</y>
-     <width>531</width>
+     <x>80</x>
+     <y>350</y>
+     <width>441</width>
      <height>141</height>
     </rect>
    </property>
@@ -593,9 +578,9 @@
    <widget class="QTextEdit" name="LE_notes">
     <property name="geometry">
      <rect>
-      <x>125</x>
+      <x>20</x>
       <y>20</y>
-      <width>391</width>
+      <width>411</width>
       <height>111</height>
      </rect>
     </property>
@@ -604,8 +589,8 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>120</y>
+     <x>578</x>
+     <y>243</y>
      <width>531</width>
      <height>121</height>
     </rect>
@@ -794,6 +779,147 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_7">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>10</y>
+     <width>411</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>بحث ب </string>
+   </property>
+   <widget class="QRadioButton" name="Rbtn_custNo">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>26</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>رقم العميل</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LE_custNo">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>26</y>
+      <width>281</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LE_custName">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>54</y>
+      <width>281</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="Rbtn_custName">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>54</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>اسم العميل</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="Qbtn_search">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>50</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>بحث </string>
+   </property>
   </widget>
  </widget>
  <resources/>

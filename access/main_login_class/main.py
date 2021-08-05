@@ -145,7 +145,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Prom_Voucher_Act.clicked.connect(self.FN_LOAD_CHANGE_STATUS_ACTIVE)
             self.QAct_Prom_Voucher_Deact.clicked.connect(self.FN_LOAD_CHANGE_STATUS_INACTIVE)
 
-            self.QAct_Customer_Service.clicked.connect(self.FN_Customer_Service)
+           # self.QAct_Customer_Service.clicked.connect(self.FN_Customer_Service)
 
             # customer card
             self.QAct_Cust_Card_Add.clicked.connect(self.FN_Cust_Card_Add)

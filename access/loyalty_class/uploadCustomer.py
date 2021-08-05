@@ -33,9 +33,11 @@ class CL_customer(QtWidgets.QDialog):
         self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
         self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP)
         self.fileName = ''
-
-        self.setFixedWidth(576)
-        self.setFixedHeight(178)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+        #self.setFixedWidth(576)
+        #self.setFixedHeight(178)
     def FN_LOAD_UPLOAD_PT(self):
 
         filename = self.dirname + '/uploadCustPt.ui'

@@ -20,43 +20,32 @@ class CL_CustService_modify(QtWidgets.QDialog):
     oldmobile=''
     oldstatus=''
     oldemail=''
-    def __init__(self,pp):
+    def __init__(self):
         super(CL_CustService_modify, self).__init__()
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/customer_service_ui'
         conn = db1.connect()
-        self.parent = pp
-    def FN_LOAD_MODIFY(self,id):
+
+    def FN_LOAD_MODIFY(self):
         try:
-            print("id is ", id)
+            #print("id is ", id)
             filename = self.dirname + '/customerService_modify.ui'
             loadUi(filename, self)
             #get company id
             conn = db1.connect()
-            mycursor = conn.cursor()
-            mycursor.execute("SELECT COMPANY_ID ,CC_DEPARTMENT FROM Hyper1_Retail.CUSTOMER_COMPLAINT where CC_COMPLAINT_ID = '" + id + "'")
-            myresult = mycursor.fetchone()
-            mycursor.close()
+            #mycursor = conn.cursor()
+
+            #mycursor.close()
             records = util.FN_GET_COMPANIES()
             for row, val in records:
                 self.CMB_company.addItem(row, val)
 
-            records = util.FN_GET_BRANCHES(myresult[0])
-            for row, val in records:
-                for br in CL_userModule.branch:
-                    if str(val) in br:
-                       self.CMB_branch.addItem(row, val)
 
             records = util.FN_GET_DEPARTMENTS()
             for row, val in records:
                 self.CMB_department.addItem(row, val)
 
-            records = util.FN_GET_SECTIONS(myresult[1])
-            for row, val in records:
-                for sec in CL_userModule.section:
-                    if str(val) in sec:
-                        self.CMB_section.addItem(row, val)
             self.CMB_status.addItem( "Created", '0')
             self.CMB_status.addItem( "Finished" ,'1')
 
@@ -66,20 +55,57 @@ class CL_CustService_modify(QtWidgets.QDialog):
             for row, val in records:
                 self.CMB_complainType.addItem(row, val)
 
-            self.FN_GET_CUST(id)
-
             self.CMB_department.activated.connect(self.FN_GET_SECTIONS)
-            self.LE_custNo.textChanged.connect(self.FN_GET_CUST)
-            self.btn_modify.clicked.connect(self.FN_MODIFY_CUST)
+            #self.LE_custNo.textChanged.connect(self.FN_GET_CUST)
+            #self.Rbtn_custNo.clicked.connect(self.onClicked)
+            #self.Rbtn_complainNo.clicked.connect(self.onClicked)
 
-            self.setFixedWidth(723)
-            self.setFixedHeight(633)
+            self.btn_modify.clicked.connect(self.FN_MODIFY_CUST)
+            self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST_SERVICE)
+            #self.setFixedWidth(723)
+            #self.setFixedHeight(633)
 
         except Exception as err:
             print(err)
+    def onClicked(self):
+        if self.Rbtn_custNo.isChecked():
+            self.LE_custNo.setEnabled(True)
+            self.Rbtn_complainNo.setEnabled(False)
+            self.Rbtn_complainNo.setText('')
+        elif self.Rbtn_custName.isChecked():
 
+            self.LE_custNo.setEnabled(False)
+            self.Rbtn_complainNo.setEnabled(True)
+            self.LE_custNo.setText('')
+    def FN_SEARCH_CUST_SERVICE(self):
+        try:
+            whereClause = "  "
 
+            if self.Rbtn_custNo.isChecked():
+                id = self.LE_custNo.text()
+                whereClause =  "  POSC_CUST_ID = '" + id + "'  "
 
+            if self.Rbtn_complainNo.isChecked():
+                name = self.LE_complainNo.text()
+                whereClause = " CC_COMPLAINT_ID = '" + name + "'  "
+
+            if self.Rbtn_custNo.isChecked() == False and self.Rbtn_complainNo.isChecked() == False:
+                QtWidgets.QMessageBox.warning(self, "خطأ", "أختر أي من محدادات  البحث")
+            else:
+                conn = db1.connect()
+                mycursor = conn.cursor()
+                print(whereClause)
+                sql_select_query = "select  CC_COMPLAINT_ID from Hyper1_Retail.CUSTOMER_COMPLAINT where " + whereClause
+
+                mycursor.execute(sql_select_query)
+                records = mycursor.fetchone()
+
+                self.FN_GET_CUST(str(records[0]))
+
+                mycursor.close()
+            # self.Qbtn_search.setEnabled(True)
+        except Exception as err:
+            print(err)
     def FN_GET_STATUS_ID(self):
         status = self.CMB_status.currentData()
         id = ""
@@ -143,8 +169,8 @@ class CL_CustService_modify(QtWidgets.QDialog):
             record = mycursor.fetchone()
             self.LE_complainNo.setText(id)
             self.LE_custNo.setText(record[1])
-            self.LE_custName.setText(record[2])
-            self.LE_custPhone.setText( record[3] )
+            #self.LE_custName.setText(record[2])
+            #self.LE_custPhone.setText( record[3] )
             self.LE_pos.setText(record[8])
             self.LE_responsible.setText(record[10])
             self.details.setText(record[12])
@@ -152,6 +178,18 @@ class CL_CustService_modify(QtWidgets.QDialog):
 
             d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_invoice.setDate(d)
+
+            records = util.FN_GET_BRANCHES(record[4])
+            for row, val in records:
+                for br in CL_userModule.branch:
+                    if str(val) in br:
+                        self.CMB_branch.addItem(row, val)
+
+            records = util.FN_GET_SECTIONS(record[6])
+            for row, val in records:
+                for sec in CL_userModule.section:
+                    if str(val) in sec:
+                        self.CMB_section.addItem(row, val)
 
             self.CMB_status.setCurrentText(util.FN_GET_COMPAIN_STATUS_DESC(record[11]))
             self.CMB_complainType.setCurrentText(util.FN_GET_COMPLAIN_TYPE_DESC(str(record[0])))

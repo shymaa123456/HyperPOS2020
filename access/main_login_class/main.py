@@ -11,7 +11,8 @@ from access.coupon_class.EditCoupon import CL_EditCoupon
 from access.coupon_class.StoppedSerial import CL_StoppedSerial
 from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
-from access.customer_service_class.customer_complain import CL_CustService
+from access.customer_service_class.modifyCustomerComplain import CL_CustService_modify
+from access.customer_service_class.createCustomerComplain import CL_CustService_create
 from access.loyalty_class.CL_loyPoint import CL_loyPoint
 from access.loyalty_class.createCustomer import CL_customer_create
 from access.loyalty_class.customerCard import CL_customerCard
@@ -145,7 +146,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Prom_Voucher_Act.clicked.connect(self.FN_LOAD_CHANGE_STATUS_ACTIVE)
             self.QAct_Prom_Voucher_Deact.clicked.connect(self.FN_LOAD_CHANGE_STATUS_INACTIVE)
 
-           # self.QAct_Customer_Service.clicked.connect(self.FN_Customer_Service)
+            self.QAct_Create_Complain.clicked.connect(self.FN_CreateCustomerService)
+            self.QAct_Modify_Complain.clicked.connect(self.FN_ModifyCustomerService)
 
             # customer card
             self.QAct_Cust_Card_Add.clicked.connect(self.FN_Cust_Card_Add)
@@ -217,6 +219,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_Cust_Card_Edit = 0
             self.window_Cust_Card_Add = 0
 
+            self.window_Create_Customer_Service = 0
+            self.window_Modify_Customer_Service = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
             self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested)
@@ -920,19 +924,36 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setCurrentWidget(self.window_LOAD_CHANGE_STATUS_INACTIVE)
 
 
-    def FN_Customer_Service(self):
-        if self.window_Customer_Service == 0:
-            self.window_Customer_Service = CL_CustService()
-            self.window_Customer_Service.FN_LOAD_DISPLAY()
-            self.ui.tabWidget.addTab(self.window_Customer_Service, 'خدمة العملاء')
-            self.ui.tabWidget.setFixedWidth(self.window_Customer_Service.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_Customer_Service.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_Customer_Service)
-        else:
-            self.ui.tabWidget.setFixedWidth(self.window_Pwindow_Customer_ServicerintCoupon.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_Customer_Service.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_Customer_Service)
-
+    def FN_CreateCustomerService(self):
+        try:
+            if self.window_Create_Customer_Service == 0:
+                self.window_Create_Customer_Service = CL_CustService_create()
+                self.window_Create_Customer_Service.FN_LOAD_CREATE()
+                self.ui.tabWidget.addTab(self.window_Create_Customer_Service, 'إنشاء شكوى')
+                self.ui.tabWidget.setFixedWidth(self.window_Create_Customer_Service.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_Create_Customer_Service.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_Create_Customer_Service)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_Pwindow_Customer_ServicerintCoupon.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_Create_Customer_Service.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_Create_Customer_Service)
+        except Exception as err:
+           print(err)
+    def FN_ModifyCustomerService(self):
+        try:
+            if self.window_Modify_Customer_Service == 0:
+                self.window_Modify_Customer_Service = CL_CustService_modify()
+                self.window_Modify_Customer_Service.FN_LOAD_MODIFY()
+                self.ui.tabWidget.addTab(self.window_Modify_Customer_Service, 'تعديل شكوى')
+                self.ui.tabWidget.setFixedWidth(self.window_Modify_Customer_Service.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_Modify_Customer_Service.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_Modify_Customer_Service)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_Modify_Customer_Service.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_Modify_Customer_Service.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_Modify_Customer_Service)
+        except Exception as err:
+           print(err)
     # Configuration Parametrs
     def FN_Parameters(self):
         if self.window_Parameters == 0:
@@ -1307,6 +1328,12 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_Cust_Card_Edit = 0
         if self.window_Cust_Card_Add not in li:
             self.window_Cust_Card_Add = 0
+
+        if self.window_Create_Customer_Service not in li:
+            self.window_Create_Customer_Service = 0
+
+        if self.window_Modify_Customer_Service not in li:
+            self.window_Modify_Customer_Service = 0
         if len(li) == 0:
             self.ui.tabWidget.setFixedWidth(1000)
             self.ui.tabWidget.setFixedHeight(650)

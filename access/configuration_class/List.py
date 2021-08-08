@@ -34,6 +34,11 @@ class CL_List(QtWidgets.QDialog):
         self.CMB_Status.addItems(["Active", "Inactive"])
         self.FN_DISPLAY_PRIVILAGE()
 
+        # Apply Style
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
     def FN_GET_Parameter(self):
         # Todo: method for fills the Parameter combobox
         self.conn = db1.connect()

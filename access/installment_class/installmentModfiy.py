@@ -79,7 +79,7 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.Qcombo_branch.setEnabled(False)
-        #self.FN_GET_Branch()
+        self.FN_GET_Branch_Wiithoutselectcompany()
 
         #validation for not pick date before today
         datefrom = str(datetime.today().strftime('%Y-%m-%d'))
@@ -242,12 +242,14 @@ class CL_installmentModify(QtWidgets.QDialog):
              print(sys.exc_info())
 
     # get branches list
-    def FN_GET_Branch_Wiithoutselectcompany(self,mycursorb,companyID):
+    def FN_GET_Branch_Wiithoutselectcompany(self):
         #self.Qcombo_branch.clear()
         i = 0
         try:
+            self.conn = db1.connect()
+            mycursorb = self.conn.cursor()
             # Todo: method for fills the Branch combobox
-            sqlite3 = "SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH WHERE COMPANY_ID in (" + companyID + ")"
+            sqlite3 = "SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH "
 
             print("Branches_sqlite3_without", sqlite3)
 
@@ -260,7 +262,8 @@ class CL_installmentModify(QtWidgets.QDialog):
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
 
-            self.Qcombo_branch.setCurrentIndex(-1)
+            #self.Qcombo_branch.setCurrentIndex(-1)
+            mycursorb.close()
         except:
             print(sys.exc_info())
 
@@ -279,24 +282,29 @@ class CL_installmentModify(QtWidgets.QDialog):
     def FN_WhenCheckDepartment(self):
         if self.checkBox_department.isChecked():
             self.FN_GET_Department()
-            #self.Qcombo_department.setEnabled(True)
-            #self.checkBox_section.setEnabled(True)
+            self.Qcombo_department.setEnabled(True)
+            self.checkBox_section.setEnabled(True)
             self.Qtable_acceptedItems.setEnabled(False)
             self.FN_ClearAcepptedQTableData()
-            #self.Qbtn_loadItems.setEnabled(False)
-            #self.Qbtn_deleteItem.setEnabled(False)
+            self.Qbtn_loadItems.setEnabled(False)
+            self.Qbtn_deleteItem.setEnabled(False)
             self.Qcombo_department.setCurrentIndex(-1)
 
         else:
             self.Qcombo_department.unCheckedList()
-            #self.Qcombo_department.setEnabled(False)
-            #self.checkBox_section.setEnabled(False)
+            self.Qcombo_department.setEnabled(False)
+            self.checkBox_section.setEnabled(False)
             self.checkBox_section.setChecked(False)
             self.checkBox_BMCLevel.setChecked(False)
-            #self.Qtable_acceptedItems.setEnabled(True)
-            #self.Qbtn_loadItems.setEnabled(True)
-            #self.Qbtn_deleteItem.setEnabled(True)
+            self.checkBox_BMCLevel.setEnabled(False)
+            self.Qtable_acceptedItems.setEnabled(True)
+            self.Qbtn_loadItems.setEnabled(True)
+            self.Qbtn_deleteItem.setEnabled(True)
             self.Qcombo_department.setCurrentIndex(-1)
+            self.Qcombo_section.unCheckedList()
+            self.Qcombo_BMCLevel.unCheckedList()
+            self.Qcombo_BMCLevel.setEnabled(False)
+
 
 
     #get Department list
@@ -330,17 +338,16 @@ class CL_installmentModify(QtWidgets.QDialog):
     def FN_WhenChecksection(self):
         if self.checkBox_section.isChecked():
             self.FN_GET_sections()
-            #self.checkBox_BMCLevel.setEnabled(True)
-            #self.Qcombo_section.setEnabled(True)
+            self.checkBox_BMCLevel.setEnabled(True)
+            self.Qcombo_section.setEnabled(True)
             self.Qcombo_section.setCurrentIndex(-1)
 
         else:
             self.Qcombo_section.unCheckedList()
-            #self.checkBox_BMCLevel.setChecked(False)
-            #self.checkBox_BMCLevel.setEnabled(False)
-            #self.Qcombo_section.setEnabled(False)
+            self.checkBox_BMCLevel.setChecked(False)
+            self.checkBox_BMCLevel.setEnabled(False)
+            self.Qcombo_section.setEnabled(False)
             self.Qcombo_section.setCurrentIndex(-1)
-            #self.Qcombo_section.unChecked()
 
     #get sections list
     def FN_GET_sections(self):
@@ -374,13 +381,13 @@ class CL_installmentModify(QtWidgets.QDialog):
     def FN_WhenCheckBMC_Level(self):
         if self.checkBox_BMCLevel.isChecked():
             self.FN_GET_BMC_Level()
-            #self.Qcombo_BMCLevel.setEnabled(True)
+            self.Qcombo_BMCLevel.setEnabled(True)
             self.Qcombo_BMCLevel.setCurrentIndex(-1)
             #self.FN_
         else:
             self.Qcombo_BMCLevel.unCheckedList()
             self.checkBox_BMCLevel.setChecked(False)
-            #self.Qcombo_BMCLevel.setEnabled(False)
+            self.Qcombo_BMCLevel.setEnabled(False)
             self.Qcombo_BMCLevel.setCurrentIndex(-1)
 
     #get BMC LEVEL4 list
@@ -953,7 +960,8 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.FN_ConvertDateAndTimeAndPutItInItsObject(INST_VALID_FROM , INST_VALID_TO)
 
         # Get selected Data For company and branch
-        self.FN_GetSlectedCompanyAndBranchForThisProgram(mycursor)
+        self.FN_GetSlectedCompanyForThisProgram(mycursor)
+        self.FN_GetSlectedBranchForThisProgram(mycursor)
 
         # Get customer groupe
         self.FN_GetSlectedCustomerGroupeForThisProgram(mycursor)
@@ -1034,35 +1042,59 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.Qtime_from.setTime(some_timeTo)
 
     # Get selected Data For company and branch
-    def FN_GetSlectedCompanyAndBranchForThisProgram(self,mycursor):
+    def FN_GetSlectedCompanyForThisProgram(self,mycursor):
         try:
             sql21 = "SELECT COMPANY_ID ,BRANCH_NO FROM Hyper1_Retail.INSTALLMENT_BRANCH  WHERE INST_PROGRAM_ID='" + self.InstallmentNo + "'"
             mycursor.execute(sql21)
             records21 = mycursor.fetchall()
-
+            print("FN_GetSlectedCompanyAndBranchForThisProgram",len(records21))
             sql_select_Companies_branchs = "SELECT COMPANY_ID, BRANCH_NO FROM BRANCH"
             mycursor.execute(sql_select_Companies_branchs)
             record = mycursor.fetchall()
+            print("FN_GetSlectedCompanyAndBranchForThisProgram",len(record))
+
             i = 0
             for row in record:
                 for row1 in records21:
-                    if row[0] == row1[0]:
-                        items = self.Qcombo_company.findText(row[0])
+                    print("bcrow[0]",row[0],"row1[0]",row1[0])
+                    print("bcrow[0]",row[1],"row1[0]",row1[1])
+
+                    if str(row[0]) == str(row1[0]):
+                        items = self.Qcombo_company.findText(str(row[0]))
                         for item in range(items + 2):
                             # if int(row1[1]) == 1:
                             self.Qcombo_company.setChecked(i)
-                            self.FN_GET_Branch_Wiithoutselectcompany(mycursor,row[0])
 
+                i = i + 1
+        except:
+            print(sys.exc_info())
 
-                    if row[1] == row1[1]:
-                        items = self.Qcombo_branch.findText(row[1])
+    # Get selected Data For  branch
+    def FN_GetSlectedBranchForThisProgram(self,mycursor):
+        try:
+            sql21 = "SELECT BRANCH_NO FROM Hyper1_Retail.INSTALLMENT_BRANCH  WHERE INST_PROGRAM_ID='" + self.InstallmentNo + "'"
+            mycursor.execute(sql21)
+            records21 = mycursor.fetchall()
+            print("FN_GetSlectedCompanyAndBranchForThisProgram",len(records21))
+            sql_select_Companies_branchs = "SELECT BRANCH_NO FROM BRANCH"
+            mycursor.execute(sql_select_Companies_branchs)
+            record = mycursor.fetchall()
+            print("FN_GetSlectedCompanyAndBranchForThisProgram",len(record))
+
+            i = 0
+            for row in record:
+                for row1 in records21:
+                    print("bcrow[0]",row[0],"row1[0]",row1[0])
+
+                    if str(row[0]) == str(row1[0]):
+                        items = self.Qcombo_branch.findText(str(row[0]))
+                        print("FN_GetSlectedCompanyAndBranchForThisProgram_items",items)
                         for item in range(items + 2):
                             # if int(row1[1]) == 1:
                             self.Qcombo_branch.setChecked(i)
                 i = i + 1
         except:
             print(sys.exc_info())
-
     # Get selected Data For CustomerGroupe
     def FN_GetSlectedCustomerGroupeForThisProgram(self,mycursor):
         try:
@@ -1187,6 +1219,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                                     # if int(row1[1]) == 1:
                                     self.Qcombo_section.setChecked(i)
 
+                        i = i + 1
 
                 if BMC_ID != None:
                     self.checkBox_BMCLevel.setChecked(True)
@@ -1202,7 +1235,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                                 for item in range(items + 2):
                                     # if int(row1[1]) == 1:
                                     self.Qcombo_BMCLevel.setChecked(i)
-                i = i + 1
+                        i = i + 1
 
         except:
             print(sys.exc_info())
@@ -1334,7 +1367,8 @@ class CL_installmentModify(QtWidgets.QDialog):
                 self.conn.start_transaction()
 
                 # # lock table for new record:
-                sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE , Hyper1_Retail.SYS_CHANGE_LOG  WRITE , Hyper1_Retail.INSTALLMENT_RULE  WRITE"
+                sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE , Hyper1_Retail.SYS_CHANGE_LOG  WRITE , Hyper1_Retail.INSTALLMENT_RULE  WRITE" \
+                       ", Hyper1_Retail.INSTALLMENT_ITEM  WRITE , Hyper1_Retail.INSTALLMENT_SECTION  WRITE   , Hyper1_Retail.INSTALLMENT_REJECTED_ITEM  WRITE  "
                 mycursor.execute(sql0)
 
                 ModifingDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
@@ -1344,7 +1378,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                     self.Qtime_to.dateTime().toString('hh:mm'))
 
                 # update to INSTALLMENT_PROGRAM INST_VALID_TO,INST_ADMIN_EXPENSES_PERC,INST_ADMIN_EXPENSES_MIN,INST_ADMIN_EXPENSES_MAX
-                if ToDateTime != self.oldstatusDateTo:
+                if ToDateTime != self.oldstatusDateTo or ToDateTime == self.oldstatusDateTo:
                     sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_VALID_TO='" + ToDateTime + "', INST_ADMIN_EXPENSES_PERC ='"+str(self.QDSpinBox_adminExpendses.value())+\
                         "', INST_ADMIN_EXPENSES_MIN ='"+str(self.QDSpinBox_Min_adminExpendses.value()) +"', INST_ADMIN_EXPENSES_MAX='"+str(self.QDSpinBox_Min_adminExpendses.value())+\
                         "' , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
@@ -1358,40 +1392,52 @@ class CL_installmentModify(QtWidgets.QDialog):
                     print("sql3", sql3)
                     mycursor.execute(sql3)
 
-                    #TODO insert Installment_item
-                    if self.Qtable_acceptedItems.rowCount() != 0 :
-                        # TODO Delete fom Installment_item
-                        sql50 = "DELETE FROM Installment_item where INSTR_RULEID='" + str(self.InstallmentRule) + "'"
-                        mycursor.execute(sql50)
+                    #TODO Delete
+                    # TODO Delete fom INSTALLMENT_ITEM
+                    sql50 = "DELETE FROM INSTALLMENT_ITEM where INSTR_RULEID='" + str(self.InstallmentRule) + "'"
+                    mycursor.execute(sql50)
 
+                    sql60 = "DELETE FROM INSTALLMENT_SECTION where INSTR_RULEID='" + str(self.InstallmentRule) + "'"
+                    mycursor.execute(sql60)
+
+                    # TODO Delete fom INSTALLMENT_REJECTED_ITEM
+                    sql70 = "DELETE FROM INSTALLMENT_REJECTED_ITEM where INSTR_RULEID='" + str(
+                        self.InstallmentRule) + "'"
+                    mycursor.execute(sql70)
+
+                    #TODO insert INSTALLMENT_ITEM
+                    print("self.Qtable_acceptedItems.rowCount()", self.Qtable_acceptedItems.rowCount())
+                    if self.Qtable_acceptedItems.rowCount() != 0 :
                         for i in range(self.Qtable_acceptedItems.rowCount()):
                             barcode = self.Qtable_acceptedItems.item(i, 0).text()
-                            sql5 = "INSERT INTO INSTALLMENT_ITEM (POS_GTIN,instR_RuleID,STATUS) VALUES (%s,%s,%s)"
+                            print("self.Qtable_acceptedItems.barcode", barcode)
+                            print("self.Qtable_acceptedItems.i", i)
+
+                            sql5 = "INSERT INTO Hyper1_Retail.INSTALLMENT_ITEM (POS_GTIN,instR_RuleID,STATUS) VALUES (%s,%s,%s)"
                             val5 = (
                                 barcode, str(self.InstallmentRule),
                                 '1')
                             mycursor.execute(sql5, val5)
+                            print("self.INSTALLMENT_ITEM. val5 ", val5)
 
                     #TODO insert Installment_department_section_BMC
                     elif self.checkBox_department.isChecked():
-                        sql60 = "DELETE FROM INSTALLMENT_SECTION where INSTR_RULEID='" + str(self.InstallmentRule) + "'"
-                        mycursor.execute(sql60)
-
+                        print("self.INSTALLMENT_ITEM. isChecked() ", self.checkBox_department.isChecked())
                         self.FN_SaveDepartmentSectionBMCLeve(mycursor)
 
                     #TODO insert rejected items to Installment_rejected_item
+                    print("self.Qtable_rejectedItems.rowCount()", self.Qtable_rejectedItems.rowCount())
                     if self.Qtable_rejectedItems.rowCount() != 0 :
-                        # TODO Delete fom Installment_item
-                        sql70 = "DELETE FROM INSTALLMENT_REJECTED_ITEM where INSTR_RULEID='" + str(self.InstallmentRule) + "'"
-                        mycursor.execute(sql70)
-
                         for i in range(self.Qtable_rejectedItems.rowCount()):
                             barcode_rejected = self.Qtable_rejectedItems.item(i, 0).text()
+                            print("self.Qtable_rejectedItems.barcode", barcode_rejected)
+                            print("self.Qtable_rejectedItems.i", i)
                             sql7 = "INSERT INTO INSTALLMENT_REJECTED_ITEM (POS_GTIN,instR_RuleID,STATUS) VALUES (%s,%s,%s)"
                             val7 = (
                                 barcode_rejected, str(self.InstallmentRule),
                                 '1')
                             mycursor.execute(sql7, val7)
+
 
                     # TODO Insert in log table date to
                     sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
@@ -1422,8 +1468,8 @@ class CL_installmentModify(QtWidgets.QDialog):
                     print("sql10", sql10)
                     mycursor.execute(sql10, val10)
 
-                elif ToDateTime == self.oldstatusDateTo:
-                    QtWidgets.QMessageBox.warning(self, "Error", "Data doesn't change")
+                #elif ToDateTime == self.oldstatusDateTo:
+                #    QtWidgets.QMessageBox.warning(self, "Error", "Date doesn't change")
 
                 # # unlock table :
                 sql00 = "  UNLOCK   tables    "
@@ -1449,11 +1495,13 @@ class CL_installmentModify(QtWidgets.QDialog):
                     for k in range(len(self.Qcombo_BMCLevel.currentData())):
                         sql6 = "INSERT INTO INSTALLMENT_SECTION (INSTR_RULEID, DEPARTMENT_ID, SECTION_ID , BMC_ID ,STATUS) VALUES (%s,%s,%s,%s,%s)"
                         val6 = (
-                            self.id_INSTR_RULEID,
+                            self.InstallmentRule,
                             self.Qcombo_department.currentData()[j],
                             self.Qcombo_section.currentData()[i],
                             self.Qcombo_BMCLevel.currentData()[k],
                             '1')
+                        print("for k_val6", val6)
+
                         mycursor.execute(sql6, val6)
 
         elif self.checkBox_department.isChecked() and self.checkBox_section.isChecked() and not self.checkBox_BMCLevel.isChecked():
@@ -1461,18 +1509,22 @@ class CL_installmentModify(QtWidgets.QDialog):
                 for i in range(len(self.Qcombo_section.currentData())):
                     sql6 = "INSERT INTO INSTALLMENT_SECTION (INSTR_RULEID, DEPARTMENT_ID, SECTION_ID  ,STATUS) VALUES (%s,%s,%s,%s)"
                     val6 = (
-                        self.id_INSTR_RULEID,
+                        self.InstallmentRule,
                         self.Qcombo_department.currentData()[j],
                         self.Qcombo_section.currentData()[i],
                         '1')
+                    print("for i_val6", val6)
+
                     mycursor.execute(sql6, val6)
 
         elif self.checkBox_department.isChecked() and not self.checkBox_section.isChecked() and not self.checkBox_BMCLevel.isChecked():
             for j in range(len(self.Qcombo_department.currentData())):
                 sql6 = "INSERT INTO INSTALLMENT_SECTION (INSTR_RULEID, DEPARTMENT_ID, STATUS) VALUES (%s,%s,%s)"
                 val6 = (
-                    self.id_INSTR_RULEID,
+                    self.InstallmentRule,
                     self.Qcombo_department.currentData()[j],
                     '1')
+                print("for j_val6", val6)
+
                 mycursor.execute(sql6, val6)
 

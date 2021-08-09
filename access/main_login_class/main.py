@@ -6,6 +6,12 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
 from access.configuration_class.Parameters import CL_Parameters
+from access.configuration_class.Check_List import CL_HW_Parameter
+from access.configuration_class.List import CL_List
+# from access.configuration_class.Parameters import CL_Parameters
+from access.configuration_class.List_POS import CL_List_POS
+
+
 from access.coupon_class.CreateCoupon import CL_CreateCoupon
 from access.coupon_class.EditCoupon import CL_EditCoupon
 from access.coupon_class.StoppedSerial import CL_StoppedSerial
@@ -52,6 +58,7 @@ from access.voucher_class.CreateVoucher import CL_CreateVoucher
 from access.voucher_class.EditVoucher import CL_EditVoucher
 from access.voucher_class.stoppedVoucher import CL_modifyVoucher
 from access.promotion_voucher_class.PromotionVoucher import CL_PromVoucher
+
 
 
 class CL_main(QtWidgets.QMainWindow):
@@ -159,6 +166,9 @@ class CL_main(QtWidgets.QMainWindow):
 
             # Parameter Form
             self.QAct_Parameter.clicked.connect(self.FN_Parameters)
+            self.QAct_HW_Parameter.clicked.connect(self.FN_HW_Parameters)
+            self.QAct_List_POS.clicked.connect(self.FN_List_POS)
+            self.QAct_List.clicked.connect(self.FN_List)
 
             self.QAct_Exit.clicked.connect(self.FN_exit)
 
@@ -216,6 +226,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_UP_CUST_PT = 0
             self.window_Cust_Card_Edit = 0
             self.window_Cust_Card_Add = 0
+            self.window_HW_Parameters = 0
+            self.window_List_POS = 0
+            self.window_List = 0
 
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
@@ -1037,6 +1050,53 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedHeight(self.window_Active_installment.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_Active_installment)
 
+    # Configurations
+    def FN_HW_Parameters(self):
+        # self.window_two = CL_HW_Parameter()
+        # self.window_two.FN_LOAD_CREATE()
+        if self.window_HW_Parameters == 0:
+            self.window_HW_Parameters = CL_HW_Parameter()
+            self.window_HW_Parameters.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_HW_Parameters, 'HW Parameters')
+            self.ui.tabWidget.setFixedWidth(self.window_HW_Parameters.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_HW_Parameters.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_HW_Parameters)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_HW_Parameters.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_HW_Parameters.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_HW_Parameters)
+
+    def FN_List(self):
+        # self.window_two = CL_List()
+        # self.window_two.FN_LOAD_CREATE()
+        if self.window_List == 0:
+            self.window_List = CL_List()
+            self.window_List.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_List, 'List')
+            self.ui.tabWidget.setFixedWidth(self.window_List.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_List.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_List)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_List.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_List.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_List)
+
+
+    def FN_List_POS(self):
+        # self.window_two = CL_List_POS()
+        # self.window_two.FN_LOAD_CREATE()
+        if self.window_List_POS == 0:
+            self.window_List_POS = CL_List_POS()
+            self.window_List_POS.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_List_POS, 'List POS')
+            self.ui.tabWidget.setFixedWidth(self.window_List_POS.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_List_POS.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_List_POS)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_List_POS.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_List_POS.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_List_POS)
+
 
     def onChange(self):
         if self.ui.tabWidget.currentWidget() == self.window_CreateCoupon:
@@ -1199,6 +1259,16 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_search_promotion.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_search_promotion.frameGeometry().height() + 20)
 
+        elif self.ui.tabWidget.currentWidget() == self.window_HW_Parameters:
+            self.ui.tabWidget.setFixedWidth(self.window_HW_Parameters.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_HW_Parameters.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_List_POS:
+            self.ui.tabWidget.setFixedWidth(self.window_List_POS.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_List_POS.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_List:
+            self.ui.tabWidget.setFixedWidth(self.window_List.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_List.frameGeometry().height())
+
     def onTabCloseRequested(self, index):
         li = []
         for i in range(self.ui.tabWidget.count()):
@@ -1307,6 +1377,14 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_Cust_Card_Edit = 0
         if self.window_Cust_Card_Add not in li:
             self.window_Cust_Card_Add = 0
+
+        if self.window_HW_Parameters not in li:
+            self.window_HW_Parameters = 0
+        if self.window_List_POS not in li:
+            self.window_List_POS = 0
+        if self.window_List not in li:
+            self.window_List = 0
+
         if len(li) == 0:
             self.ui.tabWidget.setFixedWidth(1000)
             self.ui.tabWidget.setFixedHeight(650)

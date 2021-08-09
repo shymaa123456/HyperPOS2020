@@ -28,6 +28,10 @@ from access.loyalty_class.redeemItem import CL_redItem
 from access.loyalty_class.redeemType import CL_redeemType
 from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.loyalty_class.uploadCustomer import CL_customer
+from access.master_data_class.company import CL_company
+from access.master_data_class.installmentType import CL_installmentType
+from access.master_data_class.promotionType import CL_promotionType
+from access.master_data_class.userType import CL_userType
 from access.reports_class.reporting import CL_report
 from access.reports_class.reporting1 import CL_report1
 
@@ -172,10 +176,17 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Create_Complain.clicked.connect(self.FN_CreateCustomerService)
             self.QAct_Modify_Complain.clicked.connect(self.FN_ModifyCustomerService)
 
+            self.QAct_company.clicked.connect(self.FN_company)
+            self.QAct_branch.clicked.connect(self.FN_branch)
+            self.QAct_promotionType.clicked.connect(self.FN_promotionType)
+            self.QAct_installmentType.clicked.connect(self.FN_installmentType)
+            self.QAct_userType.clicked.connect(self.FN_userType)
+
             self.QAct_Exit.clicked.connect(self.FN_exit)
 
             # self.ui.tabWidget.setTabsClosable(True)
             self.ui.tabWidget.tabCloseRequested.connect(lambda index: self.ui.tabWidget.removeTab(index))
+
             self.window_Active_installment = 0
             self.window_Modify_installment = 0
             self.window_CREATE_installment = 0
@@ -233,6 +244,12 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_List = 0
             self.window_Create_Customer_Service = 0
             self.window_Modify_Customer_Service = 0
+
+            self.window_company = 0
+            self.window_branch = 0
+            self.window_promotionType =0
+            self.window_installmentType = 0
+            self.window_userType = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
             self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested)
@@ -250,6 +267,72 @@ class CL_main(QtWidgets.QMainWindow):
         else:
             self.ui.widget.setVisible(True)
 
+    def FN_company(self):
+        try:
+            if self.window_company == 0:
+                self.window_company = CL_company()
+                self.window_company.FN_LOAD_DISPlAY()
+                self.ui.tabWidget.addTab(self.window_company, 'الشركات')
+                self.ui.tabWidget.setFixedWidth(self.window_company.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_company.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_company)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_company.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_company.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_company)
+        except Exception as err:
+         print(err)
+    def FN_branch(self):
+        if self.window_branch == 0:
+            self.window_branch = CL_branch()
+            self.window_branch.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_branch, 'الفروع')
+            self.ui.tabWidget.setFixedWidth(self.window_branch.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_branch.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_branch)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_branch.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_branch.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_branch)
+
+    def FN_promotionType(self):
+        if self.window_promotionType == 0:
+            self.window_promotionType = CL_promotionType()
+            self.window_promotionType.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_promotionType, 'أنواع العروض')
+            self.ui.tabWidget.setFixedWidth(self.window_promotionType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_promotionType.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_promotionType)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_promotionType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_promotionType.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_promotionType)
+
+    def FN_installmentType(self):
+        if self.window_installmentType == 0:
+            self.window_installmentType = CL_installmentType()
+            self.window_installmentType.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_installmentType, 'أنواع التقسيط')
+            self.ui.tabWidget.setFixedWidth(self.window_installmentType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_installmentType.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_installmentType)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_installmentType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_installmentType.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_installmentType)
+
+    def FN_userType(self):
+        if self.window_userType == 0:
+            self.window_userType = CL_userType()
+            self.window_userType.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_userType, 'أنواع المستخدمين')
+            self.ui.tabWidget.setFixedWidth(self.window_userType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_userType.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_userType)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_userType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_userType.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_userType)
 
     def FN_Cust_Card_Add(self):
         if self.window_Cust_Card_Add == 0:
@@ -1295,6 +1378,22 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_Modify_Customer_Service.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_Modify_Customer_Service.frameGeometry().height())
 
+        elif self.ui.tabWidget.currentWidget() == self.window_company:
+            self.ui.tabWidget.setFixedWidth(self.window_company.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_company.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_branch:
+            self.ui.tabWidget.setFixedWidth(self.window_branch.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_branch.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_promotionType:
+            self.ui.tabWidget.setFixedWidth(self.window_promotionType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_promotionType.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_installmentType:
+            self.ui.tabWidget.setFixedWidth(self.window_installmentType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_installmentType.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_userType:
+            self.ui.tabWidget.setFixedWidth(self.window_userType.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_userType.frameGeometry().height())
+
     def onTabCloseRequested(self, index):
         li = []
         for i in range(self.ui.tabWidget.count()):
@@ -1408,6 +1507,18 @@ class CL_main(QtWidgets.QMainWindow):
 
         if self.window_Modify_Customer_Service not in li:
             self.window_Modify_Customer_Service = 0
+
+        if self.window_company not in li:
+            self.window_company = 0
+        if self.window_branch not in li:
+            self.window_branch = 0
+        if self.window_promotionType not in li:
+            self.window_promotionType = 0
+        if self.window_installmentType not in li:
+            self.window_installmentType = 0
+        if self.window_userType not in li:
+            self.window_userType = 0
+
         if self.window_HW_Parameters not in li:
             self.window_HW_Parameters = 0
         if self.window_List_POS not in li:

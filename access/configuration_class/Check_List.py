@@ -28,6 +28,11 @@ class CL_HW_Parameter(QtWidgets.QDialog):
         self.CMB_Status.addItems(["Active", "Inactive"])
         self.FN_DISPLAY_PRIVILAGE()
 
+        # Apply Style
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
         # Todo: method to Create Parameter if not Exist
     def FN_CREATE_Parameters(self):
         sql_select_Query = "SELECT * FROM Hyper1_Retail.SYS_HW_COMPONENT where HW_PARAMETER_DESC = '"+self.LE_name.text().strip()+"' and STATUS = 1"

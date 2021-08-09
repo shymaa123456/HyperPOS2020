@@ -233,6 +233,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_List = 0
             self.window_Create_Customer_Service = 0
             self.window_Modify_Customer_Service = 0
+            self.window_Customer_Service = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
             self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested)

@@ -1418,8 +1418,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_CREATE_Bank = 0
         if self.window_Parameters not in li:
             self.window_Parameters = 0
-        if self.window_Customer_Service not in li:
-            self.window_Customer_Service = 0
+
         if self.window_LOAD_CHANGE_STATUS_INACTIVE not in li:
             self.window_LOAD_CHANGE_STATUS_INACTIVE = 0
         if self.window_LOAD_CHANGE_STATUS_ACTIVE not in li:

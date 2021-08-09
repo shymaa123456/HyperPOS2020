@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>373</width>
-    <height>473</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>إنشاء محموعه عملاء</string>
@@ -16,7 +28,7 @@
   <widget class="QLabel" name="desc">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>960</x>
      <y>50</y>
      <width>81</width>
      <height>21</height>
@@ -29,7 +41,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>980</x>
      <y>110</y>
      <width>67</width>
      <height>17</height>
@@ -42,7 +54,7 @@
   <widget class="QComboBox" name="CMB_status">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>870</x>
      <y>110</y>
      <width>86</width>
      <height>25</height>
@@ -52,7 +64,7 @@
   <widget class="QLineEdit" name="LE_desc">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>830</x>
      <y>46</y>
      <width>161</width>
      <height>25</height>
@@ -89,10 +101,10 @@
   <widget class="QTableWidget" name="Qtable">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>635</x>
      <y>170</y>
-     <width>341</width>
-     <height>281</height>
+     <width>421</width>
+     <height>351</height>
     </rect>
    </property>
    <property name="layoutDirection">
@@ -120,7 +132,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>811</x>
      <y>20</y>
      <width>31</width>
      <height>20</height>
@@ -136,7 +148,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>810</x>
      <y>110</y>
      <width>31</width>
      <height>21</height>
@@ -149,7 +161,7 @@
   <widget class="QPushButton" name="BTN_create">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>720</x>
      <y>20</y>
      <width>82</width>
      <height>21</height>
@@ -165,7 +177,7 @@
   <widget class="QPushButton" name="BTN_modify">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>720</x>
      <y>60</y>
      <width>82</width>
      <height>21</height>
@@ -181,7 +193,7 @@
   <widget class="QPushButton" name="BTN_search">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>720</x>
      <y>100</y>
      <width>82</width>
      <height>21</height>
@@ -197,7 +209,7 @@
   <widget class="QPushButton" name="BTN_search_all">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>720</x>
      <y>140</y>
      <width>82</width>
      <height>21</height>

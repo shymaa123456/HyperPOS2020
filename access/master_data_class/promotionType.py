@@ -59,14 +59,14 @@ class CL_promotionType(QtWidgets.QDialog):
             status = self.CMB_status.currentText()
             if status == 'Active':
 
-                whereClause = "where `COMPANY_STATUS` = 1  "
+                whereClause = "where `PROMOTION_STATUS` = 1  "
             else:
-                whereClause = "where `COMPANY_STATUS` = 0 "
+                whereClause = "where `PROMOTION_STATUS` = 0 "
 
             if name != '' :
-                whereClause = whereClause + "and `COMPANY_DESC` like '%" + str(name) + "%'"
+                whereClause = whereClause + "and `PROMT_NAME_AR` like '%" + str(name) + "%'"
 
-            sql_select_query = "select  COMPANY_ID, `COMPANY_DESC` , `COMPANY_STATUS` from Hyper1_Retail.CUSTOMER_GROUP " + whereClause + " and CG_DESC !='H1' order by CG_GROUP_ID*1 asc"
+            sql_select_query = "select  PROMOTION_TYPE_ID, `PROMT_NAME_AR` , `PROMOTION_STATUS` from Hyper1_Retail.PROMOTION_TYPE " + whereClause + "  order by PROMOTION_TYPE_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -98,7 +98,7 @@ class CL_promotionType(QtWidgets.QDialog):
                 self.Qtable.removeRow(i)
 
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT  COMPANY_ID, COMPANY_DESC ,COMPANY_STATUS  FROM Hyper1_Retail.COMPANY   order by COMPANY_ID*1   asc")
+            mycursor.execute("SELECT  PROMOTION_TYPE_ID, PROMT_NAME_AR ,PROMOTION_STATUS  FROM Hyper1_Retail.PROMOTION_TYPE   order by PROMOTION_TYPE_ID*1   asc")
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable.insertRow(row_number)
@@ -134,7 +134,7 @@ class CL_promotionType(QtWidgets.QDialog):
     def FN_CHECK_DUP_NAME(self,name,id=''):
         self.conn1 = db1.connect()
         mycursor1 = self.conn1.cursor()
-        sql = "SELECT COMPANY_DESC  FROM Hyper1_Retail.COMPANY where COMPANY_DESC = '"+name+"' and COMPANY_ID !='"+id+"'"
+        sql = "SELECT PROMT_NAME_AR  FROM Hyper1_Retail.PROMOTION_TYPE where PROMT_NAME_AR = '"+name+"' and PROMOTION_TYPE_ID !='"+id+"'"
         mycursor1.execute(sql)
         myresult = mycursor1.fetchall()
         len = mycursor1.rowcount
@@ -164,7 +164,7 @@ class CL_promotionType(QtWidgets.QDialog):
 
         mycursor = self.conn.cursor()
         # get max userid
-        mycursor.execute("SELECT max(cast(COMPANY_ID  AS UNSIGNED)) FROM Hyper1_Retail.COMPANY")
+        mycursor.execute("SELECT max(cast(PROMOTION_TYPE_ID  AS UNSIGNED)) FROM Hyper1_Retail.PROMOTION_TYPE")
         myresult = mycursor.fetchone()
 
         if myresult[0] == None:
@@ -184,7 +184,7 @@ class CL_promotionType(QtWidgets.QDialog):
                     mycursor.close()
                 else:
 
-                    sql = "INSERT INTO Hyper1_Retail.COMPANY(COMPANY_ID, COMPANY_DESC , COMPANY_Status) " \
+                    sql = "INSERT INTO Hyper1_Retail.PROMOTION_TYPE(PROMOTION_TYPE_ID, PROMT_NAME_AR , PROMOTION_STATUS) " \
                           "         VALUES ( %s, %s, %s)"
 
                     # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
@@ -234,7 +234,7 @@ class CL_promotionType(QtWidgets.QDialog):
                 if error!=1:
                     mycursor = self.conn1.cursor()
                     changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                    sql = "UPDATE `Hyper1_Retail`.`COMPANY` SET `COMPANY_DESC` = %s, `COMPANY_STATUS` = %s WHERE `COMPANY_ID` = %s"
+                    sql = "UPDATE `Hyper1_Retail`.`PROMOTION_TYPE` SET `PROMT_NAME_AR` = %s, `PROMOTION_STATUS` = %s WHERE `PROMOTION_TYPE_ID` = %s"
                     val = (desc,status, id)
                     mycursor.execute(sql, val)
                     #mycursor.close()
@@ -245,7 +245,7 @@ class CL_promotionType(QtWidgets.QDialog):
                     self.FN_GET_ALL()
                     self.FN_CLEAR_FEILDS ()
                     if str(status) != str(status_old):
-                        util.FN_INSERT_IN_LOG("COMPANY", "status", status, status_old, id)
+                        util.FN_INSERT_IN_LOG("PROMOTION_TYPE", "status", status, status_old, id)
         else:
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
 

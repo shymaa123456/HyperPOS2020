@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>الشركات</string>
+   <string>إنشاء محموعه عملاء</string>
   </property>
   <widget class="QLabel" name="desc">
    <property name="geometry">
@@ -47,22 +47,6 @@
      <width>86</width>
      <height>25</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BTN_create">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>إنشاء</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="LE_desc">
@@ -130,38 +114,6 @@
     </property>
    </column>
   </widget>
-  <widget class="QPushButton" name="BTN_modify">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>تعديل</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BTN_search">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>90</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>بحث</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="LB_id">
    <property name="enabled">
     <bool>false</bool>
@@ -194,11 +146,59 @@
     <string/>
    </property>
   </widget>
+  <widget class="QPushButton" name="BTN_create">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>82</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>إنشاء</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="BTN_modify">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>82</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>تعديل</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="BTN_search">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>82</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>بحث</string>
+   </property>
+  </widget>
   <widget class="QPushButton" name="BTN_search_all">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>130</y>
+     <x>20</x>
+     <y>140</y>
      <width>82</width>
      <height>21</height>
     </rect>

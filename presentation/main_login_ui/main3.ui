@@ -148,10 +148,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Promotion">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>-25</x>
             <y>0</y>
-            <width>228</width>
-            <height>456</height>
+            <width>123</width>
+            <height>231</height>
            </rect>
           </property>
           <attribute name="label">
@@ -177,7 +177,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="QM_Promotion_Prom">
               <property name="geometry">
                <rect>
-                <x>-89</x>
+                <x>-74</x>
                 <y>0</y>
                 <width>172</width>
                 <height>221</height>
@@ -337,10 +337,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="QM_Promotion_Coupon">
               <property name="geometry">
                <rect>
-                <x>0</x>
+                <x>-34</x>
                 <y>0</y>
-                <width>174</width>
-                <height>294</height>
+                <width>132</width>
+                <height>192</height>
                </rect>
               </property>
               <attribute name="label">
@@ -501,7 +501,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>83</width>
+                <width>98</width>
                 <height>163</height>
                </rect>
               </property>
@@ -581,7 +581,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>83</width>
+                <width>98</width>
                 <height>134</height>
                </rect>
               </property>
@@ -654,7 +654,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>83</width>
+                <width>98</width>
                 <height>134</height>
                </rect>
               </property>
@@ -739,10 +739,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Installment">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>-25</x>
             <y>0</y>
-            <width>228</width>
-            <height>456</height>
+            <width>123</width>
+            <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -765,10 +765,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page">
               <property name="geometry">
                <rect>
-                <x>0</x>
+                <x>-31</x>
                 <y>0</y>
-                <width>174</width>
-                <height>378</height>
+                <width>129</width>
+                <height>105</height>
                </rect>
               </property>
               <attribute name="label">
@@ -831,7 +831,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_2">
               <property name="geometry">
                <rect>
-                <x>-90</x>
+                <x>-75</x>
                 <y>0</y>
                 <width>173</width>
                 <height>76</height>
@@ -901,10 +901,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Customer">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>-43</x>
             <y>0</y>
-            <width>228</width>
-            <height>456</height>
+            <width>141</width>
+            <height>316</height>
            </rect>
           </property>
           <attribute name="label">
@@ -927,7 +927,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_3">
               <property name="geometry">
                <rect>
-                <x>-42</x>
+                <x>-27</x>
                 <y>0</y>
                 <width>125</width>
                 <height>47</height>
@@ -981,7 +981,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>83</width>
+                <width>98</width>
                 <height>47</height>
                </rect>
               </property>
@@ -1031,7 +1031,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_5">
               <property name="geometry">
                <rect>
-                <x>-64</x>
+                <x>-49</x>
                 <y>0</y>
                 <width>147</width>
                 <height>186</height>
@@ -1105,7 +1105,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_6">
               <property name="geometry">
                <rect>
-                <x>-73</x>
+                <x>-58</x>
                 <y>0</y>
                 <width>156</width>
                 <height>47</height>
@@ -1157,7 +1157,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_7">
               <property name="geometry">
                <rect>
-                <x>-83</x>
+                <x>-68</x>
                 <y>0</y>
                 <width>166</width>
                 <height>76</height>
@@ -1216,7 +1216,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_8">
               <property name="geometry">
                <rect>
-                <x>-99</x>
+                <x>-84</x>
                 <y>0</y>
                 <width>182</width>
                 <height>134</height>
@@ -1289,10 +1289,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_9">
               <property name="geometry">
                <rect>
-                <x>0</x>
+                <x>-2</x>
                 <y>0</y>
-                <width>184</width>
-                <height>209</height>
+                <width>100</width>
+                <height>30</height>
                </rect>
               </property>
               <attribute name="label">
@@ -1426,15 +1426,15 @@ QToolBox::tab:selected { /* italicize selected tabs */
               </font>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="page_30">
               <property name="geometry">
                <rect>
-                <x>-83</x>
+                <x>0</x>
                 <y>0</y>
-                <width>166</width>
-                <height>339</height>
+                <width>189</width>
+                <height>350</height>
                </rect>
               </property>
               <attribute name="label">
@@ -1444,14 +1444,14 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <item row="0" column="1">
                 <layout class="QVBoxLayout" name="verticalLayout_10">
                  <item>
-                  <widget class="QPushButton" name="action_28">
+                  <widget class="QPushButton" name="QAct_company">
                    <property name="text">
                     <string>الشركات</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="action_26">
+                  <widget class="QPushButton" name="QAct_branch">
                    <property name="text">
                     <string>الفروع</string>
                    </property>
@@ -1472,14 +1472,14 @@ QToolBox::tab:selected { /* italicize selected tabs */
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="action_27">
+                  <widget class="QPushButton" name="QAct_promotionType">
                    <property name="text">
                     <string>انواع العروض</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="action_30">
+                  <widget class="QPushButton" name="QAct_installmentType">
                    <property name="text">
                     <string>انواع التقسيط</string>
                    </property>
@@ -1493,7 +1493,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="action_129">
+                  <widget class="QPushButton" name="QAct_userType">
                    <property name="text">
                     <string>انواع المستخدمين</string>
                    </property>
@@ -1557,9 +1557,9 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_31">
               <property name="geometry">
                <rect>
-                <x>-8</x>
+                <x>0</x>
                 <y>0</y>
-                <width>91</width>
+                <width>98</width>
                 <height>226</height>
                </rect>
               </property>
@@ -1583,7 +1583,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                  <widget class="QWidget" name="page_33">
                   <property name="geometry">
                    <rect>
-                    <x>-90</x>
+                    <x>-59</x>
                     <y>0</y>
                     <width>142</width>
                     <height>223</height>
@@ -2028,8 +2028,8 @@ QToolBox::tab:selected { /* italicize selected tabs */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>96</width>
-            <height>456</height>
+            <width>98</width>
+            <height>28</height>
            </rect>
           </property>
           <attribute name="label">

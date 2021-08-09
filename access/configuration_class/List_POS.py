@@ -47,6 +47,10 @@ class CL_List_POS(QtWidgets.QDialog):
         self.BTN_ModifyList.clicked.connect(self.FN_ModifyList)
         self.CMB_Status.addItems(["Active", "Inactive"])
         self.FN_DISPLAY_PRIVILAGE()
+        # Apply Style
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
 
     def FN_GET_Parameter(self):
         # Todo: method for fills the Parameter combobox

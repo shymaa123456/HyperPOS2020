@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>861</width>
-    <height>568</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,6 +15,18 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>user</string>
@@ -26,9 +38,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-                    background-color: rgb(198, 207, 199);
-                </string>
+   <string notr="true"/>
   </property>
   <widget class="QLineEdit" name="LE_name">
    <property name="geometry">
@@ -83,28 +93,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>Create List</string>
@@ -168,28 +157,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QPushButton:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                        QPushButton:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>Modify List</string>

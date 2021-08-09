@@ -79,7 +79,7 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.Qcombo_branch.setEnabled(False)
-        #self.FN_GET_Branch()
+        self.FN_GET_Branch_Wiithoutselectcompany()
 
         #validation for not pick date before today
         datefrom = str(datetime.today().strftime('%Y-%m-%d'))
@@ -242,12 +242,14 @@ class CL_installmentModify(QtWidgets.QDialog):
              print(sys.exc_info())
 
     # get branches list
-    def FN_GET_Branch_Wiithoutselectcompany(self,mycursorb,companyID):
+    def FN_GET_Branch_Wiithoutselectcompany(self):
         #self.Qcombo_branch.clear()
         i = 0
         try:
+            self.conn = db1.connect()
+            mycursorb = self.conn.cursor()
             # Todo: method for fills the Branch combobox
-            sqlite3 = "SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH WHERE COMPANY_ID in (" + companyID + ")"
+            sqlite3 = "SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH "
 
             print("Branches_sqlite3_without", sqlite3)
 
@@ -260,7 +262,8 @@ class CL_installmentModify(QtWidgets.QDialog):
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
 
-            self.Qcombo_branch.setCurrentIndex(-1)
+            #self.Qcombo_branch.setCurrentIndex(-1)
+            mycursorb.close()
         except:
             print(sys.exc_info())
 
@@ -957,7 +960,8 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.FN_ConvertDateAndTimeAndPutItInItsObject(INST_VALID_FROM , INST_VALID_TO)
 
         # Get selected Data For company and branch
-        self.FN_GetSlectedCompanyAndBranchForThisProgram(mycursor)
+        self.FN_GetSlectedCompanyForThisProgram(mycursor)
+        self.FN_GetSlectedBranchForThisProgram(mycursor)
 
         # Get customer groupe
         self.FN_GetSlectedCustomerGroupeForThisProgram(mycursor)
@@ -1038,35 +1042,59 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.Qtime_from.setTime(some_timeTo)
 
     # Get selected Data For company and branch
-    def FN_GetSlectedCompanyAndBranchForThisProgram(self,mycursor):
+    def FN_GetSlectedCompanyForThisProgram(self,mycursor):
         try:
             sql21 = "SELECT COMPANY_ID ,BRANCH_NO FROM Hyper1_Retail.INSTALLMENT_BRANCH  WHERE INST_PROGRAM_ID='" + self.InstallmentNo + "'"
             mycursor.execute(sql21)
             records21 = mycursor.fetchall()
-
+            print("FN_GetSlectedCompanyAndBranchForThisProgram",len(records21))
             sql_select_Companies_branchs = "SELECT COMPANY_ID, BRANCH_NO FROM BRANCH"
             mycursor.execute(sql_select_Companies_branchs)
             record = mycursor.fetchall()
+            print("FN_GetSlectedCompanyAndBranchForThisProgram",len(record))
+
             i = 0
             for row in record:
                 for row1 in records21:
-                    if row[0] == row1[0]:
-                        items = self.Qcombo_company.findText(row[0])
+                    print("bcrow[0]",row[0],"row1[0]",row1[0])
+                    print("bcrow[0]",row[1],"row1[0]",row1[1])
+
+                    if str(row[0]) == str(row1[0]):
+                        items = self.Qcombo_company.findText(str(row[0]))
                         for item in range(items + 2):
                             # if int(row1[1]) == 1:
                             self.Qcombo_company.setChecked(i)
-                            self.FN_GET_Branch_Wiithoutselectcompany(mycursor,row[0])
 
+                i = i + 1
+        except:
+            print(sys.exc_info())
 
-                    if row[1] == row1[1]:
-                        items = self.Qcombo_branch.findText(row[1])
+    # Get selected Data For  branch
+    def FN_GetSlectedBranchForThisProgram(self,mycursor):
+        try:
+            sql21 = "SELECT BRANCH_NO FROM Hyper1_Retail.INSTALLMENT_BRANCH  WHERE INST_PROGRAM_ID='" + self.InstallmentNo + "'"
+            mycursor.execute(sql21)
+            records21 = mycursor.fetchall()
+            print("FN_GetSlectedCompanyAndBranchForThisProgram",len(records21))
+            sql_select_Companies_branchs = "SELECT BRANCH_NO FROM BRANCH"
+            mycursor.execute(sql_select_Companies_branchs)
+            record = mycursor.fetchall()
+            print("FN_GetSlectedCompanyAndBranchForThisProgram",len(record))
+
+            i = 0
+            for row in record:
+                for row1 in records21:
+                    print("bcrow[0]",row[0],"row1[0]",row1[0])
+
+                    if str(row[0]) == str(row1[0]):
+                        items = self.Qcombo_branch.findText(str(row[0]))
+                        print("FN_GetSlectedCompanyAndBranchForThisProgram_items",items)
                         for item in range(items + 2):
                             # if int(row1[1]) == 1:
                             self.Qcombo_branch.setChecked(i)
                 i = i + 1
         except:
             print(sys.exc_info())
-
     # Get selected Data For CustomerGroupe
     def FN_GetSlectedCustomerGroupeForThisProgram(self,mycursor):
         try:

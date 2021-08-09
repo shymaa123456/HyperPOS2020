@@ -17,7 +17,7 @@ from access.coupon_class.EditCoupon import CL_EditCoupon
 from access.coupon_class.StoppedSerial import CL_StoppedSerial
 from access.coupon_class.printCoupon import CL_printCoupon
 from access.coupon_class.stoppedCoupon import CL_modifyCoupon
-from access.customer_service_class.customer_complain import CL_CustService
+#from access.customer_service_class.customer_complain import CL_CustService
 from access.loyalty_class.CL_loyPoint import CL_loyPoint
 from access.loyalty_class.createCustomer import CL_customer_create
 from access.loyalty_class.customerCard import CL_customerCard
@@ -60,6 +60,8 @@ from access.voucher_class.stoppedVoucher import CL_modifyVoucher
 from access.promotion_voucher_class.PromotionVoucher import CL_PromVoucher
 
 
+from access.customer_service_class.modifyCustomerComplain import CL_CustService_modify
+from access.customer_service_class.createCustomerComplain import CL_CustService_create
 
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
@@ -125,9 +127,6 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Create_Form_Item.clicked.connect(self.FN_create_form_item)
             self.QAct_Modify_Form_Item.clicked.connect(self.FN_modify_form_item)
 
-
-
-
             """ Promotion """
             self.QAct_Prom_Add.clicked.connect(self.FN_search_promotion)
             self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)
@@ -170,6 +169,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_List_POS.clicked.connect(self.FN_List_POS)
             self.QAct_List.clicked.connect(self.FN_List)
 
+            self.QAct_Create_Complain.clicked.connect(self.FN_CreateCustomerService)
+            self.QAct_Modify_Complain.clicked.connect(self.FN_ModifyCustomerService)
+
             self.QAct_Exit.clicked.connect(self.FN_exit)
 
             # self.ui.tabWidget.setTabsClosable(True)
@@ -180,7 +182,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_Modify_Bank = 0
             self.window_CREATE_Bank = 0
             self.window_Parameters = 0
-            self.window_Customer_Service = 0
+            #self.window_Customer_Service = 0
             self.window_LOAD_CHANGE_STATUS_INACTIVE = 0
             self.window_LOAD_CHANGE_STATUS_ACTIVE = 0
             self.window_EditPromVoucher = 0
@@ -229,7 +231,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_HW_Parameters = 0
             self.window_List_POS = 0
             self.window_List = 0
-
+            self.window_Create_Customer_Service = 0
+            self.window_Modify_Customer_Service = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
             self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested)
@@ -933,18 +936,6 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setCurrentWidget(self.window_LOAD_CHANGE_STATUS_INACTIVE)
 
 
-    def FN_Customer_Service(self):
-        if self.window_Customer_Service == 0:
-            self.window_Customer_Service = CL_CustService()
-            self.window_Customer_Service.FN_LOAD_DISPLAY()
-            self.ui.tabWidget.addTab(self.window_Customer_Service, 'خدمة العملاء')
-            self.ui.tabWidget.setFixedWidth(self.window_Customer_Service.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_Customer_Service.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_Customer_Service)
-        else:
-            self.ui.tabWidget.setFixedWidth(self.window_Pwindow_Customer_ServicerintCoupon.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_Customer_Service.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_Customer_Service)
 
     # Configuration Parametrs
     def FN_Parameters(self):
@@ -1050,6 +1041,37 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedHeight(self.window_Active_installment.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_Active_installment)
 
+    def FN_CreateCustomerService(self):
+        try:
+            if self.window_Create_Customer_Service == 0:
+                self.window_Create_Customer_Service = CL_CustService_create()
+                self.window_Create_Customer_Service.FN_LOAD_CREATE()
+                self.ui.tabWidget.addTab(self.window_Create_Customer_Service, 'إنشاء شكوى')
+                self.ui.tabWidget.setFixedWidth(self.window_Create_Customer_Service.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_Create_Customer_Service.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_Create_Customer_Service)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_Pwindow_Customer_ServicerintCoupon.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_Create_Customer_Service.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_Create_Customer_Service)
+        except Exception as err:
+            print(err)
+
+    def FN_ModifyCustomerService(self):
+        try:
+            if self.window_Modify_Customer_Service == 0:
+                self.window_Modify_Customer_Service = CL_CustService_modify()
+                self.window_Modify_Customer_Service.FN_LOAD_MODIFY()
+                self.ui.tabWidget.addTab(self.window_Modify_Customer_Service, 'تعديل شكوى')
+                self.ui.tabWidget.setFixedWidth(self.window_Modify_Customer_Service.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_Modify_Customer_Service.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_Modify_Customer_Service)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_Modify_Customer_Service.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_Modify_Customer_Service.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_Modify_Customer_Service)
+        except Exception as err:
+            print(err)
     # Configurations
     def FN_HW_Parameters(self):
         # self.window_two = CL_HW_Parameter()
@@ -1129,9 +1151,7 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_Parameters:
             self.ui.tabWidget.setFixedWidth(self.window_Parameters.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_Parameters.frameGeometry().height())
-        elif self.ui.tabWidget.currentWidget() == self.window_Customer_Service:
-            self.ui.tabWidget.setFixedWidth(self.window_Customer_Service.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_Customer_Service.frameGeometry().height())
+
         elif self.ui.tabWidget.currentWidget() == self.window_LOAD_CHANGE_STATUS_INACTIVE:
             self.ui.tabWidget.setFixedWidth(self.window_LOAD_CHANGE_STATUS_INACTIVE.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_LOAD_CHANGE_STATUS_INACTIVE.frameGeometry().height())
@@ -1268,6 +1288,12 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_List:
             self.ui.tabWidget.setFixedWidth(self.window_List.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_List.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_Create_Customer_Service:
+            self.ui.tabWidget.setFixedWidth(self.window_Create_Customer_Service.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_Create_Customer_Service.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_Modify_Customer_Service:
+            self.ui.tabWidget.setFixedWidth(self.window_Modify_Customer_Service.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_Modify_Customer_Service.frameGeometry().height())
 
     def onTabCloseRequested(self, index):
         li = []
@@ -1377,7 +1403,11 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_Cust_Card_Edit = 0
         if self.window_Cust_Card_Add not in li:
             self.window_Cust_Card_Add = 0
+        if self.window_Create_Customer_Service not in li:
+            self.window_Create_Customer_Service = 0
 
+        if self.window_Modify_Customer_Service not in li:
+            self.window_Modify_Customer_Service = 0
         if self.window_HW_Parameters not in li:
             self.window_HW_Parameters = 0
         if self.window_List_POS not in li:

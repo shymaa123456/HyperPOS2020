@@ -64,6 +64,9 @@ class CL_CustService_modify(QtWidgets.QDialog):
             self.Qbtn_search.clicked.connect(self.FN_SEARCH_CUST_SERVICE)
             #self.setFixedWidth(723)
             #self.setFixedHeight(633)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
 
         except Exception as err:
             print(err)

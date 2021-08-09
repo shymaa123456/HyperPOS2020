@@ -60,10 +60,12 @@ class CL_CustService_create(QtWidgets.QDialog):
             self.BTN_create.clicked.connect(self.FN_CREATE_CUST)
             self.LE_custNo.textChanged.connect(self.FN_GET_CUST)
             #
-            self.setFixedWidth(723)
-            self.setFixedHeight(602)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
+
         except Exception as err:
-            print(err)
+                print(err)
     def FN_GET_COMPLAIN_TYPE(self):
         conn = db1.connect()
         mycursor = conn.cursor()

@@ -66,7 +66,7 @@ class CL_promotionType(QtWidgets.QDialog):
             if name != '' :
                 whereClause = whereClause + "and `PROMT_NAME_AR` like '%" + str(name) + "%'"
 
-            sql_select_query = "select  PROMOTION_TYPE_ID, `PROMT_NAME_AR` , `PROMOTION_STATUS` from Hyper1_Retail.PROMOTION_TYPE " + whereClause + "  order by PROMOTION_TYPE_ID*1 asc"
+            sql_select_query = "select  PROMOTION_TYPE_ID, `PROMT_NAME_AR`,PROMT_NAME_EN,`PROMOTION_STATUS`,PROMOTION_NOTES   from Hyper1_Retail.PROMOTION_TYPE " + whereClause + "  order by PROMOTION_TYPE_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -78,7 +78,7 @@ class CL_promotionType(QtWidgets.QDialog):
 
                     item = QTableWidgetItem(str(data))
 
-                    if column_number == 2:
+                    if column_number == 3:
                         data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
@@ -98,14 +98,14 @@ class CL_promotionType(QtWidgets.QDialog):
                 self.Qtable.removeRow(i)
 
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT  PROMOTION_TYPE_ID, PROMT_NAME_AR ,PROMOTION_STATUS  FROM Hyper1_Retail.PROMOTION_TYPE   order by PROMOTION_TYPE_ID*1   asc")
+            mycursor.execute("SELECT  PROMOTION_TYPE_ID, PROMT_NAME_AR, PROMT_NAME_EN,PROMOTION_STATUS ,PROMOTION_NOTES FROM Hyper1_Retail.PROMOTION_TYPE   order by PROMOTION_TYPE_ID*1   asc")
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable.insertRow(row_number)
                 for column_number, data in enumerate(row_data):
                     item = QTableWidgetItem(str(data))
 
-                    if column_number == 2:
+                    if column_number == 3:
                         data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
@@ -123,8 +123,12 @@ class CL_promotionType(QtWidgets.QDialog):
                 rowNo = self.Qtable.selectedItems()[0].row()
                 id = self.Qtable.item(rowNo, 0).text()
                 desc = self.Qtable.item(rowNo, 1).text()
-                status = self.Qtable.item(rowNo, 2).text()
+                descEn = self.Qtable.item(rowNo, 2).text()
+                status = self.Qtable.item(rowNo, 3).text()
+                notes = self.Qtable.item(rowNo,4).text()
                 self.LE_desc.setText(desc)
+                self.LE_desc_2.setText(descEn)
+                self.notes.setText(notes)
                 self.LB_id.setText(id)
                 self.LB_status.setText(util.FN_GET_STATUS_id(status))
                 self.CMB_status.setCurrentText(status)
@@ -156,6 +160,8 @@ class CL_promotionType(QtWidgets.QDialog):
     def FN_CREATE(self):
         self.conn = db1.connect()
         self.name = self.LE_desc.text().strip()
+        nameEn = self.LE_desc_2.text().strip()
+        notes = self.notes.text().strip()
         status = self.CMB_status.currentText()
         if status == 'Active':
             self.status = 1
@@ -184,11 +190,11 @@ class CL_promotionType(QtWidgets.QDialog):
                     mycursor.close()
                 else:
 
-                    sql = "INSERT INTO Hyper1_Retail.PROMOTION_TYPE(PROMOTION_TYPE_ID, PROMT_NAME_AR , PROMOTION_STATUS) " \
-                          "         VALUES ( %s, %s, %s)"
+                    sql = "INSERT INTO Hyper1_Retail.PROMOTION_TYPE(PROMOTION_TYPE_ID, PROMT_NAME_AR,PROMT_NAME_EN ,PROMOTION_NOTES, PROMOTION_STATUS) " \
+                          "         VALUES ( %s, %s,%s, %s, %s)"
 
                     # sql = "INSERT INTO SYS_USER (USER_ID,USER_NAME) VALUES (%s, %s)"
-                    val = (self.id, self.name,  self.status                          )
+                    val = (self.id, self.name, nameEn,notes, self.status                          )
                     mycursor.execute(sql, val)
                     # mycursor.execute(sql)
 
@@ -216,6 +222,8 @@ class CL_promotionType(QtWidgets.QDialog):
             status_old =  self.Qtable.item(rowNo, 0).text()
             desc = self.LE_desc.text().strip()
             status = self.LB_status.text().strip()
+            nameEn = self.LE_desc_2.text().strip()
+            notes = self.notes.text().strip()
             # if status == 'Active':
             #     status = 1
             # else:
@@ -234,8 +242,8 @@ class CL_promotionType(QtWidgets.QDialog):
                 if error!=1:
                     mycursor = self.conn1.cursor()
                     changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                    sql = "UPDATE `Hyper1_Retail`.`PROMOTION_TYPE` SET `PROMT_NAME_AR` = %s, `PROMOTION_STATUS` = %s WHERE `PROMOTION_TYPE_ID` = %s"
-                    val = (desc,status, id)
+                    sql = "UPDATE `Hyper1_Retail`.`PROMOTION_TYPE` SET `PROMT_NAME_AR` = %s, PROMT_NAME_EN = %s ,PROMOTION_NOTES = %s, `PROMOTION_STATUS` = %s WHERE `PROMOTION_TYPE_ID` = %s"
+                    val = (desc,nameEn,notes,status, id)
                     mycursor.execute(sql, val)
                     #mycursor.close()
                     #

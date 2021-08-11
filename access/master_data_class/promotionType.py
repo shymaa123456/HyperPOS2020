@@ -128,7 +128,7 @@ class CL_promotionType(QtWidgets.QDialog):
                 notes = self.Qtable.item(rowNo,4).text()
                 self.LE_desc.setText(desc)
                 self.LE_desc_2.setText(descEn)
-                self.notes.setText(notes)
+                self.LE_notes.setText(notes)
                 self.LB_id.setText(id)
                 self.LB_status.setText(util.FN_GET_STATUS_id(status))
                 self.CMB_status.setCurrentText(status)
@@ -161,7 +161,7 @@ class CL_promotionType(QtWidgets.QDialog):
         self.conn = db1.connect()
         self.name = self.LE_desc.text().strip()
         nameEn = self.LE_desc_2.text().strip()
-        notes = self.notes.text().strip()
+        notes = self.LE_notes.text().strip()
         status = self.CMB_status.currentText()
         if status == 'Active':
             self.status = 1
@@ -223,7 +223,7 @@ class CL_promotionType(QtWidgets.QDialog):
             desc = self.LE_desc.text().strip()
             status = self.LB_status.text().strip()
             nameEn = self.LE_desc_2.text().strip()
-            notes = self.notes.text().strip()
+            notes = self.LE_notes.text().strip()
             # if status == 'Active':
             #     status = 1
             # else:
@@ -260,5 +260,7 @@ class CL_promotionType(QtWidgets.QDialog):
     def FN_CLEAR_FEILDS (self):
         self.LB_id.clear()
         self.LE_desc.clear()
+        self.LE_desc_2.clear()
+        self.LE_notes.clear()
         self.CMB_status.setCurrentText('Active')
         self.LB_status.setText('1')

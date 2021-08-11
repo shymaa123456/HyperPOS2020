@@ -6,72 +6,330 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1110</width>
-    <height>777</height>
+    <width>1100</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1110</width>
-    <height>777</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1110</width>
-    <height>777</height>
+    <width>1100</width>
+    <height>717</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>إنشاء محموعه عملاء</string>
   </property>
-  <widget class="QLabel" name="desc">
+  <widget class="QTableWidget" name="Qtable">
    <property name="geometry">
     <rect>
-     <x>970</x>
-     <y>60</y>
-     <width>81</width>
-     <height>21</height>
+     <x>110</x>
+     <y>350</y>
+     <width>971</width>
+     <height>181</height>
     </rect>
    </property>
-   <property name="text">
-    <string>الأسم</string>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
    </property>
+   <column>
+    <property name="text">
+     <string>رقم الفرع</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الشركه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الاسم  </string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الاسم EN</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>العنوان</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>المدينه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>تليفون1</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>تليفون2</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>فاكس</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الإيميل</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>ملاحظات</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>العمله</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الحاله</string>
+    </property>
+   </column>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QWidget" name="verticalLayoutWidget_5">
    <property name="geometry">
     <rect>
-     <x>990</x>
+     <x>10</x>
      <y>120</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>الحاله</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="CMB_status">
-   <property name="geometry">
-    <rect>
-     <x>880</x>
-     <y>120</y>
-     <width>86</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="LE_desc">
-   <property name="geometry">
-    <rect>
-     <x>840</x>
-     <y>56</y>
      <width>161</width>
-     <height>25</height>
+     <height>191</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">QLineEdit{
+   <layout class="QVBoxLayout" name="verticalLayout_5">
+    <item>
+     <widget class="QPushButton" name="BTN_create">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>إنشاء</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="BTN_modify">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>تعديل</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="BTN_search">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>بحث</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="BTN_search_all">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>عرض الكل</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>260</y>
+     <width>461</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>ملاحظات</string>
+   </property>
+   <widget class="QTextEdit" name="LE_notes">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>20</y>
+      <width>391</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="geometry">
+    <rect>
+     <x>181</x>
+     <y>10</y>
+     <width>461</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>بيانات التواصل</string>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget_7">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>32</y>
+      <width>281</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <item>
+      <widget class="QLineEdit" name="LE_phone1">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    
+                            </string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="LE_phone2">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    
+                            </string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="LE_fax">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
                                         background-color: white;
                                         border-style: outset;
                                         border-width: 2px;
@@ -93,134 +351,478 @@
                                         );
                                         }
                                     </string>
-   </property>
-   <property name="maxLength">
-    <number>50</number>
-   </property>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="LE_address">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="CMB_city">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="duplicatesEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>28</y>
+      <width>93</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>رقم الهاتف  1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>رقم الهاتف 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_11">
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>الفاكس</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_10">
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>اﻹيميل</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_16">
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>العنوان</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>المدينه</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
-  <widget class="QTableWidget" name="Qtable">
+  <widget class="QGroupBox" name="groupBox_6">
    <property name="geometry">
     <rect>
-     <x>720</x>
-     <y>180</y>
-     <width>341</width>
-     <height>281</height>
+     <x>654</x>
+     <y>144</y>
+     <width>431</width>
+     <height>191</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
-   <column>
-    <property name="text">
-     <string>id</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>الاسم  </string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>الحاله</string>
-    </property>
-   </column>
-  </widget>
-  <widget class="QLabel" name="LB_id">
-   <property name="enabled">
-    <bool>false</bool>
+   <property name="title">
+    <string>بيانات أساسيه</string>
    </property>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>34</y>
+      <width>281</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_8">
+     <item>
+      <widget class="QLineEdit" name="LE_desc">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+       <property name="maxLength">
+        <number>50</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="LE_desc_2">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+       <property name="maxLength">
+        <number>50</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="CMB_status"/>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="LE_currency">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+       <property name="maxLength">
+        <number>50</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>348</x>
+      <y>32</y>
+      <width>71</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_9">
+     <item>
+      <widget class="QLabel" name="desc_4">
+       <property name="text">
+        <string>الأسم</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="desc_5">
+       <property name="text">
+        <string>الأسم EN </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>الحاله</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="desc_6">
+       <property name="text">
+        <string>العمله</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="LB_status">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>4</x>
+      <y>107</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_7">
    <property name="geometry">
     <rect>
-     <x>810</x>
-     <y>30</y>
-     <width>31</width>
-     <height>16</height>
+     <x>660</x>
+     <y>0</y>
+     <width>421</width>
+     <height>131</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
     <string/>
    </property>
-  </widget>
-  <widget class="QLabel" name="LB_status">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>820</x>
-     <y>120</y>
-     <width>31</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BTN_create">
-   <property name="geometry">
-    <rect>
-     <x>720</x>
-     <y>20</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>إنشاء</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BTN_modify">
-   <property name="geometry">
-    <rect>
-     <x>720</x>
-     <y>60</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>تعديل</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BTN_search">
-   <property name="geometry">
-    <rect>
-     <x>720</x>
-     <y>100</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>بحث</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BTN_search_all">
-   <property name="geometry">
-    <rect>
-     <x>720</x>
-     <y>140</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>عرض الكل</string>
-   </property>
+   <widget class="QLabel" name="LB_status_2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>4</x>
+      <y>107</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>331</x>
+      <y>17</y>
+      <width>71</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QLabel" name="desc_3">
+       <property name="text">
+        <string>رقم الفرع</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>الشركه</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>17</x>
+      <y>20</y>
+      <width>281</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLineEdit" name="LE_branchNo">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+       <property name="maxLength">
+        <number>50</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="CMB_company"/>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <resources/>

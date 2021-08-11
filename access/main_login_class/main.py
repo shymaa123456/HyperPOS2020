@@ -29,6 +29,7 @@ from access.loyalty_class.redeemType import CL_redeemType
 from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.loyalty_class.uploadCustomer import CL_customer
 from access.master_data_class.company import CL_company
+from access.master_data_class.branch import CL_branch
 from access.master_data_class.installmentType import CL_installmentType
 from access.master_data_class.promotionType import CL_promotionType
 from access.master_data_class.userType import CL_userType
@@ -36,7 +37,7 @@ from access.reports_class.reporting import CL_report
 from access.reports_class.reporting1 import CL_report1
 
 from access.authorization_class.Role import CL_role
-from access.authorization_class.branch import CL_branch
+#from access.authorization_class.branch import CL_branch
 from access.authorization_class.form import CL_form
 from access.authorization_class.formItem import CL_formItem
 from access.authorization_class.privilage import CL_privilage
@@ -564,18 +565,6 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_exit(self):
         QApplication.quit()
-
-    def FN_create_branch(self):
-        if self.window_create_branch == 0:
-            self.window_create_branch = CL_branch()
-            self.ui.tabWidget.addTab(self.window_create_branch, 'طباعة كوبون')
-            self.ui.tabWidget.setFixedWidth(self.window_create_branch.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_create_branch.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_create_branch)
-        else:
-            self.ui.tabWidget.setFixedWidth(self.window_create_branch.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_create_branch.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_create_branch)
 
 
     def FN_display_item(self):

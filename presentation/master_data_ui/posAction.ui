@@ -244,7 +244,7 @@
      <widget class="QComboBox" name="CMB_status"/>
     </item>
     <item>
-     <widget class="QComboBox" name="CMB_status_2"/>
+     <widget class="QComboBox" name="CMB_reqApproval"/>
     </item>
     <item>
      <widget class="QLineEdit" name="LE_notes">

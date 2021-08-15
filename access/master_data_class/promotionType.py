@@ -219,7 +219,7 @@ class CL_promotionType(QtWidgets.QDialog):
             rowNo = self.Qtable.selectedItems()[0].row()
             id = self.LB_id.text().strip()
             desc_old = self.Qtable.item(rowNo, 1).text()
-            status_old =  self.Qtable.item(rowNo, 0).text()
+            status_old =  self.Qtable.item(rowNo, 3).text()
             desc = self.LE_desc.text().strip()
             status = self.LB_status.text().strip()
             nameEn = self.LE_desc_2.text().strip()

@@ -156,7 +156,7 @@ class CL_company(QtWidgets.QDialog):
     def FN_CREATE(self):
         self.conn = db1.connect()
         self.name = self.LE_desc.text().strip()
-        status = self.CMB_status.currentText()
+        status = self.CMB_status.current()
         if status == 'Active':
             self.status = 1
         else:
@@ -213,7 +213,7 @@ class CL_company(QtWidgets.QDialog):
             rowNo = self.Qtable.selectedItems()[0].row()
             id = self.LB_id.text().strip()
             desc_old = self.Qtable.item(rowNo, 1).text()
-            status_old =  self.Qtable.item(rowNo, 0).text()
+            status_old =  self.Qtable.item(rowNo, 2).text()
             desc = self.LE_desc.text().strip()
             status = self.LB_status.text().strip()
             # if status == 'Active':

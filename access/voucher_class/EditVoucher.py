@@ -40,16 +40,22 @@ class CL_EditVoucher(QtWidgets.QDialog):
         try:
             filename = self.dirname + '/editVoucher.ui'
             loadUi(filename, self)
+
+            css_path = Path(__file__).parent.parent.parent
+            # Apply Style For Design
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
+
             self.Qcombo_company = CheckableComboBox(self)
-            self.Qcombo_company.setGeometry(340, 160, 271, 25)
+            self.Qcombo_company.setGeometry(580, 160, 271, 25)
             self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
             self.Qcombo_branch = CheckableComboBox(self)
-            self.Qcombo_branch.setGeometry(340, 200, 271, 25)
+            self.Qcombo_branch.setGeometry(580, 200, 271, 25)
             self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
             self.Qcombo_section = CheckableComboBox(self)
-            self.Qcombo_section.setGeometry(340, 240, 271, 25)
+            self.Qcombo_section.setGeometry(580, 240, 271, 25)
             self.Qcombo_section.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_section.setStyleSheet("background-color: rgb(198, 207, 199)")
             self.FN_GET_Company()
@@ -65,12 +71,6 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.checkBox_refundable.toggled.connect(self.FN_Refundable)
             self.BTN_editCoupon.clicked.connect(self.FN_editAction)
             self.LE_desc_5.textChanged.connect(self.FN_search)
-            # Set Style
-            # self.label_num.setStyleSheet(label_num)
-            # self.label_2.setStyleSheet(desc_5)
-            css_path = Path(__file__).parent.parent.parent
-            path = css_path.__str__() + '/presentation/Themes/Style.css'
-            self.setStyleSheet(open(path).read())
         except:
             print(sys.exc_info())
 
@@ -216,7 +216,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
     def FN_GET_sponsor(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT SPONSER_NAME,SPONSER_ID FROM SPONSER")
+        mycursor.execute("SELECT SPONSOR_NAME,SPONSOR_ID FROM SPONSOR")
         records = mycursor.fetchall()
         print(records)
         for row, val in records:
@@ -292,7 +292,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.FN_check_section(indx)
             self.FN_check_company(indx)
             self.FN_check_branch(indx)
-            sql_select = "select * from SPONSER where SPONSER_ID=( SELECT SPONSER_ID FROM VOUCHER_SPONSOR where GV_ID = %s)"
+            sql_select = "select * from SPONSOR where SPONSOR_ID=( SELECT SPONSOR_ID FROM VOUCHER_SPONSOR where GV_ID = %s)"
             x = (indx,)
             mycursor.execute(sql_select, x)
             record = mycursor.fetchone()

@@ -24,6 +24,10 @@ class CL_modifyVoucher(QtWidgets.QDialog):
         try:
             filename = self.dirname + '/stoppedVoucher.ui'
             loadUi(filename, self)
+            css_path = Path(__file__).parent.parent.parent
+            # Apply Style For Design
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
             self.CMB_CouponStatus.addItems(["Inactive", "Active"])
             self.CMB_CouponDes.activated[str].connect(self.FN_getStatus)
             self.FN_getData()
@@ -31,13 +35,6 @@ class CL_modifyVoucher(QtWidgets.QDialog):
             self.FN_getStatus()
             self.BTN_modifyCoupon.clicked.connect(self.FN_UpdateStatus)
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
-
-            # Set Style
-            # self.label_num.setStyleSheet(label_num)
-            # self.label_2.setStyleSheet(desc_5)
-            css_path = Path(__file__).parent.parent.parent
-            path = css_path.__str__() + '/presentation/Themes/Style.css'
-            self.setStyleSheet(open(path).read())
         except:
             print(sys.exc_info())
 
@@ -54,17 +51,16 @@ class CL_modifyVoucher(QtWidgets.QDialog):
     # Todo: method to get data of voucher
     def FN_getDatabyID(self):
         try:
-            indx = self.CMB_CouponDes.currentData()
-            self.labe_id.setText(str(indx))
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
+            indx = self.CMB_CouponDes.currentData()
+            self.labe_id.setText(str(indx))
             sql_select_Query = "SELECT * FROM VOUCHER where GV_ID = %s "
             x = (indx,)
-            mycursor = self.conn.cursor()
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
             self.LE_desc_2.setValue(float(record[4]))
-            dateto = record[13]
+            dateto = record[14]
             xto = dateto.split("-")
             d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
             self.Qdate_to.setDate(d)
@@ -72,23 +68,25 @@ class CL_modifyVoucher(QtWidgets.QDialog):
             xfrom = datefrom.split("-")
             d = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
             self.Qdate_from.setDate(d)
-            print(record[16])
-            if(record[16]=="1"):
+
+            if(record[18]=="1"):
                 self.checkBox_Multi.setChecked(True)
-            elif(record[15]=="1"):
+            elif(record[17]=="1"):
                 self.checkBox_rechange.setChecked(True)
-            elif (record[14] == "1"):
+            elif (record[16] == "1"):
                 self.checkBox_refundable.setChecked(True)
-            sql_select_Query2 = "SELECT * from SPONSER where SPONSER_ID=( SELECT SPONSER_ID FROM VOUCHER_SPONSOR where GV_ID = '"+str(record[0])+"') "
-            mycursor.execute(sql_select_Query2)
-            record2 = mycursor.fetchone()
-            self.LE_desc_6.setText(record2[2])
-            sql_select_Query3 = "select * from POS_CUSTOMER where POSC_CUST_ID = '" + str(record[17]) + "' "
+            sql_select_Query3 = "select * from POS_CUSTOMER where POSC_CUST_ID ='" + str(record[19]) + "'"
             print(sql_select_Query3)
             mycursor.execute(sql_select_Query3)
             record3 = mycursor.fetchone()
             self.LE_desc_5.setText(str(record3[0]))
-            self.desc_13.setText(record3[3])
+            self.desc_13.setText(str(record3[3]))
+
+            sql_select_Query2 = "SELECT * from SPONSOR where SPONSOR_ID=( SELECT SPONSER_ID FROM VOUCHER_SPONSOR where GV_ID = '"+str(record[0])+"')"
+            print(sql_select_Query2)
+            mycursor.execute(sql_select_Query2)
+            record2 = mycursor.fetchone()
+            self.LE_desc_6.setText(record2[2])
             mycursor.close()
         except:
             print(sys.exc_info())

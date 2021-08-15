@@ -26,7 +26,8 @@ class CL_branch(QtWidgets.QDialog):
 
         self.FN_GET_ALL()
         try:
-            self.CMB_status.addItems(["Active", "Inactive"])
+            self.CMB_status.addItem("Active", '1')
+            self.CMB_status.addItem("Inactive", '0')
             self.LB_status.setText('1')
             self.CMB_status.activated.connect(self.FN_GET_STATUS)
             self.BTN_create.clicked.connect(self.FN_CREATE)
@@ -67,7 +68,7 @@ class CL_branch(QtWidgets.QDialog):
             if name != '' :
                 whereClause = whereClause + "and `BRANCH_DESC_A` like '%" + str(name) + "%'"
 
-            sql_select_query = "select  `COMPANY_ID`,    `BRANCH_NO`,    `BRANCH_DESC_A`,    `BRANCH_DESC_E`,    `BRANCH_ADDRESS`,    `BRANCH_CITY`,    `BRANCH_TEL1`,    `BRANCH_TEL2`,    `BRANCH_FAX`,    `BRANCH_EMAIL`,    `BRANCH_NOTES`,      `BRANCH_CURRENCY`,    `BRANCH_STATUS` from Hyper1_Retail.BRANCH " + whereClause + "  order by BRANCH_NO asc"
+            sql_select_query = "select `BRANCH_NO`, `COMPANY_ID`,        `BRANCH_DESC_A`,    `BRANCH_DESC_E`,    `BRANCH_ADDRESS`,    `BRANCH_CITY`,    `BRANCH_TEL1`,    `BRANCH_TEL2`,    `BRANCH_FAX`,    `BRANCH_EMAIL`,    `BRANCH_NOTES`,      `BRANCH_CURRENCY`,    `BRANCH_STATUS` from Hyper1_Retail.BRANCH " + whereClause + "  order by BRANCH_NO asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -75,14 +76,13 @@ class CL_branch(QtWidgets.QDialog):
                 self.Qtable.insertRow(row_number)
 
                 for column_number, data in enumerate(row_data):
-
                     if column_number == 12 :
                         data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
                     elif column_number == 5:
                         data = util.FN_GET_CITY_DESC(str(data))
                         item = QTableWidgetItem(str(data))
-                    elif column_number == 0:
+                    elif column_number == 1:
                         data = util.FN_GET_COMP_DESC(str(data))
                         item = QTableWidgetItem(str(data))
                     else:
@@ -100,7 +100,7 @@ class CL_branch(QtWidgets.QDialog):
                 self.Qtable.removeRow(i)
 
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT  `COMPANY_ID`,    `BRANCH_NO`,    `BRANCH_DESC_A`,    `BRANCH_DESC_E`,    `BRANCH_ADDRESS`,    `BRANCH_CITY`,    `BRANCH_TEL1`,    `BRANCH_TEL2`,    `BRANCH_FAX`,    `BRANCH_EMAIL`,    `BRANCH_NOTES`,      `BRANCH_CURRENCY`,    `BRANCH_STATUS`  FROM Hyper1_Retail.BRANCH   order by BRANCH_NO    asc")
+            mycursor.execute("SELECT `BRANCH_NO`, `COMPANY_ID`,        `BRANCH_DESC_A`,    `BRANCH_DESC_E`,    `BRANCH_ADDRESS`,    `BRANCH_CITY`,    `BRANCH_TEL1`,    `BRANCH_TEL2`,    `BRANCH_FAX`,    `BRANCH_EMAIL`,    `BRANCH_NOTES`,      `BRANCH_CURRENCY`,    `BRANCH_STATUS`  FROM Hyper1_Retail.BRANCH   order by BRANCH_NO    asc")
             records = mycursor.fetchall()
 
             for row_number, row_data in enumerate(records):
@@ -113,7 +113,7 @@ class CL_branch(QtWidgets.QDialog):
                     elif column_number == 5:
                         data = util.FN_GET_CITY_DESC(str(data))
                         item = QTableWidgetItem(str(data))
-                    elif column_number == 0:
+                    elif column_number == 1:
                         data = util.FN_GET_COMP_DESC(str(data))
                         item = QTableWidgetItem(str(data))
                     else:
@@ -128,8 +128,8 @@ class CL_branch(QtWidgets.QDialog):
         try:
             if len(self.Qtable.selectedIndexes()) >= 0:
                 rowNo = self.Qtable.selectedItems()[0].row()
-                branchNo = self.Qtable.item(rowNo, 1).text()
-                company = self.Qtable.item(rowNo, 0).text()
+                branchNo = self.Qtable.item(rowNo, 0).text()
+                company = self.Qtable.item(rowNo, 1).text()
                 name = self.Qtable.item(rowNo, 2).text()
                 nameEn = self.Qtable.item(rowNo, 3).text()
                 address = self.Qtable.item(rowNo, 4).text()
@@ -144,18 +144,18 @@ class CL_branch(QtWidgets.QDialog):
                 currency = self.Qtable.item(rowNo, 11).text()
                 status = self.Qtable.item(rowNo, 12).text()
 
-                self.branchNo.setText(branchNo)
+                self.LE_branchNo.setText(branchNo)
                 self.CMB_company.setCurrentText(company)
                 self.CMB_city.setCurrentText(city)
                 self.LE_desc.setText(name)
                 self.LE_desc_2.setText(nameEn)
-                self.address.setText(address)
-                self.phone1.setText(phone1)
-                self.phone2.setText(phone2)
-                self.fax.setText(fax)
-                self.email.setText(email)
-                self.currency.setText(currency)
-                self.notes.setText(notes)
+                self.LE_address.setText(address)
+                self.LE_phone1.setText(phone1)
+                self.LE_phone2.setText(phone2)
+                self.LE_fax.setText(fax)
+                self.LE_email.setText(email)
+                self.LE_currency.setText(currency)
+                self.LE_notes.setText(notes)
                 #self.LB_id.setText(id)
                 self.LB_status.setText(util.FN_GET_STATUS_id(status))
                 self.CMB_status.setCurrentText(status)
@@ -243,15 +243,13 @@ class CL_branch(QtWidgets.QDialog):
         self.conn1 = db1.connect()
         if len(self.Qtable.selectedIndexes()) >0 :
             rowNo = self.Qtable.selectedItems()[0].row()
-            #id = self.LB_id.text().strip()
             name_old = self.Qtable.item(rowNo, 2).text()
-            status_old =  self.Qtable.item(rowNo, 12).text()
+            status_old = util.FN_GET_STATUS_id( self.Qtable.item(rowNo, 12).text())
             branchNo = self.LE_branchNo.text().strip()
             company = self.CMB_company.currentData()
             name = self.LE_desc.text().strip()
             nameEn = self.LE_desc_2.text().strip()
             city = self.CMB_city.currentData()
-
             phone1 = self.LE_phone1.text().strip()
             phone2 = self.LE_phone2.text().strip()
             fax = self.LE_fax.text().strip()
@@ -259,10 +257,10 @@ class CL_branch(QtWidgets.QDialog):
             email = self.LE_email.text().strip()
             currency = self.LE_currency.text().strip()
             notes = self.LE_notes.toPlainText().strip()
-            status = self.CMB_status.currentText()
+            status = self.CMB_status.currentData()
 
             error = 0
-            if self.desc == '':
+            if name == '':
                 QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
 
             else:
@@ -272,21 +270,24 @@ class CL_branch(QtWidgets.QDialog):
                         error=1
 
                 if error!=1:
-                    mycursor = self.conn1.cursor()
-                    changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                    sql = "UPDATE `Hyper1_Retail`.`BRANCH` SET `BRANCH_DESC_A` =  %s,`BRANCH_DESC_E` =  %s,`BRANCH_ADDRESS` =  %s,`BRANCH_CITY` =  %s,`BRANCH_TEL1` =  %s,`BRANCH_TEL2` =  %s,`BRANCH_FAX` = %s,`BRANCH_EMAIL` =  %s,`BRANCH_NOTES` = %s,`BRANCH_CHANGED_ON` = %s ,`BRANCH_CURRENCY` =  %s,`BRANCH_STATUS` =  %s,WHERE `COMPANY_ID` = %s  AND `BRANCH_NO` = %s"
-                    val = (name, nameEn, address, city, phone1, phone2, fax, email, notes, changeDate, currency,                    status)
+                    try:
+                        mycursor = self.conn1.cursor()
+                        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                        sql = "UPDATE `Hyper1_Retail`.`BRANCH` SET `BRANCH_DESC_A` =  %s,`BRANCH_DESC_E` =  %s,`BRANCH_ADDRESS` =  %s,`BRANCH_CITY` =  %s,`BRANCH_TEL1` =  %s,`BRANCH_TEL2` =  %s,`BRANCH_FAX` = %s,`BRANCH_EMAIL` =  %s,`BRANCH_NOTES` = %s,`BRANCH_CHANGED_ON` = %s ,`BRANCH_CURRENCY` =  %s,`BRANCH_STATUS` =  %s WHERE `COMPANY_ID` = %s  AND `BRANCH_NO` = %s"
+                        val = (name, nameEn, address, city, phone1, phone2, fax, email, notes, changeDate, currency, status , company,branchNo)
 
-                    mycursor.execute(sql, val)
-                    #mycursor.close()
-                    #
-                    print(mycursor.rowcount, "record updated.")
-                    QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل")
-                    db1.connectionCommit(self.conn1)
-                    self.FN_GET_ALL()
-                    self.FN_CLEAR_FEILDS ()
-                    if str(status) != str(status_old):
-                        util.FN_INSERT_IN_LOG("BRANCH", "status", status, status_old, id)
+                        mycursor.execute(sql, val)
+                        #mycursor.close()
+                        #
+                        print(mycursor.rowcount, "record updated.")
+                        QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل")
+                        db1.connectionCommit(self.conn1)
+                        self.FN_GET_ALL()
+                        self.FN_CLEAR_FEILDS ()
+                        if str(status) != str(status_old):
+                            util.FN_INSERT_IN_LOG("BRANCH", "status", status, status_old, id)
+                    except Exception as err:
+                        print(err)
         else:
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
 
@@ -304,5 +305,6 @@ class CL_branch(QtWidgets.QDialog):
         self.LE_currency.clear()
         self.LE_notes.clear()
 
-        self.CMB_status.setCurrentText('Active')
+        #self.CMB_status.setCurrentText('Active')
+        self.CMB_status.setCurrentText(util.FN_GET_STATUS_DESC('1'))
         self.LB_status.setText('1')

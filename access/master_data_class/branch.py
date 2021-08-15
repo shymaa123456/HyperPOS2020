@@ -199,11 +199,11 @@ class CL_branch(QtWidgets.QDialog):
         email = self.LE_email.text().strip()
         currency = self.LE_currency.text().strip()
         notes = self.LE_notes.toPlainText().strip()
-        status = self.CMB_status.currentText()
-        if status == 'Active':
-            self.status = 1
-        else:
-            self.status = 0
+        status = self.CMB_status.currentData()
+        # if status == 'Active':
+        #     self.status = 1
+        # else:
+        #     self.status = 0
 
         mycursor = self.conn.cursor()
 
@@ -214,12 +214,12 @@ class CL_branch(QtWidgets.QDialog):
 
         else:
             try:
-                if self.FN_CHECK_DUP_NAME(self.name) != False:
+                if self.FN_CHECK_DUP_NAME(name , branchNo) != False:
                     QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
                     mycursor.close()
                 else:
 
-                    sql = "INSERT INTO Hyper1_Retail.BRANCH  VALUES ( %s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s ,%s)"
+                    sql = "INSERT INTO Hyper1_Retail.BRANCH   VALUES ( %s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s ,%s,%s)"
                     val = (company,branchNo,name, nameEn,address,city,phone1,phone2,fax,email,notes,'',currency,status )
                     mycursor.execute(sql, val)
                     # mycursor.execute(sql)
@@ -235,7 +235,7 @@ class CL_branch(QtWidgets.QDialog):
                     #self.close()
             except Exception as err:
                 print(err)
-        print("in create company", self.name)
+        print("in create company", name)
 
         # insert into db
 
@@ -265,7 +265,7 @@ class CL_branch(QtWidgets.QDialog):
 
             else:
                 if name != name_old:
-                    if self.FN_CHECK_DUP_NAME(name,id) != False:
+                    if self.FN_CHECK_DUP_NAME(name,branchNo) != False:
                         QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
                         error=1
 

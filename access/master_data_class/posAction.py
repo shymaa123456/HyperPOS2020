@@ -49,9 +49,9 @@ class CL_posAction(QtWidgets.QDialog):
             print(err)
 
 
-    def FN_GET_APPROVAL_DESC(id):
+    def FN_GET_APPROVAL_DESC(self,id):
         if id == '1':
-            return "YEs"
+            return "YES"
         else:
             return "NO"
     def FN_SEARCH(self):

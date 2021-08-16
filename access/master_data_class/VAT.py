@@ -120,9 +120,10 @@ class CL_VAT(QtWidgets.QDialog):
     def FN_CHECK_DUP_NAME(self,name,id=''):
         self.conn1 = db1.connect()
         mycursor1 = self.conn1.cursor()
-        sql = " SELECT DESC  FROM Hyper1_Retail.VAT where DESC = %s and VAT_ID !=%s "
+
+        sql = " SELECT     `VAT`.`DESC`   FROM `Hyper1_Retail`.`VAT` where `DESC` = %s and VAT_ID !=%s "
         val = (name,id)
-        print(sql)
+
         mycursor1.execute(sql,val)
         myresult = mycursor1.fetchall()
         len = mycursor1.rowcount
@@ -159,10 +160,10 @@ class CL_VAT(QtWidgets.QDialog):
                 else:
 
 
-                    sql = "INSERT INTO Hyper1_Retail.VAT ( DESC ,  STATUS, VAT_RATE , CREATED_BY) " \
+                    sql = "INSERT INTO `Hyper1_Retail`.`VAT` (`VATRATE`,`DESC`,`CREATED_BY`,`STATUS`) " \
                           "         VALUES (  %s, %s,%s,%s)"
 
-                    val = (self.name,  status,VAT_RATE,CL_userModule.user_name  )
+                    val = (VAT_RATE,self.name, CL_userModule.user_name,status  )
                     mycursor.execute(sql, val)
                     mycursor.close()
 

@@ -351,7 +351,7 @@ class CL_main(QtWidgets.QMainWindow):
         if self.window_VAT == 0:
             self.window_VAT = CL_VAT()
             self.window_VAT.FN_LOAD_DISPlAY()
-            self.ui.tabWidget.addTab(self.window_VAT, 'أنواع الموردين')
+            self.ui.tabWidget.addTab(self.window_VAT, 'الضريبه')
             self.ui.tabWidget.setFixedWidth(self.window_VAT.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_VAT.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_VAT)
@@ -361,9 +361,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setCurrentWidget(self.window_VAT)
     def FN_bank(self):
         if self.window_bank == 0:
-            self.window_bank = CL_bank
+            self.window_bank = CL_bank()
             self.window_bank.FN_LOAD_DISPlAY()
-            self.ui.tabWidget.addTab(self.window_bank, 'أنواع الموردين')
+            self.ui.tabWidget.addTab(self.window_bank, 'البنوك')
             self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_bank)

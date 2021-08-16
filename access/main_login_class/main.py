@@ -77,8 +77,17 @@ class CL_main(QtWidgets.QMainWindow):
             cwd = Path.cwd()
             mod_path = Path(__file__).parent.parent.parent
             dirname = mod_path.__str__() + '/presentation/main_login_ui'
-            filename = dirname + '/main3.ui'
+            filename = dirname + '/main34.ui'
             self.ui = loadUi(filename, self)
+            #self.toolBox.setAlignment(QtCore.Qt.AlignRight)
+            #self.toolBox.setTextAlignment(QtCore.Qt.AlignCenter)
+            #self.toolBox.setTextAlignment(QtCore.Qt.RightToLeft)
+
+            #self.QM_Promotion.setTextAlignment(QtCore.Qt.AlignCenter)
+            #self.QM_Promotion.setTextAlignment(QtCore.Qt.AlignRight)
+
+
+            #self.QM_Promotion.setAlignment(QtCore.Qt.AlignRight)
 
             # print (CL_userModule.user_name)
             CL_userModule.loadPrivilages(self)

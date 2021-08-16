@@ -120,9 +120,10 @@ class CL_VAT(QtWidgets.QDialog):
     def FN_CHECK_DUP_NAME(self,name,id=''):
         self.conn1 = db1.connect()
         mycursor1 = self.conn1.cursor()
-        sql = "SELECT DESC  FROM Hyper1_Retail.VAT where DESC = '"+name+"' and `VAT_ID` !='"+id+"'"
+        sql = " SELECT DESC  FROM Hyper1_Retail.VAT where DESC = %s and VAT_ID !=%s "
+        val = (name,id)
         print(sql)
-        mycursor1.execute(sql)
+        mycursor1.execute(sql,val)
         myresult = mycursor1.fetchall()
         len = mycursor1.rowcount
 

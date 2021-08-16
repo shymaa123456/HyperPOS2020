@@ -138,9 +138,21 @@
     <rect>
      <x>250</x>
      <y>10</y>
-     <width>451</width>
-     <height>101</height>
+     <width>1100</width>
+     <height>717</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>1100</width>
+     <height>717</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1100</width>
+     <height>717</height>
+    </size>
    </property>
    <property name="title">
     <string/>

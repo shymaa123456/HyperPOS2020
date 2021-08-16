@@ -35,7 +35,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>الأسم</string>
+    <string>الوصف</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -133,7 +133,7 @@
    </column>
    <column>
     <property name="text">
-     <string>الاسم  </string>
+     <string>الوصف</string>
     </property>
    </column>
    <column>

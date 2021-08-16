@@ -736,7 +736,7 @@
     <widget class="QDateTimeEdit" name="Qdate_from">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>130</x>
        <y>10</y>
        <width>121</width>
        <height>20</height>
@@ -792,6 +792,19 @@
       <string>من</string>
      </property>
     </widget>
+    <widget class="QTimeEdit" name="Qtime_from">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>81</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="displayFormat">
+      <string>mm:hh AP</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
@@ -815,7 +828,7 @@
     <widget class="QDateTimeEdit" name="Qdate_to">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>130</x>
        <y>10</y>
        <width>121</width>
        <height>20</height>
@@ -869,6 +882,19 @@
      </property>
      <property name="text">
       <string>الي</string>
+     </property>
+    </widget>
+    <widget class="QTimeEdit" name="Qtime_to">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>81</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="displayFormat">
+      <string>mm:hh AP</string>
      </property>
     </widget>
    </widget>

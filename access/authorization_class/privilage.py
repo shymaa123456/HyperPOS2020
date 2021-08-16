@@ -195,20 +195,22 @@ class CL_privilage( QtWidgets.QDialog ):
 
     #Todo: method to get form id
     def FN_GET_FORMID(self):
-        self.form = self.CMB_formName.currentText()
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s "
-        x = (self.form,)
-        mycursor.execute( sql_select_query, x )
-        myresult = mycursor.fetchone()
-        if mycursor.rowcount > 0:
-            self.LB_formId.setText( myresult[0] )
-        mycursor.close()
-        self.CMB_formItemName.activated[str].connect(self.FN_GET_FORMITEMID)
-        self.FN_GET_FORMItems()
-        self.FN_GET_FORMITEMID()
-
+        try:
+            self.form = self.CMB_formName.currentText()
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            sql_select_query = "SELECT FORM_ID FROM SYS_FORM WHERE FORM_DESC = %s "
+            x = (self.form,)
+            mycursor.execute( sql_select_query, x )
+            myresult = mycursor.fetchone()
+            if mycursor.rowcount > 0:
+                self.LB_formId.setText( myresult[0] )
+            mycursor.close()
+            self.CMB_formItemName.activated[str].connect(self.FN_GET_FORMITEMID)
+            self.FN_GET_FORMItems()
+            self.FN_GET_FORMITEMID()
+        except Exception as err:
+            print(err)
     #Todo: method to get action id
     def FN_GET_ACTIONID(self):
         self.action = self.CMB_actionName.currentText()

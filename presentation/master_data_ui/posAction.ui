@@ -23,15 +23,31 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>إنشاء محموعه عملاء</string>
+   <string/>
   </property>
+  <widget class="QPushButton" name="BTN_create">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>30</y>
+     <width>82</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>إنشاء</string>
+   </property>
+  </widget>
   <widget class="QTableWidget" name="Qtable">
    <property name="geometry">
     <rect>
-     <x>570</x>
-     <y>170</y>
+     <x>560</x>
+     <y>190</y>
      <width>511</width>
-     <height>421</height>
+     <height>281</height>
     </rect>
    </property>
    <property name="layoutDirection">
@@ -49,12 +65,12 @@
    </column>
    <column>
     <property name="text">
-     <string>الاسم EN</string>
+     <string>الحاله</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>الحاله</string>
+     <string>يلزم الموافقه</string>
     </property>
    </column>
    <column>
@@ -63,14 +79,46 @@
     </property>
    </column>
   </widget>
+  <widget class="QPushButton" name="BTN_modify">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>70</y>
+     <width>82</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>تعديل</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="BTN_search">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>110</y>
+     <width>82</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>بحث</string>
+   </property>
+  </widget>
   <widget class="QLabel" name="LB_id">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>661</x>
-     <y>10</y>
+     <x>650</x>
+     <y>40</y>
      <width>31</width>
      <height>20</height>
     </rect>
@@ -86,7 +134,7 @@
    <property name="geometry">
     <rect>
      <x>660</x>
-     <y>100</y>
+     <y>130</y>
      <width>31</width>
      <height>21</height>
     </rect>
@@ -95,59 +143,11 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="BTN_create">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>10</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>إنشاء</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BTN_modify">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>50</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>تعديل</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BTN_search">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>90</y>
-     <width>82</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>بحث</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="BTN_search_all">
    <property name="geometry">
     <rect>
-     <x>570</x>
-     <y>130</y>
+     <x>560</x>
+     <y>150</y>
      <width>82</width>
      <height>21</height>
     </rect>
@@ -162,10 +162,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>1020</x>
-     <y>20</y>
-     <width>71</width>
-     <height>131</height>
+     <x>1030</x>
+     <y>40</y>
+     <width>64</width>
+     <height>141</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -177,16 +177,16 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="desc_2">
+     <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>الأسم EN </string>
+       <string>الحاله</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>الحاله</string>
+       <string>يلزم الموافقه</string>
       </property>
      </widget>
     </item>
@@ -202,10 +202,10 @@
   <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>720</x>
-     <y>10</y>
-     <width>281</width>
-     <height>151</height>
+     <x>730</x>
+     <y>40</y>
+     <width>261</width>
+     <height>141</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -241,38 +241,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="LE_desc_2">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit{
-                                        background-color: white;
-                                        border-style: outset;
-                                        border-width: 2px;
-                                        border-radius: 10px;
-                                        border-color: blue;
-                                        min-width: 6em;
-                                        }
-                                        QLineEdit:hover {
-                                        background: qradialgradient(
-                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
-                                        );
-                                        }
-                                       QLineEdit:pressed {
-                                        border-style: inset;
-                                        background: qradialgradient(
-                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
-                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
-                                        );
-                                        }
-                                    </string>
-      </property>
-      <property name="maxLength">
-       <number>50</number>
-      </property>
-     </widget>
+     <widget class="QComboBox" name="CMB_status"/>
     </item>
     <item>
-     <widget class="QComboBox" name="CMB_status"/>
+     <widget class="QComboBox" name="CMB_reqApproval"/>
     </item>
     <item>
      <widget class="QLineEdit" name="LE_notes">

@@ -35,8 +35,7 @@ class CL_userType(QtWidgets.QDialog):
             #self.Qtable.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
             self.BTN_search.clicked.connect(self.FN_SEARCH)
             self.BTN_search_all.clicked.connect(self.FN_GET_ALL)
-            #self.setFixedWidth(368)
-            #self.setFixedHeight(430)
+
             self.Qtable.setColumnHidden(0, True)
             self.Qtable.doubleClicked.connect(self.FN_GET_ONE)
 
@@ -60,7 +59,7 @@ class CL_userType(QtWidgets.QDialog):
             whereClause = "where `USER_TYPE_STATUS` = '"+str(status)+"'"
 
             if name != '' :
-                whereClause = whereClause + "and `USER_TYPE_STATUS` like '%" + str(name) + "%'"
+                whereClause = whereClause + "and `USER_TYPE_DESC` like '%" + str(name) + "%'"
 
             sql_select_query = "select * from Hyper1_Retail.SYS_USER_TYPE " + whereClause + " order by USER_TYPE_ID*1 asc"
             #print(sql_select_query)
@@ -68,22 +67,13 @@ class CL_userType(QtWidgets.QDialog):
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable.insertRow(row_number)
-
                 for column_number, data in enumerate(row_data):
-
-
                     item = QTableWidgetItem(str(data))
-
                     if column_number == 2:
                         data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable.setItem(row_number, column_number, item)
-            #self.Qtable.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-        #
-            self.Qtable.doubleClicked.connect(self.FN_GET_ONE)
-            #mycursor.close()
-        #self.Qtable.setItem(0, 0, QTableWidgetItem(str('11111')))
         except Exception as err:
              print(err)
 
@@ -209,7 +199,7 @@ class CL_userType(QtWidgets.QDialog):
             rowNo = self.Qtable.selectedItems()[0].row()
             id = self.LB_id.text().strip()
             desc_old = self.Qtable.item(rowNo, 1).text()
-            status_old =  self.Qtable.item(rowNo, 0).text()
+            status_old =  self.Qtable.item(rowNo, 2).text()
             desc = self.LE_desc.text().strip()
             status = self.LB_status.text().strip()
             # if status == 'Active':

@@ -79,7 +79,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4F
        </size>
       </property>
       <layout class="QGridLayout" name="gridLayout_44">
-       <item row="0" column="0">
+       <item row="0" column="1">
         <widget class="QToolBox" name="toolBox">
          <property name="minimumSize">
           <size>
@@ -148,10 +148,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Promotion">
           <property name="geometry">
            <rect>
-            <x>-25</x>
+            <x>0</x>
             <y>0</y>
-            <width>123</width>
-            <height>231</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">
@@ -177,7 +177,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="QM_Promotion_Prom">
               <property name="geometry">
                <rect>
-                <x>-74</x>
+                <x>-89</x>
                 <y>0</y>
                 <width>172</width>
                 <height>221</height>
@@ -337,10 +337,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="QM_Promotion_Coupon">
               <property name="geometry">
                <rect>
-                <x>-34</x>
+                <x>0</x>
                 <y>0</y>
-                <width>132</width>
-                <height>192</height>
+                <width>174</width>
+                <height>294</height>
                </rect>
               </property>
               <attribute name="label">
@@ -501,7 +501,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>83</width>
                 <height>163</height>
                </rect>
               </property>
@@ -581,7 +581,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>83</width>
                 <height>134</height>
                </rect>
               </property>
@@ -654,7 +654,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>83</width>
                 <height>134</height>
                </rect>
               </property>
@@ -739,10 +739,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Installment">
           <property name="geometry">
            <rect>
-            <x>-25</x>
+            <x>0</x>
             <y>0</y>
-            <width>123</width>
-            <height>147</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">
@@ -765,10 +765,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page">
               <property name="geometry">
                <rect>
-                <x>-31</x>
+                <x>0</x>
                 <y>0</y>
-                <width>129</width>
-                <height>105</height>
+                <width>174</width>
+                <height>378</height>
                </rect>
               </property>
               <attribute name="label">
@@ -791,6 +791,9 @@ QToolBox::tab:selected { /* italicize selected tabs */
                </item>
                <item row="2" column="1">
                 <widget class="QPushButton" name="QAct_Install_Activate_Deactivate">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="text">
                   <string>تفعيل او  ايقاف</string>
                  </property>
@@ -831,7 +834,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_2">
               <property name="geometry">
                <rect>
-                <x>-75</x>
+                <x>-90</x>
                 <y>0</y>
                 <width>173</width>
                 <height>76</height>
@@ -901,10 +904,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Customer">
           <property name="geometry">
            <rect>
-            <x>-43</x>
+            <x>0</x>
             <y>0</y>
-            <width>141</width>
-            <height>316</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">
@@ -927,7 +930,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_3">
               <property name="geometry">
                <rect>
-                <x>-27</x>
+                <x>-42</x>
                 <y>0</y>
                 <width>125</width>
                 <height>47</height>
@@ -981,7 +984,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>83</width>
                 <height>47</height>
                </rect>
               </property>
@@ -1031,7 +1034,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_5">
               <property name="geometry">
                <rect>
-                <x>-49</x>
+                <x>-64</x>
                 <y>0</y>
                 <width>147</width>
                 <height>186</height>
@@ -1105,7 +1108,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_6">
               <property name="geometry">
                <rect>
-                <x>-58</x>
+                <x>-73</x>
                 <y>0</y>
                 <width>156</width>
                 <height>47</height>
@@ -1157,7 +1160,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_7">
               <property name="geometry">
                <rect>
-                <x>-68</x>
+                <x>-83</x>
                 <y>0</y>
                 <width>166</width>
                 <height>76</height>
@@ -1216,7 +1219,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_8">
               <property name="geometry">
                <rect>
-                <x>-84</x>
+                <x>-99</x>
                 <y>0</y>
                 <width>182</width>
                 <height>134</height>
@@ -1289,10 +1292,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_9">
               <property name="geometry">
                <rect>
-                <x>-2</x>
+                <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>184</width>
+                <height>209</height>
                </rect>
               </property>
               <attribute name="label">
@@ -1432,97 +1435,16 @@ QToolBox::tab:selected { /* italicize selected tabs */
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
-                <width>189</width>
-                <height>350</height>
+                <y>-76</y>
+                <width>172</width>
+                <height>426</height>
                </rect>
               </property>
               <attribute name="label">
                <string>البيانات الاساسية</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_31">
-               <item row="0" column="1">
-                <layout class="QVBoxLayout" name="verticalLayout_10">
-                 <item>
-                  <widget class="QPushButton" name="QAct_company">
-                   <property name="text">
-                    <string>الشركات</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="QAct_branch">
-                   <property name="text">
-                    <string>الفروع</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="action_24">
-                   <property name="text">
-                    <string>طرق الدفع</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="action_25">
-                   <property name="text">
-                    <string>البنوك</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="QAct_promotionType">
-                   <property name="text">
-                    <string>انواع العروض</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="QAct_installmentType">
-                   <property name="text">
-                    <string>انواع التقسيط</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="action_35">
-                   <property name="text">
-                    <string>انواع الموردين</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="QAct_userType">
-                   <property name="text">
-                    <string>انواع المستخدمين</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="action_4">
-                   <property name="text">
-                    <string>تحديث الموردين</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="action_BMC_2">
-                   <property name="text">
-                    <string>شجرة الاصناف BMC</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="action_140">
-                   <property name="text">
-                    <string>اكواد المحافظات</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="1" column="1">
+               <item row="4" column="1">
                 <spacer name="verticalSpacer_21">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1552,6 +1474,150 @@ QToolBox::tab:selected { /* italicize selected tabs */
                  </item>
                 </layout>
                </item>
+               <item row="2" column="1">
+                <widget class="QPushButton" name="QAct_VAT">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>VAT</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <layout class="QVBoxLayout" name="verticalLayout_10">
+                 <item>
+                  <widget class="QPushButton" name="QAct_company">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>الشركات</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_branch">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>الفروع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_paymentType">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>طرق الدفع</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_bank">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>البنوك</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_promotionType">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>انواع العروض</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_installmentType">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>انواع التقسيط</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_sponsorType">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>انواع الموردين</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="QAct_userType">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>انواع المستخدمين</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_4">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>تحديث الموردين</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_BMC_2">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>شجرة الاصناف BMC</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="action_140">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>اكواد المحافظات</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="3" column="1">
+                <widget class="QPushButton" name="QAct_posAction">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>POS Action</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QPushButton" name="QAct_posAction_3">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>المناطق</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </widget>
              <widget class="QWidget" name="page_31">
@@ -1559,8 +1625,8 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
-                <height>226</height>
+                <width>189</width>
+                <height>350</height>
                </rect>
               </property>
               <attribute name="label">
@@ -1583,9 +1649,9 @@ QToolBox::tab:selected { /* italicize selected tabs */
                  <widget class="QWidget" name="page_33">
                   <property name="geometry">
                    <rect>
-                    <x>-59</x>
+                    <x>0</x>
                     <y>0</y>
-                    <width>142</width>
+                    <width>150</width>
                     <height>223</height>
                    </rect>
                   </property>
@@ -2028,8 +2094,8 @@ QToolBox::tab:selected { /* italicize selected tabs */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>28</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">

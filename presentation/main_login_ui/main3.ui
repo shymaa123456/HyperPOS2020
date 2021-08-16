@@ -1435,16 +1435,16 @@ QToolBox::tab:selected { /* italicize selected tabs */
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
+                <y>-76</y>
                 <width>172</width>
-                <height>368</height>
+                <height>426</height>
                </rect>
               </property>
               <attribute name="label">
                <string>البيانات الاساسية</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_31">
-               <item row="2" column="1">
+               <item row="4" column="1">
                 <spacer name="verticalSpacer_21">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1473,6 +1473,16 @@ QToolBox::tab:selected { /* italicize selected tabs */
                   </spacer>
                  </item>
                 </layout>
+               </item>
+               <item row="2" column="1">
+                <widget class="QPushButton" name="QAct_VAT">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>VAT</string>
+                 </property>
+                </widget>
                </item>
                <item row="0" column="1">
                 <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1507,7 +1517,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="action_25">
+                  <widget class="QPushButton" name="QAct_bank">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -1588,13 +1598,23 @@ QToolBox::tab:selected { /* italicize selected tabs */
                  </item>
                 </layout>
                </item>
-               <item row="1" column="1">
+               <item row="3" column="1">
                 <widget class="QPushButton" name="QAct_posAction">
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
                  <property name="text">
                   <string>POS Action</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QPushButton" name="QAct_posAction_3">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>المناطق</string>
                  </property>
                 </widget>
                </item>

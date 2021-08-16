@@ -28,6 +28,8 @@ from access.loyalty_class.redeemItem import CL_redItem
 from access.loyalty_class.redeemType import CL_redeemType
 from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.loyalty_class.uploadCustomer import CL_customer
+from access.master_data_class.VAT import CL_VAT
+from access.master_data_class.bank import CL_bank
 from access.master_data_class.company import CL_company
 from access.master_data_class.branch import CL_branch
 from access.master_data_class.installmentType import CL_installmentType
@@ -188,6 +190,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_paymentType.clicked.connect(self.FN_paymentType)
             self.QAct_sponsorType.clicked.connect(self.FN_sponsorType)
             self.QAct_posAction.clicked.connect(self.FN_posAction)
+            self.QAct_VAT.clicked.connect(self.FN_VAT)
+            self.QAct_bank.clicked.connect(self.FN_bank)
 
             self.QAct_Exit.clicked.connect(self.FN_exit)
 
@@ -260,6 +264,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_sponsorType = 0
             self.window_paymentType = 0
             self.window_posAction = 0
+            self.window_VAT = 0
+            self.window_bank = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
             self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested)
@@ -341,6 +347,30 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_sponsorType.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsorType.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_sponsorType)
+    def FN_VAT(self):
+        if self.window_VAT == 0:
+            self.window_VAT = CL_VAT()
+            self.window_VAT.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_VAT, 'أنواع الموردين')
+            self.ui.tabWidget.setFixedWidth(self.window_VAT.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_VAT.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_VAT)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_VAT.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_VAT.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_VAT)
+    def FN_bank(self):
+        if self.window_bank == 0:
+            self.window_bank = CL_bank
+            self.window_bank.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_bank, 'أنواع الموردين')
+            self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_bank)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_bank)
 
     def FN_posAction(self):
         if self.window_posAction == 0:
@@ -1437,7 +1467,12 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_sponsorType:
             self.ui.tabWidget.setFixedWidth(self.window_sponsorType.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsorType.frameGeometry().height())
-
+        elif self.ui.tabWidget.currentWidget() == self.window_VAT:
+            self.ui.tabWidget.setFixedWidth(self.window_VAT.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_VAT.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_bank:
+            self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
     def onTabCloseRequested(self, index):
         li = []
         for i in range(self.ui.tabWidget.count()):
@@ -1563,6 +1598,10 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_userType = 0
         if self.window_sponsorType not in li:
             self.window_sponsorType = 0
+        if self.window_VAT not in li:
+            self.window_VAT = 0
+        if self.window_bank not in li:
+            self.window_bank = 0
         if self.window_paymentType not in li:
             self.window_paymentType = 0
         if self.window_posAction not in li:

@@ -71,9 +71,7 @@ class CL_bank(QtWidgets.QDialog):
                     if column_number == 2:
                         data = util.FN_GET_Bank_Status_DESC(str(data))
                         item = QTableWidgetItem(str(data))
-                    if column_number == 3:
-                        data = self.FN_GET_APPROVAL_DESC(str(data))
-                        item = QTableWidgetItem(str(data))
+
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable.setItem(row_number, column_number, item)
         except Exception as err:

@@ -71,9 +71,7 @@ class CL_VAT(QtWidgets.QDialog):
                     if column_number == 2:
                         data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
-                    if column_number == 3:
-                        data = self.FN_GET_APPROVAL_DESC(str(data))
-                        item = QTableWidgetItem(str(data))
+
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable.setItem(row_number, column_number, item)
         except Exception as err:
@@ -123,6 +121,7 @@ class CL_VAT(QtWidgets.QDialog):
         self.conn1 = db1.connect()
         mycursor1 = self.conn1.cursor()
         sql = "SELECT DESC  FROM Hyper1_Retail.VAT where DESC = '"+name+"' and `VAT_ID` !='"+id+"'"
+        print(sql)
         mycursor1.execute(sql)
         myresult = mycursor1.fetchall()
         len = mycursor1.rowcount
@@ -159,7 +158,7 @@ class CL_VAT(QtWidgets.QDialog):
                 else:
 
 
-                    sql = "INSERT INTO Hyper1_Retail.VAT( DESC , STATUS,VAT_RATE,CREATED_BY) " \
+                    sql = "INSERT INTO Hyper1_Retail.VAT ( DESC ,  STATUS, VAT_RATE , CREATED_BY) " \
                           "         VALUES (  %s, %s,%s,%s)"
 
                     val = (self.name,  status,VAT_RATE,CL_userModule.user_name  )
@@ -185,6 +184,7 @@ class CL_VAT(QtWidgets.QDialog):
             status_old =  self.Qtable.item(rowNo, 2).text()
             desc = self.LE_desc.text().strip()
             status = self.LB_status.text().strip()
+            rate = self.LE_rate.text().strip()
 
             error = 0
             if self.desc == '':
@@ -201,7 +201,7 @@ class CL_VAT(QtWidgets.QDialog):
                     changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                     sql = "UPDATE Hyper1_Retail.VAT SET `DESC` = %s, STATUS = %s  , VATRATE =%s" \
                           " ,CHANGED_ON =%s  WHERE VAT_ID = %s"
-                    val = (desc,status,changeDate, id)
+                    val = (desc,status,rate,changeDate, id)
                     mycursor.execute(sql, val)
                     #mycursor.close()
                     #
@@ -216,9 +216,12 @@ class CL_VAT(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
 
     def FN_CLEAR_FEILDS (self):
-        self.LB_id.clear()
-        self.LE_desc.clear()
-        set.LE_rate.setValue(0)
+        try:
+            self.LB_id.clear()
+            self.LE_desc.clear()
+            self.LE_rate.setValue(int(0))
+            self.CMB_status.setCurrentText('Active')
+            self.LB_status.setText('1')
+        except Exception as err:
+            print(err)
 
-        self.CMB_status.setCurrentText('Active')
-        self.LB_status.setText('1')

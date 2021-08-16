@@ -64,8 +64,8 @@ class CL_district(QtWidgets.QDialog):
             whereClause = " where `DISTRICT_STATUS` = '"+status+"'"
             if name != '' :
                 whereClause = whereClause + " and `DISTRICT_NAME` like '%" + str(name) + "%'"
-            if city != '' :
-                whereClause = whereClause + " and city_id  = '" + str(city)+ "'"
+            if city != '' and city != '0':
+                whereClause = whereClause + " and c.city_id  = " + str(city)+ ""
 
             sql_select_query = "SELECT  DISTRICT_ID , DISTRICT_NAME,DISTRICT_STATUS,CITY_NAME FROM `Hyper1_Retail`.`DISTRICT` d inner join " \
                                             " Hyper1_Retail.City c  on  c.CITY_ID = d.CITY_ID " + whereClause + "  order by `DISTRICT_ID` asc"

@@ -71,9 +71,7 @@ class CL_sponsorType(QtWidgets.QDialog):
                     if column_number == 2:
                         data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
-                    if column_number == 3:
-                        data = self.FN_GET_APPROVAL_DESC(str(data))
-                        item = QTableWidgetItem(str(data))
+
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable.setItem(row_number, column_number, item)
         except Exception as err:
@@ -163,7 +161,7 @@ class CL_sponsorType(QtWidgets.QDialog):
                     mycursor.execute(sql, val)
                     mycursor.close()
 
-                    print(mycursor.rowcount, "POS_ACTION inserted.")
+                    print(mycursor.rowcount, "sponsor type inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_ALL()

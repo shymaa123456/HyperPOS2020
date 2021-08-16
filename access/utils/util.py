@@ -49,9 +49,10 @@ class util():
         val=(id,)
         mycursor.execute(sql,val)
         myresult = mycursor.fetchone()
+        name= myresult[0]
         mycursor.close()
 
-        return myresult[0]
+        return name
 
     @staticmethod
     def FN_VALIDATE_CUST(id ):

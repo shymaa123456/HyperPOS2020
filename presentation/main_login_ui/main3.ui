@@ -1587,7 +1587,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="action_140">
+                  <widget class="QPushButton" name="QAct_city">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -1609,7 +1609,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="QPushButton" name="QAct_posAction_3">
+                <widget class="QPushButton" name="QAct_district">
                  <property name="enabled">
                   <bool>false</bool>
                  </property>

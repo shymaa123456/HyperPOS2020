@@ -8,11 +8,11 @@ from access.utils.util import *
 from datetime import datetime
 
 
-class CL_VAT(QtWidgets.QDialog):
+class CL_district(QtWidgets.QDialog):
     dirname = ''
     switch_window = QtCore.pyqtSignal()
     def __init__(self):
-        super(CL_VAT, self).__init__()
+        super(CL_district, self).__init__()
         cwd = Path.cwd()
         mod_path = Path(__file__).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/master_data_ui'
@@ -22,7 +22,7 @@ class CL_VAT(QtWidgets.QDialog):
     ###
 
     def FN_LOAD_DISPlAY(self):
-        filename = self.dirname + '/VAT.ui'
+        filename = self.dirname + '/district.ui'
         loadUi(filename, self)
 
         self.FN_GET_ALL()
@@ -30,6 +30,10 @@ class CL_VAT(QtWidgets.QDialog):
             self.CMB_status.addItem("Active", '1')
             self.CMB_status.addItem("Inactive", '0')
 
+            self.CMB_city.addItem("Select City", '0')
+            records = util.FN_GET_CITIES()
+            for row, val in records:
+                self.CMB_city.addItem(row, val)
 
             self.LB_status.setText('1')
             self.CMB_status.activated.connect(self.FN_GET_STATUS)
@@ -55,12 +59,16 @@ class CL_VAT(QtWidgets.QDialog):
 
             mycursor = self.conn1.cursor()
             name = self.LE_desc.text().strip()
+            city = self.CMB_city.currentData()
             status = self.CMB_status.currentData()
-            whereClause = "where `STATUS` = '"+status+"'"
+            whereClause = " where `DISTRICT_STATUS` = '"+status+"'"
             if name != '' :
-                whereClause = whereClause + "and `DESC` like '%" + str(name) + "%'"
+                whereClause = whereClause + " and `DISTRICT_NAME` like '%" + str(name) + "%'"
+            if city != '' and city != '0':
+                whereClause = whereClause + " and c.city_id  = " + str(city)+ ""
 
-            sql_select_query = "SELECT  `VAT_ID`,`DESC`,`STATUS`, VATRATE FROM Hyper1_Retail.VAT " + whereClause + "  order by `VAT_ID` asc"
+            sql_select_query = "SELECT  DISTRICT_ID , DISTRICT_NAME,DISTRICT_STATUS,CITY_NAME FROM `Hyper1_Retail`.`DISTRICT` d inner join " \
+                                            " Hyper1_Retail.City c  on  c.CITY_ID = d.CITY_ID " + whereClause + "  order by `DISTRICT_ID` asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -84,7 +92,8 @@ class CL_VAT(QtWidgets.QDialog):
                 self.Qtable.removeRow(i)
 
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT  VAT_ID,`DESC`, `STATUS`,VATRATE FROM Hyper1_Retail.VAT order by `VAT_ID`   asc")
+            mycursor.execute("SELECT  DISTRICT_ID , DISTRICT_NAME,DISTRICT_STATUS,CITY_NAME FROM `Hyper1_Retail`.`DISTRICT` d inner join "
+                             " Hyper1_Retail.City c  on  c.CITY_ID = d.CITY_ID order by `DISTRICT_ID`   asc")
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable.insertRow(row_number)
@@ -106,28 +115,23 @@ class CL_VAT(QtWidgets.QDialog):
                 id = self.Qtable.item(rowNo, 0).text()
                 desc = self.Qtable.item(rowNo, 1).text()
                 status = self.Qtable.item(rowNo, 2).text()
-                VATRATE = self.Qtable.item(rowNo, 3).text()
-
+                city= self.Qtable.item(rowNo, 3).text()
                 self.LE_desc.setText(desc)
                 self.LB_id.setText(id)
                 self.LB_status.setText(util.FN_GET_STATUS_id(status))
                 self.CMB_status.setCurrentText(status)
-                self.LE_rate.setValue(int(VATRATE))
-
+                self.CMB_city.setCurrentText(city)
 
         except Exception as err:
             print(err)
     def FN_CHECK_DUP_NAME(self,name,id=''):
         self.conn1 = db1.connect()
         mycursor1 = self.conn1.cursor()
-
-        sql = " SELECT     `VAT`.`DESC`   FROM `Hyper1_Retail`.`VAT` where `DESC` = %s and VAT_ID !=%s "
-        val = (name,id)
-
-        mycursor1.execute(sql,val)
+        sql = "SELECT DISTRICT_NAME  FROM Hyper1_Retail.DISTRICT where DISTRICT_NAME = '"+name+"' and `DISTRICT_ID` !='"+id+"'"
+        mycursor1.execute(sql)
         myresult = mycursor1.fetchall()
         len = mycursor1.rowcount
-
+        print(len)
         if len > 0:
             #mycursor1.close()
             return True
@@ -146,12 +150,13 @@ class CL_VAT(QtWidgets.QDialog):
         self.conn = db1.connect()
         self.name = self.LE_desc.text().strip()
         status = self.CMB_status.currentData()
-        VAT_RATE = self.LE_rate.text().strip()
+        city = self.CMB_city.currentData()
         mycursor = self.conn.cursor()
 
         if self.name == '' :
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم")
-
+        elif city == 0 :
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال المحافظه")
         else:
             try:
                 if self.FN_CHECK_DUP_NAME(self.name) != False:
@@ -159,15 +164,14 @@ class CL_VAT(QtWidgets.QDialog):
                     mycursor.close()
                 else:
 
+                    sql = "INSERT INTO Hyper1_Retail.DISTRICT( DISTRICT_NAME , DISTRICT_STATUS,city_id) " \
+                          "         VALUES (  %s, %s ,%s)"
 
-                    sql = "INSERT INTO `Hyper1_Retail`.`VAT` (`VATRATE`,`DESC`,`CREATED_BY`,`STATUS`) " \
-                          "         VALUES (  %s, %s,%s,%s)"
-
-                    val = (VAT_RATE,self.name, CL_userModule.user_name,status  )
+                    val = (self.name,  status , city   )
                     mycursor.execute(sql, val)
                     mycursor.close()
 
-                    print(mycursor.rowcount, "POS_ACTION inserted.")
+                    print(mycursor.rowcount, "district inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_ALL()
@@ -186,8 +190,7 @@ class CL_VAT(QtWidgets.QDialog):
             status_old =  self.Qtable.item(rowNo, 2).text()
             desc = self.LE_desc.text().strip()
             status = self.LB_status.text().strip()
-            rate = self.LE_rate.text().strip()
-
+            city= self.CMB_city.currentData()
             error = 0
             if self.desc == '':
                 QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
@@ -201,9 +204,9 @@ class CL_VAT(QtWidgets.QDialog):
                 if error!=1:
                     mycursor = self.conn1.cursor()
                     changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                    sql = "UPDATE Hyper1_Retail.VAT SET `DESC` = %s, STATUS = %s  , VATRATE =%s" \
-                          " ,CHANGED_ON =%s  WHERE VAT_ID = %s"
-                    val = (desc,status,rate,changeDate, id)
+                    sql = "UPDATE `Hyper1_Retail`.DISTRICT SET `DISTRICT_NAME` = %s, DISTRICT_STATUS = %s , city_id = %s  " \
+                          " WHERE DISTRICT_ID = %s"
+                    val = (desc,status,city, id)
                     mycursor.execute(sql, val)
                     #mycursor.close()
                     #
@@ -213,17 +216,14 @@ class CL_VAT(QtWidgets.QDialog):
                     self.FN_GET_ALL()
                     self.FN_CLEAR_FEILDS ()
                     if str(status) != str(status_old):
-                        util.FN_INSERT_IN_LOG("VAT_ID", "status", status, status_old, id)
+                        util.FN_INSERT_IN_LOG("district", "status", status, status_old, id)
         else:
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
 
     def FN_CLEAR_FEILDS (self):
-        try:
-            self.LB_id.clear()
-            self.LE_desc.clear()
-            self.LE_rate.setValue(int(0))
-            self.CMB_status.setCurrentText('Active')
-            self.LB_status.setText('1')
-        except Exception as err:
-            print(err)
+        self.LB_id.clear()
+        self.LE_desc.clear()
+        self.CMB_city.setCurrentText('Select City')
 
+        self.CMB_status.setCurrentText('Active')
+        self.LB_status.setText('1')

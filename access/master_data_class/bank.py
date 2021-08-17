@@ -22,7 +22,7 @@ class CL_bank(QtWidgets.QDialog):
     ###
 
     def FN_LOAD_DISPlAY(self):
-        filename = self.dirname + '/sponsorType.ui'
+        filename = self.dirname + '/bank.ui'
         loadUi(filename, self)
 
         self.FN_GET_ALL()
@@ -56,11 +56,11 @@ class CL_bank(QtWidgets.QDialog):
             mycursor = self.conn1.cursor()
             name = self.LE_desc.text().strip()
             status = self.CMB_status.currentData()
-            whereClause = "where `Bank_Status` = '"+status+"'"
+            whereClause = " where Bank_Status = "+status
             if name != '' :
-                whereClause = whereClause + "and `Bank_Desc` like '%" + str(name) + "%'"
+                whereClause = whereClause + " and `Bank_Desc` like '%" + str(name) + "%' "
 
-            sql_select_query = "SELECT  Bank_ID,`Bank_Desc`, `Bank_Status`,Bank_Account_No,Bank_Address FROM Hyper1_Retail.BANK" + whereClause + "  order by Bank_ID asc"
+            sql_select_query = "SELECT  Bank_ID,`Bank_Desc`, `Bank_Status`,Bank_Account_No,Bank_Address FROM Hyper1_Retail.BANK " + whereClause + "  order by Bank_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -69,11 +69,9 @@ class CL_bank(QtWidgets.QDialog):
                 for column_number, data in enumerate(row_data):
                     item = QTableWidgetItem(str(data))
                     if column_number == 2:
-                        data = util.FN_GET_Bank_Status_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
-                    if column_number == 3:
-                        data = self.FN_GET_APPROVAL_DESC(str(data))
-                        item = QTableWidgetItem(str(data))
+
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
                     self.Qtable.setItem(row_number, column_number, item)
         except Exception as err:
@@ -86,14 +84,14 @@ class CL_bank(QtWidgets.QDialog):
                 self.Qtable.removeRow(i)
 
             mycursor = self.conn.cursor()
-            mycursor.execute("SELECT  Bank_ID,`Bank_Desc`, `Bank_Status` ,Bank_Account_No,Bank_Address FROM Hyper1_Retail.BANK order by Bank_ID   asc")
+            mycursor.execute("SELECT  Bank_ID,`Bank_Desc`, `Bank_Status` ,Bank_Account_No,Bank_Address FROM Hyper1_Retail.BANK order by Bank_ID*1   asc")
             records = mycursor.fetchall()
             for row_number, row_data in enumerate(records):
                 self.Qtable.insertRow(row_number)
                 for column_number, data in enumerate(row_data):
                     item = QTableWidgetItem(str(data))
                     if column_number == 2:
-                        data = util.FN_GET_Bank_Status_DESC(str(data))
+                        data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
 
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
@@ -113,7 +111,7 @@ class CL_bank(QtWidgets.QDialog):
 
                 self.LE_desc.setText(desc)
                 self.LB_id.setText(id)
-                self.LB_status.setText(util.FN_GET_Bank_Status_id(status))
+                self.LB_status.setText(util.FN_GET_STATUS_id(status))
                 self.CMB_status.setCurrentText(status)
                 self.LE_accountNo.setText(accountNo)
                 self.LE_address.setText(address)
@@ -150,26 +148,35 @@ class CL_bank(QtWidgets.QDialog):
         address = self.LE_address.text().strip()
         status = self.CMB_status.currentData()
 
-        mycursor = self.conn.cursor()
+
 
         if self.name == '' :
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم")
 
         else:
             try:
+                mycursor = self.conn.cursor()
                 if self.FN_CHECK_DUP_NAME(self.name) != False:
                     QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
                     mycursor.close()
                 else:
-                    creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                    sql = "INSERT INTO Hyper1_Retail.BANK( Bank_Desc , Bank_Status ,Bank_Account_No,Bank_Address,Bank_Created_By,Bank_Created_On) " \
-                          "         VALUES (  %s, %s,%s, %s,%s, %s)"
+                    mycursor.execute("SELECT max(cast(Bank_ID  AS UNSIGNED)) FROM Hyper1_Retail.BANK")
+                    myresult = mycursor.fetchone()
 
-                    val = (self.name,  status,accountNo,address,CL_userModule.user_name, creationDate  )
+                    if myresult[0] == None:
+                        id = "1"
+                    else:
+                       id = int(myresult[0]) + 1
+
+                    creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                    sql = "INSERT INTO Hyper1_Retail.BANK(Bank_ID, Bank_Desc , Bank_Status ,Bank_Account_No,Bank_Address,Bank_Created_By,Bank_Created_On) " \
+                          "         VALUES (%s,  %s, %s,%s, %s,%s, %s)"
+
+                    val = (id,self.name,  status,accountNo,address,CL_userModule.user_name, creationDate  )
                     mycursor.execute(sql, val)
                     mycursor.close()
 
-                    print(mycursor.rowcount, "POS_ACTION inserted.")
+                    print(mycursor.rowcount, "bank inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_ALL()

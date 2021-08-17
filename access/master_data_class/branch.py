@@ -61,12 +61,12 @@ class CL_branch(QtWidgets.QDialog):
             status = self.CMB_status.currentText()
             if status == 'Active':
 
-                whereClause = "where `BRANCH_STATUS` = 1  "
+                whereClause = " where `BRANCH_STATUS` = 1  "
             else:
-                whereClause = "where `BRANCH_STATUS` = 0 "
+                whereClause = " where `BRANCH_STATUS` = 0 "
 
             if name != '' :
-                whereClause = whereClause + "and `BRANCH_DESC_A` like '%" + str(name) + "%'"
+                whereClause = whereClause + " and `BRANCH_DESC_A` like '%" + str(name) + "%'"
 
             sql_select_query = "select `BRANCH_NO`, `COMPANY_ID`,        `BRANCH_DESC_A`,    `BRANCH_DESC_E`,    `BRANCH_ADDRESS`,    `BRANCH_CITY`,    `BRANCH_TEL1`,    `BRANCH_TEL2`,    `BRANCH_FAX`,    `BRANCH_EMAIL`,    `BRANCH_NOTES`,      `BRANCH_CURRENCY`,    `BRANCH_STATUS` from Hyper1_Retail.BRANCH " + whereClause + "  order by BRANCH_NO asc"
             #print(sql_select_query)

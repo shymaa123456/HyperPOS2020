@@ -54,9 +54,9 @@
   <widget class="QComboBox" name="CMB_status">
    <property name="geometry">
     <rect>
-     <x>930</x>
+     <x>925</x>
      <y>110</y>
-     <width>86</width>
+     <width>91</width>
      <height>25</height>
     </rect>
    </property>

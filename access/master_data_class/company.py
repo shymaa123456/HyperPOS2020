@@ -66,7 +66,7 @@ class CL_company(QtWidgets.QDialog):
             if name != '' :
                 whereClause = whereClause + "and `COMPANY_DESC` like '%" + str(name) + "%'"
 
-            sql_select_query = "select  COMPANY_ID, `COMPANY_DESC` , `COMPANY_STATUS` from Hyper1_Retail.COMPANY " + whereClause + "  order by company_ID*1 asc"
+            sql_select_query = "select  COMPANY_ID, `COMPANY_DESC` , `COMPANY_STATUS` from Hyper1_Retail.COMPANY  " + whereClause + "  order by company_ID*1 asc"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()

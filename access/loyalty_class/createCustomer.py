@@ -92,10 +92,10 @@ class CL_customer_create(QtWidgets.QDialog):
         try:
 
             print("here")
-            self.parent.Qtable_customer.insertRow(0)
+            #self.parent.Qtable_customer.insertRow(0)
             self.name = self.LE_name.text().strip()
             self.custGroup = self.CMB_custGroup.currentData()
-            self.loyalityType =self.CMB_loyalityTypecurrentData()
+            self.loyalityType =self.CMB_loyalityType.currentData()
             self.phone = self.lE_phone .text().strip()
             self.mobile = self.lE_mobile.text().strip()
             self.job = self.LE_job.text().strip()
@@ -157,7 +157,7 @@ class CL_customer_create(QtWidgets.QDialog):
 
                 self.close()
                 #update parent
-                self.FN_REFRESH_GRID(id)
+                #self.FN_REFRESH_GRID(id)
                 #self.parent.Qtable_customer.insertRow(2)
                 print(id)
                 print("in create cust" ,self.name)

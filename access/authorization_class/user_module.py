@@ -36,14 +36,14 @@ class CL_userModule(object):
         x = (CL_userModule.user_name,)
         mycursor.execute(sql_select_query, x)
         records = mycursor.fetchall()
-        print(records)
+        #print(records)
         CL_userModule.myList = records
 
     #Todo: method for get branch assigned to login user
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT `BRANCH`.`BRANCH_NO`,`BRANCH`.`BRANCH_DESC_A` FROM `BRANCH` JOIN `SYS_USER_BRANCH` ON `BRANCH`.`BRANCH_NO`=`SYS_USER_BRANCH`.`BRANCH_NO` where USER_ID = '"+CL_userModule.user_name+"' and STATUS = 1")
+        mycursor.execute("SELECT `BRANCH`.`BRANCH_NO`,`BRANCH`.`BRANCH_DESC_A` FROM `BRANCH` JOIN `SYS_USER_BRANCH` ON `BRANCH`.`BRANCH_NO`=`SYS_USER_BRANCH`.`BRANCH_NO` where USER_ID = '"+CL_userModule.user_name+"' and STATUS = 1 and BRANCH_STATUS = 1 ")
         records = mycursor.fetchall()
         CL_userModule.branch = records
         return records

@@ -80,15 +80,18 @@ class CL_customer_modify(QtWidgets.QDialog):
             if self.Rbtn_custNo.isChecked() == False and self.Rbtn_custName.isChecked() == False:
                 QtWidgets.QMessageBox.warning(self, "خطأ", "أختر أي من محدادات  البحث")
             else:
-                conn = db1.connect()
-                mycursor = conn.cursor()
-                sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where " + whereClause
+                if self.LE_custNo.text() == '' and self.LE_custName.text() == '':
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "أختر أي من محدادات  البحث")
+                else:
+                    conn = db1.connect()
+                    mycursor = conn.cursor()
+                    sql_select_query = "select  POSC_CUST_ID ,POSC_NAME,LOYCT_TYPE_ID,POSC_PHONE, POSC_MOBILE,POSC_JOB,    POSC_ADDRESS,POSC_CITY,POSC_DISTICT,POSC_BUILDING,POSC_FLOOR,POSC_EMAIL,POSC_STATUS from Hyper1_Retail.POS_CUSTOMER where " + whereClause
 
-                mycursor.execute(sql_select_query)
-                records = mycursor.fetchone()
-                self.FN_GET_CUST(records[0])
+                    mycursor.execute(sql_select_query)
+                    records = mycursor.fetchone()
+                    self.FN_GET_CUST(records[0])
 
-                mycursor.close()
+                    mycursor.close()
             # self.Qbtn_search.setEnabled(True)
 
     def FN_GET_DISTRICT(self):

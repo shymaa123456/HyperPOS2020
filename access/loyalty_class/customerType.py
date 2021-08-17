@@ -26,6 +26,10 @@ class CL_customerTP(QtWidgets.QDialog):
     def FN_LOAD_DISPlAY(self):
         filename = self.dirname + '/createModifyCustTp.ui'
         loadUi(filename, self)
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+        self.Qtable_custTP.setColumnHidden(0, True)
         try:
             self.FN_GET_CUSTTPS()
             self.FN_GET_NEXTLVL()
@@ -40,16 +44,14 @@ class CL_customerTP(QtWidgets.QDialog):
             self.Qtable_custTP.doubleClicked.connect(self.FN_GET_CUSTTP)
             self.FN_GET_ID()
             self.FN_GET_ID_STS()
-            self.Qtable_custTP.setColumnHidden(0, True)
+
             # self.setFixedWidth(520)
             # self.setFixedHeight(415)
 
             # Set Style
             # self.voucher_num.setStyleSheet(label_num)
             # self.label_2.setStyleSheet(desc_5)
-            css_path = Path(__file__).parent.parent.parent
-            path = css_path.__str__() + '/presentation/Themes/Style.css'
-            self.setStyleSheet(open(path).read())
+
         except Exception as err:
             print(err)
 
@@ -165,9 +167,10 @@ class CL_customerTP(QtWidgets.QDialog):
         for i in reversed(range(self.Qtable_custTP.rowCount())):
             self.Qtable_custTP.removeRow(i)
         self.conn = db1.connect()
-        mycursor = self.conn.cursor(buffered=True)
+        mycursor = self.conn.cursor()
         mycursor.execute("SELECT  LOYCT_TYPE_ID, LOYCT_DESC, LOYCT_POINTS_TO_PROMOTE, LOYCT_TYPE_NEXT, LOYCT_STATUS FROM Hyper1_Retail.LOYALITY_CUSTOMER_TYPE where LOYCT_TYPE_ID != 'H1' order by LOYCT_TYPE_ID*1   asc")
         records = mycursor.fetchall()
+        print(records)
         for row_number, row_data in enumerate(records):
             self.Qtable_custTP.insertRow(row_number)
             for column_number, data in enumerate(row_data):
@@ -243,8 +246,8 @@ class CL_customerTP(QtWidgets.QDialog):
             else:
                 self.id = int(myresult[0]) + 1
 
-            if name == '':
-                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
+            if name == '' or points == '':
+                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات ")
             else:
                 if self.FN_CHECK_DUP_NAME(name) != False:
                     QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
@@ -292,8 +295,8 @@ class CL_customerTP(QtWidgets.QDialog):
                     status = 0
                 ret = self.FN_CHECK_DUP_NAME(desc,id)
                 error = 0
-                if desc == '':
-                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
+                if desc == '' or points == '':
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال جميع البيانات ")
                 else:
                     if desc != desc_old:
                         if self.FN_CHECK_DUP_NAME(desc,id) != False:

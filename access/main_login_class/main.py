@@ -83,7 +83,7 @@ class CL_main(QtWidgets.QMainWindow):
             cwd = Path.cwd()
             mod_path = Path(__file__).parent.parent.parent
             dirname = mod_path.__str__() + '/presentation/main_login_ui'
-            filename = dirname + '/main34.ui'
+            filename = dirname + '/main3.ui'
             self.ui = loadUi(filename, self)
             #self.toolBox.setAlignment(QtCore.Qt.AlignRight)
             #self.toolBox.setTextAlignment(QtCore.Qt.AlignCenter)

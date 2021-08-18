@@ -5,6 +5,7 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.configuration_class.Group import CL_FNGroup
 from access.configuration_class.Parameters import CL_Parameters
 from access.configuration_class.Pos_Parameter import CL_Pos_Parameters
 from access.configuration_class.Check_List import CL_HW_Parameter
@@ -197,6 +198,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_bank.clicked.connect(self.FN_bank)
             self.QAct_Pos_Parameter.clicked.connect(self.FN_Pos_Parameter)
             self.QAct_Pos_Parameter_Modify.clicked.connect(self.FN_Pos_Parameter_Modify)
+            self.QAct_FN_Group.clicked.connect(self.FN_FNGroup)
 
 
             self.QAct_sponsor.clicked.connect(self.FN_sponsor)
@@ -275,6 +277,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_VAT = 0
             self.window_bank = 0
             self.window_posparameter=0
+            self.window_FnGroup=0
             self.window_posparameter_modify=0
             self.window_sponsor = 0
             #self.ui.tabWidget.blockSignals(True)
@@ -412,18 +415,34 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setCurrentWidget(self.window_posparameter)
 
 
+    def FN_FNGroup(self):
+        if self.window_FnGroup == 0:
+            self.window_FnGroup = CL_FNGroup()
+            self.window_FnGroup.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FnGroup, 'Pos Function Group')
+            self.ui.tabWidget.setFixedWidth(self.window_FnGroup.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnGroup.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnGroup)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FnGroup.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnGroup.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnGroup)
+
+
+
+
     def FN_Pos_Parameter_Modify(self):
         if self.window_posparameter_modify == 0:
-            self.window_posparameter = CL_Pos_Parameters_Modify()
-            self.window_posparameter.FN_LOAD_CREATE()
-            self.ui.tabWidget.addTab(self.window_posparameter, 'Pos Parameter Modify')
-            self.ui.tabWidget.setFixedWidth(self.window_posparameter.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_posparameter.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_posparameter)
+            self.window_posparameter_modify = CL_Pos_Parameters_Modify()
+            self.window_posparameter_modify.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_posparameter_modify, 'Pos Parameter Modify')
+            self.ui.tabWidget.setFixedWidth(self.window_posparameter_modify.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_posparameter_modify.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_posparameter_modify)
         else:
-            self.ui.tabWidget.setFixedWidth(self.window_posparameter.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_posparameter.frameGeometry().height())
-            self.ui.tabWidget.setCurrentWidget(self.window_posparameter)
+            self.ui.tabWidget.setFixedWidth(self.window_posparameter_modify.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_posparameter_modify.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_posparameter_modify)
 
     def FN_posAction(self):
         if self.window_posAction == 0:
@@ -1672,6 +1691,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_List_POS = 0
         if self.window_List not in li:
             self.window_List = 0
+        if self.window_FnGroup not in li:
+            self.window_FnGroup = 0
 
         if len(li) == 0:
             self.ui.tabWidget.setFixedWidth(1000)

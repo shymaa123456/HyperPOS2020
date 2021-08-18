@@ -102,6 +102,8 @@ class CL_Pos_Parameters(QtWidgets.QDialog):
                           " VALUES (%s, %s, %s, %s, %s) "
                     val = (self.Qcombo_company.currentData(), self.Qcombo_branch.currentData(),self.Qcombo_pos.currentData(),self.Qcombo_parameter.currentData()[row],self.CMB_CouponStatus.currentIndex())
                     mycursor.execute(sql, val)
+                sql00 = "  UNLOCK   tables    "
+                mycursor.execute(sql00)
                 db1.connectionCommit(self.conn)
                 mycursor.close()
                 QtWidgets.QMessageBox.warning(self, "Done", "تم الانشاء")

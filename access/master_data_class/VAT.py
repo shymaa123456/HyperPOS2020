@@ -165,13 +165,13 @@ class CL_VAT(QtWidgets.QDialog):
 
                     val = (VAT_RATE,self.name, CL_userModule.user_name,status  )
                     mycursor.execute(sql, val)
-                    mycursor.close()
 
                     print(mycursor.rowcount, "POS_ACTION inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_ALL()
                     self.FN_CLEAR_FEILDS()
+                    mycursor.close()
                     #db1.connectionClose(self.conn)
                     #self.close()
             except Exception as err:

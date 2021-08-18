@@ -173,13 +173,14 @@ class CL_posAction(QtWidgets.QDialog):
 
                     val = (self.name,  status , reqApproval,notes  )
                     mycursor.execute(sql, val)
-                    mycursor.close()
 
                     print(mycursor.rowcount, "POS_ACTION inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
+
                     self.FN_GET_ALL()
                     self.FN_CLEAR_FEILDS()
+                    mycursor.close()
                     #db1.connectionClose(self.conn)
                     #self.close()
             except Exception as err:

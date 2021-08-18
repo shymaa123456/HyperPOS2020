@@ -214,7 +214,7 @@ class CL_branch(QtWidgets.QDialog):
 
         else:
             try:
-                if self.FN_CHECK_DUP_NAME(name , branchNo) != False:
+                if self.FN_CHECK_DUP_NAME(name ) != False:
                     QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
                     mycursor.close()
                 else:
@@ -222,17 +222,13 @@ class CL_branch(QtWidgets.QDialog):
                     sql = "INSERT INTO Hyper1_Retail.BRANCH   VALUES ( %s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s ,%s,%s)"
                     val = (company,branchNo,name, nameEn,address,city,phone1,phone2,fax,email,notes,'',currency,status )
                     mycursor.execute(sql, val)
-                    # mycursor.execute(sql)
-
-                    mycursor.close()
 
                     print(mycursor.rowcount, "branch inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_ALL()
                     self.FN_CLEAR_FEILDS()
-                    #db1.connectionClose(self.conn)
-                    #self.close()
+                    mycursor.close()
             except Exception as err:
                 print(err)
         print("in create company", name)
@@ -277,7 +273,7 @@ class CL_branch(QtWidgets.QDialog):
                         val = (name, nameEn, address, city, phone1, phone2, fax, email, notes, changeDate, currency, status , company,branchNo)
 
                         mycursor.execute(sql, val)
-                        #mycursor.close()
+                        #
                         #
                         print(mycursor.rowcount, "record updated.")
                         QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل")
@@ -286,6 +282,7 @@ class CL_branch(QtWidgets.QDialog):
                         self.FN_CLEAR_FEILDS ()
                         if str(status) != str(status_old):
                             util.FN_INSERT_IN_LOG("BRANCH", "status", status, status_old, id)
+                        mycursor.close()
                     except Exception as err:
                         print(err)
         else:

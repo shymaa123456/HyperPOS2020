@@ -28,15 +28,20 @@
   <widget class="QTableWidget" name="Qtable">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>40</x>
      <y>350</y>
-     <width>911</width>
-     <height>181</height>
+     <width>1041</width>
+     <height>241</height>
     </rect>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
+   <column>
+    <property name="text">
+     <string>id</string>
+    </property>
+   </column>
    <column>
     <property name="text">
      <string>كود الممول</string>
@@ -549,22 +554,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="LB_status">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>4</x>
-      <y>107</y>
-      <width>31</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_7">
    <property name="geometry">
@@ -589,16 +578,16 @@
    <property name="title">
     <string/>
    </property>
-   <widget class="QLabel" name="LB_status_2">
+   <widget class="QLabel" name="LB_id">
     <property name="enabled">
      <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>4</x>
-      <y>107</y>
-      <width>31</width>
-      <height>21</height>
+      <x>0</x>
+      <y>-10</y>
+      <width>91</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -642,7 +631,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <widget class="QLineEdit" name="LE_branchNo">
+      <widget class="QLineEdit" name="LE_code">
        <property name="styleSheet">
         <string notr="true">QLineEdit{
                                         background-color: white;
@@ -673,10 +662,26 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="CMB_company"/>
+      <widget class="QComboBox" name="CMB_sponsorType"/>
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QLabel" name="LB_status">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>280</y>
+     <width>31</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

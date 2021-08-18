@@ -38,6 +38,7 @@ from access.master_data_class.installmentType import CL_installmentType
 from access.master_data_class.paymentType import CL_paymentType
 from access.master_data_class.posAction import CL_posAction
 from access.master_data_class.promotionType import CL_promotionType
+from access.master_data_class.sponsor import CL_sponsor
 from access.master_data_class.sponsorType import CL_sponsorType
 from access.master_data_class.userType import CL_userType
 from access.reports_class.reporting import CL_report
@@ -196,6 +197,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_bank.clicked.connect(self.FN_bank)
             self.QAct_city.clicked.connect(self.FN_city)
             self.QAct_district.clicked.connect(self.FN_district)
+            self.QAct_sponsor.clicked.connect(self.FN_sponsor)
+
             self.QAct_Exit.clicked.connect(self.FN_exit)
 
             # self.ui.tabWidget.setTabsClosable(True)
@@ -271,6 +274,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_bank = 0
             self.window_city = 0
             self.window_district = 0
+            self.window_sponsor = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
             self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested)
@@ -352,6 +356,20 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_sponsorType.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsorType.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_sponsorType)
+
+    def FN_sponsor(self):
+        if self.window_sponsor == 0:
+            self.window_sponsor = CL_sponsor()
+            self.window_sponsor.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_sponsor, 'الموردين')
+            self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_sponsor)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_sponsor)
+
     def FN_VAT(self):
         if self.window_VAT == 0:
             self.window_VAT = CL_VAT()
@@ -1514,6 +1532,9 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_bank:
             self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_sponsor:
+            self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
     def onTabCloseRequested(self, index):
         li = []
         for i in range(self.ui.tabWidget.count()):
@@ -1651,7 +1672,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_paymentType = 0
         if self.window_posAction not in li:
             self.window_posAction = 0
-
+        if self.window_sponsor not in li:
+            self.window_sponsor = 0
         if self.window_HW_Parameters not in li:
             self.window_HW_Parameters = 0
         if self.window_List_POS not in li:

@@ -162,13 +162,14 @@ class CL_paymentType(QtWidgets.QDialog):
 
                     val = (self.name,  status,CL_userModule.user_name,creationDate  )
                     mycursor.execute(sql, val)
-                    mycursor.close()
+
 
                     print(mycursor.rowcount, "PAYMENT_TYPE inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_ALL()
                     self.FN_CLEAR_FEILDS()
+                    mycursor.close()
                     #db1.connectionClose(self.conn)
                     #self.close()
             except Exception as err:

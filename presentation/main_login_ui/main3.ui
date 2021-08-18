@@ -1492,7 +1492,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                     <bool>false</bool>
                    </property>
                    <property name="text">
-                    <string>الشركات</string>
+                    <string>الشركات </string>
                    </property>
                   </widget>
                  </item>

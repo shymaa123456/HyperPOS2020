@@ -277,7 +277,7 @@ class CL_sponsor(QtWidgets.QDialog):
                             mycursor = self.conn1.cursor()
                             changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                             sql = "UPDATE `Hyper1_Retail`.`SPONSOR` SET `SPONSOR_SAP_CODE` =  %s,`SPONSOR_NAME` =  %s," \
-                                  "`SPONSOR_TYPE` =  %s,`SPONSOR_ADDRESS` =  %s,`SPONSOR_CONTACT_PERSON` =  %s,`SPONSOR_EMAIL` =  %s,`SPONSOR_TEL` = %s,`SPONSOR_FAX` =  %s,`SPONSOR_STATUS` = %s WHERE SPONSOR_ID = %s"
+                                  " `SPONSOR_TYPE`= %s,`SPONSOR_ADDRESS` =  %s,`SPONSOR_CONTACT_PERSON` =  %s,`SPONSOR_EMAIL` =  %s,`SPONSOR_TEL` = %s,`SPONSOR_FAX` =  %s,`SPONSOR_STATUS` = %s WHERE SPONSOR_ID = %s"
                             val = (sponsorCode,name, sponsorType,address,contactPerson ,email,  phone1,  fax, status , id)
 
                             mycursor.execute(sql, val)

@@ -192,15 +192,13 @@ class CL_installmentType(QtWidgets.QDialog):
                     mycursor.execute(sql, val)
                     # mycursor.execute(sql)
 
-                    mycursor.close()
 
                     print(mycursor.rowcount, "INSTALLMENT_TYPE inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_ALL()
                     self.FN_CLEAR_FEILDS()
-                    #db1.connectionClose(self.conn)
-                    #self.close()
+                    mycursor.close()
             except Exception as err:
                 print(err)
         print("in create company", self.name)

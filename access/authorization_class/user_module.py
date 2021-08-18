@@ -16,6 +16,7 @@ class CL_userModule(object):
     branch = []
     section = []
     item = []
+    keys=[]
 
     def init(self):
         self.conn = db1.connect()
@@ -36,14 +37,14 @@ class CL_userModule(object):
         x = (CL_userModule.user_name,)
         mycursor.execute(sql_select_query, x)
         records = mycursor.fetchall()
-        print(records)
+        #print(records)
         CL_userModule.myList = records
 
     #Todo: method for get branch assigned to login user
     def FN_AuthBranchUser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT `BRANCH`.`BRANCH_NO`,`BRANCH`.`BRANCH_DESC_A` FROM `BRANCH` JOIN `SYS_USER_BRANCH` ON `BRANCH`.`BRANCH_NO`=`SYS_USER_BRANCH`.`BRANCH_NO` where USER_ID = '"+CL_userModule.user_name+"' and STATUS = 1")
+        mycursor.execute("SELECT `BRANCH`.`BRANCH_NO`,`BRANCH`.`BRANCH_DESC_A` FROM `BRANCH` JOIN `SYS_USER_BRANCH` ON `BRANCH`.`BRANCH_NO`=`SYS_USER_BRANCH`.`BRANCH_NO` where USER_ID = '"+CL_userModule.user_name+"' and STATUS = 1 and BRANCH_STATUS = 1 ")
         records = mycursor.fetchall()
         CL_userModule.branch = records
         return records
@@ -70,3 +71,24 @@ class CL_userModule(object):
             mycursor.execute(sql8, val8)
         except:
             print(sys.exc_info())
+
+    def FN_FuncKey(self):
+        try:
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            sql8 = "select k.FUNC_ID from SYS_FUNC_KEY k " \
+             "join Hyper1_Retail.SYS_ROLE_FUNCTION f on f.FUNC_ID=k.FUNC_ID " \
+             "join Hyper1_Retail.SYS_ROLE p on p.ROLE_ID=f.ROLE_ID " \
+             "join Hyper1_Retail.SYS_USER_ROLE  ur on p.ROLE_ID = ur.ROLE_ID " \
+             "join Hyper1_Retail.SYS_USER u ON u.USER_ID = ur.USER_ID " \
+             "where  u.USER_ID = %s and u.USER_STATUS= 1"
+            print(sql8)
+            val8 = (CL_userModule.user_name,)
+            mycursor.execute(sql8, val8)
+            records = mycursor.fetchall()
+            CL_userModule.keys = records
+        except:
+            print(sys.exc_info())
+
+
+

@@ -1492,7 +1492,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                     <bool>false</bool>
                    </property>
                    <property name="text">
-                    <string>الشركات</string>
+                    <string>الشركات </string>
                    </property>
                   </widget>
                  </item>
@@ -2032,14 +2032,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QPushButton" name="QAct_Parameter">
-                 <property name="text">
-                  <string>Parameter</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
+               <item row="6" column="1">
                 <spacer name="verticalSpacer_27">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -2051,6 +2044,20 @@ QToolBox::tab:selected { /* italicize selected tabs */
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="1" column="1">
+                <widget class="QPushButton" name="QAct_HW_Parameter">
+                 <property name="text">
+                  <string>Hardware Parameter</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QPushButton" name="QAct_Parameter">
+                 <property name="text">
+                  <string>Parameter</string>
+                 </property>
+                </widget>
                </item>
                <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_56">
@@ -2076,6 +2083,20 @@ QToolBox::tab:selected { /* italicize selected tabs */
                  </property>
                 </widget>
                </item>
+               <item row="4" column="1">
+                <widget class="QPushButton" name="QAct_Pos_Parameter">
+                 <property name="text">
+                  <string>Pos Parameter</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QPushButton" name="QAct_Pos_Parameter_Modify">
+                 <property name="text">
+                  <string>Pos Parameter Modify</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </widget>
             </widget>
@@ -2094,8 +2115,8 @@ QToolBox::tab:selected { /* italicize selected tabs */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>228</width>
-            <height>456</height>
+            <width>98</width>
+            <height>28</height>
            </rect>
           </property>
           <attribute name="label">

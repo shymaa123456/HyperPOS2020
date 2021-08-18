@@ -6,11 +6,12 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
 from access.configuration_class.Parameters import CL_Parameters
+from access.configuration_class.Pos_Parameter import CL_Pos_Parameters
 from access.configuration_class.Check_List import CL_HW_Parameter
 from access.configuration_class.List import CL_List
 # from access.configuration_class.Parameters import CL_Parameters
 from access.configuration_class.List_POS import CL_List_POS
-
+from access.configuration_class.Pos_Parameter_Modify import CL_Pos_Parameters_Modify
 
 from access.coupon_class.CreateCoupon import CL_CreateCoupon
 from access.coupon_class.EditCoupon import CL_EditCoupon
@@ -30,14 +31,13 @@ from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.loyalty_class.uploadCustomer import CL_customer
 from access.master_data_class.VAT import CL_VAT
 from access.master_data_class.bank import CL_bank
-from access.master_data_class.city import CL_city
 from access.master_data_class.company import CL_company
 from access.master_data_class.branch import CL_branch
-from access.master_data_class.district import CL_district
 from access.master_data_class.installmentType import CL_installmentType
 from access.master_data_class.paymentType import CL_paymentType
 from access.master_data_class.posAction import CL_posAction
 from access.master_data_class.promotionType import CL_promotionType
+from access.master_data_class.sponsor import CL_sponsor
 from access.master_data_class.sponsorType import CL_sponsorType
 from access.master_data_class.userType import CL_userType
 from access.reports_class.reporting import CL_report
@@ -101,6 +101,7 @@ class CL_main(QtWidgets.QMainWindow):
             CL_userModule.loadPrivilages(self)
             CL_userModule.FN_AuthBranchUser(self)
             CL_userModule.FN_AuthSectionUser(self)
+            CL_userModule.FN_FuncKey(self)
             for row_number, row_data in enumerate(CL_userModule.myList):
                 forms.append(row_data[1])
 
@@ -203,8 +204,12 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_posAction.clicked.connect(self.FN_posAction)
             self.QAct_VAT.clicked.connect(self.FN_VAT)
             self.QAct_bank.clicked.connect(self.FN_bank)
-            self.QAct_city.clicked.connect(self.FN_city)
-            self.QAct_district.clicked.connect(self.FN_district)
+            self.QAct_Pos_Parameter.clicked.connect(self.FN_Pos_Parameter)
+            self.QAct_Pos_Parameter_Modify.clicked.connect(self.FN_Pos_Parameter_Modify)
+
+
+            self.QAct_sponsor.clicked.connect(self.FN_sponsor)
+
             self.QAct_Exit.clicked.connect(self.FN_exit)
 
             # self.ui.tabWidget.setTabsClosable(True)
@@ -278,8 +283,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_posAction = 0
             self.window_VAT = 0
             self.window_bank = 0
-            self.window_city = 0
-            self.window_district = 0
+            self.window_posparameter=0
+            self.window_posparameter_modify=0
+            self.window_sponsor = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
             self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested)
@@ -361,6 +367,20 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_sponsorType.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsorType.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_sponsorType)
+
+    def FN_sponsor(self):
+        if self.window_sponsor == 0:
+            self.window_sponsor = CL_sponsor()
+            self.window_sponsor.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_sponsor, 'الموردين')
+            self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_sponsor)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_sponsor)
+
     def FN_VAT(self):
         if self.window_VAT == 0:
             self.window_VAT = CL_VAT()
@@ -385,6 +405,34 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_bank)
+
+
+    def FN_Pos_Parameter(self):
+        if self.window_posparameter == 0:
+            self.window_posparameter = CL_Pos_Parameters()
+            self.window_posparameter.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_posparameter, 'Pos Parameter')
+            self.ui.tabWidget.setFixedWidth(self.window_posparameter.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_posparameter.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_posparameter)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_posparameter.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_posparameter.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_posparameter)
+
+
+    def FN_Pos_Parameter_Modify(self):
+        if self.window_posparameter_modify == 0:
+            self.window_posparameter = CL_Pos_Parameters_Modify()
+            self.window_posparameter.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_posparameter, 'Pos Parameter Modify')
+            self.ui.tabWidget.setFixedWidth(self.window_posparameter.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_posparameter.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_posparameter)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_posparameter.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_posparameter.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_posparameter)
 
     def FN_posAction(self):
         if self.window_posAction == 0:
@@ -425,36 +473,6 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedHeight(self.window_userType.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_userType)
 
-    def FN_city(self):
-        try:
-            if self.window_city == 0:
-                self.window_city = CL_city()
-                self.window_city.FN_LOAD_DISPlAY()
-                self.ui.tabWidget.addTab(self.window_city, 'المحافظات')
-                self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
-                self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
-                self.ui.tabWidget.setCurrentWidget(self.window_city)
-            else:
-                self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
-                self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
-                self.ui.tabWidget.setCurrentWidget(self.window_city)
-        except Exception as err:
-            print(err)
-    def FN_district(self):
-        try:
-            if self.window_district == 0:
-                self.window_district = CL_district()
-                self.window_district.FN_LOAD_DISPlAY()
-                self.ui.tabWidget.addTab(self.window_district, 'المناطق')
-                self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
-                self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
-                self.ui.tabWidget.setCurrentWidget(self.window_district)
-            else:
-                self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
-                self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
-                self.ui.tabWidget.setCurrentWidget(self.window_district)
-        except Exception as err:
-            print(err)
     def FN_Cust_Card_Add(self):
         if self.window_Cust_Card_Add == 0:
             self.window_Cust_Card_Add = CL_customerCard()
@@ -1502,12 +1520,6 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_userType:
             self.ui.tabWidget.setFixedWidth(self.window_userType.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_userType.frameGeometry().height())
-        elif self.ui.tabWidget.currentWidget() == self.window_city:
-            self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
-        elif self.ui.tabWidget.currentWidget() == self.window_district:
-            self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
-            self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
         elif self.ui.tabWidget.currentWidget() == self.window_posAction:
             self.ui.tabWidget.setFixedWidth(self.window_posAction.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_posAction.frameGeometry().height())
@@ -1523,12 +1535,17 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_bank:
             self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_sponsor:
+            self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
     def onTabCloseRequested(self, index):
         li = []
         for i in range(self.ui.tabWidget.count()):
             li.append(self.ui.tabWidget.widget(i))
         if self.window_CreateCoupon not in li:
             self.window_CreateCoupon = 0
+        if self.window_posparameter not in li:
+            self.window_posparameter = 0
         if self.window_EditCoupon not in li:
             self.window_EditCoupon = 0
         if self.window_ModifyCoupon not in li:
@@ -1646,10 +1663,6 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_installmentType = 0
         if self.window_userType not in li:
             self.window_userType = 0
-        if self.window_city not in li:
-            self.window_city = 0
-        if self.window_district not in li:
-            self.window_district = 0
         if self.window_sponsorType not in li:
             self.window_sponsorType = 0
         if self.window_VAT not in li:
@@ -1660,7 +1673,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_paymentType = 0
         if self.window_posAction not in li:
             self.window_posAction = 0
-
+        if self.window_sponsor not in li:
+            self.window_sponsor = 0
         if self.window_HW_Parameters not in li:
             self.window_HW_Parameters = 0
         if self.window_List_POS not in li:

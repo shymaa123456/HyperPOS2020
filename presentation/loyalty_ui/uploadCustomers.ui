@@ -26,9 +26,7 @@
    <string>تحميل مجموعه عملاء</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-
-            </string>
+   <string notr="true"/>
   </property>
   <widget class="QPushButton" name="BTN_load">
    <property name="geometry">
@@ -107,6 +105,9 @@
    </property>
   </widget>
   <widget class="QTextEdit" name="textEdit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>230</x>

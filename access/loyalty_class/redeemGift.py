@@ -30,7 +30,7 @@ class CL_redGift(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
 
     from Validation.Validation import CL_validation
-    def textchanged(self):
+    def FN_REPLACE_CLICKED(self):
         try:
 
             if self.Qline_replace.text().strip() !='' and self.Qline_points.text().strip() !='' :
@@ -73,7 +73,7 @@ class CL_redGift(QtWidgets.QDialog):
             mycursor = conn.cursor()
             self.Qbtn_search.clicked.connect(self.FN_SEARCH_RED_VOUCH)
 
-            self.Qline_replace.textChanged.connect(self.textchanged)
+            self.Qline_replace.textChanged.connect(self.FN_REPLACE_CLICKED)
             self.Qline_cust.textChanged.connect(self.FN_CLEAR_FEILDS)
             # self.setFixedWidth(513)
             # self.setFixedHeight(330)

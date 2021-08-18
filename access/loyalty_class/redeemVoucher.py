@@ -30,10 +30,12 @@ class CL_redVouch(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
 
     from Validation.Validation import CL_validation
-    def textchanged(self):
+    def FN_REPLACE_CLICKED(self):
         try:
+            replacedPts=self.Qline_replace.text().strip()
 
-            if self.Qline_replace.text().strip() !='' and self.Qline_points.text().strip() !='' :
+            if (self.Qline_replace.text().strip() !='' and self.Qline_points.text().strip() !='') or (replacedPts == '-') :
+                print(self.Qline_points.text().strip())
                 ret = CL_validation.FN_validation_int(self.Qline_replace.text().strip())
                 if ret == True:
                     replacedPoints = float(self.Qline_replace.text().strip())
@@ -44,8 +46,8 @@ class CL_redVouch(QtWidgets.QDialog):
                     self.FN_GET_POINTS_VALUE(replacedPoints)
                 else:
                     QtWidgets.QMessageBox.warning(self, "خطأ", "replaced points is not integer ")
-        except (Error, Warning) as e:
-            print(e)
+        except Exception as err:
+            print(err)
 
     def FN_GET_POINTS_VALUE(self,replacedPoints):
         conn = db1.connect()
@@ -74,7 +76,7 @@ class CL_redVouch(QtWidgets.QDialog):
             self.Qbtn_search.clicked.connect(self.FN_SEARCH_RED_VOUCH)
             #self.Qbtn_export.clicked.connect(self.FN_SAVE)
             #self.Qbtn_exit.clicked.connect(self.FN_exit)
-            self.Qline_replace.textChanged.connect(self.textchanged)
+            self.Qline_replace.textChanged.connect(self.FN_REPLACE_CLICKED)
             self.Qline_cust.textChanged.connect(self.FN_CLEAR_FEILDS)
             # self.setFixedWidth(497)
             # self.setFixedHeight(281)

@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QRegExpValidator, QIntValidator
 from PyQt5.QtCore import QRegExp, QDate
+from cryptography.fernet import Fernet
 
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1
@@ -82,6 +83,7 @@ class CL_customerCard(QtWidgets.QDialog):
         myresult = mycursor.fetchone()
 
         if mycursor.rowcount > 0:
+            self.error = 0
             xto = myresult[0].split("-")
 
             d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
@@ -90,7 +92,8 @@ class CL_customerCard(QtWidgets.QDialog):
             #set the date
             print("found")
         else:
-            print("no data")
+            self.error = 1
+            QtWidgets.QMessageBox.warning(self, "خطأ", "العميل ليس لديه كارت فعال ")
 
     def FN_GET_CUST_NAME (self):
         conn = db1.connect()
@@ -135,13 +138,13 @@ class CL_customerCard(QtWidgets.QDialog):
                 return False
     def FN_GET_MASKED_CARD_SERIAL(self,id):
         print("here")
-        # key = Fernet.generate_key()
-        # print(key)
-        # id = 'b'+ id
-        # cipher_suite = Fernet(key)
-        # ciphered_text = cipher_suite.encrypt(b'id')
-        # print(ciphered_text)
-        # return ciphered_text
+        key = Fernet.generate_key()
+        #print(key)
+        id = 'b'+ id
+        cipher_suite = Fernet(key)
+        ciphered_text = cipher_suite.encrypt(b'id')
+        print(ciphered_text)
+        return ciphered_text
     def FN_CREATE_CUSTCD(self):
         try:
             self.conn = db1.connect()
@@ -157,6 +160,7 @@ class CL_customerCard(QtWidgets.QDialog):
                 ret = self.FN_VALIDATE_CUST(no)
                 if ret == True:
                         mask_serial = self.FN_GET_MASKED_CARD_SERIAL(no)
+                        print(mask_serial)
                         sql = "INSERT INTO `Hyper1_Retail`.`POS_CUSTOMER_CARD`(`CARD_SERIAL_BARCODE`,`POS_CUST_ID`,`EXPIRY_DATE`,`CARD_STATUS`) " \
                               "         VALUES ( %s, %s, %s,  %s)"
 
@@ -176,21 +180,23 @@ class CL_customerCard(QtWidgets.QDialog):
             # insert in  to db
 
     def FN_MODIFY_CUSTCD(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        no = self.LE_custNo.text().strip()
-        name = self.LE_custName.text().strip()
-        if len(name) >0:
-            print(len (no))
-            sql = "update `Hyper1_Retail`.`POS_CUSTOMER_CARD` set CARD_STATUS = '0'  where CARD_SERIAL = %s "
-            val = (self.card_serial,)
-            mycursor.execute(sql, val)
-            mycursor.close()
-            QtWidgets.QMessageBox.information(self, "تم", "تم  التعديل")
-            db1.connectionCommit(self.conn)
-        else:
-            if len(no) > 0:
-                QtWidgets.QMessageBox.warning(self, "خطأ", " رقم العميل غير موجود")
+        if self.error !=1:
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            no = self.LE_custNo.text().strip()
+            name = self.LE_custName.text().strip()
+            if len(name) >0:
+                print(len (no))
+                sql = "update `Hyper1_Retail`.`POS_CUSTOMER_CARD` set CARD_STATUS = '0'  where CARD_SERIAL = %s "
+                val = (self.card_serial,)
+                mycursor.execute(sql, val)
+                mycursor.close()
+                #util.FN_INSERT_IN_LOG("POS_CUSTOMER_CARD", "status", '0', '0', self.card_serial)
+                QtWidgets.QMessageBox.information(self, "تم", "تم  التعديل")
+                db1.connectionCommit(self.conn)
             else:
-                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال رقم العميل")
+                if len(no) > 0:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", " رقم العميل غير موجود")
+                else:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال رقم العميل")
 

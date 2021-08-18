@@ -35,74 +35,70 @@ class CL_redItem(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
 
     def FN_LOAD_DISPlAY(self):
-        filename = self.dirname + '/createModifyReedemItem.ui'
-        loadUi(filename, self)
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        self.Qbtn_search.clicked.connect(self.FN_SEARCH_REDITEM)
-        self.Qbtn_search_all.clicked.connect(self.FN_REFRESH_DATA_GRID)
+        try:
+            filename = self.dirname + '/createModifyReedemItem.ui'
+            loadUi(filename, self)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
+            conn = db1.connect()
+            mycursor = conn.cursor()
+            self.Qbtn_search.clicked.connect(self.FN_SEARCH_REDITEM)
+            self.Qbtn_search_all.clicked.connect(self.FN_REFRESH_DATA_GRID)
 
-        #self.Qbtn_export.clicked.connect(self.FN_SAVE)
-        self.Qbtn_exit.clicked.connect(self.FN_exit)
-        self.Qtable_redeem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
-        self.Qtable_redeem.doubleClicked.connect(self.FN_GET_REDITEM)
-        self.Qradio_active.setChecked(True)
+            #self.Qbtn_export.clicked.connect(self.FN_SAVE)
+            self.Qbtn_exit.clicked.connect(self.FN_exit)
+            self.Qtable_redeem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+            self.Qtable_redeem.doubleClicked.connect(self.FN_GET_REDITEM)
+            self.Qradio_active.setChecked(True)
 
-        self.Qcombo_group3 = CheckableComboBox(self)
-        self.Qcombo_group3.setGeometry(190, 45, 179, 18)
-        self.Qcombo_group3.setStyleSheet("background-color: rgb(198, 207, 199)")
+            self.Qcombo_group3 = CheckableComboBox(self)
+            self.Qcombo_group3.setGeometry(380, 45, 179, 18)
+            self.Qcombo_group3.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        self.Qcombo_group4 = CheckableComboBox(self)
-        self.Qcombo_group4.setGeometry(190, 90, 179, 18)
-        self.Qcombo_group4.setStyleSheet("background-color: rgb(198, 207, 199)")
+            self.Qcombo_group4 = CheckableComboBox(self)
+            self.Qcombo_group4.setGeometry(380, 90, 179, 18)
+            self.Qcombo_group4.setStyleSheet("background-color: rgb(198, 207, 199)")
 
-        self.CMB_branch.hide()
-        self.CMB_company.hide()
+            self.CMB_branch.hide()
+            self.CMB_company.hide()
 
-        self.FN_GET_COMPANIES()
-        self.FN_GET_BRANCHES()
-        # self.setFixedWidth(789)
-        # self.setFixedHeight(571)
+            self.FN_GET_COMPANIES()
+            self.FN_GET_BRANCHES()
+            for row_number, row_data in enumerate(CL_userModule.myList):
+                if row_data[1] == 'Redeem_Item':
+                    if row_data[4] == 'None':
+                        print('hh')
+                    else:
+                        sql_select_query = "select  i.ITEM_DESC from Hyper1_Retail.SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
+                        x = (row_data[4],)
+                        mycursor.execute(sql_select_query, x)
 
-        # Set Style
-        # self.voucher_num.setStyleSheet(label_num)
-        # self.label_2.setStyleSheet(desc_5)
-        css_path = Path(__file__).parent.parent.parent
-        path = css_path.__str__() + '/presentation/Themes/Style.css'
-        self.setStyleSheet(open(path).read())
-        for row_number, row_data in enumerate(CL_userModule.myList):
-            if row_data[1] == 'Redeem_Item':
-                if row_data[4] == 'None':
-                    print('hh')
-                else:
-                    sql_select_query = "select  i.ITEM_DESC from Hyper1_Retail.SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
-                    x = (row_data[4],)
-                    mycursor.execute(sql_select_query, x)
+                        result = mycursor.fetchone()
+                        # print(result)
+                        if result[0] == 'create':
+                            self.Qbtn_create.setEnabled(True)
+                            self.Qbtn_create.clicked.connect(self.FN_CREATE_REDITEM)
+                        elif result[0] == 'modify':
+                            self.Qbtn_modify.setEnabled(True)
+                            self.Qbtn_modify.clicked.connect(self.FN_MODIFY_REDITEM)
+                        elif result[0] == 'upload':
+                            try:
+                                self.Qbtn_upload.setEnabled(True)
+                                self.Qbtn_upload.clicked.connect(self.FN_UPLOAD_REDITEM)
+                            except Exception as err:
+                                print(err)
 
-                    result = mycursor.fetchone()
-                    # print(result)
-                    if result[0] == 'create':
-                        self.Qbtn_create.setEnabled(True)
-                        self.Qbtn_create.clicked.connect(self.FN_CREATE_REDITEM)
-                    elif result[0] == 'modify':
-                        self.Qbtn_modify.setEnabled(True)
-                        self.Qbtn_modify.clicked.connect(self.FN_MODIFY_REDITEM)
-                    elif result[0] == 'upload':
-                        try:
-                            self.Qbtn_upload.setEnabled(True)
-                            self.Qbtn_upload.clicked.connect(self.FN_UPLOAD_REDITEM)
-                        except Exception as err:
-                            print(err)
+            valid_from = str(datetime.today().strftime('%Y-%m-%d'))
 
-        valid_from = str(datetime.today().strftime('%Y-%m-%d'))
+            xto = valid_from.split("-")
+            print(xto)
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+            self.Qdate_from.setDate(d)
+            # Todo: method for get branches
 
-        xto = valid_from.split("-")
-        print(xto)
-        d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
-        self.Qdate_from.setDate(d)
-        # Todo: method for get branches
-
-
+        except Exception as err:
+            print(err)
 
     def FN_SEARCH_REDITEM(self):
        try:
@@ -297,60 +293,61 @@ class CL_redItem(QtWidgets.QDialog):
                 rowNo = self.Qtable_redeem.selectedItems()[0].row()
                 branch = self.Qtable_redeem.item(rowNo, 2).text()
                 br_id = util.FN_GET_BRANCH_ID(branch, '1')
+                self.found = 0
+                for br in CL_userModule.branch:
+                    if br_id == br[0]:
+                        self.found=1
+                        bar = self.Qtable_redeem.item(rowNo, 0).text()
+                        company = self.Qtable_redeem.item(rowNo, 1).text()
 
-                if br_id in CL_userModule.branch[0]:
-                    bar = self.Qtable_redeem.item(rowNo, 0).text()
-                    company = self.Qtable_redeem.item(rowNo, 1).text()
+                        points = self.Qtable_redeem.item(rowNo, 3).text()
+                        valid_from = self.Qtable_redeem.item(rowNo, 4).text()
+                        valid_to = self.Qtable_redeem.item(rowNo, 5).text()
+                        status = self.Qtable_redeem.item(rowNo, 6).text()
+                        self.Qline_barcode.setText(bar)
+                        self.Qline_points.setText(points)
 
-                    points = self.Qtable_redeem.item(rowNo, 3).text()
-                    valid_from = self.Qtable_redeem.item(rowNo, 4).text()
-                    valid_to = self.Qtable_redeem.item(rowNo, 5).text()
-                    status = self.Qtable_redeem.item(rowNo, 6).text()
-                    self.Qline_barcode.setText(bar)
-                    self.Qline_points.setText(points)
+                        self.old_points = points
+                        self.old_valid_from = valid_from
+                        self.old_valid_to = valid_to
+                        self.old_status = status
 
-                    self.old_points = points
-                    self.old_valid_from = valid_from
-                    self.old_valid_to = valid_to
-                    self.old_status = status
+                        self.Qcombo_group3.hide()
+                        self.Qcombo_group4.hide()
+                        self.CMB_branch.show()
+                        self.CMB_company.show()
 
-                    self.Qcombo_group3.hide()
-                    self.Qcombo_group4.hide()
-                    self.CMB_branch.show()
-                    self.CMB_company.show()
+                        # comp = util.FN_GET_COMP_ID(company)
+                        # br =util.FN_GET_BRANCH_DESC(branch)
 
-                    # comp = util.FN_GET_COMP_ID(company)
-                    # br =util.FN_GET_BRANCH_DESC(branch)
+                        # print(br)
+                        self.CMB_branch.setCurrentText(branch)
+                        self.CMB_company.setCurrentText(company)
 
-                    # print(br)
-                    self.CMB_branch.setCurrentText(branch)
-                    self.CMB_company.setCurrentText(company)
+                        self.Qline_barcode.setEnabled(False)
 
-                    self.Qline_barcode.setEnabled(False)
+                        # self.CMB_company.hide()
+                        # self.CMB_branch.hide()
+                        if status == 'Active':
+                            self.Qradio_active.setChecked(True)
+                        else:
+                            self.Qradio_inactive.setChecked(True)
 
-                    # self.CMB_company.hide()
-                    # self.CMB_branch.hide()
-                    if status == 'Active':
-                        self.Qradio_active.setChecked(True)
-                    else:
-                        self.Qradio_inactive.setChecked(True)
+                        xto = valid_from.split("-")
 
-                    xto = valid_from.split("-")
+                        d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+                        self.Qdate_from.setDate(d)
 
-                    d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
-                    self.Qdate_from.setDate(d)
+                        xto = valid_to.split("-")
 
-                    xto = valid_to.split("-")
+                        d1 = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+                        self.Qdate_to.setDate(d1)
 
-                    d1 = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
-                    self.Qdate_to.setDate(d1)
-                else:
+                if self.found == 0:
                     QtWidgets.QMessageBox.warning(self, "خطأ", "ليس لك صلاحيه على هذا الفرع")
-
-
-        except (Error, Warning) as e:
-
-            return False
+        except Exception as err:
+            print(err)
+        return False
 
     def FN_MODIFY_REDITEM(self):
         try:

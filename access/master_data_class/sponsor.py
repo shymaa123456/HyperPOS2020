@@ -28,6 +28,20 @@ class CL_sponsor(QtWidgets.QDialog):
         mycursor.close()
 
         return records
+    def FN_GET_SPONSORTYPEDESC(self,id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute(
+            "SELECT SPONSOR_TYPE_DESC  FROM Hyper1_Retail.SPONSOR_TYPE  where  SPONSOR_TYPE = '"+id+"'")
+        records = mycursor.fetchone()
+        return records[0]
+    def FN_GET_SPONSORTYPEID(self,desc):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute(
+            "SELECT SPONSOR_TYPE  FROM Hyper1_Retail.SPONSOR_TYPE  where  SPONSOR_TYPE_DESC = '"+desc+"'")
+        records = mycursor.fetchone()
+        return records[0]
     def FN_LOAD_DISPlAY(self):
         try:
             filename = self.dirname + '/sponsor.ui'
@@ -88,7 +102,9 @@ class CL_sponsor(QtWidgets.QDialog):
                     if column_number == 9 :
                         data = util.FN_GET_STATUS_DESC(str(data))
                         item = QTableWidgetItem(str(data))
-                   
+                    elif column_number == 2:
+                        data = self.FN_GET_SPONSORTYPEDESC(str(data))
+                        item = QTableWidgetItem(str(data))
                     else:
                         item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemFlags(~QtCore.Qt.ItemIsEditable))
@@ -116,6 +132,9 @@ class CL_sponsor(QtWidgets.QDialog):
 
                     if column_number == 9:
                         data = util.FN_GET_STATUS_DESC(str(data))
+                        item = QTableWidgetItem(str(data))
+                    elif column_number == 2:
+                        data = self.FN_GET_SPONSORTYPEDESC(str(data))
                         item = QTableWidgetItem(str(data))
                     else:
                         item = QTableWidgetItem(str(data))
@@ -150,6 +169,7 @@ class CL_sponsor(QtWidgets.QDialog):
                 self.LB_status.setText(util.FN_GET_STATUS_id(status))
                 self.LB_id.setText(sponsorId)
                 self.CMB_sponsorType.setCurrentText(sponsorType)
+                self.CMB_status.setCurrentText(status)
                 # self.FN_MODIFY_CUSTTP()
         except Exception as err:
             print(err)
@@ -177,7 +197,7 @@ class CL_sponsor(QtWidgets.QDialog):
 
     def FN_CREATE(self):
         self.conn = db1.connect()
-        mycursor = self.conn1.cursor()
+        mycursor = self.conn.cursor()
 
         sponsorCode= self.LE_code.text().strip()
         name = self.LE_desc.text().strip()
@@ -209,12 +229,8 @@ class CL_sponsor(QtWidgets.QDialog):
 
                     sql = "INSERT INTO `Hyper1_Retail`.`SPONSOR` (`SPONSOR_ID`,`SPONSOR_SAP_CODE`,`SPONSOR_NAME`,`SPONSOR_TYPE`," \
                           "`SPONSOR_ADDRESS`,`SPONSOR_CONTACT_PERSON`,`SPONSOR_EMAIL`,`SPONSOR_TEL`,`SPONSOR_FAX`,`SPONSOR_STATUS`)   VALUES ( %s, %s,%s, %s,%s, %s,%s, %s,%s, %s)"
-                    val = (id,sponsorCode,name,sponsorType,address,contactPerson ,email,phone1,fax,'',status )
+                    val = (id,sponsorCode,name,sponsorType,address,contactPerson ,email,phone1,fax,status )
                     mycursor.execute(sql, val)
-                    # mycursor.execute(sql)
-
-
-
                     print(mycursor.rowcount, "sponsor inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)

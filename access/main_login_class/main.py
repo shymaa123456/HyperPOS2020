@@ -5,7 +5,12 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.configuration_class.AssignGroupkey import CL_FNGroupKey
+from access.configuration_class.AssignPosGroup import CL_FNGroupPos
+from access.configuration_class.AssignPosGroupItem import CL_FNGroupPosItem
 from access.configuration_class.Group import CL_FNGroup
+from access.configuration_class.GroupItem import CL_ItemGroup
+from access.configuration_class.Key import CL_FNKey
 from access.configuration_class.Parameters import CL_Parameters
 from access.configuration_class.Pos_Parameter import CL_Pos_Parameters
 from access.configuration_class.Check_List import CL_HW_Parameter
@@ -208,6 +213,11 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_Pos_Parameter.clicked.connect(self.FN_Pos_Parameter)
             self.QAct_Pos_Parameter_Modify.clicked.connect(self.FN_Pos_Parameter_Modify)
             self.QAct_FN_Group.clicked.connect(self.FN_FNGroup)
+            self.QAct_FN_Key.clicked.connect(self.FN_FNKey)
+            self.QAct_group_key.clicked.connect(self.FN_FNGrouptokey)
+            self.QAct_assign_pos.clicked.connect(self.FN_FNGroupPos)
+            self.QAct_item_Group.clicked.connect(self.FN_ItemGroup)
+            self.QAct_assign_pos_groupitem.clicked.connect(self.FN_FNGroupPositem)
 
 
             self.QAct_sponsor.clicked.connect(self.FN_sponsor)
@@ -287,7 +297,13 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_bank = 0
             self.window_posparameter=0
             self.window_FnGroup=0
+            self.window_FnKey=0
+
+            self.window_FNGroupPos=0
             self.window_posparameter_modify=0
+            self.window_ItemGroup=0
+            self.window_ItemGrouppos=0
+
             self.window_sponsor = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
@@ -396,6 +412,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_VAT.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_VAT.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_VAT)
+
     def FN_bank(self):
         if self.window_bank == 0:
             self.window_bank = CL_bank()
@@ -437,6 +454,70 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedHeight(self.window_FnGroup.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_FnGroup)
 
+    def FN_ItemGroup(self):
+        if self.window_ItemGroup == 0:
+            self.window_ItemGroup = CL_ItemGroup()
+            self.window_ItemGroup.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_ItemGroup, 'Pos Item Group')
+            self.ui.tabWidget.setFixedWidth(self.window_ItemGroup.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_ItemGroup.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_ItemGroup)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_ItemGroup.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_ItemGroup.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_ItemGroup)
+
+    def FN_FNKey(self):
+        if self.window_FnKey == 0:
+            self.window_FnKey = CL_FNKey()
+            self.window_FnKey.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FnKey, 'Pos Function Key')
+            self.ui.tabWidget.setFixedWidth(self.window_FnKey.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnKey.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnKey)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FnKey.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnKey.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnKey)
+
+    def FN_FNGroupPos(self):
+        if self.window_FNGroupPos == 0:
+            self.window_FNGroupPos = CL_FNGroupPos()
+            self.window_FNGroupPos.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FNGroupPos, 'Assign Group to Pos')
+            self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+
+    def FN_FNGroupPositem(self):
+        if self.window_FNGroupPos == 0:
+            self.window_FNGroupPos = CL_FNGroupPosItem()
+            self.window_FNGroupPos.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FNGroupPos, 'Assign Group to Pos item')
+            self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+
+    def FN_FNGrouptokey(self):
+        if self.window_FnKey == 0:
+            self.window_FnKey = CL_FNGroupKey()
+            self.window_FnKey.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FnKey, 'Assign Group to key')
+            self.ui.tabWidget.setFixedWidth(self.window_FnKey.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnKey.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnKey)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FnKey.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnKey.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnKey)
 
 
 
@@ -1702,6 +1783,12 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_List = 0
         if self.window_FnGroup not in li:
             self.window_FnGroup = 0
+        if self.window_FnKey not in li:
+            self.window_FnKey = 0
+        if self.window_posparameter_modify not in li:
+            self.window_posparameter_modify = 0
+        if self.window_ItemGrouppos not in li:
+            self.window_posparameter_modify = 0
 
         if len(li) == 0:
             self.ui.tabWidget.setFixedWidth(1000)

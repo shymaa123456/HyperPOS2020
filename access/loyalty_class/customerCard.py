@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QRegExpValidator, QIntValidator
 from PyQt5.QtCore import QRegExp, QDate
-from cryptography.fernet import Fernet
+#from cryptography.fernet import Fernet
 
 from access.authorization_class.user_module import CL_userModule
 from data_connection.h1pos import db1

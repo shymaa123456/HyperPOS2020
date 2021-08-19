@@ -543,6 +543,10 @@ class CL_installment(QtWidgets.QDialog):
                         #validate for check if barcode belong to selected BMC
                         elif self.FN_ValidateIfRelateToDepartmentSectionBMC(str(sheet.cell_value(i,0)),checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel) == False:
                             QtWidgets.QMessageBox.warning(self, "Error", "Barcode doesn't belong to same BMC"+str(sheet.cell_value(i,0)))
+                        #validate if barcode in pos_items
+                        elif self.FN_ValidateIfBarcodeInPos_item(str(sheet.cell_value(i, 0))) == False:
+                            QtWidgets.QMessageBox.warning(self, "Error", "Barcode doesn't found in pos_item " + str(
+                                sheet.cell_value(i, 0)))
                         else:
                             #for row_number, row_data in enumerate(records):
                             QTableWidgit.insertRow(i)
@@ -610,6 +614,24 @@ class CL_installment(QtWidgets.QDialog):
         """
 
         return  BarcodeFound
+
+
+    # TODO Validate if barcode in pos_item
+    def FN_ValidateIfBarcodeInPos_item(self,ValidateBarcode ):
+
+                self.conn = db1.connect()
+                mycursor = self.conn.cursor()
+                #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
+                sql="select POS_GTIN   from Hyper1_Retail.POS_ITEM where POS_GTIN ='"+ValidateBarcode+"'"
+
+                mycursor.execute(sql)
+                myresult = mycursor.fetchall()
+                print("FN_ValidateIfBarcodeInPos_item",len(myresult))
+                if len(myresult) == 0:
+                    return False
+                else:
+                    return True
+
 
     # TODO Validate if barcode belong to selected BMC
     def FN_ValidateIfRelateToDepartmentSectionBMC(self,ValidateBarcode,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel ):
@@ -994,6 +1016,11 @@ class CL_installment(QtWidgets.QDialog):
         elif self.Qtable_acceptedItems.rowCount() == 0 and not self.checkBox_department.isChecked():
             QtWidgets.QMessageBox.warning(self, "Error", " يرجى إدخال اصناف التقسيط او اختيار الاقسام")
             error = 0
+        elif (self.Qdate_from.date() >= self.Qdate_to.date()) :
+                #\ and int(self.Qtime_from.dateTime().toString('hh')) + int(self.Qtime_from.dateTime().toString('mm')) > \
+                # int(self.Qtime_to.dateTime().toString('hh')) + int(self.Qtime_to.dateTime().toString('mm')):
+            QtWidgets.QMessageBox.warning(self, "خطا", "وقت الانتهاء يجب ان يكون اكبر من وقت الانشاء")
+            error =0
 
         elif self.checkBox_department.isChecked() and len(self.Qcombo_department.currentData()) == 0:
             QtWidgets.QMessageBox.warning(self, "Error", " يرجى أختيار الأداره")

@@ -1361,7 +1361,7 @@ class CL_main(QtWidgets.QMainWindow):
                 self.ui.tabWidget.setFixedHeight(self.window_Create_Customer_Service.frameGeometry().height())
                 self.ui.tabWidget.setCurrentWidget(self.window_Create_Customer_Service)
             else:
-                self.ui.tabWidget.setFixedWidth(self.window_Pwindow_Customer_ServicerintCoupon.frameGeometry().width())
+                self.ui.tabWidget.setFixedWidth(self.window_Create_Customer_Service.frameGeometry().width())
                 self.ui.tabWidget.setFixedHeight(self.window_Create_Customer_Service.frameGeometry().height())
                 self.ui.tabWidget.setCurrentWidget(self.window_Create_Customer_Service)
         except Exception as err:

@@ -188,46 +188,48 @@ class CL_bank(QtWidgets.QDialog):
                 print(err)
 
     def FN_MODIFY(self):
-        self.conn1 = db1.connect()
-        if len(self.Qtable.selectedIndexes()) >0 :
-            rowNo = self.Qtable.selectedItems()[0].row()
-            id = self.LB_id.text().strip()
-            desc_old = self.Qtable.item(rowNo, 1).text()
-            status_old =  self.Qtable.item(rowNo, 2).text()
-            desc = self.LE_desc.text().strip()
-            status = self.LB_status.text().strip()
-            accountNo = self.LE_accountNo.text().strip()
-            address = self.LE_address.text().strip()
+        try:
+            self.conn1 = db1.connect()
+            if len(self.Qtable.selectedIndexes()) >0 :
+                rowNo = self.Qtable.selectedItems()[0].row()
+                id = self.LB_id.text().strip()
+                desc_old = self.Qtable.item(rowNo, 1).text()
+                status_old =  self.Qtable.item(rowNo, 2).text()
+                desc = self.LE_desc.text().strip()
+                status = self.LB_status.text().strip()
+                accountNo = self.LE_accountNo.text().strip()
+                address = self.LE_address.text().strip()
 
-            error = 0
-            if self.desc == '':
-                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
+                error = 0
+                if self.desc == '':
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
 
+                else:
+                    if desc != desc_old:
+                        if self.FN_CHECK_DUP_NAME(desc,id) != False:
+                            QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
+                            error=1
+
+                    if error!=1:
+                        mycursor = self.conn1.cursor()
+                        changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
+                        sql = "UPDATE Hyper1_Retail.BANK SET `Bank_Desc` = %s, Bank_Status = %s ,Bank_Account_No=%s , Bank_Address=%s ,Bank_Changed_By=%s,Bank_Changed_On = %s " \
+                              " WHERE Bank_ID = %s"
+                        val = (desc,status, accountNo,address,CL_userModule.user_name,changeDate,id)
+                        mycursor.execute(sql, val)
+                        #mycursor.close()
+                        #
+                        print(mycursor.rowcount, "record updated.")
+                        QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل")
+                        db1.connectionCommit(self.conn1)
+                        self.FN_GET_ALL()
+                        self.FN_CLEAR_FEILDS ()
+                        if str(status) != str(status_old):
+                            util.FN_INSERT_IN_LOG("Bank", "status", status, status_old, id)
             else:
-                if desc != desc_old:
-                    if self.FN_CHECK_DUP_NAME(desc,id) != False:
-                        QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
-                        error=1
-
-                if error!=1:
-                    mycursor = self.conn1.cursor()
-                    changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
-                    sql = "UPDATE Hyper1_Retail.BANK SET `Bank_Desc` = %s, Bank_Status = %s ,Bank_Account_No=%s , Bank_Address=%s ,Bank_Changed_By=%s,Bank_Changed_On = %s " \
-                          " WHERE Bank_ID = %s"
-                    val = (desc,status, accountNo,address,changeDate,CL_userModule.user_name,id)
-                    mycursor.execute(sql, val)
-                    #mycursor.close()
-                    #
-                    print(mycursor.rowcount, "record updated.")
-                    QtWidgets.QMessageBox.information(self, "نجاح", "تم التعديل")
-                    db1.connectionCommit(self.conn1)
-                    self.FN_GET_ALL()
-                    self.FN_CLEAR_FEILDS ()
-                    if str(status) != str(status_old):
-                        util.FN_INSERT_IN_LOG("Bank", "status", status, status_old, id)
-        else:
-            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
-
+                QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
+        except Exception as err:
+                print(err)
     def FN_CLEAR_FEILDS (self):
         self.LB_id.clear()
         self.LE_desc.clear()

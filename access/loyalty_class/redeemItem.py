@@ -426,8 +426,7 @@ class CL_redItem(QtWidgets.QDialog):
             self.BTN_browse.clicked.connect(self.FN_OPEN_FILE)
             self.BTN_load.clicked.connect(self.FN_SAVE_UPLOAD)
             self.BTN_uploadTemp.clicked.connect(self.FN_DISPLAY_TEMP1)
-            self.setFixedWidth(590)
-            self.setFixedHeight(175)
+
             # self.fileName = ''
         except (Error, Warning) as e:
             print(e)

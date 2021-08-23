@@ -441,7 +441,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_sponsor)
-
+#sdfds
     def FN_VAT(self):
         if self.window_VAT == 0:
             self.window_VAT = CL_VAT()
@@ -693,7 +693,7 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_CREATE_LOYPROG(self):
         if self.window_CREATE_LOYPROG == 0:
-            self.window_CREATE_LOYPROG = CL_loyProg('aaaaa')
+            self.window_CREATE_LOYPROG = CL_loyProg()
             self.window_CREATE_LOYPROG.FN_LOAD_DISPLAY()
             self.ui.tabWidget.addTab(self.window_CREATE_LOYPROG, 'انشاء برنامج عضوية')
             self.ui.tabWidget.setFixedWidth(self.window_CREATE_LOYPROG.frameGeometry().width())

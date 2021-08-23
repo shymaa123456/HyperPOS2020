@@ -5,8 +5,14 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 
+from access.configuration_class.AssignGroupkey import CL_FNGroupKey
+from access.configuration_class.AssignPosGroup import CL_FNGroupPos
+from access.configuration_class.AssignPosGroupItem import CL_FNGroupPosItem
 from access.configuration_class.Group import CL_FNGroup
+from access.configuration_class.GroupItem import CL_ItemGroup
+from access.configuration_class.Key import CL_FNKey
 from access.configuration_class.Parameters import CL_Parameters
+from access.configuration_class.PosWorkingDay import CL_WorkingDay
 from access.configuration_class.Pos_Parameter import CL_Pos_Parameters
 from access.configuration_class.Check_List import CL_HW_Parameter
 from access.configuration_class.List import CL_List
@@ -32,8 +38,10 @@ from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.loyalty_class.uploadCustomer import CL_customer
 from access.master_data_class.VAT import CL_VAT
 from access.master_data_class.bank import CL_bank
+from access.master_data_class.city import CL_city
 from access.master_data_class.company import CL_company
 from access.master_data_class.branch import CL_branch
+from access.master_data_class.district import CL_district
 from access.master_data_class.installmentType import CL_installmentType
 from access.master_data_class.paymentType import CL_paymentType
 from access.master_data_class.posAction import CL_posAction
@@ -103,6 +111,7 @@ class CL_main(QtWidgets.QMainWindow):
             CL_userModule.FN_AuthBranchUser(self)
             CL_userModule.FN_AuthSectionUser(self)
             CL_userModule.FN_FuncKey(self)
+            CL_userModule.FN_userlogin(self)
             for row_number, row_data in enumerate(CL_userModule.myList):
                 forms.append(row_data[1])
 
@@ -205,9 +214,19 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_posAction.clicked.connect(self.FN_posAction)
             self.QAct_VAT.clicked.connect(self.FN_VAT)
             self.QAct_bank.clicked.connect(self.FN_bank)
+            self.QAct_city.clicked.connect(self.FN_city)
+            self.QAct_district.clicked.connect(self.FN_district)
+
             self.QAct_Pos_Parameter.clicked.connect(self.FN_Pos_Parameter)
             self.QAct_Pos_Parameter_Modify.clicked.connect(self.FN_Pos_Parameter_Modify)
             self.QAct_FN_Group.clicked.connect(self.FN_FNGroup)
+            self.QAct_FN_Key.clicked.connect(self.FN_FNKey)
+            self.QAct_group_key.clicked.connect(self.FN_FNGrouptokey)
+            self.QAct_assign_pos.clicked.connect(self.FN_FNGroupPos)
+            self.QAct_item_Group.clicked.connect(self.FN_ItemGroup)
+            self.QAct_assign_pos_groupitem.clicked.connect(self.FN_FNGroupPositem)
+            self.QAct_workingDay.clicked.connect(self.FN_PosWorkingDay)
+            self.QAct_copypos.clicked.connect(self.FN_PosWorkingDay)
 
 
             self.QAct_sponsor.clicked.connect(self.FN_sponsor)
@@ -285,9 +304,19 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_posAction = 0
             self.window_VAT = 0
             self.window_bank = 0
+            self.window_city = 0
+            self.window_district = 0
             self.window_posparameter=0
             self.window_FnGroup=0
+            self.window_FnKey=0
+            self.window_copypos=0
+
+            self.window_FNGroupPos=0
             self.window_posparameter_modify=0
+            self.window_ItemGroup=0
+            self.window_ItemGrouppos=0
+            self.window_PosWorkingDay=0
+
             self.window_sponsor = 0
             #self.ui.tabWidget.blockSignals(True)
             self.ui.tabWidget.currentChanged.connect(self.onChange)
@@ -305,7 +334,36 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.widget.setVisible(False)
         else:
             self.ui.widget.setVisible(True)
-
+    def FN_city(self):
+        try:
+            if self.window_city == 0:
+                self.window_city = CL_city()
+                self.window_city.FN_LOAD_DISPlAY()
+                self.ui.tabWidget.addTab(self.window_city, 'الشركات')
+                self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_city)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_city)
+        except Exception as err:
+         print(err)
+    def FN_district(self):
+        try:
+            if self.window_district == 0:
+                self.window_district = CL_district()
+                self.window_district.FN_LOAD_DISPlAY()
+                self.ui.tabWidget.addTab(self.window_district, 'الشركات')
+                self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_district)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_district)
+        except Exception as err:
+         print(err)
     def FN_company(self):
         try:
             if self.window_company == 0:
@@ -383,7 +441,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_sponsor)
-
+#sdfds
     def FN_VAT(self):
         if self.window_VAT == 0:
             self.window_VAT = CL_VAT()
@@ -396,6 +454,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_VAT.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_VAT.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_VAT)
+
     def FN_bank(self):
         if self.window_bank == 0:
             self.window_bank = CL_bank()
@@ -437,6 +496,98 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedHeight(self.window_FnGroup.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_FnGroup)
 
+    def FN_ItemGroup(self):
+        if self.window_ItemGroup == 0:
+            self.window_ItemGroup = CL_ItemGroup()
+            self.window_ItemGroup.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_ItemGroup, 'Pos Item Group')
+            self.ui.tabWidget.setFixedWidth(self.window_ItemGroup.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_ItemGroup.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_ItemGroup)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_ItemGroup.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_ItemGroup.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_ItemGroup)
+
+    def FN_FNKey(self):
+        if self.window_FnKey == 0:
+            self.window_FnKey = CL_FNKey()
+            self.window_FnKey.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FnKey, 'Pos Function Key')
+            self.ui.tabWidget.setFixedWidth(self.window_FnKey.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnKey.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnKey)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FnKey.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnKey.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnKey)
+
+    def FN_FNGroupPos(self):
+        if self.window_FNGroupPos == 0:
+            self.window_FNGroupPos = CL_FNGroupPos()
+            self.window_FNGroupPos.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FNGroupPos, 'Assign Group to Pos')
+            self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+
+    def FN_FNGroupPositem(self):
+        if self.window_FNGroupPos == 0:
+            self.window_FNGroupPos = CL_FNGroupPosItem()
+            self.window_FNGroupPos.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FNGroupPos, 'Assign Group to Pos item')
+            self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+
+
+
+    def FN_PosWorkingDay(self):
+        if self.window_PosWorkingDay == 0:
+            self.window_PosWorkingDay = CL_WorkingDay()
+            self.window_PosWorkingDay.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_PosWorkingDay, 'Pos Working Day')
+            self.ui.tabWidget.setFixedWidth(self.window_PosWorkingDay.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_PosWorkingDay.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_PosWorkingDay)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_PosWorkingDay.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_PosWorkingDay.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_PosWorkingDay)
+
+    def FN_Copypos(self):
+        if self.window_copypos == 0:
+            self.window_copypos = CL_WorkingDay()
+            self.window_copypos.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_copypos, 'Pos Working Day')
+            self.ui.tabWidget.setFixedWidth(self.window_copypos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_copypos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_copypos)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_copypos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_copypos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_copypos)
+
+    def FN_FNGrouptokey(self):
+        if self.window_FnKey == 0:
+            self.window_FnKey = CL_FNGroupKey()
+            self.window_FnKey.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_FnKey, 'Assign Group to key')
+            self.ui.tabWidget.setFixedWidth(self.window_FnKey.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnKey.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnKey)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_FnKey.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_FnKey.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_FnKey)
 
 
 
@@ -542,7 +693,7 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_CREATE_LOYPROG(self):
         if self.window_CREATE_LOYPROG == 0:
-            self.window_CREATE_LOYPROG = CL_loyProg('aaaaa')
+            self.window_CREATE_LOYPROG = CL_loyProg()
             self.window_CREATE_LOYPROG.FN_LOAD_DISPLAY()
             self.ui.tabWidget.addTab(self.window_CREATE_LOYPROG, 'انشاء برنامج عضوية')
             self.ui.tabWidget.setFixedWidth(self.window_CREATE_LOYPROG.frameGeometry().width())
@@ -1554,6 +1705,12 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_bank:
             self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_city:
+            self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_district:
+            self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
         elif self.ui.tabWidget.currentWidget() == self.window_sponsor:
             self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
@@ -1688,6 +1845,10 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_VAT = 0
         if self.window_bank not in li:
             self.window_bank = 0
+        if self.window_city not in li:
+            self.window_city = 0
+        if self.window_district not in li:
+            self.window_district = 0
         if self.window_paymentType not in li:
             self.window_paymentType = 0
         if self.window_posAction not in li:
@@ -1702,6 +1863,12 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_List = 0
         if self.window_FnGroup not in li:
             self.window_FnGroup = 0
+        if self.window_FnKey not in li:
+            self.window_FnKey = 0
+        if self.window_posparameter_modify not in li:
+            self.window_posparameter_modify = 0
+        if self.window_ItemGrouppos not in li:
+            self.window_posparameter_modify = 0
 
         if len(li) == 0:
             self.ui.tabWidget.setFixedWidth(1000)

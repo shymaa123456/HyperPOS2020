@@ -37,8 +37,10 @@ from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.loyalty_class.uploadCustomer import CL_customer
 from access.master_data_class.VAT import CL_VAT
 from access.master_data_class.bank import CL_bank
+from access.master_data_class.city import CL_city
 from access.master_data_class.company import CL_company
 from access.master_data_class.branch import CL_branch
+from access.master_data_class.district import CL_district
 from access.master_data_class.installmentType import CL_installmentType
 from access.master_data_class.paymentType import CL_paymentType
 from access.master_data_class.posAction import CL_posAction
@@ -210,6 +212,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_posAction.clicked.connect(self.FN_posAction)
             self.QAct_VAT.clicked.connect(self.FN_VAT)
             self.QAct_bank.clicked.connect(self.FN_bank)
+            self.QAct_city.clicked.connect(self.FN_city)
+            self.QAct_district.clicked.connect(self.FN_district)
+
             self.QAct_Pos_Parameter.clicked.connect(self.FN_Pos_Parameter)
             self.QAct_Pos_Parameter_Modify.clicked.connect(self.FN_Pos_Parameter_Modify)
             self.QAct_FN_Group.clicked.connect(self.FN_FNGroup)
@@ -295,6 +300,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_posAction = 0
             self.window_VAT = 0
             self.window_bank = 0
+            self.window_city = 0
+            self.window_district = 0
             self.window_posparameter=0
             self.window_FnGroup=0
             self.window_FnKey=0
@@ -321,7 +328,36 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.widget.setVisible(False)
         else:
             self.ui.widget.setVisible(True)
-
+    def FN_city(self):
+        try:
+            if self.window_city == 0:
+                self.window_city = CL_city()
+                self.window_city.FN_LOAD_DISPlAY()
+                self.ui.tabWidget.addTab(self.window_city, 'الشركات')
+                self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_city)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_city)
+        except Exception as err:
+         print(err)
+    def FN_district(self):
+        try:
+            if self.window_district == 0:
+                self.window_district = CL_district()
+                self.window_district.FN_LOAD_DISPlAY()
+                self.ui.tabWidget.addTab(self.window_district, 'الشركات')
+                self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_district)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_district)
+        except Exception as err:
+         print(err)
     def FN_company(self):
         try:
             if self.window_company == 0:
@@ -1635,6 +1671,12 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_bank:
             self.ui.tabWidget.setFixedWidth(self.window_bank.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_bank.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_city:
+            self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_district:
+            self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
         elif self.ui.tabWidget.currentWidget() == self.window_sponsor:
             self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
@@ -1769,6 +1811,10 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_VAT = 0
         if self.window_bank not in li:
             self.window_bank = 0
+        if self.window_city not in li:
+            self.window_city = 0
+        if self.window_district not in li:
+            self.window_district = 0
         if self.window_paymentType not in li:
             self.window_paymentType = 0
         if self.window_posAction not in li:

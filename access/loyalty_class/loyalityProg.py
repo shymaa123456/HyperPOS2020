@@ -22,13 +22,13 @@ from access.utils.util import *
 class CL_loyProg(QtWidgets.QDialog):
     switch_window = QtCore.pyqtSignal()
     dirname = ''
-    def __init__(self,pp):
+    def __init__(self):
         super(CL_loyProg, self).__init__()
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/loyalty_ui'
         self.creationDate1 = str(datetime.today().strftime('%Y-%m-%d'))
-        self.p=pp
+        #self.p=pp
     def onClicked(self):
         #radioButton = self.sender()
         #print(radioButton.name)
@@ -47,6 +47,10 @@ class CL_loyProg(QtWidgets.QDialog):
     def FN_LOAD_DISPLAY(self):
         filename = self.dirname + '/createModifyLoyalityProg.ui'
         loadUi(filename, self)
+
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
         conn = db1.connect()
         mycursor = conn.cursor()
 
@@ -79,10 +83,9 @@ class CL_loyProg(QtWidgets.QDialog):
         self.Qcombo_group5.setStyleSheet("background-color: rgb(198, 207, 199)")
 
         self.Qcombo_group6 = CheckableComboBox(self)
-        self.Qcombo_group6.setGeometry(205, 152, 120, 18)
+        self.Qcombo_group6.setGeometry(170, 190, 120, 18)
         self.Qcombo_group6.setStyleSheet("background-color: rgb(198, 207, 199)")
-        self.setFixedWidth(1028)
-        self.setFixedHeight(560)
+
         self.CMB_custGroup.hide()
         self.CMB_branch.hide()
         self.CMB_company.hide()
@@ -773,10 +776,13 @@ class CL_loyProg(QtWidgets.QDialog):
         self.Qtable_loyality.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
     def FN_UPLOAD_LOYPROG(self):
-        self.window_two = CL_loyProg()
-        self.window_two.FN_LOAD_UPLOAD()
-        self.window_two.show()
+        try:
+            self.window_two = CL_loyProg()
+            self.window_two.FN_LOAD_UPLOAD()
+            self.window_two.show()
 
+        except Exception as err:
+            print(err)
     def FN_OPEN_FILE(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog

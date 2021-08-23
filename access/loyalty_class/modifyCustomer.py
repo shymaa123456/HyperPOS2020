@@ -47,9 +47,9 @@ class CL_customer_modify(QtWidgets.QDialog):
 
             self.CMB_city.currentIndexChanged.connect(self.FN_GET_DISTRICT)
             self.BTN_modifyCustomer.clicked.connect(self.FN_MODIFY_CUST)
-
-            #self.setFixedWidth(1056)
-            #self.setFixedHeight(540)
+            css_path = Path(__file__).parent.parent.parent
+            path = css_path.__str__() + '/presentation/Themes/Style.css'
+            self.setStyleSheet(open(path).read())
 
         except Exception as err:
             print(err)

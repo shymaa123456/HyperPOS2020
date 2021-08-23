@@ -659,7 +659,7 @@ class CL_main(QtWidgets.QMainWindow):
 
     def FN_CREATE_LOYPROG(self):
         if self.window_CREATE_LOYPROG == 0:
-            self.window_CREATE_LOYPROG = CL_loyProg('aaaaa')
+            self.window_CREATE_LOYPROG = CL_loyProg()
             self.window_CREATE_LOYPROG.FN_LOAD_DISPLAY()
             self.ui.tabWidget.addTab(self.window_CREATE_LOYPROG, 'انشاء برنامج عضوية')
             self.ui.tabWidget.setFixedWidth(self.window_CREATE_LOYPROG.frameGeometry().width())

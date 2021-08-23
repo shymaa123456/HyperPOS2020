@@ -435,7 +435,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_sponsor)
-
+#sdfds
     def FN_VAT(self):
         if self.window_VAT == 0:
             self.window_VAT = CL_VAT()

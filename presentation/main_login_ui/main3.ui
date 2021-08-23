@@ -2008,9 +2008,9 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_32">
               <property name="geometry">
                <rect>
-                <x>-22</x>
+                <x>-27</x>
                 <y>-62</y>
-                <width>194</width>
+                <width>199</width>
                 <height>395</height>
                </rect>
               </property>
@@ -2142,7 +2142,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <item row="12" column="1">
                 <widget class="QPushButton" name="QAct_assign_pos_groupitem">
                  <property name="text">
-                  <string>Assign Pos Group Item</string>
+                  <string>Assign Pos Group Item </string>
                  </property>
                 </widget>
                </item>

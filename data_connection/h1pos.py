@@ -14,7 +14,13 @@ class db1():
                                              , user='pos', port='3306')
         return connection
 
-
+    """
+    @staticmethod
+    def FN_connectioncursor():
+        connection = mysql.connector.connect(host='10.2.1.190', database='Hyper1_Retail', password='Hyper1@POS'
+                                             , user='pos', port='3306')
+        return connection.cursor()
+    """
 
     @staticmethod
     def connectionClose(conn):

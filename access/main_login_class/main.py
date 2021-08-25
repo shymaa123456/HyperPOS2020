@@ -83,8 +83,11 @@ from access.promotion_voucher_class.PromotionVoucher import CL_PromVoucher
 from access.customer_service_class.modifyCustomerComplain import CL_CustService_modify
 from access.customer_service_class.createCustomerComplain import CL_CustService_create
 
+from data_connection.h1pos import db1
+
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
+    #mycursor=''
 
     def __init__(self):
         try:
@@ -95,6 +98,9 @@ class CL_main(QtWidgets.QMainWindow):
             dirname = mod_path.__str__() + '/presentation/main_login_ui'
             filename = dirname + '/main3.ui'
             self.ui = loadUi(filename, self)
+            #self.conn = db1.connect()
+            #self.mycursor = self.conn.cursor()
+
             #self.toolBox.setAlignment(QtCore.Qt.AlignRight)
             #self.toolBox.setTextAlignment(QtCore.Qt.AlignCenter)
             #self.toolBox.setTextAlignment(QtCore.Qt.RightToLeft)
@@ -841,6 +847,7 @@ class CL_main(QtWidgets.QMainWindow):
         QApplication.quit()
 
 
+
     def FN_display_item(self):
         if self.window_display_item == 0:
             self.window_display_item = CL_formItem()
@@ -1306,6 +1313,8 @@ class CL_main(QtWidgets.QMainWindow):
 
         if reply == QMessageBox.Yes:
             QApplication.quit()
+            #self.mycursor.close()
+
         else:
             event.ignore()
 

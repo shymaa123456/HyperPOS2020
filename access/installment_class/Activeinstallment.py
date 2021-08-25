@@ -16,9 +16,12 @@ class CL_installment_Activation(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/installment_ui'
-        self.conn = db1.connect()
-        self.parent = parentInit
 
+        self.parent = parentInit
+        self.conn = db1.connect()
+        self.mycursor = self.conn.cursor()
+
+        self.conn.start_transaction()
 
     def FN_LOAD_Activation(self):
         filename = self.dirname + '/Activate_InstallmentProgram.ui'
@@ -33,14 +36,14 @@ class CL_installment_Activation(QtWidgets.QDialog):
     #Get data for installment program
     def FN_SearchForInstallmentProgram(self):
         self.InstallmentNo=self.QL_installmentNo.text()
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
+        #self.conn = db1.connect()
+        #mycursor = self.conn.cursor()
 
         # insert to INSTALLMENT_PROGRAM
         sql2 = "SELECT INST_DESC,INST_STATUS FROM INSTALLMENT_PROGRAM WHERE INST_PROGRAM_ID='"+self.InstallmentNo+"'"
 
-        mycursor.execute(sql2)
-        records = mycursor.fetchall()
+        self.mycursor.execute(sql2)
+        records = self.mycursor.fetchall()
         if len(records) >0 :
 
             for INST_DESC, INST_STATUS in records:
@@ -60,7 +63,7 @@ class CL_installment_Activation(QtWidgets.QDialog):
             QtWidgets.QMessageBox.information(self, "INFO", " Program doesn't exist")
 
 
-        mycursor.close()
+        #mycursor.close()
 
 
     #save Installment program
@@ -73,14 +76,14 @@ class CL_installment_Activation(QtWidgets.QDialog):
         if error !=0:
 
             try:
-                self.conn = db1.connect()
+                #self.conn = db1.connect()
                 self.conn.autocommit = False
-                mycursor = self.conn.cursor()
-                self.conn.start_transaction()
+                #mycursor = self.conn.cursor()
+                #self.conn.start_transaction()
 
                 # # lock table for new record:
                 sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE , Hyper1_Retail.SYS_CHANGE_LOG  WRITE"
-                mycursor.execute(sql0)
+                self.mycursor.execute(sql0)
 
                 #Check if this program create before or not
                 #Validation_For_installmentProgramm = 1
@@ -108,16 +111,16 @@ class CL_installment_Activation(QtWidgets.QDialog):
                         CL_userModule.user_name)
 
                 print("sql2",sql2)
-                mycursor.execute(sql2)
+                self.mycursor.execute(sql2)
 
                 #Insert in log table
-                sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                sql8 = "INSERT INTO SYS_CHANGE_LO (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
 
-                mycursor.execute(sql8, val8)
+                self.mycursor.execute(sql8, val8)
 
                 # # unlock table :
                 sql00 = "  UNLOCK   tables    "
-                mycursor.execute(sql00)
+                self.mycursor.execute(sql00)
                 self.conn.commit()
 
             except mysql.connector.Error as error:
@@ -127,9 +130,9 @@ class CL_installment_Activation(QtWidgets.QDialog):
             finally:
                 # closing database connection.
                 if self.conn.is_connected():
-                    mycursor.close()
-                    self.conn.close()
-                    print("connection is closed")
+                    #mycursor.close()
+                    #self.conn.close()
+                    print("connected")
 
     def FN_ValidateInstallemt(self):
         error=0

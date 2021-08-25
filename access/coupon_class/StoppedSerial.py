@@ -2,6 +2,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from random import randint
+from PyQt5 import QtWidgets, QtCore
 
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDate
@@ -29,7 +30,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
         filename = self.dirname + '/stoppedSerial.ui'
         loadUi(filename, self)
         self.BTN_search.clicked.connect(self.FN_Search)
-        self.CMB_CouponStatus.addItems(["Active"])
+        self.CMB_CouponStatus.addItems(["Inactive","Active"])
         self.BTN_stopCoupon.clicked.connect(self.FN_Stop)
         self.BTN_recreateCoupon.clicked.connect(self.FN_Recreate)
 
@@ -43,51 +44,69 @@ class CL_StoppedSerial(QtWidgets.QDialog):
     # Todo: method to search about coupon by barcode
     def FN_Search(self):
         try:
-            string=self.lineDesc_2.text()
-            x = (string[0:4]+bin(int(string[4:len(string)])))
-            print(x)
-            sql_select_Query = "select * from COUPON_SERIAL where COPS_BARCODE='"+x+"' and COPS_STATUS=1"
-            mycursor = self.conn.cursor()
-            mycursor.execute(sql_select_Query)
-            record = mycursor.fetchone()
-            if mycursor.rowcount > 0:
-                self.serialType=record[3]
-                self.cop_id=record[1]
-                self.serialId=record[0]
-                sql_select_Query = "select * from COUPON where COP_ID='"+str(record[1])+"'"
+            if(len(self.lineDesc_2.text())<=4):
+                QtWidgets.QMessageBox.warning(self, "", "لم يتم العثور علي هذا الباركود")
+            if(len(self.lineDesc_2.text())>0):
+                string = self.lineDesc_2.text()
+                x = (string[0:4] + bin(int(string[4:len(string)])))
+                print(x)
+                sql_select_Query = "select * from COUPON_SERIAL where COPS_BARCODE='" + x + "' and COPS_STATUS=1"
+                mycursor = self.conn.cursor()
                 mycursor.execute(sql_select_Query)
                 record = mycursor.fetchone()
-                self.lineDesc.setText(record[1])
-                if (record[2]!=None and len(record[2]) > 0):
-                    self.radioButton_Value.setChecked(True)
-                    self.LE_desc_2.setValue(float(record[2]))
-                    self.LE_desc_3.clear()
+                if mycursor.rowcount > 0:
+                    self.serialType = record[3]
+                    self.cop_id = record[1]
+                    self.serialId = record[0]
+                    sql_select_Query = "select * from COUPON where COP_ID='" + str(record[1]) + "'"
+                    mycursor.execute(sql_select_Query)
+                    record = mycursor.fetchone()
+                    self.lineDesc.setText(record[1])
+                    if (record[2] != None and len(str(record[2])) > 0):
+                        self.radioButton_Value.setChecked(True)
+                        self.LE_desc_2.setValue(float(record[2]))
+                        self.LE_desc_3.clear()
+                    else:
+                        self.radioButton_Percentage.setChecked(True)
+                        self.LE_desc_3.setValue(float(record[3]))
+                        self.LE_desc_2.clear()
+                    dateto = record[13]
+                    xto = dateto.split("-")
+                    d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
+                    self.Qdate_to.setDate(d)
+                    datefrom = record[11]
+                    xfrom = datefrom.split("-")
+                    self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
+                    self.Qdate_from.setDate(self.dfrom)
+
+                    timefrom = record[12]
+                    tfrom = timefrom.split(":")
+                    some_time = QtCore.QTime(int(tfrom[0]), int(tfrom[1]), 00)
+                    self.Qtime_from.setTime(some_time)
+
+                    timeto = record[14]
+                    tto = timeto.split(":")
+                    some_time = QtCore.QTime(int(tto[0]), int(tto[1]), 00)
+                    self.Qtime_to.setTime(some_time)
+
+
+                    self.LE_desc_4.setValue(float(record[4]))
+                    if (int(record[5]) == 1):
+                        self.checkBox_Multi.setChecked(True)
+                        self.LE_desc_5.setValue(float(record[6]))
+                    else:
+                        self.checkBox_Multi.setChecked(False)
+                        self.LE_desc_5.clear()
+                    self.CMB_CouponStatus.setCurrentIndex(int(record[15]))
+                    self.BTN_stopCoupon.setEnabled(True)
+                    self.BTN_recreateCoupon.setEnabled(True)
                 else:
-                    self.radioButton_Percentage.setChecked(True)
-                    self.LE_desc_3.setValue(float(record[3]))
-                    self.LE_desc_2.clear()
-                dateto = record[12]
-                xto = dateto.split("-")
-                d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
-                self.Qdate_to.setDate(d)
-                datefrom = record[11]
-                xfrom = datefrom.split("-")
-                self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
-                self.Qdate_from.setDate(self.dfrom)
-                self.LE_desc_4.setValue(float(record[4]))
-                if (int(record[5]) == 1):
-                    self.checkBox_Multi.setChecked(True)
-                    self.LE_desc_5.setValue(float(record[6]))
-                else:
-                    self.checkBox_Multi.setChecked(False)
-                    self.LE_desc_5.clear()
-                self.CMB_CouponStatus.setCurrentIndex(int(record[13]))
-                self.BTN_stopCoupon.setEnabled(True)
-                self.BTN_recreateCoupon.setEnabled(True)
+                    QtWidgets.QMessageBox.warning(self, "", "لم يتم العثور علي هذا الباركود")
             else:
-                QtWidgets.QMessageBox.warning(self, "", "لم يتم العثور علي هذا الباركود")
+                QtWidgets.QMessageBox.warning(self, "", "برجاء ادخال الباركود")
         except:
             print(sys.exc_info())
+
 
     # Todo: method to stop serial of coupon
     def FN_Stop(self):

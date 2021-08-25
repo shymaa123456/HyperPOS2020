@@ -35,11 +35,11 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         filename = self.dirname + '/createCoupon.ui'
         loadUi(filename, self)
         self.Qcombo_company = CheckableComboBox(self)
-        self.Qcombo_company.setGeometry(360, 35, 271, 25)
+        self.Qcombo_company.setGeometry(550, 35, 271, 25)
         self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.Qcombo_branch = CheckableComboBox(self)
-        self.Qcombo_branch.setGeometry(360, 65, 271, 25)
+        self.Qcombo_branch.setGeometry(550, 65, 271, 25)
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_Company()

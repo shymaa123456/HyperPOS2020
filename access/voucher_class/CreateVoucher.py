@@ -199,7 +199,7 @@ class CL_CreateVoucher(QtWidgets.QDialog):
                     mycursor.execute("SELECT * FROM VOUCHER Where GV_DESC = '" + indx + "'")
                     c = mycursor.fetchone()
                     id = c[0]
-                    sql3 = "INSERT INTO VOUCHER_SPONSOR (SPONSOR_ID,GV_ID,SPONSOR_SHARE,HYPER_SHARE,NOTES) VALUES (%s,%s,%s,%s,%s)"
+                    sql3 = "INSERT INTO VOUCHER_SPONSOR (SPONSER_ID,GV_ID,SPONSOR_SHARE,HYPER_SHARE,NOTES) VALUES (%s,%s,%s,%s,%s)"
                     val3 = (
                             self.Qcombo_sponser.currentData(), id,
                             self.LE_desc_6.text(),

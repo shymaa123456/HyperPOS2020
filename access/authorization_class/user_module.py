@@ -17,6 +17,7 @@ class CL_userModule(object):
     section = []
     item = []
     keys=[]
+    userlogin=[]
 
     def init(self):
         self.conn = db1.connect()
@@ -87,6 +88,21 @@ class CL_userModule(object):
             mycursor.execute(sql8, val8)
             records = mycursor.fetchall()
             CL_userModule.keys = records
+        except:
+            print(sys.exc_info())
+
+
+
+    def FN_userlogin(self):
+        try:
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+            sql8 = "SELECT * FROM Hyper1_Retail.SYS_USER_LOGIN Where USER_ID=%s"
+            print(sql8)
+            val8 = (CL_userModule.user_name,)
+            mycursor.execute(sql8, val8)
+            records = mycursor.fetchall()
+            CL_userModule.userlogin = records
         except:
             print(sys.exc_info())
 

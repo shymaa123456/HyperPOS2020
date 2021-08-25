@@ -221,11 +221,13 @@ class util():
         return records
 
     @staticmethod
-    def FN_GET_SECTIONS(dept):
+    def FN_GET_SECTIONS(dept=''):
         conn = db1.connect()
         mycursor = conn.cursor()
-
-        sql_select_query = "SELECT SECTION_DESC ,SECTION_ID  FROM Hyper1_Retail.SECTION where SECTION_STATUS   = 1 and `DEPARTMENT_ID`= '"+dept+"'"
+        if dept == '':
+            sql_select_query = "SELECT SECTION_DESC ,SECTION_ID  FROM Hyper1_Retail.SECTION where SECTION_STATUS   = 1 "
+        else:
+             sql_select_query = "SELECT SECTION_DESC ,SECTION_ID  FROM Hyper1_Retail.SECTION where SECTION_STATUS   = 1 and `DEPARTMENT_ID`= '"+dept+"'"
         mycursor.execute( sql_select_query )
         records = mycursor.fetchall()
         mycursor.close()

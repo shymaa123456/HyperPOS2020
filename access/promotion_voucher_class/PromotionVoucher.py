@@ -55,17 +55,19 @@ class CL_PromVoucher(QtWidgets.QDialog):
             filename = self.dirname + '/modifyPromVoucher.ui'
             loadUi(filename, self)
 
+            # datefrom = str(datetime.today().strftime('%Y-%m-%d'))
+            # xfrom = datefrom.split("-")
+            # d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
+            # # self.Qdate_from.setMinimumDate(d)
+            # self.Qdate_to.setMinimumDate(d)
+
             self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
             self.BTN_modifyVoucher.clicked.connect(self.FN_MODIFY_VOUCHER)
             self.FN_GET_VOUCHERS()
             self.FN_GET_VOUCHER()
             self.CMB_PromVoucher.currentIndexChanged.connect(self.FN_GET_VOUCHER)
-            # رself.setFixedWidth(436)
-            # self.setFixedHeight(268)
 
-            # Set Style
-            # self.label_num.setStyleSheet(label_num)
-            # self.label_2.setStyleSheet(desc_5)
+
             css_path = Path(__file__).parent.parent.parent
             path = css_path.__str__() + '/presentation/Themes/Style.css'
             self.setStyleSheet(open(path).read())
@@ -242,7 +244,8 @@ class CL_PromVoucher(QtWidgets.QDialog):
             print(err)
     def FN_MODIFY_VOUCHER(self):
         try:
-
+            todayDate = str(datetime.today().strftime('%Y-%m-%d'))
+            self.date_to = self.Qdate_to.date().toString('yyyy-MM-dd')
             self.conn = db1.connect()
             mycursor = self.conn.cursor()
             changeDate = str(datetime.today().strftime('%Y-%m-%d'))
@@ -261,6 +264,8 @@ class CL_PromVoucher(QtWidgets.QDialog):
                 elif self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
                     QtWidgets.QMessageBox.warning(self, "خطا",
                                                   "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
+                elif self.date_to <todayDate:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "تاريخ الإنتهاء يجب أن يكون أكبرمن أو يساوي تاريخ اليوم")
 
                 else:
 

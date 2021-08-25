@@ -145,7 +145,7 @@ class CL_BMC(QtWidgets.QDialog):
             self.LB_status.setText('1')
         else :
             self.LB_status.setText('0')
-
+#ggg
     def FN_CREATE(self):
         self.conn = db1.connect()
         self.name = self.LE_desc.text().strip()

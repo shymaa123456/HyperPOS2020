@@ -79,12 +79,23 @@ class CL_modifyCoupon(QtWidgets.QDialog):
                 self.valueData = self.LE_desc_3.text()
             dateto = record[13]
             xto = dateto.split("-")
-            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
             self.Qdate_to.setDate(d)
             datefrom = record[11]
             xfrom = datefrom.split("-")
-            d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
+            d = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
             self.Qdate_from.setDate(d)
+
+            timefrom = record[12]
+            tfrom = timefrom.split(":")
+            some_time = QtCore.QTime(int(tfrom[0]), int(tfrom[1]), 00)
+            self.Qtime_from.setTime(some_time)
+
+            timeto = record[14]
+            tto = timeto.split(":")
+            some_time = QtCore.QTime(int(tto[0]), int(tto[1]), 00)
+            self.Qtime_to.setTime(some_time)
+
             self.LE_desc_4.setValue(float(record[4]))
             print(record[5])
             if (int(record[5]) == 0):

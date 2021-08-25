@@ -5,9 +5,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.uic import loadUi
 from data_connection.h1pos import db1
-from PyQt5.QtCore import QDate
-
-
+from PyQt5.QtCore import QDate, QDateTime
 
 
 class CL_modifyVoucher(QtWidgets.QDialog):
@@ -60,14 +58,15 @@ class CL_modifyVoucher(QtWidgets.QDialog):
             mycursor.execute(sql_select_Query, x)
             record = mycursor.fetchone()
             self.LE_desc_2.setValue(float(record[4]))
-            dateto = record[14]
-            xto = dateto.split("-")
-            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
-            self.Qdate_to.setDate(d)
             datefrom = record[12]
             xfrom = datefrom.split("-")
-            d = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
-            self.Qdate_from.setDate(d)
+            self.dfrom = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
+            self.Qdate_from.setDate(self.dfrom)
+            self.dfrom = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
+            dateto = record[14]
+            xto = dateto.split("-")
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+            self.Qdate_to.setDate(d)
 
             if(record[18]=="1"):
                 self.checkBox_Multi.setChecked(True)

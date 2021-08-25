@@ -12,6 +12,7 @@ from access.configuration_class.Group import CL_FNGroup
 from access.configuration_class.GroupItem import CL_ItemGroup
 from access.configuration_class.Key import CL_FNKey
 from access.configuration_class.Parameters import CL_Parameters
+from access.configuration_class.PosWorkingDay import CL_WorkingDay
 from access.configuration_class.Pos_Parameter import CL_Pos_Parameters
 from access.configuration_class.Check_List import CL_HW_Parameter
 from access.configuration_class.List import CL_List
@@ -111,6 +112,7 @@ class CL_main(QtWidgets.QMainWindow):
             CL_userModule.FN_AuthBranchUser(self)
             CL_userModule.FN_AuthSectionUser(self)
             CL_userModule.FN_FuncKey(self)
+            CL_userModule.FN_userlogin(self)
             for row_number, row_data in enumerate(CL_userModule.myList):
                 forms.append(row_data[1])
 
@@ -225,6 +227,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_assign_pos.clicked.connect(self.FN_FNGroupPos)
             self.QAct_item_Group.clicked.connect(self.FN_ItemGroup)
             self.QAct_assign_pos_groupitem.clicked.connect(self.FN_FNGroupPositem)
+            self.QAct_workingDay.clicked.connect(self.FN_PosWorkingDay)
+            self.QAct_copypos.clicked.connect(self.FN_PosWorkingDay)
 
 
             self.QAct_sponsor.clicked.connect(self.FN_sponsor)
@@ -308,11 +312,13 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_posparameter=0
             self.window_FnGroup=0
             self.window_FnKey=0
+            self.window_copypos=0
 
             self.window_FNGroupPos=0
             self.window_posparameter_modify=0
             self.window_ItemGroup=0
             self.window_ItemGrouppos=0
+            self.window_PosWorkingDay=0
 
             self.window_sponsor = 0
             #self.ui.tabWidget.blockSignals(True)
@@ -559,6 +565,34 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedWidth(self.window_FNGroupPos.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_FNGroupPos.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_FNGroupPos)
+
+
+
+    def FN_PosWorkingDay(self):
+        if self.window_PosWorkingDay == 0:
+            self.window_PosWorkingDay = CL_WorkingDay()
+            self.window_PosWorkingDay.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_PosWorkingDay, 'Pos Working Day')
+            self.ui.tabWidget.setFixedWidth(self.window_PosWorkingDay.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_PosWorkingDay.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_PosWorkingDay)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_PosWorkingDay.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_PosWorkingDay.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_PosWorkingDay)
+
+    def FN_Copypos(self):
+        if self.window_copypos == 0:
+            self.window_copypos = CL_WorkingDay()
+            self.window_copypos.FN_LOAD_CREATE()
+            self.ui.tabWidget.addTab(self.window_copypos, 'Pos Working Day')
+            self.ui.tabWidget.setFixedWidth(self.window_copypos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_copypos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_copypos)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_copypos.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_copypos.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_copypos)
 
     def FN_FNGrouptokey(self):
         if self.window_FnKey == 0:

@@ -265,6 +265,16 @@ class CL_create_promotion(QtWidgets.QDialog):
         # self.LE_desc_5.setEnabled(False)
         ###############################################################################
         ###############################################################################
+        # set minimum time
+        # this_moment PyQt5.QtCore.QTime(10, 43, 1, 872)
+        # print(self.Qdate_from.dateTime().toString('yyyy-MM-dd'))
+        this_moment = QtCore.QTime.currentTime()
+        # this_moment = this_moment.toString('hh:mm')
+        print("this_moment", this_moment)
+        self.Qtime_to.setTime(this_moment)
+        self.Qtime_from.setTime(this_moment)
+        self.Qtime_from.setMinimumTime(this_moment)
+        self.Qtime_to.setMinimumTime(this_moment)
 
         ###########test Qbtn_search animation#############################################################
 
@@ -304,6 +314,12 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.Qbtn_save.setText('حفظ بيانات العرض')
 
         ###############################################################################
+        """ checked combobox sample >>> company"""
+        self.Qcombo_company2 = CheckableComboBox(self)
+        self.Qcombo_company2.setGeometry(801, 74, 179, 18)
+        self.Qcombo_company2.setLayoutDirection(Qt.RightToLeft)
+        self.Qcombo_company2.setStyleSheet("background-color: rgb(198, 207, 199)")
+        self.Qcombo_company.hide()
 
         """ checked combobox sample >>> Branch"""
         self.Qcombo_branch2 = CheckableComboBox(self)
@@ -338,7 +354,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         try:
 
             self.FN_GET_Company()
-            self.FN_GET_Branch()
+            # self.FN_GET_Branch()
             self.FN_GET_CustomerGroup()
             self.FN_GET_sponser()
             self.FN_GET_promotion_type()
@@ -369,11 +385,11 @@ class CL_create_promotion(QtWidgets.QDialog):
             # save promotion
             self.Qbtn_save.clicked.connect(self.save_items)  # create promotion items
 
+            # company branch change
+            self.Qcombo_company2.model().dataChanged.connect(self.FN_GET_Branch)
 
         except:
             print("An exception occurred")
-
-
 
 
     def save_items(self):
@@ -891,22 +907,59 @@ class CL_create_promotion(QtWidgets.QDialog):
     def FN_GET_Company(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT COMPANY_DESC FROM COMPANY")
+        mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
         records = mycursor.fetchall()
         print(records)
-        for row in records:
-            self.Qcombo_company.addItems(row)
+        for row, val in records:
+            # for row in records:
+            self.Qcombo_company2.addItem(row, val)
+            # self.Qcombo_company.addItems(row)
         mycursor.close()
 
+        self.FN_GET_Branch()
+
     def FN_GET_Branch(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT BRANCH_DESC_A FROM BRANCH")
-        records = mycursor.fetchall()
-        print(records)
-        for row in records:
-            self.Qcombo_branch2.addItems(row)
-        mycursor.close()
+        self.Qcombo_branch2.clear()
+        i = 0
+        try:
+            # Todo: method for fills the Branch combobox
+            self.conn = db1.connect()
+            mycursor = self.conn.cursor()
+
+            val3 = ""
+            for a in range(len(self.Qcombo_company2.currentData())):
+                if a < len(self.Qcombo_company2.currentData()) - 1:
+                    val3 = val3 + "'" + self.Qcombo_company2.currentData()[a] + "',"
+                else:
+                    val3 = val3 + "'" + self.Qcombo_company2.currentData()[a] + "'"
+
+            print("companies", val3)
+
+            sqlite3 = "SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH WHERE COMPANY_ID in (" + val3 + ")"
+
+            print("Branches_sqlite3", sqlite3)
+
+            mycursor.execute(sqlite3)
+
+            records = mycursor.fetchall()
+            for row, val in records:
+                for bra in CL_userModule.branch:
+                    if val in bra:
+                        self.Qcombo_branch2.addItem(row, val)
+                    i += 1
+            mycursor.close()
+            self.Qcombo_branch2.setCurrentIndex(-1)
+        except:
+            print(sys.exc_info())
+
+        # self.conn = db1.connect()
+        # mycursor = self.conn.cursor()
+        # mycursor.execute("SELECT BRANCH_DESC_A FROM BRANCH")
+        # records = mycursor.fetchall()
+        # print(records)
+        # for row in records:
+        #     self.Qcombo_branch2.addItems(row)
+        # mycursor.close()
 
     def FN_GET_CustomerGroup(self):
         self.conn = db1.connect()
@@ -932,7 +985,7 @@ class CL_create_promotion(QtWidgets.QDialog):
     def FN_GET_sponser(self):
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT SPONSER_NAME , SPONSER_ID FROM SPONSER WHERE SPONSER_STATUS = '1' ")
+        mycursor.execute("SELECT SPONSOR_NAME , SPONSOR_ID FROM SPONSOR WHERE SPONSOR_STATUS = '1' ")
         records = mycursor.fetchall()
         print(records)
         for row, VAL in records:

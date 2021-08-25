@@ -1877,6 +1877,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_bank = 0
         if self.window_city not in li:
             self.window_city = 0
+
         if self.window_BMC not in li:
             self.window_BMC = 0
         if self.window_district not in li:

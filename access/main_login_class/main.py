@@ -36,6 +36,7 @@ from access.loyalty_class.redeemItem import CL_redItem
 from access.loyalty_class.redeemType import CL_redeemType
 from access.loyalty_class.redeemVoucher import CL_redVouch
 from access.loyalty_class.uploadCustomer import CL_customer
+from access.master_data_class.BMC import CL_BMC
 from access.master_data_class.VAT import CL_VAT
 from access.master_data_class.bank import CL_bank
 from access.master_data_class.city import CL_city
@@ -216,6 +217,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.QAct_bank.clicked.connect(self.FN_bank)
             self.QAct_city.clicked.connect(self.FN_city)
             self.QAct_district.clicked.connect(self.FN_district)
+            self.QAct_BMC.clicked.connect(self.FN_BMC)
 
             self.QAct_Pos_Parameter.clicked.connect(self.FN_Pos_Parameter)
             self.QAct_Pos_Parameter_Modify.clicked.connect(self.FN_Pos_Parameter_Modify)
@@ -306,6 +308,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_bank = 0
             self.window_city = 0
             self.window_district = 0
+            self.window_BMC = 0
             self.window_posparameter=0
             self.window_FnGroup=0
             self.window_FnKey=0
@@ -362,6 +365,21 @@ class CL_main(QtWidgets.QMainWindow):
                 self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
                 self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
                 self.ui.tabWidget.setCurrentWidget(self.window_district)
+        except Exception as err:
+         print(err)
+    def FN_BMC(self):
+        try:
+            if self.window_BMC == 0:
+                self.window_BMC = CL_BMC()
+                self.window_BMC.FN_LOAD_DISPlAY()
+                self.ui.tabWidget.addTab(self.window_BMC, 'شجره الأصناف')
+                self.ui.tabWidget.setFixedWidth(self.window_BMC.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_BMC.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_BMC)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_BMC.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_BMC.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_BMC)
         except Exception as err:
          print(err)
     def FN_company(self):
@@ -1711,6 +1729,9 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_district:
             self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_BMC:
+            self.ui.tabWidget.setFixedWidth(self.window_BMC.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_BMC.frameGeometry().height())
         elif self.ui.tabWidget.currentWidget() == self.window_sponsor:
             self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
@@ -1847,6 +1868,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_bank = 0
         if self.window_city not in li:
             self.window_city = 0
+
+        if self.window_BMC not in li:
+            self.window_BMC = 0
         if self.window_district not in li:
             self.window_district = 0
         if self.window_paymentType not in li:

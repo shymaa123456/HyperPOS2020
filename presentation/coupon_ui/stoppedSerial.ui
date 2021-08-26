@@ -624,7 +624,7 @@
       </rect>
      </property>
      <property name="displayFormat">
-      <string>h:mm AP</string>
+      <string>mm:hh AP</string>
      </property>
     </widget>
    </widget>
@@ -727,7 +727,7 @@
       </rect>
      </property>
      <property name="displayFormat">
-      <string>h:mm AP</string>
+      <string>mm:hh AP</string>
      </property>
     </widget>
    </widget>

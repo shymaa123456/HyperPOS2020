@@ -453,6 +453,9 @@
      <string/>
     </property>
     <widget class="QDateTimeEdit" name="Qdate_from">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>10</x>

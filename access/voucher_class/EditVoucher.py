@@ -251,7 +251,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
             self.row=str(record[0])
             self.LE_desc_1.setText(str(record[1]))
             self.LE_desc_2.setValue(float(record[4]))
-            self.CMB_CouponStatus.setCurrentIndex(int(record[20]))
+            self.CMB_CouponStatus.setCurrentIndex(int(record[22]))
             self.LE_desc_5.setText(str(record[19]))
             self.FN_search()
 
@@ -362,9 +362,7 @@ class CL_EditVoucher(QtWidgets.QDialog):
                         self.GV_REFUNDABLE) + ",GV_RECHARGABLE=" + str(self.GV_RECHARGABLE) + ",GV_MULTIUSE=" + str(
                         self.GV_MULTIUSE) + " ,GV_CHANGED_BY='" + CL_userModule.user_name + "',GV_CHANGE_ON='" + creationDate + "',GV_VALID_FROM='" + self.Qdate_from.dateTime().toString(
                         'yyyy-MM-dd') + "',GV_VALID_TO='" + self.Qdate_to.dateTime().toString(
-                        'yyyy-MM-dd') + "',GV_STATUS='" + str(
-                        self.CMB_CouponStatus.currentIndex()) + "',POSC_CUST_ID='"+self.LE_desc_5.text().strip()+"' ,GV_TIME_FROM='"+str(self.Qtime_from.dateTime().toString('hh:mm'))+"',GV_TIME_TO='"+str(self.Qtime_to.dateTime().toString('hh:mm'))+"' where GV_ID='" + str(
-                        self.CMB_CouponDes.currentData()) + "'"
+                        'yyyy-MM-dd') + "',GV_STATUS='" + str(self.CMB_CouponStatus.currentIndex()) + "',POSC_CUST_ID='"+self.LE_desc_5.text().strip()+"' ,GV_TIME_FROM='"+str(self.Qtime_from.dateTime().toString('hh:mm'))+"',GV_TIME_TO='"+str(self.Qtime_to.dateTime().toString('hh:mm'))+"' where GV_ID='" + str(self.CMB_CouponDes.currentData()) + "'"
                     print(sql)
                     mycursor.execute(sql)
                     if len(self.Qcombo_branch.currentData()) > 0:

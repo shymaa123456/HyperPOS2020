@@ -40,9 +40,12 @@
 #    sleep(0.5)
 
 
-import os
-ping = os.system('ping 192.168.1.86')
-if ping == 0:
- print ('up')
-else:
- print('down')
+# import os
+# ping = os.system('ping 192.168.1.86')
+# if ping == 0:
+#  print ('up')
+# else:
+#  print('down')
+
+
+print(int(0b1011101111101011100011100010001010011010))

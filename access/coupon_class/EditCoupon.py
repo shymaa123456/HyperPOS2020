@@ -51,11 +51,11 @@ class CL_EditCoupon(QtWidgets.QDialog):
         filename = self.dirname + '/editCoupon.ui'
         loadUi(filename, self)
         self.Qcombo_company = CheckableComboBox(self)
-        self.Qcombo_company.setGeometry(350, 135, 271, 25)
+        self.Qcombo_company.setGeometry(550, 135, 271, 25)
         self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.Qcombo_branch = CheckableComboBox(self)
-        self.Qcombo_branch.setGeometry(350, 165, 271, 25)
+        self.Qcombo_branch.setGeometry(550, 165, 271, 25)
         self.Qcombo_branch.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Qcombo_branch.setStyleSheet("background-color: rgb(198, 207, 199)")
         self.FN_GET_Company()
@@ -146,13 +146,12 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.Othertype="COP_DISCOUNT_VAL"
             dateto = record[13]
             xto = dateto.split("-")
-            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
             self.Qdate_to.setDate(d)
             datefrom = record[11]
             xfrom = datefrom.split("-")
-            self.dfrom = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
+            self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
             self.Qdate_from.setDate(self.dfrom)
-            self.dfrom=QDateTime(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]),00,00,00,00)
             self.LE_desc_4.setValue(float(record[4]))
             self.serial_num=int(record[4])
             self.multiusage=int(record[5])
@@ -303,8 +302,8 @@ class CL_EditCoupon(QtWidgets.QDialog):
                         elif self.valueType == "COP_DISCOUNT_PERCENT":
                             self.valueData = self.LE_desc_3.text()
                         sql = "update COUPON set COP_DESC='" + self.LE_desc_1.text().strip() + "'," + self.valueType + "=" + self.valueData +","+self.Othertype+"="+"null"+",COP_SERIAL_COUNT=" + self.serialCount + ",COP_MULTI_USE=" + self.MultiUse + ",COP_MULTI_USE_COUNT=" + self.MultiCount + ",COP_CHANGED_BY='" + CL_userModule.user_name + "',COP_CHANGED_ON='" + creationDate + "',COP_VALID_FROM='" + self.Qdate_from.dateTime().toString(
-                            'dd-MM-yyyy') + "',COP_VALID_TO='" + self.Qdate_to.dateTime().toString(
-                            'dd-MM-yyyy') + "',COP_STATUS='" + str(
+                            'yyyy-MM-dd') + "',COP_VALID_TO='" + self.Qdate_to.dateTime().toString(
+                            'yyyy-MM-dd') + "',COP_STATUS='" + str(
                             self.CMB_CouponStatus.currentIndex()) + "',COP_TIME_FROM='"+str(self.Qtime_from.dateTime().toString('hh:mm'))+"',COP_TIME_TO='"+str(self.Qtime_to.dateTime().toString('hh:mm'))+"' where COP_ID='" + str(
                             self.CMB_CouponDes.currentData()) + "'"
                         print(sql)

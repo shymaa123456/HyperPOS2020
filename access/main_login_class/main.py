@@ -342,7 +342,7 @@ class CL_main(QtWidgets.QMainWindow):
             if self.window_city == 0:
                 self.window_city = CL_city()
                 self.window_city.FN_LOAD_DISPlAY()
-                self.ui.tabWidget.addTab(self.window_city, 'الشركات')
+                self.ui.tabWidget.addTab(self.window_city, 'المحافطات')
                 self.ui.tabWidget.setFixedWidth(self.window_city.frameGeometry().width())
                 self.ui.tabWidget.setFixedHeight(self.window_city.frameGeometry().height())
                 self.ui.tabWidget.setCurrentWidget(self.window_city)
@@ -357,7 +357,7 @@ class CL_main(QtWidgets.QMainWindow):
             if self.window_district == 0:
                 self.window_district = CL_district()
                 self.window_district.FN_LOAD_DISPlAY()
-                self.ui.tabWidget.addTab(self.window_district, 'الشركات')
+                self.ui.tabWidget.addTab(self.window_district, 'المناطق')
                 self.ui.tabWidget.setFixedWidth(self.window_district.frameGeometry().width())
                 self.ui.tabWidget.setFixedHeight(self.window_district.frameGeometry().height())
                 self.ui.tabWidget.setCurrentWidget(self.window_district)
@@ -1155,7 +1155,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedHeight(self.window_CreateCoupon.frameGeometry().height()+20)
             # self.ui.tabWidget.tabCloseRequested.connect(self.onTabCloseRequested_CreateCoupon)
             self.ui.tabWidget.setCurrentWidget(self.window_CreateCoupon)
-            # self.name = self.ui.tabWidget.currentWidget().objectName()
+            # self.n
+            # ame = self.ui.tabWidget.currentWidget().objectName()
             print(self.ui.tabWidget.currentWidget())
             print(self.window_CreateCoupon)
             self.flag2 = 1

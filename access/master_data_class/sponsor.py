@@ -217,8 +217,8 @@ class CL_sponsor(QtWidgets.QDialog):
         else:
             id = int(myresult[0]) + 1
 
-        if name == '' :
-            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم")
+        if name == '' or sponsorCode == '' :
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم  و الكود")
 
         else:
             try:
@@ -263,8 +263,8 @@ class CL_sponsor(QtWidgets.QDialog):
                 status = self.CMB_status.currentData()
                 id= self.LB_id.text().strip()
                 error = 0
-                if name == '':
-                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
+                if name == '' or sponsorCode == '':
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم  و الكود")
 
                 else:
                     if name != name_old:

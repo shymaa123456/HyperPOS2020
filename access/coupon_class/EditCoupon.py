@@ -146,12 +146,14 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.Othertype="COP_DISCOUNT_VAL"
             dateto = record[13]
             xto = dateto.split("-")
-            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)
             datefrom = record[11]
             xfrom = datefrom.split("-")
-            self.dfrom = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
+            self.dfrom = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setDate(self.dfrom)
+            self.dfrom = QDateTime(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]), 00, 00, 00, 00)
+
             self.LE_desc_4.setValue(float(record[4]))
             self.serial_num=int(record[4])
             self.multiusage=int(record[5])
@@ -254,9 +256,9 @@ class CL_EditCoupon(QtWidgets.QDialog):
                     self.LE_desc_1.text().strip()) == 0 or len(self.LE_desc_3.text().strip()) == 0 and len(self.LE_desc_2.text().strip()) == 0:
                 QtWidgets.QMessageBox.warning(self, "خطا", "اكمل العناصر الفارغه")
             else:
-                if self.Qdate_to.dateTime()<self.Qdate_from.dateTime():
+                if self.Qdate_to.dateTime() < self.Qdate_from.dateTime():
                     QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانتهاء يجب ان يكون اكبر من او يساوي تاريخ الانشاء")
-                elif self.Qdate_from.dateTime()<self.dfrom:
+                elif self.Qdate_from.dateTime() < self.dfrom:
                     QtWidgets.QMessageBox.warning(self, "Done", "تاريخ الانشاء الجديد يجب ان يكون اكبر او يساوي تاريخ الانشاء قبل التعديل")
                 elif (self.Qdate_from.date() == self.Qdate_to.date()) and int(self.Qtime_from.dateTime().toString('hh')) + int(
                             self.Qtime_from.dateTime().toString('mm')) > int(

@@ -134,6 +134,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         mycursor.close()
         QtWidgets.QMessageBox.warning(self, "Done", "Done")
 
+
     # Todo: method to clear edit text
     def FN_Clear(self):
         self.LE_desc_2.clear()

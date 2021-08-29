@@ -163,6 +163,7 @@ class CL_EditCoupon(QtWidgets.QDialog):
                 self.LE_desc_5.setValue(float(record[6]))
                 self.LE_desc_4.setEnabled(False)
                 self.LE_desc_5.setEnabled(True)
+
             else:
                 self.checkBox_Multi.setChecked(False)
                 self.LE_desc_5.setEnabled(False)

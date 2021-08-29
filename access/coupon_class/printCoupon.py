@@ -16,6 +16,7 @@ class CL_printCoupon(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/coupon_ui'
         self.conn = db1.connect()
 
+
     # Todo: method load ui of printCoupon
     def FN_LOADUI(self):
         filename = self.dirname + '/printCoupon.ui'

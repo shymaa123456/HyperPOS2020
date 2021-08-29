@@ -65,6 +65,7 @@ class CL_CreateCoupon(QtWidgets.QDialog):
         this_moment = QtCore.QTime.currentTime()
         self.Qtime_from.setMinimumTime(this_moment)
 
+
     # Todo: method to make coupon multi use
     def FN_endableMultiUser(self):
         if self.checkBox_Multi.isChecked():

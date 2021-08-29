@@ -18,6 +18,7 @@ class CL_StoppedSerial(QtWidgets.QDialog):
     cop_id=""
     serialId=""
 
+
     def __init__(self):
         super(CL_StoppedSerial, self).__init__()
         cwd = Path.cwd()

@@ -41,7 +41,7 @@ class CL_BMC(QtWidgets.QDialog):
             self.BTN_modify.clicked.connect(self.FN_MODIFY)
             self.BTN_search.clicked.connect(self.FN_SEARCH)
             self.BTN_search_all.clicked.connect(self.FN_GET_ALL)
-            self.Qtable.setColumnHidden(0, True)
+            #self.Qtable.setColumnHidden(0, True)
             self.Qtable.doubleClicked.connect(self.FN_GET_ONE)
 
             css_path = Path(__file__).parent.parent.parent
@@ -112,12 +112,12 @@ class CL_BMC(QtWidgets.QDialog):
         try:
             if len(self.Qtable.selectedIndexes()) >= 0:
                 rowNo = self.Qtable.selectedItems()[0].row()
-                id = self.Qtable.item(rowNo, 0).text()
+                code = self.Qtable.item(rowNo, 0).text()
                 desc = self.Qtable.item(rowNo, 1).text()
                 status = self.Qtable.item(rowNo, 2).text()
                 section= self.Qtable.item(rowNo, 3).text()
                 self.LE_desc.setText(desc)
-                self.LB_id.setText(id)
+                self.LE_code.setText(code)
                 self.LB_status.setText(util.FN_GET_STATUS_id(status))
                 self.CMB_status.setCurrentText(status)
                 self.CMB_section.setCurrentText(section)
@@ -149,14 +149,15 @@ class CL_BMC(QtWidgets.QDialog):
     def FN_CREATE(self):
         self.conn = db1.connect()
         self.name = self.LE_desc.text().strip()
+        code = self.LE_code.text().strip()
         status = self.CMB_status.currentData()
         section = self.CMB_section.currentData()
         mycursor = self.conn.cursor()
 
         if self.name == '' :
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم")
-        elif section == 0 :
-            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال المحافظه")
+        elif section == '0' :
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال القسم")
         else:
             try:
                 if self.FN_CHECK_DUP_NAME(self.name) != False:
@@ -164,14 +165,14 @@ class CL_BMC(QtWidgets.QDialog):
                     mycursor.close()
                 else:
 
-                    sql = "INSERT INTO Hyper1_Retail.BMC_LEVEL4( BMC_LEVEL4_DESC , BMC_LEVEL4_STATUS,section_id) " \
-                          "         VALUES (  %s, %s ,%s)"
+                    sql = "INSERT INTO Hyper1_Retail.BMC_LEVEL4(BMC_LEVEL4, BMC_LEVEL4_DESC , BMC_LEVEL4_STATUS,section_id) " \
+                          "         VALUES (%s,  %s, %s ,%s)"
 
-                    val = (self.name,  status , section   )
+                    val = (code,self.name,  status , section   )
                     mycursor.execute(sql, val)
 
 
-                    print(mycursor.rowcount, "district inserted.")
+                    print(mycursor.rowcount, "bmc inserted.")
                     QtWidgets.QMessageBox.information(self, "نجاح", "تم الإنشاء")
                     db1.connectionCommit(self.conn)
                     self.FN_GET_ALL()
@@ -186,7 +187,7 @@ class CL_BMC(QtWidgets.QDialog):
         self.conn1 = db1.connect()
         if len(self.Qtable.selectedIndexes()) >0 :
             rowNo = self.Qtable.selectedItems()[0].row()
-            id = self.LB_id.text().strip()
+            code = self.LE_code.text().strip()
             desc_old = self.Qtable.item(rowNo, 1).text()
             status_old =  self.Qtable.item(rowNo, 2).text()
             desc = self.LE_desc.text().strip()
@@ -207,7 +208,7 @@ class CL_BMC(QtWidgets.QDialog):
                     changeDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                     sql = "UPDATE `Hyper1_Retail`.BMC_LEVEL4 SET `BMC_LEVEL4_DESC` = %s, BMC_LEVEL4_STATUS = %s , section_id = %s  " \
                           " WHERE BMC_LEVEL4 = %s"
-                    val = (desc,status,section, id)
+                    val = (desc,status,section, code)
                     mycursor.execute(sql, val)
                     #mycursor.close()
                     #
@@ -222,9 +223,9 @@ class CL_BMC(QtWidgets.QDialog):
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
 
     def FN_CLEAR_FEILDS (self):
-        self.LB_id.clear()
+
         self.LE_desc.clear()
         self.CMB_section.setCurrentText('Select Section')
-
+        self.LE_code.clear()
         self.CMB_status.setCurrentText('Active')
         self.LB_status.setText('1')

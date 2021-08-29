@@ -206,15 +206,70 @@ class CL_create_promotion(QtWidgets.QDialog):
     def FN_LOAD_CREATE_PROM(self):
         filename = self.dirname + '/Promotion_create.ui'
         loadUi(filename, self)
+
         # self.ui = uic.loadUi( filename )
         # self.ui.closeEvent = self.closeEvent
         # self.ui.show()
         # quit = QAction("Quit", self)
         # quit.triggered.connect(self.closeEvent)
 
-        # self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False)
+
+        # Set Style
+        # self.label_num.setStyleSheet(label_num)
+        # self.label_2.setStyleSheet(desc_5)
+
+        css_path = Path(__file__).parent.parent.parent
+        path = css_path.__str__() + '/presentation/Themes/Style.css'
+        self.setStyleSheet(open(path).read())
+
+        try:
+            self.load_layout()
+            self.FN_GET_Company()
+            # self.FN_GET_Branch()
+            self.FN_GET_CustomerGroup()
+            self.FN_GET_sponser()
+            self.FN_GET_promotion_type()
+            self.FN_GET_department()
+            self.updatestatecombo()
+            self.FN_GET_MAGAZINE()
+
+            self.Qcombo_sponsor2.activated.connect(self.handleActivated)
+            # self.Qcombo_sponsor2.currentIndexChanged().connect(self.handleActivated)
+
+            # Qcombo_promotion = self.Qcombo_promotion.itemData(self.Qcombo_promotion.currentIndex())  # promotion type id
+            # self.Qcombo_promotion.activated.connect(self.Qcombo_promotion_index)
+            # print(Qcombo_promotion)
+            # department
+            self.Qcombo_department.activated[str].connect(self.updatestatecombo)
+
+            self.tableWidget.setRowCount(0)
+            self.Qtable_promotion.setRowCount(0)
+
+            self.tableWidget.setSelectionMode(QAbstractItemView.MultiSelection)
+
+            #  SEARCH BUTTON
+            self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)  # search barcodes
+            self.QcheckBox_all.stateChanged.connect(self.changeTitle)  # select all
+            self.Qbtn_add.clicked.connect(self.add_items)  # add_items  to Qtable_promotion datatable
+            self.Qbtn_remove.clicked.connect(self.remove_selected)  # remove items from Qtable_promotion datatable
+
+            # save promotion
+            self.Qbtn_save.clicked.connect(self.save_items)  # create promotion items
+
+            # company branch change
+            self.Qcombo_company2.model().dataChanged.connect(self.FN_GET_Branch)
+
+        except:
+            print("An exception occurred")
+
+
+    def load_layout(self):
+
         self.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
-        # # this will hide the title bar
+        #
+        # self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False)
+
+        # this will hide the title bar
         # self.setWindowFlag(Qt.FramelessWindowHint)
         #
         # # set the title
@@ -247,6 +302,7 @@ class CL_create_promotion(QtWidgets.QDialog):
         #
         # self.QLilne_Barcode.setValidator(self.validating)
         # reg_ex = QRegExp("[0-9]+.?[0-9]{,2}")
+
         regex = QRegExp("[0-9_]+")
         # regex = QDoubleValidator(-100, 100, 0)
         input_validator = QRegExpValidator(regex)
@@ -343,54 +399,6 @@ class CL_create_promotion(QtWidgets.QDialog):
         self.Qcombo_sponsor2.setLayoutDirection(Qt.RightToLeft)
         self.Qcombo_sponsor2.setStyleSheet("background-color: rgb(198, 207, 199)")
         # self.Qcombo_sponsor.hide()
-
-        # Set Style
-        # self.label_num.setStyleSheet(label_num)
-        # self.label_2.setStyleSheet(desc_5)
-        css_path = Path(__file__).parent.parent.parent
-        path = css_path.__str__() + '/presentation/Themes/Style.css'
-        self.setStyleSheet(open(path).read())
-
-        try:
-
-            self.FN_GET_Company()
-            # self.FN_GET_Branch()
-            self.FN_GET_CustomerGroup()
-            self.FN_GET_sponser()
-            self.FN_GET_promotion_type()
-            self.FN_GET_department()
-            self.updatestatecombo()
-            self.FN_GET_MAGAZINE()
-
-            self.Qcombo_sponsor2.activated.connect(self.handleActivated)
-            # self.Qcombo_sponsor2.currentIndexChanged().connect(self.handleActivated)
-
-            # Qcombo_promotion = self.Qcombo_promotion.itemData(self.Qcombo_promotion.currentIndex())  # promotion type id
-            # self.Qcombo_promotion.activated.connect(self.Qcombo_promotion_index)
-            # print(Qcombo_promotion)
-            # department
-            self.Qcombo_department.activated[str].connect(self.updatestatecombo)
-
-            self.tableWidget.setRowCount(0)
-            self.Qtable_promotion.setRowCount(0)
-
-            self.tableWidget.setSelectionMode(QAbstractItemView.MultiSelection)
-
-            #  SEARCH BUTTON
-            self.Qbtn_search.clicked.connect(self.FN_SEARCH_BARCODES)  # search barcodes
-            self.QcheckBox_all.stateChanged.connect(self.changeTitle)  # select all
-            self.Qbtn_add.clicked.connect(self.add_items)  # add_items  to Qtable_promotion datatable
-            self.Qbtn_remove.clicked.connect(self.remove_selected)  # remove items from Qtable_promotion datatable
-
-            # save promotion
-            self.Qbtn_save.clicked.connect(self.save_items)  # create promotion items
-
-            # company branch change
-            self.Qcombo_company2.model().dataChanged.connect(self.FN_GET_Branch)
-
-        except:
-            print("An exception occurred")
-
 
     def save_items(self):
         if self.Qtable_promotion.rowCount() < 1:

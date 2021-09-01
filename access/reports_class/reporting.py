@@ -434,6 +434,12 @@ class CL_report(QtWidgets.QDialog):
         title.setCursor(self.Qline_promotion.text)
         title.setQuery(self.query)
         title.setCursor(self.field_names)
+        data = [['Nubmber reset:', '248361 5/1/2018', '                                      ', 'Client Data', ''],
+                ['phone number:', title.gettelText(), '                           ', 'Customer Code',
+                 title.getcodeText()],
+                ['mobile number', title.gettelText(), '                             ', 'Customer Name', 'TEST'],
+                ['', '', '                                ', 'City', 'Giza']]
+        title.setData(data)
         body()
         QtWidgets.QMessageBox.information(self, "Success", "Report is printed successfully")
         import os

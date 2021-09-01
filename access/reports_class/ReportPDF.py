@@ -31,6 +31,7 @@ tel=""
 query=""
 cursortest=0
 field_names = []
+datatable=[]
 
 class Text():
     def setCursor(self,cursor):
@@ -95,6 +96,12 @@ class Text():
     def getCursor(self):
         return field_names
 
+    def setData(self, data):
+        global datatable
+        datatable = data
+    def getData(self):
+        return datatable
+
 class body():
     def __init__(self):
         title=Text()
@@ -104,7 +111,7 @@ class body():
                 ['phone number:', title.gettelText(), '                           ', 'Customer Code', title.getcodeText()],
                 ['mobile number', title.gettelText(), '                             ', 'Customer Name', 'TEST'],
                 ['', '', '                                ', 'City', 'Giza']]
-        f = Table(data, repeatRows=1, repeatCols=1, hAlign='CENTER')
+        f = Table(title.getData(), repeatRows=1, repeatCols=1, hAlign='CENTER')
         d = Drawing(100, 5)
         d.add(Line(16, 6, 500, 6))
         connection = db1.connect()

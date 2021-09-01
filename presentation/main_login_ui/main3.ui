@@ -148,10 +148,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Promotion">
           <property name="geometry">
            <rect>
-            <x>-25</x>
+            <x>0</x>
             <y>0</y>
-            <width>123</width>
-            <height>231</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">
@@ -177,7 +177,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="QM_Promotion_Prom">
               <property name="geometry">
                <rect>
-                <x>-74</x>
+                <x>-89</x>
                 <y>0</y>
                 <width>172</width>
                 <height>221</height>
@@ -337,10 +337,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="QM_Promotion_Coupon">
               <property name="geometry">
                <rect>
-                <x>-34</x>
+                <x>0</x>
                 <y>0</y>
-                <width>132</width>
-                <height>192</height>
+                <width>174</width>
+                <height>294</height>
                </rect>
               </property>
               <attribute name="label">
@@ -501,7 +501,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>83</width>
                 <height>163</height>
                </rect>
               </property>
@@ -581,7 +581,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>83</width>
                 <height>134</height>
                </rect>
               </property>
@@ -654,7 +654,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>83</width>
                 <height>134</height>
                </rect>
               </property>
@@ -739,10 +739,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Installment">
           <property name="geometry">
            <rect>
-            <x>-25</x>
+            <x>0</x>
             <y>0</y>
-            <width>123</width>
-            <height>147</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">
@@ -765,10 +765,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page">
               <property name="geometry">
                <rect>
-                <x>-31</x>
+                <x>0</x>
                 <y>0</y>
-                <width>129</width>
-                <height>105</height>
+                <width>174</width>
+                <height>378</height>
                </rect>
               </property>
               <attribute name="label">
@@ -834,7 +834,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_2">
               <property name="geometry">
                <rect>
-                <x>-75</x>
+                <x>-90</x>
                 <y>0</y>
                 <width>173</width>
                 <height>76</height>
@@ -904,10 +904,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <widget class="QWidget" name="QM_Customer">
           <property name="geometry">
            <rect>
-            <x>-43</x>
+            <x>0</x>
             <y>0</y>
-            <width>141</width>
-            <height>316</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">
@@ -930,7 +930,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_3">
               <property name="geometry">
                <rect>
-                <x>-27</x>
+                <x>-42</x>
                 <y>0</y>
                 <width>125</width>
                 <height>47</height>
@@ -984,7 +984,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>83</width>
                 <height>47</height>
                </rect>
               </property>
@@ -1034,7 +1034,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_5">
               <property name="geometry">
                <rect>
-                <x>-49</x>
+                <x>-64</x>
                 <y>0</y>
                 <width>147</width>
                 <height>186</height>
@@ -1108,7 +1108,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_6">
               <property name="geometry">
                <rect>
-                <x>-58</x>
+                <x>-73</x>
                 <y>0</y>
                 <width>156</width>
                 <height>47</height>
@@ -1160,7 +1160,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_7">
               <property name="geometry">
                <rect>
-                <x>-68</x>
+                <x>-83</x>
                 <y>0</y>
                 <width>166</width>
                 <height>76</height>
@@ -1219,7 +1219,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_8">
               <property name="geometry">
                <rect>
-                <x>-84</x>
+                <x>-99</x>
                 <y>0</y>
                 <width>182</width>
                 <height>134</height>
@@ -1292,10 +1292,10 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_9">
               <property name="geometry">
                <rect>
-                <x>-2</x>
+                <x>0</x>
                 <y>0</y>
-                <width>100</width>
-                <height>30</height>
+                <width>184</width>
+                <height>209</height>
                </rect>
               </property>
               <attribute name="label">
@@ -1351,8 +1351,8 @@ QToolBox::tab:selected { /* italicize selected tabs */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>76</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1623,9 +1623,9 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_31">
               <property name="geometry">
                <rect>
-                <x>0</x>
+                <x>-8</x>
                 <y>0</y>
-                <width>98</width>
+                <width>91</width>
                 <height>226</height>
                </rect>
               </property>
@@ -1649,7 +1649,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
                  <widget class="QWidget" name="page_33">
                   <property name="geometry">
                    <rect>
-                    <x>-59</x>
+                    <x>-90</x>
                     <y>0</y>
                     <width>142</width>
                     <height>223</height>
@@ -2178,8 +2178,8 @@ QToolBox::tab:selected { /* italicize selected tabs */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>28</height>
+            <width>228</width>
+            <height>456</height>
            </rect>
           </property>
           <attribute name="label">
@@ -2343,6 +2343,7 @@ border-color:steelblue;}</string>
      <property name="title">
       <string>تقارير العملاء</string>
      </property>
+     <addaction name="QAct_Customer_Details"/>
      <addaction name="QAct_Report_Cust_1"/>
      <addaction name="QAct_Report_Cust_2"/>
      <addaction name="QAct_Report_Cust_3"/>
@@ -2358,15 +2359,15 @@ border-color:steelblue;}</string>
      <addaction name="QAct_Report_Cust_13"/>
      <addaction name="QAct_Report_Cust_14"/>
      <addaction name="QAct_Report_Cust_15"/>
+     <addaction name="QAct_Report_Cust_19"/>
+     <addaction name="QAct_Report_Cust_18"/>
+     <addaction name="QAct_Customer_Funds"/>
+     <addaction name="QAct_Report_Cust_22"/>
+     <addaction name="QAct_Report_Cust_21"/>
      <addaction name="QAct_Report_Cust_16"/>
      <addaction name="QAct_Report_Cust_17"/>
      <addaction name="separator"/>
-     <addaction name="QAct_Report_Cust_18"/>
-     <addaction name="QAct_Report_Cust_19"/>
-     <addaction name="QAct_Report_Cust_20"/>
-     <addaction name="QAct_Report_Cust_21"/>
-     <addaction name="QAct_Report_Cust_22"/>
-     <addaction name="QAct_Report_Cust_23"/>
+     <addaction name="action"/>
     </widget>
     <widget class="QMenu" name="QM_Report_Sale">
      <property name="title">
@@ -2602,7 +2603,7 @@ border-color:steelblue;}</string>
     <string>تقرير قيم مشتريات العملاء خلال فترة</string>
    </property>
   </action>
-  <action name="QAct_Report_Cust_20">
+  <action name="QAct_Customer_Funds">
    <property name="text">
     <string>تقرير بارصدة العملاء</string>
    </property>
@@ -2617,9 +2618,9 @@ border-color:steelblue;}</string>
     <string>تقرير بالهدايا الممنوحة للعملاء</string>
    </property>
   </action>
-  <action name="QAct_Report_Cust_23">
+  <action name="QAct_Customer_Details">
    <property name="text">
-    <string>تقرير لاجراء السحب للعملاء</string>
+    <string>تقرير بيانات العملاء</string>
    </property>
   </action>
   <action name="QAct_Report_Sale_1">
@@ -2895,6 +2896,11 @@ border-color:steelblue;}</string>
   <action name="action_123">
    <property name="text">
     <string>تقرير متابعة وصول المبيعات من نقاط البيع بالنقاط</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>تقرير بيانات العملاء</string>
    </property>
   </action>
  </widget>

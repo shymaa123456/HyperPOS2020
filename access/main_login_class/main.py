@@ -50,6 +50,7 @@ from access.master_data_class.promotionType import CL_promotionType
 from access.master_data_class.sponsor import CL_sponsor
 from access.master_data_class.sponsorType import CL_sponsorType
 from access.master_data_class.userType import CL_userType
+from access.reports_class.customer import CL_customer_report
 from access.reports_class.reporting import CL_report
 from access.reports_class.reporting1 import CL_report1
 
@@ -232,6 +233,9 @@ class CL_main(QtWidgets.QMainWindow):
 
 
             self.QAct_sponsor.clicked.connect(self.FN_sponsor)
+            #customer reports
+            self.QAct_Customer_Details.triggered.connect(self.FN_search_customer)
+
 
             self.QAct_Exit.clicked.connect(self.FN_exit)
 
@@ -258,6 +262,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_ModifyCoupon = 0
             self.window_CreateCoupon = 0
             self.window_search_reporting1 = 0
+            self.window_search_cust_rep = 0
             self.window_search_reporting = 0
             self.window_search_promotion = 0
             self.window_modify_form_item = 0
@@ -1146,6 +1151,22 @@ class CL_main(QtWidgets.QMainWindow):
 
 
 
+    def FN_search_customer(self):
+        try:
+            if self.window_search_cust_rep == 0:
+                self.window_search_cust_rep = CL_customer_report()
+                self.window_search_cust_rep.FN_LOAD_DISPLAY()
+                self.ui.tabWidget.addTab(self.window_search_cust_rep, 'الاستعلام عن بيانات العملاء')
+                self.ui.tabWidget.setFixedWidth(self.window_search_cust_rep.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_search_cust_rep.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_search_cust_rep)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_search_cust_rep.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_search_cust_rep.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_search_cust_rep)
+
+        except Exception as err:
+             print(err)
     def FN_CreateCoupon(self):
         if self.window_CreateCoupon == 0:
             self.window_CreateCoupon = CL_CreateCoupon()
@@ -1578,6 +1599,9 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_search_reporting1:
             self.ui.tabWidget.setFixedWidth(self.window_search_reporting1.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_search_reporting1.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_search_cust_rep:
+            self.ui.tabWidget.setFixedWidth(self.window_search_cust_rep.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_search_cust_rep.frameGeometry().height())
         elif self.ui.tabWidget.currentWidget() == self.window_search_reporting:
             self.ui.tabWidget.setFixedWidth(self.window_search_reporting.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_search_reporting.frameGeometry().height())
@@ -1781,6 +1805,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_SerialCoupon = 0
         if self.window_search_reporting1 not in li:
             self.window_search_reporting1 = 0
+        if self.window_search_cust_rep not in li:
+            self.window_search_cust_rep = 0
         if self.window_search_reporting not in li:
             self.window_search_reporting = 0
         if self.window_search_promotion not in li:

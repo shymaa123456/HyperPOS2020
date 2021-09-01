@@ -199,7 +199,7 @@ class CL_BMC(QtWidgets.QDialog):
 
             else:
                 if desc != desc_old:
-                    if self.FN_CHECK_DUP_NAME(desc,id) != False:
+                    if self.FN_CHECK_DUP_NAME(desc,code) != False:
                         QtWidgets.QMessageBox.warning(self, "خطأ", "الاسم مكرر")
                         error=1
 
@@ -218,7 +218,7 @@ class CL_BMC(QtWidgets.QDialog):
                     self.FN_GET_ALL()
                     self.FN_CLEAR_FEILDS ()
                     if str(status) != str(status_old):
-                        util.FN_INSERT_IN_LOG("BMC", "status", status, status_old, id)
+                        util.FN_INSERT_IN_LOG("BMC", "status", status, status_old, code)
         else:
             QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء اختيار السطر المراد تعديله ")
 

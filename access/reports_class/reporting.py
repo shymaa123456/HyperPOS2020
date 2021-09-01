@@ -89,7 +89,7 @@ class CL_report(QtWidgets.QDialog):
                     for i in self.Qcombo_sponsor.currentData():
                         self.sponsor_list.append("'" + i + "'")
 
-                    self.sponsor_prom = "and `PROMOTION_SPONSER`.`SPONSER_ID`IN(" + ','.join(
+                    self.sponsor_prom = "and `PROMOTION_SPONSOR`.`SPONSOR_ID`IN(" + ','.join(
                         self.sponsor_list) + ")"
             if self.QcheckBox_magazine.isChecked():
                 if len(self.Qcombo_magazine.currentData()) > 0:
@@ -117,7 +117,7 @@ class CL_report(QtWidgets.QDialog):
                         "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` "
                         "JOIN `PROM_BRANCH` ON `PROM_BRANCH`.`PROM_ID` = `PROMOTION_HEADER`.`PROM_ID`"
                         "JOIN `PROMOTION_GROUP` ON   `PROMOTION_GROUP`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
-                        "JOIN `PROMOTION_SPONSER` ON   `PROMOTION_SPONSER`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
+                        "JOIN `PROMOTION_SPONSOR` ON   `PROMOTION_SPONSOR`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
                         "JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`"
 
                         "where"
@@ -137,7 +137,7 @@ class CL_report(QtWidgets.QDialog):
                         "SELECT `PROMOTION_HEADER`.`PROM_ID`, `PROMOTION_HEADER`.`PROM_TYPE_ID`, `PROMOTION_HEADER`.`PROM_CREATED_BY`, `PROMOTION_HEADER`.`PROM_CREATED_ON`, `PROMOTION_DETAIL`.`PROM_LINE_NO`, `PROMOTION_DETAIL`.`POS_ITEM_NO`,`PROMOTION_DETAIL`.`POS_GTIN`,`PROMOTION_DETAIL`.`BMC_ID`,`PROMOTION_DETAIL`.`PROM_PRICE_BEFORE_DISC`,`PROMOTION_DETAIL`.`PROM_ITEM_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_GROUP_SCALE_FLAG`,`PROMOTION_DETAIL`.`PROM_DISCOUNT_FLAG`,`PROMOTION_DETAIL`.`PROM_ITEM_QTY`,`PROMOTION_DETAIL`.`PROM_ITEM_DISC_VAL`,`PROMOTION_DETAIL`.`PROM_ITEM_PRICE`,`PROMOTION_DETAIL`.`PROM_START_DATE`,`PROMOTION_DETAIL`.`PROM_END_DATE`,`PROMOTION_DETAIL`.`PROM_STATUS` FROM `PROMOTION_HEADER` "
                         "JOIN `PROMOTION_DETAIL` ON `PROMOTION_HEADER`.`PROM_ID`=`PROMOTION_DETAIL`.`PROM_ID`"
                         "JOIN `PROMOTION_GROUP` ON   `PROMOTION_GROUP`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
-                        "JOIN `PROMOTION_SPONSER` ON   `PROMOTION_SPONSER`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
+                        "JOIN `PROMOTION_SPONSOR` ON   `PROMOTION_SPONSOR`.`PROMID` = `PROMOTION_HEADER`.`PROM_ID`"
                         "JOIN `PROM_BRANCH` ON `PROM_BRANCH`.`PROM_ID` = `PROMOTION_HEADER`.`PROM_ID`"
                         "where"
                         "`PROM_BRANCH`.`COMPANY_ID` IN (" + ','.join(self.company_list) + ")"
@@ -227,7 +227,7 @@ class CL_report(QtWidgets.QDialog):
 
         self.conn = db1.connect()
         mycursor = self.conn.cursor()
-        mycursor.execute("SELECT SPONSER_NAME ,SPONSER_ID FROM SPONSER")
+        mycursor.execute("SELECT SPONSOR_NAME ,SPONSOR_ID FROM SPONSOR")
         records = mycursor.fetchall()
         for row, val in records:
             self.Qcombo_sponsor.addItem(row, val)

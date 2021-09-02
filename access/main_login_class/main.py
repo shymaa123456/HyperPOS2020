@@ -51,6 +51,7 @@ from access.master_data_class.sponsor import CL_sponsor
 from access.master_data_class.sponsorType import CL_sponsorType
 from access.master_data_class.userType import CL_userType
 from access.reports_class.customer import CL_customer_report
+from access.reports_class.customerFunds import CL_customerFunds
 from access.reports_class.reporting import CL_report
 from access.reports_class.reporting1 import CL_report1
 
@@ -234,7 +235,8 @@ class CL_main(QtWidgets.QMainWindow):
 
             self.QAct_sponsor.clicked.connect(self.FN_sponsor)
             #customer reports
-            self.QAct_Customer_Details.triggered.connect(self.FN_search_customer)
+            self.QAct_Customer_Details.triggered.connect(self.FN_customer_details_report)
+            self.QAct_Customer_Funds.triggered.connect(self.FN_customer_funds_report)
 
 
             self.QAct_Exit.clicked.connect(self.FN_exit)
@@ -263,6 +265,7 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_CreateCoupon = 0
             self.window_search_reporting1 = 0
             self.window_search_cust_rep = 0
+            self.window_cust_funds_rep = 0
             self.window_search_reporting = 0
             self.window_search_promotion = 0
             self.window_modify_form_item = 0
@@ -1151,7 +1154,7 @@ class CL_main(QtWidgets.QMainWindow):
 
 
 
-    def FN_search_customer(self):
+    def FN_customer_details_report(self):
         try:
             if self.window_search_cust_rep == 0:
                 self.window_search_cust_rep = CL_customer_report()
@@ -1167,6 +1170,23 @@ class CL_main(QtWidgets.QMainWindow):
 
         except Exception as err:
              print(err)
+
+    def FN_customer_funds_report(self):
+        try:
+            if self.window_cust_funds_rep == 0:
+                self.window_cust_funds_rep = CL_customerFunds()
+                self.window_cust_funds_rep.FN_LOAD_DISPLAY()
+                self.ui.tabWidget.addTab(self.window_cust_funds_rep, 'الاستعلام عن أرصده العملاء')
+                self.ui.tabWidget.setFixedWidth(self.window_cust_funds_rep.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_cust_funds_rep.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self.window_cust_funds_rep)
+            else:
+                self.ui.tabWidget.setFixedWidth(self.window_cust_funds_rep.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self.window_cust_funds_rep.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget (self.window_cust_funds_rep )
+        except Exception as err:
+             print(err)
+
     def FN_CreateCoupon(self):
         if self.window_CreateCoupon == 0:
             self.window_CreateCoupon = CL_CreateCoupon()
@@ -1602,6 +1622,9 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_search_cust_rep:
             self.ui.tabWidget.setFixedWidth(self.window_search_cust_rep.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_search_cust_rep.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_cust_funds_rep:
+            self.ui.tabWidget.setFixedWidth(self.window_cust_funds_rep.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_cust_funds_rep.frameGeometry().height())
         elif self.ui.tabWidget.currentWidget() == self.window_search_reporting:
             self.ui.tabWidget.setFixedWidth(self.window_search_reporting.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_search_reporting.frameGeometry().height())
@@ -1807,6 +1830,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_search_reporting1 = 0
         if self.window_search_cust_rep not in li:
             self.window_search_cust_rep = 0
+        if self.window_cust_funds_rep not in li:
+            self.window_cust_funds_rep = 0
         if self.window_search_reporting not in li:
             self.window_search_reporting = 0
         if self.window_search_promotion not in li:

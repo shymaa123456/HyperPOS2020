@@ -372,7 +372,7 @@
      <string>بحث</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Qbtn_replace">
+   <widget class="QPushButton" name="Qbtn_search_details">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -557,10 +557,88 @@
     </property>
    </widget>
   </widget>
+  <widget class="QTableWidget" name="Qtable_customer">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>350</y>
+     <width>999</width>
+     <height>299</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="columnCount">
+    <number>11</number>
+   </property>
+   <column>
+    <property name="text">
+     <string>رقم العمليه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>نوع الإسترجاع</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الشركه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الفرع</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>ماكينه الكاشير</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>رقم الفاتوره</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>تاريخ الفاتوره</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>نقاط العميل قبل </string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>النقاط المكتسبه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>نقاط العميل بعد</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الحاله</string>
+    </property>
+   </column>
+  </widget>
   <zorder>groupBox_3</zorder>
   <zorder>groupBox_2</zorder>
   <zorder>groupBox</zorder>
   <zorder>groupBox_4</zorder>
+  <zorder>Qtable_customer</zorder>
  </widget>
  <resources/>
  <connections/>

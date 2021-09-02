@@ -1,5 +1,6 @@
 from pathlib import Path
 from PyQt5 import QtWidgets,QtCore
+from PyQt5.QtCore import QDate
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QTableWidgetItem
 from PyQt5.uic import loadUi
 
@@ -28,7 +29,7 @@ class CL_customerFunds(QtWidgets.QDialog):
         self.dirname = mod_path.__str__() + '/presentation/reports_ui'
         conn = db1.connect()
 
-    def FN_LOAD_DISPlAY(self):
+    def FN_LOAD_DISPLAY(self):
         try:
             filename = self.dirname + '/customer_funds.ui'
             loadUi(filename, self)
@@ -42,6 +43,12 @@ class CL_customerFunds(QtWidgets.QDialog):
             css_path = Path(__file__).parent.parent.parent
             path = css_path.__str__() + '/presentation/Themes/Style.css'
             self.setStyleSheet(open(path).read())
+            valid_from = str(datetime.today().strftime('%Y-%m-%d'))
+
+            xto = valid_from.split("-")
+            print(xto)
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
+            self.Qdate_from.setDate(d)
 
         except Exception as err:
             print(err)
@@ -64,11 +71,58 @@ class CL_customerFunds(QtWidgets.QDialog):
                 print(err)
 
     def FN_SEARCH_DETAILS(self):
-        print('details')
+        try:
+            customer = self.Qline_cust.text().strip()
+            date_from = self.Qdate_from.dateTime().toString('yyyy-MM-dd')
+            date_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')
+            if customer != '':
+                ret = self.FN_CHECK_CUSTOMER(customer)
+                if ret == True:
+                    for i in reversed(range(self.Qtable_customer.rowCount())):
+                        self.Qtable_customer.removeRow(i)
+                    conn = db1.connect()
+                    mycursor = conn.cursor()
+                    sql = "SELECT MEMBERSHIP_POINTS_TRANS ,REDEEM_TYPE_ID ,COMPANY_ID ,BRANCH_NO,POS_NO,INVOICE_NO ,INVOICE_DATE,  POSC_POINTS_BEFORE, TRANS_POINTS_QTY,POSC_POINTS_AFTER,TRANS_STATUS  FROM Hyper1_Retail.LOYALITY_POINTS_TRANSACTION_LOG  cp " \
+                          " inner join Hyper1_Retail.POS_CUSTOMER  c " \
+                          " on cp.POSC_CUST_ID = c.POSC_CUST_ID " \
+                          " where c.POSC_CUST_ID = " + customer + " and TRANS_CREATED_ON >= '" + date_from + "' and TRANS_CREATED_ON <= '" + date_to + "' order by MEMBERSHIP_POINTS_TRANS*1 asc"
+                    print(sql)
+                    mycursor.execute(sql)
+                    myresult = mycursor.fetchall()
+
+
+                    for row_number, row_data in enumerate(myresult):
+                        self.Qtable_customer.insertRow(row_number)
+
+                        for column_number, data in enumerate(row_data):
+                            if column_number == 1:
+                                data = util.FN_GET_REDEEMTYPE_DESC(str(data))
+                            elif column_number == 2:
+                                data = util.FN_GET_COMP_DESC(str(data))
+                            elif column_number == 3:
+                                data = util.FN_GET_BRANCH_DESC(str(data))
+                            elif column_number == 10:
+                                data = self.FN_GET_TRANS_STATUS(str(data))
+                            self.Qtable_customer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+                    self.Qtable_customer.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
+                    mycursor.close()
+                else:
+                     QtWidgets.QMessageBox.warning(self, "خطأ", "رقم العميل غير صحيح")
+            else:
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال رقم العميل")
+        except Exception as err:
+                print(err)
+
+    def FN_GET_TRANS_STATUS(self,status):
+        if status == '2':
+            return "Completed"
+        elif status== '0':
+            return "Reversed"
+        elif status == '1':
+            return "Cancelled"
     def FN_SEARCH(self):
         try:
-            print('in search')
-
             customer = self.Qline_cust.text().strip()
             if customer != '':
                 ret = self.FN_CHECK_CUSTOMER(customer)
@@ -107,6 +161,8 @@ class CL_customerFunds(QtWidgets.QDialog):
             #title.setCursor("Testing")
             title.setQuery(self.sql_select_query)
             title.setCursor(self.field_names)
+            data = [['   ']]
+            title.setData(data)
             body()
             QtWidgets.QMessageBox.information(self, "Success", "Report is printed successfully")
             import os

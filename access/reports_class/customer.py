@@ -88,7 +88,7 @@ class CL_customer_report(QtWidgets.QDialog):
             #title.setCursor("Testing")
             title.setQuery(self.sql_select_query)
             title.setCursor(self.field_names)
-            data = [['Nubmber reset:', '248361 5/1/2018', '                                      ', 'Client Data', '']]
+            data = [['   ']]
             title.setData(data)
             body()
             QtWidgets.QMessageBox.information(self, "Success", "Report is printed successfully")

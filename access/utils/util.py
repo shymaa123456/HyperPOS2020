@@ -144,6 +144,14 @@ class util():
         return myresult[0]
 
     @staticmethod
+    def FN_GET_REDEEMTYPE_DESC(id):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        mycursor.execute("SELECT REDEEMT_DESC FROM Hyper1_Retail.REDEEM_TYPE where REDEEMT_TYPE_ID = '" + id + "'")
+        myresult = mycursor.fetchone()
+        mycursor.close()
+        return myresult[0]
+    @staticmethod
     def FN_GET_BRANCH_DESC( id):
         conn = db1.connect()
         mycursor = conn.cursor()

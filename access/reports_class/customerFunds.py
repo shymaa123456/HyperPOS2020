@@ -19,9 +19,7 @@ class CL_customerFunds(QtWidgets.QDialog):
     dirname = ''
     parent =''
     modify_flag=0
-    field_names = ['رقم العميل', 'اسم العميل', 'مجموعه العملاء', 'رقم الهاتف' , 'الموبيل' ,
-                                    'الوطيفه' , 'العنوان' , 'المدينه' , 'المجاوره' ,
-                                    'المبنى' , 'الطابق'  ,'الإيميل' , 'حاله العميل']
+    field_names = ['رقم العمليه','نوع الإسترجاع','الشركه','الفرع','ماكينه الكاشير','رقم الفاتوره','تاريخ الفاتوره','نقاط العميل قبل','النقاط المكتسبه','تقاط العميل بعد','الحاله']
     def __init__(self):
         super(CL_customerFunds, self).__init__()
         cwd = Path.cwd()
@@ -72,6 +70,7 @@ class CL_customerFunds(QtWidgets.QDialog):
 
     def FN_SEARCH_DETAILS(self):
         try:
+            self.FN_SEARCH()
             customer = self.Qline_cust.text().strip()
             date_from = self.Qdate_from.dateTime().toString('yyyy-MM-dd')
             date_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')
@@ -82,12 +81,13 @@ class CL_customerFunds(QtWidgets.QDialog):
                         self.Qtable_customer.removeRow(i)
                     conn = db1.connect()
                     mycursor = conn.cursor()
-                    sql = "SELECT MEMBERSHIP_POINTS_TRANS ,REDEEM_TYPE_ID ,COMPANY_ID ,BRANCH_NO,POS_NO,INVOICE_NO ,INVOICE_DATE,  POSC_POINTS_BEFORE, TRANS_POINTS_QTY,POSC_POINTS_AFTER,TRANS_STATUS  FROM Hyper1_Retail.LOYALITY_POINTS_TRANSACTION_LOG  cp " \
+
+                    self.sql = "SELECT MEMBERSHIP_POINTS_TRANS  'رقم العمليه',REDEEM_TYPE_ID 'نوع الإسترجاع',COMPANY_ID 'الشركه' ,BRANCH_NO  'الفرع',POS_NO 'ماكينه الكاشير',INVOICE_NO 'رقم الفاتوره' ,INVOICE_DATE 'تاريخ الفاتوره',  POSC_POINTS_BEFORE 'نقاط العميل قبل', TRANS_POINTS_QTY 'النقاط المكتسبه',POSC_POINTS_AFTER 'تقاط العميل بعد',TRANS_STATUS 'الحاله' FROM Hyper1_Retail.LOYALITY_POINTS_TRANSACTION_LOG  cp " \
                           " inner join Hyper1_Retail.POS_CUSTOMER  c " \
                           " on cp.POSC_CUST_ID = c.POSC_CUST_ID " \
                           " where c.POSC_CUST_ID = " + customer + " and TRANS_CREATED_ON >= '" + date_from + "' and TRANS_CREATED_ON <= '" + date_to + "' order by MEMBERSHIP_POINTS_TRANS*1 asc"
-                    print(sql)
-                    mycursor.execute(sql)
+                    print(self.sql)
+                    mycursor.execute(self.sql)
                     myresult = mycursor.fetchall()
 
 
@@ -147,21 +147,27 @@ class CL_customerFunds(QtWidgets.QDialog):
     def printpreviewDialog(self):
         try:
             # Todo: method for export reports pdf file
-
+            customer = self.Qline_cust.text().strip()
+            points = self.Qline_points.text().strip()
+            name = self.Qline_name.text().strip()
             title = Text()
-            title.setName("customers")
+
             title.setFooter(
                 " س ت 36108 ملف  ضريبي 212/306/5 مأموريه  ضرائب الشركات المساهمة رقم التسجيل بضرائب المبيعات 153/846/310 ")
             title.setFont('Scheherazade-Regular.ttf')
             title.setFontsize(10)
+            title.setName("customer funds")
             #title.setcodeText("15235")
             title.setwaterText("hyperone company")
             #title.settelText("1266533")
             title.setbrachText("Entrance 1,EL Sheikh Zayed City")
             #title.setCursor("Testing")
-            title.setQuery(self.sql_select_query)
+            title.setQuery(self.sql)
             title.setCursor(self.field_names)
-            data = [['   ']]
+            data = [['customer no:' , '  ',customer],
+                    ['customer name:' , '  ',name],
+                    ['customer points:', '  ', points]
+                    ]
             title.setData(data)
             body()
             QtWidgets.QMessageBox.information(self, "Success", "Report is printed successfully")

@@ -138,18 +138,33 @@ class CL_customerFunds(QtWidgets.QDialog):
                     myresult = mycursor.fetchone()
                     self.Qline_points.setText(str(myresult[0]))
                     self.Qline_name.setText(str(myresult[1]))
+                    value = self.FN_GET_POINTS_VALUE(str(myresult[0]))
+                    self.Qline_point_value.setText(str(value))
                 else:
                     QtWidgets.QMessageBox.warning(self, "خطأ", "رقم العميل غير صحيح")
             else:
                 QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال رقم العميل")
         except Exception as err:
             print(err)
+
+    def FN_GET_POINTS_VALUE(self,points):
+        conn = db1.connect()
+        mycursor = conn.cursor()
+        sql_select_query = "SELECT POINTS_QTY,POINTS_VALUE FROM Hyper1_Retail.LOYALITY_POINT where POINTS_VALID_FROM <= %s and POINTS_VALID_TO >= %s"
+        currentDate =str(datetime.today().strftime('%Y-%m-%d'))
+        x = (currentDate,currentDate,)
+        mycursor.execute(sql_select_query,x)
+        result = mycursor.fetchone()
+        value = float(points) * int(result[1])  / int(result[0])
+        #value = float(value)
+        return value
     def printpreviewDialog(self):
         try:
             # Todo: method for export reports pdf file
             customer = self.Qline_cust.text().strip()
             points = self.Qline_points.text().strip()
             name = self.Qline_name.text().strip()
+            pointValue = self.Qline_point_value.text().strip()
             title = Text()
 
             title.setFooter(
@@ -164,9 +179,9 @@ class CL_customerFunds(QtWidgets.QDialog):
             #title.setCursor("Testing")
             title.setQuery(self.sql)
             title.setCursor(self.field_names)
-            data = [['customer no:' , '  ',customer],
-                    ['customer name:' , '  ',name],
-                    ['customer points:', '  ', points]
+            data = [['customer no:' , ' ',customer ,'                                   ', 'customer name:' , ' ',name],
+
+                    ['customer points:', ' ', points ,'                                   ', 'point value:', ' ', pointValue  ]
                     ]
             title.setData(data)
             body()

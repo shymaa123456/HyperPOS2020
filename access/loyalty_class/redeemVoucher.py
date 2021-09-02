@@ -57,7 +57,7 @@ class CL_redVouch(QtWidgets.QDialog):
         x = (currentDate,currentDate,)
         mycursor.execute(sql_select_query,x)
         result = mycursor.fetchone()
-        value = replacedPoints * int(result[1] )/int(result[0])
+        value = replacedPoints * int(result[1])/int(result[0])
 
         self.Qline_point_value.setText(str(value))
         return result

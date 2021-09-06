@@ -2357,7 +2357,7 @@ border-color:steelblue;}</string>
      <addaction name="QAct_Report_Cust_11"/>
      <addaction name="QAct_Report_Cust_12"/>
      <addaction name="QAct_Report_Cust_13"/>
-     <addaction name="QAct_Report_Cust_14"/>
+     <addaction name="QAct_Redeem_Type_Values"/>
      <addaction name="QAct_Report_Cust_15"/>
      <addaction name="QAct_Report_Cust_19"/>
      <addaction name="QAct_Report_Cust_18"/>
@@ -2573,7 +2573,7 @@ border-color:steelblue;}</string>
     <string>تقرير تفصيلى يوضح طرق استبدال النقاط</string>
    </property>
   </action>
-  <action name="QAct_Report_Cust_14">
+  <action name="QAct_Redeem_Type_Values">
    <property name="text">
     <string>تقرير تفصيلى يوضح اعداد وقيم طرق استبدال النقاط</string>
    </property>

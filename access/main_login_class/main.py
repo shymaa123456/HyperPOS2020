@@ -52,6 +52,7 @@ from access.master_data_class.sponsorType import CL_sponsorType
 from access.master_data_class.userType import CL_userType
 from access.reports_class.customer import CL_customer_report
 from access.reports_class.customerFunds import CL_customerFunds
+from access.reports_class.redeemTypeValue import CL_redeemTypeValue
 from access.reports_class.reporting import CL_report
 from access.reports_class.reporting1 import CL_report1
 
@@ -237,6 +238,7 @@ class CL_main(QtWidgets.QMainWindow):
             #customer reports
             self.QAct_Customer_Details.triggered.connect(self.FN_customer_details_report)
             self.QAct_Customer_Funds.triggered.connect(self.FN_customer_funds_report)
+            self.QAct_Redeem_Type_Values.triggered.connect(self.FN_redeem_type_value_rep)
 
 
             self.QAct_Exit.clicked.connect(self.FN_exit)
@@ -266,6 +268,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_search_reporting1 = 0
             self.window_search_cust_rep = 0
             self.window_cust_funds_rep = 0
+            self.window_redeem_type_value_rep= 0
+
             self.window_search_reporting = 0
             self.window_search_promotion = 0
             self.window_modify_form_item = 0
@@ -1187,6 +1191,23 @@ class CL_main(QtWidgets.QMainWindow):
         except Exception as err:
              print(err)
 
+    def FN_redeem_type_value_rep(self):
+        try:
+            if self.window_redeem_type_value_rep == 0:
+                self.window_redeem_type_value_rep = CL_redeemTypeValue()
+                self. window_redeem_type_value_rep.FN_LOAD_DISPLAY()
+                self.ui.tabWidget.addTab(self. window_redeem_type_value_rep, 'اعداد و قيم طرق استبدال النقاط')
+                self.ui.tabWidget.setFixedWidth(self. window_redeem_type_value_rep.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self. window_redeem_type_value_rep.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self. window_redeem_type_value_rep)
+            else:
+                self.ui.tabWidget.setFixedWidth(self. window_redeem_type_value_rep.frameGeometry().width())
+                self.ui.tabWidget.setFixedHeight(self. window_redeem_type_value_rep.frameGeometry().height())
+                self.ui.tabWidget.setCurrentWidget(self. window_redeem_type_value_rep)
+        except Exception as err:
+            print(err)
+
+
     def FN_CreateCoupon(self):
         if self.window_CreateCoupon == 0:
             self.window_CreateCoupon = CL_CreateCoupon()
@@ -1625,6 +1646,10 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_cust_funds_rep:
             self.ui.tabWidget.setFixedWidth(self.window_cust_funds_rep.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_cust_funds_rep.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_redeem_type_value_rep:
+            self.ui.tabWidget.setFixedWidth(self.window_redeem_type_value_rep.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_redeem_type_value_rep.frameGeometry().height())
+
         elif self.ui.tabWidget.currentWidget() == self.window_search_reporting:
             self.ui.tabWidget.setFixedWidth(self.window_search_reporting.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_search_reporting.frameGeometry().height())
@@ -1832,6 +1857,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_search_cust_rep = 0
         if self.window_cust_funds_rep not in li:
             self.window_cust_funds_rep = 0
+        if self.window_redeem_type_value_rep not in li:
+           self.window_redeem_type_value_rep = 0
         if self.window_search_reporting not in li:
             self.window_search_reporting = 0
         if self.window_search_promotion not in li:

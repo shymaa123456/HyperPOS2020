@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Voucher</class>
+ <widget class="QDialog" name="Voucher">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1100</width>
+    <height>717</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1100</width>
+    <height>717</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>أرصده العملاء</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>0</y>
+     <width>131</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QPushButton" name="Qbtn_print">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>170</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>طباعه</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Qbtn_search">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>بحث</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Qbtn_search_details">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>بحث تفصيلي</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>130</y>
+     <width>591</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>29LT Bukra Regular</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="title">
+    <string>الفتره</string>
+   </property>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>30</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>من</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>30</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>الي</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="Qdate_to">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>30</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="dateTime">
+     <datetime>
+      <hour>0</hour>
+      <minute>0</minute>
+      <second>0</second>
+      <year>9999</year>
+      <month>12</month>
+      <day>25</day>
+     </datetime>
+    </property>
+    <property name="maximumDateTime">
+     <datetime>
+      <hour>23</hour>
+      <minute>59</minute>
+      <second>59</second>
+      <year>9999</year>
+      <month>12</month>
+      <day>25</day>
+     </datetime>
+    </property>
+    <property name="displayFormat">
+     <string>dd-MM-yyyy</string>
+    </property>
+    <property name="calendarPopup">
+     <bool>true</bool>
+    </property>
+    <property name="date">
+     <date>
+      <year>9999</year>
+      <month>12</month>
+      <day>25</day>
+     </date>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="Qdate_from">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>31</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="displayFormat">
+     <string>dd-MM-yyyy</string>
+    </property>
+    <property name="calendarPopup">
+     <bool>true</bool>
+    </property>
+    <property name="date">
+     <date>
+      <year>2020</year>
+      <month>1</month>
+      <day>3</day>
+     </date>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QTableWidget" name="Qtable_customer">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>350</y>
+     <width>999</width>
+     <height>299</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="columnCount">
+    <number>13</number>
+   </property>
+   <column>
+    <property name="text">
+     <string>رقم العمليه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>رقم العميل</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>اسم العميل</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>نوع الإسترجاع</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الشركه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الفرع</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>ماكينه الكاشير</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>رقم الفاتوره</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>تاريخ الفاتوره</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>نقاط العميل قبل </string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>النقاط المكتسبه</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>نقاط العميل بعد</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>الحاله</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>20</y>
+     <width>611</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QComboBox" name="CMB_level4">
+    <property name="geometry">
+     <rect>
+      <x>-90</x>
+      <y>110</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>198</x>
+      <y>0</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>الشركة</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>198</x>
+      <y>60</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>الفرع</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>508</x>
+      <y>20</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>نوع الإسترجاع</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="CMB_redeemType">
+    <property name="geometry">
+     <rect>
+      <x>268</x>
+      <y>40</y>
+      <width>221</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>29LT Bukra Regular</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>210</y>
+     <width>481</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>10</y>
+      <width>160</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_16">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>عدد النقاط</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_19">
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>قيمه النقاط</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>261</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLineEdit" name="Qline_points">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="Qline_point_value">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>29LT Bukra Regular</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+                                        background-color: white;
+                                        border-style: outset;
+                                        border-width: 2px;
+                                        border-radius: 10px;
+                                        border-color: blue;
+                                        min-width: 6em;
+                                        }
+                                        QLineEdit:hover {
+                                        background: qradialgradient(
+                                        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+                                        );
+                                        }
+                                       QLineEdit:pressed {
+                                        border-style: inset;
+                                        background: qradialgradient(
+                                        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+                                        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+                                        );
+                                        }
+                                    </string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

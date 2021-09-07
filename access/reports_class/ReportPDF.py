@@ -106,7 +106,7 @@ class body():
     def __init__(self):
         title=Text()
         val= CL_validation()
-        pdfmetrics.registerFont(TTFont('Scheherazade', 'Scheherazade-Regular.ttf'))
+        pdfmetrics.registerFont(TTFont('Scheherazade', 'adobearabic.ttf'))
         data = [['Nubmber reset:', '248361 5/1/2018', '                                      ', 'Client Data', ''],
                 ['phone number:', title.gettelText(), '                           ', 'Customer Code', title.getcodeText()],
                 ['mobile number', title.gettelText(), '                             ', 'Customer Name', 'TEST'],
@@ -180,7 +180,6 @@ class body():
         elements.append(table)
         elements.append(Spacer(20, 20))
         elements.append(Paragraph(genStr))
-
         elements.append(PageBreak())
 
         foo = Foo()

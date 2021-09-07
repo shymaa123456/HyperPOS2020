@@ -99,7 +99,7 @@ class FooterCanvas(canvas.Canvas):
         self.setFont('Scheherazade', foo.getFontsize())
         page = "Page %s of %s" % (self._pageNumber, page_count)
         x = 128
-        z = 550
+        z = 450
         self.saveState()
         self.setStrokeColorRGB(0, 0, 0)
         self.setLineWidth(2)
@@ -125,11 +125,13 @@ class FooterCanvas(canvas.Canvas):
         self.line(50, 750, LETTER[0] - 66, 750)
 
         self.setFont("Courier", 50)
-        self.setFillColorRGB(230 / 256, 230 / 256, 230 / 256)
+        self.setFillColorRGB(240 / 256, 240 / 256, 240 / 256)
         self.translate(500, 100)
         self.rotate(90)
-        self.drawCentredString(420, 350, foo.getwaterText())
-        self.drawCentredString(420, 150, foo.getwaterText())
-        self.drawCentredString(420, 20, foo.getwaterText())
+        self.setStrokeGray(0.90)
+
+        # self.drawCentredString(420, 350, foo.getwaterText())
+        # self.drawCentredString(420, 150, foo.getwaterText())
+        # self.drawCentredString(420, 20, foo.getwaterText())
 
         self.restoreState()

@@ -28,7 +28,7 @@ import sys
 
 
 
-class CL_report1(QtWidgets.QDialog):
+class CL_Coupon(QtWidgets.QDialog):
     model = QStandardItemModel()
 
     switch_window = QtCore.pyqtSignal()
@@ -273,7 +273,7 @@ class CL_report1(QtWidgets.QDialog):
         #Todo: method for initialization components
 
 
-        super(CL_report1, self).__init__()
+        super(CL_Coupon, self).__init__()
         try:
             cwd = Path.cwd()
             mod_path = Path(__file__).parent.parent.parent
@@ -286,12 +286,12 @@ class CL_report1(QtWidgets.QDialog):
             self.setWindowTitle('تقرير الكوبون')
 
             self.Qcombo_company = CheckableComboBox(self)
-            self.Qcombo_company.setGeometry(450, 50, 200, 18)
+            self.Qcombo_company.setGeometry(250, 60, 200, 18)
             self.Qcombo_company.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_company.setStyleSheet("background-color: rgb(198, 207, 199)")
 
             self.Qcombo_branchEdition = CheckableComboBox(self)
-            self.Qcombo_branchEdition.setGeometry(450, 120, 200, 18)
+            self.Qcombo_branchEdition.setGeometry(250, 120, 200, 18)
             self.Qcombo_branchEdition.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.Qcombo_branchEdition.setStyleSheet("background-color: rgb(198, 207, 199)")
 
@@ -321,11 +321,11 @@ class CL_controller():
         pass
 
     def FN_show_login(self):
-        self.report = CL_report1()
+        self.report = CL_Coupon()
         self.report.show()
 
     def FN_show_main(self):
-        self.window = CL_report1()
+        self.window = CL_Coupon()
 
         self.report.close()
 

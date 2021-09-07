@@ -54,7 +54,7 @@ from access.reports_class.customer import CL_customer_report
 from access.reports_class.customerFunds import CL_customerFunds
 from access.reports_class.redeemTypeValue import CL_redeemTypeValue
 from access.reports_class.reporting import CL_report
-from access.reports_class.reporting1 import CL_report1
+from access.reports_class.Coupon import CL_Coupon
 
 from access.authorization_class.Role import CL_role
 #from access.authorization_class.branch import CL_branch
@@ -166,7 +166,7 @@ class CL_main(QtWidgets.QMainWindow):
             """ Promotion """
             self.QAct_Prom_Add.clicked.connect(self.FN_search_promotion)
             self.QAct_Report_Promotion_1.triggered.connect(self.FN_search_reporting)
-            self.QAct_Report_Promotion_2.triggered.connect(self.FN_search_reporting1)
+            self.QAct_Report_Promotion_2.triggered.connect(self.FN_search_Coupon)
 
             # Todo: method for Open Create Coupon Window
             self.QAct_Coupon_Add.clicked.connect(self.FN_CreateCoupon)
@@ -1144,9 +1144,9 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setCurrentWidget(self.window_search_reporting)
 
 
-    def FN_search_reporting1(self):
+    def FN_search_Coupon(self):
         if self.window_search_reporting1 == 0:
-            self.window_search_reporting1 = CL_report1()
+            self.window_search_reporting1 = CL_Coupon()
             self.ui.tabWidget.addTab(self.window_search_reporting1, 'الاستعلام عن كوبونات الخصم')
             self.ui.tabWidget.setFixedWidth(self.window_search_reporting1.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_search_reporting1.frameGeometry().height())

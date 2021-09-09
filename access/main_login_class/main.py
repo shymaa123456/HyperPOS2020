@@ -1214,7 +1214,7 @@ class CL_main(QtWidgets.QMainWindow):
             if self.window_installment_rep == 0:
                 self.window_installment_rep = CL_installmentReport()
                 self. window_installment_rep.FN_LOAD_DISPLAY()
-                self.ui.tabWidget.addTab(self. window_installment_rep, 'اعداد و قيم طرق استبدال النقاط')
+                self.ui.tabWidget.addTab(self. window_installment_rep, 'تقرير التقسيط')
                 self.ui.tabWidget.setFixedWidth(self. window_installment_rep.frameGeometry().width())
                 self.ui.tabWidget.setFixedHeight(self. window_installment_rep.frameGeometry().height())
                 self.ui.tabWidget.setCurrentWidget(self. window_installment_rep)

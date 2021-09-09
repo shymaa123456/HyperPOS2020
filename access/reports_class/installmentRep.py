@@ -41,8 +41,9 @@ class CL_installmentReport(QtWidgets.QDialog):
             self.setStyleSheet(open(path).read())
 
             #Get installment type
-            self.FN_GET_installment_types_period()
             self.Qcombo_installmentType.addItem("Select type", '0')
+            self.FN_GET_installment_types_period()
+
             # test Multi selection for company
 
             #drob down list with multiselection for company
@@ -158,7 +159,7 @@ class CL_installmentReport(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
         records = mycursor.fetchall()
-        print(records)
+
         for row, val in records:
             self.Qcombo_company.addItem(row, val)
         mycursor.close()
@@ -179,11 +180,11 @@ class CL_installmentReport(QtWidgets.QDialog):
                 else:
                     val3 = val3 + "'" + self.Qcombo_company.currentData()[a] + "'"
 
-            print("companies", val3)
+
 
             sqlite3 = "SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH WHERE COMPANY_ID in (" + val3 + ")"
 
-            print("Branches_sqlite3", sqlite3)
+
 
             mycursor.execute(sqlite3)
 
@@ -204,7 +205,7 @@ class CL_installmentReport(QtWidgets.QDialog):
         mycursor = self.conn.cursor()
         mycursor.execute("SELECT CG_DESC,CG_GROUP_ID FROM CUSTOMER_GROUP")
         records = mycursor.fetchall()
-        print(records)
+
         for row, val in records:
             self.Qcombo_customerGroupe.addItem(row, val)
         mycursor.close()
@@ -276,7 +277,7 @@ class CL_installmentReport(QtWidgets.QDialog):
         try:
             conn = db1.connect()
             mycursor = conn.cursor()
-            print("currentData", self.Qcombo_department.currentData())
+            #print("currentData", self.Qcombo_department.currentData())
             val3 = ""
             for a in range(len(self.Qcombo_department.currentData())):
                 if a < len(self.Qcombo_department.currentData()) - 1:
@@ -284,7 +285,7 @@ class CL_installmentReport(QtWidgets.QDialog):
                 else:
                     val3 = val3 + "'" + self.Qcombo_department.currentData()[a] + "'"
 
-            print("deparments", val3)
+            #print("deparments", val3)
 
             mycursor.execute("SELECT SECTION_DESC,SECTION_ID FROM SECTION where DEPARTMENT_ID in (" + val3 + ")")
             # print("Query"+"SELECT SECTION_DESC,SECTION_ID FROM SECTION where DEPARTMENT_ID in ("+val3+")")
@@ -325,7 +326,7 @@ class CL_installmentReport(QtWidgets.QDialog):
                 else:
                     val3 = val3 + "'" + self.Qcombo_section.currentData()[a] + "'"
 
-            print("sections", val3)
+            #print("sections", val3)
             mycursor.execute("SELECT BMC_LEVEL4_DESC,BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID in (" + val3 + ")")
             records = mycursor.fetchall()
             mycursor.close()
@@ -386,6 +387,14 @@ class CL_installmentReport(QtWidgets.QDialog):
             elif self.Rbtn_stsAll.isChecked():
                 whereClause = whereClause + '  INST_STATUS in ( 0,1)'
 
+            if self.RBTN_bank.isChecked():
+                whereClause = whereClause + "and  s.BANK_ID <> '' "
+            elif self.RBTN_vendor.isChecked():
+                whereClause = whereClause + " and   s.SPONSOR_ID <> '' "
+            elif self.RBTN_hyperone.isChecked():
+                whereClause = whereClause + " and s.HYPERONE <> '' "
+
+
             if instDesc !='':
                 whereClause = whereClause + " and  p.INST_DESC like '%" + str(instDesc) + "%'  "
 
@@ -408,7 +417,7 @@ class CL_installmentReport(QtWidgets.QDialog):
             # get customer gp id
             if len(cust_gps) > 0:
                 if len(cust_gps) == 1:
-                    whereClause = whereClause + " and g.CG_GROUP_ID ='" + cust_gps[0] + "'"
+                    whereClause = whereClause + " and g.CG_GROUP_ID ='" + str(cust_gps[0] )+ "'"
                 else:
                     cust_gp_list_tuple = tuple(cust_gps)
                     whereClause = whereClause + " and g.CG_GROUP_ID in {}".format(cust_gp_list_tuple)

@@ -209,7 +209,7 @@
      <item>
       <widget class="QLineEdit" name="LE_desc">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit{
@@ -335,9 +335,9 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>0</y>
-      <width>181</width>
+      <x>376</x>
+      <y>6</y>
+      <width>291</width>
       <height>131</height>
      </rect>
     </property>
@@ -350,9 +350,9 @@
     <widget class="QRadioButton" name="RBTN_hyperone">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>190</x>
        <y>80</y>
-       <width>111</width>
+       <width>91</width>
        <height>20</height>
       </rect>
      </property>
@@ -369,9 +369,9 @@
     <widget class="QRadioButton" name="RBTN_vendor">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>190</x>
        <y>50</y>
-       <width>111</width>
+       <width>91</width>
        <height>20</height>
       </rect>
      </property>
@@ -385,9 +385,9 @@
     <widget class="QRadioButton" name="RBTN_bank">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>200</x>
        <y>10</y>
-       <width>111</width>
+       <width>81</width>
        <height>21</height>
       </rect>
      </property>
@@ -399,6 +399,38 @@
      </property>
      <property name="checked">
       <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="Qcombo_bank">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>13</y>
+       <width>101</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="Qcombo_vendor">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>50</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
      </property>
     </widget>
    </widget>
@@ -587,7 +619,7 @@
      <string>بحث</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Qbtn_print">
+   <widget class="QPushButton" name="Qbtn_export">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -645,7 +677,32 @@
     </column>
     <column>
      <property name="text">
-      <string>تاريخ البدايه</string>
+      <string>مجموعات العملاء</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>الشركه</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>الفرع</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>الإداره</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>القسم</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>الصنف</string>
      </property>
     </column>
     <column>
@@ -670,6 +727,11 @@
     </column>
     <column>
      <property name="text">
+      <string>تقسيط هايبر</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>تقسيط بنك</string>
      </property>
     </column>
@@ -680,12 +742,7 @@
     </column>
     <column>
      <property name="text">
-      <string>تقسيط هايبر</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>نسبه العميل</string>
+      <string>نسبه هايبر</string>
      </property>
     </column>
     <column>
@@ -695,7 +752,7 @@
     </column>
     <column>
      <property name="text">
-      <string>نسبه هايبر</string>
+      <string>نسبه العميل</string>
      </property>
     </column>
    </widget>

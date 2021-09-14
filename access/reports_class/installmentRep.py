@@ -21,6 +21,7 @@ class CL_installmentReport(QtWidgets.QDialog):
 
     field_names = ['رقم البرنامج','اسم البرنامج','مجموعات العملاء','الشركه','الفرع','الإداره','القسم',
                    'من تاريخ','إلى تاريخ','المصاريف الإداريه','الحاله','مده التقسيط','تقسيط هايبر','تقسيط بنك','تقسيط مورد','نسبه هايبر','نسبه المورد','نسبه العميل']
+    barcodes = []
     def __init__(self):
         super(CL_installmentReport, self).__init__()
         cwd = Path.cwd()
@@ -31,8 +32,6 @@ class CL_installmentReport(QtWidgets.QDialog):
     def FN_EXPORT(self):
         try:
             filename = QFileDialog.getSaveFileName(self, "Save File", '', "(*.xls)")
-            print(filename)
-
             wb = xlwt.Workbook()
 
             # add_sheet is used to create sheet.
@@ -58,8 +57,6 @@ class CL_installmentReport(QtWidgets.QDialog):
             sheet.write(0, 17, 'نسبه العميل')
 
             rowNo = self.Qtable_inst.rowCount() + 1
-            print(self.Qtable_inst.columnCount())
-            print(self.Qtable_inst.rowCount())
             for currentColumn in range(self.Qtable_inst.columnCount()):
                 for currentRow in range(self.Qtable_inst.rowCount()):
                     teext = str(self.Qtable_inst.item(currentRow, currentColumn).text())
@@ -83,6 +80,7 @@ class CL_installmentReport(QtWidgets.QDialog):
             mycursor = conn.cursor()
             self.Qbtn_search.clicked.connect(self.FN_SEARCH)
             self.Qbtn_export.clicked.connect(self.FN_EXPORT)
+            self.Qbtn_loadItems.clicked.connect(self.FN_LOAD_BARCODES)
             # Apply Style For Design
             css_path = Path(__file__).parent.parent.parent
             path = css_path.__str__() + '/presentation/Themes/Style.css'
@@ -181,7 +179,30 @@ class CL_installmentReport(QtWidgets.QDialog):
         except Exception as err:
             print(err)
 
+    def FN_LOAD_BARCODES(self):
+        try:
+            self.Qlab_msg.setText("")
+            options = QFileDialog.Options()
+            options |= QFileDialog.DontUseNativeDialog
+            fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
+                                                           " Files (*.xlsx)", options=options)
+            self.barcodes= []
+            if fileName != '':
+                #self.LE_fileName.setText(fileName)
+                wb = xlrd.open_workbook(fileName)
+                sheet = wb.sheet_by_index(0)
+                conn = db1.connect()
+                mycursor = conn.cursor()
 
+                for i in range(sheet.nrows):
+                    error = 0
+                    bar = int(sheet.cell_value(i, 0))
+                    self.barcodes.append(str(bar))
+                if len(self.barcodes)>0:
+                    self.Qlab_msg.setText("تم تحميل الأصناف")
+            #print(barcodes)
+        except Exception as err:
+            print(err)
     # this function for what enabled or not when start
     def EnabledWhenOpen(self):
         self.checkBox_department.setEnabled(True)
@@ -322,8 +343,11 @@ class CL_installmentReport(QtWidgets.QDialog):
     def FN_WhenCheckBarcode(self):
         if self.checkBox_Barcode.isChecked():
             self.Qline_barcode.setEnabled(True)
+            self.Qbtn_loadItems.setEnabled(True)
         else:
             self.Qline_barcode.setEnabled(False)
+            self.Qbtn_loadItems.setEnabled(False)
+            self.Qlab_msg.setText('')
     # get sections list
     def FN_GET_sections(self):
         self.Qcombo_section.clear()
@@ -452,8 +476,8 @@ class CL_installmentReport(QtWidgets.QDialog):
             else:
                 mycursor11.close()
                 return False
-        except (Error, Warning) as e:
-            print(e)
+        except Exception as err:
+            print(err)
     def FN_SEARCH(self):
         try:
 
@@ -470,21 +494,24 @@ class CL_installmentReport(QtWidgets.QDialog):
             conn = db1.connect()
             mycursor = conn.cursor()
             whereClause = ""
-            if self.checkBox_Barcode.isChecked():
-                ret = self.FN_CHECK_VALID_BARCCODE(bar)
+            ret =  True
+            if self.checkBox_Barcode.isChecked() :
+                if len(bar)>0:
+                    ret = self.FN_CHECK_VALID_BARCCODE(bar)
+                    self.barcodes =[]
+            else:
+                self.barcodes = []
             if ret ==  True:
                 if self.checkBox_BMCLevel .isChecked():
                     #get bmc
-                    print("BMC")
                     BMC= self.Qcombo_BMCLevel.currentData()
                 elif self.checkBox_section  .isChecked():
                     #get sec
-                    print("SEC")
                     sec = self.Qcombo_section.currentData()
                 elif self.checkBox_department.isChecked():
                     # get dep
                     dep=self.Qcombo_department.currentData()
-                    print("dep")
+
 
                 instType= self.Qcombo_installmentType.currentData()
                 instDesc = self.LE_desc.text()
@@ -564,6 +591,13 @@ class CL_installmentReport(QtWidgets.QDialog):
                     whereClause = whereClause + " and tp.INSTT_TYPE_ID = '" +str(instType)+"'"
                 if len (bar)>0:
                     whereClause = whereClause + " and ii.POS_GTIN = '" + str(bar) + "'"
+                if len(self.barcodes) > 0:
+                    if len(self.barcodes) == 1:
+                        whereClause = whereClause + "and ii.POS_GTIN = '" + str(self.barcodes[0] )+ "'"
+                    else:
+                        bar_tuple = tuple(self.barcodes)
+                        whereClause = whereClause + " and ii.POS_GTIN in {}".format(bar_tuple)
+
                 whereClause = whereClause + " and INST_VALID_FROM >= '" + date_from + "' and INST_VALID_TO <= '" + date_to + "' "
                 sql_select_query = "SELECT distinct p.INST_PROGRAM_ID, p.INST_DESC ,'customer_gp','company','branch','dep', p.INST_VALID_FROM,p.INST_VALID_TO,p.INST_ADMIN_EXPENSES_PERC,p.INST_STATUS , tp.INSTT_DESC,s.HYPERONE,bank.Bank_Desc ,spon.SPONSOR_NAME , r.INSTR_HYPER_RATE,r.INSTR_SPONSOR_RATE,r.INSTR_CUSTOMER_RATE FROM Hyper1_Retail.INSTALLMENT_PROGRAM p inner join Hyper1_Retail.INSTALLMENT_RULE r on p.INSTR_RULEID = r.INSTR_RULEID inner join Hyper1_Retail.INSTALLMENT_TYPE tp on  r.INSTT_TYPE_ID = tp.INSTT_TYPE_ID   inner join Hyper1_Retail.INSTALLMENT_GROUP g on  p.INST_PROGRAM_ID = g.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_BRANCH b on  p.INST_PROGRAM_ID = b.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_SPONSOR s on  p.INSTR_RULEID =  s.INSTR_RULEID  left outer join Hyper1_Retail.BANK bank on s.BANK_ID = bank.Bank_ID left outer join Hyper1_Retail.SPONSOR spon on spon.SPONSOR_ID = s.SPONSOR_ID inner join CUSTOMER_GROUP cg on g.CG_GROUP_ID = cg.CG_GROUP_ID  inner join Hyper1_Retail.BRANCH branch on b.COMPANY_ID = branch.COMPANY_ID and  b.BRANCH_NO = branch.BRANCH_NO inner join  Hyper1_Retail.COMPANY c on branch.COMPANY_ID =c.COMPANY_ID " \
                                    "left outer join Hyper1_Retail.INSTALLMENT_SECTION sec on sec.INSTR_RULEID = r.INSTR_RULEID" \

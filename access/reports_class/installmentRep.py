@@ -162,7 +162,8 @@ class CL_installmentReport(QtWidgets.QDialog):
 
             # get BMC LEVEL4 list if check box
             self.checkBox_BMCLevel.stateChanged.connect(self.FN_WhenCheckBMC_Level)
-            # self.FN_GET_BMC_Level()
+
+            self.checkBox_Barcode.stateChanged.connect(self.FN_WhenCheckBarcode)
 
             # get Banks list if readio button clicked
             self.RBTN_bank.clicked.connect(self.FN_InstallMent_Checked)
@@ -318,6 +319,11 @@ class CL_installmentReport(QtWidgets.QDialog):
             self.Qcombo_section.setCurrentIndex(-1)
             # self.Qcombo_section.unChecked()
 
+    def FN_WhenCheckBarcode(self):
+        if self.checkBox_Barcode.isChecked():
+            self.Qline_barcode.setEnabled(True)
+        else:
+            self.Qline_barcode.setEnabled(False)
     # get sections list
     def FN_GET_sections(self):
         self.Qcombo_section.clear()
@@ -433,7 +439,21 @@ class CL_installmentReport(QtWidgets.QDialog):
         mycursor.close()
         for row, val in records:
             self.Qcombo_vendor.addItem(row, val)
-
+    def FN_CHECK_VALID_BARCCODE(self, id):
+        try:
+            conn = db1.connect()
+            mycursor11 = conn.cursor()
+            sql = "SELECT * FROM Hyper1_Retail.POS_ITEM where POS_GTIN = '" + str(id) + "'"
+            mycursor11.execute(sql)
+            myresult = mycursor11.fetchone()
+            if mycursor11.rowcount > 0:
+                mycursor11.close()
+                return True
+            else:
+                mycursor11.close()
+                return False
+        except (Error, Warning) as e:
+            print(e)
     def FN_SEARCH(self):
         try:
 
@@ -443,135 +463,147 @@ class CL_installmentReport(QtWidgets.QDialog):
             cust_gps = self.Qcombo_customerGroupe.currentData()
             branchs = self.Qcombo_branch.currentData()
             companies = self.Qcombo_company.currentData()
+            bar = self.Qline_barcode.text()
             BMC = []
             sec = []
             dep = []
-            if self.checkBox_BMCLevel .isChecked():
-                #get bmc
-                print("BMC")
-                BMC= self.Qcombo_BMCLevel.currentData()
-            elif self.checkBox_section  .isChecked():
-                #get sec
-                print("SEC")
-                sec = self.Qcombo_section.currentData()
-            elif self.checkBox_department.isChecked():
-                # get dep
-                dep=self.Qcombo_department.currentData()
-                print("dep")
-
-            instType= self.Qcombo_installmentType.currentData()
-            instDesc = self.LE_desc.text()
-
-            date_from = self.Qdate_from.dateTime().toString('yyyy-MM-dd')
-            date_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')
             conn = db1.connect()
             mycursor = conn.cursor()
             whereClause = ""
-            ### Call Validation Function
-            if self.Rbtn_stsActive.isChecked():
-                whereClause = whereClause + ' INST_STATUS = 1'
-            elif self.Rbtn_stsInactive.isChecked():
-                whereClause = whereClause + '  INST_STATUS = 0'
-            elif self.Rbtn_stsAll.isChecked():
-                whereClause = whereClause + '  INST_STATUS in ( 0,1)'
+            if self.checkBox_Barcode.isChecked():
+                ret = self.FN_CHECK_VALID_BARCCODE(bar)
+            if ret ==  True:
+                if self.checkBox_BMCLevel .isChecked():
+                    #get bmc
+                    print("BMC")
+                    BMC= self.Qcombo_BMCLevel.currentData()
+                elif self.checkBox_section  .isChecked():
+                    #get sec
+                    print("SEC")
+                    sec = self.Qcombo_section.currentData()
+                elif self.checkBox_department.isChecked():
+                    # get dep
+                    dep=self.Qcombo_department.currentData()
+                    print("dep")
 
-            if self.RBTN_bank.isChecked()  :
-                if self.Qcombo_bank.currentData() == "0":
-                    whereClause = whereClause + "and  s.BANK_ID <> '' "
-                else :
-                    whereClause = whereClause + "and  s.BANK_ID = '"+str(self.Qcombo_bank.currentData())+"'"
-            elif self.RBTN_vendor.isChecked():
-                if self.Qcombo_vendor.currentData() == "0":
-                    whereClause = whereClause + " and   s.SPONSOR_ID <> '' "
-                else:
-                    whereClause = whereClause + " and   s.SPONSOR_ID = '"+str(self.Qcombo_vendor.currentData())+"'"
-            elif self.RBTN_hyperone.isChecked():
-                whereClause = whereClause + " and s.HYPERONE <> '' "
+                instType= self.Qcombo_installmentType.currentData()
+                instDesc = self.LE_desc.text()
 
+                date_from = self.Qdate_from.dateTime().toString('yyyy-MM-dd')
+                date_to = self.Qdate_to.dateTime().toString('yyyy-MM-dd')
 
-            if instDesc !='':
-                whereClause = whereClause + " and  p.INST_DESC like '%" + str(instDesc) + "%'  "
+                ### Call Validation Function
+                if self.Rbtn_stsActive.isChecked():
+                    whereClause = whereClause + ' INST_STATUS = 1'
+                elif self.Rbtn_stsInactive.isChecked():
+                    whereClause = whereClause + '  INST_STATUS = 0'
+                elif self.Rbtn_stsAll.isChecked():
+                    whereClause = whereClause + '  INST_STATUS in ( 0,1)'
 
-            # get COMPANY
-            if len(companies) > 0:
-                if len(companies) == 1:
-                    whereClause = whereClause + " and c.COMPANY_ID = '" + companies[0] + "'"
-                else:
-                    company_list_tuple = tuple(companies)
-                    whereClause = whereClause + " and c.COMPANY_ID in {}".format(company_list_tuple)
-            # get branchs
+                if self.RBTN_bank.isChecked()  :
+                    if self.Qcombo_bank.currentData() == "0":
+                        whereClause = whereClause + "and  s.BANK_ID <> '' "
+                    else :
+                        whereClause = whereClause + "and  s.BANK_ID = '"+str(self.Qcombo_bank.currentData())+"'"
+                elif self.RBTN_vendor.isChecked():
+                    if self.Qcombo_vendor.currentData() == "0":
+                        whereClause = whereClause + " and   s.SPONSOR_ID <> '' "
+                    else:
+                        whereClause = whereClause + " and   s.SPONSOR_ID = '"+str(self.Qcombo_vendor.currentData())+"'"
+                elif self.RBTN_hyperone.isChecked():
+                    whereClause = whereClause + " and s.HYPERONE <> '' "
+                #elif self.RBTN_all.isChecked():
+                    #whereClause = whereClause + " and s.HYPERONE <> ''  "
+                if instDesc !='':
+                    whereClause = whereClause + " and  p.INST_DESC like '%" + str(instDesc) + "%'  "
 
-            if len(branchs) > 0:
-                if len(branchs) == 1:
-                    whereClause = whereClause + " and b.BRANCH_NO ='" + branchs[0] + "'"
-                else:
-                    branch_list_tuple = tuple(branchs)
-                    whereClause = whereClause + " and b.BRANCH_NO in {} ".format(branch_list_tuple)
+                # get COMPANY
+                if len(companies) > 0:
+                    if len(companies) == 1:
+                        whereClause = whereClause + " and c.COMPANY_ID = '" + companies[0] + "'"
+                    else:
+                        company_list_tuple = tuple(companies)
+                        whereClause = whereClause + " and c.COMPANY_ID in {}".format(company_list_tuple)
+                # get branchs
 
-            # get customer gp id
-            if len(cust_gps) > 0:
-                if len(cust_gps) == 1:
-                    whereClause = whereClause + " and g.CG_GROUP_ID ='" + str(cust_gps[0] )+ "'"
-                else:
-                    cust_gp_list_tuple = tuple(cust_gps)
-                    whereClause = whereClause + " and g.CG_GROUP_ID in {}".format(cust_gp_list_tuple)
-            #get BMC levels
-            if len(BMC) > 0 :
-                if len(BMC) == 1:
-                    whereClause = whereClause + " and sec.BMC_ID ='" + str(BMC[0] )+ "'"
-                else:
-                    bmc_tuple = tuple(BMC)
-                    whereClause = whereClause + " and sec.BMC_ID in {}".format(bmc_tuple)
-            elif len(sec) > 0:
-                if len(sec) == 1:
-                    whereClause = whereClause + " and sec.SECTION_ID ='" + str(sec[0]) + "'"
-                else:
-                    sec_tuple = tuple(sec)
-                    whereClause = whereClause + " and sec.SECTION_ID in {}".format(sec_tuple)
-            elif len(dep) > 0:
-                if len(dep) == 1:
-                    whereClause = whereClause + " and sec.DEPARTMENT_ID ='" + str(dep[0]) + "'"
-                else:
-                    dep_tuple = tuple(dep)
-                    whereClause = whereClause + " and sec.DEPARTMENT_ID in {}".format(dep_tuple)
+                if len(branchs) > 0:
+                    if len(branchs) == 1:
+                        whereClause = whereClause + " and b.BRANCH_NO ='" + branchs[0] + "'"
+                    else:
+                        branch_list_tuple = tuple(branchs)
+                        whereClause = whereClause + " and b.BRANCH_NO in {} ".format(branch_list_tuple)
 
-            if instType !='0':
-                whereClause = whereClause + " and tp.INSTT_TYPE_ID = '" +str(instType)+"'"
+                # get customer gp id
+                if len(cust_gps) > 0:
+                    if len(cust_gps) == 1:
+                        whereClause = whereClause + " and g.CG_GROUP_ID ='" + str(cust_gps[0] )+ "'"
+                    else:
+                        cust_gp_list_tuple = tuple(cust_gps)
+                        whereClause = whereClause + " and g.CG_GROUP_ID in {}".format(cust_gp_list_tuple)
+                #get BMC levels
+                if len(BMC) > 0 :
+                    if len(BMC) == 1:
+                        whereClause = whereClause + " and sec.BMC_ID ='" + str(BMC[0] )+ "'"
+                    else:
+                        bmc_tuple = tuple(BMC)
+                        whereClause = whereClause + " and sec.BMC_ID in {}".format(bmc_tuple)
+                elif len(sec) > 0:
+                    if len(sec) == 1:
+                        whereClause = whereClause + " and sec.SECTION_ID ='" + str(sec[0]) + "'"
+                    else:
+                        sec_tuple = tuple(sec)
+                        whereClause = whereClause + " and sec.SECTION_ID in {}".format(sec_tuple)
+                elif len(dep) > 0:
+                    if len(dep) == 1:
+                        whereClause = whereClause + " and sec.DEPARTMENT_ID ='" + str(dep[0]) + "'"
+                    else:
+                        dep_tuple = tuple(dep)
+                        whereClause = whereClause + " and sec.DEPARTMENT_ID in {}".format(dep_tuple)
 
-            whereClause = whereClause + " and INST_VALID_FROM >= '" + date_from + "' and INST_VALID_TO <= '" + date_to + "' "
-            sql_select_query = "SELECT distinct p.INST_PROGRAM_ID, p.INST_DESC ,'customer_gp','company','branch','dep', p.INST_VALID_FROM,p.INST_VALID_TO,p.INST_ADMIN_EXPENSES_PERC,p.INST_STATUS , tp.INSTT_DESC,s.HYPERONE,bank.Bank_Desc ,spon.SPONSOR_NAME , r.INSTR_HYPER_RATE,r.INSTR_SPONSOR_RATE,r.INSTR_CUSTOMER_RATE FROM Hyper1_Retail.INSTALLMENT_PROGRAM p inner join Hyper1_Retail.INSTALLMENT_RULE r on p.INSTR_RULEID = r.INSTR_RULEID inner join Hyper1_Retail.INSTALLMENT_TYPE tp on  r.INSTT_TYPE_ID = tp.INSTT_TYPE_ID   inner join Hyper1_Retail.INSTALLMENT_GROUP g on  p.INST_PROGRAM_ID = g.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_BRANCH b on  p.INST_PROGRAM_ID = b.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_SPONSOR s on  p.INSTR_RULEID =  s.INSTR_RULEID  left outer join Hyper1_Retail.BANK bank on s.BANK_ID = bank.Bank_ID left outer join Hyper1_Retail.SPONSOR spon on spon.SPONSOR_ID = s.SPONSOR_ID inner join CUSTOMER_GROUP cg on g.CG_GROUP_ID = cg.CG_GROUP_ID  inner join Hyper1_Retail.BRANCH branch on b.COMPANY_ID = branch.COMPANY_ID and  b.BRANCH_NO = branch.BRANCH_NO inner join  Hyper1_Retail.COMPANY c on branch.COMPANY_ID =c.COMPANY_ID " \
-                               "left outer join Hyper1_Retail.INSTALLMENT_SECTION sec on sec.INSTR_RULEID = r.INSTR_RULEID" \
-                               " " \
-                               "where"+ whereClause
+                if instType !='0':
+                    whereClause = whereClause + " and tp.INSTT_TYPE_ID = '" +str(instType)+"'"
+                if len (bar)>0:
+                    whereClause = whereClause + " and ii.POS_GTIN = '" + str(bar) + "'"
+                whereClause = whereClause + " and INST_VALID_FROM >= '" + date_from + "' and INST_VALID_TO <= '" + date_to + "' "
+                sql_select_query = "SELECT distinct p.INST_PROGRAM_ID, p.INST_DESC ,'customer_gp','company','branch','dep', p.INST_VALID_FROM,p.INST_VALID_TO,p.INST_ADMIN_EXPENSES_PERC,p.INST_STATUS , tp.INSTT_DESC,s.HYPERONE,bank.Bank_Desc ,spon.SPONSOR_NAME , r.INSTR_HYPER_RATE,r.INSTR_SPONSOR_RATE,r.INSTR_CUSTOMER_RATE FROM Hyper1_Retail.INSTALLMENT_PROGRAM p inner join Hyper1_Retail.INSTALLMENT_RULE r on p.INSTR_RULEID = r.INSTR_RULEID inner join Hyper1_Retail.INSTALLMENT_TYPE tp on  r.INSTT_TYPE_ID = tp.INSTT_TYPE_ID   inner join Hyper1_Retail.INSTALLMENT_GROUP g on  p.INST_PROGRAM_ID = g.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_BRANCH b on  p.INST_PROGRAM_ID = b.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_SPONSOR s on  p.INSTR_RULEID =  s.INSTR_RULEID  left outer join Hyper1_Retail.BANK bank on s.BANK_ID = bank.Bank_ID left outer join Hyper1_Retail.SPONSOR spon on spon.SPONSOR_ID = s.SPONSOR_ID inner join CUSTOMER_GROUP cg on g.CG_GROUP_ID = cg.CG_GROUP_ID  inner join Hyper1_Retail.BRANCH branch on b.COMPANY_ID = branch.COMPANY_ID and  b.BRANCH_NO = branch.BRANCH_NO inner join  Hyper1_Retail.COMPANY c on branch.COMPANY_ID =c.COMPANY_ID " \
+                                   "left outer join Hyper1_Retail.INSTALLMENT_SECTION sec on sec.INSTR_RULEID = r.INSTR_RULEID" \
+                                   " left outer join Hyper1_Retail.INSTALLMENT_ITEM ii on ii.INSTR_RULEID = r.INSTR_RULEID " \
+                                   " where"+ whereClause
 
-            print(sql_select_query)
-            mycursor.execute(sql_select_query)
-            records = mycursor.fetchall()
+                print(sql_select_query)
+                mycursor.execute(sql_select_query)
+                records = mycursor.fetchall()
 
-            inst_prog_no = ''
-            for row_number, row_data in enumerate(records):
-                #get customer groups
-                self.Qtable_inst.insertRow(row_number)
                 inst_prog_no = ''
-                for column_number, data in enumerate(row_data):
-                    if  column_number == 0:
-                        inst_prog_no=str(data)
-                    if column_number == 2:
-                        data = self.FN_GET_CUST_GP(inst_prog_no)
-                    if column_number == 3:
-                        data = self.FN_GET_COMP(inst_prog_no)
-                    if column_number == 4:
-                        data = self.FN_GET_BRANCH(inst_prog_no)
-                    if column_number == 5:
-                        data = self.FN_GET_DEPT(inst_prog_no)
-                    if column_number == 6:
-                        data = self.FN_GET_SEC(inst_prog_no)
-                    if data == None or data =='0.00' or data == '':
-                        data = '----'
-                    self.Qtable_inst.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-            self.Qtable_inst.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+                for row_number, row_data in enumerate(records):
+                    #get customer groups
+                    self.Qtable_inst.insertRow(row_number)
+                    inst_prog_no = ''
+                    for column_number, data in enumerate(row_data):
+                        if  column_number == 0:
+                            inst_prog_no=str(data)
+                        if column_number == 2:
+                            data = self.FN_GET_CUST_GP(inst_prog_no)
+                        if column_number == 3:
+                            data = self.FN_GET_COMP(inst_prog_no)
+                        if column_number == 4:
+                            data = self.FN_GET_BRANCH(inst_prog_no)
+                        if column_number == 5:
+                            data = self.FN_GET_DEPT(inst_prog_no)
+                        if column_number == 6:
+                            data = self.FN_GET_SEC(inst_prog_no)
+                        if column_number == 10:
+                            data = util.FN_GET_STATUS_DESC(str(data))
+                        if data == None or data =='' :
+                            data = '----'
 
-            mycursor.close()
+                        self.Qtable_inst.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+                self.Qtable_inst.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
+                mycursor.close()
+            else:
+                QtWidgets.QMessageBox.warning(self, "خطأ",
+                                              "الباركود غير صحيح")
         except Exception as err:
             print(err)
     def FN_GET_DEPT (self,inst_no):
@@ -583,7 +615,8 @@ class CL_installmentReport(QtWidgets.QDialog):
                               " inner join Hyper1_Retail.INSTALLMENT_RULE irule on isec.INSTR_RULEID = irule.INSTR_RULEID " \
                               " inner join Hyper1_Retail.INSTALLMENT_PROGRAM p on irule.INSTR_RULEID = p.INSTR_RULEID" \
                               " inner join Hyper1_Retail.DEPARTMENT d " \
-                              " on  isec.DEPARTMENT_ID = d.DEPARTMENT_ID  where  p.INST_PROGRAM_ID = '"+inst_no+"'"
+                              " on  isec.DEPARTMENT_ID = d.DEPARTMENT_ID  " \
+                              " where  p.INST_PROGRAM_ID = '"+inst_no+"'"
             #print(sql_select_query)
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
@@ -591,6 +624,7 @@ class CL_installmentReport(QtWidgets.QDialog):
             for rec in records:
                 dept=dept +','+ rec[0]
             mycursor.close()
+
             return dept
         except Exception as err:
             print(err)
@@ -613,6 +647,7 @@ class CL_installmentReport(QtWidgets.QDialog):
             for rec in records:
                 sec = sec + ',' + rec[0]
             mycursor.close()
+
             return sec
         except Exception as err:
             print(err)

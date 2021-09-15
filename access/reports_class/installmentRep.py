@@ -80,6 +80,22 @@ class CL_installmentReport(QtWidgets.QDialog):
             mycursor = conn.cursor()
             self.Qbtn_search.clicked.connect(self.FN_SEARCH)
             self.Qbtn_export.clicked.connect(self.FN_EXPORT)
+            for row_number, row_data in enumerate(CL_userModule.myList):
+                if row_data[1] == 'Installment':
+                    if row_data[4] == 'None':
+                        print('hh')
+                    else:
+                        sql_select_query = "select  i.ITEM_DESC from Hyper1_Retail.SYS_FORM_ITEM  i where  ITEM_STATUS= 1 and i.item_id =%s"
+                        x = (row_data[4],)
+                        mycursor.execute(sql_select_query, x)
+
+                        result = mycursor.fetchone()
+                        # print(result)
+                        if result[0] == 'search':
+                            self.Qbtn_search.setEnabled(True)
+                        elif result[0] == 'export':
+                            self.Qbtn_export.setEnabled(True)
+
             self.Qbtn_loadItems.clicked.connect(self.FN_LOAD_BARCODES)
             # Apply Style For Design
             css_path = Path(__file__).parent.parent.parent
@@ -176,6 +192,9 @@ class CL_installmentReport(QtWidgets.QDialog):
             # this function for what enabled or not when start
             self.EnabledWhenOpen()
             self.Rbtn_stsAll.setChecked(True)
+            #enable the search and the export buttons
+
+
         except Exception as err:
             print(err)
 
@@ -599,7 +618,7 @@ class CL_installmentReport(QtWidgets.QDialog):
                         whereClause = whereClause + " and ii.POS_GTIN in {}".format(bar_tuple)
 
                 whereClause = whereClause + " and INST_VALID_FROM >= '" + date_from + "' and INST_VALID_TO <= '" + date_to + "' "
-                sql_select_query = "SELECT distinct p.INST_PROGRAM_ID, p.INST_DESC ,'customer_gp','company','branch','dep', p.INST_VALID_FROM,p.INST_VALID_TO,p.INST_ADMIN_EXPENSES_PERC,p.INST_STATUS , tp.INSTT_DESC,s.HYPERONE,bank.Bank_Desc ,spon.SPONSOR_NAME , r.INSTR_HYPER_RATE,r.INSTR_SPONSOR_RATE,r.INSTR_CUSTOMER_RATE FROM Hyper1_Retail.INSTALLMENT_PROGRAM p inner join Hyper1_Retail.INSTALLMENT_RULE r on p.INSTR_RULEID = r.INSTR_RULEID inner join Hyper1_Retail.INSTALLMENT_TYPE tp on  r.INSTT_TYPE_ID = tp.INSTT_TYPE_ID   inner join Hyper1_Retail.INSTALLMENT_GROUP g on  p.INST_PROGRAM_ID = g.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_BRANCH b on  p.INST_PROGRAM_ID = b.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_SPONSOR s on  p.INSTR_RULEID =  s.INSTR_RULEID  left outer join Hyper1_Retail.BANK bank on s.BANK_ID = bank.Bank_ID left outer join Hyper1_Retail.SPONSOR spon on spon.SPONSOR_ID = s.SPONSOR_ID inner join CUSTOMER_GROUP cg on g.CG_GROUP_ID = cg.CG_GROUP_ID  inner join Hyper1_Retail.BRANCH branch on b.COMPANY_ID = branch.COMPANY_ID and  b.BRANCH_NO = branch.BRANCH_NO inner join  Hyper1_Retail.COMPANY c on branch.COMPANY_ID =c.COMPANY_ID " \
+                sql_select_query = "SELECT distinct p.INST_PROGRAM_ID, p.INST_DESC ,'customer_gp','company','branch','dep', 'sec',p.INST_VALID_FROM,p.INST_VALID_TO,p.INST_ADMIN_EXPENSES_PERC,p.INST_STATUS , tp.INSTT_DESC,s.HYPERONE,bank.Bank_Desc ,spon.SPONSOR_NAME , r.INSTR_HYPER_RATE,r.INSTR_SPONSOR_RATE,r.INSTR_CUSTOMER_RATE FROM Hyper1_Retail.INSTALLMENT_PROGRAM p inner join Hyper1_Retail.INSTALLMENT_RULE r on p.INSTR_RULEID = r.INSTR_RULEID inner join Hyper1_Retail.INSTALLMENT_TYPE tp on  r.INSTT_TYPE_ID = tp.INSTT_TYPE_ID   inner join Hyper1_Retail.INSTALLMENT_GROUP g on  p.INST_PROGRAM_ID = g.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_BRANCH b on  p.INST_PROGRAM_ID = b.INST_PROGRAM_ID inner join Hyper1_Retail.INSTALLMENT_SPONSOR s on  p.INSTR_RULEID =  s.INSTR_RULEID  left outer join Hyper1_Retail.BANK bank on s.BANK_ID = bank.Bank_ID left outer join Hyper1_Retail.SPONSOR spon on spon.SPONSOR_ID = s.SPONSOR_ID inner join CUSTOMER_GROUP cg on g.CG_GROUP_ID = cg.CG_GROUP_ID  inner join Hyper1_Retail.BRANCH branch on b.COMPANY_ID = branch.COMPANY_ID and  b.BRANCH_NO = branch.BRANCH_NO inner join  Hyper1_Retail.COMPANY c on branch.COMPANY_ID =c.COMPANY_ID " \
                                    "left outer join Hyper1_Retail.INSTALLMENT_SECTION sec on sec.INSTR_RULEID = r.INSTR_RULEID" \
                                    " left outer join Hyper1_Retail.INSTALLMENT_ITEM ii on ii.INSTR_RULEID = r.INSTR_RULEID " \
                                    " where"+ whereClause
@@ -691,7 +710,7 @@ class CL_installmentReport(QtWidgets.QDialog):
             mycursor = conn.cursor()
             cust_gp=''
             sql_select_query ="SELECT CG_DESC FROM Hyper1_Retail.INSTALLMENT_GROUP ig inner join Hyper1_Retail.CUSTOMER_GROUP cg " \
-                              "on  ig.CG_GROUP_ID = cg.CG_GROUP_ID where  INST_PROGRAM_ID = '"+inst_no+"'"
+                              "on  ig.CG_GROUP_ID = cg.CG_GROUP_ID where  INST_PROGRAM_ID = '"+inst_no+"' and CG_DESC !='H1'"
             mycursor.execute(sql_select_query)
             records = mycursor.fetchall()
 

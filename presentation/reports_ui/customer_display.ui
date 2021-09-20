@@ -66,8 +66,7 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(198, 207, 199);
-                </string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string/>

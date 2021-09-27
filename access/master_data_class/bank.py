@@ -150,8 +150,8 @@ class CL_bank(QtWidgets.QDialog):
 
 
 
-        if self.name == '' :
-            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم")
+        if self.name == '' or accountNo == ''  :
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الأسم و رقم الحساب")
 
         else:
             try:
@@ -201,8 +201,8 @@ class CL_bank(QtWidgets.QDialog):
                 address = self.LE_address.text().strip()
 
                 error = 0
-                if self.desc == '':
-                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الاسم")
+                if desc == '' or accountNo == '':
+                    QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء إدخال الأسم و رقم الحساب")
 
                 else:
                     if desc != desc_old:

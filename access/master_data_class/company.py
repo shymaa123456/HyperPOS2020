@@ -156,7 +156,7 @@ class CL_company(QtWidgets.QDialog):
     def FN_CREATE(self):
         self.conn = db1.connect()
         self.name = self.LE_desc.text().strip()
-        status = self.CMB_status.current()
+        status = self.CMB_status.currentText()
         if status == 'Active':
             self.status = 1
         else:
@@ -175,7 +175,7 @@ class CL_company(QtWidgets.QDialog):
         creationDate = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
 
         if self.name == '' :
-            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاءادخال الاسم")
+            QtWidgets.QMessageBox.warning(self, "خطأ", "برجاء ادخال الاسم")
 
         else:
             try:

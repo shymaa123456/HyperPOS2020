@@ -79,11 +79,11 @@ class CL_modifyCoupon(QtWidgets.QDialog):
                 self.valueData = self.LE_desc_3.text()
             dateto = record[13]
             xto = dateto.split("-")
-            d = QDate(int(xto[2]), int(xto[1]), int(xto[0]))
+            d = QDate(int(xto[0]), int(xto[1]), int(xto[2]))
             self.Qdate_to.setDate(d)
             datefrom = record[11]
             xfrom = datefrom.split("-")
-            d = QDate(int(xfrom[2]), int(xfrom[1]), int(xfrom[0]))
+            d = QDate(int(xfrom[0]), int(xfrom[1]), int(xfrom[2]))
             self.Qdate_from.setDate(d)
 
             timefrom = record[12]
@@ -98,7 +98,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
 
             self.LE_desc_4.setValue(float(record[4]))
             print(record[5])
-            if (int(record[5]) == 0):
+            if (int(record[5]) == 1):
                 self.checkBox_Multi.setChecked(True)
                 self.LE_desc_5.setValue(float(record[6]))
             else:
@@ -133,7 +133,7 @@ class CL_modifyCoupon(QtWidgets.QDialog):
         db1.connectionCommit(self.conn)
         mycursor.close()
         QtWidgets.QMessageBox.warning(self, "Done", "Done")
-        self.close()
+
 
     # Todo: method to clear edit text
     def FN_Clear(self):

@@ -2008,7 +2008,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
              <widget class="QWidget" name="page_32">
               <property name="geometry">
                <rect>
-                <x>-27</x>
+                <x>-101</x>
                 <y>0</y>
                 <width>199</width>
                 <height>453</height>
@@ -2343,6 +2343,7 @@ border-color:steelblue;}</string>
      <property name="title">
       <string>تقارير العملاء</string>
      </property>
+     <addaction name="QAct_Customer_Details"/>
      <addaction name="QAct_Report_Cust_1"/>
      <addaction name="QAct_Report_Cust_2"/>
      <addaction name="QAct_Report_Cust_3"/>
@@ -2356,17 +2357,17 @@ border-color:steelblue;}</string>
      <addaction name="QAct_Report_Cust_11"/>
      <addaction name="QAct_Report_Cust_12"/>
      <addaction name="QAct_Report_Cust_13"/>
-     <addaction name="QAct_Report_Cust_14"/>
+     <addaction name="QAct_Redeem_Type_Values"/>
      <addaction name="QAct_Report_Cust_15"/>
+     <addaction name="QAct_Report_Cust_19"/>
+     <addaction name="QAct_Report_Cust_18"/>
+     <addaction name="QAct_Customer_Funds"/>
+     <addaction name="QAct_Report_Cust_22"/>
+     <addaction name="QAct_Report_Cust_21"/>
      <addaction name="QAct_Report_Cust_16"/>
      <addaction name="QAct_Report_Cust_17"/>
      <addaction name="separator"/>
-     <addaction name="QAct_Report_Cust_18"/>
-     <addaction name="QAct_Report_Cust_19"/>
-     <addaction name="QAct_Report_Cust_20"/>
-     <addaction name="QAct_Report_Cust_21"/>
-     <addaction name="QAct_Report_Cust_22"/>
-     <addaction name="QAct_Report_Cust_23"/>
+     <addaction name="action"/>
     </widget>
     <widget class="QMenu" name="QM_Report_Sale">
      <property name="title">
@@ -2457,7 +2458,7 @@ border-color:steelblue;}</string>
      <property name="title">
       <string>تقارير انظمة التقسيط</string>
      </property>
-     <addaction name="action_22"/>
+     <addaction name="QAct_Installment"/>
      <addaction name="action_46"/>
      <addaction name="action_23"/>
      <addaction name="action_29"/>
@@ -2572,7 +2573,7 @@ border-color:steelblue;}</string>
     <string>تقرير تفصيلى يوضح طرق استبدال النقاط</string>
    </property>
   </action>
-  <action name="QAct_Report_Cust_14">
+  <action name="QAct_Redeem_Type_Values">
    <property name="text">
     <string>تقرير تفصيلى يوضح اعداد وقيم طرق استبدال النقاط</string>
    </property>
@@ -2602,7 +2603,7 @@ border-color:steelblue;}</string>
     <string>تقرير قيم مشتريات العملاء خلال فترة</string>
    </property>
   </action>
-  <action name="QAct_Report_Cust_20">
+  <action name="QAct_Customer_Funds">
    <property name="text">
     <string>تقرير بارصدة العملاء</string>
    </property>
@@ -2617,9 +2618,9 @@ border-color:steelblue;}</string>
     <string>تقرير بالهدايا الممنوحة للعملاء</string>
    </property>
   </action>
-  <action name="QAct_Report_Cust_23">
+  <action name="QAct_Customer_Details">
    <property name="text">
-    <string>تقرير لاجراء السحب للعملاء</string>
+    <string>تقرير بيانات العملاء</string>
    </property>
   </action>
   <action name="QAct_Report_Sale_1">
@@ -2842,7 +2843,7 @@ border-color:steelblue;}</string>
     <string>تقرير حركة كروت الائتمان تقسيط</string>
    </property>
   </action>
-  <action name="action_22">
+  <action name="QAct_Installment">
    <property name="text">
     <string>تقرير قواعد التقسيط</string>
    </property>
@@ -2895,6 +2896,11 @@ border-color:steelblue;}</string>
   <action name="action_123">
    <property name="text">
     <string>تقرير متابعة وصول المبيعات من نقاط البيع بالنقاط</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>تقرير بيانات العملاء</string>
    </property>
   </action>
  </widget>

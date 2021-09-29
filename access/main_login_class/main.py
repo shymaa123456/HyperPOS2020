@@ -8,9 +8,11 @@ from PyQt5.uic import loadUi
 from access.configuration_class.AssignGroupkey import CL_FNGroupKey
 from access.configuration_class.AssignPosGroup import CL_FNGroupPos
 from access.configuration_class.AssignPosGroupItem import CL_FNGroupPosItem
+from access.configuration_class.FunctionKeys import CL_FunctionKey
 from access.configuration_class.Group import CL_FNGroup
 from access.configuration_class.GroupItem import CL_ItemGroup
 from access.configuration_class.Key import CL_FNKey
+from access.configuration_class.ModifyFunctionKeys import CL_ModifyFunctionKey
 from access.configuration_class.Parameters import CL_Parameters
 from access.configuration_class.PosWorkingDay import CL_WorkingDay
 from access.configuration_class.Pos_Parameter import CL_Pos_Parameters
@@ -93,9 +95,12 @@ from data_connection.h1pos import db1
 
 class CL_main(QtWidgets.QMainWindow):
     switch_window = QtCore.pyqtSignal()
-    #mycursor=''
+    # mycursor=""
+    # conn = db1.connect()
+    # mycursor = conn.cursor()
 
     def __init__(self):
+
         try:
             forms = []
             super(CL_main, self).__init__()
@@ -104,8 +109,13 @@ class CL_main(QtWidgets.QMainWindow):
             dirname = mod_path.__str__() + '/presentation/main_login_ui'
             filename = dirname + '/main3.ui'
             self.ui = loadUi(filename, self)
-            #self.conn = db1.connect()
-            #self.mycursor = self.conn.cursor()
+
+            # self.conn = db1.connect()
+            # self.mycursor = self.conn.cursor()
+
+            # sql2 = "SELECT INST_DESC,INST_STATUS FROM INSTALLMENT_PROGRAM WHERE INST_PROGRAM_ID='38'"
+            # self.mycursor.execute(sql2)
+            # print("init self.mycursor",self.mycursor)
 
             #self.toolBox.setAlignment(QtCore.Qt.AlignRight)
             #self.toolBox.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -132,7 +142,11 @@ class CL_main(QtWidgets.QMainWindow):
             for row in forms:
                 #print(row)
                 but_name = 'QAct_' + row
-                self.findChild(QObject, but_name).setEnabled(True)
+                print(row)
+                # print('here1')
+
+                #self.findChild(QObject, but_name).setEnabled(True)
+                # print('Done')
 
             self.QAct_Create_User.clicked.connect(self.FN_CREATE_USER)
             self.QAct_Modify_User.clicked.connect(self.FN_MODIFY_USER)
@@ -169,6 +183,10 @@ class CL_main(QtWidgets.QMainWindow):
 
             self.QAct_Create_Form_Item.clicked.connect(self.FN_create_form_item)
             self.QAct_Modify_Form_Item.clicked.connect(self.FN_modify_form_item)
+
+            #TODO function keys
+            self.QAct_Create_Function_Keys.clicked.connect(self.FN_create_function_keys)
+            self.QAct_Modify_Function_Keys.clicked.connect(self.FN_modify_function_keys)
 
             """ Promotion """
             self.QAct_Prom_Add.clicked.connect(self.FN_search_promotion)
@@ -283,6 +301,8 @@ class CL_main(QtWidgets.QMainWindow):
             self.window_create_form_item = 0
             self.window_CREATE_PRIV = 0
             self.window_create_form = 0
+            self.window_create_function =0
+            self.window_modify_function =0
             self.window_modify_form = 0
             self.window_ASSIGN = 0
             self.window_COPY_ROLE = 0
@@ -347,6 +367,9 @@ class CL_main(QtWidgets.QMainWindow):
             # self.ui.MainMenu.clicked.connect(self.ShowHideMenu)
             #self.ui.tabWidget.blockSignals(False)
             self.setWindowTitle('HyperPOS Main Page')
+
+            self.conn = db1.connect()
+            self.mycursor = self.conn.cursor()
 
         except Exception as err:
             print(err)
@@ -1066,6 +1089,33 @@ class CL_main(QtWidgets.QMainWindow):
             self.ui.tabWidget.setFixedHeight(self.window_create_form.frameGeometry().height())
             self.ui.tabWidget.setCurrentWidget(self.window_create_form)
 
+    #TODO Create function Keys
+    def FN_create_function_keys(self):
+        if self.window_create_function == 0:
+            self.window_create_function = CL_FunctionKey()
+            self.window_create_function.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_create_function, 'Create Function')
+            self.ui.tabWidget.setFixedWidth(self.window_create_function.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_create_function.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_create_function)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_create_function.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_create_function.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_create_function)
+
+    #TODO modify function Keys
+    def FN_modify_function_keys(self):
+        if self.window_modify_function == 0:
+            self.window_modify_function = CL_ModifyFunctionKey()
+            self.window_modify_function.FN_LOAD_DISPlAY()
+            self.ui.tabWidget.addTab(self.window_modify_function, 'Create Function')
+            self.ui.tabWidget.setFixedWidth(self.window_modify_function.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_modify_function.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_modify_function)
+        else:
+            self.ui.tabWidget.setFixedWidth(self.window_modify_function.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_modify_function.frameGeometry().height())
+            self.ui.tabWidget.setCurrentWidget(self.window_modify_function)
 
     def FN_CREATE_PRIV(self):
         if self.window_CREATE_PRIV == 0:
@@ -1444,7 +1494,7 @@ class CL_main(QtWidgets.QMainWindow):
 
         if reply == QMessageBox.Yes:
             QApplication.quit()
-            #self.mycursor.close()
+            self.mycursor.close()
 
         else:
             event.ignore()
@@ -1514,9 +1564,15 @@ class CL_main(QtWidgets.QMainWindow):
 
     #Active installment program
     def FN_Active_installment(self):
+        #self.conn = db1.connect()
+        #self.mycursor = self.conn.cursor()
+        #global mycursor
+        sql2 = "SELECT INST_DESC,INST_STATUS FROM INSTALLMENT_PROGRAM WHERE INST_PROGRAM_ID='38';"
+        self.mycursor.execute(sql2)
+        print("FN_Active_installment self.mycursor",self.mycursor.fetchall())
 
         if self.window_Active_installment == 0:
-            self.window_Active_installment = CL_installment_Activation(self)
+            self.window_Active_installment = CL_installment_Activation(parentInit=self )
             self.window_Active_installment.FN_LOAD_Activation()
             self.ui.tabWidget.addTab(self.window_Active_installment, 'تفعيل او ايقاف نظام التقسيط')
             self.ui.tabWidget.setFixedWidth(self.window_Active_installment.frameGeometry().width())
@@ -1836,12 +1892,19 @@ class CL_main(QtWidgets.QMainWindow):
         elif self.ui.tabWidget.currentWidget() == self.window_sponsor:
             self.ui.tabWidget.setFixedWidth(self.window_sponsor.frameGeometry().width())
             self.ui.tabWidget.setFixedHeight(self.window_sponsor.frameGeometry().height())
+        elif self.ui.tabWidget.currentWidget() == self.window_create_function:
+            self.ui.tabWidget.setFixedWidth(self.window_create_function.frameGeometry().width())
+            self.ui.tabWidget.setFixedHeight(self.window_create_function.frameGeometry().height())
     def onTabCloseRequested(self, index):
         li = []
         for i in range(self.ui.tabWidget.count()):
             li.append(self.ui.tabWidget.widget(i))
         if self.window_CreateCoupon not in li:
             self.window_CreateCoupon = 0
+        if self.window_create_function not in li:
+            self.window_create_function = 0
+        if self.window_modify_function not in li :
+            self.window_modify_function =0
         if self.window_posparameter not in li:
             self.window_posparameter = 0
         if self.window_EditCoupon not in li:

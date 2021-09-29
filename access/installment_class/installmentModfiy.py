@@ -48,9 +48,12 @@ class CL_installmentModify(QtWidgets.QDialog):
         cwd = Path.cwd()
         mod_path = Path( __file__ ).parent.parent.parent
         self.dirname = mod_path.__str__() + '/presentation/installment_ui'
-        self.conn = db1.connect()
+        #self.conn = db1.connect()
         self.parent = parentInit
 
+        #self.conn = db1.connect()
+        #self.parent.mycursor = self.conn.cursor()
+        self.conn = self.parent.conn#.rollback()
 
     def FN_LOAD_Modify(self):
         filename = self.dirname + '/Installment_modify.ui'
@@ -184,11 +187,11 @@ class CL_installmentModify(QtWidgets.QDialog):
     # get installments period list
     def FN_GET_installment_types_period(self):
         self.Qcombo_installmentType.clear()
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT InstT_Installment_Period ,INSTT_TYPE_ID FROM INSTALLMENT_TYPE")
-        records = mycursor.fetchall()
-        mycursor.close()
+        #conn = db1.connect()
+        #mycursor = conn.cursor()
+        self.parent.mycursor.execute("SELECT InstT_Installment_Period ,INSTT_TYPE_ID FROM INSTALLMENT_TYPE")
+        records = self.parent.mycursor.fetchall()
+        #mycursor.close()
         for row, val in records:
             self.Qcombo_installmentType.addItem(row, val)
 
@@ -197,14 +200,14 @@ class CL_installmentModify(QtWidgets.QDialog):
 
     #get companys list
     def FN_GET_Company(self):
-        self.conn = db1.connect()
-        mycursor = self.conn.cursor()
-        mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
-        records = mycursor.fetchall()
+        #self.conn = db1.connect()
+        #mycursor = self.conn.cursor()
+        self.parent.mycursor.execute("SELECT COMPANY_DESC , COMPANY_ID FROM COMPANY")
+        records = self.parent.mycursor.fetchall()
         print(records)
         for row, val in records:
             self.Qcombo_company.addItem(row, val)
-        mycursor.close()
+        #mycursor.close()
 
     #get branches list
     def FN_GET_Branch(self):
@@ -212,8 +215,8 @@ class CL_installmentModify(QtWidgets.QDialog):
          i=0
          try:
             # Todo: method for fills the Branch combobox
-            self.conn = db1.connect()
-            mycursorb = self.conn.cursor()
+            #self.conn = db1.connect()
+            #mycursorb = self.conn.cursor()
 
             val3 = ""
             for a in range(len(self.Qcombo_company.currentData())):
@@ -228,15 +231,15 @@ class CL_installmentModify(QtWidgets.QDialog):
 
             print("Branches_sqlite3", sqlite3)
 
-            mycursorb.execute(sqlite3)
+            self.parent.mycursor.execute(sqlite3)
 
-            records = mycursorb.fetchall()
+            records = self.parent.mycursor.fetchall()
             for row, val in records:
                 for bra in CL_userModule.branch :
                     if val in bra:
                         self.Qcombo_branch.addItem(row, val)
                     i += 1
-            mycursorb.close()
+            #mycursorb.close()
             self.Qcombo_branch.setCurrentIndex(-1)
          except:
              print(sys.exc_info())
@@ -246,16 +249,16 @@ class CL_installmentModify(QtWidgets.QDialog):
         #self.Qcombo_branch.clear()
         i = 0
         try:
-            self.conn = db1.connect()
-            mycursorb = self.conn.cursor()
+            #self.conn = db1.connect()
+            #mycursorb = self.conn.cursor()
             # Todo: method for fills the Branch combobox
             sqlite3 = "SELECT BRANCH_DESC_A ,BRANCH_NO FROM BRANCH "
 
             print("Branches_sqlite3_without", sqlite3)
 
-            mycursorb.execute(sqlite3)
+            self.parent.mycursor.execute(sqlite3)
 
-            records = mycursorb.fetchall()
+            records = self.parent.mycursor.fetchall()
             for row, val in records:
                 for bra in CL_userModule.branch:
                     if val in bra:
@@ -263,20 +266,20 @@ class CL_installmentModify(QtWidgets.QDialog):
                     i += 1
 
             #self.Qcombo_branch.setCurrentIndex(-1)
-            mycursorb.close()
+            #mycursorb.close()
         except:
             print(sys.exc_info())
 
     #get customer Groupe list
     def FN_GET_customerGroupe(self):
-        self.conn = db1.connect()
-        mycursorg = self.conn.cursor()
-        mycursorg.execute("SELECT CG_DESC,CG_GROUP_ID FROM CUSTOMER_GROUP")
-        records = mycursorg.fetchall()
+        #self.conn = db1.connect()
+        #mycursorg = self.conn.cursor()
+        self.parent.mycursor.execute("SELECT CG_DESC,CG_GROUP_ID FROM CUSTOMER_GROUP")
+        records = self.parent.mycursor.fetchall()
         print(records)
         for row, val in records:
             self.Qcombo_customerGroupe.addItem(row, val)
-        mycursorg.close()
+        #mycursorg.close()
 
     #after check department check box
     def FN_WhenCheckDepartment(self):
@@ -354,8 +357,8 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.Qcombo_section.clear()
         i = 0
         try:
-            conn = db1.connect()
-            mycursor = conn.cursor()
+            #conn = db1.connect()
+            #mycursor = conn.cursor()
             print("currentData",self.Qcombo_department.currentData())
             val3=""
             for a in range(len(self.Qcombo_department.currentData())):
@@ -366,10 +369,10 @@ class CL_installmentModify(QtWidgets.QDialog):
 
             print("deparments",val3)
 
-            mycursor.execute("SELECT SECTION_DESC,SECTION_ID FROM SECTION where DEPARTMENT_ID in ("+val3+")")
+            self.parent.mycursor.execute("SELECT SECTION_DESC,SECTION_ID FROM SECTION where DEPARTMENT_ID in ("+val3+")")
             #print("Query"+"SELECT SECTION_DESC,SECTION_ID FROM SECTION where DEPARTMENT_ID in ("+val3+")")
-            records = mycursor.fetchall()
-            mycursor.close()
+            records = self.parent.mycursor.fetchall()
+            #mycursor.close()
             for row, val in records:
                 self.Qcombo_section.addItem(row, val)
                 i += 1
@@ -395,8 +398,8 @@ class CL_installmentModify(QtWidgets.QDialog):
         self.Qcombo_BMCLevel.clear()
         i = 0
         try:
-            conn = db1.connect()
-            mycursor = conn.cursor()
+            #conn = db1.connect()
+            #mycursor = conn.cursor()
 
             val3=""
             for a in range(len(self.Qcombo_section.currentData())):
@@ -406,9 +409,9 @@ class CL_installmentModify(QtWidgets.QDialog):
                     val3 =val3+ "'"+self.Qcombo_section.currentData()[a] + "'"
 
             print("sections",val3)
-            mycursor.execute("SELECT BMC_LEVEL4_DESC,BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID in ("+val3+")")
-            records = mycursor.fetchall()
-            mycursor.close()
+            self.parent.mycursor.execute("SELECT BMC_LEVEL4_DESC,BMC_LEVEL4 FROM BMC_LEVEL4 where SECTION_ID in ("+val3+")")
+            records = self.parent.mycursor.fetchall()
+            #mycursor.close()
             for row, val in records:
                 self.Qcombo_BMCLevel.addItem(row, val)
                 i += 1
@@ -451,11 +454,11 @@ class CL_installmentModify(QtWidgets.QDialog):
     #get Banks list
     def FN_GET_Banks(self):
         self.Qcombo_bank.clear()
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT Bank_Desc,Bank_ID FROM BANK")
-        records = mycursor.fetchall()
-        mycursor.close()
+        #conn = db1.connect()
+        #mycursor = conn.cursor()
+        self.parent.mycursor.execute("SELECT Bank_Desc,Bank_ID FROM BANK")
+        records = self.parent.mycursor.fetchall()
+        #mycursor.close()
         for row, val in records:
             self.Qcombo_bank.addItem(row, val)
 
@@ -473,12 +476,12 @@ class CL_installmentModify(QtWidgets.QDialog):
     #get Vendor list
     def FN_GET_Vendor(self):
         self.Qcombo_vendor.clear()
-        conn = db1.connect()
-        mycursor = conn.cursor()
-        mycursor.execute("SELECT SPONSER_NAME,SPONSER_ID FROM SPONSER")
-        records = mycursor.fetchall()
+        #conn = db1.connect()
+        #mycursor = conn.cursor()
+        self.parent.mycursor.execute("SELECT SPONSER_NAME,SPONSER_ID FROM SPONSER")
+        records = self.parent.mycursor.fetchall()
         print("FN_GetVwndor",len(records))
-        mycursor.close()
+        #mycursor.close()
         for row, val in records:
             self.Qcombo_vendor.addItem(row, val)
 
@@ -515,8 +518,8 @@ class CL_installmentModify(QtWidgets.QDialog):
                 self.LE_fileName.setText(self.fileName)
                 wb = xlrd.open_workbook( self.fileName )
                 sheet = wb.sheet_by_index( 0 )
-                conn = db1.connect()
-                mycursor = conn.cursor()
+                #conn = db1.connect()
+                #mycursor = conn.cursor()
                 errorMsg =''
                 createdCust =0
                 nonCreatedCust=0
@@ -560,7 +563,7 @@ class CL_installmentModify(QtWidgets.QDialog):
 
                     except Exception as err:
                          print(err)
-                mycursor.close()
+                #mycursor.close()
                 self.msgBox = QMessageBox()
 
                 # Set the various texts
@@ -619,13 +622,13 @@ class CL_installmentModify(QtWidgets.QDialog):
     # TODO Validate if barcode in pos_item
     def FN_ValidateIfBarcodeInPos_item(self,ValidateBarcode ):
 
-                self.conn = db1.connect()
-                mycursor = self.conn.cursor()
+                #self.conn = db1.connect()
+                #mycursor = self.conn.cursor()
                 #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
                 sql="select POS_GTIN   from Hyper1_Retail.POS_ITEM where POS_GTIN ='"+ValidateBarcode+"'"
 
-                mycursor.execute(sql)
-                myresult = mycursor.fetchall()
+                self.parent.mycursor.execute(sql)
+                myresult = self.parent.mycursor.fetchall()
                 print("FN_ValidateIfBarcodeInPos_item",len(myresult))
                 if len(myresult) == 0:
                     return False
@@ -636,13 +639,13 @@ class CL_installmentModify(QtWidgets.QDialog):
     def FN_ValidateIfRelateToDepartmentSectionBMC(self,ValidateBarcode,checkBox_department,Qcombo_department,checkBox_section,Qcombo_section,checkBox_BMCLevel,Qcombo_BMCLevel ):
         if checkBox_BMCLevel.isChecked() and len(Qcombo_BMCLevel.currentData()) > 0:
             for k in range(len(Qcombo_BMCLevel.currentData())):
-                self.conn = db1.connect()
-                mycursor = self.conn.cursor()
+                #self.conn = db1.connect()
+                #mycursor = self.conn.cursor()
                 #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
                 sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND B.BMC_ID ='"+Qcombo_BMCLevel.currentData()[k]+"'"
 
-                mycursor.execute(sql)
-                myresult = mycursor.fetchall()
+                self.parent.mycursor.execute(sql)
+                myresult = self.parent.mycursor.fetchall()
                 print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
                 if len(myresult) == 0:
                     if k == len(Qcombo_BMCLevel.currentData()) :
@@ -652,13 +655,13 @@ class CL_installmentModify(QtWidgets.QDialog):
 
         elif checkBox_section.isChecked() and len(Qcombo_section.currentData()) > 0 and not checkBox_BMCLevel.isChecked():
             for k in range(len(Qcombo_section.currentData())):
-                self.conn = db1.connect()
-                mycursor = self.conn.cursor()
+                #self.conn = db1.connect()
+                #mycursor = self.conn.cursor()
                 #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
                 sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND B.SECTION_ID ='"+Qcombo_section.currentData()[k]+"'"
 
-                mycursor.execute(sql)
-                myresult = mycursor.fetchall()
+                self.parent.mycursor.execute(sql)
+                myresult = self.parent.mycursor.fetchall()
                 print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
                 if len(myresult) == 0:
                     if k == len(Qcombo_section.currentData()) :
@@ -668,13 +671,13 @@ class CL_installmentModify(QtWidgets.QDialog):
 
         elif checkBox_department.isChecked() and len(Qcombo_department.currentData()) > 0 and not checkBox_section.isChecked() and not checkBox_BMCLevel.isChecked():
             for k in range(len(Qcombo_department.currentData())):
-                self.conn = db1.connect()
-                mycursor = self.conn.cursor()
+                #self.conn = db1.connect()
+                #mycursor = self.conn.cursor()
                 #sql="SELECT BMC_ID FROM POS_ITEM WHERE POS_GTIN ='"+ValidateBarcode+"' BMC_ID AND '"+self.Qcombo_BMCLevel.currentData()[k]+"'"
                 sql="select a.POS_GTIN , a.BMC_ID  from Hyper1_Retail.POS_ITEM a inner join  Hyper1_Retail.POS_BMC B on a.BMC_ID = B.BMC_ID where a.POS_GTIN ='"+ValidateBarcode+"' AND B.DEPARTMENT_ID ='"+Qcombo_department.currentData()[k]+"'"
 
-                mycursor.execute(sql)
-                myresult = mycursor.fetchall()
+                self.parent.mycursor.execute(sql)
+                myresult = self.parent.mycursor.fetchall()
                 print("FN_ValidateIfRelateToDepartmentSectionBMC",len(myresult))
                 if len(myresult) == 0:
                     if k == len(Qcombo_BMCLevel.currentData()) :
@@ -786,14 +789,14 @@ class CL_installmentModify(QtWidgets.QDialog):
         #Empty element before search
         self.FN_EmptyElement()
         try:
-            self.conn = db1.connect()
-            mycursor = self.conn.cursor()
+            #self.conn = db1.connect()
+            #mycursor = self.conn.cursor()
 
             # Select INSTALLMENT_PROGRAM
             sql1 = "SELECT INSTR_RULEID ,INST_DESC,INST_VALID_FROM ,INST_VALID_TO , INST_ADMIN_EXPENSES_PERC ,INST_ADMIN_EXPENSES_MAX , INST_ADMIN_EXPENSES_MIN  , INST_STATUS ,INST_DEACTIVATED_BY FROM INSTALLMENT_PROGRAM WHERE INST_PROGRAM_ID='"+self.InstallmentNo+"'"
 
-            mycursor.execute(sql1)
-            records = mycursor.fetchall()
+            self.parent.mycursor.execute(sql1)
+            records = self.parent.mycursor.fetchall()
             if len(records) >0 :
 
                 for INSTR_RULEID , INST_DESC, INST_VALID_FROM , INST_VALID_TO ,INST_ADMIN_EXPENSES_PERC , INST_ADMIN_EXPENSES_MAX ,INST_ADMIN_EXPENSES_MIN ,INST_STATUS ,INST_DEACTIVATED_BY in records:
@@ -810,7 +813,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                             self.FN_EnabelWhenNotActiveAndNotDeactivate()
                             self.LoadingDataofProgram(INST_VALID_FROM, INST_VALID_TO, INST_ADMIN_EXPENSES_PERC,
                                                       INST_ADMIN_EXPENSES_MAX, INST_ADMIN_EXPENSES_MIN, INST_DESC,
-                                                      mycursor, INSTR_RULEID)
+                                                      self.parent.mycursor, INSTR_RULEID)
 
 
                         else:
@@ -819,7 +822,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                             self.QL_hint_youcanonlychange_period.setText( "تم الغاء تفعيل البرنامج من قبل  غير مسموح بتعديل البرنامج")
                             self.LoadingDataofProgram(INST_VALID_FROM, INST_VALID_TO, INST_ADMIN_EXPENSES_PERC,
                                                       INST_ADMIN_EXPENSES_MAX, INST_ADMIN_EXPENSES_MIN, INST_DESC,
-                                                      mycursor, INSTR_RULEID)
+                                                      self.parent.mycursor, INSTR_RULEID)
 
 
 
@@ -828,7 +831,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                         self.QL_hint_youcanonlychange_period.setVisible(True)
                         self.QL_hint_youcanonlychange_period.setText("البرنامج مفعل مسموح بتعديل الفتره فقط")
                         self.LoadingDataofProgram(INST_VALID_FROM , INST_VALID_TO,INST_ADMIN_EXPENSES_PERC,INST_ADMIN_EXPENSES_MAX ,
-                                                  INST_ADMIN_EXPENSES_MIN,INST_DESC , mycursor,INSTR_RULEID)
+                                                  INST_ADMIN_EXPENSES_MIN,INST_DESC , self.parent.mycursor,INSTR_RULEID)
                         self.FN_EnabelWhenNotActive()
 
 
@@ -837,7 +840,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                 print("Program doesn't exist")
                 QtWidgets.QMessageBox.information(self, "INFO", " Program doesn't exist")
 
-            mycursor.close()
+            #mycursor.close()
         except:
             print(sys.exc_info())
 
@@ -1380,20 +1383,20 @@ class CL_installmentModify(QtWidgets.QDialog):
     def FN_updateActiveProgram(self):
         error = 0
         Validation_For_installmentProgramm = 0
-
+        self.Qbtn_modifyInstallment.setEnabled(False)
         error = self.FN_ValidateInstallemt()
         print(error)
         if error != 0:
 
             try:
-                self.conn = db1.connect()
+                #self.conn = db1.connect()
                 self.conn.autocommit = False
-                mycursor = self.conn.cursor()
-                self.conn.start_transaction()
+                #mycursor = self.conn.cursor()
+                #self.conn.start_transaction()
 
                 # # lock table for new record:
                 sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE , Hyper1_Retail.SYS_CHANGE_LOG  WRITE"
-                mycursor.execute(sql0)
+                self.parent.mycursor.execute(sql0)
 
                 ModifingDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                 creationDate = str(datetime.today().strftime('%Y-%m-%d'))
@@ -1405,7 +1408,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                 if ToDateTime != self.oldstatusDateTo:
                     sql2 = "update Hyper1_Retail.INSTALLMENT_PROGRAM set INST_VALID_TO='" + ToDateTime + "' , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
                     print("sql2", sql2)
-                    mycursor.execute(sql2)
+                    self.parent.mycursor.execute(sql2)
 
                     # TODO Insert in log table
                     sql8 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
@@ -1414,14 +1417,14 @@ class CL_installmentModify(QtWidgets.QDialog):
                             creationDate,
                             CL_userModule.user_name)
                     print("sql8", sql8)
-                    mycursor.execute(sql8, val8)
+                    self.parent.mycursor.execute(sql8, val8)
 
                 elif ToDateTime == self.oldstatusDateTo:
                     QtWidgets.QMessageBox.warning(self, "Error", "Data doesn't change")
 
                 # # unlock table :
                 sql00 = "  UNLOCK   tables    "
-                mycursor.execute(sql00)
+                self.parent.mycursor.execute(sql00)
                 self.conn.commit()
 
             except mysql.connector.Error as error:
@@ -1431,29 +1434,35 @@ class CL_installmentModify(QtWidgets.QDialog):
             finally:
                 # closing database connection.
                 if self.conn.is_connected():
-                    mycursor.close()
-                    self.conn.close()
-                    print("connection is closed")
+                    # # unlock table :
+                    sql00 = "  UNLOCK   tables    "
+                    self.parent.mycursor.execute(sql00)
+
+                    self.Qbtn_modifyInstallment.setEnabled(True)
+                    #mycursor.close()
+                    #self.conn.close()
+                    print("connected")
 
     #update programm if programm isn't active before
     def FN_updateNotActivebeforeProgram(self):
         error = 0
         Validation_For_installmentProgramm = 0
+        self.Qbtn_modifyInstallment.setEnabled(False)
 
         error = self.FN_ValidateInstallemt()
         print(error)
         if error != 0:
 
             try:
-                self.conn = db1.connect()
+                #self.conn = db1.connect()
                 self.conn.autocommit = False
-                mycursor = self.conn.cursor()
-                self.conn.start_transaction()
+                #mycursor = self.conn.cursor()
+                #self.conn.start_transaction()
 
                 # # lock table for new record:
                 sql0 = "  LOCK  TABLES   Hyper1_Retail.INSTALLMENT_PROGRAM   WRITE , Hyper1_Retail.SYS_CHANGE_LOG  WRITE , Hyper1_Retail.INSTALLMENT_RULE  WRITE" \
                        ", Hyper1_Retail.INSTALLMENT_ITEM  WRITE , Hyper1_Retail.INSTALLMENT_SECTION  WRITE   , Hyper1_Retail.INSTALLMENT_REJECTED_ITEM  WRITE  "
-                mycursor.execute(sql0)
+                self.parent.mycursor.execute(sql0)
 
                 ModifingDateTime = str(datetime.today().strftime('%Y-%m-%d-%H:%M-%S'))
                 creationDate = str(datetime.today().strftime('%Y-%m-%d'))
@@ -1467,27 +1476,27 @@ class CL_installmentModify(QtWidgets.QDialog):
                         "', INST_ADMIN_EXPENSES_MIN ='"+str(self.QDSpinBox_Min_adminExpendses.value()) +"', INST_ADMIN_EXPENSES_MAX='"+str(self.QDSpinBox_Min_adminExpendses.value())+\
                         "' , INST_CHANGED_ON = '" + ModifingDateTime + "' , INST_CHANGED_BY = " + CL_userModule.user_name + " where INST_PROGRAM_ID='" + self.InstallmentNo + "'"
                     print("sql2", sql2)
-                    mycursor.execute(sql2)
+                    self.parent.mycursor.execute(sql2)
 
                     #update INSTALLMENT_RULE INSTR_INTEREST_RATE,INSTR_SPONSOR_RATE , INSTR_HYPER_RATE  ,INSTR_CUSTOMER_RATE
                     sql3 = "update Hyper1_Retail.INSTALLMENT_RULE set INSTR_INTEREST_RATE='" + str(self.QDubleSpiner_interestRate.value()) + "', INSTR_SPONSOR_RATE ='" + \
                            str(self.QDubleSpiner_vendorRate.value()) + "' , INSTR_HYPER_RATE='"+ str(self.QDubleSpiner_hperoneRate.value())+\
                            "' , INSTR_CUSTOMER_RATE='"+ str(self.QDubleSpiner_customerRate.value())+ "' where INSTR_RULEID='" + str(self.InstallmentRule) + "'"
                     print("sql3", sql3)
-                    mycursor.execute(sql3)
+                    self.parent.mycursor.execute(sql3)
 
                     #TODO Delete
                     # TODO Delete fom INSTALLMENT_ITEM
                     sql50 = "DELETE FROM INSTALLMENT_ITEM where INSTR_RULEID='" + str(self.InstallmentRule) + "'"
-                    mycursor.execute(sql50)
+                    self.parent.mycursor.execute(sql50)
 
                     sql60 = "DELETE FROM INSTALLMENT_SECTION where INSTR_RULEID='" + str(self.InstallmentRule) + "'"
-                    mycursor.execute(sql60)
+                    self.parent.mycursor.execute(sql60)
 
                     # TODO Delete fom INSTALLMENT_REJECTED_ITEM
                     sql70 = "DELETE FROM INSTALLMENT_REJECTED_ITEM where INSTR_RULEID='" + str(
                         self.InstallmentRule) + "'"
-                    mycursor.execute(sql70)
+                    self.parent.mycursor.execute(sql70)
 
                     #TODO insert INSTALLMENT_ITEM
                     print("self.Qtable_acceptedItems.rowCount()", self.Qtable_acceptedItems.rowCount())
@@ -1501,13 +1510,13 @@ class CL_installmentModify(QtWidgets.QDialog):
                             val5 = (
                                 barcode, str(self.InstallmentRule),
                                 '1')
-                            mycursor.execute(sql5, val5)
+                            self.parent.mycursor.execute(sql5, val5)
                             print("self.INSTALLMENT_ITEM. val5 ", val5)
 
                     #TODO insert Installment_department_section_BMC
                     elif self.checkBox_department.isChecked():
                         print("self.INSTALLMENT_ITEM. isChecked() ", self.checkBox_department.isChecked())
-                        self.FN_SaveDepartmentSectionBMCLeve(mycursor)
+                        self.FN_SaveDepartmentSectionBMCLeve(self.parent.mycursor)
 
                     #TODO insert rejected items to Installment_rejected_item
                     print("self.Qtable_rejectedItems.rowCount()", self.Qtable_rejectedItems.rowCount())
@@ -1520,7 +1529,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                             val7 = (
                                 barcode_rejected, str(self.InstallmentRule),
                                 '1')
-                            mycursor.execute(sql7, val7)
+                            self.parent.mycursor.execute(sql7, val7)
 
 
                     # TODO Insert in log table date to
@@ -1530,7 +1539,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                             creationDate,
                             CL_userModule.user_name)
                     print("sql8", sql8)
-                    mycursor.execute(sql8, val8)
+                    self.parent.mycursor.execute(sql8, val8)
 
                     # TODO Insert in log table INST_ADMIN_EXPENSES_PERC
                     sql9 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s)"
@@ -1540,7 +1549,7 @@ class CL_installmentModify(QtWidgets.QDialog):
                             creationDate,
                             CL_userModule.user_name)
                     print("sql9", sql9)
-                    mycursor.execute(sql9, val9)
+                    self.parent.mycursor.execute(sql9, val9)
 
                     # TODO Insert in log table INSTR_INTEREST_RATE
                     sql10 = "INSERT INTO SYS_CHANGE_LOG (ROW_KEY_ID,ROW_KEY_ID2,TABLE_NAME,FIELD_NAME,FIELD_OLD_VALUE,FIELD_NEW_VALUE,CHANGED_ON,CHANGED_BY) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
@@ -1550,26 +1559,28 @@ class CL_installmentModify(QtWidgets.QDialog):
                              creationDate,
                              CL_userModule.user_name)
                     print("sql10", sql10)
-                    mycursor.execute(sql10, val10)
+                    self.parent.mycursor.execute(sql10, val10)
 
                 #elif ToDateTime == self.oldstatusDateTo:
                 #    QtWidgets.QMessageBox.warning(self, "Error", "Date doesn't change")
 
                 # # unlock table :
                 sql00 = "  UNLOCK   tables    "
-                mycursor.execute(sql00)
+                self.parent.mycursor.execute(sql00)
                 self.conn.commit()
 
             except mysql.connector.Error as error:
                 print("Failed to update record to database rollback: {}".format(error))
+                sql00 = "  UNLOCK   tables    "
+                self.parent.mycursor.execute(sql00)
                 # reverting changes because of exception
                 self.conn.rollback()
             finally:
                 # closing database connection.
                 if self.conn.is_connected():
-                    mycursor.close()
-                    self.conn.close()
-                    print("connection is closed")
+                    #mycursor.close()
+                    #self.conn.close()
+                    print("connected")
 
     # insert Installment_department_section_BMC
     def FN_SaveDepartmentSectionBMCLeve(self, mycursor):
